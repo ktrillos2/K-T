@@ -1,19 +1,23 @@
 import { BrowserRouter } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
 
 import {
-  About,
-  Achievement,
-  Contact,
-  Feedbacks,
-  Hero,
   Navbar,
   Preloader,
-  StarsCanvas,
-  Works,
+  Hero, // Keep Hero eager for LCP
+  About, // Keep About eager as it's above fold-ish
 } from "./components";
+
+// Lazy load heavy components
+const Achievement = lazy(() => import("./components/Achievement"));
+const SkillKeyboard = lazy(() => import("./components/SkillKeyboard"));
+const Works = lazy(() => import("./components/Works"));
+const Feedbacks = lazy(() => import("./components/Feedbacks"));
+const Contact = lazy(() => import("./components/Contact"));
+const StarsCanvas = lazy(() => import("./components/canvas").then(module => ({ default: module.StarsCanvas })));
+
 import EasterEggs from "./components/EasterEggs";
 import ElasticCursor from "./components/ElasticCursor";
-import SkillKeyboard from "./components/SkillKeyboard";
 
 const App = () => {
   return (
@@ -29,15 +33,17 @@ const App = () => {
             <Navbar />
             <Hero />
           </div>
-          <StarsCanvas />
-          <About />
-          <Achievement />
-          <SkillKeyboard />
-          <Works />
-          <Feedbacks />
-          <div className="relative z-0">
-            <Contact />
-          </div>
+          <Suspense fallback={null}>
+            <StarsCanvas />
+            <About />
+            <Achievement />
+            <SkillKeyboard />
+            <Works />
+            <Feedbacks />
+            <div className="relative z-0">
+              <Contact />
+            </div>
+          </Suspense>
         </div>
       </BrowserRouter>
     </Preloader>

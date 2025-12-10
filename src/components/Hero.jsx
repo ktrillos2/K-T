@@ -58,13 +58,15 @@ const Hero = () => {
                 backgroundPosition: "0 100%",
                 color: "#915EFF",
                 display: "inline-block",
-                fontWeight: "bold"
+                fontWeight: "bold",
+                minHeight: "1em", // Reserve vertical space
+                minWidth: "150px" // Reserve horizontal space approximately
               }}
             >
               {typedText}
             </span>
-            <span 
-              className="typed-cursor" 
+            <span
+              className="typed-cursor"
               aria-hidden="true"
             >
               |

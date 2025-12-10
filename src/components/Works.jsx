@@ -31,6 +31,8 @@ const ProjectCard = ({
           <img
             src={image}
             alt="project_image"
+            width="360"
+            height="200"
             className="w-full h-full object-cover rounded-2xl"
           />
 
@@ -95,11 +97,11 @@ const Works = () => {
                         alt="person"
                         className=" md:p-2 p-1 rounded-full bg-[#8ec5ff]"
                       />
-                      <span 
-                        className="font-extrabold text-white" 
-                        style={{ 
-                          fontFamily: word.font, 
-                          textShadow: '0 0 4px #8ec5ff, 0 0 6px white' 
+                      <span
+                        className="font-extrabold text-white"
+                        style={{
+                          fontFamily: word.font,
+                          textShadow: '0 0 4px #8ec5ff, 0 0 6px white'
                         }}
                       >
                         {word.text}
