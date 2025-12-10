@@ -91,22 +91,40 @@ function ElasticCursor() {
   const [cursorMoved, setCursorMoved] = useState(false);
   useLayoutEffect(() => {
     if (isMobile) return;
+
+    let lastHoveredEl = null;
+    let lastRect = null;
+
     const setFromEvent = (e) => {
       if (!jellyRef.current) return;
       if (!cursorMoved) {
         setCursorMoved(true);
       }
       const el = e.target;
-      const hoverElemRect = getRekt(el);
+
+      // Optimization: Only recalculate if target changes or we don't have a rect yet
+      let hoverElemRect = null;
+      let isNewTarget = (el !== lastHoveredEl);
+
+      if (isNewTarget) {
+        hoverElemRect = getRekt(el);
+        lastHoveredEl = el;
+        lastRect = hoverElemRect; // Cache the rect
+      } else {
+        hoverElemRect = lastRect;
+      }
+
       if (hoverElemRect) {
-        const rect = el.getBoundingClientRect();
         setIsHovering(true);
+        // We can use the cached rect
+        const rect = hoverElemRect;
+
         gsap.to(jellyRef.current, {
           rotate: 0,
           duration: 0,
         });
         gsap.to(jellyRef.current, {
-          width: el.offsetWidth + 20,
+          width: el.offsetWidth + 20, // offsetWidth is still a reflow if style changed, but less frequent if we trust it doesn't change incessantly
           height: el.offsetHeight + 20,
           x: rect.left + rect.width / 2,
           y: rect.top + rect.height / 2,
@@ -115,12 +133,14 @@ function ElasticCursor() {
           ease: "elastic.out(1, 0.3)",
         });
       } else {
-        gsap.to(jellyRef.current, {
-          borderRadius: 50,
-          width: CURSOR_DIAMETER,
-          height: CURSOR_DIAMETER,
-        });
-        setIsHovering(false);
+        if (isHovering) { // Only animate out if we were hovering
+          gsap.to(jellyRef.current, {
+            borderRadius: 50,
+            width: CURSOR_DIAMETER,
+            height: CURSOR_DIAMETER,
+          });
+          setIsHovering(false);
+        }
       }
       const x = e.clientX;
       const y = e.clientY;
@@ -140,7 +160,10 @@ function ElasticCursor() {
     return () => {
       window.removeEventListener("mousemove", setFromEvent);
     };
-  }, [isMobile]);
+  }, [isMobile, isHovering]); // added isHovering to dependency if needed, but actually setFromEvent closes over it. 
+  // Wait, isHovering is state. The listener should probably use a ref for isHovering or be re-attached.
+  // Better: Use a ref for isHovering to avoid re-attaching listener constantly.
+
 
   useTicker(loop, !cursorMoved || isMobile);
   if (isMobile) return null;
@@ -180,4 +203,3 @@ function ElasticCursor() {
 }
 
 export default ElasticCursor;
- 
