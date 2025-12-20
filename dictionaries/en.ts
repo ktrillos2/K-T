@@ -1,0 +1,94 @@
+export const en = {
+  nav: {
+    home: "Home",
+    about: "About",
+    services: "Services",
+    work: "Work",
+    contact: "Contact",
+  },
+  hero: {
+    greeting: "// Welcome to K&T",
+    slogan: "We code your digital vision",
+    cta: "Get Started",
+    scroll: "Scroll to explore",
+  },
+  about: {
+    title: "Who We Are",
+    subtitle: "// About K&T",
+    description:
+      "We are a passionate team of developers and designers dedicated to transforming ideas into exceptional digital experiences. With expertise in modern technologies, we build solutions that drive results.",
+    values: {
+      innovation: {
+        title: "Innovation",
+        description: "We use cutting-edge technologies to create unique solutions that stand out.",
+      },
+      quality: {
+        title: "Quality",
+        description: "Every line of code is crafted with precision and attention to detail.",
+      },
+      speed: {
+        title: "Speed",
+        description: "Fast delivery without compromising on quality or functionality.",
+      },
+      collaboration: {
+        title: "Collaboration",
+        description: "We work closely with you to bring your vision to life.",
+      },
+    },
+    stats: {
+      projects: "Projects",
+      clients: "Clients",
+      years: "Years",
+      satisfaction: "Satisfaction",
+    },
+  },
+  services: {
+    title: "Our Services",
+    subtitle: "// Choose your plan",
+    landing: {
+      title: "Landing Page",
+      price: "$400,000 COP",
+      features: ["SEO Optimization", "Custom Design", "Hosting Included", "Free Domain"],
+      cta: "Select Plan",
+    },
+    ecommerce: {
+      title: "Simple E-commerce",
+      price: "$1,200,000 COP",
+      features: ["Product Catalog", "Payment Gateway", "Admin Dashboard", "SEO & Analytics"],
+      cta: "Select Plan",
+    },
+    custom: {
+      title: "Custom Solution",
+      price: "Let's Talk",
+      features: ["Tailored Development", "Scalable Architecture", "API Integration", "Full Support"],
+      cta: "Get Quote",
+    },
+  },
+  projects: {
+    title: "Our Work",
+    subtitle: "// Recent projects",
+  },
+  contact: {
+    title: "Let's Connect",
+    subtitle: "// Ready to build something amazing?",
+    email: "Email",
+    phone: "Phone",
+    location: "Location",
+    locationValue: "Colombia",
+    socials: "Follow Us",
+    selectService: "// What do you need?",
+    webDev: "Web Development",
+    socialMedia: "Social Media",
+    formName: "Your Name",
+    formEmail: "Your Email",
+    formMessage: "Tell us about your project",
+    formSubmit: "Send Message",
+    successTitle: "Message Sent!",
+    successMessage: "We'll get back to you within 24 hours.",
+  },
+  footer: {
+    rights: "All rights reserved",
+    made: "Made with",
+    by: "by K&T",
+  },
+}
