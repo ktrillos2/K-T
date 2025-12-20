@@ -24,25 +24,25 @@ const ariW9500 = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://kandtagency.com"), // Replace with your actual domain
   title: {
-    default: "K&T Digital Agency | We Code Your Vision - Tu Visión Digital",
-    template: "%s | K&T Digital Agency",
+    default: "K&T Agencia Digital | Tu Visión Digital - We Code Your Vision",
+    template: "%s | K&T Agencia Digital",
   },
-  description: "K&T is a premium digital agency in Colombia / Agencia Digital Premium en Colombia. We build high-performance websites and custom software solutions / Creamos sitios web de alto rendimiento y software a medida.",
+  description: "Agencia Digital Premium en Colombia / K&T is a premium digital agency. Creamos sitios web de alto rendimiento y software a medida / We build high-performance websites and custom software solutions.",
   keywords: [
-    "Digital Agency",
     "Agencia Digital",
-    "Web Development",
     "Desarrollo Web",
-    "Software Development",
     "Desarrollo de Software",
     "Colombia",
     "Bogota",
+    "Diseño Web",
+    "Digital Agency",
+    "Web Development",
+    "Software Development",
     "Next.js",
     "React",
     "E-commerce",
     "Landing Page",
     "Custom Software",
-    "Diseño Web",
     "Web Design",
   ],
   authors: [{ name: "K&T Digital Agency", url: "https://kandtagency.com" }],
@@ -54,8 +54,8 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "K&T Digital Agency | We Code Your Vision - Tu Visión Digital",
-    description: "Premium digital agency in Colombia. We build high-performance, beautiful websites and software. / Agencia digital premium en Colombia. Creamos sitios web y software de alto rendimiento.",
+    title: "K&T Agencia Digital | Tu Visión Digital - We Code Your Vision",
+    description: "Agencia digital premium en Colombia. Creamos sitios web y software de alto rendimiento para impulsar tu negocio. / Premium digital agency building high-performance websites.",
     url: "https://kandtagency.com",
     siteName: "K&T Digital Agency",
     images: [
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
         url: "/images/og-image.png", // Ensure you create/upload this
         width: 1200,
         height: 630,
-        alt: "K&T Digital Agency Preview",
+        alt: "K&T Agencia Digital",
       },
     ],
     locale: "es_CO",
@@ -71,8 +71,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "K&T Digital Agency | We Code Your Vision",
-    description: "Premium digital agency / Agencia digital premium. We code your vision.",
+    title: "K&T Agencia Digital | Tu Visión Digital",
+    description: "Agencia digital premium. Codificamos tu visión. / Premium digital agency. We code your vision.",
     creator: "@kandtagency",
     images: ["/images/og-image.png"],
   },
@@ -138,7 +138,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="es" className="dark">
       <body className={`${firaCode.variable} ${vt323.variable} ${pressStart2P.variable} ${ariW9500.variable} font-mono antialiased`}>
         <LanguageProvider>
           <CursorProvider>
