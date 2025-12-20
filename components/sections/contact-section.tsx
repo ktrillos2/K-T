@@ -75,14 +75,24 @@ const serviceOptions = [
   },
 ]
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { countryCodes } from "@/lib/country-codes"
+
 export default function ContactSection() {
   const { dictionary } = useLanguage()
   const { setCursorVariant } = useCursor()
 
   const [selectedService, setSelectedService] = useState<string | null>(null)
+  const [countryCode, setCountryCode] = useState("+57")
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+    phone: "",
     message: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -93,16 +103,35 @@ export default function ContactSection() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: `${countryCode} ${formData.phone}`,
+          message: formData.message,
+          service: selectedService
+        }),
+      })
 
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setSelectedService(null)
-      setFormData({ name: "", email: "", message: "" })
-    }, 3000)
+      if (response.ok) {
+        setIsSubmitted(true)
+        setTimeout(() => {
+          setIsSubmitted(false)
+          setSelectedService(null)
+          setFormData({ name: "", phone: "", message: "" })
+        }, 3000)
+      } else {
+        console.error("Failed to send message")
+      }
+    } catch (error) {
+      console.error("Error submitting form", error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -316,31 +345,54 @@ export default function ContactSection() {
                         />
                       </div>
 
-                      {/* Email field */}
-                      <div className="relative">
-                        <motion.label
-                          className={`absolute left-3 transition-all duration-200 font-mono text-xs ${focusedField === "email" || formData.email
-                            ? "-top-2 text-white bg-neutral-900 px-1"
-                            : "top-3 text-white/40"
-                            }`}
-                        >
-                          {dictionary.contact.formEmail}
-                        </motion.label>
-                        <input
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          onFocus={() => setFocusedField("email")}
-                          onBlur={() => setFocusedField(null)}
-                          className="w-full bg-transparent border border-white/20 rounded-lg px-3 py-3 text-white font-mono text-sm focus:border-white focus:outline-none transition-colors"
-                          required
-                        />
-                        <motion.div
-                          className="absolute bottom-0 left-0 h-0.5 bg-white"
-                          initial={{ width: "0%" }}
-                          animate={{ width: focusedField === "email" ? "100%" : "0%" }}
-                          transition={{ duration: 0.3 }}
-                        />
+
+                      <div className="relative flex gap-2">
+                        <Select value={countryCode} onValueChange={setCountryCode}>
+                          <SelectTrigger
+                            className="w-[120px] bg-transparent border border-white/20 rounded-lg px-3 text-white font-mono text-sm h-14 focus:ring-0 focus:ring-offset-0 focus:border-white transition-colors"
+                            style={{ height: '56px' }}
+                          >
+                            <SelectValue placeholder="Code" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-neutral-900 border-white/20 text-white max-h-[200px]">
+                            {countryCodes.map((country) => (
+                              <SelectItem key={country.code + country.name} value={country.code} className="font-mono text-xs focus:bg-white/10 focus:text-white">
+                                <span className="mr-2">{country.flag}</span>
+                                {country.code}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+
+                        <div className="relative flex-1">
+                          <motion.label
+                            className={`absolute left-3 transition-all duration-200 font-mono text-xs z-10 ${focusedField === "phone" || formData.phone
+                                ? "-top-2 text-white bg-neutral-900 px-1"
+                                : "top-4 text-white/40"
+                              }`}
+                          >
+                            Celular / WhatsApp
+                          </motion.label>
+                          <input
+                            type="tel"
+                            value={formData.phone}
+                            onChange={(e) => {
+                              const value = e.target.value.replace(/\D/g, '')
+                              setFormData({ ...formData, phone: value })
+                            }}
+                            onFocus={() => setFocusedField("phone")}
+                            onBlur={() => setFocusedField(null)}
+                            className="w-full bg-transparent border border-white/20 rounded-lg px-3 text-white font-mono text-sm focus:border-white focus:outline-none transition-colors h-14"
+                            style={{ height: '56px' }}
+                            required
+                          />
+                          <motion.div
+                            className="absolute bottom-0 left-0 h-0.5 bg-white rounded-b-lg"
+                            initial={{ width: "0%" }}
+                            animate={{ width: focusedField === "phone" ? "100%" : "0%" }}
+                            transition={{ duration: 0.3 }}
+                          />
+                        </div>
                       </div>
 
                       {/* Message field */}
