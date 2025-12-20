@@ -1,6 +1,6 @@
 /* Fallback pixel font from Google Fonts - Replaced by next/font */
 @import "tailwindcss";
-@import "tw-animate-css";
+
 @import "tailwindcss/theme.css";
 
 @custom-variant dark (&:is(.dark *));
