@@ -1034,6 +1034,7 @@ function Header() {
                                 src: "/images/logo.png",
                                 alt: "K&T Logo",
                                 fill: true,
+                                sizes: "96px",
                                 className: "object-contain",
                                 priority: true
                             }, void 0, false, {

@@ -47,7 +47,7 @@ export default function Header() {
               smoothScrollTo(0, 1000)
             }}
           >
-            <Image src="/images/logo.png" alt="K&T Logo" fill className="object-contain" priority />
+            <Image src="/images/logo.png" alt="K&T Logo" fill sizes="96px" className="object-contain" priority />
           </motion.a>
 
           <div className="flex items-center gap-4">

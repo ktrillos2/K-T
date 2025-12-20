@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState, useRef } from "react"
+import Image from "next/image"
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
 import { useLanguage } from "@/context/language-context"
@@ -204,32 +205,50 @@ function ProjectCard({ project, index, isActive, onHover, onLeave, language, set
           <div className="relative h-64 lg:h-80 w-full overflow-hidden shrink-0">
             {project.imageMobile ? (
               <>
-                <motion.img
-                  src={project.imageMobile}
-                  alt={title}
-                  className="w-full h-full object-cover lg:hidden"
+                <motion.div
+                  className="w-full h-full lg:hidden block relative"
                   animate={{ scale: isActive ? 1.05 : 1 }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
-                />
-                <motion.img
-                  src={project.image}
-                  alt={title}
-                  className="w-full h-full object-cover object-top hidden lg:block"
+                >
+                  <Image
+                    src={project.imageMobile}
+                    alt={title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                </motion.div>
+                <motion.div
+                  className="w-full h-full hidden lg:block relative"
                   animate={{ scale: isActive ? 1.05 : 1 }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
-                />
+                >
+                  <Image
+                    src={project.image}
+                    alt={title}
+                    fill
+                    sizes="(max-width: 1200px) 50vw, 33vw"
+                    className="object-cover object-top"
+                  />
+                </motion.div>
               </>
             ) : (
-              <motion.img
-                src={project.image}
-                alt={title}
-                className="w-full h-full object-cover object-top"
+              <motion.div
+                className="w-full h-full relative"
                 animate={{ scale: isActive ? 1.05 : 1 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-              />
+              >
+                <Image
+                  src={project.image}
+                  alt={title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover object-top"
+                />
+              </motion.div>
             )}
             {/* Overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-transparent to-transparent pointer-events-none" />
 
             {/* Year badge */}
             <div className="absolute top-4 left-4 px-3 py-1 bg-black/50 backdrop-blur-sm rounded-full border border-white/20">

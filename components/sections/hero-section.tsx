@@ -94,7 +94,7 @@ export default function HeroSection() {
 
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
         <motion.p
-          className="text-white/60 font-mono text-sm md:text-base mb-6"
+          className="text-white/60 font-mono text-sm md:text-base mb-6 min-h-[1.5em]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}

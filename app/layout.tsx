@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Fira_Code } from "next/font/google"
+import { Fira_Code, VT323, Press_Start_2P } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { LanguageProvider } from "@/context/language-context"
@@ -11,6 +11,8 @@ import WhatsAppButton from "@/components/ui/whatsapp-button"
 import ClarityAnalytics from "@/components/analytics/clarity-analytics"
 
 const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-fira" })
+const vt323 = VT323({ weight: "400", subsets: ["latin"], variable: "--font-vt323" })
+const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"], variable: "--font-press-start-2p" })
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kandtagency.com"), // Replace with your actual domain
@@ -128,7 +130,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${firaCode.className} font-mono antialiased`}>
+      <body className={`${firaCode.variable} ${vt323.variable} ${pressStart2P.variable} font-mono antialiased`}>
         <LanguageProvider>
           <CursorProvider>
             <CustomCursor />
