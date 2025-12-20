@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Fira_Code, VT323, Press_Start_2P } from "next/font/google"
+import localFont from "next/font/local"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { LanguageProvider } from "@/context/language-context"
@@ -14,17 +15,26 @@ const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-fira" })
 const vt323 = VT323({ weight: "400", subsets: ["latin"], variable: "--font-vt323" })
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"], variable: "--font-press-start-2p" })
 
+const ariW9500 = localFont({
+  src: "../public/fonts/ari-w9500-bold.ttf",
+  variable: "--font-ari",
+  display: "swap",
+})
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://kandtagency.com"), // Replace with your actual domain
   title: {
-    default: "K&T Digital Agency | We Code Your Vision",
+    default: "K&T Digital Agency | We Code Your Vision - Tu Visión Digital",
     template: "%s | K&T Digital Agency",
   },
-  description: "K&T is a premium digital agency in Colombia specializing in high-performance landing pages, e-commerce, and custom software solutions. We transform ideas into digital reality.",
+  description: "K&T is a premium digital agency in Colombia / Agencia Digital Premium en Colombia. We build high-performance websites and custom software solutions / Creamos sitios web de alto rendimiento y software a medida.",
   keywords: [
     "Digital Agency",
+    "Agencia Digital",
     "Web Development",
+    "Desarrollo Web",
     "Software Development",
+    "Desarrollo de Software",
     "Colombia",
     "Bogota",
     "Next.js",
@@ -32,9 +42,8 @@ export const metadata: Metadata = {
     "E-commerce",
     "Landing Page",
     "Custom Software",
-    "Agencia Digital",
-    "Desarrollo Web",
     "Diseño Web",
+    "Web Design",
   ],
   authors: [{ name: "K&T Digital Agency", url: "https://kandtagency.com" }],
   creator: "K&T Digital Agency",
@@ -45,8 +54,8 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "K&T Digital Agency | We Code Your Vision",
-    description: "Premium digital agency in Colombia. We build high-performance, beautiful websites and software.",
+    title: "K&T Digital Agency | We Code Your Vision - Tu Visión Digital",
+    description: "Premium digital agency in Colombia. We build high-performance, beautiful websites and software. / Agencia digital premium en Colombia. Creamos sitios web y software de alto rendimiento.",
     url: "https://kandtagency.com",
     siteName: "K&T Digital Agency",
     images: [
@@ -62,8 +71,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "K&T Digital Agency",
-    description: "We code your vision. Premium digital agency specializing in modern web development.",
+    title: "K&T Digital Agency | We Code Your Vision",
+    description: "Premium digital agency / Agencia digital premium. We code your vision.",
     creator: "@kandtagency",
     images: ["/images/og-image.png"],
   },
@@ -130,7 +139,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${firaCode.variable} ${vt323.variable} ${pressStart2P.variable} font-mono antialiased`}>
+      <body className={`${firaCode.variable} ${vt323.variable} ${pressStart2P.variable} ${ariW9500.variable} font-mono antialiased`}>
         <LanguageProvider>
           <CursorProvider>
             <CustomCursor />

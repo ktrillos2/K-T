@@ -12,7 +12,7 @@ export default function Footer() {
     <footer className="relative py-8 px-6 border-t border-border">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <motion.div
-          className="relative w-20 h-20"
+          className="relative w-32 h-32"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}

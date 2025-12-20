@@ -37,7 +37,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <motion.a
             href="#"
-            className="relative w-24 h-24"
+            className="relative w-24 h-24 scale-150 origin-left ml-4"
             onMouseEnter={() => setCursorVariant("hover")}
             onMouseLeave={() => setCursorVariant("default")}
             whileHover={{ scale: 1.05 }}

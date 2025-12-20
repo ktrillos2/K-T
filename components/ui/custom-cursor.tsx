@@ -10,7 +10,10 @@ export default function CustomCursor() {
   const mousePos = useRef({ x: -100, y: -100 })
   const dotPos = useRef({ x: -100, y: -100 })
   const ringPos = useRef({ x: -100, y: -100 })
-  const rafId = useRef<number>()
+  const rafId = useRef<number | null>(null)
+
+  // ... rest of logic
+
 
   const animate = useCallback(() => {
     const dotSpeed = 0.35
@@ -41,7 +44,7 @@ export default function CustomCursor() {
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove)
-      if (rafId.current) cancelAnimationFrame(rafId.current)
+      if (rafId.current !== null) cancelAnimationFrame(rafId.current)
     }
   }, [animate])
 
@@ -52,7 +55,7 @@ export default function CustomCursor() {
       {/* Main dot cursor */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full mix-blend-difference will-change-transform"
+        className="hidden lg:block fixed top-0 left-0 pointer-events-none z-[9999] rounded-full mix-blend-difference will-change-transform"
         style={{
           width: isHover ? 60 : 8,
           height: isHover ? 60 : 8,
@@ -64,7 +67,7 @@ export default function CustomCursor() {
       {/* Trailing ring */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border border-white/40 mix-blend-difference will-change-transform"
+        className="hidden lg:block fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border border-white/40 mix-blend-difference will-change-transform"
         style={{
           width: 32,
           height: 32,

@@ -103,21 +103,31 @@ export default function HeroSection() {
         </motion.p>
 
         <motion.h1
-          className="text-4xl md:text-6xl lg:text-8xl font-bold font-title mb-8 min-h-[1.2em]"
+          className="relative text-4xl md:text-6xl lg:text-8xl font-bold font-title mb-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
         >
-          <span className="text-foreground">{displayedText}</span>
-          <motion.span
-            className="inline-block w-[3px] h-[1em] bg-white ml-1 align-middle"
-            animate={{ opacity: isTypingComplete ? [1, 0] : 1 }}
-            transition={{
-              duration: 0.5,
-              repeat: isTypingComplete ? Number.POSITIVE_INFINITY : 0,
-              repeatType: "reverse",
-            }}
-          />
+          {/* Ghost text to reserve space and prevent CLS */}
+          <span className="invisible" aria-hidden="true">
+            {dictionary.hero.slogan}
+          </span>
+
+          {/* Actual animated text overlay */}
+          <span className="absolute inset-0 flex justify-center">
+            <span>
+              <span className="text-foreground">{displayedText}</span>
+              <motion.span
+                className="inline-block w-[3px] h-[1em] bg-white ml-1 align-middle"
+                animate={{ opacity: isTypingComplete ? [1, 0] : 1 }}
+                transition={{
+                  duration: 0.5,
+                  repeat: isTypingComplete ? Number.POSITIVE_INFINITY : 0,
+                  repeatType: "reverse",
+                }}
+              />
+            </span>
+          </span>
         </motion.h1>
 
         <motion.a
