@@ -22,7 +22,7 @@ const ariW9500 = localFont({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kandtagency.com"),
+  metadataBase: new URL("https://kytcode.lat"),
   title: {
     default: "K&T Agencia Digital | Desarrollo Web y Gestión de Redes Sociales en Colombia",
     template: "%s | K&T Agencia Digital",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     "Next.js",
     "React",
   ],
-  authors: [{ name: "K&T Agencia Digital", url: "https://kandtagency.com" }],
+  authors: [{ name: "K&T Agencia Digital", url: "https://kytcode.lat" }],
   creator: "K&T Agencia Digital",
   publisher: "K&T Agencia Digital",
   formatDetection: {
@@ -63,11 +63,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "K&T Agencia Digital | Desarrollo Web y Gestión de Redes Sociales",
     description: "Agencia digital en Colombia. Desarrollo de páginas web, e-commerce y gestión de redes sociales. Creamos tu presencia digital con soluciones profesionales.",
-    url: "https://kandtagency.com",
+    url: "https://kytcode.lat",
     siteName: "K&T Agencia Digital",
     images: [
       {
-        url: "/images/og-image.png",
+        url: "https://kytcode.lat/images/og-image.png",
         width: 1200,
         height: 630,
         alt: "K&T Agencia Digital - Desarrollo Web y Redes Sociales",
@@ -80,8 +80,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "K&T Agencia Digital | Desarrollo Web y Redes Sociales",
     description: "Agencia digital en Colombia. Desarrollo web, e-commerce y gestión de redes sociales. Creamos tu presencia digital.",
-    creator: "@kandtagency",
-    images: ["/images/og-image.png"],
+    creator: "@kytweb",
+    images: ["https://kytcode.lat/images/og-image.png"],
   },
   robots: {
     index: true,
@@ -96,10 +96,10 @@ export const metadata: Metadata = {
   },
   category: "technology",
   alternates: {
-    canonical: "https://kandtagency.com",
+    canonical: "https://kytcode.lat",
     languages: {
-      "es-CO": "https://kandtagency.com",
-      "en-US": "https://kandtagency.com",
+      "es-CO": "https://kytcode.lat",
+      "en-US": "https://kytcode.lat",
     },
   },
   verification: {
@@ -111,8 +111,8 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "K&T Agencia Digital",
-  "image": "https://kandtagency.com/images/logo.png",
-  "url": "https://kandtagency.com",
+  "image": "https://kytcode.lat/images/logo.png",
+  "url": "https://kytcode.lat",
   "telephone": "+573116360057",
   "address": {
     "@type": "PostalAddress",
@@ -133,9 +133,9 @@ const jsonLd = {
     "closes": "18:00"
   },
   "sameAs": [
-    "https://facebook.com/kandtagency",
-    "https://instagram.com/kandtagency",
-    "https://linkedin.com/company/kandtagency"
+    "https://www.facebook.com/KTSolutionsWeb",
+    "https://www.instagram.com/ktweb_/",
+    "https://www.tiktok.com/@kytweb"
   ]
 }
 

@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/private/',
         },
-        sitemap: 'https://kandtagency.com/sitemap.xml', // Replace with actual domain
+        sitemap: 'https://kytcode.lat/sitemap.xml',
     }
 }

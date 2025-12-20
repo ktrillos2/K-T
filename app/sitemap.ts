@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://kandtagency.com' // Replace with actual domain
+    const baseUrl = 'https://kytcode.lat'
 
     return [
         {
