@@ -4,6 +4,30 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
+import { smoothScrollTo } from "@/lib/utils"
+import { Instagram, Facebook } from "lucide-react"
+
+// Custom TikTok Icon
+const TikTok = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+  </svg>
+)
+
+const socials = [
+  { icon: TikTok, href: "https://www.tiktok.com/@kytweb", label: "TikTok" },
+  { icon: Instagram, href: "https://www.instagram.com/ktweb_/", label: "Instagram" },
+  { icon: Facebook, href: "https://www.facebook.com/KTSolutionsWeb", label: "Facebook" },
+]
 
 interface SuperMenuProps {
   isOpen: boolean
@@ -11,11 +35,11 @@ interface SuperMenuProps {
 }
 
 const menuItems = [
-  { key: "home", href: "#hero", image: "/dark-website-hero-section-with-matrix-code-effect.jpg" },
-  { key: "about", href: "#about", image: "/dark-about-us-section-with-terminal-window-style.jpg" },
-  { key: "services", href: "#services", image: "/dark-pricing-cards-with-macbook-window-buttons.jpg" },
-  { key: "work", href: "#projects", image: "/dark-portfolio-projects-gallery-grid.jpg" },
-  { key: "contact", href: "#contact", image: "/dark-contact-form-with-3d-visualization.jpg" },
+  { key: "home", href: "#hero", image: "/images/home-preview.png" },
+  { key: "about", href: "#about", image: "/images/about-preview.png" },
+  { key: "services", href: "#services", image: "/images/services-preview.png" },
+  { key: "work", href: "#projects", image: "/images/work-preview.png" },
+  { key: "contact", href: "#contact", image: "/images/contact-preview.png" },
 ]
 
 export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
@@ -26,11 +50,11 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
   const menuVariants = {
     closed: {
       opacity: 0,
-      transition: { duration: 0.3, ease: "easeInOut" },
+      transition: { duration: 0.3, ease: "easeInOut" as any },
     },
     open: {
       opacity: 1,
-      transition: { duration: 0.3, ease: "easeInOut" },
+      transition: { duration: 0.3, ease: "easeInOut" as any },
     },
   }
 
@@ -39,16 +63,14 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
     open: (i: number) => ({
       x: 0,
       opacity: 1,
-      transition: { delay: i * 0.1, duration: 0.4, ease: "easeOut" },
+      transition: { delay: i * 0.1, duration: 0.4, ease: "easeOut" as any },
     }),
   }
 
   const handleLinkClick = (href: string) => {
     onClose()
-    setTimeout(() => {
-      const element = document.querySelector(href)
-      element?.scrollIntoView({ behavior: "smooth" })
-    }, 300)
+    onClose()
+    smoothScrollTo(href, 1000)
   }
 
   return (
@@ -61,9 +83,9 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
           animate="open"
           exit="closed"
         >
-          <div className="h-full flex">
+          <div className="h-full flex max-w-7xl mx-auto">
             {/* Left side - Navigation links */}
-            <div className="w-full lg:w-1/2 h-full flex flex-col justify-center px-8 lg:px-16">
+            <div className="w-full lg:w-1/2 h-full flex flex-col justify-center px-6 lg:px-0 pt-24">
               <nav className="space-y-4">
                 {menuItems.map((item, index) => {
                   const isHovered = hoveredItem === item.key
@@ -93,9 +115,8 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
                       >
                         <span className="text-white/40 text-sm font-mono">0{index + 1}.</span>
                         <h2
-                          className={`text-5xl lg:text-7xl font-bold font-title transition-colors duration-300 ${
-                            isHovered ? "text-white" : "text-white/80"
-                          }`}
+                          className={`text-5xl lg:text-7xl font-bold font-title transition-colors duration-300 ${isHovered ? "text-white" : "text-white/80"
+                            }`}
                           style={{ textShadow: isHovered ? "0 0 30px rgba(255,255,255,0.5)" : "none" }}
                         >
                           {dictionary.nav[item.key as keyof typeof dictionary.nav]}
@@ -112,24 +133,64 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
               >
-                <p>// K&T Digital Agency</p>
-                <p className="text-white">contactoktweb@gmail.com</p>
+                {/* @ts-ignore */}
+                <p>{dictionary.nav.agency}</p>
+                <div className="flex flex-col gap-2 mt-2">
+                  <a
+                    href="mailto:contactoktweb@gmail.com"
+                    className="text-white hover:text-white/80 transition-colors w-fit"
+                    onMouseEnter={() => setCursorVariant("text")}
+                    onMouseLeave={() => setCursorVariant("default")}
+                  >
+                    contactoktweb@gmail.com
+                  </a>
+                  <a
+                    href="tel:+573116360057"
+                    className="text-white hover:text-white/80 transition-colors w-fit"
+                    onMouseEnter={() => setCursorVariant("text")}
+                    onMouseLeave={() => setCursorVariant("default")}
+                  >
+                    +57 311 636 0057
+                  </a>
+
+                  {/* Social Icons in Header Menu */}
+                  <div className="flex gap-3 mt-4">
+                    {socials.map((social) => {
+                      const Icon = social.icon
+                      return (
+                        <motion.a
+                          key={social.label}
+                          href={social.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition-colors border border-white/10 hover:border-white"
+                          onMouseEnter={() => setCursorVariant("hover")}
+                          onMouseLeave={() => setCursorVariant("default")}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Icon className="w-4 h-4" />
+                        </motion.a>
+                      )
+                    })}
+                  </div>
+                </div>
               </motion.div>
             </div>
 
             {/* Right side - Preview window */}
             <div className="hidden lg:flex w-1/2 h-full items-center justify-center p-16 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-l from-black via-transparent to-transparent z-10" />
+              {/* Removed gradient overlay as requested */}
 
               <AnimatePresence mode="wait">
                 {hoveredItem && (
                   <motion.div
                     key={hoveredItem}
-                    className="relative w-full max-w-lg h-[400px] rounded-xl overflow-hidden border border-white/20 shadow-2xl"
+                    className="relative w-full max-w-lg h-auto rounded-xl overflow-hidden border border-white/20 shadow-2xl bg-neutral-950"
                     initial={{ opacity: 0, scale: 0.8, rotateY: -15 }}
                     animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                     exit={{ opacity: 0, scale: 0.8, rotateY: 15 }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
                     style={{ perspective: 1000 }}
                   >
                     {/* macOS-style window header */}
@@ -141,11 +202,11 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
                     </div>
 
                     {/* Preview image */}
-                    <div className="absolute inset-0 pt-8 bg-neutral-950">
+                    <div className="relative pt-8 w-full">
                       <img
                         src={menuItems.find((m) => m.key === hoveredItem)?.image || ""}
                         alt={hoveredItem}
-                        className="w-full h-full object-cover"
+                        className="w-full h-auto block"
                       />
                     </div>
 
@@ -178,13 +239,14 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
                   >
                     {"{ }"}
                   </motion.div>
-                  <p className="text-white/40 font-mono text-sm">// Hover a link to preview</p>
+                  <p className="text-white/40 font-mono text-sm">{dictionary.nav.hoverHint}</p>
                 </motion.div>
               )}
             </div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          </div >
+        </motion.div >
+      )
+      }
+    </AnimatePresence >
   )
 }

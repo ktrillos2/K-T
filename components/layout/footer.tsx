@@ -35,7 +35,7 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          {dictionary.footer.made} <Heart className="w-4 h-4 text-white fill-white" /> {dictionary.footer.by}
+          {dictionary.footer.made} <Heart className="w-4 h-4 text-white fill-white" />
         </motion.p>
       </div>
     </footer>

@@ -1,20 +1,20 @@
+/* Fallback pixel font from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
-/* Import ARI-W9500 font or similar pixel font */
+/* Import ARI-W9500 font from local public folder */
 @font-face {
   font-family: "ARI-W9500";
-  src: url("https://cdn.jsdelivr.net/gh/nicodelamaza/pixel-fonts/ARI-W9500.woff2") format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/nicodelamaza/pixel-fonts/ARI-W9500.woff") format("woff");
-  font-weight: normal;
+  src: url("/fonts/ari-w9500-bold.ttf") format("truetype");
+  font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 
-/* Fallback pixel font from Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap");
+
 
 /* Updated to black/white color scheme - removed green */
 :root {
@@ -135,12 +135,18 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
 @layer utilities {
+
   /* Updated glow to white */
   .text-glow {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3);
@@ -158,6 +164,24 @@
 
   /* Title font class */
   .font-title {
-    font-family: "VT323", "Press Start 2P", monospace;
+    font-family: "ARI-W9500", "VT323", "Press Start 2P", monospace;
   }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.8);
 }

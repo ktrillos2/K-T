@@ -22,12 +22,14 @@ const ServiceCard = memo(function ServiceCard({
   isPopular,
   index,
   setCursorVariant,
+  dictionary,
 }: {
   plan: (typeof plans)[number]
   planData: { title: string; price: string; features: string[]; cta: string }
   isPopular: boolean
   index: number
-  setCursorVariant: (v: string) => void
+  setCursorVariant: (v: "default" | "text" | "hover") => void
+  dictionary: any
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const Icon = planIcons[plan]
@@ -57,9 +59,8 @@ const ServiceCard = memo(function ServiceCard({
   return (
     <motion.div
       ref={ref}
-      className={`relative rounded-xl overflow-hidden border bg-zinc-950 ${
-        isPopular ? "border-white/30 lg:-mt-6 lg:mb-6" : "border-white/10"
-      }`}
+      className={`relative rounded-xl overflow-hidden border bg-zinc-950 flex flex-col ${isPopular ? "border-white lg:-mt-6 lg:mb-6" : "border-white/10"
+        }`}
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -111,12 +112,13 @@ const ServiceCard = memo(function ServiceCard({
             transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
           >
             <Sparkles className="w-3 h-3" />
-            POPULAR
+            {/* @ts-ignore */}
+            {dictionary.services.popular}
           </motion.span>
         )}
       </motion.div>
 
-      <div className="p-6 lg:p-8" style={{ transform: "translateZ(20px)" }}>
+      <div className="p-6 lg:p-8 flex flex-col h-full" style={{ transform: "translateZ(20px)" }}>
         {/* Icon and title */}
         <div className="flex items-start gap-4 mb-6">
           <motion.div
@@ -139,7 +141,7 @@ const ServiceCard = memo(function ServiceCard({
         </div>
 
         {/* Features with stagger and hover effects */}
-        <ul className="space-y-3 mb-8">
+        <ul className="space-y-3 mb-8 flex-grow">
           {planData.features.map((feature, i) => (
             <motion.li
               key={i}
@@ -202,7 +204,7 @@ export default function ServicesSection() {
   const { setCursorVariant } = useCursor()
 
   return (
-    <section id="services" className="relative py-24 lg:py-32 px-6 bg-black overflow-hidden">
+    <section id="services" className="relative pt-0 pb-16 lg:pt-0 lg:pb-24 px-6 bg-black overflow-hidden">
       <div className="absolute inset-0">
         <motion.div
           className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px]"
@@ -220,7 +222,7 @@ export default function ServicesSection() {
           transition={{ duration: 0.5 }}
         >
           <motion.p
-            className="text-white/40 font-mono text-sm mb-4"
+            className="text-white/70 font-mono text-sm mb-4"
             animate={{ opacity: [0.4, 0.8, 0.4] }}
             transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
           >
@@ -240,6 +242,7 @@ export default function ServicesSection() {
               isPopular={plan === "ecommerce"}
               index={index}
               setCursorVariant={setCursorVariant}
+              dictionary={dictionary}
             />
           ))}
         </div>

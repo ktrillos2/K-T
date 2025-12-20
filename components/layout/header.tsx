@@ -5,12 +5,13 @@ import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
+import { smoothScrollTo } from "@/lib/utils"
 import SuperMenu from "./super-menu"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const { language, toggleLanguage } = useLanguage()
+  const { language, toggleLanguage, dictionary } = useLanguage()
   const { setCursorVariant } = useCursor()
 
   useEffect(() => {
@@ -25,11 +26,10 @@ export default function Header() {
   return (
     <>
       <motion.header
-        className={`fixed top-0 left-0 right-0 z-40 px-6 py-4 transition-all duration-300 ${
-          isScrolled
-            ? "backdrop-blur-md bg-black/80 border-b border-white/10"
-            : "bg-transparent border-b border-transparent"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-40 px-6 py-4 transition-all duration-300 ${isScrolled && !isMenuOpen
+          ? "backdrop-blur-md bg-black/80 border-b border-white/10"
+          : "bg-transparent border-b border-transparent"
+          }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
@@ -43,7 +43,8 @@ export default function Header() {
             whileHover={{ scale: 1.05 }}
             onClick={(e) => {
               e.preventDefault()
-              window.scrollTo({ top: 0, behavior: "smooth" })
+              window.scrollTo({ top: 0, behavior: "instant" }) // Reset instant to avoid conflict
+              smoothScrollTo(0, 1000)
             }}
           >
             <Image src="/images/logo.png" alt="K&T Logo" fill className="object-contain" priority />
@@ -52,13 +53,15 @@ export default function Header() {
           <div className="flex items-center gap-4">
             <motion.button
               onClick={toggleLanguage}
-              className="px-3 py-1 text-sm font-mono border border-white/30 rounded hover:border-white hover:text-white transition-colors"
+              className="px-4 py-2 text-lg rounded hover:bg-white/10 hover:text-white transition-all duration-300 flex items-center justify-center min-w-[60px]"
               onMouseEnter={() => setCursorVariant("hover")}
               onMouseLeave={() => setCursorVariant("default")}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {language === "en" ? "ES" : "EN"}
+              <span role="img" aria-label={language === "en" ? "English" : "Spanish"}>
+                {language === "en" ? "🇺🇸" : "🇪🇸"}
+              </span>
             </motion.button>
 
             <motion.button
@@ -78,7 +81,7 @@ export default function Header() {
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
                   >
-                    CLOSE
+                    {dictionary.nav.close}
                   </motion.span>
                 ) : (
                   <motion.span
@@ -88,7 +91,7 @@ export default function Header() {
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
                   >
-                    MENU
+                    {dictionary.nav.menu}
                   </motion.span>
                 )}
               </AnimatePresence>

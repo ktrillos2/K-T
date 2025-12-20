@@ -324,6 +324,7 @@ export default function CodeAnimation() {
     setShowCursor(true)
   }, [])
 
+  // Typing phase: faster speed
   useEffect(() => {
     if (phase === "typing") {
       const interval = setInterval(() => {
@@ -331,44 +332,53 @@ export default function CodeAnimation() {
           const newVal = prev + 1
           // Mouse follows the typing position smoothly
           setMousePos({
-            x: 100 + (codeLines[Math.min(newVal - 1, codeLines.length - 1)]?.text?.length || 0) * 3,
-            y: 55 + newVal * 16,
+            x: 100 + (codeLines[Math.min(newVal - 1, codeLines.length - 1)]?.text?.length || 0) * 8.5, // Adjusted char width
+            y: 55 + newVal * 20, // Adjusted line height matches rendering
           })
 
           if (newVal >= codeLines.length) {
             clearInterval(interval)
-            setTimeout(() => setPhase("moving"), 400)
+            setTimeout(() => setPhase("moving"), 200) // Lower delay before moving
             return prev
           }
           return newVal
         })
-      }, 180)
+      }, 40) // Much faster typing (was 180)
       return () => clearInterval(interval)
     }
   }, [phase])
 
+  // Mouse movement: Bezier curve for natural feel
   useEffect(() => {
     if (phase === "moving") {
-      const moveToButton = async () => {
-        // Step 1: Move up and right
-        setMousePos({ x: 200, y: 200 })
-        await new Promise((r) => setTimeout(r, 200))
+      const animateMouse = async () => {
+        const start = { x: mousePos.x, y: mousePos.y }
+        const end = { x: 335, y: 35 } // Target: Run button
+        const control = { x: 150, y: 150 } // Control point for curve
 
-        // Step 2: Move to middle area
-        setMousePos({ x: 280, y: 80 })
-        await new Promise((r) => setTimeout(r, 200))
+        const duration = 1000 // 1 second movement
+        const startTime = performance.now()
 
-        // Step 3: Move near button
-        setMousePos({ x: 320, y: 35 })
-        await new Promise((r) => setTimeout(r, 200))
+        const move = (currentTime: number) => {
+          const elapsed = currentTime - startTime
+          const t = Math.min(elapsed / duration, 1)
 
-        // Step 4: Final position on Run button
-        setMousePos({ x: 335, y: 22 })
-        await new Promise((r) => setTimeout(r, 300))
+          // Quadratic Bezier: (1-t)^2 * P0 + 2(1-t)t * P1 + t^2 * P2
+          const x = Math.pow(1 - t, 2) * start.x + 2 * (1 - t) * t * control.x + Math.pow(t, 2) * end.x
+          const y = Math.pow(1 - t, 2) * start.y + 2 * (1 - t) * t * control.y + Math.pow(t, 2) * end.y
 
-        setPhase("clicking")
+          setMousePos({ x, y })
+
+          if (t < 1) {
+            requestAnimationFrame(move)
+          } else {
+            setPhase("clicking")
+          }
+        }
+
+        requestAnimationFrame(move)
       }
-      moveToButton()
+      animateMouse()
     }
   }, [phase])
 
@@ -376,9 +386,9 @@ export default function CodeAnimation() {
     if (phase === "clicking") {
       const clickSequence = async () => {
         setIsClicking(true)
-        await new Promise((r) => setTimeout(r, 200))
-        setIsClicking(false)
         await new Promise((r) => setTimeout(r, 150))
+        setIsClicking(false)
+        await new Promise((r) => setTimeout(r, 100))
         setPhase("compiling")
       }
       clickSequence()
@@ -392,19 +402,19 @@ export default function CodeAnimation() {
         setCompileProgress((prev) => {
           if (prev >= 100) {
             clearInterval(interval)
-            setTimeout(() => setPhase("preview"), 300)
+            setTimeout(() => setPhase("preview"), 200)
             return 100
           }
-          return prev + 4
+          return prev + 8 // Faster compile
         })
-      }, 30)
+      }, 20)
       return () => clearInterval(interval)
     }
   }, [phase])
 
   useEffect(() => {
     if (phase === "preview") {
-      setTimeout(resetAnimation, 7000)
+      setTimeout(resetAnimation, 3000) // Shorter preview time
     }
   }, [phase, resetAnimation])
 
@@ -423,13 +433,12 @@ export default function CodeAnimation() {
 
         {/* Run button */}
         <motion.button
-          className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-xs font-mono font-medium transition-all ${
-            phase === "compiling"
+          className={`flex items-center gap-2 px-4 py-1.5 rounded-md text-xs font-mono font-medium transition-all ${phase === "compiling"
               ? "bg-amber-500/20 text-amber-400 border border-amber-500/40"
               : phase === "preview"
                 ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40"
                 : "bg-white/10 text-white hover:bg-white/20 border border-white/20"
-          }`}
+            }`}
           animate={{
             scale: isClicking ? 0.88 : 1,
             boxShadow: isClicking

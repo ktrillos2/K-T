@@ -23,12 +23,14 @@ const ValueCard = memo(function ValueCard({
   isActive,
   onClick,
   setCursorVariant,
+  dictionary,
 }: {
   value: (typeof values)[number]
   data: { title: string; description: string }
   isActive: boolean
   onClick: () => void
-  setCursorVariant: (v: string) => void
+  setCursorVariant: (v: "default" | "text" | "hover") => void
+  dictionary: any
 }) {
   const Icon = iconMap[value]
   const ref = useRef<HTMLButtonElement>(null)
@@ -57,11 +59,10 @@ const ValueCard = memo(function ValueCard({
     <motion.button
       ref={ref}
       onClick={onClick}
-      className={`w-full text-left p-5 rounded-xl border backdrop-blur-sm transition-colors duration-200 ${
-        isActive
-          ? "bg-white text-black border-white shadow-[0_0_40px_rgba(255,255,255,0.15)]"
-          : "bg-white/5 text-white/60 border-white/10 hover:border-white/30 hover:bg-white/10"
-      }`}
+      className={`w-full text-left p-5 rounded-xl border backdrop-blur-sm transition-colors duration-200 ${isActive
+        ? "bg-white text-black border-white shadow-[0_0_40px_rgba(255,255,255,0.15)]"
+        : "bg-white/5 text-white/60 border-white/10 hover:border-white/30 hover:bg-white/10"
+        }`}
       onMouseEnter={() => setCursorVariant("hover")}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -78,14 +79,15 @@ const ValueCard = memo(function ValueCard({
             <Icon className={`w-5 h-5 ${isActive ? "text-black" : "text-white/60"}`} />
           </motion.div>
           <div>
-            <span className="font-mono font-bold text-lg block">{data.title}</span>
+            <h3 className="font-mono font-bold text-lg block">{data.title}</h3>
             {isActive && (
               <motion.span
                 className="text-black/60 text-xs font-mono"
                 initial={{ opacity: 0, y: -5 }}
                 animate={{ opacity: 1, y: 0 }}
               >
-                Click to explore
+                {/* @ts-ignore */}
+                {dictionary.about.clickToExplore}
               </motion.span>
             )}
           </div>
@@ -101,75 +103,7 @@ const ValueCard = memo(function ValueCard({
   )
 })
 
-const StatCounter = memo(function StatCounter({
-  value,
-  label,
-  suffix = "",
-  delay = 0,
-}: {
-  value: number
-  label: string
-  suffix?: string
-  delay?: number
-}) {
-  const [count, setCount] = useState(0)
-  const [hasAnimated, setHasAnimated] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true)
-          const start = 0
-          const duration = 2000
-          const startTime = performance.now()
-
-          const animate = (currentTime: number) => {
-            const elapsed = currentTime - startTime
-            const progress = Math.min(elapsed / duration, 1)
-            const eased = 1 - Math.pow(1 - progress, 4)
-            setCount(Math.floor(eased * value))
-            if (progress < 1) requestAnimationFrame(animate)
-          }
-
-          setTimeout(() => requestAnimationFrame(animate), delay)
-        }
-      },
-      { threshold: 0.5 },
-    )
-
-    if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [value, delay, hasAnimated])
-
-  return (
-    <motion.div
-      ref={ref}
-      className="text-center group cursor-default"
-      whileHover={{ scale: 1.05, y: -5 }}
-      transition={{ type: "spring", stiffness: 400 }}
-    >
-      <motion.div className="relative">
-        <motion.span
-          className="text-5xl md:text-6xl font-bold font-title text-white block"
-          animate={{ opacity: hasAnimated ? 1 : 0.3 }}
-        >
-          {count}
-          {suffix}
-        </motion.span>
-        <motion.div
-          className="absolute -inset-4 bg-white/5 rounded-2xl -z-10"
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileHover={{ opacity: 1, scale: 1 }}
-        />
-      </motion.div>
-      <span className="text-white/40 text-sm font-mono mt-3 block group-hover:text-white/60 transition-colors">
-        {label}
-      </span>
-    </motion.div>
-  )
-})
 
 const TypingCode = memo(function TypingCode({ text, delay = 0 }: { text: string; delay?: number }) {
   const [displayed, setDisplayed] = useState("")
@@ -208,28 +142,51 @@ const TypingCode = memo(function TypingCode({ text, delay = 0 }: { text: string;
 export default function AboutSection() {
   const { dictionary } = useLanguage()
   const { setCursorVariant } = useCursor()
+
   const [activeValue, setActiveValue] = useState<(typeof values)[number]>("innovation")
+  const [isCompiled, setIsCompiled] = useState(false)
+
+  const [particles, setParticles] = useState<Array<{ x: number; y: number; duration: number; delay: number }>>([])
+
+  useEffect(() => {
+    const newParticles = [...Array(8)].map(() => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * 800,
+      duration: Math.random() * 5 + 5,
+      delay: Math.random() * 5,
+    }))
+    setParticles(newParticles)
+  }, [])
+
+  useEffect(() => {
+    setIsCompiled(false)
+    const timer = setTimeout(() => {
+      setIsCompiled(true)
+    }, 1500)
+    return () => clearTimeout(timer)
+  }, [activeValue])
 
   return (
-    <section id="about" className="relative py-24 lg:py-32 px-6 bg-black overflow-hidden">
+    <section id="about" className="relative py-16 lg:py-24 px-6 bg-black overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/[0.02] rounded-full blur-3xl" />
-        {[...Array(20)].map((_, i) => (
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/[0.015] rounded-full blur-2xl" />
+        {particles.map((particle, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-white/20 rounded-full"
+            className="absolute w-1 h-1 bg-white/10 rounded-full"
             initial={{
-              x: Math.random() * (typeof window !== "undefined" ? window.innerWidth : 1000),
-              y: Math.random() * 800,
+              x: particle.x,
+              y: particle.y,
             }}
             animate={{
               y: [null, -100],
-              opacity: [0, 1, 0],
+              opacity: [0, 0.8, 0],
             }}
             transition={{
-              duration: Math.random() * 3 + 2,
+              duration: particle.duration,
               repeat: Number.POSITIVE_INFINITY,
-              delay: Math.random() * 2,
+              delay: particle.delay,
+              ease: "linear",
             }}
           />
         ))}
@@ -245,9 +202,10 @@ export default function AboutSection() {
           transition={{ duration: 0.5 }}
         >
           <motion.p
-            className="text-white/40 font-mono text-sm mb-4 flex items-center justify-center gap-2"
-            animate={{ opacity: [0.4, 0.7, 0.4] }}
-            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+            className="text-white/70 font-mono text-sm mb-4 flex items-center justify-center gap-2"
+            initial={{ opacity: 0.5 }}
+            whileHover={{ opacity: 0.8 }}
+            transition={{ duration: 0.3 }}
           >
             <Terminal className="w-4 h-4" />
             {dictionary.about.subtitle}
@@ -263,6 +221,7 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="h-full flex flex-col"
           >
             <p className="text-white/60 font-mono text-lg mb-8 leading-relaxed">{dictionary.about.description}</p>
 
@@ -281,6 +240,7 @@ export default function AboutSection() {
                     isActive={activeValue === value}
                     onClick={() => setActiveValue(value)}
                     setCursorVariant={setCursorVariant}
+                    dictionary={dictionary}
                   />
                 </motion.div>
               ))}
@@ -289,18 +249,19 @@ export default function AboutSection() {
 
           {/* Right - Terminal with typing effect */}
           <motion.div
-            className="relative"
+            className="relative h-full"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="sticky top-32">
+            <div className="h-full">
               {/* Terminal window with glow */}
               <motion.div
-                className="rounded-xl overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl"
-                animate={{ boxShadow: `0 0 60px rgba(255,255,255,0.05)` }}
-                whileHover={{ boxShadow: `0 0 80px rgba(255,255,255,0.1)` }}
+                className="rounded-xl overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl h-full flex flex-col transition-shadow duration-300 hover:shadow-[0_0_80px_rgba(255,255,255,0.1)]"
+                initial={{ boxShadow: "0 0 0 rgba(0,0,0,0)" }}
+                whileInView={{ boxShadow: "0 0 60px rgba(255,255,255,0.05)" }}
+                viewport={{ once: true }}
               >
                 <div className="flex items-center gap-2 px-4 py-3 bg-zinc-900/80 border-b border-white/10">
                   <motion.div className="w-3 h-3 rounded-full bg-[#FF5F56]" whileHover={{ scale: 1.4 }} />
@@ -309,7 +270,7 @@ export default function AboutSection() {
                   <span className="ml-3 text-xs text-white/40 font-mono">~/k&t/{activeValue}.ts</span>
                 </div>
 
-                <div className="p-6 min-h-[350px]">
+                <div className="p-6 flex-1 flex flex-col justify-between">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeValue}
@@ -317,6 +278,7 @@ export default function AboutSection() {
                       animate={{ opacity: 1, filter: "blur(0px)" }}
                       exit={{ opacity: 0, filter: "blur(10px)" }}
                       transition={{ duration: 0.3 }}
+                      className="h-full flex flex-col justify-between"
                     >
                       <div className="font-mono text-sm space-y-2">
                         <p className="text-white/30">
@@ -360,14 +322,17 @@ export default function AboutSection() {
                       {/* Animated progress bar */}
                       <div className="mt-8 space-y-2">
                         <div className="flex justify-between text-xs text-white/40 font-mono">
-                          <span>Compiling...</span>
+                          {/* @ts-ignore */}
+                          <span>{dictionary.about.compiling}</span>
                           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}>
-                            Done!
+                            {/* @ts-ignore */}
+                            {dictionary.about.done}
                           </motion.span>
                         </div>
                         <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
                           <motion.div
-                            className="h-full bg-gradient-to-r from-white/50 to-white rounded-full"
+                            className={`h-full rounded-full transition-colors duration-500 ${isCompiled ? "bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]" : "bg-gradient-to-r from-white/50 to-white"
+                              }`}
                             initial={{ width: "0%" }}
                             animate={{ width: "100%" }}
                             transition={{ duration: 1.5, ease: "easeOut" }}
@@ -382,19 +347,6 @@ export default function AboutSection() {
           </motion.div>
         </div>
 
-        {/* Stats with animated counters */}
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 pt-16 border-t border-white/10"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <StatCounter value={50} suffix="+" label={dictionary.about.stats.projects} delay={0} />
-          <StatCounter value={30} suffix="+" label={dictionary.about.stats.clients} delay={200} />
-          <StatCounter value={3} suffix="+" label={dictionary.about.stats.years} delay={400} />
-          <StatCounter value={100} suffix="%" label={dictionary.about.stats.satisfaction} delay={600} />
-        </motion.div>
       </div>
     </section>
   )
