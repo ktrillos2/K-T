@@ -22,48 +22,55 @@ const ariW9500 = localFont({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kandtagency.com"), // Replace with your actual domain
+  metadataBase: new URL("https://kandtagency.com"),
   title: {
-    default: "K&T Agencia Digital | Tu Visión Digital - We Code Your Vision",
+    default: "K&T Agencia Digital | Desarrollo Web y Gestión de Redes Sociales en Colombia",
     template: "%s | K&T Agencia Digital",
   },
-  description: "Agencia Digital Premium en Colombia / K&T is a premium digital agency. Creamos sitios web de alto rendimiento y software a medida / We build high-performance websites and custom software solutions.",
+  description: "Agencia digital en Colombia especializada en desarrollo de páginas web, diseño web, e-commerce y gestión de redes sociales. Creamos tu presencia digital con landing pages y tiendas online profesionales.",
   keywords: [
-    "Agencia Digital",
-    "Desarrollo Web",
-    "Desarrollo de Software",
-    "Colombia",
-    "Bogota",
-    "Diseño Web",
-    "Digital Agency",
-    "Web Development",
-    "Software Development",
+    "agencia digital",
+    "agencia digital Colombia",
+    "agencia digital Bogotá",
+    "desarrollo web",
+    "desarrollo web Colombia",
+    "páginas web",
+    "diseño web",
+    "diseño de páginas web",
+    "gestión de redes sociales",
+    "manejo de redes sociales",
+    "community manager",
+    "marketing digital",
+    "publicidad digital",
+    "landing page",
+    "landing page Colombia",
+    "e-commerce",
+    "tienda online",
+    "comercio electrónico",
+    "desarrollo de software",
+    "soluciones web",
     "Next.js",
     "React",
-    "E-commerce",
-    "Landing Page",
-    "Custom Software",
-    "Web Design",
   ],
-  authors: [{ name: "K&T Digital Agency", url: "https://kandtagency.com" }],
-  creator: "K&T Digital Agency",
-  publisher: "K&T Digital Agency",
+  authors: [{ name: "K&T Agencia Digital", url: "https://kandtagency.com" }],
+  creator: "K&T Agencia Digital",
+  publisher: "K&T Agencia Digital",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   openGraph: {
-    title: "K&T Agencia Digital | Tu Visión Digital - We Code Your Vision",
-    description: "Agencia digital premium en Colombia. Creamos sitios web y software de alto rendimiento para impulsar tu negocio. / Premium digital agency building high-performance websites.",
+    title: "K&T Agencia Digital | Desarrollo Web y Gestión de Redes Sociales",
+    description: "Agencia digital en Colombia. Desarrollo de páginas web, e-commerce y gestión de redes sociales. Creamos tu presencia digital con soluciones profesionales.",
     url: "https://kandtagency.com",
-    siteName: "K&T Digital Agency",
+    siteName: "K&T Agencia Digital",
     images: [
       {
-        url: "/images/og-image.png", // Ensure you create/upload this
+        url: "/images/og-image.png",
         width: 1200,
         height: 630,
-        alt: "K&T Agencia Digital",
+        alt: "K&T Agencia Digital - Desarrollo Web y Redes Sociales",
       },
     ],
     locale: "es_CO",
@@ -71,8 +78,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "K&T Agencia Digital | Tu Visión Digital",
-    description: "Agencia digital premium. Codificamos tu visión. / Premium digital agency. We code your vision.",
+    title: "K&T Agencia Digital | Desarrollo Web y Redes Sociales",
+    description: "Agencia digital en Colombia. Desarrollo web, e-commerce y gestión de redes sociales. Creamos tu presencia digital.",
     creator: "@kandtagency",
     images: ["/images/og-image.png"],
   },
@@ -96,14 +103,14 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "google-site-verification-placeholder", // Add your verification code
+    google: "google-site-verification-placeholder",
   },
 }
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "name": "K&T Digital Agency",
+  "name": "K&T Agencia Digital",
   "image": "https://kandtagency.com/images/logo.png",
   "url": "https://kandtagency.com",
   "telephone": "+573116360057",
@@ -111,8 +118,8 @@ const jsonLd = {
     "@type": "PostalAddress",
     "addressCountry": "CO"
   },
-  "priceRange": "$$$",
-  "description": "K&T is a digital agency specializing in landing pages, e-commerce, and custom web solutions.",
+  "priceRange": "$$",
+  "description": "Agencia digital en Colombia especializada en desarrollo de páginas web, e-commerce y gestión de redes sociales. Ofrecemos servicios de diseño web, landing pages, tiendas online y marketing digital.",
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": [

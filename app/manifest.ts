@@ -2,9 +2,9 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        name: 'K&T Digital Agency',
+        name: 'K&T Agencia Digital',
         short_name: 'K&T Agency',
-        description: 'K&T is a digital agency specializing in landing pages, e-commerce, and custom web solutions. We Code Your Vision.',
+        description: 'Agencia digital en Colombia. Desarrollo de páginas web, e-commerce y gestión de redes sociales. Creamos tu presencia digital.',
         start_url: '/',
         display: 'standalone',
         background_color: '#000000',

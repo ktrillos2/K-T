@@ -17,7 +17,7 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <Image src="/images/logo.png" alt="K&T Logo" fill sizes="80px" className="object-contain" />
+          <Image src="/images/logo.png" alt="K&T Agencia Digital - Desarrollo Web y Gestión de Redes Sociales en Colombia" fill sizes="80px" className="object-contain" />
         </motion.div>
 
         <motion.p

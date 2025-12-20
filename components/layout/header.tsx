@@ -47,7 +47,7 @@ export default function Header() {
               smoothScrollTo(0, 1000)
             }}
           >
-            <Image src="/images/logo.png" alt="K&T Logo" fill sizes="96px" className="object-contain" priority />
+            <Image src="/images/logo.png" alt="K&T Agencia Digital - Desarrollo Web y Gestión de Redes Sociales en Colombia" fill sizes="96px" className="object-contain" priority />
           </motion.a>
 
           <div className="flex items-center gap-4">
