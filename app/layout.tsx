@@ -24,10 +24,10 @@ const ariW9500 = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://kytcode.lat"),
   title: {
-    default: "K&T Agencia Digital | Desarrollo Web y Gestión de Redes Sociales en Colombia",
+    default: "K&T - Desarrollo Web y Gestión de Redes en Colombia",
     template: "%s | K&T Agencia Digital",
   },
-  description: "Agencia digital en Colombia especializada en desarrollo de páginas web, diseño web, e-commerce y gestión de redes sociales. Creamos tu presencia digital con landing pages y tiendas online profesionales.",
+  description: "Agencia digital en Colombia. Desarrollo web, e-commerce, landing pages y gestión de redes sociales. Soluciones profesionales para tu negocio.",
   keywords: [
     "agencia digital",
     "agencia digital Colombia",
@@ -61,8 +61,8 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "K&T Agencia Digital | Desarrollo Web y Gestión de Redes Sociales",
-    description: "Agencia digital en Colombia. Desarrollo de páginas web, e-commerce y gestión de redes sociales. Creamos tu presencia digital con soluciones profesionales.",
+    title: "K&T - Desarrollo Web y Gestión de Redes en Colombia",
+    description: "Agencia digital en Colombia. Desarrollo web, e-commerce, landing pages y gestión de redes sociales.",
     url: "https://kytcode.lat",
     siteName: "K&T Agencia Digital",
     images: [
@@ -78,8 +78,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "K&T Agencia Digital | Desarrollo Web y Redes Sociales",
-    description: "Agencia digital en Colombia. Desarrollo web, e-commerce y gestión de redes sociales. Creamos tu presencia digital.",
+    title: "K&T - Desarrollo Web y Gestión de Redes en Colombia",
+    description: "Agencia digital en Colombia. Desarrollo web, e-commerce, landing pages y gestión de redes sociales.",
     creator: "@kytweb",
     images: ["https://kytcode.lat/images/og-image.png"],
   },
