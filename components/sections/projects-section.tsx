@@ -21,7 +21,7 @@ const projects = [
     image: "/images/projects/eklipse.png",
     imageMobile: "/images/projects/eklipse-mobile.png",
     tech: ["Next.js", "Tailwind CSS"],
-    year: "2024",
+    year: "2025",
     link: "https://www.eklipsehometextil.com",
   },
   {
@@ -33,7 +33,7 @@ const projects = [
     image: "/images/projects/san-roque.png",
     imageMobile: "/images/projects/san-roque-mobile.png",
     tech: ["Next.js", "Tailwind CSS"],
-    year: "2024",
+    year: "2025",
     link: "https://sanroqueros.com",
   },
   {
@@ -45,7 +45,7 @@ const projects = [
     image: "/images/projects/telas-real.png",
     imageMobile: "/images/projects/telas-real-mobile.png",
     tech: ["Next.js", "Tailwind CSS"],
-    year: "2024",
+    year: "2025",
     link: "https://telasreal.com",
   },
   {
@@ -57,7 +57,7 @@ const projects = [
     image: "/images/projects/redeservi-paris.png",
     imageMobile: "/images/projects/redeservi-paris-mobile.png",
     tech: ["Next.js", "Tailwind CSS"],
-    year: "2024",
+    year: "2025",
     link: "https://redeservieuropa.com",
   },
   {
@@ -69,7 +69,7 @@ const projects = [
     image: "/images/projects/chevere-bogota.png",
     imageMobile: "/images/projects/chevere-bogota-mobile.png",
     tech: ["Next.js", "Tailwind CSS"],
-    year: "2024",
+    year: "2025",
     link: "https://cheverebogotatravel.com",
   },
 ]
