@@ -7,6 +7,7 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { Check, ArrowRight, Sparkles, Zap, ShoppingCart, Code2 } from "lucide-react"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
+import { reportConversion } from "@/lib/gtag"
 
 const plans = ["landing", "ecommerce", "custom"] as const
 
@@ -174,6 +175,13 @@ const ServiceCard = memo(function ServiceCard({
           )}`}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={(e) => {
+            e.preventDefault()
+            reportConversion(`https://wa.me/573116360057?text=${encodeURIComponent(
+              // @ts-ignore
+              planData.whatsapp_message || "Hola, me gustaría recibir más información."
+            )}`)
+          }}
           className="w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold bg-white text-black relative overflow-hidden group"
           onMouseEnter={() => setCursorVariant("hover")}
           onMouseLeave={() => setCursorVariant("default")}
