@@ -200,8 +200,29 @@ const ServiceCard = memo(function ServiceCard({
 })
 
 export default function ServicesSection() {
-  const { dictionary } = useLanguage()
+  const { dictionary, currency } = useLanguage()
   const { setCursorVariant } = useCursor()
+
+  const PRICING = {
+    landing: {
+      COP: "$500,000 COP",
+      USD: "$111 USD",
+      ARS: "$160,950 ARS",
+      MXN: "$2,220 MXN",
+      PEN: "411 PEN",
+      GS: "743,700 GS",
+      UYU: "4,353 UYU",
+    },
+    ecommerce: {
+      COP: "$1,300,000 COP",
+      USD: "$289 USD",
+      ARS: "$419,050 ARS",
+      MXN: "$5,780 MXN",
+      PEN: "1,069 PEN",
+      GS: "1,936,300 GS",
+      UYU: "11,335 UYU",
+    },
+  }
 
   return (
     <section id="services" className="relative pt-0 pb-16 lg:pt-0 lg:pb-24 px-6 bg-black overflow-hidden">
@@ -234,17 +255,28 @@ export default function ServicesSection() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 perspective-1000">
-          {plans.map((plan, index) => (
-            <ServiceCard
-              key={plan}
-              plan={plan}
-              planData={dictionary.services[plan]}
-              isPopular={plan === "ecommerce"}
-              index={index}
-              setCursorVariant={setCursorVariant}
-              dictionary={dictionary}
-            />
-          ))}
+          {plans.map((plan, index) => {
+            const planInfo = dictionary.services[plan]
+            // Use dynamic price for landing/ecommerce, fallback to dictionary (for custom)
+            const price = (plan === "landing" || plan === "ecommerce")
+              ? PRICING[plan][currency]
+              : planInfo.price
+
+            return (
+              <ServiceCard
+                key={plan}
+                plan={plan}
+                planData={{
+                  ...planInfo,
+                  price: price
+                }}
+                isPopular={plan === "ecommerce"}
+                index={index}
+                setCursorVariant={setCursorVariant}
+                dictionary={dictionary}
+              />
+            )
+          })}
         </div>
       </div>
     </section>

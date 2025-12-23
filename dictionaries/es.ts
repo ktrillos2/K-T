@@ -24,7 +24,7 @@ export const es = {
     title: "Quiénes Somos",
     subtitle: "// Sobre K&T",
     description:
-      "Somos un equipo apasionado de desarrolladores y diseñadores dedicados a transformar ideas en experiencias digitales excepcionales. Con experiencia en tecnologías modernas, construimos soluciones que generan resultados.",
+      "Somos una agencia digital colombiana, un equipo apasionado de desarrolladores y diseñadores dedicados a transformar ideas en experiencias digitales excepcionales. Con experiencia en tecnologías modernas, construimos soluciones que generan resultados.",
     values: {
       innovation: {
         title: "Innovación",
