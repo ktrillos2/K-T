@@ -213,6 +213,7 @@ export default function ServicesSection() {
       Perú: "555 PEN ($150 USD)",
       Paraguay: "1,005,000 GS ($150 USD)",
       Uruguay: "5,888 UYU ($150 USD)",
+      "Estados Unidos": "$550 USD",
     },
     ecommerce: {
       Colombia: "$1,300,000 COP ($289 USD)",
@@ -223,6 +224,7 @@ export default function ServicesSection() {
       Perú: "1,480 PEN ($400 USD)",
       Paraguay: "2,680,000 GS ($400 USD)",
       Uruguay: "15,700 UYU ($400 USD)",
+      "Estados Unidos": "$1,100 USD",
     },
   }
 

@@ -11,7 +11,7 @@ import SuperMenu from "./super-menu"
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const { language, toggleLanguage, dictionary, country, setCountry } = useLanguage()
+  const { dictionary, country, setCountry } = useLanguage()
   const { setCursorVariant } = useCursor()
   const [isCountryOpen, setIsCountryOpen] = useState(false)
 
@@ -24,6 +24,7 @@ export default function Header() {
     Perú: { flag: "🇵🇪" },
     Paraguay: { flag: "🇵🇾" },
     Uruguay: { flag: "🇺🇾" },
+    "Estados Unidos": { flag: "🇺🇸" },
   }
 
   useEffect(() => {
@@ -102,19 +103,6 @@ export default function Header() {
                 )}
               </AnimatePresence>
             </div>
-
-            <motion.button
-              onClick={toggleLanguage}
-              className="px-4 py-2 text-lg rounded hover:bg-white/10 hover:text-white transition-all duration-300 flex items-center justify-center min-w-[60px]"
-              onMouseEnter={() => setCursorVariant("hover")}
-              onMouseLeave={() => setCursorVariant("default")}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span role="img" aria-label={language === "en" ? "English" : "Spanish"}>
-                {language === "en" ? "🇺🇸" : "🇪🇸"}
-              </span>
-            </motion.button>
 
             <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}

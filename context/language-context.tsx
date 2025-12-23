@@ -1,11 +1,20 @@
 "use client"
 
-import { createContext, useContext, useState, type ReactNode } from "react"
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 import { en } from "@/dictionaries/en"
 import { es } from "@/dictionaries/es"
 
 type Language = "en" | "es"
-export type Country = "Colombia" | "Panamá" | "Argentina" | "México" | "Ecuador" | "Perú" | "Paraguay" | "Uruguay"
+export type Country =
+  | "Colombia"
+  | "Panamá"
+  | "Argentina"
+  | "México"
+  | "Ecuador"
+  | "Perú"
+  | "Paraguay"
+  | "Uruguay"
+  | "Estados Unidos"
 
 type Dictionary = typeof en
 
@@ -30,8 +39,55 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     setLanguage((prev) => (prev === "en" ? "es" : "en"))
   }
 
+  const handleSetCountry = (newCountry: Country) => {
+    setCountry(newCountry)
+    if (newCountry === "Estados Unidos") {
+      setLanguage("en")
+    } else {
+      setLanguage("es")
+    }
+  }
+
+  // Detect user location on mount
+  useEffect(() => {
+    const detectCountry = async () => {
+      try {
+        const response = await fetch("https://ipapi.co/json/")
+        if (!response.ok) throw new Error("Failed to fetch location")
+        const data = await response.json()
+        const countryName = data.country_name
+
+        // Map English country names to our internal Country type
+        const countryMap: Record<string, Country> = {
+          "Colombia": "Colombia",
+          "Panama": "Panamá",
+          "Argentina": "Argentina",
+          "Mexico": "México",
+          "Ecuador": "Ecuador",
+          "Peru": "Perú",
+          "Paraguay": "Paraguay",
+          "Uruguay": "Uruguay",
+          "United States": "Estados Unidos",
+        }
+
+        const detectedCountry = countryMap[countryName]
+        if (detectedCountry) {
+          handleSetCountry(detectedCountry)
+        }
+        // Fallback or unknown countries remain as default (Colombia)
+      } catch (error) {
+        console.error("Location detection failed:", error)
+        // Fallback remains Colombia
+      }
+    }
+
+    detectCountry()
+  }, [])
+
   return (
-    <LanguageContext.Provider value={{ language, dictionary, country, toggleLanguage, setLanguage, setCountry }}>
+    <LanguageContext.Provider
+      value={{ language, dictionary, country, toggleLanguage, setLanguage, setCountry: handleSetCountry }}
+    >
       {children}
     </LanguageContext.Provider>
   )
