@@ -2,13 +2,18 @@
 
 import { motion } from "framer-motion"
 import { useCursor } from "@/context/cursor-context"
+import { useLanguage } from "@/context/language-context"
 
 export default function WhatsAppButton() {
   const { setCursorVariant } = useCursor()
+  const { dictionary } = useLanguage()
 
   return (
     <motion.a
-      href="https://wa.me/573116360057"
+      href={`https://wa.me/573116360057?text=${encodeURIComponent(
+        // @ts-ignore
+        dictionary.contact.whatsapp_general || "Hola, me gustaría recibir más información."
+      )}`}
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-lg hover:shadow-[0_0_20px_rgba(37,211,102,0.5)]"

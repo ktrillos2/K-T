@@ -71,6 +71,7 @@ export const es = {
         "Diseño Responsivo",
       ],
       cta: "Seleccionar",
+      whatsapp_message: "Hola, estoy interesado en el plan Landing Page.",
     },
     ecommerce: {
       title: "E-commerce Simple",
@@ -86,12 +87,14 @@ export const es = {
         "Seguimiento de Pedidos",
       ],
       cta: "Seleccionar",
+      whatsapp_message: "Hola, estoy interesado en el plan E-commerce.",
     },
     custom: {
       title: "Solución Personalizada",
       price: "Hablemos",
       features: ["Desarrollo a Medida", "Arquitectura Escalable", "Integración API", "Soporte Completo"],
       cta: "Cotizar",
+      whatsapp_message: "Hola, estoy interesado en una solución personalizada.",
     },
   },
   projects: {
@@ -117,6 +120,7 @@ export const es = {
     formSubmit: "Enviar Mensaje",
     successTitle: "¡Mensaje Enviado!",
     successMessage: "Te responderemos en menos de 24 horas.",
+    whatsapp_general: "Hola, me gustaría recibir más información sobre sus servicios.",
   },
   footer: {
     rights: "Todos los derechos reservados",

@@ -168,7 +168,10 @@ const ServiceCard = memo(function ServiceCard({
 
         {/* Interactive CTA Button with ripple effect */}
         <motion.a
-          href="https://wa.me/573116360057"
+          href={`https://wa.me/573116360057?text=${encodeURIComponent(
+            // @ts-ignore
+            planData.whatsapp_message || "Hola, me gustaría recibir más información."
+          )}`}
           target="_blank"
           rel="noopener noreferrer"
           className="w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold bg-white text-black relative overflow-hidden group"

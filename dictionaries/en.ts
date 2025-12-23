@@ -71,6 +71,7 @@ export const en = {
         "Mobile Responsive",
       ],
       cta: "Select Plan",
+      whatsapp_message: "Hi, I'm interested in the Landing Page plan.",
     },
     ecommerce: {
       title: "Simple E-commerce",
@@ -86,12 +87,14 @@ export const en = {
         "Order Tracking",
       ],
       cta: "Select Plan",
+      whatsapp_message: "Hi, I'm interested in the E-commerce plan.",
     },
     custom: {
       title: "Custom Solution",
       price: "Let's Talk",
       features: ["Tailored Development", "Scalable Architecture", "API Integration", "Full Support"],
       cta: "Get Quote",
+      whatsapp_message: "Hi, I'm interested in a custom solution.",
     },
   },
   projects: {
@@ -117,6 +120,7 @@ export const en = {
     formSubmit: "Send Message",
     successTitle: "Message Sent!",
     successMessage: "We'll get back to you within 24 hours.",
+    whatsapp_general: "Hi, I would like more information about your services.",
   },
   footer: {
     rights: "All rights reserved",
