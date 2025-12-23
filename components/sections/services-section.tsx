@@ -200,32 +200,27 @@ const ServiceCard = memo(function ServiceCard({
 })
 
 export default function ServicesSection() {
-  const { dictionary, country } = useLanguage()
+  const { dictionary, country, convertPrice } = useLanguage()
   const { setCursorVariant } = useCursor()
 
-  const PRICING = {
-    landing: {
-      Colombia: "$500,000 COP",
-      Panamá: "$200",
-      Argentina: "$217,500 ARS",
-      México: "$4,000 MXN",
-      Ecuador: "$150",
-      Perú: "555 PEN",
-      Paraguay: "1,005,000 GS",
-      Uruguay: "5,888 UYU",
-      "Estados Unidos": "$200 USD",
-    },
-    ecommerce: {
-      Colombia: "$1,300,000 COP",
-      Panamá: "$500",
-      Argentina: "$580,000 ARS",
-      México: "$10,000 MXN",
-      Ecuador: "$400",
-      Perú: "1,480 PEN",
-      Paraguay: "2,680,000 GS",
-      Uruguay: "15,700 UYU",
-      "Estados Unidos": "$500 USD",
-    },
+  // Pricing tiers in USD
+  const TIER_HIGH = { landing: 200, ecommerce: 500 } // USA, Panama, Mexico
+  const TIER_LOW = { landing: 150, ecommerce: 400 } // Argentina, Ecuador, Peru, Paraguay, Uruguay
+
+  const getPrice = (plan: "landing" | "ecommerce" | "custom") => {
+    if (plan === "custom") return dictionary.services.custom.price
+
+    if (country === "Colombia") {
+      return plan === "landing" ? "$500,000 COP" : "$1,300,000 COP"
+    }
+
+    // Define tiers
+    const highTierCountries = ["Panamá", "México", "Estados Unidos"]
+    const isHighTier = highTierCountries.includes(country)
+    // @ts-ignore
+    const basePrice = isHighTier ? TIER_HIGH[plan] : TIER_LOW[plan]
+
+    return convertPrice(basePrice)
   }
 
   return (
@@ -261,11 +256,7 @@ export default function ServicesSection() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 perspective-1000">
           {plans.map((plan, index) => {
             const planInfo = dictionary.services[plan]
-            // Use dynamic price for landing/ecommerce, fallback to dictionary (for custom)
-            const price = (plan === "landing" || plan === "ecommerce")
-              // @ts-ignore
-              ? PRICING[plan][country]
-              : planInfo.price
+            const price = getPrice(plan)
 
             return (
               <ServiceCard
