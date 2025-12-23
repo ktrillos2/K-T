@@ -200,27 +200,29 @@ const ServiceCard = memo(function ServiceCard({
 })
 
 export default function ServicesSection() {
-  const { dictionary, currency } = useLanguage()
+  const { dictionary, country } = useLanguage()
   const { setCursorVariant } = useCursor()
 
   const PRICING = {
     landing: {
-      COP: "$500,000 COP",
-      USD: "$111 USD",
-      ARS: "$160,950 ARS",
-      MXN: "$2,220 MXN",
-      PEN: "411 PEN",
-      GS: "743,700 GS",
-      UYU: "4,353 UYU",
+      Colombia: "$500,000 COP ($111 USD)",
+      Panamá: "$200 USD",
+      Argentina: "$217,500 ARS ($150 USD)",
+      México: "$4,000 MXN ($200 USD)",
+      Ecuador: "$150 USD",
+      Perú: "555 PEN ($150 USD)",
+      Paraguay: "1,005,000 GS ($150 USD)",
+      Uruguay: "5,888 UYU ($150 USD)",
     },
     ecommerce: {
-      COP: "$1,300,000 COP",
-      USD: "$289 USD",
-      ARS: "$419,050 ARS",
-      MXN: "$5,780 MXN",
-      PEN: "1,069 PEN",
-      GS: "1,936,300 GS",
-      UYU: "11,335 UYU",
+      Colombia: "$1,300,000 COP ($289 USD)",
+      Panamá: "$500 USD",
+      Argentina: "$580,000 ARS ($400 USD)",
+      México: "$10,000 MXN ($500 USD)",
+      Ecuador: "$400 USD",
+      Perú: "1,480 PEN ($400 USD)",
+      Paraguay: "2,680,000 GS ($400 USD)",
+      Uruguay: "15,700 UYU ($400 USD)",
     },
   }
 
@@ -259,7 +261,8 @@ export default function ServicesSection() {
             const planInfo = dictionary.services[plan]
             // Use dynamic price for landing/ecommerce, fallback to dictionary (for custom)
             const price = (plan === "landing" || plan === "ecommerce")
-              ? PRICING[plan][currency]
+              // @ts-ignore
+              ? PRICING[plan][country]
               : planInfo.price
 
             return (

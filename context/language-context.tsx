@@ -5,24 +5,24 @@ import { en } from "@/dictionaries/en"
 import { es } from "@/dictionaries/es"
 
 type Language = "en" | "es"
-export type Currency = "COP" | "USD" | "ARS" | "MXN" | "PEN" | "GS" | "UYU"
+export type Country = "Colombia" | "Panamá" | "Argentina" | "México" | "Ecuador" | "Perú" | "Paraguay" | "Uruguay"
 
 type Dictionary = typeof en
 
 interface LanguageContextType {
   language: Language
   dictionary: Dictionary
-  currency: Currency
+  country: Country
   toggleLanguage: () => void
   setLanguage: (lang: Language) => void
-  setCurrency: (currency: Currency) => void
+  setCountry: (country: Country) => void
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>("es")
-  const [currency, setCurrency] = useState<Currency>("COP")
+  const [country, setCountry] = useState<Country>("Colombia")
 
   const dictionary = language === "en" ? en : es
 
@@ -31,7 +31,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <LanguageContext.Provider value={{ language, dictionary, currency, toggleLanguage, setLanguage, setCurrency }}>
+    <LanguageContext.Provider value={{ language, dictionary, country, toggleLanguage, setLanguage, setCountry }}>
       {children}
     </LanguageContext.Provider>
   )
