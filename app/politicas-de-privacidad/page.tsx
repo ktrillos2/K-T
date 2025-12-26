@@ -1,22 +1,8 @@
-import type { Metadata } from "next"
+"use client"
+
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
-
-export const metadata: Metadata = {
-    title: "Política de Privacidad",
-    description: "Política de privacidad de K&T Agencia Digital. Conoce cómo recopilamos, usamos y protegemos tu información personal.",
-    robots: {
-        index: true,
-        follow: true,
-    },
-    openGraph: {
-        title: "Política de Privacidad | K&T Agencia Digital",
-        description: "Conoce cómo K&T protege tu información personal y privacidad.",
-        url: "https://kytcode.lat/politicas-de-privacidad",
-        type: "website",
-    },
-}
 
 export default function PrivacyPolicy() {
     return (
