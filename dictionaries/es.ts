@@ -59,7 +59,7 @@ export const es = {
     popular: "POPULAR",
     landing: {
       title: "Landing Page",
-      price: "Desde $500,000 COP",
+      price: "Desde $450,000 COP",
       features: [
         "Optimización SEO",
         "Diseño Personalizado",

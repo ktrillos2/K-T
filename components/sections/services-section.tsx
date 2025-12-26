@@ -222,7 +222,7 @@ export default function ServicesSection() {
     if (plan === "custom") return dictionary.services.custom.price
 
     if (country === "Colombia") {
-      return plan === "landing" ? "$500,000 COP" : "$1,300,000 COP"
+      return plan === "landing" ? "$450,000 COP" : "$1,300,000 COP"
     }
 
     // Define tiers
