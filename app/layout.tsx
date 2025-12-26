@@ -29,30 +29,46 @@ export const metadata: Metadata = {
     template: "%s | K&T Agencia Digital",
   },
   description: "Agencia digital en Colombia. Desarrollo web, e-commerce, landing pages y gestión de redes sociales. Soluciones profesionales para tu negocio.",
-  keywords: [
-    "agencia digital",
-    "agencia digital Colombia",
-    "agencia digital Bogotá",
-    "desarrollo web",
-    "desarrollo web Colombia",
-    "páginas web",
-    "diseño web",
-    "diseño de páginas web",
-    "gestión de redes sociales",
-    "manejo de redes sociales",
-    "community manager",
-    "marketing digital",
-    "publicidad digital",
-    "landing page",
-    "landing page Colombia",
-    "e-commerce",
-    "tienda online",
-    "comercio electrónico",
-    "desarrollo de software",
-    "soluciones web",
-    "Next.js",
-    "React",
-  ],
+  const keywords = [
+  // 🔍 Términos Generales (Alto Volumen de Búsqueda)
+  "Crear página web",
+  "Desarrollo de páginas web",
+  "Diseño de páginas web",
+  "Hacer página web",
+  "Páginas web profesionales",
+
+  // 📍 SEO Local (Cúcuta y Norte de Santander)
+  "Agencia digital Cúcuta",
+  "Desarrollo web Cúcuta",
+  "Diseño web Norte de Santander",
+  "Gestión de redes sociales Cúcuta",
+
+  // 💰 Intención de Contratación
+  "Cotización página web",
+  "Precio desarrollo web Colombia",
+  "Contratar agencia de marketing",
+  "Empresa de desarrollo de software",
+
+  // 🛠️ Servicios Específicos K&T
+  "Desarrollo web a medida",
+  "Tiendas virtuales",
+  "E-commerce Colombia",
+  "Landing pages",
+  "Posicionamiento SEO",
+  "Gestión de redes",
+
+  // 🚀 Tecnologías (Para clientes que saben lo que quieren)
+  "Desarrollo Next.js",
+  "Expertos en React",
+
+  // 🏷️ Marca
+  "K&T",
+  "K&T Agencia Digital",
+  "kyt",
+  "k&t",
+  "kytcode",
+  "kytcode.lat"
+],
   authors: [{ name: "K&T Agencia Digital", url: "https://kytcode.lat" }],
   creator: "K&T Agencia Digital",
   publisher: "K&T Agencia Digital",
@@ -104,23 +120,78 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "google-site-verification-placeholder",
+    google: "dqsrEf4u6-TWpy3i2r3S-BJbGb7LV6J7cWob35JSKD4",
   },
 }
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": "https://kytcode.lat/#organization",
   "name": "K&T Agencia Digital",
+  "alternateName": "K&T Agency",
   "image": "https://kytcode.lat/images/logo.png",
+  "logo": "https://kytcode.lat/images/logo.png",
   "url": "https://kytcode.lat",
   "telephone": "+573116360057",
+  "email": "contacto@kytcode.lat",
   "address": {
     "@type": "PostalAddress",
-    "addressCountry": "CO"
+    "addressCountry": "CO",
+    "addressRegion": "Cundinamarca",
+    "addressLocality": "Bogotá"
   },
+  "areaServed": [
+    {
+      "@type": "Country",
+      "name": "Colombia"
+    },
+    {
+      "@type": "City",
+      "name": "Bogotá"
+    }
+  ],
   "priceRange": "$$",
   "description": "Agencia digital en Colombia especializada en desarrollo de páginas web, e-commerce y gestión de redes sociales. Ofrecemos servicios de diseño web, landing pages, tiendas online y marketing digital.",
+  "slogan": "Transformamos tu visión en realidad digital",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios Digitales",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Desarrollo Web",
+          "description": "Desarrollo de páginas web profesionales, e-commerce y aplicaciones web personalizadas"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Gestión de Redes Sociales",
+          "description": "Community management, creación de contenido y estrategias de marketing digital"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Landing Pages",
+          "description": "Diseño y desarrollo de landing pages optimizadas para conversión"
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "E-commerce",
+          "description": "Tiendas online completas con pasarelas de pago y gestión de inventario"
+        }
+      }
+    ]
+  },
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": [
@@ -147,6 +218,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="dark">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        <link rel="icon" href="/icon.png" type="image/png" sizes="500x500" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
+      </head>
       <body className={`${firaCode.variable} ${vt323.variable} ${pressStart2P.variable} ${ariW9500.variable} font-mono antialiased`}>
         <LanguageProvider>
           <CursorProvider>

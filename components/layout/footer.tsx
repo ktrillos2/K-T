@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { motion } from "framer-motion"
 import { Heart } from "lucide-react"
 import { useLanguage } from "@/context/language-context"
@@ -28,6 +29,19 @@ export default function Footer() {
         >
           © {new Date().getFullYear()} K&T. {dictionary.footer.rights}.
         </motion.p>
+
+        <motion.div
+          className="text-sm text-muted-foreground font-mono"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          {/* @ts-ignore */}
+          <Link href="/politicas-de-privacidad" className="hover:text-white transition-colors">
+            {/* @ts-ignore */}
+            {dictionary.footer.privacy}
+          </Link>
+        </motion.div>
 
         <motion.p
           className="text-sm text-muted-foreground font-mono flex items-center gap-1"

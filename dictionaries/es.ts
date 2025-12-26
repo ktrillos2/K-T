@@ -126,5 +126,6 @@ export const es = {
     rights: "Todos los derechos reservados",
     made: "Hecho con",
     by: "por K&T",
+    privacy: "Política de Privacidad",
   },
 }

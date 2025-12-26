@@ -59,7 +59,7 @@ export const en = {
     popular: "POPULAR",
     landing: {
       title: "Landing Page",
-      price: "From $500,000 COP",
+      price: "From $450,000 COP",
       features: [
         "SEO Optimization",
         "Custom Design",
@@ -126,5 +126,6 @@ export const en = {
     rights: "All rights reserved",
     made: "Made with",
     by: "by K&T",
+    privacy: "Privacy Policy",
   },
 }
