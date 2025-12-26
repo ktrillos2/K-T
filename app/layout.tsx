@@ -29,6 +29,10 @@ export const metadata: Metadata = {
     template: "%s | K&T Agencia Digital",
   },
   description: "Agencia digital en Colombia. Desarrollo web, e-commerce, landing pages y gestión de redes sociales. Soluciones profesionales para tu negocio.",
+  icons: {
+    icon: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
   keywords: [
   // 🔍 Términos Generales (Alto Volumen de Búsqueda)
   "Crear página web",
