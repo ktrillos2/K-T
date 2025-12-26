@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useRouter, usePathname } from "next/navigation"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { useLanguage } from "@/context/language-context"
@@ -9,6 +10,8 @@ import { smoothScrollTo } from "@/lib/utils"
 import SuperMenu from "./super-menu"
 
 export default function Header() {
+  const router = useRouter()
+  const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const { dictionary, country, setCountry } = useLanguage()
@@ -48,20 +51,22 @@ export default function Header() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <motion.a
-            href="#"
-            className="relative w-24 h-24 scale-150 origin-left ml-4"
+          <motion.button
+            className="relative w-24 h-24 scale-150 origin-left ml-4 cursor-pointer"
             onMouseEnter={() => setCursorVariant("hover")}
             onMouseLeave={() => setCursorVariant("default")}
             whileHover={{ scale: 1.05 }}
-            onClick={(e) => {
-              e.preventDefault()
-              window.scrollTo({ top: 0, behavior: "instant" }) // Reset instant to avoid conflict
-              smoothScrollTo(0, 1000)
+            onClick={() => {
+              if (pathname === '/') {
+                window.scrollTo({ top: 0, behavior: "instant" })
+                smoothScrollTo(0, 1000)
+              } else {
+                router.push('/')
+              }
             }}
           >
             <Image src="/images/logo.png" alt="K&T Agencia Digital - Desarrollo Web y Gestión de Redes Sociales en Colombia" fill sizes="96px" className="object-contain" priority />
-          </motion.a>
+          </motion.button>
 
           <div className="flex items-center gap-4">
             <div className="relative">

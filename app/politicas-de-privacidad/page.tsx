@@ -1,10 +1,12 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
 
 export default function PrivacyPolicy() {
+    const router = useRouter()
+
     return (
         <main className="min-h-screen bg-black text-white pt-24 pb-16 px-6">
             <div className="absolute inset-0 z-0">
@@ -12,10 +14,13 @@ export default function PrivacyPolicy() {
             </div>
 
             <div className="relative z-10 max-w-4xl mx-auto">
-                <Link href="/" className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-8 font-mono">
+                <button
+                    onClick={() => router.push('/')}
+                    className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-8 font-mono cursor-pointer"
+                >
                     <ArrowLeft className="w-4 h-4" />
                     Volver al inicio
-                </Link>
+                </button>
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
