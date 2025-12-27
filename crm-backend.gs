@@ -40,6 +40,21 @@ function doPost(e) {
        empresa = "RAW: " + JSON.stringify(data).substring(0, 500);
     }
 
+    // 3. Manejar envío de correos (Para OTP/Login)
+    if (data.action === 'send_email') {
+       if (!data.key || data.key !== 'K_AND_T_SECURE_2025') {
+          return ContentService.createTextOutput(JSON.stringify({ status: 'error', message: 'Invalid Key' })).setMimeType(ContentService.MimeType.JSON);
+       }
+       
+       MailApp.sendEmail({
+         to: data.email,
+         subject: data.subject,
+         htmlBody: data.body
+       });
+       
+       return ContentService.createTextOutput(JSON.stringify({ status: 'success' })).setMimeType(ContentService.MimeType.JSON);
+    }
+
     // Append row: [id, name, company/raw, service, status, date, email, phone]
     // Asegúrate de tener columnas suficientes en tu Sheet
     sheet.appendRow([
@@ -70,6 +85,18 @@ function doPost(e) {
 }
 
 function doGet(e) {
+  // SEGURIDAD: Verificar llave maestra
+  // Reemplaza 'TU_CLAVE_SECRETA_AQUI' con la misma que pongas en .env CR_SECRET_KEY
+  // O mejor, usa PropertiesService si sabes configurarlo, pero hardcodeado es aceptable para uso personal si el script no se comparte.
+  const SECRET_KEY = 'K_AND_T_SECURE_2025'; 
+  
+  if (!e.parameter.key || e.parameter.key !== SECRET_KEY) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: 'error',
+      message: 'Acceso denegado: Credenciales inválidas.'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
   try {
     // IMPORTANTE: Reemplaza 'TU_ID_DE_HOJA_DE_CALCULO' con el ID real de tu hoja de Google Sheets
     const sheet = SpreadsheetApp.openById('1DetNAjSygZtvOHAJAtgcMdtIPdO1lZmO-I716HX-2ic').getSheets()[0];

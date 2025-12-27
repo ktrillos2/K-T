@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
             {
                 userAgent: '*',
                 allow: '/',
-                disallow: ['/api/', '/private/'],
+                disallow: ['/api/', '/private/', '/CRM/', '/login/', '/admin/'],
             },
         ],
         sitemap: 'https://kytcode.lat/sitemap.xml',

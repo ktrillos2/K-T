@@ -1,7 +1,15 @@
-'use client';
-
+import { Metadata } from 'next';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { LeadList } from '@/components/crm/LeadList';
+
+export const metadata: Metadata = {
+    title: 'CRM Dashboard | K&T',
+    description: 'Gestión interna de leads.',
+    robots: {
+        index: false,
+        follow: false,
+    },
+};
 
 export default function AdminPage() {
     return (
