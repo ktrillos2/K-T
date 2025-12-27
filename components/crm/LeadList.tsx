@@ -8,6 +8,7 @@ import { Lead } from '@/types/crm';
 import { fetchLeadsAction } from '@/app/actions/crm';
 import { LeadCard } from './LeadCard';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { toast } from 'sonner';
 
 export function LeadList() {
     const [leads, setLeads] = useState<Lead[]>([]);
@@ -26,6 +27,19 @@ export function LeadList() {
             if (result.success && result.data) {
                 // Reverse to show newest first
                 setLeads(result.data.reverse());
+
+                // NOTIFICATION: Check for pending leads (Nuevo or Volver a Contactar)
+                const pendingLeads = result.data.filter(l => l.estado === 'Nuevo' || l.estado === 'Volver a Contactar');
+                if (pendingLeads.length > 0) {
+                    toast.message('🔔 Atención Requerida', {
+                        description: `Tienes ${pendingLeads.length} leads pendientes de contacto o seguimiento.`,
+                        action: {
+                            label: 'Ver Nuevos',
+                            onClick: () => setFilterStatus('Nuevo')
+                        },
+                        duration: 8000,
+                    });
+                }
             } else {
                 setError(result.error || 'Error al cargar leads');
             }
