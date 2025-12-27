@@ -34,46 +34,52 @@ export const metadata: Metadata = {
     icon: "/images/logo.png",
     apple: "/images/logo.png",
   },
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "K&T CRM",
+  },
   keywords: [
-  // 🔍 Términos Generales (Alto Volumen de Búsqueda)
-  "Crear página web",
-  "Desarrollo de páginas web",
-  "Diseño de páginas web",
-  "Hacer página web",
-  "Páginas web profesionales",
+    // 🔍 Términos Generales (Alto Volumen de Búsqueda)
+    "Crear página web",
+    "Desarrollo de páginas web",
+    "Diseño de páginas web",
+    "Hacer página web",
+    "Páginas web profesionales",
 
-  // 📍 SEO Local (Cúcuta y Norte de Santander)
-  "Agencia digital Cúcuta",
-  "Desarrollo web Cúcuta",
-  "Diseño web Norte de Santander",
-  "Gestión de redes sociales Cúcuta",
+    // 📍 SEO Local (Cúcuta y Norte de Santander)
+    "Agencia digital Cúcuta",
+    "Desarrollo web Cúcuta",
+    "Diseño web Norte de Santander",
+    "Gestión de redes sociales Cúcuta",
 
-  // 💰 Intención de Contratación
-  "Cotización página web",
-  "Precio desarrollo web Colombia",
-  "Contratar agencia de marketing",
-  "Empresa de desarrollo de software",
+    // 💰 Intención de Contratación
+    "Cotización página web",
+    "Precio desarrollo web Colombia",
+    "Contratar agencia de marketing",
+    "Empresa de desarrollo de software",
 
-  // 🛠️ Servicios Específicos K&T
-  "Desarrollo web a medida",
-  "Tiendas virtuales",
-  "E-commerce Colombia",
-  "Landing pages",
-  "Posicionamiento SEO",
-  "Gestión de redes",
+    // 🛠️ Servicios Específicos K&T
+    "Desarrollo web a medida",
+    "Tiendas virtuales",
+    "E-commerce Colombia",
+    "Landing pages",
+    "Posicionamiento SEO",
+    "Gestión de redes",
 
-  // 🚀 Tecnologías (Para clientes que saben lo que quieren)
-  "Desarrollo Next.js",
-  "Expertos en React",
+    // 🚀 Tecnologías (Para clientes que saben lo que quieren)
+    "Desarrollo Next.js",
+    "Expertos en React",
 
-  // 🏷️ Marca
-  "K&T",
-  "K&T Agencia Digital",
-  "kyt",
-  "k&t",
-  "kytcode",
-  "kytcode.lat"
-],
+    // 🏷️ Marca
+    "K&T",
+    "K&T Agencia Digital",
+    "kyt",
+    "k&t",
+    "kytcode",
+    "kytcode.lat"
+  ],
   authors: [{ name: "K&T Agencia Digital", url: "https://kytcode.lat" }],
   creator: "K&T Agencia Digital",
   publisher: "K&T Agencia Digital",

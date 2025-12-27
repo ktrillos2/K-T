@@ -8,6 +8,8 @@ const PROJECT_ID = "uobtn7p0mf"
 
 export default function ClarityAnalytics() {
     useEffect(() => {
+        if (process.env.NODE_ENV === 'development') return;
+
         if (PROJECT_ID && PROJECT_ID !== "yourProjectId") {
             Clarity.init(PROJECT_ID)
         } else {
