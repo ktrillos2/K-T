@@ -113,7 +113,7 @@ export function LeadCard({ lead, onStatusUpdate, isOpen, onToggle }: LeadCardPro
         if (type === 'info') {
             message = `Hola ${name}, te saluda K&T Agencia Digital. Recibimos tu interés y nos gustaría conocer más sobre tu proyecto para brindarte una asesoría personalizada. ¿Tienes unos minutos?`;
         } else if (type === 'landing') {
-            message = `Hola ${name}, un gusto saludarte. Recibimos tu interés en una Landing Page. Desarrollamos sitios de alto impacto con diseño persuasivo y optimización SEO. ¿Te gustaría que agendemos una breve reunión para revisar tu proyecto?`;
+            message = `Hola ${name}, un gusto saludarte. Recibimos tu interés en una Landing Page. Desarrollamos sitios de alto impacto con optimización SEO. ¿Te gustaría conocer más sobre nuestro proceso y los costos de inversión?`;
         } else if (type === 'ecommerce') {
             message = `Hola ${name}, un gusto saludarte. Vemos que te interesa una Tienda Virtual. Nuestras soluciones incluyen pasarelas de pago y panel administrativo completo. ¿Tienes disponibilidad para conversar sobre los requerimientos de tu catálogo?`;
         }
@@ -184,7 +184,7 @@ export function LeadCard({ lead, onStatusUpdate, isOpen, onToggle }: LeadCardPro
                         {/* Middle: Name and Info */}
                         <div className="flex items-start justify-between gap-2">
                             <div className="flex flex-col min-w-0 pr-1">
-                                <CardTitle className="text-sm font-bold leading-tight truncate group-hover:text-primary transition-colors">
+                                <CardTitle className="text-base font-bold leading-tight truncate group-hover:text-primary transition-colors">
                                     {lead.nombre || 'Lead Sin Nombre'}
                                 </CardTitle>
                                 <CardDescription className="text-xs font-medium text-foreground/70 truncate mt-0.5">
@@ -194,10 +194,21 @@ export function LeadCard({ lead, onStatusUpdate, isOpen, onToggle }: LeadCardPro
 
                             <div className="flex flex-col items-end shrink-0">
                                 <div className="flex items-center gap-1 text-xs bg-secondary/50 px-1.5 py-0.5 rounded-sm mb-0.5">
-                                    <Phone className="h-2.5 w-2.5 opacity-70" />
+                                    <Phone className="h-3 w-3 opacity-70" />
                                     <span>{lead.telefono || '-'}</span>
                                 </div>
-                                {getPriceDisplay()}
+                                <div className="flex flex-col items-end text-xs leading-tight mt-1">
+                                    {(interestLabel.includes('Landing') || interestLabel.includes('Asesoría')) && (
+                                        <span className="text-muted-foreground whitespace-nowrap">
+                                            Landing: <span className="font-semibold text-green-600">{prices.landing} {prices.currency}</span>
+                                        </span>
+                                    )}
+                                    {(interestLabel.includes('E-commerce') || interestLabel.includes('Asesoría')) && (
+                                        <span className="text-muted-foreground whitespace-nowrap">
+                                            Tienda: <span className="font-semibold text-green-600">{prices.ecommerce} {prices.currency}</span>
+                                        </span>
+                                    )}
+                                </div>
                             </div>
                         </div>
 

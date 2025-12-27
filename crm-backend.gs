@@ -69,7 +69,7 @@ function doPost(e) {
 
     sheet.appendRow([id, nombre, empresa, servicio, 'Nuevo', timestamp, telefono, email]);
 
-    // --- NOTIFICACIÓN: NUEVO LEAD ---
+    // --- INTENTO DIRECTO (A veces falla según permisos de ejecución) ---
     try {
       sendNotificationEmail(
         '¡Nueva Oportunidad! 🔥',
@@ -78,7 +78,7 @@ function doPost(e) {
         { nombre, telefono, interes: servicio + (empresa ? ' - ' + empresa : '') }
       );
     } catch (mailErr) {
-      console.log('Error enviando correo inicial: ' + mailErr);
+      console.log('Error enviando correo inicial (Directo): ' + mailErr);
     }
 
     return ContentService.createTextOutput(JSON.stringify({ status: 'success', id: id })).setMimeType(ContentService.MimeType.JSON);
@@ -118,7 +118,6 @@ function doGet(e) {
   }
 }
 
-// --- AUTOMATIZACIÓN DE SEGUIMIENTO ---
 function checkFollowUps() {
   const sheet = SpreadsheetApp.openById('1DetNAjSygZtvOHAJAtgcMdtIPdO1lZmO-I716HX-2ic').getSheets()[0];
   const rows = sheet.getDataRange().getValues();
@@ -131,10 +130,8 @@ function checkFollowUps() {
     const fecha = new Date(row[5]);
     const telefono = row[6];
     
-    const daysOld = (new Date() - fecha) / (1000 * 60 * 60 * 24);
-    
     // Condición: Estado "Volver a Contactar" O "Nuevo" con > 2 días
-    if (estado === 'Volver a Contactar' || (estado === 'Nuevo' && daysOld > 2)) {
+    if (estado === 'Volver a Contactar' || (estado === 'Nuevo' && (new Date() - fecha) / (1000 * 60 * 60 * 24) > 2)) {
       const reason = estado === 'Volver a Contactar' ? 'Seguimiento Programado' : 'Lead Lento (>48h)';
       const badge = estado === 'Volver a Contactar' ? 'RECORDATORIO' : 'LEAD EN RIESGO';
       
@@ -142,38 +139,80 @@ function checkFollowUps() {
         sendNotificationEmail(
           `⚠️ Acción CRM: ${nombre}`,
           badge,
-          `Este lead requiere atención. Razón: <strong>${reason}</strong>. No dejes enfriar la venta.`,
+          `Este lead requiere atención. Razón: <strong>${reason}</strong>.`,
           { nombre, telefono, interes: servicio }
         );
-      } catch (e) {
-        console.log('Error enviando follow-up a ' + nombre);
-      }
+      } catch (e) { console.log(e); }
     }
   }
 }
 
-// --- HELPER: PLANTILLA DE CORREO ---
+// --- ALTERNATIVA ROBUSTA: TRIGGER DESDE LA HOJA ---
+// Si doPost falla en enviar correos por permisos, usa esto.
+// CONFIGURACIÓN: Añadir activador -> Seleccionar "notifyNewLeadFromSheet" -> Fuente "De la hoja de cálculo" -> "Al cambiar" (On Change)
+function notifyNewLeadFromSheet(e) {
+  // Solo nos interesa si el cambio es inserción de filas (INSERT_ROW) o cambios generales que implican nuevos datos
+  if (e.changeType !== 'INSERT_ROW' && e.changeType !== 'EDIT' && e.changeType !== 'OTHER') return;
+
+  const sheet = SpreadsheetApp.openById('1DetNAjSygZtvOHAJAtgcMdtIPdO1lZmO-I716HX-2ic').getSheets()[0];
+  const lastRow = sheet.getLastRow();
+  
+  // Verificamos si la última fila tiene datos y es "Nuevo"
+  // Columnas: ID(1), Nombre(2), Empresa(3), Servicio(4), Estado(5), Fecha(6), Tel(7), Email(8)
+  const range = sheet.getRange(lastRow, 1, 1, 8); 
+  const rowData = range.getValues()[0];
+  
+  const nombre = rowData[1];
+  const estado = rowData[4];
+  const timestamp = new Date(rowData[5]);
+  const now = new Date();
+  const diffMs = now - timestamp;
+  
+  // Si el lead se creó en los últimos 5 minutos y es Nuevo
+  if (estado === 'Nuevo' && diffMs < 300000) { // 5 min tolerancia
+     const scriptProperties = PropertiesService.getScriptProperties();
+     const lastNotifiedId = scriptProperties.getProperty('LAST_NOTIFIED_ID');
+     const currentId = rowData[0];
+
+     if (lastNotifiedId !== currentId) {
+        try {
+           sendNotificationEmail(
+            '¡Nueva Oportunidad! 🔥 (Vía Sheet)',
+            'Nuevo Lead Detectado',
+            'Un cliente potencial ha sido añadido a la base de datos.',
+            { 
+              nombre: nombre, 
+              telefono: rowData[6], 
+              interes: rowData[3] 
+            }
+          );
+          scriptProperties.setProperty('LAST_NOTIFIED_ID', currentId);
+        } catch(err) {
+          console.error("Error en trigger de hoja: " + err);
+        }
+     }
+  }
+}
+
+
 function sendNotificationEmail(subject, badgeText, mainMessage, leadData) {
   const htmlTemplate = `
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${subject}</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; margin: 0; padding: 0; color: #333; }
         .email-container { max-width: 600px; margin: 40px auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; border: 1px solid #eaeaea; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .header { background-color: #1a1a1a; padding: 30px 20px; text-align: center; color: white; font-size: 24px; font-weight: bold; letter-spacing: 2px; }
+        .header { background-color: #1a1a1a; padding: 30px 20px; text-align: center; color: white; font-size: 24px; font-weight: bold; }
         .content { padding: 40px 30px; text-align: center; }
         .notification-badge { display: inline-block; background-color: #e0f2fe; color: #0284c7; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 20px; }
         h1 { margin: 0 0 10px 0; font-size: 24px; color: #111827; }
         p { margin: 0 0 30px 0; color: #6b7280; font-size: 16px; line-height: 1.5; }
-        .lead-card { background-color: #fafafa; border: 1px solid #eeeeee; border-radius: 8px; padding: 25px; margin-bottom: 30px; text-align: left; }
         .label { display: block; font-size: 12px; color: #9ca3af; text-transform: uppercase; font-weight: 600; margin-bottom: 5px; }
-        .value { font-size: 18px; color: #1f2937; font-weight: 500; }
+        .value { font-size: 18px; color: #1f2937; font-weight: 500; margin-bottom: 15px; }
         .btn { display: block; width: 100%; background-color: #2563eb; color: #ffffff; text-decoration: none; padding: 15px 0; border-radius: 6px; font-weight: 600; text-align: center; margin-bottom: 10px; }
-        .footer { background-color: #f9fafb; padding: 20px; text-align: center; border-top: 1px solid #eaeaea; font-size: 12px; color: #9ca3af; }
     </style>
 </head>
 <body>
@@ -183,45 +222,28 @@ function sendNotificationEmail(subject, badgeText, mainMessage, leadData) {
             <div class="notification-badge">${badgeText}</div>
             <h1>¡Atención!</h1>
             <p>${mainMessage}</p>
-            <div class="lead-card">
-                <div style="margin-bottom: 15px;">
-                    <span class="label">Nombre</span>
-                    <div class="value" style="color: #2563eb; font-weight: 700;">${leadData.nombre}</div>
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <span class="label">CELULAR</span>
-                    <div class="value">${leadData.telefono}</div>
-                </div>
-                <div style="border-top: 1px dashed #e5e7eb; padding-top: 15px;">
-                    <span class="label">INTERÉS / SERVICIO</span>
-                    <div class="value" style="font-size: 14px;">${leadData.interes}</div>
-                </div>
-            </div>
-            <a href="https://wa.me/${leadData.telefono.replace(/\D/g, '')}" class="btn" style="background-color: #25D366;">💬 Contactar por WhatsApp</a>
-            <a href="tel:${leadData.telefono}" class="btn" style="background-color: #f3f4f6; color: #374151;">📞 Llamar por Teléfono</a>
+            <hr style="border:0; border-top:1px dashed #eee; margin: 20px 0;">
+            <span class="label">Nombre</span>
+            <div class="value" style="color: #2563eb; font-weight: 700;">${leadData.nombre}</div>
+            <span class="label">CELULAR</span>
+            <div class="value">${leadData.telefono}</div>
+            <span class="label">INTERÉS</span>
+            <div class="value" style="font-size: 14px;">${leadData.interes}</div>
+            
+            <a href="https://wa.me/${leadData.telefono.replace(/\D/g, '')}" class="btn" style="background-color: #25D366;">💬 WhatsApp</a>
             <a href="https://crm.kytcode.lat/CRM" style="display:block; margin-top:15px; text-align:center; color:#6b7280; font-size:14px; text-decoration:none;">Ir al CRM</a>
-        </div>
-        <div class="footer">
-            <p>Notificación automática del CRM K&T.</p>
         </div>
     </div>
 </body>
-</html>
-  `;
+</html>`;
 
   MailApp.sendEmail({
-    to: 'keteruse@gmail.com', // CONFIG: Tu correo
+    to: 'keteruse@gmail.com', 
     subject: subject,
     htmlBody: htmlTemplate
   });
 }
 
-// --- ÚTILES DE PRUEBA ---
 function testEmail() {
-  sendNotificationEmail(
-    '🧪 Prueba de Plantilla', 
-    'TEST SYSTEM', 
-    'Si ves esto, la nueva plantilla HTML funciona correctamente.', 
-    { nombre: 'Juan Pérez Test', telefono: '+573001234567', interes: 'Prueba de Sistema' }
-  );
+  sendNotificationEmail('🧪 Prueba', 'TEST', 'Verificación manual.', { nombre: 'Test', telefono: '123', interes: 'Prueba' });
 }
