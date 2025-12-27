@@ -6,6 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
         short_name: 'K&T Agency',
         description: 'Agencia digital en Colombia. Desarrollo de páginas web, e-commerce y gestión de redes sociales. Creamos tu presencia digital.',
         start_url: '/',
+        scope: './',
         display: 'standalone',
         background_color: '#000000',
         theme_color: '#000000',
