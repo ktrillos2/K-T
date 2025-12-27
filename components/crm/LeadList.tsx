@@ -1,45 +1,22 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Loader2, RefreshCw } from 'lucide-react';
-import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
-
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from '@/components/ui/table';
+import { Loader2, RefreshCw, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Skeleton } from '@/components/ui/skeleton';
-import { fetchLeadsAction } from '@/app/actions/crm';
+import { Input } from '@/components/ui/input';
 import { Lead } from '@/types/crm';
+import { fetchLeadsAction } from '@/app/actions/crm';
+import { LeadCard } from './LeadCard';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export function LeadList() {
     const [leads, setLeads] = useState<Lead[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [openLeadId, setOpenLeadId] = useState<string | null>(null);
 
-    const formatDate = (dateString: string) => {
-        if (!dateString) return '-';
-        let dateObj = new Date(dateString);
-        if (!isNaN(Number(dateString)) && Number(dateString) > 1000000000 && Number(dateString) < 2000000000) {
-            dateObj = new Date(Number(dateString) * 1000);
-        }
-        return format(dateObj, 'dd MMM yyyy, HH:mm', { locale: es });
-    };
-
-    const renderInterestBadge = (empresa: string) => {
-        const interest = (empresa || '').toLowerCase();
-        if (interest.includes('tienda')) return <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">Tienda Virtual</Badge>;
-        if (interest.includes('landing')) return <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">Landing Page</Badge>;
-        if (interest.includes('asesor') || interest.includes('seguro')) return <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200">Asesoría</Badge>;
-        return <span className="text-muted-foreground text-sm">{empresa || '-'}</span>;
-    };
+    const [filterStatus, setFilterStatus] = useState('all');
 
     const loadLeads = async () => {
         setLoading(true);
@@ -47,7 +24,8 @@ export function LeadList() {
         try {
             const result = await fetchLeadsAction();
             if (result.success && result.data) {
-                setLeads(result.data);
+                // Reverse to show newest first
+                setLeads(result.data.reverse());
             } else {
                 setError(result.error || 'Error al cargar leads');
             }
@@ -62,98 +40,87 @@ export function LeadList() {
         loadLeads();
     }, []);
 
-    // Expose loadLeads via imperative handle if needed, or just let parent trigger refresh via key change
-    // For now, allow manual refresh via button as well
+    const filteredLeads = leads.filter(lead => {
+        const matchesSearch = lead.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            lead.empresa.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            (lead.servicio || '').toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesStatus = filterStatus === 'all' || lead.estado === filterStatus;
+        return matchesSearch && matchesStatus;
+    });
 
     if (error) {
         return (
-            <div className="text-center py-8 text-red-500">
-                <p>{error}</p>
-                <Button variant="outline" onClick={loadLeads} className="mt-4">
-                    Reintentar
+            <div className="text-center py-12 text-red-500 bg-red-50 rounded-lg">
+                <p className="mb-2 font-medium">⚠️ {error}</p>
+                <Button variant="outline" onClick={loadLeads} size="sm">
+                    Reintentar Conexión
                 </Button>
             </div>
         );
     }
 
     return (
-        <div className="space-y-4">
-            <div className="flex justify-between items-center">
-                <h3 className="text-lg font-medium">Leads Recientes</h3>
-                <Button variant="ghost" size="sm" onClick={loadLeads} disabled={loading}>
-                    <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
-                </Button>
+        <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-card p-4 rounded-lg border shadow-sm">
+                <div className="relative w-full sm:w-auto flex-1">
+                    <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                    <Input
+                        placeholder="Buscar por nombre, empresa..."
+                        className="pl-8"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
+                <div className="w-full sm:w-[200px]">
+                    <Select value={filterStatus} onValueChange={setFilterStatus}>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Filtrar por estado" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="all">Todos los estados</SelectItem>
+                            <SelectItem value="Nuevo">Nuevo</SelectItem>
+                            <SelectItem value="Mensaje Enviado">Mensaje Enviado</SelectItem>
+                            <SelectItem value="Esperando Reunión">Esperando Reunión</SelectItem>
+                            <SelectItem value="Esperando Cotización">Esperando Cotización</SelectItem>
+                            <SelectItem value="Volver a Contactar">Volver a Contactar</SelectItem>
+                            <SelectItem value="Nuevo Cliente">Nuevo Cliente</SelectItem>
+                            <SelectItem value="Cerrado/Perdido">Cerrado/Perdido</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
+                <div className="flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground hidden sm:inline">
+                        {loading ? 'Sincronizando...' : `Última act: ${new Date().toLocaleTimeString()}`}
+                    </span>
+                    <Button variant="outline" size="icon" onClick={loadLeads} disabled={loading} className="shrink-0">
+                        <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+                    </Button>
+                </div>
             </div>
 
-            <div className="border rounded-md">
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Fecha</TableHead>
-                            <TableHead>Nombre</TableHead>
-                            <TableHead>Interés / Tipo de Sitio</TableHead>
-                            <TableHead>Campaña</TableHead>
-                            <TableHead>Teléfono</TableHead>
-                            <TableHead>Estado</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {loading ? (
-                            Array.from({ length: 5 }).map((_, i) => (
-                                <TableRow key={i}>
-                                    <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-                                    <TableCell><Skeleton className="h-4 w-32" /></TableCell>
-                                    <TableCell><Skeleton className="h-4 w-32" /></TableCell>
-                                    <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-                                    <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-                                    <TableCell><Skeleton className="h-4 w-16" /></TableCell>
-                                </TableRow>
-                            ))
-                        ) : leads.length === 0 ? (
-                            <TableRow>
-                                <TableCell colSpan={6} className="text-center h-24">
-                                    No hay leads registrados.
-                                </TableCell>
-                            </TableRow>
-                        ) : (
-                            leads.map((lead) => (
-                                <TableRow key={lead.id}>
-                                    <TableCell className="whitespace-nowrap">
-                                        {lead.fecha ? (() => {
-                                            // Handle TikTok Unix Timestamp (seconds) or standard date string
-                                            let dateObj = new Date(lead.fecha);
-                                            // If it's a number-like string and dateObj is invalid or way back in 1970 (due to seconds vs ms)
-                                            // Check if it's a seconds timestamp (10 digits)
-                                            if (!isNaN(Number(lead.fecha)) && Number(lead.fecha) > 1000000000 && Number(lead.fecha) < 2000000000) {
-                                                dateObj = new Date(Number(lead.fecha) * 1000);
-                                            }
-
-                                            return format(dateObj, 'dd MMM yyyy, HH:mm', { locale: es });
-                                        })() : '-'}
-                                    </TableCell>
-                                    <TableCell className="font-medium">{lead.nombre}</TableCell>
-                                    <TableCell>
-                                        {(() => {
-                                            const interest = (lead.empresa || '').toLowerCase();
-                                            if (interest.includes('tienda')) return <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">Tienda Virtual</Badge>;
-                                            if (interest.includes('landing')) return <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">Landing Page</Badge>;
-                                            if (interest.includes('asesor') || interest.includes('seguro')) return <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200">Asesoría</Badge>;
-                                            return <span className="text-muted-foreground text-sm">{lead.empresa || '-'}</span>;
-                                        })()}
-                                    </TableCell>
-                                    <TableCell>{lead.servicio}</TableCell>
-                                    <TableCell>{lead.telefono || '-'}</TableCell>
-                                    <TableCell>
-                                        <Badge variant={lead.estado === 'Nuevo' ? 'default' : 'secondary'}>
-                                            {lead.estado || 'Nuevo'}
-                                        </Badge>
-                                    </TableCell>
-                                </TableRow>
-                            ))
-                        )}
-                    </TableBody>
-                </Table>
-            </div>
+            {loading && leads.length === 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {Array.from({ length: 6 }).map((_, i) => (
+                        <div key={i} className="h-48 rounded-xl bg-neutral-100 dark:bg-neutral-800 animate-pulse" />
+                    ))}
+                </div>
+            ) : filteredLeads.length === 0 ? (
+                <div className="text-center py-20 opacity-50">
+                    <p className="text-lg">No se encontraron leads.</p>
+                </div>
+            ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredLeads.map((lead) => (
+                        <LeadCard
+                            key={lead.id}
+                            lead={lead}
+                            onStatusUpdate={loadLeads}
+                            isOpen={openLeadId === lead.id}
+                            onToggle={() => setOpenLeadId(openLeadId === lead.id ? null : lead.id)}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

@@ -28,3 +28,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Security / Private
+crm-backend.gs
+# auth.config.ts (Opcional si quieres ocultar lógica auth)
+# auth.ts (Opcional si quieres ocultar lógica auth)

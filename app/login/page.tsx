@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useFormStatus } from 'react-dom';
-import { sendOTP } from '@/app/actions/auth-actions';
+import { verifyPasswordAndSendOTP } from '@/app/actions/auth-actions';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
@@ -12,36 +11,38 @@ import { Card, CardHeader, CardContent, CardTitle, CardDescription } from '@/com
 import { Loader2 } from 'lucide-react';
 
 export default function LoginPage() {
-    const [email, setEmail] = useState('');
-    const [step, setStep] = useState<'email' | 'otp'>('email');
+    const [step, setStep] = useState<'password' | 'otp'>('password');
+    const [password, setPassword] = useState('');
     const [otp, setOtp] = useState('');
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
     const router = useRouter();
 
-    const handleSendCode = async (e: React.FormEvent) => {
+    // Step 1: Verify Password and Trigger OTP
+    const handlePasswordSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setMessage('');
 
-        const res = await sendOTP(email);
+        const res = await verifyPasswordAndSendOTP(password);
         setLoading(false);
 
         if (res.success) {
             setStep('otp');
-            setMessage('Código enviado! Revisa tu email.');
+            setMessage('Código de verificación enviado.');
         } else {
-            setMessage(res.error || 'Error al enviar código');
+            setMessage(res.error || 'Contraseña incorrecta');
         }
     };
 
+    // Step 2: Verify OTP and Login
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
         setMessage('');
 
         const res = await signIn('credentials', {
-            email,
+            email: 'keteruse@gmail.com', // Must match hardcoded logic
             otp,
             redirect: false,
         });
@@ -52,7 +53,7 @@ export default function LoginPage() {
             setMessage('Código inválido o expirado.');
         } else {
             router.push('/CRM');
-            router.refresh(); // Ensure middleware state updates
+            router.refresh();
         }
     };
 
@@ -60,35 +61,37 @@ export default function LoginPage() {
         <div className="flex items-center justify-center min-h-screen bg-black text-white p-4">
             <Card className="w-full max-w-sm border-neutral-800 bg-neutral-900 text-white">
                 <CardHeader>
-                    <CardTitle className="text-2xl font-bold text-center">Acceso Seguro</CardTitle>
+                    <CardTitle className="text-2xl font-bold text-center">
+                        {step === 'password' ? 'Acceso Privado' : 'Verificación de Seguridad'}
+                    </CardTitle>
                     <CardDescription className="text-center text-neutral-400">
-                        {step === 'email' ? 'Ingresa tu correo autorizado' : 'Ingresa el código enviado a tu correo'}
+                        {step === 'password' ? 'Ingresa la llave maestra' : 'Ingresa el código enviado a tu correo'}
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    {step === 'email' ? (
-                        <form onSubmit={handleSendCode} className="space-y-4">
+                    {step === 'password' ? (
+                        <form onSubmit={handlePasswordSubmit} className="space-y-4">
                             <div className="space-y-2">
-                                <Label htmlFor="email">Correo Electrónico</Label>
+                                <Label htmlFor="password">Contraseña</Label>
                                 <Input
-                                    id="email"
-                                    type="email"
-                                    placeholder="admin@ejemplo.com"
+                                    id="password"
+                                    type="password"
+                                    placeholder="••••••••"
                                     className="bg-neutral-800 border-neutral-700 text-white"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     required
                                 />
                             </div>
                             <Button type="submit" className="w-full bg-white text-black hover:bg-neutral-200" disabled={loading}>
                                 {loading ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : null}
-                                Enviar Código
+                                Validar
                             </Button>
                         </form>
                     ) : (
                         <form onSubmit={handleLogin} className="space-y-4">
                             <div className="space-y-2">
-                                <Label htmlFor="otp">Código de Verificación</Label>
+                                <Label htmlFor="otp">Código OTP</Label>
                                 <Input
                                     id="otp"
                                     type="text"
@@ -102,10 +105,10 @@ export default function LoginPage() {
                             </div>
                             <Button type="submit" className="w-full bg-white text-black hover:bg-neutral-200" disabled={loading}>
                                 {loading ? <Loader2 className="animate-spin mr-2 h-4 w-4" /> : null}
-                                Iniciar Sesión
+                                Entrar
                             </Button>
-                            <Button variant="link" type="button" onClick={() => setStep('email')} className="w-full text-neutral-400">
-                                Volver / Reenviar
+                            <Button variant="link" type="button" onClick={() => setStep('password')} className="w-full text-neutral-400">
+                                Volver
                             </Button>
                         </form>
                     )}

@@ -3,45 +3,18 @@ function doPost(e) {
   lock.tryLock(10000);
 
   try {
-    // IMPORTANTE: Reemplaza 'TU_ID_DE_HOJA_DE_CALCULO' con el ID real de tu hoja de Google Sheets
     const sheet = SpreadsheetApp.openById('1DetNAjSygZtvOHAJAtgcMdtIPdO1lZmO-I716HX-2ic').getSheets()[0];
     
-    // 1. Intentar parsear los datos recibidos
     let data;
     try {
       data = JSON.parse(e.postData.contents);
     } catch (err) {
-      // Si no es JSON, intentar usar parámetros de formulario
       data = e.parameter;
     }
 
-    // 2. Normalizar campos (Buscamos claves comunes en diferentes APIs)
-    // TikTok suele enviar estructuras anidadas, pero si usamos Make/Zapier llega plano.
-    // Este código intenta encontrar datos útiles donde sea.
-    
-    const timestamp = new Date();
-    const id = Utilities.getUuid();
-
-    // Función auxiliar para buscar valor insensitive (nombre, Name, full_name, etc)
-    const findValue = (obj, keys) => {
-      const foundKey = Object.keys(obj).find(k => keys.includes(k.toLowerCase()));
-      return foundKey ? obj[foundKey] : '';
-    };
-
-    let nombre = findValue(data, ['nombre', 'name', 'full_name', 'fullname', 'first_name']) || 'Sin nombre';
-    let empresa = findValue(data, ['empresa', 'company', 'company_name', 'business']) || '';
-    let servicio = findValue(data, ['servicio', 'service', 'campaign', 'ad_name', 'form_name']) || 'TikTok Lead';
-    let email = findValue(data, ['email', 'correo', 'mail']) || '';
-    let telefono = findValue(data, ['telefono', 'phone', 'phone_number', 'celular']) || '';
-    
-    // Si llega de TikTok directo (estructura compleja), a veces viene en data.page_info o similar.
-    // Por seguridad, si todo está vacío, guardamos el JSON crudo en la columna de 'Empresa' para no perder el lead.
-    if (nombre === 'Sin nombre' && !empresa && !email) {
-       empresa = "RAW: " + JSON.stringify(data).substring(0, 500);
-    }
-
-    // 3. Manejar envío de correos (Para OTP/Login)
+    // --- ACCIÓN: ENVIAR CORREO (Auth Action) ---
     if (data.action === 'send_email') {
+       // Validación de Seguridad Estricta
        if (!data.key || data.key !== 'K_AND_T_SECURE_2025') {
           return ContentService.createTextOutput(JSON.stringify({ status: 'error', message: 'Invalid Key' })).setMimeType(ContentService.MimeType.JSON);
        }
@@ -55,89 +28,130 @@ function doPost(e) {
        return ContentService.createTextOutput(JSON.stringify({ status: 'success' })).setMimeType(ContentService.MimeType.JSON);
     }
 
-    // Append row: [id, name, company/raw, service, status, date, email, phone]
-    // Asegúrate de tener columnas suficientes en tu Sheet
-    sheet.appendRow([
-      id,
-      nombre,
-      empresa,
-      servicio,
-      'Nuevo',
-      timestamp,
-      email, // Nueva columna G sugerida
-      telefono // Nueva columna H sugerida
-    ]);
+    // --- ACCIÓN: ACTUALIZAR ESTADO (CRM Action) ---
+    if (data.action === 'update_status') {
+       if (!data.key || data.key !== 'K_AND_T_SECURE_2025') { // Misma llave maestra
+          return ContentService.createTextOutput(JSON.stringify({ status: 'error', message: 'Invalid Key' })).setMimeType(ContentService.MimeType.JSON);
+       }
 
-    return ContentService.createTextOutput(JSON.stringify({ 
-      status: 'success', 
-      message: 'Lead recibido',
-      id: id
-    })).setMimeType(ContentService.MimeType.JSON);
+       const idToUpdate = data.id;
+       const newStatus = data.status;
+       
+       const rows = sheet.getDataRange().getValues();
+       let found = false;
+       
+       // Buscar fila por ID (asumiendo ID en columna A - índice 0)
+       for (let i = 1; i < rows.length; i++) {
+         if (rows[i][0] == idToUpdate) {
+           // Actualizar columna E (Índice 4+1 = 5, pero getRange es 1-based)
+           // status es la 5ta columna (A, B, C, D, E) -> fila i+1, col 5
+           sheet.getRange(i + 1, 5).setValue(newStatus);
+           found = true;
+           break;
+         }
+       }
+       
+       if (found) {
+         return ContentService.createTextOutput(JSON.stringify({ status: 'success' })).setMimeType(ContentService.MimeType.JSON);
+       } else {
+         return ContentService.createTextOutput(JSON.stringify({ status: 'error', message: 'ID not found' })).setMimeType(ContentService.MimeType.JSON);
+       }
+    }
+
+    // --- ACCIÓN: CREAR LEAD (Default) ---
+    // Normalizar
+    const findValue = (obj, keys) => {
+      const foundKey = Object.keys(obj).find(k => keys.includes(k.toLowerCase()));
+      return foundKey ? obj[foundKey] : '';
+    };
+
+    const timestamp = new Date();
+    const id = Utilities.getUuid();
+    
+    let nombre = findValue(data, ['nombre', 'name', 'full_name', 'fullname', 'first_name']) || 'Sin nombre';
+    let empresa = findValue(data, ['empresa', 'company', 'company_name', 'business']) || '';
+    let servicio = findValue(data, ['servicio', 'service', 'campaign', 'ad_name', 'form_name']) || 'TikTok Lead';
+    let email = findValue(data, ['email', 'correo', 'mail']) || '';
+    let telefono = findValue(data, ['telefono', 'phone', 'phone_number', 'celular']) || '';
+
+    if (nombre === 'Sin nombre' && !empresa && !email) {
+       empresa = "RAW: " + JSON.stringify(data).substring(0, 500);
+    }
+
+    sheet.appendRow([id, nombre, empresa, servicio, 'Nuevo', timestamp, telefono, email]);
+
+    return ContentService.createTextOutput(JSON.stringify({ status: 'success', id: id })).setMimeType(ContentService.MimeType.JSON);
 
   } catch (e) {
-    return ContentService.createTextOutput(JSON.stringify({ 
-      status: 'error', 
-      message: e.toString() 
-    })).setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput(JSON.stringify({ status: 'error', message: e.toString() })).setMimeType(ContentService.MimeType.JSON);
   } finally {
     lock.releaseLock();
   }
 }
 
 function doGet(e) {
-  // SEGURIDAD: Verificar llave maestra
-  // Reemplaza 'TU_CLAVE_SECRETA_AQUI' con la misma que pongas en .env CR_SECRET_KEY
-  // O mejor, usa PropertiesService si sabes configurarlo, pero hardcodeado es aceptable para uso personal si el script no se comparte.
   const SECRET_KEY = 'K_AND_T_SECURE_2025'; 
   
   if (!e.parameter.key || e.parameter.key !== SECRET_KEY) {
-    return ContentService.createTextOutput(JSON.stringify({
-      status: 'error',
-      message: 'Acceso denegado: Credenciales inválidas.'
-    })).setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput(JSON.stringify({ status: 'error', message: 'Acceso denegado' })).setMimeType(ContentService.MimeType.JSON);
   }
 
   try {
-    // IMPORTANTE: Reemplaza 'TU_ID_DE_HOJA_DE_CALCULO' con el ID real de tu hoja de Google Sheets
     const sheet = SpreadsheetApp.openById('1DetNAjSygZtvOHAJAtgcMdtIPdO1lZmO-I716HX-2ic').getSheets()[0];
     const rows = sheet.getDataRange().getValues();
-    const headers = rows[0]; 
-    const data = rows.slice(1); // Skip header
-
-    // Map rows to objects
-    // Assuming columns order: ID, Nombre, Empresa, Servicio, Estado, Fecha, Telefono
-    const leads = data.map(row => {
-      let estado = row[4];
-      // Si el estado viene vacío (común en TikTok), poner 'Nuevo'
-      if (!estado) estado = 'Nuevo';
-
-      let fecha = row[5];
-      // TikTok envía Timestamp numérico (segundos), convertir a fecha legible
-      // Si es un número grande (tipo 17xxxxxx), asumimos timestamp Unix
-      if (typeof fecha === 'number' && fecha > 1000000000) {
-        fecha = new Date(fecha * 1000).toLocaleString('es-ES'); 
-      }
-
-      return {
+    // Assuming: ID, Name, Company, Service, Status, Date, Phone, Email (Swapped based on user feedback)
+    const leads = rows.slice(1).map(row => ({
         id: row[0],
         nombre: row[1],
         empresa: row[2],
         servicio: row[3],
-        estado: estado,
-        fecha: fecha,
-        telefono: (row[6] || '').toString() // Columna G - Force string to avoid undefined
-      };
-    });
+        estado: row[4] || 'Nuevo',
+        fecha: row[5],
+        telefono: (row[6] || '').toString(), 
+        email: row[7] || '' 
+    }));
 
-    return ContentService.createTextOutput(JSON.stringify({
-      status: 'success',
-      data: leads
-    })).setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput(JSON.stringify({ status: 'success', data: leads })).setMimeType(ContentService.MimeType.JSON);
 
   } catch (e) {
-    return ContentService.createTextOutput(JSON.stringify({
-      status: 'error',
-      message: e.toString()
-    })).setMimeType(ContentService.MimeType.JSON);
+    return ContentService.createTextOutput(JSON.stringify({ status: 'error', message: e.toString() })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// --- AUTOMATIZACIÓN ---
+// Configura un Activador (Reloj) para ejecutar esto diariamente
+function checkFollowUps() {
+  const sheet = SpreadsheetApp.openById('1DetNAjSygZtvOHAJAtgcMdtIPdO1lZmO-I716HX-2ic').getSheets()[0];
+  const rows = sheet.getDataRange().getValues();
+  let leadsToContact = [];
+
+  // Skip header
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    const nombre = row[1];
+    const estado = row[4];
+    const fecha = new Date(row[5]);
+    const telefono = row[7];
+    
+    // Lógica: Notificar si el estado es "Volver a Contactar" O si es "Nuevo" y tiene más de 2 días
+    const daysOld = (new Date() - fecha) / (1000 * 60 * 60 * 24);
+    
+    if (estado === 'Volver a Contactar' || (estado === 'Nuevo' && daysOld > 2)) {
+      leadsToContact.push(`${nombre} (${estado}) - Tel: ${telefono}`);
+    }
+  }
+
+  if (leadsToContact.length > 0) {
+    MailApp.sendEmail({
+      to: 'keteruse@gmail.com', // Tu correo
+      subject: '⚠️ Alerta CRM: Leads pendientes de seguimiento',
+      htmlBody: `
+        <h2>Tienes ${leadsToContact.length} leads esperando atención:</h2>
+        <ul>
+          ${leadsToContact.map(l => `<li>${l}</li>`).join('')}
+        </ul>
+        <p>Entra al CRM para gestionarlos.</p>
+      `
+    });
   }
 }

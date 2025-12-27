@@ -15,12 +15,7 @@ export default function AdminPage() {
     return (
         <div className="container mx-auto py-10 px-4 md:px-8 pt-30">
             <div className="flex flex-col space-y-8">
-                <div className="flex flex-col space-y-2">
-                    <h1 className="text-3xl font-bold tracking-tight">CRM Dashboard (Solo Lectura)</h1>
-                    <p className="text-muted-foreground">
-                        Monitoreo de leads capturados automáticamente desde TikTok.
-                    </p>
-                </div>
+                
 
                 <div className="grid gap-8 grid-cols-1">
                     {/* List Section - Full Width */}

@@ -4,7 +4,7 @@ import Credentials from 'next-auth/providers/credentials';
 import { z } from 'zod';
 import * as TOTP from 'otpauth';
 
-export const { auth, signIn, signOut } = NextAuth({
+export const { auth, signIn, signOut, handlers } = NextAuth({
     ...authConfig,
     providers: [
         Credentials({

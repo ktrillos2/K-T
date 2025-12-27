@@ -67,17 +67,15 @@ export async function createLeadAction(leadData: CreateLeadDTO): Promise<{ succe
             headers: {
                 'Content-Type': 'application/json',
             },
-            // Google Apps Script redirects after POST. 'follow' is default.
         });
 
-        // Handle the redirect response content
         const text = await response.text();
         let data;
         try {
             data = JSON.parse(text);
         } catch (e) {
-            console.error('Server Action createLead parse error. Response beginning:', text.substring(0, 150));
-            return { success: false, error: 'Respuesta inválida al crear lead. Revisa permisos.' };
+            console.error('Server Action createLead parse error:', text.substring(0, 150));
+            return { success: false, error: 'Respuesta inválida al crear lead.' };
         }
 
         if (data.status === 'success') {
@@ -89,5 +87,41 @@ export async function createLeadAction(leadData: CreateLeadDTO): Promise<{ succe
     } catch (error) {
         console.error('Server Action createLead Error:', error);
         return { success: false, error: 'Error de conexión al crear lead' };
+    }
+}
+
+export async function updateLeadStatusAction(id: string, newStatus: string): Promise<{ success: boolean; error?: string }> {
+    if (!GOOGLE_SCRIPT_URL) return { success: false, error: 'Config Error' };
+
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+                action: 'update_status',
+                key: process.env.CR_SECRET_KEY, // Secure Backend-to-Script
+                id: id,
+                status: newStatus
+            }),
+            headers: { 'Content-Type': 'application/json' },
+            cache: 'no-store'
+        });
+
+        const text = await response.text();
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (e) {
+            return { success: false, error: 'Invalid JSON from GAS' };
+        }
+
+        if (data.status === 'success') {
+            return { success: true };
+        } else {
+            return { success: false, error: data.message || 'Error updating status' };
+        }
+
+    } catch (error) {
+        console.error('Update Status Error:', error);
+        return { success: false, error: 'Connection Error' };
     }
 }
