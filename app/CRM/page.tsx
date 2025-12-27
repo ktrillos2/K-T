@@ -9,6 +9,14 @@ export const metadata: Metadata = {
         index: false,
         follow: false,
     },
+    // Añade esta sección para forzar el comportamiento en iOS
+    appleWebApp: {
+        capable: true,
+        title: 'K&T CRM',
+        statusBarStyle: 'black-translucent',
+        // Esto refuerza que el inicio sea en la ruta actual
+        startupImage: [], 
+    },
 };
 
 export default function AdminPage() {

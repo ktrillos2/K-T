@@ -2,7 +2,7 @@
     "name": "K&T CRM",
     "short_name": "CRM",
     "description": "K&T Agencia Digital CRM Dashboard",
-    "start_url": "/CRM",
+    "start_url": "/CRM/",
     "display": "standalone",
     "background_color": "#000000",
     "theme_color": "#000000",
