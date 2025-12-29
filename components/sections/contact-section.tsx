@@ -135,7 +135,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="relative py-16 lg:py-24 px-6 overflow-hidden">
+    <section id="contact" className="relative py-16 lg:py-24 px-6 overflow-hidden cv-auto">
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/30 to-background" />
 
       <div className="absolute inset-0 opacity-10">

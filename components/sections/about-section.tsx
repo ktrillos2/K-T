@@ -167,7 +167,7 @@ export default function AboutSection() {
   }, [activeValue])
 
   return (
-    <section id="about" className="relative py-16 lg:py-24 px-6 bg-black overflow-hidden">
+    <section id="about" className="relative py-16 lg:py-24 px-6 bg-black overflow-hidden cv-auto">
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/[0.015] rounded-full blur-2xl" />
         {particles.map((particle, i) => (

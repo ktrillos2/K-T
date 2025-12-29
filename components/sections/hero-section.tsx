@@ -35,8 +35,7 @@ export default function HeroSection() {
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
-    const isSmallScreen = window.matchMedia?.("(max-width: 768px)")?.matches ?? window.innerWidth < 768
-    if (prefersReducedMotion || isSmallScreen) return
+    if (prefersReducedMotion) return
 
     const canvas = canvasRef.current
     if (!canvas) return
@@ -60,7 +59,7 @@ export default function HeroSection() {
 
     const start = () => {
       // Optimize particle count based on screen size
-      const particleCount = window.innerWidth < 1024 ? 60 : 100
+      const particleCount = window.innerWidth < 768 ? 40 : window.innerWidth < 1024 ? 60 : 100
 
       for (let i = 0; i < particleCount; i++) {
         particles.push({

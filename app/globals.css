@@ -150,14 +150,22 @@
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
   }
 
-  /* Hide default cursor */
-  * {
-    cursor: none !important;
+  /* Hide default cursor (desktop only) */
+  @media (min-width: 1024px) {
+    * {
+      cursor: none !important;
+    }
   }
 
   /* Title font class */
   .font-title {
     font-family: var(--font-ari), var(--font-vt323), var(--font-press-start-2p), monospace;
+  }
+
+  /* Performance: skip offscreen rendering (supported browsers) */
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 1000px;
   }
 }
 

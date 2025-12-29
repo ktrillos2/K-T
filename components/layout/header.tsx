@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
@@ -14,6 +14,8 @@ export default function Header() {
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const lastScrolledRef = useRef<boolean>(false)
+  const rafRef = useRef<number | null>(null)
   const { dictionary, country, setCountry } = useLanguage()
   const { setCursorVariant } = useCursor()
   const [isCountryOpen, setIsCountryOpen] = useState(false)
@@ -31,12 +33,28 @@ export default function Header() {
   }
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+    const update = () => {
+      rafRef.current = null
+      const next = window.scrollY > 50
+      if (next !== lastScrolledRef.current) {
+        lastScrolledRef.current = next
+        setIsScrolled(next)
+      }
     }
 
+    const handleScroll = () => {
+      if (rafRef.current !== null) return
+      rafRef.current = window.requestAnimationFrame(update)
+    }
+
+    // Initialize once
+    update()
+
     window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current)
+    }
   }, [])
 
   return (

@@ -10,7 +10,7 @@ export default function Footer() {
   const { dictionary } = useLanguage()
 
   return (
-    <footer className="relative py-8 px-6 border-t border-border">
+    <footer className="relative py-8 px-6 border-t border-border cv-auto">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <motion.div
           className="relative w-32 h-32"
