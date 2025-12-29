@@ -34,6 +34,9 @@ export default function HeroSection() {
   }, [dictionary.hero.slogan])
 
   useEffect(() => {
+    // Disable canvas animation on mobile for performance
+
+
     const canvas = canvasRef.current
     if (!canvas) return
 
@@ -50,7 +53,10 @@ export default function HeroSection() {
     const particles: { x: number; y: number; speed: number; char: string; opacity: number }[] = []
     const chars = "01アイウエオカキクケコ<>/{}[]();=+-*&^%$#@!"
 
-    for (let i = 0; i < 100; i++) {
+    // Optimize particle count based on screen size
+    const particleCount = window.innerWidth < 768 ? 40 : 100
+
+    for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,

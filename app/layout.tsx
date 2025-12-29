@@ -10,7 +10,7 @@ import { CursorProvider } from "@/context/cursor-context"
 import Header from "@/components/layout/header"
 import CustomCursor from "@/components/ui/custom-cursor"
 import WhatsAppButton from "@/components/ui/whatsapp-button"
-import ClarityAnalytics from "@/components/analytics/clarity-analytics"
+
 import GoogleAnalytics from "@/components/analytics/google-analytics"
 
 const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-fira" })
@@ -249,7 +249,7 @@ export default function RootLayout({
         />
         <Analytics />
         <SpeedInsights />
-        <ClarityAnalytics />
+
         <GoogleAnalytics />
       </body>
     </html>

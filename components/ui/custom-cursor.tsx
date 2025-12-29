@@ -1,10 +1,25 @@
 "use client"
 
-import { useEffect, useRef, useCallback } from "react"
+import { useEffect, useRef, useCallback, useState } from "react"
 import { useCursor } from "@/context/cursor-context"
+
+// Utility to check mobile
+function isMobile() {
+  if (typeof window === 'undefined') return false
+  return window.matchMedia('(max-width: 1024px)').matches
+}
 
 export default function CustomCursor() {
   const { cursorVariant } = useCursor()
+  // Early return for mobile to avoid any JS execution
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+
+
   const dotRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
   const mousePos = useRef({ x: -100, y: -100 })
@@ -49,6 +64,8 @@ export default function CustomCursor() {
   }, [animate])
 
   const isHover = cursorVariant === "hover"
+
+  if (mounted && isMobile()) return null
 
   return (
     <>
