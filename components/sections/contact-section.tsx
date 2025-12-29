@@ -167,7 +167,7 @@ export default function ContactSection() {
                 const displayValue = item.label === "location" ? dictionary.contact.locationValue : item.value
 
                 const Wrapper = item.href ? motion.a : motion.div
-                const wrapperProps = item.href ? { href: item.href, target: "_blank", rel: "noopener noreferrer" } : {}
+                const wrapperProps = item.href ? { href: item.href, target: "_blank", rel: "noopener noreferrer", "aria-label": `Contact via ${item.label}` } : {}
 
                 return (
                   <Wrapper
@@ -203,6 +203,7 @@ export default function ContactSection() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`Visit our ${social.label} page`}
                     className="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center hover:bg-white hover:text-black transition-colors border border-white/10 hover:border-white"
                     onMouseEnter={() => setCursorVariant("hover")}
                     onMouseLeave={() => setCursorVariant("default")}
@@ -367,8 +368,8 @@ export default function ContactSection() {
                         <div className="relative flex-1">
                           <motion.label
                             className={`absolute left-3 transition-all duration-200 font-mono text-xs z-10 ${focusedField === "phone" || formData.phone
-                                ? "-top-2 text-white bg-neutral-900 px-1"
-                                : "top-4 text-white/40"
+                              ? "-top-2 text-white bg-neutral-900 px-1"
+                              : "top-4 text-white/40"
                               }`}
                           >
                             Celular / WhatsApp

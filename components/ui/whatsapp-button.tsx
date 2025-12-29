@@ -17,6 +17,7 @@ export default function WhatsAppButton() {
       )}`}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label="Chat on WhatsApp"
       onClick={(e) => {
         e.preventDefault()
         reportConversion(`https://wa.me/573116360057?text=${encodeURIComponent(
