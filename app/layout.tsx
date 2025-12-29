@@ -233,8 +233,12 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
         <link rel="icon" href="/icon.png" type="image/png" sizes="500x500" />
         <link rel="apple-touch-icon" href="/apple-icon.png" />
-        <link rel="preconnect" href="https://api.exchangerate-api.com" />
-        <link rel="preconnect" href="https://ipapi.co" />
+        <link rel="dns-prefetch" href="https://api.exchangerate-api.com" />
+        <link rel="preconnect" href="https://api.exchangerate-api.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://ipapi.co" />
+        <link rel="preconnect" href="https://ipapi.co" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="" />
       </head>
       <body className={`${firaCode.variable} ${vt323.variable} ${pressStart2P.variable} ${ariW9500.variable} font-mono antialiased`}>
         <LanguageProvider>

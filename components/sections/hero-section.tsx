@@ -34,8 +34,9 @@ export default function HeroSection() {
   }, [dictionary.hero.slogan])
 
   useEffect(() => {
-    // Disable canvas animation on mobile for performance
-
+    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
+    const isSmallScreen = window.matchMedia?.("(max-width: 768px)")?.matches ?? window.innerWidth < 768
+    if (prefersReducedMotion || isSmallScreen) return
 
     const canvas = canvasRef.current
     if (!canvas) return
@@ -53,43 +54,60 @@ export default function HeroSection() {
     const particles: { x: number; y: number; speed: number; char: string; opacity: number }[] = []
     const chars = "01アイウエオカキクケコ<>/{}[]();=+-*&^%$#@!"
 
-    // Optimize particle count based on screen size
-    const particleCount = window.innerWidth < 768 ? 40 : 100
+    let rafId: number | null = null
+    let idleId: number | null = null
+    let timeoutId: number | null = null
 
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        speed: Math.random() * 2 + 0.5,
-        char: chars[Math.floor(Math.random() * chars.length)],
-        opacity: Math.random() * 0.3 + 0.05,
-      })
-    }
+    const start = () => {
+      // Optimize particle count based on screen size
+      const particleCount = window.innerWidth < 1024 ? 60 : 100
 
-    const animate = () => {
-      ctx.fillStyle = "rgba(10, 10, 10, 0.1)"
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          speed: Math.random() * 2 + 0.5,
+          char: chars[Math.floor(Math.random() * chars.length)],
+          opacity: Math.random() * 0.3 + 0.05,
+        })
+      }
 
       ctx.font = "14px Fira Code, monospace"
 
-      particles.forEach((particle) => {
-        ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`
-        ctx.fillText(particle.char, particle.x, particle.y)
+      const animate = () => {
+        ctx.fillStyle = "rgba(10, 10, 10, 0.1)"
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-        particle.y += particle.speed
-        if (particle.y > canvas.height) {
-          particle.y = 0
-          particle.x = Math.random() * canvas.width
-          particle.char = chars[Math.floor(Math.random() * chars.length)]
-        }
-      })
+        particles.forEach((particle) => {
+          ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`
+          ctx.fillText(particle.char, particle.x, particle.y)
 
-      requestAnimationFrame(animate)
+          particle.y += particle.speed
+          if (particle.y > canvas.height) {
+            particle.y = 0
+            particle.x = Math.random() * canvas.width
+            particle.char = chars[Math.floor(Math.random() * chars.length)]
+          }
+        })
+
+        rafId = requestAnimationFrame(animate)
+      }
+
+      rafId = requestAnimationFrame(animate)
     }
 
-    animate()
+    if ("requestIdleCallback" in window) {
+      idleId = (window as any).requestIdleCallback(start, { timeout: 1500 })
+    } else {
+      timeoutId = window.setTimeout(start, 900)
+    }
 
-    return () => window.removeEventListener("resize", resizeCanvas)
+    return () => {
+      window.removeEventListener("resize", resizeCanvas)
+      if (rafId !== null) cancelAnimationFrame(rafId)
+      if (idleId !== null) (window as any).cancelIdleCallback?.(idleId)
+      if (timeoutId !== null) window.clearTimeout(timeoutId)
+    }
   }, [])
 
   return (

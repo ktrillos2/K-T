@@ -63,15 +63,57 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     "Estados Unidos": "USD",
   }
 
-  // Fetch exchange rates
-  useEffect(() => {
-    fetch("https://api.exchangerate-api.com/v4/latest/USD")
-      .then((res) => res.json())
-      .then((data) => {
+  const EXCHANGE_CACHE_KEY = "kyt.exchangeRates.usd.v1"
+  const EXCHANGE_CACHE_TTL_MS = 24 * 60 * 60 * 1000
+
+  const loadExchangeRates = async () => {
+    if (Object.keys(exchangeRates).length > 0) return
+
+    try {
+      const cachedRaw = typeof window !== "undefined" ? window.sessionStorage.getItem(EXCHANGE_CACHE_KEY) : null
+      if (cachedRaw) {
+        const cached = JSON.parse(cachedRaw) as { ts: number; rates: Record<string, number> }
+        if (cached?.ts && cached?.rates && Date.now() - cached.ts < EXCHANGE_CACHE_TTL_MS) {
+          setExchangeRates(cached.rates)
+          return
+        }
+      }
+    } catch {
+      // Ignore cache errors
+    }
+
+    try {
+      const res = await fetch("https://api.exchangerate-api.com/v4/latest/USD")
+      const data = await res.json()
+      if (data?.rates) {
         setExchangeRates(data.rates)
-      })
-      .catch((err) => console.error("Error fetching rates:", err))
-  }, [])
+        try {
+          window.sessionStorage.setItem(EXCHANGE_CACHE_KEY, JSON.stringify({ ts: Date.now(), rates: data.rates }))
+        } catch {
+          // Ignore cache write errors
+        }
+      }
+    } catch {
+      // Silent fail: UI already handles missing rate with "Loading..."
+    }
+  }
+
+  // Load exchange rates only when needed (non-Colombia users) and do it during idle time.
+  useEffect(() => {
+    if (country === "Colombia") return
+
+    const schedule = () => {
+      void loadExchangeRates()
+    }
+
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      const id = (window as any).requestIdleCallback(schedule, { timeout: 2000 })
+      return () => (window as any).cancelIdleCallback?.(id)
+    }
+
+    const t = window.setTimeout(schedule, 800)
+    return () => window.clearTimeout(t)
+  }, [country])
 
   const convertPrice = (usdAmount: number) => {
     if (country === "Colombia") return "" // Handled specifically for fixed pricing
@@ -99,40 +141,45 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   // Detect user location on mount (existing logic)
 
-  // Detect user location on mount
+  // Detect user location after first paint (idle) to avoid competing with LCP.
   useEffect(() => {
     const detectCountry = async () => {
       try {
         const response = await fetch("https://ipapi.co/json/")
-        if (!response.ok) throw new Error("Failed to fetch location")
+        if (!response.ok) return
         const data = await response.json()
         const countryName = data.country_name
 
-        // Map English country names to our internal Country type
         const countryMap: Record<string, Country> = {
-          "Colombia": "Colombia",
-          "Panama": "Panamá",
-          "Argentina": "Argentina",
-          "Mexico": "México",
-          "Ecuador": "Ecuador",
-          "Peru": "Perú",
-          "Paraguay": "Paraguay",
-          "Uruguay": "Uruguay",
+          Colombia: "Colombia",
+          Panama: "Panamá",
+          Argentina: "Argentina",
+          Mexico: "México",
+          Ecuador: "Ecuador",
+          Peru: "Perú",
+          Paraguay: "Paraguay",
+          Uruguay: "Uruguay",
           "United States": "Estados Unidos",
         }
 
         const detectedCountry = countryMap[countryName]
-        if (detectedCountry) {
-          handleSetCountry(detectedCountry)
-        }
-        // Fallback or unknown countries remain as default (Colombia)
-      } catch (error) {
-        console.error("Location detection failed:", error)
-        // Fallback remains Colombia
+        if (detectedCountry) handleSetCountry(detectedCountry)
+      } catch {
+        // Ignore errors; keep defaults
       }
     }
 
-    detectCountry()
+    const schedule = () => {
+      void detectCountry()
+    }
+
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      const id = (window as any).requestIdleCallback(schedule, { timeout: 2500 })
+      return () => (window as any).cancelIdleCallback?.(id)
+    }
+
+    const t = window.setTimeout(schedule, 1200)
+    return () => window.clearTimeout(t)
   }, [])
 
   return (

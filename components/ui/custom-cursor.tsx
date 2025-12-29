@@ -50,6 +50,11 @@ export default function CustomCursor() {
   }, [])
 
   useEffect(() => {
+    if (!mounted) return
+    if (isMobile()) return
+    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
+    if (prefersReducedMotion) return
+
     const handleMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY }
     }
@@ -61,7 +66,7 @@ export default function CustomCursor() {
       window.removeEventListener("mousemove", handleMouseMove)
       if (rafId.current !== null) cancelAnimationFrame(rafId.current)
     }
-  }, [animate])
+  }, [animate, mounted])
 
   const isHover = cursorVariant === "hover"
 
