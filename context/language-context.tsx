@@ -145,6 +145,37 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const detectCountry = async () => {
       try {
+        // Prefer server-provided geo (no third-party rate limits, avoids PSI console errors)
+        try {
+          const res = await fetch("/api/geo", { cache: "no-store" })
+          if (res.ok) {
+            const geo = (await res.json()) as { countryName?: string | null }
+            const countryName = geo?.countryName ?? null
+            if (countryName) {
+              const countryMap: Record<string, Country> = {
+                Colombia: "Colombia",
+                Panama: "Panamá",
+                Argentina: "Argentina",
+                Mexico: "México",
+                Ecuador: "Ecuador",
+                Peru: "Perú",
+                Paraguay: "Paraguay",
+                Uruguay: "Uruguay",
+                "United States": "Estados Unidos",
+              }
+
+              const detectedCountry = countryMap[countryName]
+              if (detectedCountry) {
+                handleSetCountry(detectedCountry)
+                return
+              }
+            }
+          }
+        } catch {
+          // Ignore and fall back
+        }
+
+        // Fallback (may be rate-limited on free tier)
         const response = await fetch("https://ipapi.co/json/")
         if (!response.ok) return
         const data = await response.json()
