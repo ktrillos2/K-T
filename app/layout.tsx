@@ -24,7 +24,7 @@ const ariW9500 = localFont({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kytcode.lat"),
+  metadataBase: new URL("https://www.kytcode.lat"),
   title: {
     default: "K&T - Desarrollo Web y Gestión de Redes en Colombia",
     template: "%s | K&T Agencia Digital",
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     "kytcode",
     "kytcode.lat"
   ],
-  authors: [{ name: "K&T Agencia Digital", url: "https://kytcode.lat" }],
+  authors: [{ name: "K&T Agencia Digital", url: "https://www.kytcode.lat" }],
   creator: "K&T Agencia Digital",
   publisher: "K&T Agencia Digital",
   formatDetection: {
@@ -91,11 +91,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "K&T - Desarrollo Web y Gestión de Redes en Colombia",
     description: "Agencia digital en Colombia. Desarrollo web, e-commerce, landing pages y gestión de redes sociales.",
-    url: "https://kytcode.lat",
+    url: "https://www.kytcode.lat",
     siteName: "K&T Agencia Digital",
     images: [
       {
-        url: "https://kytcode.lat/images/og-image.png",
+        url: "https://www.kytcode.lat/images/og-image.png",
         width: 1200,
         height: 630,
         alt: "K&T Agencia Digital - Desarrollo Web y Redes Sociales",
@@ -109,7 +109,7 @@ export const metadata: Metadata = {
     title: "K&T - Desarrollo Web y Gestión de Redes en Colombia",
     description: "Agencia digital en Colombia. Desarrollo web, e-commerce, landing pages y gestión de redes sociales.",
     creator: "@kytweb",
-    images: ["https://kytcode.lat/images/og-image.png"],
+    images: ["https://www.kytcode.lat/images/og-image.png"],
   },
   robots: {
     index: true,
@@ -124,10 +124,10 @@ export const metadata: Metadata = {
   },
   category: "technology",
   alternates: {
-    canonical: "https://kytcode.lat",
+    canonical: "https://www.kytcode.lat",
     languages: {
-      "es-CO": "https://kytcode.lat",
-      "en-US": "https://kytcode.lat",
+      "es-CO": "https://www.kytcode.lat",
+      "en-US": "https://www.kytcode.lat",
     },
   },
   verification: {
@@ -138,12 +138,12 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "@id": "https://kytcode.lat/#organization",
+  "@id": "https://www.kytcode.lat/#organization",
   "name": "K&T Agencia Digital",
   "alternateName": "K&T Agency",
-  "image": "https://kytcode.lat/images/logo.png",
-  "logo": "https://kytcode.lat/images/logo.png",
-  "url": "https://kytcode.lat",
+  "image": "https://www.kytcode.lat/images/logo.png",
+  "logo": "https://www.kytcode.lat/images/logo.png",
+  "url": "https://www.kytcode.lat",
   "telephone": "+573116360057",
   "email": "contacto@kytcode.lat",
   "address": {
