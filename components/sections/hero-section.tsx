@@ -117,7 +117,7 @@ export default function HeroSection() {
 
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
         <motion.p
-          className="text-white/60 font-mono text-sm md:text-base mb-6 min-h-[1.5em]"
+          className="text-white font-mono text-sm md:text-base mb-6 min-h-[1.5em]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -175,7 +175,7 @@ export default function HeroSection() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.6 }}
       >
-        <span className="text-xs text-muted-foreground font-mono">{dictionary.hero.scroll}</span>
+        <span className="text-xs text-white font-mono">{dictionary.hero.scroll}</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}

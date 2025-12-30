@@ -61,7 +61,7 @@ const ValueCard = memo(function ValueCard({
       onClick={onClick}
       className={`w-full text-left p-5 rounded-xl border backdrop-blur-sm transition-colors duration-200 ${isActive
         ? "bg-white text-black border-white shadow-[0_0_40px_rgba(255,255,255,0.15)]"
-        : "bg-white/5 text-white/60 border-white/10 hover:border-white/30 hover:bg-white/10"
+        : "bg-white/5 text-white border-white/10 hover:border-white/30 hover:bg-white/10"
         }`}
       onMouseEnter={() => setCursorVariant("hover")}
       onMouseMove={handleMouseMove}
@@ -76,7 +76,7 @@ const ValueCard = memo(function ValueCard({
             animate={isActive ? { rotate: [0, -10, 10, 0] } : {}}
             transition={{ duration: 0.5 }}
           >
-            <Icon className={`w-5 h-5 ${isActive ? "text-black" : "text-white/60"}`} />
+            <Icon className={`w-5 h-5 ${isActive ? "text-black" : "text-white"}`} />
           </motion.div>
           <div>
             <h3 className="font-mono font-bold text-lg block">{data.title}</h3>
@@ -96,7 +96,7 @@ const ValueCard = memo(function ValueCard({
           animate={{ rotate: isActive ? 90 : 0, x: isActive ? 0 : -5 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
-          <ChevronRight className={`w-5 h-5 ${isActive ? "text-black" : "text-white/40"}`} />
+          <ChevronRight className={`w-5 h-5 ${isActive ? "text-black" : "text-white"}`} />
         </motion.div>
       </div>
     </motion.button>
@@ -202,10 +202,8 @@ export default function AboutSection() {
           transition={{ duration: 0.5 }}
         >
           <motion.p
-            className="text-white/70 font-mono text-sm mb-4 flex items-center justify-center gap-2"
-            initial={{ opacity: 0.5 }}
-            whileHover={{ opacity: 0.8 }}
-            transition={{ duration: 0.3 }}
+            className="text-white font-mono text-sm mb-4 flex items-center justify-center gap-2"
+            initial={{ opacity: 1 }}
           >
             <Terminal className="w-4 h-4" />
             {dictionary.about.subtitle}
@@ -223,7 +221,7 @@ export default function AboutSection() {
             transition={{ duration: 0.6 }}
             className="h-full flex flex-col"
           >
-            <p className="text-white/60 font-mono text-lg mb-8 leading-relaxed">{dictionary.about.description}</p>
+            <p className="text-white font-mono text-lg mb-8 leading-relaxed">{dictionary.about.description}</p>
 
             <div className="space-y-4">
               {values.map((value, i) => (
@@ -267,7 +265,7 @@ export default function AboutSection() {
                   <motion.div className="w-3 h-3 rounded-full bg-[#FF5F56]" whileHover={{ scale: 1.4 }} />
                   <motion.div className="w-3 h-3 rounded-full bg-[#FFBD2E]" whileHover={{ scale: 1.4 }} />
                   <motion.div className="w-3 h-3 rounded-full bg-[#27C93F]" whileHover={{ scale: 1.4 }} />
-                  <span className="ml-3 text-xs text-white/40 font-mono">~/k&t/{activeValue}.ts</span>
+                  <span className="ml-3 text-xs text-white font-mono">~/k&t/{activeValue}.ts</span>
                 </div>
 
                 <div className="p-6 flex-1 flex flex-col justify-between">
@@ -321,7 +319,7 @@ export default function AboutSection() {
 
                       {/* Animated progress bar */}
                       <div className="mt-8 space-y-2">
-                        <div className="flex justify-between text-xs text-white/40 font-mono">
+                        <div className="flex justify-between text-xs text-white font-mono">
                           {/* @ts-ignore */}
                           <span>{dictionary.about.compiling}</span>
                           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}>

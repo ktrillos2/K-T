@@ -2,14 +2,55 @@
 
 import type React from "react"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useCallback, useEffect } from "react"
 import Image from "next/image"
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
-import { ArrowUpRight } from "lucide-react"
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion"
+import { ArrowUpRight, MousePointer2 } from "lucide-react"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
+
+// Animation simulating a mouse click
+const ClickAnimation = ({ text }: { text: string }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.8, x: 20, y: 20 }}
+    animate={{
+      opacity: [1, 1, 1, 1],
+      scale: [1, 0.9, 1, 1], // Click effect
+      x: [20, 0, 0, 20], // Move in and out
+      y: [20, 0, 0, 20]
+    }}
+    transition={{
+      duration: 2,
+      repeat: Infinity,
+      times: [0, 0.2, 0.3, 1], // Quick click at 0.2-0.3
+      repeatDelay: 1
+    }}
+    className="absolute bottom-8 right-8 z-[999] pointer-events-none flex flex-col items-center gap-2"
+  >
+    <motion.span
+      animate={{ scale: [1, 0.9, 1, 1] }}
+      transition={{
+        duration: 2,
+        repeat: Infinity,
+        times: [0, 0.2, 0.3, 1],
+        repeatDelay: 1
+      }}
+      className="text-white font-title text-sm font-bold drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] whitespace-nowrap relative z-[1002]"
+    >
+      {text}
+    </motion.span>
+    <div className="relative">
+      <motion.div
+        animate={{ scale: [1, 2, 0], opacity: [0.8, 0, 0] }} // Ripple effect
+        transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
+        className="absolute -inset-4 bg-white/40 rounded-full z-[1000]"
+      />
+      <MousePointer2 className="w-8 h-8 text-white fill-white relative z-[1001]" />
+    </div>
+  </motion.div>
+)
 
 const projects = [
   {
@@ -79,9 +120,26 @@ export default function ProjectsSection() {
   const { dictionary } = useLanguage()
   const { setCursorVariant } = useCursor()
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
-  const [emblaRef] = useEmblaCarousel({ loop: true, align: "center", skipSnaps: false, dragFree: false }, [
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center", skipSnaps: false, dragFree: false }, [
     Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true }),
   ])
+
+  const onSelect = useCallback((api: any) => {
+    setCurrentSlide(api.selectedScrollSnap())
+  }, [])
+
+  useEffect(() => {
+    if (!emblaApi) return
+    onSelect(emblaApi)
+    emblaApi.on("select", onSelect)
+    emblaApi.on("reInit", onSelect)
+
+    return () => {
+      emblaApi.off("select", onSelect)
+      emblaApi.off("reInit", onSelect)
+    }
+  }, [emblaApi, onSelect])
 
   return (
     <section id="work" className="relative py-16 lg:py-24 overflow-hidden cv-auto">
@@ -97,7 +155,7 @@ export default function ProjectsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-white/70 font-mono text-sm mb-4">{dictionary.projects.subtitle}</p>
+          <p className="text-white font-mono text-sm mb-4">{dictionary.projects.subtitle}</p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-title">{dictionary.projects.title}</h2>
         </motion.div>
 
@@ -113,6 +171,7 @@ export default function ProjectsSection() {
                   project={project}
                   index={index}
                   isActive={activeIndex === index}
+                  isCurrent={currentSlide === index}
                   onHover={() => setActiveIndex(index)}
                   onLeave={() => setActiveIndex(null)}
                   language={language}
@@ -132,6 +191,7 @@ interface ProjectCardProps {
   project: (typeof projects)[0] & { link?: string }
   index: number
   isActive: boolean
+  isCurrent: boolean
   onHover: () => void
   onLeave: () => void
   language: "en" | "es"
@@ -139,7 +199,7 @@ interface ProjectCardProps {
   dictionary: any
 }
 
-function ProjectCard({ project, index, isActive, onHover, onLeave, language, setCursorVariant, dictionary }: ProjectCardProps) {
+function ProjectCard({ project, index, isActive, isCurrent, onHover, onLeave, language, setCursorVariant, dictionary }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -254,6 +314,20 @@ function ProjectCard({ project, index, isActive, onHover, onLeave, language, set
             <div className="absolute top-4 left-4 px-3 py-1 bg-black/50 backdrop-blur-sm rounded-full border border-white/20">
               <span className="text-xs font-mono text-white">{project.year}</span>
             </div>
+
+            {/* Hand Touch Animation Hint (Only on active slide) */}
+            <AnimatePresence>
+              {isCurrent && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <ClickAnimation text={language === "en" ? "Click here" : "Clic aquí"} />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Content Side */}
@@ -280,14 +354,14 @@ function ProjectCard({ project, index, isActive, onHover, onLeave, language, set
             </motion.h3>
 
             {/* Description */}
-            <p className="text-muted-foreground font-mono text-sm mb-6 relative z-10 flex-grow">{desc}</p>
+            <p className="text-white font-mono text-sm mb-6 relative z-10 flex-grow">{desc}</p>
 
             {/* Tech stack */}
             <div className="flex flex-wrap gap-2 mb-8 mt-auto">
               {project.tech.slice(0, 3).map((tech) => (
                 <span
                   key={tech}
-                  className="px-2 py-1 text-[10px] lg:text-xs font-mono border border-white/20 rounded-full text-white/60"
+                  className="px-2 py-1 text-[10px] lg:text-xs font-mono border border-white/20 rounded-full text-white"
                 >
                   {tech}
                 </span>

@@ -45,7 +45,7 @@ const ProgrammingAnimation = dynamic(() => import("@/components/ui/programming-a
   ssr: false,
   loading: () => (
     <div className="w-full h-full flex items-center justify-center bg-neutral-950 rounded-xl">
-      <div className="text-white/60 font-mono text-sm animate-pulse">Loading...</div>
+      <div className="text-white font-mono text-sm animate-pulse">Loading...</div>
     </div>
   ),
 })
@@ -156,7 +156,7 @@ export default function ContactSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-white/70 font-mono text-sm mb-4">{dictionary.contact.subtitle}</p>
+          <p className="text-white font-mono text-sm mb-4">{dictionary.contact.subtitle}</p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-title mb-8">{dictionary.contact.title}</h2>
 
           {/* Contact Info & Socials Centered */}
@@ -181,7 +181,7 @@ export default function ContactSection() {
                       <Icon className="w-4 h-4 text-white" />
                     </div>
                     <div className="text-left">
-                      <p className="text-xs text-muted-foreground font-mono uppercase leading-tight mb-1">
+                      <p className="text-xs text-white font-mono uppercase leading-tight mb-1">
                         {dictionary.contact[item.label as keyof typeof dictionary.contact]}
                       </p>
                       <p className="text-foreground font-mono text-base md:text-lg font-medium group-hover:text-white transition-colors">
@@ -228,7 +228,7 @@ export default function ContactSection() {
           >
             {/* Service Selection */}
             <div className="space-y-4">
-              <p className="text-white/60 font-mono text-sm">{dictionary.contact.selectService}</p>
+              <p className="text-white font-mono text-sm">{dictionary.contact.selectService}</p>
               <div className="grid grid-cols-2 gap-4">
                 {serviceOptions.map((service, index) => {
                   const Icon = service.icon
@@ -298,7 +298,7 @@ export default function ContactSection() {
                   <h3 className="text-xl font-title font-bold text-white">
                     {dictionary.contact.readyToStart || "Ready to Start?"}
                   </h3>
-                  <p className="text-white/40 font-mono text-sm max-w-xs">
+                  <p className="text-white font-mono text-sm max-w-xs">
                     {dictionary.contact.selectPrompt || "Select an option above to initialize the contact protocol."}
                   </p>
                   <div className="flex gap-2 mt-4">
@@ -324,7 +324,7 @@ export default function ContactSection() {
                         <motion.label
                           className={`absolute left-3 transition-all duration-200 font-mono text-xs ${focusedField === "name" || formData.name
                             ? "-top-2 text-white bg-neutral-900 px-1"
-                            : "top-3 text-white/40"
+                            : "top-3 text-white"
                             }`}
                         >
                           {dictionary.contact.formName}
@@ -369,7 +369,7 @@ export default function ContactSection() {
                           <motion.label
                             className={`absolute left-3 transition-all duration-200 font-mono text-xs z-10 ${focusedField === "phone" || formData.phone
                               ? "-top-2 text-white bg-neutral-900 px-1"
-                              : "top-4 text-white/40"
+                              : "top-4 text-white"
                               }`}
                           >
                             Celular / WhatsApp
@@ -401,7 +401,7 @@ export default function ContactSection() {
                         <motion.label
                           className={`absolute left-3 transition-all duration-200 font-mono text-xs ${focusedField === "message" || formData.message
                             ? "-top-2 text-white bg-neutral-900 px-1"
-                            : "top-3 text-white/40"
+                            : "top-3 text-white"
                             }`}
                         >
                           {dictionary.contact.formMessage}
@@ -469,7 +469,7 @@ export default function ContactSection() {
                     <CheckCircle className="w-16 h-16 text-white mx-auto mb-4" />
                   </motion.div>
                   <h3 className="text-xl font-title font-bold text-white mb-2">{dictionary.contact.successTitle}</h3>
-                  <p className="text-white/60 font-mono text-sm">{dictionary.contact.successMessage}</p>
+                  <p className="text-white font-mono text-sm">{dictionary.contact.successMessage}</p>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -488,7 +488,7 @@ export default function ContactSection() {
               fallback={
                 <div className="w-full h-full flex items-center justify-center bg-neutral-950 rounded-xl">
                   {/* @ts-ignore */}
-                  <div className="text-white/60 font-mono text-sm animate-pulse">{dictionary?.common?.loading || "Loading..."}</div>
+                  <div className="text-white font-mono text-sm animate-pulse">{dictionary?.common?.loading || "Loading..."}</div>
                 </div>
               }
             >

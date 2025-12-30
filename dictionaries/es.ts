@@ -16,7 +16,7 @@ export const es = {
   },
   hero: {
     greeting: "// Bienvenido a K&T",
-    slogan: "Codificamos tu visión digital",
+    slogan: "Codificamos el futuro de tu marca",
     cta: "Ver planes",
     scroll: "Desliza para explorar",
   },

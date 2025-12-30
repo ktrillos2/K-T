@@ -43,6 +43,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const handleSetCountry = (newCountry: Country) => {
     setCountry(newCountry)
+    if (typeof window !== "undefined") {
+      localStorage.setItem("user_country", newCountry)
+    }
     if (newCountry === "Estados Unidos") {
       setLanguage("en")
     } else {
@@ -139,10 +142,23 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     return `${localAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })} ${code}`
   }
 
-  // Detect user location on mount (existing logic)
-
-  // Detect user location after first paint (idle) to avoid competing with LCP.
+  // Detect user location on mount
   useEffect(() => {
+    // 1. Priority: Check LocalStorage
+    if (typeof window !== "undefined") {
+      const storedCountry = localStorage.getItem("user_country") as Country | null
+      const validCountries: Country[] = [
+        "Colombia", "Panamá", "Argentina", "México", "Ecuador",
+        "Perú", "Paraguay", "Uruguay", "Estados Unidos"
+      ]
+
+      if (storedCountry && validCountries.includes(storedCountry)) {
+        handleSetCountry(storedCountry)
+        return // Stop detection if stored
+      }
+    }
+
+    // 2. Fallback: Auto-detect
     const detectCountry = async () => {
       try {
         // Prefer server-provided geo (no third-party rate limits, avoids PSI console errors)

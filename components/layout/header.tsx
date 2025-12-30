@@ -115,7 +115,7 @@ export default function Header() {
                           setCountry(c)
                           setIsCountryOpen(false)
                         }}
-                        className={`px-3 py-2 text-xs font-mono text-left rounded hover:bg-white/10 transition-colors flex items-center gap-2 ${country === c ? "text-white bg-white/10" : "text-white/60"
+                        className={`px-3 py-2 text-xs font-mono text-left rounded hover:bg-white/10 transition-colors flex items-center gap-2 ${country === c ? "text-white bg-white/10" : "text-white"
                           }`}
                       >
                         <span>{COUNTRIES[c].flag}</span>

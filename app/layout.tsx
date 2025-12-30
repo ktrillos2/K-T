@@ -10,6 +10,8 @@ import { CursorProvider } from "@/context/cursor-context"
 import Header from "@/components/layout/header"
 import CustomCursor from "@/components/ui/custom-cursor"
 import WhatsAppButton from "@/components/ui/whatsapp-button"
+import CountrySelector from "@/components/layout/country-selector"
+
 
 import GoogleAnalytics from "@/components/analytics/google-analytics"
 
@@ -243,6 +245,7 @@ export default function RootLayout({
       <body className={`${firaCode.variable} ${vt323.variable} ${pressStart2P.variable} ${ariW9500.variable} font-mono antialiased`}>
         <LanguageProvider>
           <CursorProvider>
+            <CountrySelector />
             <CustomCursor />
             <Header />
             <main>{children}</main>

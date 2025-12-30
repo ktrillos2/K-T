@@ -99,7 +99,7 @@ const ServiceCard = memo(function ServiceCard({
             transition={{ type: "spring", stiffness: 500, damping: 15 }}
           />
         ))}
-        <span className="ml-3 text-xs text-white/40 font-mono">{plan}.config.ts</span>
+        <span className="ml-3 text-xs text-white font-mono">{plan}.config.ts</span>
         {isPopular && (
           <motion.span
             className="ml-auto text-xs bg-white text-black px-3 py-1 rounded-full font-bold flex items-center gap-1"
@@ -160,7 +160,7 @@ const ServiceCard = memo(function ServiceCard({
               >
                 <Check className="w-3 h-3 text-white group-hover:text-black transition-colors duration-200" />
               </motion.div>
-              <span className="text-sm text-white/60 font-mono group-hover:text-white transition-colors duration-200">
+              <span className="text-sm text-white font-mono group-hover:text-white transition-colors duration-200">
                 {feature}
               </span>
             </motion.li>
@@ -253,9 +253,8 @@ export default function ServicesSection() {
           transition={{ duration: 0.5 }}
         >
           <motion.p
-            className="text-white/70 font-mono text-sm mb-4"
-            animate={{ opacity: [0.4, 0.8, 0.4] }}
-            transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+            className="text-white font-mono text-sm mb-4"
+            initial={{ opacity: 1 }}
           >
             {dictionary.services.subtitle}
           </motion.p>
