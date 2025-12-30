@@ -77,7 +77,7 @@ export default function CustomCursor() {
       {/* Main dot cursor */}
       <div
         ref={dotRef}
-        className="hidden lg:block fixed top-0 left-0 pointer-events-none z-[9999] rounded-full mix-blend-difference will-change-transform"
+        className="hidden lg:block fixed top-0 left-0 pointer-events-none z-[10000] rounded-full mix-blend-difference will-change-transform"
         style={{
           width: isHover ? 60 : 8,
           height: isHover ? 60 : 8,
@@ -89,7 +89,7 @@ export default function CustomCursor() {
       {/* Trailing ring */}
       <div
         ref={ringRef}
-        className="hidden lg:block fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border border-white/40 mix-blend-difference will-change-transform"
+        className="hidden lg:block fixed top-0 left-0 pointer-events-none z-[9999] rounded-full border border-white/40 mix-blend-difference will-change-transform"
         style={{
           width: 32,
           height: 32,

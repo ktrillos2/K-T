@@ -25,7 +25,10 @@ interface LanguageContextType {
   toggleLanguage: () => void
   setLanguage: (lang: Language) => void
   setCountry: (country: Country) => void
+
   convertPrice: (usdAmount: number) => string
+  isAppReady: boolean
+  setIsAppReady: (ready: boolean) => void
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
@@ -34,6 +37,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>("es")
   const [country, setCountry] = useState<Country>("Colombia")
   const [exchangeRates, setExchangeRates] = useState<Record<string, number>>({})
+  const [isAppReady, setIsAppReady] = useState(false)
 
   const dictionary = language === "en" ? en : es
 
@@ -231,7 +235,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   return (
     <LanguageContext.Provider
-      value={{ language, dictionary, country, toggleLanguage, setLanguage, setCountry: handleSetCountry, convertPrice }}
+      value={{ language, dictionary, country, toggleLanguage, setLanguage, setCountry: handleSetCountry, convertPrice, isAppReady, setIsAppReady }}
     >
       {children}
     </LanguageContext.Provider>

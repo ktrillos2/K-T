@@ -13,17 +13,19 @@ export default function CountrySelector() {
     const pathname = usePathname()
     const [isVisible, setIsVisible] = useState(false)
     const [showContent, setShowContent] = useState(false)
-    const { setCountry } = useLanguage()
+    const { setCountry, setIsAppReady } = useLanguage()
 
     useEffect(() => {
         // Only show if we are on the home page
         if (pathname === "/") {
             setIsVisible(true)
             setShowContent(true)
+            setIsAppReady(false)
         } else {
             setIsVisible(false)
+            setIsAppReady(true)
         }
-    }, [pathname])
+    }, [pathname, setIsAppReady])
 
     useEffect(() => {
         if (isVisible) {
@@ -39,6 +41,7 @@ export default function CountrySelector() {
     const handleSelectCountry = (countryCode: string) => {
         setCountry(countryCode as Country)
         setIsVisible(false)
+        setIsAppReady(true)
     }
 
     return (

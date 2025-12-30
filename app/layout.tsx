@@ -11,6 +11,7 @@ import Header from "@/components/layout/header"
 import CustomCursor from "@/components/ui/custom-cursor"
 import WhatsAppButton from "@/components/ui/whatsapp-button"
 import CountrySelector from "@/components/layout/country-selector"
+import ContentWrapper from "@/components/layout/content-wrapper"
 
 
 import GoogleAnalytics from "@/components/analytics/google-analytics"
@@ -247,9 +248,11 @@ export default function RootLayout({
           <CursorProvider>
             <CountrySelector />
             <CustomCursor />
-            <Header />
-            <main>{children}</main>
-            <WhatsAppButton />
+            <ContentWrapper>
+              <Header />
+              <main>{children}</main>
+              <WhatsAppButton />
+            </ContentWrapper>
           </CursorProvider>
         </LanguageProvider>
         <script
