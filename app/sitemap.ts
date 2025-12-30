@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://kytcode.lat'
+    const baseUrl = 'https://www.kytcode.lat'
     const currentDate = new Date()
 
     return [

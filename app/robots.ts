@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
                 disallow: ['/api/', '/private/', '/CRM/', '/login/', '/admin/'],
             },
         ],
-        sitemap: 'https://kytcode.lat/sitemap.xml',
-        host: 'https://kytcode.lat',
+        sitemap: 'https://www.kytcode.lat/sitemap.xml',
+        host: 'https://www.kytcode.lat',
     }
 }
