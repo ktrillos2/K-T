@@ -68,6 +68,32 @@ export default function CountrySelector() {
                                 <p className="text-xl md:text-2xl text-white font-title">
                                     Selecciona tu ubicación para continuar
                                 </p>
+                                <div className="md:hidden flex flex-col items-center gap-1 text-white/60">
+                                    <span className="text-sm font-medium">Desliza para ver más</span>
+                                    <motion.div
+                                        animate={{ y: [0, 5, 0] }}
+                                        transition={{
+                                            duration: 1.5,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            className="w-5 h-5"
+                                        >
+                                            <path d="M12 5v14M19 12l-7 7-7-7" />
+                                        </svg>
+                                    </motion.div>
+                                </div>
                             </div>
 
                             {/* Grid Overlay */}

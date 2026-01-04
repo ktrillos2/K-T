@@ -265,21 +265,41 @@ function ProjectCard({ project, index, isActive, isCurrent, onHover, onLeave, la
           <div className="relative h-64 lg:h-80 w-full overflow-hidden shrink-0">
             {project.imageMobile ? (
               <>
-                <motion.div
-                  className="w-full h-full lg:hidden block relative"
-                  animate={{ scale: isActive ? 1.05 : 1 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                >
+                {/* Mobile Image - Hidden on lg and up */}
+                <div className="w-full h-full lg:hidden block relative">
                   <Image
                     src={project.imageMobile}
                     alt={title}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover"
+                    priority={index < 2}
+                    unoptimized
                   />
-                </motion.div>
+                </div>
+
+                {/* Desktop Image - Hidden on mobile, Block on lg and up */}
+                <div className="w-full h-full hidden lg:block relative">
+                  <motion.div
+                    className="w-full h-full relative"
+                    animate={{ scale: isActive ? 1.05 : 1 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  >
+                    <Image
+                      src={project.image}
+                      alt={title}
+                      fill
+                      sizes="(max-width: 1200px) 50vw, 50vw"
+                      className="object-cover object-top"
+                      priority={index < 2}
+                    />
+                  </motion.div>
+                </div>
+              </>
+            ) : (
+              <div className="w-full h-full relative">
                 <motion.div
-                  className="w-full h-full hidden lg:block relative"
+                  className="w-full h-full relative"
                   animate={{ scale: isActive ? 1.05 : 1 }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
                 >
@@ -287,25 +307,12 @@ function ProjectCard({ project, index, isActive, isCurrent, onHover, onLeave, la
                     src={project.image}
                     alt={title}
                     fill
-                    sizes="(max-width: 1200px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
                     className="object-cover object-top"
+                    priority={index < 2}
                   />
                 </motion.div>
-              </>
-            ) : (
-              <motion.div
-                className="w-full h-full relative"
-                animate={{ scale: isActive ? 1.05 : 1 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-              >
-                <Image
-                  src={project.image}
-                  alt={title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover object-top"
-                />
-              </motion.div>
+              </div>
             )}
             {/* Overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-transparent to-transparent pointer-events-none" />

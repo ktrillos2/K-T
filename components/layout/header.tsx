@@ -8,8 +8,11 @@ import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
 import { smoothScrollTo } from "@/lib/utils"
 import SuperMenu from "./super-menu"
+import { countryCodes } from "@/lib/country-codes"
+/* eslint-disable @next/next/no-img-element */
 
 export default function Header() {
+  /* eslint-enable @next/next/no-img-element */
   const router = useRouter()
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -20,17 +23,7 @@ export default function Header() {
   const { setCursorVariant } = useCursor()
   const [isCountryOpen, setIsCountryOpen] = useState(false)
 
-  const COUNTRIES = {
-    Colombia: { flag: "🇨🇴" },
-    Panamá: { flag: "🇵🇦" },
-    Argentina: { flag: "🇦🇷" },
-    México: { flag: "🇲🇽" },
-    Ecuador: { flag: "🇪🇨" },
-    Perú: { flag: "🇵🇪" },
-    Paraguay: { flag: "🇵🇾" },
-    Uruguay: { flag: "🇺🇾" },
-    "Estados Unidos": { flag: "🇺🇸" },
-  }
+  const currentCountry = countryCodes.find((c) => c.name === country)
 
   useEffect(() => {
     const update = () => {
@@ -70,7 +63,7 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <motion.button
-            className="relative w-24 h-24 scale-150 origin-left ml-4 cursor-pointer"
+            className="relative w-48 h-20 cursor-pointer"
             onMouseEnter={() => setCursorVariant("hover")}
             onMouseLeave={() => setCursorVariant("default")}
             whileHover={{ scale: 1.05 }}
@@ -83,7 +76,7 @@ export default function Header() {
               }
             }}
           >
-            <Image src="/images/logo.png" alt="K&T Agencia Digital - Desarrollo Web y Gestión de Redes Sociales en Colombia" fill sizes="96px" className="object-contain" priority />
+            <Image src="/images/logo.png" alt="K&T Agencia Digital - Desarrollo Web y Gestión de Redes Sociales en Colombia" fill sizes="(max-width: 768px) 150px, 200px" className="object-contain" priority />
           </motion.button>
 
           <div className="flex items-center gap-4">
@@ -96,7 +89,13 @@ export default function Header() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span>{COUNTRIES[country].flag}</span>
+                {currentCountry && (
+                  <img
+                    src={`https://flagcdn.com/w40/${currentCountry.iso}.png`}
+                    alt={country}
+                    className="w-5 h-auto rounded-sm object-cover"
+                  />
+                )}
                 <span className="hidden md:inline">{country}</span>
               </motion.button>
 
@@ -108,18 +107,23 @@ export default function Header() {
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
                     className="absolute top-full right-0 mt-2 bg-zinc-900 border border-white/20 rounded-xl p-1 flex flex-col gap-1 min-w-[140px] z-50 overflow-hidden shadow-xl"
                   >
-                    {(Object.keys(COUNTRIES) as Array<keyof typeof COUNTRIES>).map((c) => (
+                    {countryCodes.map((c) => (
                       <button
-                        key={c}
+                        key={c.code}
                         onClick={() => {
-                          setCountry(c)
+                          // @ts-ignore
+                          setCountry(c.name)
                           setIsCountryOpen(false)
                         }}
-                        className={`px-3 py-2 text-xs font-mono text-left rounded hover:bg-white/10 transition-colors flex items-center gap-2 ${country === c ? "text-white bg-white/10" : "text-white"
+                        className={`px-3 py-2 text-xs font-mono text-left rounded hover:bg-white/10 transition-colors flex items-center gap-2 ${country === c.name ? "text-white bg-white/10" : "text-white"
                           }`}
                       >
-                        <span>{COUNTRIES[c].flag}</span>
-                        <span>{c}</span>
+                        <img
+                          src={`https://flagcdn.com/w40/${c.iso}.png`}
+                          alt={c.name}
+                          className="w-4 h-auto rounded-sm object-cover"
+                        />
+                        <span>{c.name}</span>
                       </button>
                     ))}
                   </motion.div>
@@ -159,9 +163,9 @@ export default function Header() {
                 )}
               </AnimatePresence>
             </motion.button>
-          </div>
-        </div>
-      </motion.header>
+          </div >
+        </div >
+      </motion.header >
 
       <SuperMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </>

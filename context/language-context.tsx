@@ -15,6 +15,7 @@ export type Country =
   | "Paraguay"
   | "Uruguay"
   | "Estados Unidos"
+  | "Chile"
 
 type Dictionary = typeof en
 
@@ -68,6 +69,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     Paraguay: "PYG",
     Uruguay: "UYU",
     "Estados Unidos": "USD",
+    Chile: "CLP",
   }
 
   const EXCHANGE_CACHE_KEY = "kyt.exchangeRates.usd.v1"
@@ -153,7 +155,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       const storedCountry = localStorage.getItem("user_country") as Country | null
       const validCountries: Country[] = [
         "Colombia", "Panamá", "Argentina", "México", "Ecuador",
-        "Perú", "Paraguay", "Uruguay", "Estados Unidos"
+        "Perú", "Paraguay", "Uruguay", "Estados Unidos", "Chile"
       ]
 
       if (storedCountry && validCountries.includes(storedCountry)) {
@@ -182,6 +184,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
                 Paraguay: "Paraguay",
                 Uruguay: "Uruguay",
                 "United States": "Estados Unidos",
+                Chile: "Chile",
               }
 
               const detectedCountry = countryMap[countryName]
@@ -211,6 +214,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
           Paraguay: "Paraguay",
           Uruguay: "Uruguay",
           "United States": "Estados Unidos",
+          Chile: "Chile",
         }
 
         const detectedCountry = countryMap[countryName]
