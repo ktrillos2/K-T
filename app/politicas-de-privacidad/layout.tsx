@@ -27,6 +27,9 @@ export const metadata: Metadata = {
         description: "Conoce cómo K&T protege tu información personal y privacidad.",
         images: ["https://www.kytcode.lat/images/og-image.png"],
     },
+    alternates: {
+        canonical: "https://www.kytcode.lat/politicas-de-privacidad",
+    },
 }
 
 export default function PrivacyPolicyLayout({

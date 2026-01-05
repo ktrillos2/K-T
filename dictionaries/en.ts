@@ -16,7 +16,7 @@ export const en = {
   },
   hero: {
     greeting: "// Welcome to K&T",
-    slogan: "We code your digital vision",
+    slogan: "Web Development & Page Creation",
     cta: "Get Started",
     scroll: "Scroll to explore",
   },

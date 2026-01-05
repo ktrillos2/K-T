@@ -32,57 +32,24 @@ export const metadata: Metadata = {
     default: "K&T - Desarrollo Web y Gestión de Redes en Colombia",
     template: "%s | K&T Agencia Digital",
   },
-  description: "Agencia digital en Colombia. Desarrollo web, e-commerce, landing pages y gestión de redes sociales. Soluciones profesionales para tu negocio.",
+  description: "Desarrollo web, e-commerce, landing pages y gestión de redes sociales. Soluciones profesionales para tu negocio en Colombia. Transformamos ideas en código.",
   icons: {
-    icon: "/images/logo.png",
-    apple: "/images/logo.png",
+    icon: [
+      { url: "/icon.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
-  manifest: "/manifest.json",
+  manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
     title: "K&T CRM",
   },
-  keywords: [
-    // 🔍 Términos Generales (Alto Volumen de Búsqueda)
-    "Crear página web",
-    "Desarrollo de páginas web",
-    "Diseño de páginas web",
-    "Hacer página web",
-    "Páginas web profesionales",
-
-    // 📍 SEO Local (Cúcuta y Norte de Santander)
-    "Agencia digital Cúcuta",
-    "Desarrollo web Cúcuta",
-    "Diseño web Norte de Santander",
-    "Gestión de redes sociales Cúcuta",
-
-    // 💰 Intención de Contratación
-    "Cotización página web",
-    "Precio desarrollo web Colombia",
-    "Contratar agencia de marketing",
-    "Empresa de desarrollo de software",
-
-    // 🛠️ Servicios Específicos K&T
-    "Desarrollo web a medida",
-    "Tiendas virtuales",
-    "E-commerce Colombia",
-    "Landing pages",
-    "Posicionamiento SEO",
-    "Gestión de redes",
-
-    // 🚀 Tecnologías (Para clientes que saben lo que quieren)
-    "Desarrollo Next.js",
-    "Expertos en React",
-
-    // 🏷️ Marca
-    "K&T",
-    "K&T Agencia Digital",
-    "kyt",
-    "k&t",
-    "kytcode",
-    "kytcode.lat"
-  ],
+  // 3. KEYWORDS: Híbridas (Headless WooCommerce + High Performance)
+  keywords: ["Headless WooCommerce", "Next.js para WooCommerce", "WooCommerce de Alto Rendimiento", "Desarrollo Software a Medida", "K&T"],
   authors: [{ name: "K&T Agencia Digital", url: "https://www.kytcode.lat" }],
   creator: "K&T Agencia Digital",
   publisher: "K&T Agencia Digital",
@@ -148,7 +115,7 @@ const jsonLd = {
   "logo": "https://www.kytcode.lat/images/logo.png",
   "url": "https://www.kytcode.lat",
   "telephone": "+573116360057",
-  "email": "contacto@kytcode.lat",
+  "email": "contactoktweb@gmail.com",
   "address": {
     "@type": "PostalAddress",
     "addressCountry": "CO",
@@ -232,17 +199,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="dark">
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="32x32" />
-        <link rel="icon" href="/icon.png" type="image/png" sizes="500x500" />
-        <link rel="apple-touch-icon" href="/apple-icon.png" />
-        <link rel="dns-prefetch" href="https://api.exchangerate-api.com" />
-        <link rel="preconnect" href="https://api.exchangerate-api.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="https://ipapi.co" />
-        <link rel="preconnect" href="https://ipapi.co" crossOrigin="" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="" />
-      </head>
+      <link rel="dns-prefetch" href="https://api.exchangerate-api.com" />
+      <link rel="preconnect" href="https://api.exchangerate-api.com" crossOrigin="" />
+      <link rel="dns-prefetch" href="https://ipapi.co" />
+      <link rel="preconnect" href="https://ipapi.co" crossOrigin="" />
+      <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+      <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="" />
       <body className={`${firaCode.variable} ${vt323.variable} ${pressStart2P.variable} ${ariW9500.variable} font-mono antialiased`}>
         <LanguageProvider>
           <CursorProvider>

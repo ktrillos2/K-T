@@ -62,9 +62,9 @@ export default function CountrySelector() {
                             {/* Header Section */}
                             <div className="text-center space-y-6">
                                 {/* Replaced gradient with font-title and solid color */}
-                                <h1 className="text-4xl md:text-6xl font-title font-bold text-foreground">
+                                <h2 className="text-4xl md:text-6xl font-title font-bold text-foreground">
                                     ¿De qué país nos visitas?
-                                </h1>
+                                </h2>
                                 <p className="text-xl md:text-2xl text-white font-title">
                                     Selecciona tu ubicación para continuar
                                 </p>
@@ -125,6 +125,7 @@ export default function CountrySelector() {
                                                     <img
                                                         src={`https://flagcdn.com/w160/${country.iso}.png`}
                                                         alt={`Flag of ${country.name}`}
+                                                        title={`Flag of ${country.name}`}
                                                         className="w-full h-full object-cover"
                                                         loading="lazy"
                                                     />

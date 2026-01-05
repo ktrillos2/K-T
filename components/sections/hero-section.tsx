@@ -98,7 +98,7 @@ export default function HeroSection() {
     if ("requestIdleCallback" in window) {
       idleId = (window as any).requestIdleCallback(start, { timeout: 1500 })
     } else {
-      timeoutId = window.setTimeout(start, 900)
+      timeoutId = window.setTimeout(start, 900) as unknown as number
     }
 
     return () => {
