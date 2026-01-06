@@ -22,25 +22,25 @@ export const es = {
   },
   about: {
     title: "Agencia de Transformación Digital",
-    subtitle: "// Expertos en Headless WooCommerce & Next.js",
+    subtitle: "// Expertos en Modernización de WooCommerce",
     description:
-      "Somos una Agencia de Desarrollo Web y Software especializada en E-commerce de Alto Rendimiento. Usamos WooCommerce como motor (backend) para tu facilidad, pero construimos la tienda con Next.js (frontend) para una velocidad extrema.",
+      "Damos nueva vida a tu E-commerce. Especialistas en Modernización y Aceleración de tiendas WooCommerce mediante arquitectura Headless: cambiamos el motor por Next.js para que tu tienda vuele, manteniendo tu gestión de siempre.",
     values: {
       innovation: {
-        title: "Innovación WPO",
-        description: "Optimización de Velocidad Web extrema para posicionamiento y experiencia de usuario.",
+        title: "Evolución WPO",
+        description: "Transformamos tiendas lentas en experiencias ultra-rápidas.",
       },
       quality: {
         title: "Calidad Headless",
-        description: "Arquitecturas modernas: API WooCommerce con React y Cloud Computing.",
+        description: "Evolucionamos tu WooCommerce con frontend React/Next.js moderno.",
       },
       speed: {
-        title: "Velocidad",
-        description: "Entrega rápida sin comprometer la calidad o funcionalidad.",
+        title: "Aceleración",
+        description: "Optimización extrema de velocidad para tiendas existentes.",
       },
       collaboration: {
         title: "Colaboración",
-        description: "Trabajamos de cerca contigo para dar vida a tu visión.",
+        description: "Trabajamos contigo para potenciar lo que ya tienes.",
       },
     },
     stats: {
@@ -74,20 +74,20 @@ export const es = {
       whatsapp_message: "Hola, me interesa el Diseño Web Corporativo.",
     },
     ecommerce: {
-      title: "Headless WooCommerce / Next.js",
+      title: "Tienda Virtual Headless (WooCommerce)",
       price: "Desde $1,300,000 COP",
       features: [
-        "Backend Woo (Fácil Gestión)",
-        "Frontend Next.js (Velocidad Extrema)",
-        "Sin Plantillas (Código a Medida)",
-        "Migración a Headless Commerce",
+        "Frontend Next.js para Woo (Velocidad)",
+        "Acelerar Tienda WooCommerce",
+        "Rediseño Tienda Virtual a Medida",
+        "Transformación a Headless Commerce",
         "Pasarelas de Pago Colombia",
-        "API WooCommerce con React",
-        "SEO Transaccional",
-        "Soporte Continuo",
+        "Migración sin perder datos",
+        "SEO Técnico Avanzado",
+        "Soporte de Evolución",
       ],
-      cta: "Seleccionar",
-      whatsapp_message: "Hola, busco una Tienda Headless WooCommerce de Alto Rendimiento.",
+      cta: "Acelerar mi Tienda",
+      whatsapp_message: "Hola, quiero modernizar y acelerar mi tienda WooCommerce.",
     },
     custom: {
       title: "Software a Medida",

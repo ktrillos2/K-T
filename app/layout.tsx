@@ -48,8 +48,18 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     title: "K&T CRM",
   },
-  // 3. KEYWORDS: Híbridas (Headless WooCommerce + High Performance)
-  keywords: ["Headless WooCommerce", "Next.js para WooCommerce", "WooCommerce de Alto Rendimiento", "Desarrollo Software a Medida", "K&T"],
+  // 3. KEYWORDS: Definitive Strategy (Headless + Modernization + Authority)
+  keywords: [
+    "Headless WooCommerce",
+    "Next.js para WooCommerce",
+    "Modernización E-commerce",
+    "WooCommerce de Alto Rendimiento",
+    "Desarrollo Software a Medida",
+    "Agencia React",
+    "Expertos en Woo",
+    "Optimización Web WPO",
+    "K&T",
+  ],
   authors: [{ name: "K&T Agencia Digital", url: "https://www.kytcode.lat" }],
   creator: "K&T Agencia Digital",
   publisher: "K&T Agencia Digital",
