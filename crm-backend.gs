@@ -48,6 +48,30 @@ function doPost(e) {
        }
     }
 
+    // --- ACCIÓN: ACTUALIZAR NOTAS (New Feature) ---
+    if (data.action === 'update_notes') {
+       if (!data.key || data.key !== 'K_AND_T_SECURE_2025') {
+          return ContentService.createTextOutput(JSON.stringify({ status: 'error', message: 'Invalid Key' })).setMimeType(ContentService.MimeType.JSON);
+       }
+       const idToUpdate = data.id;
+       const newNotes = data.notes; // Esperamos el texto de la nota
+       const rows = sheet.getDataRange().getValues();
+       let found = false;
+       for (let i = 1; i < rows.length; i++) {
+         if (rows[i][0] == idToUpdate) {
+           // Asumiendo que las notas van en la columna 9 (Índice 8 -> Columna I)
+           sheet.getRange(i + 1, 9).setValue(newNotes);
+           found = true;
+           break;
+         }
+       }
+       if (found) {
+         return ContentService.createTextOutput(JSON.stringify({ status: 'success' })).setMimeType(ContentService.MimeType.JSON);
+       } else {
+         return ContentService.createTextOutput(JSON.stringify({ status: 'error', message: 'ID not found' })).setMimeType(ContentService.MimeType.JSON);
+       }
+    }
+
     // --- ACCIÓN: CREAR LEAD (Default) ---
     const findValue = (obj, keys) => {
       const foundKey = Object.keys(obj).find(k => keys.includes(k.toLowerCase()));
@@ -108,7 +132,8 @@ function doGet(e) {
         estado: row[4] || 'Nuevo',
         fecha: row[5],
         telefono: (row[6] || '').toString(), 
-        email: row[7] || '' 
+        email: row[7] || '',
+        notas: row[8] || '' // Columna 9 (I)
     }));
 
     return ContentService.createTextOutput(JSON.stringify({ status: 'success', data: leads })).setMimeType(ContentService.MimeType.JSON);

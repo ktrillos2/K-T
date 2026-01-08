@@ -5,12 +5,14 @@ import { Lead, LeadStatus } from '@/types/crm';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent } from '@/components/ui/collapsible';
+import { updateLeadStatusAction, updateLeadNotesAction } from '@/app/actions/crm';
+import { toast } from 'sonner';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { MessageCircle, ChevronDown, Calendar, Phone, Zap, ShoppingCart, Loader2 } from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
+import { NotebookPen, Save, Loader2, MessageCircle, ChevronDown, Calendar, Phone, Zap, ShoppingCart } from 'lucide-react';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { updateLeadStatusAction } from '@/app/actions/crm';
-import { toast } from 'sonner';
 
 interface LeadCardProps {
     lead: Lead;
@@ -22,6 +24,9 @@ interface LeadCardProps {
 export function LeadCard({ lead, onStatusUpdate, isOpen, onToggle }: LeadCardProps) {
     const [updating, setUpdating] = useState(false);
     const [status, setStatus] = useState<LeadStatus>(lead.estado as LeadStatus || 'Nuevo');
+    const [notesOpen, setNotesOpen] = useState(false);
+    const [notes, setNotes] = useState(lead.notas || '');
+    const [savingNotes, setSavingNotes] = useState(false);
 
     // --- Helpers ---
     const formatDate = (dateString: string) => {
@@ -72,6 +77,19 @@ export function LeadCard({ lead, onStatusUpdate, isOpen, onToggle }: LeadCardPro
         setUpdating(false);
     };
 
+    const handleSaveNotes = async () => {
+        setSavingNotes(true);
+        const res = await updateLeadNotesAction(lead.id, notes);
+        if (res.success) {
+            toast.success('Nota guardada');
+            setNotesOpen(false);
+            // Optionally trigger a refresh or just rely on local state if we don't need full reload
+        } else {
+            toast.error('Error al guardar nota');
+        }
+        setSavingNotes(false);
+    };
+
     const getCountryAndPriceInfo = (phone: string) => {
         const cleanPhone = phone?.replace(/\D/g, '') || '';
         let country = { name: 'Internacional', flag: '🌎', code: 'INT', tier: 'HIGH' };
@@ -91,7 +109,7 @@ export function LeadCard({ lead, onStatusUpdate, isOpen, onToggle }: LeadCardPro
         return country;
     };
 
-    const countryInfo = getCountryAndPriceInfo(lead.telefono);
+    const countryInfo = getCountryAndPriceInfo(lead.telefono || '');
 
     const getPrices = (tier: string) => {
         switch (tier) {
@@ -246,11 +264,49 @@ export function LeadCard({ lead, onStatusUpdate, isOpen, onToggle }: LeadCardPro
                                         <span className="truncate">Reunión</span>
                                     </Button>
                                 </div>
+                                <div className="mt-2">
+                                    <Button
+                                        variant="secondary"
+                                        size="sm"
+                                        className="w-full text-xs h-8 flex items-center justify-center gap-2"
+                                        onClick={() => setNotesOpen(true)}
+                                    >
+                                        <NotebookPen className="h-3.5 w-3.5 text-muted-foreground" />
+                                        <span>{lead.notas ? 'Ver/Editar Notas' : 'Agregar Nota'}</span>
+                                        {lead.notas && <span className="flex h-1.5 w-1.5 rounded-full bg-blue-500" />}
+                                    </Button>
+                                </div>
                             </div>
                         </CardContent>
                     </CollapsibleContent>
                 </Collapsible>
             </div>
+
+            <Dialog open={notesOpen} onOpenChange={setNotesOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Notas del Lead</DialogTitle>
+                        <DialogDescription>
+                            {lead.nombre} - {interestLabel}
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="py-4">
+                        <Textarea
+                            placeholder="Escribe notas, observaciones o detalles importantes aquí..."
+                            className="min-h-[150px]"
+                            value={notes}
+                            onChange={(e) => setNotes(e.target.value)}
+                        />
+                    </div>
+                    <DialogFooter>
+                        <Button variant="outline" onClick={() => setNotesOpen(false)}>Cancelar</Button>
+                        <Button onClick={handleSaveNotes} disabled={savingNotes}>
+                            {savingNotes ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <Save className="h-4 w-4 mr-2" />}
+                            Guardar Nota
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
 
             <CardFooter className="!p-0 mt-auto border-t" onClick={(e) => e.stopPropagation()}>
                 <Select value={status} onValueChange={handleStatusChange} disabled={updating}>

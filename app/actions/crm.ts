@@ -125,3 +125,39 @@ export async function updateLeadStatusAction(id: string, newStatus: string): Pro
         return { success: false, error: 'Connection Error' };
     }
 }
+
+export async function updateLeadNotesAction(id: string, notes: string): Promise<{ success: boolean; error?: string }> {
+    if (!GOOGLE_SCRIPT_URL) return { success: false, error: 'Config Error' };
+
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+                action: 'update_notes',
+                key: process.env.CR_SECRET_KEY,
+                id: id,
+                notes: notes
+            }),
+            headers: { 'Content-Type': 'application/json' },
+            cache: 'no-store'
+        });
+
+        const text = await response.text();
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (e) {
+            return { success: false, error: 'Invalid JSON from GAS' };
+        }
+
+        if (data.status === 'success') {
+            return { success: true };
+        } else {
+            return { success: false, error: data.message || 'Error updating notes' };
+        }
+
+    } catch (error) {
+        console.error('Update Notes Error:', error);
+        return { success: false, error: 'Connection Error' };
+    }
+}

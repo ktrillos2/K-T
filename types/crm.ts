@@ -7,6 +7,7 @@ export interface Lead {
   fecha: string;
   telefono?: string;
   email?: string;
+  notas?: string;
 }
 
 
