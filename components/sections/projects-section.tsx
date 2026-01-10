@@ -1,15 +1,15 @@
 "use client"
 
-import type React from "react"
-
 import { useState, useRef, useCallback, useEffect } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion"
 import { ArrowUpRight, MousePointer2 } from "lucide-react"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
+import { projects as projectData } from "@/lib/projects"
 
 // Animation simulating a mouse click
 const ClickAnimation = ({ text }: { text: string }) => (
@@ -52,68 +52,24 @@ const ClickAnimation = ({ text }: { text: string }) => (
   </motion.div>
 )
 
-const projects = [
-  {
-    id: -4,
-    titleEn: "Eklipse Home Textil",
-    titleEs: "Eklipse Home Textil",
-    descEn: "Premium fabric catalog and sales",
-    descEs: "Catálogo Digital PWA de Alto Rendimiento",
-    image: "/images/projects/eklipse.png",
-    imageMobile: "/images/projects/eklipse-mobile.png",
-    tech: ["Next.js", "Tailwind CSS"],
-    year: "2025",
-    link: "https://www.eklipsehometextil.com",
-  },
-  {
-    id: -3,
-    titleEn: "San Roque",
-    titleEs: "San Roque",
-    descEn: "Pet spa and premium services",
-    descEs: "Web Corporativa Next.js Ultra Rápida",
-    image: "/images/projects/san-roque.png",
-    imageMobile: "/images/projects/san-roque-mobile.png",
-    tech: ["Next.js", "Tailwind CSS"],
-    year: "2025",
-    link: "https://sanroqueros.com",
-  },
-  {
-    id: 0,
-    titleEn: "Telas Real",
-    titleEs: "Telas Real",
-    descEn: "Premium fabric e-commerce platform built from scratch",
-    descEs: "E-commerce B2B Headless (Next.js + API)",
-    image: "/images/projects/telas-real.png",
-    imageMobile: "/images/projects/telas-real-mobile.png",
-    tech: ["Next.js", "Tailwind CSS"],
-    year: "2025",
-    link: "https://telasreal.com",
-  },
-  {
-    id: -1,
-    titleEn: "Redeservi Paris",
-    titleEs: "Redeservi Paris",
-    descEn: "Private transport and tourism services in Paris",
-    descEs: "Plataforma de Reservas a Medida",
-    image: "/images/projects/redeservi-paris.png",
-    imageMobile: "/images/projects/redeservi-paris-mobile.png",
-    tech: ["Next.js", "Tailwind CSS"],
-    year: "2025",
-    link: "https://redeservieuropa.com",
-  },
-  {
-    id: -2,
-    titleEn: "Chevere Bogota Travel",
-    titleEs: "Chevere Bogota Travel",
-    descEn: "Tourism and travel experiences in Bogota",
-    descEs: "Landing Page Turística Optimizada (WPO)",
-    image: "/images/projects/chevere-bogota.png",
-    imageMobile: "/images/projects/chevere-bogota-mobile.png",
-    tech: ["Next.js", "Tailwind CSS"],
-    year: "2025",
-    link: "https://cheverebogotatravel.com",
-  },
-]
+// Map the centralized data to the format expected by the component (for now)
+// In a full refactor, we would update the component to use the Project interface directly.
+const projects = projectData.map((p, i) => ({
+  id: i,
+  titleEn: p.title,
+  titleEs: p.title,
+  descEn: p.shortDescription,
+  descEs: p.shortDescription,
+  image: p.images.hero,
+  imageMobile: p.images.mobile,
+  tech: p.tech,
+  year: p.year,
+  month: p.month,
+  // Link to the internal detail page
+  link: `/projects/${p.slug}`,
+  // We keep the external link accessible if needed, but the card will link to details
+  externalLink: p.liveUrl
+}))
 
 export default function ProjectsSection() {
   const { language } = useLanguage()
@@ -319,7 +275,7 @@ function ProjectCard({ project, index, isActive, isCurrent, onHover, onLeave, la
 
             {/* Year badge */}
             <div className="absolute top-4 left-4 px-3 py-1 bg-black/50 backdrop-blur-sm rounded-full border border-white/20">
-              <span className="text-xs font-mono text-white">{project.year}</span>
+              <span className="text-xs font-mono text-white capitalize">{project.month} {project.year}</span>
             </div>
 
             {/* Hand Touch Animation Hint (Only on active slide) */}
@@ -414,9 +370,9 @@ function ProjectCard({ project, index, isActive, isCurrent, onHover, onLeave, la
 
   if (project.link) {
     return (
-      <a href={project.link} target="_blank" rel="noopener noreferrer" className="block outline-none h-full">
+      <Link href={project.link} className="block outline-none h-full">
         {CardContent}
-      </a>
+      </Link>
     )
   }
 

@@ -6,6 +6,7 @@ import * as TOTP from 'otpauth';
 
 export const { auth, signIn, signOut, handlers } = NextAuth({
     ...authConfig,
+    session: { maxAge: 86400 },
     providers: [
         Credentials({
             async authorize(credentials) {

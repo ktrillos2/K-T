@@ -16,8 +16,11 @@ export default function CountrySelector() {
     const { setCountry, setIsAppReady } = useLanguage()
 
     useEffect(() => {
-        // Only show if we are on the home page
-        if (pathname === "/") {
+        // Check for stored country preference
+        const storedCountry = typeof window !== 'undefined' ? localStorage.getItem("user_country") : null
+
+        // Only show if we are on the home page AND no country is stored
+        if (pathname === "/" && !storedCountry) {
             setIsVisible(true)
             setShowContent(true)
             setIsAppReady(false)
