@@ -72,15 +72,9 @@ export const metadata: Metadata = {
     title: "K&T - Desarrollo Web y Gestión de Redes en Colombia",
     description: "Agencia digital en Colombia. Desarrollo web, e-commerce, landing pages y gestión de redes sociales.",
     url: "https://www.kytcode.lat",
+
+
     siteName: "K&T Agencia Digital",
-    images: [
-      {
-        url: "https://www.kytcode.lat/images/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "K&T Agencia Digital - Desarrollo Web y Redes Sociales",
-      },
-    ],
     locale: "es_CO",
     type: "website",
   },
@@ -88,8 +82,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "K&T - Desarrollo Web y Gestión de Redes en Colombia",
     description: "Agencia digital en Colombia. Desarrollo web, e-commerce, landing pages y gestión de redes sociales.",
+
     creator: "@kytweb",
-    images: ["https://www.kytcode.lat/images/og-image.png"],
   },
   robots: {
     index: true,
