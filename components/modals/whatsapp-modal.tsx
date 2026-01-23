@@ -8,6 +8,7 @@ import { projects } from "@/lib/projects"
 import Image from "next/image"
 import { ArrowLeft, ArrowRight, Check, X, Phone, User, Globe, MessageSquare, Info } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { usePricing, type PlanType } from "@/hooks/use-pricing"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -15,6 +16,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { countryCodes } from "@/lib/country-codes"
 import { sendLeadEmail } from "@/app/actions/send-lead"
 import { identifyTikTokUser } from "@/lib/tiktok-client"
+import { getOrSetExternalId } from "@/lib/cookie-utils"
 import { toast } from "sonner"
 
 import { useRouter } from "next/navigation"
@@ -29,8 +31,9 @@ interface WhatsAppModalProps {
 type Step = "projects" | "form" | "pricing"
 
 export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
-    const [step, setStep] = useState<Step>("projects")
+    const [step, setStep] = useState<Step>("form")
     const { dictionary, language, convertPrice, country } = useLanguage()
+    const { getPrice } = usePricing()
     const router = useRouter()
 
     // Form State
@@ -79,7 +82,7 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
 
     useEffect(() => {
         if (isOpen) {
-            setStep("projects")
+            setStep("form")
             // Set default phone code based on detected country
             const code = countryCodes.find(c => c.name === country)?.code || "+57"
             setFormData(prev => ({ ...prev, phoneCode: code }))
@@ -103,30 +106,35 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
         setFormData({ ...formData, service })
 
         // Calculate Price Logic
-        let basePriceUSD = 0
+        // We now rely on visual display from usePricing, but for the email we still need a string
+        // We will calculate it right before sending the email to ensure it matches current state if needed
+        // or just rely on the static text for now, but to be safe let's map it.
 
-        switch (service) {
-            case "web-dev":
-                basePriceUSD = 200
-                break
-            case "landing":
-                basePriceUSD = 150
-                break
-            case "ecommerce":
-                basePriceUSD = 400
-                break
-            case "ecommerce":
-                basePriceUSD = 400
-                break
-            case "social":
-                basePriceUSD = 150
-                break
-            default:
-                basePriceUSD = 0
-        }
+        let calculated = ""
 
-        setCalculatedPrice(convertPrice(basePriceUSD))
+        // Map service to pricing plan
+        let plan: PlanType = "custom"
+        if (service === "landing") plan = "landing"
+        else if (service === "ecommerce") plan = "ecommerce"
+        else if (service === "social") plan = "social"
+        else plan = "custom" // web-dev, other
+
+        calculated = getPrice(plan)
+        setCalculatedPrice(calculated)
     }
+
+    // Sync price when country changes
+    useEffect(() => {
+        if (formData.service) {
+            let plan: PlanType = "custom"
+            if (formData.service === "landing") plan = "landing"
+            else if (formData.service === "ecommerce") plan = "ecommerce"
+            else if (formData.service === "social") plan = "social"
+            else plan = "custom"
+
+            setCalculatedPrice(getPrice(plan))
+        }
+    }, [country, formData.service, getPrice])
 
     const handleFinalSubmit = async () => {
         const fullPhone = `${formData.phoneCode}${formData.phoneNumber}`
@@ -228,7 +236,7 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
                     </button>
 
                     {/* Back Button */}
-                    {step !== "projects" && (
+                    {step === "pricing" && (
                         <button onClick={handleBack} className="absolute top-4 left-4 text-white/50 hover:text-white z-20">
                             <ArrowLeft size={24} />
                         </button>
@@ -236,66 +244,7 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
 
                     <div className="p-6 pt-14 md:p-8 md:pt-14">
 
-                        {/* STEP 1: PROJECT SHOWCASE */}
-                        {step === "projects" && (
-                            <div className="space-y-6 text-center">
-                                <h3 className="text-2xl font-title font-bold text-white">¿Ya viste nuestros proyectos?</h3>
 
-                                {/* Embla Carousel */}
-                                <div className="overflow-hidden" ref={emblaRef}>
-                                    <div className="flex touch-pan-y -ml-4 items-center">
-                                        {projects.map((project, index) => (
-                                            <div className="flex-[0_0_70%] min-w-0 pl-4 relative" key={project.id}>
-                                                <div
-                                                    onClick={() => window.open(project.liveUrl, "_blank")}
-                                                    className={`
-                                    relative aspect-video w-full rounded-xl overflow-hidden border border-white/10 group cursor-pointer
-                                    transition-all duration-500 ease-out
-                                    ${index === currentProject ? 'scale-100 opacity-100 shadow-xl shadow-black/50' : 'scale-90 opacity-40 blur-[1px]'}
-                                `}>
-                                                    <Image
-                                                        src={project.images.hero}
-                                                        alt={project.title}
-                                                        fill
-                                                        className="object-cover"
-                                                    />
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-4 text-left">
-                                                        <h4 className="text-white font-bold text-lg">{project.title}</h4>
-                                                        <p className="text-white/70 text-sm font-mono">{project.month} {project.year}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <Button
-                                    className="bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-full px-6 transition-all transform hover:scale-105"
-                                    onClick={() => window.open(projects[currentProject].liveUrl, "_blank")}
-                                >
-                                    Visitar sitio web <Globe size={16} className="ml-2" />
-                                </Button>
-
-                                <div className="flex flex-col md:flex-row gap-4 pt-4">
-                                    <Button
-                                        variant="ghost"
-                                        className="flex-1 border border-white/20 hover:bg-white/10"
-                                        onClick={() => {
-                                            onClose()
-                                            router.push("/#work")
-                                        }}
-                                    >
-                                        No, quiero ver más
-                                    </Button>
-                                    <Button
-                                        className="flex-1 bg-green-600 hover:bg-green-700 text-white"
-                                        onClick={() => setStep("form")}
-                                    >
-                                        Sí, quiero empezar
-                                    </Button>
-                                </div>
-                            </div>
-                        )}
 
                         {/* STEP 2: LEAD FORM */}
                         {step === "form" && (
@@ -434,13 +383,7 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
 
                                     <p className="text-white/60 text-sm mb-2">Precio estimado desde</p>
                                     <div className="text-4xl md:text-5xl font-bold text-primary font-title">
-                                        {country === "Colombia"
-                                            ? (formData.service === 'web-dev' ? '$700.000 COP' :
-                                                formData.service === 'landing' ? '$450.000 COP' :
-                                                    formData.service === 'ecommerce' ? '$1.300.000 COP' :
-                                                        '$400.000 COP')
-                                            : calculatedPrice
-                                        }
+                                        {calculatedPrice}
                                     </div>
                                     {country !== "Colombia" && (
                                         <p className="text-xs text-white/40 mt-2">Moneda local aproximada ({country})</p>

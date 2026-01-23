@@ -1,11 +1,10 @@
 "use client"
 
-import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useCursor } from "@/context/cursor-context"
 import { useLanguage } from "@/context/language-context"
+import { useModal } from "@/context/modal-context"
 import { MessageSquareText } from "lucide-react"
-import WhatsAppModal from "@/components/modals/whatsapp-modal"
 import { trackTikTokEvent } from "@/app/actions/tiktok"
 
 
@@ -13,7 +12,7 @@ export default function WhatsAppButton() {
   const { setCursorVariant } = useCursor()
   // @ts-ignore - dictionary might not have new keys yet
   const { dictionary } = useLanguage()
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const { openModal } = useModal()
 
   return (
     <>
@@ -21,7 +20,7 @@ export default function WhatsAppButton() {
         <motion.button
           key="whatsapp-btn"
           onClick={() => {
-            setIsModalOpen(true)
+            openModal()
             trackTikTokEvent("ClickButton", {
               content_name: "Open WhatsApp Modal",
               content_type: "button"
@@ -71,8 +70,6 @@ export default function WhatsAppButton() {
           </div>
         </motion.button>
       </AnimatePresence>
-
-      <WhatsAppModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   )
 }

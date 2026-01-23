@@ -9,6 +9,7 @@ import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
 import { reportConversion } from "@/lib/gtag"
 import { usePricing } from "@/hooks/use-pricing"
+import { useModal } from "@/context/modal-context"
 
 const plans = ["landing", "ecommerce", "custom"] as const
 
@@ -25,6 +26,7 @@ const ServiceCard = memo(function ServiceCard({
   index,
   setCursorVariant,
   dictionary,
+  onSelect
 }: {
   plan: (typeof plans)[number]
   planData: { title: string; price: string; features: string[]; cta: string }
@@ -32,6 +34,7 @@ const ServiceCard = memo(function ServiceCard({
   index: number
   setCursorVariant: (v: "default" | "text" | "hover") => void
   dictionary: any
+  onSelect: () => void
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const Icon = planIcons[plan]
@@ -169,21 +172,16 @@ const ServiceCard = memo(function ServiceCard({
         </ul>
 
         {/* Interactive CTA Button with ripple effect */}
-        <motion.a
-          href={`https://wa.me/573116360057?text=${encodeURIComponent(
-            // @ts-ignore
-            planData.whatsapp_message || "Hola, me gustaría recibir más información."
-          )}`}
-          target="_blank"
-          rel="noopener noreferrer"
+        <motion.button
           onClick={(e) => {
             e.preventDefault()
+            onSelect()
             reportConversion(`https://wa.me/573116360057?text=${encodeURIComponent(
               // @ts-ignore
               planData.whatsapp_message || "Hola, me gustaría recibir más información."
             )}`)
           }}
-          className="w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold bg-white text-black relative overflow-hidden group"
+          className="w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold bg-white text-black relative overflow-hidden group cursor-pointer"
           onMouseEnter={() => setCursorVariant("hover")}
           onMouseLeave={() => setCursorVariant("default")}
           whileHover={{ scale: 1.03, boxShadow: "0 0 30px rgba(255,255,255,0.2)" }}
@@ -205,7 +203,7 @@ const ServiceCard = memo(function ServiceCard({
           >
             <ArrowRight className="w-5 h-5" />
           </motion.span>
-        </motion.a>
+        </motion.button>
       </div>
     </motion.div>
   )
@@ -215,6 +213,7 @@ export default function ServicesSection() {
   const { dictionary } = useLanguage()
   const { setCursorVariant } = useCursor()
   const { getPrice } = usePricing()
+  const { openModal } = useModal()
 
   return (
     <section id="services" className="relative pt-0 pb-16 lg:pt-0 lg:pb-24 px-6 bg-black overflow-hidden cv-auto">
@@ -262,6 +261,7 @@ export default function ServicesSection() {
                 index={index}
                 setCursorVariant={setCursorVariant}
                 dictionary={dictionary}
+                onSelect={() => openModal(plan)}
               />
             )
           })}

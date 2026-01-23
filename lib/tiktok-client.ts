@@ -42,7 +42,7 @@ export async function identifyTikTokUser(userData: {
         // E.164 cleaner
         const phone = userData.phone.replace(/[^\d+]/g, "")
         if (phone.length > 5) {
-            identityParams.phone = await sha256(phone)
+            identityParams.phone_number = await sha256(phone)
         }
     }
 

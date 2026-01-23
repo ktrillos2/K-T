@@ -65,10 +65,16 @@ export default function CountrySelector() {
                             {/* Header Section */}
                             <div className="text-center space-y-6">
                                 {/* Replaced gradient with font-title and solid color */}
-                                <h2 className="text-4xl md:text-6xl font-title font-bold text-foreground">
+                                <h2
+                                    className="text-4xl md:text-6xl font-title font-bold text-foreground"
+                                    data-clarity-unmask="true"
+                                >
                                     ¿De qué país nos visitas?
                                 </h2>
-                                <p className="text-xl md:text-2xl text-white font-title">
+                                <p
+                                    className="text-xl md:text-2xl text-white font-title"
+                                    data-clarity-unmask="true"
+                                >
                                     Selecciona tu ubicación para continuar
                                 </p>
                                 <div className="md:hidden flex flex-col items-center gap-1 text-white/60">
@@ -119,6 +125,8 @@ export default function CountrySelector() {
                                                     "group relative overflow-hidden"
                                                 )}
                                                 onClick={() => handleSelectCountry(country.name)}
+                                                data-clarity-unmask="true"
+                                                data-clarity-action={`Select Country: ${country.name}`}
                                             >
                                                 {/* Subtle Background Glow */}
                                                 <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
@@ -136,7 +144,10 @@ export default function CountrySelector() {
 
                                                 {/* Country Code & Name */}
                                                 <div className="relative z-10 flex flex-col items-center gap-1">
-                                                    <span className="font-title text-lg font-bold text-foreground group-hover:text-primary transition-colors text-wrap text-center">
+                                                    <span
+                                                        className="font-title text-lg font-bold text-foreground group-hover:text-primary transition-colors text-wrap text-center"
+                                                        data-clarity-unmask="true"
+                                                    >
                                                         {country.name}
                                                     </span>
                                                 </div>

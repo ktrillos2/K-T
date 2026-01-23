@@ -15,6 +15,7 @@ interface LeadData {
   service: string
   priceQuote: string
   contactPreference: "whatsapp" | "call"
+  externalId?: string
 }
 
 const getServiceName = (key: string) => {
@@ -71,11 +72,7 @@ export async function sendLeadEmail(data: LeadData) {
       event_name: "Lead",
       user: {
         phone: phone,
-        // name is not standard user_data for matching but can be property if needed? 
-        // TikTok matching relies on email/phone/external_id. 
-        // We don't have email in this form data? 
-        // Ah, formData doesn't have email in the UI shown! 
-        // Just phone.
+        external_id: data.externalId
       },
       properties: {
         value: 0, // Or estimate value?

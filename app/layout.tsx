@@ -9,10 +9,14 @@ import { LanguageProvider } from "@/context/language-context"
 import { CursorProvider } from "@/context/cursor-context"
 import Header from "@/components/layout/header"
 import CustomCursor from "@/components/ui/custom-cursor"
-import WhatsAppButton from "@/components/ui/whatsapp-button"
 import CountrySelector from "@/components/layout/country-selector"
 import ContentWrapper from "@/components/layout/content-wrapper"
 import { Toaster } from "@/components/ui/sonner"
+import WhatsAppButton from "@/components/ui/whatsapp-button"
+import Wrapper from "@/components/layout/global-modal-wrapper"
+import { ModalProvider } from "@/context/modal-context"
+
+
 
 
 import GoogleAnalytics from "@/components/analytics/google-analytics"
@@ -226,13 +230,16 @@ export default function RootLayout({
         </noscript>
         <LanguageProvider>
           <CursorProvider>
-            <CountrySelector />
-            <CustomCursor />
-            <ContentWrapper>
-              <Header />
-              <main>{children}</main>
-              <WhatsAppButton />
-            </ContentWrapper>
+            <ModalProvider>
+              <CountrySelector />
+              <CustomCursor />
+              <ContentWrapper>
+                <Header />
+                <main>{children}</main>
+                <WhatsAppButton />
+                <Wrapper />
+              </ContentWrapper>
+            </ModalProvider>
           </CursorProvider>
         </LanguageProvider>
         <script

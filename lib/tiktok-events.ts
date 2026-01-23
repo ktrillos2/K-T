@@ -38,9 +38,6 @@ interface TikTokEventData {
 /**
  * SHA256 helper for TikTok userdata hashing
  * TikTok requires email/phone to be lowercased and then hashed if not sent as plain text.
- * However, the Events API docs often allow sending plain text over HTTPS.
- * Best practice: verify if TikTok API expects hashed data.
- * The standard for pixel/server events usually recommends hashing emails and phones.
  */
 function sha256(value: string): string {
     return createHash("sha256").update(value).digest("hex")
@@ -65,49 +62,24 @@ export async function sendTikTokEvent(eventData: TikTokEventData) {
 
 
         // Email hashing
-        // Validate it's not empty string
         if (eventData.user?.email && eventData.user.email.trim() !== "") {
             const email = eventData.user.email.trim().toLowerCase()
-            // It's safer to always hash PII for server events if uncertain, 
-            // but some specific integrations allow plaintext. 
-            // TikTok documents say: "The email address... should be hashed using SHA-256."
             userPayload.email = sha256(email)
         }
 
 
         // Phone hashing
-        // Validate it's not empty string
         if (eventData.user?.phone && eventData.user.phone.trim() !== "") {
-            // E.164 format recommended before hashing: +[country code][number]
-            // Remove all non-numeric chars except leading +
             const phone = eventData.user.phone.replace(/[^\d+]/g, "")
-            if (phone.length > 5) { // Basic length check
-                userPayload.phone = sha256(phone)
+            if (phone.length > 5) {
+                userPayload.phone_number = sha256(phone)
             }
         }
 
-
-        const payload = {
-            pixel_code: TIKTOK_PIXEL_ID,
-            event: eventData.event_name,
-            event_time: timestamp,
-            event_id: eventData.event_id,
-            user: userPayload,
-            properties: eventData.properties,
-            context: {
-                page: {
-                    url: eventData.page?.url,
-                    referrer: eventData.page?.referrer
-                },
-                ...eventData.user // IP and User Agent often go in context or user object depending on version
-            }
-            // Note: Structure varies slightly by API version. 
-            // v1.3 /event/track/ usually takes a list of events "data": [...]
-        }
-
-        // Correct structure for batch endpoint (even for single event)
+        // Correct structure for batch endpoint
         const requestBody = {
             pixel_code: TIKTOK_PIXEL_ID,
+            event_source_id: TIKTOK_PIXEL_ID,
             event_source: "web",
             data: [
                 {

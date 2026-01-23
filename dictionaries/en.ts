@@ -101,6 +101,13 @@ export const en = {
     title: "Our Work",
     subtitle: "// Recent projects",
   },
+  international: {
+    title: "No Borders",
+    subtitle: "// Global Mindset",
+    description: "Although we are based in Colombia, our code travels the world. We work with clients across Latin America and the United States.",
+    activeClients: "Active Clients",
+    americas: "The Americas"
+  },
   contact: {
     title: "Let's Connect",
     subtitle: "// Ready to build something amazing?",

@@ -101,6 +101,13 @@ export const es = {
     title: "Portafolio de Desarrollo Web",
     subtitle: "// Desarrollo de Software Web",
   },
+  international: {
+    title: "Sin Fronteras",
+    subtitle: "// Global Mindset",
+    description: "Aunque nuestra base está en Colombia, nuestro código viaja por todo el mundo. Trabajamos con clientes en toda Latinoamérica y Estados Unidos.",
+    activeClients: "Clientes Activos",
+    americas: "Las Américas"
+  },
   contact: {
     title: "Cotiza tu Proyecto Web",
     subtitle: "// ¿Listo para construir algo increíble?",

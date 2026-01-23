@@ -97,14 +97,21 @@ import {
 } from "@/components/ui/select"
 import { countryCodes } from "@/lib/country-codes"
 import { usePricing, type PlanType } from "@/hooks/use-pricing"
+import { useEffect } from "react"
 
 export default function ContactSection() {
-  const { dictionary } = useLanguage()
+  const { dictionary, country } = useLanguage()
   const { setCursorVariant } = useCursor()
   const { getPrice } = usePricing()
 
   const [selectedService, setSelectedService] = useState<string | null>(null)
   const [countryCode, setCountryCode] = useState("+57")
+
+  useEffect(() => {
+    const code = countryCodes.find(c => c.name === country)?.code || "+57"
+    setCountryCode(code)
+  }, [country])
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
