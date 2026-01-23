@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { sendTikTokEvent } from '@/lib/tiktok-events';
+
 
 export async function POST(req: Request) {
   try {
@@ -162,7 +164,32 @@ export async function POST(req: Request) {
 
     await transporter.sendMail(mailOptions);
 
+    // Track TikTok Event
+    // Get IP and User Agent from request if possible
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || "";
+    const userAgent = req.headers.get("user-agent") || "";
+    const referer = req.headers.get("referer") || "";
+
+    // Contact form has name, phone, message, service. 
+    // We can use phone for matching.
+    await sendTikTokEvent({
+      event_name: "Contact",
+      user: {
+        phone: phone, // variable from scope
+        ip,
+        user_agent: userAgent
+      },
+      page: {
+        url: referer,
+        referrer: referer
+      },
+      properties: {
+        content_name: service || "General Contact",
+      }
+    });
+
     return NextResponse.json({ success: true, message: 'Email passed to delivery provider' });
+
   } catch (error) {
     console.error('Error sending email:', error);
     return NextResponse.json({ success: false, error: error instanceof Error ? error.message : 'Unknown error', details: error }, { status: 500 });

@@ -1,6 +1,8 @@
 "use server"
 
 import { Resend } from "resend"
+import { sendTikTokEvent } from "@/lib/tiktok-events"
+
 
 // Using the provided API key directly as requested. 
 // Ideally this should be in process.env.RESEND_API_KEY
@@ -65,7 +67,26 @@ export async function sendLeadEmail(data: LeadData) {
       `,
     })
 
+    await sendTikTokEvent({
+      event_name: "Lead",
+      user: {
+        phone: phone,
+        // name is not standard user_data for matching but can be property if needed? 
+        // TikTok matching relies on email/phone/external_id. 
+        // We don't have email in this form data? 
+        // Ah, formData doesn't have email in the UI shown! 
+        // Just phone.
+      },
+      properties: {
+        value: 0, // Or estimate value?
+        currency: "COP",
+        content_name: serviceName,
+        content_type: "product",
+      }
+    })
+
     return { success: true }
+
   } catch (error) {
     console.error("Error sending email:", error)
     return { success: false, error: "Failed to send email" }

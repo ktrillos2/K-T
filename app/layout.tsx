@@ -19,6 +19,8 @@ import GoogleAnalytics from "@/components/analytics/google-analytics"
 import TiktokPixel from "@/components/analytics/tiktok-pixel"
 import MicrosoftClarity from "@/components/analytics/microsoft-clarity"
 import GoogleTagManager from "@/components/analytics/google-tag-manager"
+import TikTokEventsTracker from "@/components/analytics/tiktok-events-tracker"
+
 
 const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-fira" })
 const vt323 = VT323({ weight: "400", subsets: ["latin"], variable: "--font-vt323" })
@@ -242,7 +244,9 @@ export default function RootLayout({
 
         <GoogleAnalytics />
         <TiktokPixel />
+        <TikTokEventsTracker />
         <MicrosoftClarity />
+
         <GoogleTagManager />
         <Toaster />
       </body>

@@ -6,6 +6,8 @@ import { useCursor } from "@/context/cursor-context"
 import { useLanguage } from "@/context/language-context"
 import { MessageSquareText } from "lucide-react"
 import WhatsAppModal from "@/components/modals/whatsapp-modal"
+import { trackTikTokEvent } from "@/app/actions/tiktok"
+
 
 export default function WhatsAppButton() {
   const { setCursorVariant } = useCursor()
@@ -18,7 +20,14 @@ export default function WhatsAppButton() {
       <AnimatePresence>
         <motion.button
           key="whatsapp-btn"
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => {
+            setIsModalOpen(true)
+            trackTikTokEvent("ClickButton", {
+              content_name: "Open WhatsApp Modal",
+              content_type: "button"
+            })
+          }}
+
           className="fixed bottom-6 right-6 z-50 group flex items-center justify-end"
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
