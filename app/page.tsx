@@ -5,6 +5,8 @@ import ProjectsSection from "@/components/sections/projects-section"
 import ContactSection from "@/components/sections/contact-section"
 import Footer from "@/components/layout/footer"
 
+export const revalidate = 60;
+
 export default function Home() {
   return (
     <>
