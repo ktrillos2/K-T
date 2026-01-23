@@ -224,7 +224,7 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
                         </button>
                     )}
 
-                    <div className="p-6 md:p-8">
+                    <div className="p-6 pt-14 md:p-8 md:pt-14">
 
                         {/* STEP 1: PROJECT SHOWCASE */}
                         {step === "projects" && (
@@ -266,7 +266,7 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
                                     Visitar sitio web <Globe size={16} className="ml-2" />
                                 </Button>
 
-                                <div className="flex gap-4 pt-4">
+                                <div className="flex flex-col md:flex-row gap-4 pt-4">
                                     <Button
                                         variant="ghost"
                                         className="flex-1 border border-white/20 hover:bg-white/10"

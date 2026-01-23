@@ -28,7 +28,7 @@ export default function WhatsAppButton() {
         >
           {/* Label Container */}
           <motion.div
-            className="bg-white text-black px-4 py-2 rounded-l-full rounded-tr-full shadow-lg mr-3 hidden md:block origin-right"
+            className="bg-white text-black px-4 py-2 rounded-l-full rounded-tr-full shadow-lg mr-3 block origin-right"
             initial={{ opacity: 0, x: 10, scale: 0.8 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ delay: 2 }}
