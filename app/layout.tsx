@@ -18,6 +18,7 @@ import { Toaster } from "@/components/ui/sonner"
 import GoogleAnalytics from "@/components/analytics/google-analytics"
 import TiktokPixel from "@/components/analytics/tiktok-pixel"
 import MicrosoftClarity from "@/components/analytics/microsoft-clarity"
+import GoogleTagManager from "@/components/analytics/google-tag-manager"
 
 const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-fira" })
 const vt323 = VT323({ weight: "400", subsets: ["latin"], variable: "--font-vt323" })
@@ -213,6 +214,14 @@ export default function RootLayout({
       <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
       <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="" />
       <body className={`${firaCode.variable} ${vt323.variable} ${pressStart2P.variable} ${ariW9500.variable} font-mono antialiased`}>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-WZJSH8FV"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <LanguageProvider>
           <CursorProvider>
             <CountrySelector />
@@ -234,6 +243,7 @@ export default function RootLayout({
         <GoogleAnalytics />
         <TiktokPixel />
         <MicrosoftClarity />
+        <GoogleTagManager />
         <Toaster />
       </body>
     </html>

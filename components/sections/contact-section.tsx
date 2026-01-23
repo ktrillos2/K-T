@@ -97,7 +97,6 @@ import {
 } from "@/components/ui/select"
 import { countryCodes } from "@/lib/country-codes"
 import { usePricing, type PlanType } from "@/hooks/use-pricing"
-import { ShoppingCart, Zap, Code2, Share2, Globe } from "lucide-react"
 
 export default function ContactSection() {
   const { dictionary } = useLanguage()
