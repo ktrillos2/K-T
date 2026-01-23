@@ -16,19 +16,62 @@ export default function CountrySelector() {
     const { setCountry, setIsAppReady } = useLanguage()
 
     useEffect(() => {
-        // Check for stored country preference
-        const storedCountry = typeof window !== 'undefined' ? localStorage.getItem("user_country") : null
+        // Function to normalize country names for comparison
+        const normalizeName = (name: string) => name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-        // Only show if we are on the home page AND no country is stored
-        if (pathname === "/" && !storedCountry) {
-            setIsVisible(true)
-            setShowContent(true)
-            setIsAppReady(false)
-        } else {
-            setIsVisible(false)
-            setIsAppReady(true)
-        }
-    }, [pathname, setIsAppReady])
+        const detectCountry = async () => {
+            try {
+                // Check local storage first
+                const storedCountry = typeof window !== 'undefined' ? localStorage.getItem("user_country") : null;
+
+                if (storedCountry) {
+                    setIsVisible(false);
+                    setIsAppReady(true);
+                    return;
+                }
+
+                if (pathname === "/") {
+                    // Try to auto-detect via API
+                    const response = await fetch("/api/geo");
+                    const data = await response.json();
+
+                    if (data?.countryName) {
+                        const detectedName = normalizeName(data.countryName);
+                        // Find matching country in our list (comparing normalized names)
+                        const matchedCountry = countryCodes.find(c =>
+                            normalizeName(c.name) === detectedName
+                        );
+
+                        if (matchedCountry) {
+                            // Auto-select and don't show modal
+                            setCountry(matchedCountry.name as Country);
+                            setIsVisible(false);
+                            setIsAppReady(true);
+                            return;
+                        }
+                    }
+
+                    // Fallback to showing modal
+                    setIsVisible(true);
+                    setShowContent(true);
+                    setIsAppReady(false);
+                } else {
+                    setIsVisible(false);
+                    setIsAppReady(true);
+                }
+            } catch (error) {
+                console.error("Auto-detection failed:", error);
+                // Fallback to showing modal on error if on homepage
+                if (pathname === "/") {
+                    setIsVisible(true);
+                    setShowContent(true);
+                    setIsAppReady(false);
+                }
+            }
+        };
+
+        detectCountry();
+    }, [pathname, setIsAppReady, setCountry]);
 
     useEffect(() => {
         if (isVisible) {

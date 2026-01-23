@@ -411,13 +411,13 @@ export default function InternationalSection() {
     };
 
     return (
-        <section className="relative py-10 lg:py-5 bg-black overflow-hidden flex flex-col items-center justify-center">
+        <section className="relative py-10 !pt-0 lg:py-5 bg-black overflow-hidden flex flex-col items-center justify-center">
             {/* Background Grid for depth */}
             <div className="absolute inset-0 opacity-10 pointer-events-none">
                 <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
             </div>
 
-            <div className="w-full max-w-7xl mx-auto px-4 md:px-8 relative z-20 grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-12 items-center">
+            <div className="w-full max-w-7xl mx-auto px-4 md:px-8 relative z-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
 
                 {/* Text Content: Centered on Mobile (Order 1), Left on Desktop (Order 1) */}
                 <div className="text-center lg:text-left order-1 pt-8 lg:pt-0">
