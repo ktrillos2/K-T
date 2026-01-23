@@ -4,6 +4,7 @@ import { Fira_Code, VT323, Press_Start_2P } from "next/font/google"
 import localFont from "next/font/local"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { LazyMotion, domAnimation } from "framer-motion"
 import "./globals.css"
 import { LanguageProvider } from "@/context/language-context"
 import { CursorProvider } from "@/context/cursor-context"
@@ -228,20 +229,22 @@ export default function RootLayout({
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <LanguageProvider>
-          <CursorProvider>
-            <ModalProvider>
-              <CountrySelector />
-              <CustomCursor />
-              <ContentWrapper>
-                <Header />
-                <main>{children}</main>
-                <WhatsAppButton />
-                <Wrapper />
-              </ContentWrapper>
-            </ModalProvider>
-          </CursorProvider>
-        </LanguageProvider>
+        <LazyMotion features={domAnimation}>
+          <LanguageProvider>
+            <CursorProvider>
+              <ModalProvider>
+                <CountrySelector />
+                <CustomCursor />
+                <ContentWrapper>
+                  <Header />
+                  <main>{children}</main>
+                  <WhatsAppButton />
+                  <Wrapper />
+                </ContentWrapper>
+              </ModalProvider>
+            </CursorProvider>
+          </LanguageProvider>
+        </LazyMotion>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

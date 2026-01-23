@@ -73,21 +73,31 @@ export default function HeroSection() {
 
       ctx.font = "14px Fira Code, monospace"
 
-      const animate = () => {
-        ctx.fillStyle = "rgba(10, 10, 10, 0.1)"
-        ctx.fillRect(0, 0, canvas.width, canvas.height)
+      let lastTime = 0
+      const fps = 30 // Cap at 30fps for performance
+      const frameInterval = 1000 / fps
 
-        particles.forEach((particle) => {
-          ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`
-          ctx.fillText(particle.char, particle.x, particle.y)
+      const animate = (time: number) => {
+        const deltaTime = time - lastTime
 
-          particle.y += particle.speed
-          if (particle.y > canvas.height) {
-            particle.y = 0
-            particle.x = Math.random() * canvas.width
-            particle.char = chars[Math.floor(Math.random() * chars.length)]
-          }
-        })
+        if (deltaTime > frameInterval) {
+          lastTime = time - (deltaTime % frameInterval)
+
+          ctx.fillStyle = "rgba(10, 10, 10, 0.1)"
+          ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+          particles.forEach((particle) => {
+            ctx.fillStyle = `rgba(255, 255, 255, ${particle.opacity})`
+            ctx.fillText(particle.char, particle.x, particle.y)
+
+            particle.y += particle.speed
+            if (particle.y > canvas.height) {
+              particle.y = 0
+              particle.x = Math.random() * canvas.width
+              particle.char = chars[Math.floor(Math.random() * chars.length)]
+            }
+          })
+        }
 
         rafId = requestAnimationFrame(animate)
       }
