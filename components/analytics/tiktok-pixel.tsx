@@ -1,12 +1,37 @@
 "use client"
 
+import { usePathname, useSearchParams } from "next/navigation"
 import Script from "next/script"
+import { useEffect, useState } from "react"
 
 export default function TiktokPixel() {
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
+    const [isLoaded, setIsLoaded] = useState(false)
+
+    useEffect(() => {
+        // Esto asegura que detecte cambios de ruta (Navegación en Next.js)
+        // @ts-ignore
+        if (isLoaded && window.ttq) {
+            // @ts-ignore
+            window.ttq.page()
+        }
+    }, [pathname, searchParams, isLoaded])
+
     return (
         <Script
             id="tiktok-pixel"
-            strategy="lazyOnload"
+            // CAMBIO 1: Usa 'afterInteractive' para que cargue más rápido y no pierdas visitas de rebote
+            strategy="afterInteractive"
+            onLoad={() => {
+                setIsLoaded(true)
+                // Disparo inicial manual una vez que carga el script
+                // @ts-ignore
+                if (window.ttq) {
+                    // @ts-ignore
+                    window.ttq.page()
+                }
+            }}
             dangerouslySetInnerHTML={{
                 __html: `
           !function (w, d, t) {
@@ -15,7 +40,8 @@ export default function TiktokPixel() {
             ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
           
             ttq.load('D5PGFD3C77UAU1QU4SH0');
-            ttq.page();
+            // MANTENER COMENTADO: ttq.page(); 
+            // Lo dejamos comentado porque lo manejamos arriba con onLoad y useEffect
           }(window, document, 'ttq');
         `,
             }}
