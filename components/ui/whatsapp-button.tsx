@@ -6,6 +6,7 @@ import { useLanguage } from "@/context/language-context"
 import { useModal } from "@/context/modal-context"
 import { MessageSquareText } from "lucide-react"
 import { trackTikTokEvent } from "@/app/actions/tiktok"
+import { notifyInteraction } from "@/app/actions/notify-click"
 
 
 export default function WhatsAppButton() {
@@ -21,6 +22,7 @@ export default function WhatsAppButton() {
           key="whatsapp-btn"
           onClick={() => {
             openModal()
+            notifyInteraction("WhatsApp Button (Floating)")
             trackTikTokEvent("ClickButton", {
               content_name: "Open WhatsApp Modal",
               content_type: "button"
