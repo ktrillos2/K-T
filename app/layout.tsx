@@ -17,6 +17,7 @@ import { Toaster } from "@/components/ui/sonner"
 
 import GoogleAnalytics from "@/components/analytics/google-analytics"
 import TiktokPixel from "@/components/analytics/tiktok-pixel"
+import MicrosoftClarity from "@/components/analytics/microsoft-clarity"
 
 const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-fira" })
 const vt323 = VT323({ weight: "400", subsets: ["latin"], variable: "--font-vt323" })
@@ -232,6 +233,7 @@ export default function RootLayout({
 
         <GoogleAnalytics />
         <TiktokPixel />
+        <MicrosoftClarity />
         <Toaster />
       </body>
     </html>
