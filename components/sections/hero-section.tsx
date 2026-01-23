@@ -55,7 +55,7 @@ export default function HeroSection() {
 
     let rafId: number | null = null
     let idleId: number | null = null
-    let timeoutId: number | null = null
+    let timeoutId: NodeJS.Timeout | number | null = null
 
     const start = () => {
       // Optimize particle count based on screen size

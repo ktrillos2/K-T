@@ -1,4 +1,4 @@
-import type React from "react"
+import React from "react"
 import type { Metadata } from "next"
 import { Fira_Code, VT323, Press_Start_2P } from "next/font/google"
 import localFont from "next/font/local"
