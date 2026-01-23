@@ -31,11 +31,13 @@ export async function trackTikTokEvent(
         event_name: eventName,
         user: {
             ...userData,
+            email: userData.email || "", // Default to empty string
+            phone: userData.phone || "", // Default to empty string
             ip,
             user_agent: userAgent,
-            ttclid: userData.ttclid || ttclid,
-            external_id: userData.external_id || externalId,
-            ttp: ttp
+            ttclid: userData.ttclid || ttclid || "",
+            external_id: userData.external_id || externalId || "",
+            ttp: ttp || ""
         },
         page: {
             url: referer,

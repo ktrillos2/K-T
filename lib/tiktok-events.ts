@@ -53,20 +53,22 @@ export async function sendTikTokEvent(eventData: TikTokEventData) {
         const timestamp = eventData.event_time || Math.floor(Date.now() / 1000)
 
         // Prepare user data
-        const userPayload: any = {}
-        if (eventData.user?.ip) userPayload.ip = eventData.user.ip
-        if (eventData.user?.user_agent) userPayload.user_agent = eventData.user.user_agent
-        if (eventData.user?.ttclid) userPayload.ttclid = eventData.user.ttclid
-        if (eventData.user?.ttp) userPayload.ttp = eventData.user.ttp
-        if (eventData.user?.external_id && eventData.user.external_id !== "") userPayload.external_id = sha256(eventData.user.external_id)
-
+        // Prepare user data with explicit empty strings if missing (for EMQ)
+        const userPayload: any = {
+            ip: eventData.user?.ip || "",
+            user_agent: eventData.user?.user_agent || "",
+            ttclid: eventData.user?.ttclid || "",
+            ttp: eventData.user?.ttp || "",
+            external_id: eventData.user?.external_id ? sha256(eventData.user.external_id) : "",
+            email: "",
+            phone_number: ""
+        }
 
         // Email hashing
         if (eventData.user?.email && eventData.user.email.trim() !== "") {
             const email = eventData.user.email.trim().toLowerCase()
             userPayload.email = sha256(email)
         }
-
 
         // Phone hashing
         if (eventData.user?.phone && eventData.user.phone.trim() !== "") {

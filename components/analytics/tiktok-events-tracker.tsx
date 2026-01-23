@@ -13,6 +13,7 @@ export default function TikTokEventsTracker() {
             properties: {
                 content_name: pathname, // or page title if available
                 content_type: "product_group", // generic
+                content_id: pathname === "/" ? "home" : pathname.replace(/^\//, ""), // ensure not empty
             }
         })
     }, [pathname])

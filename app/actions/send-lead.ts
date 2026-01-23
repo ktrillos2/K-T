@@ -79,6 +79,7 @@ export async function sendLeadEmail(data: LeadData) {
         currency: "COP",
         content_name: serviceName,
         content_type: "product",
+        content_id: service || "general_lead",
       }
     })
 
