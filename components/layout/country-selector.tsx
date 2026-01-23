@@ -7,6 +7,7 @@ import { countryCodes } from "@/lib/country-codes"
 import { useLanguage, Country } from "@/context/language-context"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 /* eslint-disable @next/next/no-img-element */
 
 export default function CountrySelector() {
@@ -176,10 +177,12 @@ export default function CountrySelector() {
 
                                                 {/* Flag Image replaces emoji */}
                                                 <div className="relative z-10 w-16 h-12 md:w-20 md:h-14 shadow-md rounded overflow-hidden transform group-hover:scale-110 transition-transform duration-300">
-                                                    <img
+                                                    <Image
                                                         src={`https://flagcdn.com/w160/${country.iso}.png`}
                                                         alt={`Flag of ${country.name}`}
                                                         title={`Flag of ${country.name}`}
+                                                        width={80}
+                                                        height={56}
                                                         className="w-full h-full object-cover"
                                                         loading="lazy"
                                                     />
