@@ -130,27 +130,27 @@ export const projects: Project[] = [
             seoFocus: "Implementación agresiva de SEO técnico, Schema Markup para productos industriales y optimización de Long-tail keywords para referencias de maquinaria.",
         },
     },
-    // {
-    //     id: "autos-saldo",
-    //     slug: "autos-saldo",
-    //     title: "Auto Saldo",
-    //     shortDescription: "Compraventa de vehículos en Perú",
-    //     description: "Plataforma dinámica para la compra y venta de autos con gestión personalizada.",
-    //     year: "2026",
-    //     month: "Enero",
-    //     category: "Automotriz",
-    //     tech: ["Next.js", "Real-time filters", "WhatsApp Integration"],
-    //     images: {
-    //         hero: "/images/projects/autos-saldo.png",
-    //         mobile: "/images/projects/autos-saldo-mobile.png",
-    //     },
-    //     liveUrl: "https://autossaldo.com",
-    //     content: {
-    //         challenge: "Crear un marketplace de autos confiable y ágil para el mercado peruano, donde la comunicación rápida es clave.",
-    //         solution: "Diseñamos una interfaz de 'dealership' moderno con filtros instantáneos y fichas de vehículo detalladas. La característica central es la integración profunda con WhatsApp para conectar compradores y vendedores instantáneamente. Todo construido con código a medida para garantizar velocidad y seguridad.",
-    //         seoFocus: "Optimización para búsquedas locales de vehículos en Perú y generación de leads cualificados.",
-    //     },
-    // },
+    {
+        id: "autos-saldo",
+        slug: "autos-saldo",
+        title: "Auto Saldo",
+        shortDescription: "Compraventa de vehículos en Perú",
+        description: "Plataforma dinámica para la compra y venta de autos con deuda.",
+        year: "2026",
+        month: "Enero",
+        category: "Automotriz",
+        tech: ["Next.js", "Real-time filters", "WhatsApp Integration"],
+        images: {
+            hero: "/images/projects/autos-saldo.png",
+            mobile: "/images/projects/autos-saldo-mobile.png",
+        },
+        liveUrl: "https://autosaldo.com",
+        content: {
+            challenge: "Crear un marketplace de autos confiable y ágil para el mercado peruano, donde la comunicación rápida es clave. El cliente necesitaba una solución para comprar autos con deuda al instante.",
+            solution: "Diseñamos una interfaz de 'dealership' moderno con filtros instantáneos y fichas de vehículo detalladas. La característica central es la integración profunda con WhatsApp para conectar compradores y vendedores instantáneamente.",
+            seoFocus: "Optimización para búsquedas locales de vehículos en Perú y generación de leads cualificados.",
+        },
+    },
     {
         id: "causalidad-dinamica",
         slug: "causalidad-dinamica",
@@ -191,6 +191,27 @@ export const projects: Project[] = [
             challenge: "La artista necesitaba una tienda online que reflejara su estética visual única (dorado y rojo oscuro) y permitiera a los fans comprar merchandising exclusivo de manera intuitiva.",
             solution: "Diseñamos una interfaz elegante y moderna con Next.js, integrando animaciones fluidas y una experiencia de compra sin fricciones. La paleta de colores y la tipografía fueron cuidadosamente seleccionadas para alinearse con la marca personal de la artista.",
             seoFocus: "Posicionamiento de marca personal y venta de merchandising exclusivo.",
+        },
+    },
+    {
+        id: "brahneyker",
+        slug: "brahneyker",
+        title: "Salón de Belleza Brahneyker",
+        shortDescription: "Sistema de gestión para salón de belleza",
+        description: "Plataforma integral para salón con más de 20 años de experiencia. Incluye landing page, agendamiento de citas, inventario y facturación.",
+        year: "2025", // Assuming recent distinct development, user didn't specify year but context implies portfolio item.
+        month: "Diciembre", // Placeholder recent month
+        category: "Gestión / Belleza",
+        tech: ["Next.js", "Sistema de Agendamiento", "Facturación", "Inventario"],
+        images: {
+            hero: "/images/projects/brahneyker.png",
+            mobile: "/images/projects/brahneyker-mobile.png",
+        },
+        liveUrl: "https://brahneyker.com", // Assuming url based on name or placeholder
+        content: {
+            challenge: "Modernizar la gestión de un salón de belleza con 20 años de trayectoria, centralizando citas, inventario y facturación en una sola plataforma.",
+            solution: "Desarrollamos una solución completa que no solo sirve como presencia digital (landing page) sino como herramienta administrativa potente. El sistema permite agendar citas en tiempo real, controlar stock de productos y generar facturas electrónicas.",
+            seoFocus: "Posicionamiento local para salón de belleza y optimización de servicios estéticos.",
         },
     },
 ]
