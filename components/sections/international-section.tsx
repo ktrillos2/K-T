@@ -461,6 +461,9 @@ export default function InternationalSection() {
                 <div className="relative h-[400px] w-full md:h-[500px] lg:h-[600px] flex items-center justify-center order-2 -mt-10 lg:mt-0">
                     <div className="absolute w-full h-full inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent blur-3xl opacity-30 pointer-events-none" />
                     <World data={sampleArcs} globeConfig={finalGlobeConfig} />
+                    {/* Fades to blend globe with background */}
+                    <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-black to-transparent pointer-events-none z-10" />
+                    <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-black to-transparent pointer-events-none z-10" />
                 </div>
             </div>
         </section>
