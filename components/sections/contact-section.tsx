@@ -11,13 +11,16 @@ import {
   Github,
   Twitter,
   Linkedin,
-  Globe,
-  Share2,
   CheckCircle,
   ArrowRight,
   Send,
   Instagram,
   Facebook,
+  Zap,
+  ShoppingCart,
+  Code2,
+  Share2,
+  Globe,
 } from "lucide-react"
 
 // Custom TikTok Icon
@@ -62,11 +65,21 @@ const socials = [
   { icon: Facebook, href: "https://www.facebook.com/KTSolutionsWeb", label: "Facebook" },
 ]
 
-const serviceOptions = [
+const serviceOptions: { id: PlanType; icon: any; labelKey: string }[] = [
   {
-    id: "web",
-    icon: Globe,
-    labelKey: "webDev",
+    id: "landing",
+    icon: Zap,
+    labelKey: "landing",
+  },
+  {
+    id: "ecommerce",
+    icon: ShoppingCart,
+    labelKey: "ecommerce",
+  },
+  {
+    id: "custom",
+    icon: Code2,
+    labelKey: "custom",
   },
   {
     id: "social",
@@ -83,10 +96,13 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { countryCodes } from "@/lib/country-codes"
+import { usePricing, type PlanType } from "@/hooks/use-pricing"
+import { ShoppingCart, Zap, Code2, Share2, Globe } from "lucide-react"
 
 export default function ContactSection() {
   const { dictionary } = useLanguage()
   const { setCursorVariant } = useCursor()
+  const { getPrice } = usePricing()
 
   const [selectedService, setSelectedService] = useState<string | null>(null)
   const [countryCode, setCountryCode] = useState("+57")
@@ -261,7 +277,10 @@ export default function ContactSection() {
                           <Icon className="w-6 h-6" />
                         </div>
                         <span className="font-mono text-sm font-medium">
-                          {dictionary.contact[service.labelKey as keyof typeof dictionary.contact]}
+                          {
+                            // @ts-ignore
+                            dictionary.contact[service.labelKey] || dictionary.services[service.labelKey]?.title || service.labelKey
+                          }
                         </span>
                       </div>
 
@@ -318,6 +337,16 @@ export default function ContactSection() {
                   transition={{ duration: 0.4 }}
                 >
                   <div className="ide-window overflow-hidden">
+                    {/* Price Display */}
+                    <div className="px-4 pt-4 pb-0">
+                      <div className="bg-white/5 border border-white/10 rounded-lg p-3 flex items-center justify-between">
+                        <span className="text-white/60 font-mono text-sm">Estimated Investment:</span>
+                        <span className="text-white font-bold font-mono text-lg">
+                          {getPrice(selectedService as PlanType)}
+                        </span>
+                      </div>
+                    </div>
+
                     <div className="p-4 space-y-4">
                       {/* Name field */}
                       <div className="relative">

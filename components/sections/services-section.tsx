@@ -8,6 +8,7 @@ import { Check, ArrowRight, Sparkles, Zap, ShoppingCart, Code2 } from "lucide-re
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
 import { reportConversion } from "@/lib/gtag"
+import { usePricing } from "@/hooks/use-pricing"
 
 const plans = ["landing", "ecommerce", "custom"] as const
 
@@ -211,28 +212,9 @@ const ServiceCard = memo(function ServiceCard({
 })
 
 export default function ServicesSection() {
-  const { dictionary, country, convertPrice } = useLanguage()
+  const { dictionary } = useLanguage()
   const { setCursorVariant } = useCursor()
-
-  // Pricing tiers in USD
-  const TIER_HIGH = { landing: 200, ecommerce: 500 } // USA, Panama, Mexico
-  const TIER_LOW = { landing: 150, ecommerce: 400 } // Argentina, Ecuador, Peru, Paraguay, Uruguay
-
-  const getPrice = (plan: "landing" | "ecommerce" | "custom") => {
-    if (plan === "custom") return dictionary.services.custom.price
-
-    if (country === "Colombia") {
-      return plan === "landing" ? "$450,000 COP" : "$1,300,000 COP"
-    }
-
-    // Define tiers
-    const highTierCountries = ["Panamá", "México", "Estados Unidos"]
-    const isHighTier = highTierCountries.includes(country)
-    // @ts-ignore
-    const basePrice = isHighTier ? TIER_HIGH[plan] : TIER_LOW[plan]
-
-    return convertPrice(basePrice)
-  }
+  const { getPrice } = usePricing()
 
   return (
     <section id="services" className="relative pt-0 pb-16 lg:pt-0 lg:pb-24 px-6 bg-black overflow-hidden cv-auto">

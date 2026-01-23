@@ -5,7 +5,7 @@ import Clarity from "@microsoft/clarity"
 
 export default function MicrosoftClarity() {
     const [shouldLoad, setShouldLoad] = useState(false)
-    const projectId = process.env.NEXT_PUBLIC_MICROSOFT_CLARITY_ID
+    const projectId = process.env.NEXT_PUBLIC_MICROSOFT_CLARITY_ID || "v634mck150"
 
     useEffect(() => {
         // Only run in production
