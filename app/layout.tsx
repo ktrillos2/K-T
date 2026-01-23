@@ -253,7 +253,9 @@ export default function RootLayout({
         <SpeedInsights />
 
         <GoogleAnalytics />
-        <TiktokPixel />
+        <React.Suspense fallback={null}>
+          <TiktokPixel />
+        </React.Suspense>
         <TikTokEventsTracker />
         <MicrosoftClarity />
 
