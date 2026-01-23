@@ -10,7 +10,8 @@ export default function TiktokPixel() {
     const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
-        // Esto asegura que detecte cambios de ruta (Navegación en Next.js)
+        // Este efecto gestiona TANTO la carga inicial como la navegación
+        // Se activa cuando el script termina de cargar (isLoaded) o cuando cambia la ruta
         // @ts-ignore
         if (isLoaded && window.ttq) {
             // @ts-ignore
@@ -21,16 +22,10 @@ export default function TiktokPixel() {
     return (
         <Script
             id="tiktok-pixel"
-            // CAMBIO 1: Usa 'afterInteractive' para que cargue más rápido y no pierdas visitas de rebote
             strategy="afterInteractive"
             onLoad={() => {
+                // Solo avisamos que cargó. El useEffect de arriba hará el disparo.
                 setIsLoaded(true)
-                // Disparo inicial manual una vez que carga el script
-                // @ts-ignore
-                if (window.ttq) {
-                    // @ts-ignore
-                    window.ttq.page()
-                }
             }}
             dangerouslySetInnerHTML={{
                 __html: `
@@ -41,7 +36,6 @@ export default function TiktokPixel() {
           
             ttq.load('D5PGFD3C77UAU1QU4SH0');
             // MANTENER COMENTADO: ttq.page(); 
-            // Lo dejamos comentado porque lo manejamos arriba con onLoad y useEffect
           }(window, document, 'ttq');
         `,
             }}
