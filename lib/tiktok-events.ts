@@ -24,8 +24,10 @@ interface TikTokEventData {
         ip?: string
         user_agent?: string
         ttclid?: string // TikTok Click ID from cookie
+        ttp?: string // TikTok Cookie ID (_ttp)
         external_id?: string
     }
+
     page?: {
         url?: string
         referrer?: string
@@ -58,10 +60,13 @@ export async function sendTikTokEvent(eventData: TikTokEventData) {
         if (eventData.user?.ip) userPayload.ip = eventData.user.ip
         if (eventData.user?.user_agent) userPayload.user_agent = eventData.user.user_agent
         if (eventData.user?.ttclid) userPayload.ttclid = eventData.user.ttclid
-        if (eventData.user?.external_id) userPayload.external_id = sha256(eventData.user.external_id)
+        if (eventData.user?.ttp) userPayload.ttp = eventData.user.ttp
+        if (eventData.user?.external_id && eventData.user.external_id !== "") userPayload.external_id = sha256(eventData.user.external_id)
+
 
         // Email hashing
-        if (eventData.user?.email) {
+        // Validate it's not empty string
+        if (eventData.user?.email && eventData.user.email.trim() !== "") {
             const email = eventData.user.email.trim().toLowerCase()
             // It's safer to always hash PII for server events if uncertain, 
             // but some specific integrations allow plaintext. 
@@ -69,13 +74,18 @@ export async function sendTikTokEvent(eventData: TikTokEventData) {
             userPayload.email = sha256(email)
         }
 
+
         // Phone hashing
-        if (eventData.user?.phone) {
+        // Validate it's not empty string
+        if (eventData.user?.phone && eventData.user.phone.trim() !== "") {
             // E.164 format recommended before hashing: +[country code][number]
             // Remove all non-numeric chars except leading +
-            let phone = eventData.user.phone.replace(/[^\d+]/g, "")
-            userPayload.phone = sha256(phone)
+            const phone = eventData.user.phone.replace(/[^\d+]/g, "")
+            if (phone.length > 5) { // Basic length check
+                userPayload.phone = sha256(phone)
+            }
         }
+
 
         const payload = {
             pixel_code: TIKTOK_PIXEL_ID,

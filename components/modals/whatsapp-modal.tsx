@@ -14,7 +14,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { countryCodes } from "@/lib/country-codes"
 import { sendLeadEmail } from "@/app/actions/send-lead"
+import { identifyTikTokUser } from "@/lib/tiktok-client"
 import { toast } from "sonner"
+
 import { useRouter } from "next/navigation"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
@@ -145,6 +147,15 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
         }
 
         const whatsappUrl = `https://wa.me/573116360057?text=${encodeURIComponent(message)}`
+
+        // 3. Identify User for TikTok Pixel (Client Side for Session Matching)
+        await identifyTikTokUser({
+            phone: fullPhone,
+            // email: no email in this form
+        })
+
+        // 2. Open WhatsApp IMMEDIATELY (to bypass popup blockers)
+
 
         // 2. Open WhatsApp IMMEDIATELY (to bypass popup blockers)
         // Adding 'noopener,noreferrer' is good practice but _blank is standard.
