@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 export default function GoogleAnalytics() {
     const [shouldLoad, setShouldLoad] = useState(false)
 
+    const gaId = "G-6SBSC9LHSY"
     const adsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-17825211485"
 
     useEffect(() => {
@@ -33,21 +34,22 @@ export default function GoogleAnalytics() {
     }, [])
 
     if (process.env.NODE_ENV !== "production") return null
-    if (!adsId) return null
     if (!shouldLoad) return null
 
     return (
         <>
-            <Script src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(adsId)}`} strategy="afterInteractive" />
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
             <Script id="google-analytics" strategy="afterInteractive">
                 {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
+          gtag('config', '${gaId}');
           gtag('config', '${adsId}');
         `}
             </Script>
         </>
     )
 }
+
