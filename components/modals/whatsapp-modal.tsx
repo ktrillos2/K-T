@@ -132,10 +132,9 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
 
 
         // 2. Prepare WhatsApp Message
-        let message = `Hola K&T Agency, soy *${formData.name}*.\n\n`
+        let message = `Hola K&T, soy *${formData.name}*.\n\n`
 
         message += `🚀 *Estoy interesado en:* ${getServiceName(formData.service)}\n`
-        message += `💰 *Presupuesto visto:* ${calculatedPrice}\n`
         message += `📱 *Mi número:* ${fullPhone}\n`
         message += `💬 *Prefiero ser contactado por:* ${formData.contactPreference === 'call' ? 'Llamada 📞' : 'WhatsApp 💬'}\n\n`
 
