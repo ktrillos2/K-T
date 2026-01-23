@@ -15,6 +15,7 @@ import ContentWrapper from "@/components/layout/content-wrapper"
 
 
 import GoogleAnalytics from "@/components/analytics/google-analytics"
+import TiktokPixel from "@/components/analytics/tiktok-pixel"
 
 const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-fira" })
 const vt323 = VT323({ weight: "400", subsets: ["latin"], variable: "--font-vt323" })
@@ -229,6 +230,7 @@ export default function RootLayout({
         <SpeedInsights />
 
         <GoogleAnalytics />
+        <TiktokPixel />
       </body>
     </html>
   )
