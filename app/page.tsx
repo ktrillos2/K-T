@@ -1,12 +1,13 @@
 import HeroSection from "@/components/sections/hero-section"
 import dynamic from 'next/dynamic'
 import { client } from "@/sanity/lib/client"
+import TestimonialsSection from "@/components/sections/testimonials-section"
 
 // Lazy load below-the-fold sections
 const AboutSection = dynamic(() => import("@/components/sections/about-section"))
 const ServicesSection = dynamic(() => import("@/components/sections/services-section"))
 const ProjectsSection = dynamic(() => import("@/components/sections/projects-section"))
-const TestimonialsSection = dynamic(() => import("@/components/sections/testimonials-section"))
+// TestimonialsSection is now static to support anchor link navigation
 const InternationalSection = dynamic(() => import("@/components/sections/international-section"))
 const ContactSection = dynamic(() => import("@/components/sections/contact-section"))
 const Footer = dynamic(() => import("@/components/layout/footer"))
