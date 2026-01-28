@@ -54,7 +54,7 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
         formData.append('project', selectedProject)
         formData.append('rating', rating.toString())
         formData.append('message', message)
-        formData.append('name', name)
+        formData.append('name', name || "Anónimo")
         formData.append('role', finalRole)
         if (image) {
             formData.append('image', image)
@@ -290,7 +290,7 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
                                         {/* Submit Button */}
                                         <button
                                             type="submit"
-                                            disabled={isSubmitting || !selectedProject || rating === 0 || !message || !name}
+                                            disabled={isSubmitting || !selectedProject || rating === 0 || !message}
                                             className="w-full h-14 bg-white text-black font-bold rounded-xl flex items-center justify-center gap-2 hover:bg-neutral-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
                                             {isSubmitting ? (
