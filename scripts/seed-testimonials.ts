@@ -1,8 +1,8 @@
 import { createClient } from 'next-sanity'
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'bc3zxc91'
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
-const token = process.env.SANITY_API_TOKEN || 'skqmWYQuIi1kBhOz20EoZ4jX97cqfpqFVUK8SbbZJ60uckXs6RpRPPXiDm4Z02o0QQHTiudM043cKtSkzhp5xybxuzJGilctHBifFtClwGPTSLvfy5Lo7hPbP2Ydq4gdpHFRWFWHxpvM7Gjqe0mznyRimesA90sDEEA0oMe6ACgQF8S6MT51'
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
+const token = process.env.SANITY_API_TOKEN
 
 const client = createClient({
     projectId,
