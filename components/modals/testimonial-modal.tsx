@@ -42,7 +42,7 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        if (!selectedProject || rating === 0 || !message || !name) return
+        if (!selectedProject || rating === 0 || !message) return
 
         setIsSubmitting(true)
 
@@ -195,6 +195,18 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
                                                     )}
                                                 </AnimatePresence>
                                             </div>
+                                        </div>
+
+                                        {/* Name Input */}
+                                        <div className="space-y-2">
+                                            <label className="text-sm font-mono text-white/80">{dictionary.testimonials.name || "Tu Nombre"}</label>
+                                            <input
+                                                type="text"
+                                                value={name}
+                                                onChange={(e) => setName(e.target.value)}
+                                                placeholder={dictionary.testimonials.namePlaceholder || "Ej. Juan Pérez"}
+                                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 h-12 text-white placeholder-white/30 focus:border-white/30 focus:outline-none transition-colors"
+                                            />
                                         </div>
 
                                         {/* Role Input (Optional) */}
