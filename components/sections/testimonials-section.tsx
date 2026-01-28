@@ -42,7 +42,7 @@ export default function TestimonialsSection({ initialTestimonials = [] }: Testim
     const scrollNext = () => emblaApi && emblaApi.scrollNext()
 
     return (
-        <section id="testimonios" className="relative py-20 lg:py-32 overflow-hidden scroll-mt-32">
+        <section id="testimonios" className="relative py-20 lg:py-32 overflow-hidden -scroll-mt-32">
             {/* Background Elements */}
             <div className="absolute inset-0 bg-neutral-950" />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />
