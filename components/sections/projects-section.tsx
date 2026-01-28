@@ -218,7 +218,7 @@ function ProjectCard({ project, index, isActive, isCurrent, onHover, onLeave, la
         {/* Card Container */}
         <div className="relative h-full overflow-hidden rounded-xl border border-white/10 bg-card/50 backdrop-blur-sm flex flex-col">
           {/* Image Side */}
-          <div className="relative h-64 lg:h-80 w-full overflow-hidden shrink-0">
+          <div className="relative h-52 lg:h-80 w-full overflow-hidden shrink-0">
             {project.imageMobile ? (
               <>
                 {/* Mobile Image - Hidden on lg and up */}
@@ -228,7 +228,7 @@ function ProjectCard({ project, index, isActive, isCurrent, onHover, onLeave, la
                     alt={title}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover"
+                    className="object-cover lg:object-cover"
                     priority={index < 2}
                     unoptimized
                   />
@@ -317,7 +317,7 @@ function ProjectCard({ project, index, isActive, isCurrent, onHover, onLeave, la
             </motion.h3>
 
             {/* Description */}
-            <p className="text-white font-mono text-sm mb-6 relative z-10 flex-grow">{desc}</p>
+            <p className="text-white font-mono text-sm relative z-10 flex-grow">{desc}</p>
 
             {/* Tech stack */}
             <div className="flex flex-wrap gap-2 mb-8 mt-auto">

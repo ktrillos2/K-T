@@ -128,6 +128,25 @@ export const es = {
     successTitle: "¡Mensaje Enviado!",
     successMessage: "Te responderemos en menos de 24 horas.",
     whatsapp_general: "Hola, me gustaría recibir más información sobre sus servicios.",
+    estimatedInvestment: "Inversión Estimada:",
+  },
+  testimonials: {
+    title: "Historias de Éxito y Confianza", // Updated title
+    subtitle: "// Testimonios",
+    leaveReview: "Dejar un Testimonio",
+    modalTitle: "Comparte tu experiencia",
+    selectProject: "Selecciona el proyecto",
+    projectPlaceholder: "Buscar proyecto...",
+    rating: "Calificación",
+    message: "Tu mensaje",
+    messagePlaceholder: "Cuéntanos qué tal te pareció...",
+    role: "Cargo / Rol (Opcional)", // New key
+    rolePlaceholder: "Ej. CEO, Dueño...", // New key
+    image: "Foto (Opcional)",
+    submit: "Enviar Testimonio",
+    visitProject: "Visitar Proyecto", // New key
+    successTitle: "¡Gracias!",
+    successMessage: "Tu comentario ha sido enviado.",
   },
   footer: {
     rights: "Todos los derechos reservados",

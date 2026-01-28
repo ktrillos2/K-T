@@ -7,13 +7,17 @@ import { useModal } from "@/context/modal-context"
 import { MessageSquareText } from "lucide-react"
 import { trackTikTokEvent } from "@/app/actions/tiktok"
 import { notifyInteraction } from "@/app/actions/notify-click"
-
+import { usePathname } from "next/navigation"
 
 export default function WhatsAppButton() {
+  const pathname = usePathname()
   const { setCursorVariant } = useCursor()
   // @ts-ignore - dictionary might not have new keys yet
   const { dictionary } = useLanguage()
   const { openModal } = useModal()
+
+  // Don't show on admin or studio pages
+  if (pathname?.startsWith('/admin') || pathname?.startsWith('/studio')) return null
 
   return (
     <>

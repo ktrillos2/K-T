@@ -181,7 +181,7 @@ export const projects: Project[] = [
         year: "2025",
         month: "Noviembre",
         category: "E-commerce / Merch",
-        tech: ["Next.js", "Shopify Integration", "Framer Motion"],
+        tech: ["Shopify Integration"],
         images: {
             hero: "/images/projects/caro-pady.png",
             mobile: "/images/projects/caro-pady-mobile.png",
@@ -212,6 +212,27 @@ export const projects: Project[] = [
             challenge: "Modernizar la gestión de un salón de belleza con 20 años de trayectoria, centralizando citas, inventario y facturación en una sola plataforma.",
             solution: "Desarrollamos una solución completa que no solo sirve como presencia digital (landing page) sino como herramienta administrativa potente. El sistema permite agendar citas en tiempo real, controlar stock de productos y generar facturas electrónicas.",
             seoFocus: "Posicionamiento local para salón de belleza y optimización de servicios estéticos.",
+        },
+    },
+    {
+        id: "estrella-de-david",
+        slug: "estrella-de-david",
+        title: "Estrella de David",
+        shortDescription: "Servicios de transporte turístico",
+        description: "Remodelación integral para empresa de transporte turístico. Rediseño moderno y optimización de posicionamiento.",
+        year: "2025",
+        month: "Noviembre",
+        category: "Turismo / Transporte",
+        tech: ["Next.js", "Tailwind CSS", "SEO Optimization"],
+        images: {
+            hero: "/images/projects/estrelladedavid.png",
+            mobile: "/images/projects/estrelladedavid-mobile.png",
+        },
+        liveUrl: "https://estrelladedavid.pe",
+        content: {
+            challenge: "La empresa tenía un sitio web existente pero con deficiente posicionamiento en buscadores y un diseño que no satisfacía sus expectativas estéticas ni funcionales.",
+            solution: "Ejecutamos una remodelación completa del sitio web, enfocándonos en un diseño visual impactante y una arquitectura optimizada para mejorar su visibilidad en motores de búsqueda. El cliente quedó muy satisfecho con el resultado final.",
+            seoFocus: "Posicionamiento para servicios de transporte turístico y alquiler de buses a nivel nacional.",
         },
     },
 ]

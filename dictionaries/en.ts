@@ -128,6 +128,25 @@ export const en = {
     successTitle: "Message Sent!",
     successMessage: "We'll get back to you within 24 hours.",
     whatsapp_general: "Hi, I would like more information about your services.",
+    estimatedInvestment: "Estimated Investment:",
+  },
+  testimonials: {
+    title: "Success Stories & Trust", // Updated title
+    subtitle: "// Testimonials",
+    leaveReview: "Leave a Testimonial",
+    modalTitle: "Share your experience",
+    selectProject: "Select project",
+    projectPlaceholder: "Search project...",
+    rating: "Rating",
+    message: "Your message",
+    messagePlaceholder: "Tell us how it went...",
+    role: "Role / Position (Optional)", // New key
+    rolePlaceholder: "Ex. CEO, Owner...", // New key
+    image: "Photo (Optional)",
+    submit: "Submit Testimonial",
+    visitProject: "Visit Project", // New key
+    successTitle: "Thank you!",
+    successMessage: "Your comment has been sent.",
   },
   footer: {
     rights: "All rights reserved",

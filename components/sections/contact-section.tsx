@@ -249,7 +249,7 @@ export default function ContactSection() {
             transition={{ duration: 0.6 }}
           >
             {/* Service Selection */}
-            <div className="space-y-4">
+            <div className={`space-y-4 ${selectedService ? "hidden lg:block" : ""}`}>
               <p className="text-white font-mono text-sm">{dictionary.contact.selectService}</p>
               <div className="grid grid-cols-2 gap-4">
                 {serviceOptions.map((service, index) => {
@@ -343,10 +343,36 @@ export default function ContactSection() {
                   transition={{ duration: 0.4 }}
                 >
                   <div className="ide-window overflow-hidden">
-                    {/* Price Display */}
-                    <div className="px-4 pt-4 pb-0">
+                    {/* Size and Price Display */}
+                    <div className="px-4 pt-4 pb-0 space-y-3">
+
+                      {/* Service Selector (Mobile Only replacement/Persistent selector) */}
+                      <div className="relative">
+                        <Select value={selectedService || ""} onValueChange={setSelectedService}>
+                          <SelectTrigger className="w-full bg-white/5 border border-white/10 rounded-lg text-white font-mono text-sm h-12 focus:ring-0 focus:border-white/20">
+                            <SelectValue placeholder={dictionary.contact.selectService} />
+                          </SelectTrigger>
+                          <SelectContent className="bg-neutral-900 border-white/20 text-white">
+                            {serviceOptions.map((service) => (
+                              <SelectItem key={service.id} value={service.id} className="font-mono text-xs focus:bg-white/10 focus:text-white">
+                                <div className="flex items-center gap-2">
+                                  <service.icon className="w-4 h-4" />
+                                  <span>
+                                    {
+                                      // @ts-ignore
+                                      dictionary.contact[service.labelKey] || dictionary.services[service.labelKey]?.title || service.labelKey
+                                    }
+                                  </span>
+                                </div>
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+
                       <div className="bg-white/5 border border-white/10 rounded-lg p-3 flex items-center justify-between">
-                        <span className="text-white/60 font-mono text-sm">Estimated Investment:</span>
+                        {/* @ts-ignore */}
+                        <span className="text-white/60 font-mono text-sm">{dictionary.contact.estimatedInvestment}</span>
                         <span className="text-white font-bold font-mono text-lg">
                           {getPrice(selectedService as PlanType)}
                         </span>

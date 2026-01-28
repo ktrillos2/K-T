@@ -25,6 +25,11 @@ export default function Header() {
 
   const currentCountry = countryCodes.find((c) => c.name === country)
 
+  // Hide header on admin pages
+  if (pathname?.startsWith('/admin')) {
+    return null
+  }
+
   useEffect(() => {
     const update = () => {
       rafRef.current = null
@@ -76,7 +81,7 @@ export default function Header() {
               }
             }}
           >
-            <Image src="/images/logo.png" alt="K&T Agencia Digital - Desarrollo Web y Gestión de Redes Sociales en Colombia" fill sizes="(max-width: 768px) 150px, 200px" className="object-contain" priority />
+            <Image src="/images/logo.png" alt="K&T Agencia Digital - Desarrollo Web y Gestión de Redes Sociales en Colombia" fill sizes="(max-width: 768px) 150px, 200px" className="object-none" priority />
           </motion.button>
 
           <div className="flex items-center gap-4">
