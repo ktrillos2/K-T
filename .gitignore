@@ -33,3 +33,5 @@ next-env.d.ts
 crm-backend.gs
 # auth.config.ts (Opcional si quieres ocultar lógica auth)
 # auth.ts (Opcional si quieres ocultar lógica auth)
+# Sentry Config File
+.env.sentry-build-plugin
