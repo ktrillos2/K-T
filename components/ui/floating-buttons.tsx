@@ -23,7 +23,7 @@ export default function FloatingButtons() {
             content_name: "Open WhatsApp Direct",
             content_type: "button"
         })
-        window.open('https://wa.me/573116360057', '_blank')
+        window.open('https://wa.me/573116360057?text=Hola%20K%26T%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios.', '_blank')
     }
 
     const handleQuoteClick = () => {
