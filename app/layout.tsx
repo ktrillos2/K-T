@@ -13,7 +13,7 @@ import CustomCursor from "@/components/ui/custom-cursor"
 import CountrySelector from "@/components/layout/country-selector"
 import ContentWrapper from "@/components/layout/content-wrapper"
 import { Toaster } from "@/components/ui/sonner"
-import WhatsAppButton from "@/components/ui/whatsapp-button"
+import FloatingButtons from "@/components/ui/floating-buttons"
 import Wrapper from "@/components/layout/global-modal-wrapper"
 import { ModalProvider } from "@/context/modal-context"
 
@@ -238,7 +238,7 @@ export default function RootLayout({
                 <ContentWrapper>
                   <Header />
                   <main>{children}</main>
-                  <WhatsAppButton />
+                  <FloatingButtons />
                   <Wrapper />
                 </ContentWrapper>
               </ModalProvider>
