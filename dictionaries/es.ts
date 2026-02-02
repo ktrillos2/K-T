@@ -81,7 +81,7 @@ export const es = {
         "Acelerar Tienda WooCommerce",
         "Rediseño Tienda Virtual a Medida",
         "Transformación a Headless Commerce",
-        "Pasarelas de Pago Colombia",
+        "Pasarelas de Pago",
         "Migración sin perder datos",
         "SEO Técnico Avanzado",
         "Soporte de Evolución",
