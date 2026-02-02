@@ -26,6 +26,27 @@ export interface Project {
 
 export const projects: Project[] = [
     {
+        id: "nosky-group",
+        slug: "nosky-group",
+        title: "Noskygroup",
+        shortDescription: "Captura, Digitalización y Documentación Aérea y Terrestre",
+        description: "Transformamos espacios físicos en datos precisos mediante escaneo LiDAR, fotogrametría aérea y topografía de alta precisión. Soluciones integrales para ingeniería, arquitectura y construcción.",
+        year: "2026",
+        month: "Febrero",
+        category: "Ingeniería / Construcción",
+        tech: ["Next.js", "Topografía Digital", "LiDAR", "React"],
+        images: {
+            hero: "/images/projects/nosky-desktop.png",
+            mobile: "/images/projects/nosky.png",
+        },
+        liveUrl: "https://noskygroup.com",
+        content: {
+            challenge: "El sector de la ingeniería y construcción demanda precisión milimétrica y tiempos de respuesta rápidos. Nosky necesitaba una presencia digital que reflejara su capacidad técnica y la sofisticación de sus equipos de medición.",
+            solution: "Desarrollamos una identidad digital que proyecta autoridad técnica y modernidad. El sitio estructura claramente los servicios especializados como LiDAR y fotogrametría, facilitando a los clientes entender el valor de la digitalización de espacios.",
+            seoFocus: "Topografía de alta precisión, Escaneo LiDAR, Fotogrametría aérea, Modelado 3D para construcción.",
+        },
+    },
+    {
         id: "telas-real",
         slug: "telas-real",
         title: "Telas Real",
