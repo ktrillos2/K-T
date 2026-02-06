@@ -114,7 +114,7 @@ export default function Header() {
                   >
                     {countryCodes.map((c) => (
                       <button
-                        key={c.code}
+                        key={c.iso}
                         onClick={() => {
                           // @ts-ignore
                           setCountry(c.name)

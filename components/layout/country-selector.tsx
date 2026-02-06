@@ -154,7 +154,7 @@ export default function CountrySelector() {
                                 <div className="flex flex-wrap justify-center gap-6 p-2">
                                     {countryCodes.map((country) => (
                                         <motion.div
-                                            key={country.code}
+                                            key={country.iso}
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
                                             className="w-[140px] sm:w-[160px] md:w-[180px]"

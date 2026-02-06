@@ -59,7 +59,7 @@ export const es = {
     popular: "POPULAR",
     landing: {
       title: "Diseño Web Corporativo",
-      price: "Desde $450,000 COP",
+      price: "$200 USD",
       features: [
         "Creación de páginas web profesionales",
         "Optimización SEO para empresas",
@@ -75,7 +75,7 @@ export const es = {
     },
     ecommerce: {
       title: "Tienda Virtual Headless (WooCommerce)",
-      price: "Desde $1,300,000 COP",
+      price: "$500 USD",
       features: [
         "Frontend Next.js para Woo (Velocidad)",
         "Acelerar Tienda WooCommerce",

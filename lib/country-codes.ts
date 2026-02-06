@@ -9,4 +9,5 @@ export const countryCodes = [
     { code: "+598", name: "Uruguay", flag: "🇺🇾", iso: "uy" },
     { code: "+56", name: "Chile", flag: "🇨🇱", iso: "cl" },
     { code: "+1", name: "Estados Unidos", flag: "🇺🇸", iso: "us" },
+    { code: "+1", name: "Puerto Rico", flag: "🇵🇷", iso: "pr" },
 ];

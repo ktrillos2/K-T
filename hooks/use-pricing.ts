@@ -19,7 +19,7 @@ export function usePricing() {
         }
 
         // Define tiers
-        const highTierCountries = ["Panamá", "México", "Estados Unidos"]
+        const highTierCountries = ["Panamá", "México", "Estados Unidos", "Puerto Rico"]
         const isHighTier = highTierCountries.includes(country)
         // @ts-ignore
         const basePrice = isHighTier ? TIER_HIGH[plan] : TIER_LOW[plan]
