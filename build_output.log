@@ -1,0 +1,126 @@
+
+> my-v0-project@0.1.0 build
+> next build
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+   ▲ Next.js 16.0.10 (Turbopack)
+   - Environments: .env.local
+   - Experiments (use with caution):
+     · clientTraceMetadata
+
+   Creating an optimized production build ...
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+Turbopack build encountered 7 warnings:
+./node_modules/.pnpm/sanity@4.22.0_@emotion+is-prop-valid@1.4.0_@portabletext+sanity-bridge@1.2.14_@types+re_ecf7d1b035632302bc85ba65340c5e43/node_modules/sanity/lib
+Package dataloader can't be external
+The request dataloader matches serverExternalPackages (or the default list).
+The request could not be resolved by Node.js from the project directory.
+Packages that should be external need to be installed in the project directory, so they can be resolved from the output files.
+Try to install it into the project directory by running npm install dataloader from the project directory.
+
+
+./node_modules/.pnpm/@opentelemetry+instrumentation@0.207.0_@opentelemetry+api@1.9.0/node_modules/@opentelemetry/instrumentation/build/esm/platform/node
+Package import-in-the-middle can't be external
+The request import-in-the-middle matches serverExternalPackages (or the default list).
+The request could not be resolved by Node.js from the project directory.
+Packages that should be external need to be installed in the project directory, so they can be resolved from the output files.
+Try to install it into the project directory by running npm install import-in-the-middle from the project directory.
+
+
+./node_modules/.pnpm/@opentelemetry+instrumentation@0.211.0_@opentelemetry+api@1.9.0/node_modules/@opentelemetry/instrumentation/build/esm/platform/node
+Package import-in-the-middle can't be external
+The request import-in-the-middle matches serverExternalPackages (or the default list).
+The request could not be resolved by Node.js from the project directory.
+Packages that should be external need to be installed in the project directory, so they can be resolved from the output files.
+Try to install it into the project directory by running npm install import-in-the-middle from the project directory.
+
+
+./node_modules/.pnpm/@sentry+node-core@10.38.0_@opentelemetry+api@1.9.0_@opentelemetry+context-async-hooks@2_bdb2c8b38c3b32b5bc323eee59ec37bb/node_modules/@sentry/node-core/build/cjs/sdk
+Package import-in-the-middle can't be external
+The request import-in-the-middle matches serverExternalPackages (or the default list).
+The request could not be resolved by Node.js from the project directory.
+Packages that should be external need to be installed in the project directory, so they can be resolved from the output files.
+Try to install it into the project directory by running npm install import-in-the-middle from the project directory.
+
+
+./node_modules/.pnpm/isomorphic-dompurify@2.26.0/node_modules/isomorphic-dompurify
+Package jsdom can't be external
+The request jsdom matches serverExternalPackages (or the default list).
+The request could not be resolved by Node.js from the project directory.
+Packages that should be external need to be installed in the project directory, so they can be resolved from the output files.
+Try to install it into the project directory by running npm install jsdom from the project directory.
+
+
+./node_modules/.pnpm/@opentelemetry+instrumentation@0.207.0_@opentelemetry+api@1.9.0/node_modules/@opentelemetry/instrumentation/build/esm/platform/node
+Package require-in-the-middle can't be external
+The request require-in-the-middle matches serverExternalPackages (or the default list).
+The request could not be resolved by Node.js from the project directory.
+Packages that should be external need to be installed in the project directory, so they can be resolved from the output files.
+Try to install it into the project directory by running npm install require-in-the-middle from the project directory.
+
+
+./node_modules/.pnpm/@opentelemetry+instrumentation@0.211.0_@opentelemetry+api@1.9.0/node_modules/@opentelemetry/instrumentation/build/esm/platform/node
+Package require-in-the-middle can't be external
+The request require-in-the-middle matches serverExternalPackages (or the default list).
+The request could not be resolved by Node.js from the project directory.
+Packages that should be external need to be installed in the project directory, so they can be resolved from the output files.
+Try to install it into the project directory by running npm install require-in-the-middle from the project directory.
+
+
+ ✓ Compiled successfully in 32.2s
+   Running next.config.js provided runAfterProductionCompile ...
+ ✓ Completed runAfterProductionCompile in 46569ms
+   Skipping validation of types
+   Collecting page data using 9 workers ...
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+ ⚠ Using edge runtime on a page currently disables static generation for that page
+   Generating static pages using 9 workers (0/27) ...
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+   Generating static pages using 9 workers (6/27) 
+   Generating static pages using 9 workers (13/27) 
+   Generating static pages using 9 workers (20/27) 
+ ✓ Generating static pages using 9 workers (27/27) in 770.4ms
+   Finalizing page optimization ...
+
+Route (app)                   Revalidate  Expire
+┌ ○ /                                 1m      1y
+├ ○ /_not-found
+├ ○ /admin/[[...tool]]
+├ ƒ /api/auth/[...nextauth]
+├ ƒ /api/contact
+├ ƒ /api/geo
+├ ƒ /api/sentry-example-api
+├ ƒ /api/testimonials
+├ ○ /apple-icon.png
+├ ○ /CRM
+├ ○ /icon.png
+├ ○ /login
+├ ○ /manifest.webmanifest
+├ ○ /opengraph-image.png
+├ ○ /politicas-de-privacidad
+├ ● /projects/[slug]
+│ ├ /projects/nosky-group
+│ ├ /projects/telas-real
+│ ├ /projects/san-roqueros
+│ └ [+8 more paths]
+├ ○ /robots.txt
+├ ○ /sentry-example-page
+├ ○ /sitemap.xml
+└ ○ /twitter-image.png
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

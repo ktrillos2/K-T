@@ -53,10 +53,6 @@
     "embla-carousel-auto-scroll": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "8.5.1",
-    "expo": "latest",
-    "expo-asset": "latest",
-    "expo-file-system": "latest",
-    "expo-gl": "latest",
     "framer-motion": "12.23.26",
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
@@ -71,7 +67,6 @@
     "react-day-picker": "9.8.0",
     "react-dom": "19.2.0",
     "react-hook-form": "^7.60.0",
-    "react-native": "latest",
     "react-resizable-panels": "^2.1.7",
     "recharts": "2.15.4",
     "resend": "^6.8.0",
@@ -98,6 +93,9 @@
     "edge >= 100",
     "firefox >= 100",
     "safari >= 15",
-    "ios >= 16"
+    "ios >= 16",
+    "not ie <= 11",
+    "not dead",
+    "not op_mini all"
   ]
 }
