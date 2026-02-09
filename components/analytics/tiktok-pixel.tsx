@@ -8,16 +8,37 @@ export default function TiktokPixel() {
     const pathname = usePathname()
     const searchParams = useSearchParams()
     const [isLoaded, setIsLoaded] = useState(false)
+    const [shouldLoad, setShouldLoad] = useState(false)
+
+    useEffect(() => {
+        const enable = () => {
+            setShouldLoad(true)
+        }
+
+        window.addEventListener("pointerdown", enable, { passive: true, once: true })
+        window.addEventListener("keydown", enable, { passive: true, once: true })
+        window.addEventListener("scroll", enable, { passive: true, once: true })
+        window.addEventListener("touchstart", enable, { passive: true, once: true })
+
+        return () => {
+            window.removeEventListener("pointerdown", enable)
+            window.removeEventListener("keydown", enable)
+            window.removeEventListener("scroll", enable)
+            window.removeEventListener("touchstart", enable)
+        }
+    }, [])
 
     useEffect(() => {
         // Este efecto gestiona TANTO la carga inicial como la navegación
         // Se activa cuando el script termina de cargar (isLoaded) o cuando cambia la ruta
         // @ts-ignore
-        if (isLoaded && window.ttq) {
+        if (shouldLoad && isLoaded && window.ttq) {
             // @ts-ignore
             window.ttq.page()
         }
-    }, [pathname, searchParams, isLoaded])
+    }, [pathname, searchParams, isLoaded, shouldLoad])
+
+    if (!shouldLoad) return null
 
     return (
         <Script

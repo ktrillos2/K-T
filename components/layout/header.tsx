@@ -9,10 +9,8 @@ import { useCursor } from "@/context/cursor-context"
 import { smoothScrollTo } from "@/lib/utils"
 import SuperMenu from "./super-menu"
 import { countryCodes } from "@/lib/country-codes"
-/* eslint-disable @next/next/no-img-element */
 
 export default function Header() {
-  /* eslint-enable @next/next/no-img-element */
   const router = useRouter()
   const pathname = usePathname()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -95,9 +93,11 @@ export default function Header() {
                 whileTap={{ scale: 0.95 }}
               >
                 {currentCountry && (
-                  <img
+                  <Image
                     src={`https://flagcdn.com/w40/${currentCountry.iso}.png`}
                     alt={country}
+                    width={20}
+                    height={15}
                     className="w-5 h-auto rounded-sm object-cover"
                   />
                 )}
@@ -123,9 +123,11 @@ export default function Header() {
                         className={`px-3 py-2 text-xs font-mono text-left rounded hover:bg-white/10 transition-colors flex items-center gap-2 ${country === c.name ? "text-white bg-white/10" : "text-white"
                           }`}
                       >
-                        <img
+                        <Image
                           src={`https://flagcdn.com/w40/${c.iso}.png`}
                           alt={c.name}
+                          width={16}
+                          height={12}
                           className="w-4 h-auto rounded-sm object-cover"
                         />
                         <span>{c.name}</span>

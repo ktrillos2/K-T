@@ -1,0 +1,693 @@
+
+> my-v0-project@0.1.0 build
+> next build
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+   ▲ Next.js 16.0.10 (Turbopack)
+   - Environments: .env.local
+   - Experiments (use with caution):
+     · clientTraceMetadata
+
+   Creating an optimized production build ...
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+Turbopack build encountered 5 warnings:
+./node_modules/.pnpm/@opentelemetry+instrumentation@0.207.0_@opentelemetry+api@1.9.0/node_modules/@opentelemetry/instrumentation/build/esm/platform/node
+Package import-in-the-middle can't be external
+The request import-in-the-middle matches serverExternalPackages (or the default list).
+The request could not be resolved by Node.js from the project directory.
+Packages that should be external need to be installed in the project directory, so they can be resolved from the output files.
+Try to install it into the project directory by running npm install import-in-the-middle from the project directory.
+
+
+./node_modules/.pnpm/@opentelemetry+instrumentation@0.211.0_@opentelemetry+api@1.9.0/node_modules/@opentelemetry/instrumentation/build/esm/platform/node
+Package import-in-the-middle can't be external
+The request import-in-the-middle matches serverExternalPackages (or the default list).
+The request could not be resolved by Node.js from the project directory.
+Packages that should be external need to be installed in the project directory, so they can be resolved from the output files.
+Try to install it into the project directory by running npm install import-in-the-middle from the project directory.
+
+
+./node_modules/.pnpm/@sentry+node-core@10.38.0_@opentelemetry+api@1.9.0_@opentelemetry+context-async-hooks@2_bdb2c8b38c3b32b5bc323eee59ec37bb/node_modules/@sentry/node-core/build/cjs/sdk
+Package import-in-the-middle can't be external
+The request import-in-the-middle matches serverExternalPackages (or the default list).
+The request could not be resolved by Node.js from the project directory.
+Packages that should be external need to be installed in the project directory, so they can be resolved from the output files.
+Try to install it into the project directory by running npm install import-in-the-middle from the project directory.
+
+
+./node_modules/.pnpm/@opentelemetry+instrumentation@0.207.0_@opentelemetry+api@1.9.0/node_modules/@opentelemetry/instrumentation/build/esm/platform/node
+Package require-in-the-middle can't be external
+The request require-in-the-middle matches serverExternalPackages (or the default list).
+The request could not be resolved by Node.js from the project directory.
+Packages that should be external need to be installed in the project directory, so they can be resolved from the output files.
+Try to install it into the project directory by running npm install require-in-the-middle from the project directory.
+
+
+./node_modules/.pnpm/@opentelemetry+instrumentation@0.211.0_@opentelemetry+api@1.9.0/node_modules/@opentelemetry/instrumentation/build/esm/platform/node
+Package require-in-the-middle can't be external
+The request require-in-the-middle matches serverExternalPackages (or the default list).
+The request could not be resolved by Node.js from the project directory.
+Packages that should be external need to be installed in the project directory, so they can be resolved from the output files.
+Try to install it into the project directory by running npm install require-in-the-middle from the project directory.
+
+
+
+> Build error occurred
+Error: Turbopack build failed with 24 errors:
+./components/analytics/google-tag-manager.tsx:2:10
+Ecmascript file had an error
+[0m [90m 1 |[39m [36mimport[39m [33mScript[39m [36mfrom[39m [32m"next/script"[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { useEffect[33m,[39m useState } [36mfrom[39m [32m"react"[39m
+ [90m   |[39m          [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 3 |[39m
+ [90m 4 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mGoogleTagManager[39m() {
+ [90m 5 |[39m     [36mconst[39m [shouldLoad[33m,[39m setShouldLoad] [33m=[39m useState([36mfalse[39m)[0m
+
+You're importing a component that needs `useEffect`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+
+ Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+
+
+
+Import trace:
+  Server Component:
+    ./components/analytics/google-tag-manager.tsx
+    ./app/layout.tsx
+
+
+./components/analytics/google-tag-manager.tsx:2:21
+Ecmascript file had an error
+[0m [90m 1 |[39m [36mimport[39m [33mScript[39m [36mfrom[39m [32m"next/script"[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { useEffect[33m,[39m useState } [36mfrom[39m [32m"react"[39m
+ [90m   |[39m                     [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 3 |[39m
+ [90m 4 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mGoogleTagManager[39m() {
+ [90m 5 |[39m     [36mconst[39m [shouldLoad[33m,[39m setShouldLoad] [33m=[39m useState([36mfalse[39m)[0m
+
+You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+
+ Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+
+
+
+Import trace:
+  Server Component:
+    ./components/analytics/google-tag-manager.tsx
+    ./app/layout.tsx
+
+
+./components/analytics/tiktok-pixel.tsx:3:10
+Ecmascript file had an error
+[0m [90m 1 |[39m [36mimport[39m { usePathname[33m,[39m useSearchParams } [36mfrom[39m [32m"next/navigation"[39m
+ [90m 2 |[39m [36mimport[39m [33mScript[39m [36mfrom[39m [32m"next/script"[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { useEffect[33m,[39m useState } [36mfrom[39m [32m"react"[39m
+ [90m   |[39m          [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m
+ [90m 5 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mTiktokPixel[39m() {
+ [90m 6 |[39m     [36mconst[39m pathname [33m=[39m usePathname()[0m
+
+You're importing a component that needs `useEffect`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+
+ Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+
+
+
+Import trace:
+  Server Component:
+    ./components/analytics/tiktok-pixel.tsx
+    ./app/layout.tsx
+
+
+./components/analytics/tiktok-pixel.tsx:1:10
+Ecmascript file had an error
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m { usePathname[33m,[39m useSearchParams } [36mfrom[39m [32m"next/navigation"[39m
+ [90m   |[39m          [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m [36mimport[39m [33mScript[39m [36mfrom[39m [32m"next/script"[39m
+ [90m 3 |[39m [36mimport[39m { useEffect[33m,[39m useState } [36mfrom[39m [32m"react"[39m
+ [90m 4 |[39m[0m
+
+You're importing a component that needs `usePathname`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+
+ Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+
+
+
+Import trace:
+  Server Component:
+    ./components/analytics/tiktok-pixel.tsx
+    ./app/layout.tsx
+
+
+./components/analytics/tiktok-pixel.tsx:1:23
+Ecmascript file had an error
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m { usePathname[33m,[39m useSearchParams } [36mfrom[39m [32m"next/navigation"[39m
+ [90m   |[39m                       [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m [36mimport[39m [33mScript[39m [36mfrom[39m [32m"next/script"[39m
+ [90m 3 |[39m [36mimport[39m { useEffect[33m,[39m useState } [36mfrom[39m [32m"react"[39m
+ [90m 4 |[39m[0m
+
+You're importing a component that needs `useSearchParams`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+
+ Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+
+
+
+Import trace:
+  Server Component:
+    ./components/analytics/tiktok-pixel.tsx
+    ./app/layout.tsx
+
+
+./components/analytics/tiktok-pixel.tsx:3:21
+Ecmascript file had an error
+[0m [90m 1 |[39m [36mimport[39m { usePathname[33m,[39m useSearchParams } [36mfrom[39m [32m"next/navigation"[39m
+ [90m 2 |[39m [36mimport[39m [33mScript[39m [36mfrom[39m [32m"next/script"[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { useEffect[33m,[39m useState } [36mfrom[39m [32m"react"[39m
+ [90m   |[39m                     [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m
+ [90m 5 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mTiktokPixel[39m() {
+ [90m 6 |[39m     [36mconst[39m pathname [33m=[39m usePathname()[0m
+
+You're importing a component that needs `useState`. This React Hook only works in a Client Component. To fix, mark the file (or its parent) with the `"use client"` directive.
+
+ Learn more: https://nextjs.org/docs/app/api-reference/directives/use-client
+
+
+
+Import trace:
+  Server Component:
+    ./components/analytics/tiktok-pixel.tsx
+    ./app/layout.tsx
+
+
+./node_modules/.pnpm/@rexxars+react-json-inspector@9.0.1_react@19.2.0/node_modules/@rexxars/react-json-inspector/dist/index.js:3:1
+Module not found: Can't resolve 'debounce'
+[0m [90m 1 |[39m [36mimport[39m { jsx[33m,[39m jsxs } [36mfrom[39m [32m"react/jsx-runtime"[39m[33m;[39m
+ [90m 2 |[39m [36mimport[39m { [33mComponent[39m[33m,[39m useCallback } [36mfrom[39m [32m"react"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m debounce [36mfrom[39m [32m"debounce"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m [36mimport[39m md5OMatic [36mfrom[39m [32m"md5-o-matic"[39m[33m;[39m
+ [90m 5 |[39m [36mlet[39m id [33m=[39m [33mMath[39m[33m.[39mceil([33mMath[39m[33m.[39mrandom() [33m*[39m [35m10[39m)[33m;[39m
+ [90m 6 |[39m [36mconst[39m uid [33m=[39m () [33m=>[39m [33m++[39mid[33m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/.pnpm/@rexxars+react-json-inspector@9.0.1_react@19.2.0/node_modules/@rexxars/react-json-inspector/dist/index.js [Client Component Browser]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/SanityVision.js [Client Component Browser]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component Browser]
+    ./sanity.config.ts [Client Component Browser]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/.pnpm/@rexxars+react-json-inspector@9.0.1_react@19.2.0/node_modules/@rexxars/react-json-inspector/dist/index.js [Client Component SSR]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/SanityVision.js [Client Component SSR]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component SSR]
+    ./sanity.config.ts [Client Component SSR]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/.pnpm/parse-entities@4.0.2/node_modules/parse-entities/lib/index.js:11:1
+Module not found: Can't resolve 'decode-named-character-reference'
+[0m [90m  9 |[39m [36mimport[39m {isHexadecimal} [36mfrom[39m [32m'is-hexadecimal'[39m
+ [90m 10 |[39m [36mimport[39m {isAlphanumerical} [36mfrom[39m [32m'is-alphanumerical'[39m
+[31m[1m>[22m[39m[90m 11 |[39m [36mimport[39m {decodeNamedCharacterReference} [36mfrom[39m [32m'decode-named-character-reference'[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 12 |[39m
+ [90m 13 |[39m [90m// Warning messages.[39m
+ [90m 14 |[39m [36mconst[39m messages [33m=[39m [[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/.pnpm/parse-entities@4.0.2/node_modules/parse-entities/lib/index.js [Client Component Browser]
+    ./node_modules/.pnpm/refractor@5.0.0/node_modules/refractor/lib/core.js [Client Component Browser]
+    ./node_modules/.pnpm/react-refractor@4.0.0_react@19.2.0/node_modules/react-refractor/dist/index.js [Client Component Browser]
+    ./node_modules/.pnpm/@sanity+ui@3.1.11_@emotion+is-prop-valid@1.4.0_react-dom@19.2.0_react@19.2.0__react-is@_abd9d7b9622de991a3025aea35b9a21f/node_modules/@sanity/ui/dist/_chunks-es/refractor.mjs [Client Component Browser]
+    ./node_modules/.pnpm/@sanity+ui@3.1.11_@emotion+is-prop-valid@1.4.0_react-dom@19.2.0_react@19.2.0__react-is@_abd9d7b9622de991a3025aea35b9a21f/node_modules/@sanity/ui/dist/_chunks-es/_visual-editing.mjs [Client Component Browser]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/SanityVision.js [Client Component Browser]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component Browser]
+    ./sanity.config.ts [Client Component Browser]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/.pnpm/parse-entities@4.0.2/node_modules/parse-entities/lib/index.js [Client Component SSR]
+    ./node_modules/.pnpm/refractor@5.0.0/node_modules/refractor/lib/core.js [Client Component SSR]
+    ./node_modules/.pnpm/react-refractor@4.0.0_react@19.2.0/node_modules/react-refractor/dist/index.js [Client Component SSR]
+    ./node_modules/.pnpm/@sanity+ui@3.1.11_@emotion+is-prop-valid@1.4.0_react-dom@19.2.0_react@19.2.0__react-is@_abd9d7b9622de991a3025aea35b9a21f/node_modules/@sanity/ui/dist/_chunks-es/refractor.mjs [Client Component SSR]
+    ./node_modules/.pnpm/@sanity+ui@3.1.11_@emotion+is-prop-valid@1.4.0_react-dom@19.2.0_react@19.2.0__react-is@_abd9d7b9622de991a3025aea35b9a21f/node_modules/@sanity/ui/dist/_chunks-es/_visual-editing.mjs [Client Component SSR]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/SanityVision.js [Client Component SSR]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component SSR]
+    ./sanity.config.ts [Client Component SSR]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/.pnpm/@rexxars+react-json-inspector@9.0.1_react@19.2.0/node_modules/@rexxars/react-json-inspector/dist/index.js:4:1
+Module not found: Can't resolve 'md5-o-matic'
+[0m [90m 2 |[39m [36mimport[39m { [33mComponent[39m[33m,[39m useCallback } [36mfrom[39m [32m"react"[39m[33m;[39m
+ [90m 3 |[39m [36mimport[39m debounce [36mfrom[39m [32m"debounce"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m md5OMatic [36mfrom[39m [32m"md5-o-matic"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 5 |[39m [36mlet[39m id [33m=[39m [33mMath[39m[33m.[39mceil([33mMath[39m[33m.[39mrandom() [33m*[39m [35m10[39m)[33m;[39m
+ [90m 6 |[39m [36mconst[39m uid [33m=[39m () [33m=>[39m [33m++[39mid[33m;[39m
+ [90m 7 |[39m [36mfunction[39m type(value) {[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/.pnpm/@rexxars+react-json-inspector@9.0.1_react@19.2.0/node_modules/@rexxars/react-json-inspector/dist/index.js [Client Component Browser]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/SanityVision.js [Client Component Browser]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component Browser]
+    ./sanity.config.ts [Client Component Browser]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/.pnpm/@rexxars+react-json-inspector@9.0.1_react@19.2.0/node_modules/@rexxars/react-json-inspector/dist/index.js [Client Component SSR]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/SanityVision.js [Client Component SSR]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component SSR]
+    ./sanity.config.ts [Client Component SSR]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/SanityVision.js:28:1
+Module not found: Can't resolve 'quick-lru'
+[0m [90m 26 |[39m [36mimport[39m { json2csv } [36mfrom[39m [32m"json-2-csv"[39m[33m;[39m
+ [90m 27 |[39m [36mimport[39m { [33mJsonInspector[39m } [36mfrom[39m [32m"@rexxars/react-json-inspector"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 28 |[39m [36mimport[39m [33mLRU[39m [36mfrom[39m [32m"quick-lru"[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 29 |[39m [36mimport[39m { [33mIntentLink[39m } [36mfrom[39m [32m"sanity/router"[39m[33m;[39m
+ [90m 30 |[39m [36mimport[39m { useObservable } [36mfrom[39m [32m"react-rx"[39m[33m;[39m
+ [90m 31 |[39m [36mimport[39m { [36mof[39m[33m,[39m map [36mas[39m map$1[33m,[39m catchError } [36mfrom[39m [32m"rxjs"[39m[33m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/SanityVision.js [Client Component Browser]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component Browser]
+    ./sanity.config.ts [Client Component Browser]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/SanityVision.js [Client Component SSR]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component SSR]
+    ./sanity.config.ts [Client Component SSR]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/SanityVision.js:3:1
+Module not found: Can't resolve 'sanity'
+[0m [90m 1 |[39m [36mimport[39m { jsx[33m,[39m jsxs[33m,[39m [33mFragment[39m [36mas[39m [33mFragment$1[39m } [36mfrom[39m [32m"react/jsx-runtime"[39m[33m;[39m
+ [90m 2 |[39m [36mimport[39m { c } [36mfrom[39m [32m"react-compiler-runtime"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { useTranslation[33m,[39m useKeyValueStore[33m,[39m useDateTimeFormat[33m,[39m [33mContextMenuButton[39m[33m,[39m [33mTranslate[39m[33m,[39m usePerspective[33m,[39m useDataset[33m,[39m useScheduledDraftsEnabled[33m,[39m useActiveReleases[33m,[39m useWorkspace[33m,[39m sortReleases[33m,[39m useClient[33m,[39m isCardinalityOneRelease[33m,[39m getReleaseIdFromReleaseDocumentId } [36mfrom[39m [32m"sanity"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m [36mimport[39m { [33mSpinner[39m[33m,[39m rem[33m,[39m useTheme[33m,[39m [33mFlex[39m[33m,[39m [33mCard[39m[33m,[39m [33mLabel[39m[33m,[39m [33mBox[39m[33m,[39m [33mText[39m[33m,[39m [33mTooltip[39m[33m,[39m [33mStack[39m[33m,[39m useToast[33m,[39m [33mTextInput[39m[33m,[39m [33mMenuButton[39m[33m,[39m [33mMenu[39m[33m,[39m [33mMenuItem[39m[33m,[39m [33mCode[39m[33m,[39m [33mButton[39m[33m,[39m [33mHotkeys[39m[33m,[39m useClickOutsideEvent[33m,[39m [33mPopover[39m[33m,[39m [33mInline[39m[33m,[39m [33mBadge[39m[33m,[39m [33mGrid[39m[33m,[39m [33mSelect[39m[33m,[39m [33mContainer[39m[33m,[39m [33mHeading[39m } [36mfrom[39m [32m"@sanity/ui"[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { useState[33m,[39m useEffect[33m,[39m forwardRef[33m,[39m useRef[33m,[39m useImperativeHandle[33m,[39m [33mFragment[39m[33m,[39m [33mComponent[39m } [36mfrom[39m [32m"react"[39m[33m;[39m
+ [90m 6 |[39m [36mimport[39m { [33mSplitPane[39m } [36mfrom[39m [32m"@rexxars/react-split-pane"[39m[33m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/SanityVision.js [Client Component Browser]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component Browser]
+    ./sanity.config.ts [Client Component Browser]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/SanityVision.js [Client Component SSR]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component SSR]
+    ./sanity.config.ts [Client Component SSR]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js:3:1
+Module not found: Can't resolve 'sanity'
+[0m [90m 1 |[39m [36mimport[39m { [33mEyeOpenIcon[39m } [36mfrom[39m [32m"@sanity/icons"[39m[33m;[39m
+ [90m 2 |[39m [36mimport[39m { lazy } [36mfrom[39m [32m"react"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { defineLocaleResourceBundle[33m,[39m definePlugin } [36mfrom[39m [32m"sanity"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 4 |[39m [36mimport[39m { route } [36mfrom[39m [32m"sanity/router"[39m[33m;[39m
+ [90m 5 |[39m [36mconst[39m visionLocaleNamespace [33m=[39m [32m"vision"[39m[33m,[39m visionUsEnglishLocaleBundle [33m=[39m defineLocaleResourceBundle({
+ [90m 6 |[39m   locale[33m:[39m [32m"en-US"[39m[33m,[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component Browser]
+    ./sanity.config.ts [Client Component Browser]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component SSR]
+    ./sanity.config.ts [Client Component SSR]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/resources.js:1:1
+Module not found: Can't resolve 'sanity'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m { defineLocalesResources } [36mfrom[39m [32m"sanity"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m [36mconst[39m visionLocaleStrings [33m=[39m defineLocalesResources([32m"vision"[39m[33m,[39m {
+ [90m 3 |[39m   [90m/** Label for action "Copy to clipboard", tied to the "Query URL" field. Also used for accessibility purposes on button */[39m
+ [90m 4 |[39m   [32m"action.copy-url-to-clipboard"[39m[33m:[39m [32m"Copy to clipboard"[39m[33m,[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/resources.js [Client Component Browser]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component Browser]
+    ./sanity.config.ts [Client Component Browser]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/resources.js [Client Component SSR]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component SSR]
+    ./sanity.config.ts [Client Component SSR]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/.pnpm/next-sanity@11.6.12_@emotion+is-prop-valid@1.4.0_@sanity+client@7.14.1_@sanity+icons@3._3574054e6f6d41cec1d117780f8c958c/node_modules/next-sanity/dist/NextStudio.js:4:1
+Module not found: Can't resolve 'sanity'
+[0m [90m 2 |[39m [36mimport[39m { useMemo[33m,[39m useSyncExternalStore } [36mfrom[39m [32m"react"[39m[33m;[39m
+ [90m 3 |[39m [36mimport[39m { [33mFragment[39m[33m,[39m jsx[33m,[39m jsxs } [36mfrom[39m [32m"react/jsx-runtime"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mStudio[39m } [36mfrom[39m [32m"sanity"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 5 |[39m [36mimport[39m { createHashHistory } [36mfrom[39m [32m"history"[39m[33m;[39m
+ [90m 6 |[39m [36mfunction[39m createHashHistoryForStudio() {
+ [90m 7 |[39m 	[36mconst[39m history [33m=[39m createHashHistory()[33m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/.pnpm/next-sanity@11.6.12_@emotion+is-prop-valid@1.4.0_@sanity+client@7.14.1_@sanity+icons@3._3574054e6f6d41cec1d117780f8c958c/node_modules/next-sanity/dist/NextStudio.js [Client Component Browser]
+    ./node_modules/.pnpm/next-sanity@11.6.12_@emotion+is-prop-valid@1.4.0_@sanity+client@7.14.1_@sanity+icons@3._3574054e6f6d41cec1d117780f8c958c/node_modules/next-sanity/dist/studio/client-component/index.js [Client Component Browser]
+    ./node_modules/.pnpm/next-sanity@11.6.12_@emotion+is-prop-valid@1.4.0_@sanity+client@7.14.1_@sanity+icons@3._3574054e6f6d41cec1d117780f8c958c/node_modules/next-sanity/dist/studio/client-component/index.js [Server Component]
+    ./node_modules/.pnpm/next-sanity@11.6.12_@emotion+is-prop-valid@1.4.0_@sanity+client@7.14.1_@sanity+icons@3._3574054e6f6d41cec1d117780f8c958c/node_modules/next-sanity/dist/studio/index.js [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/.pnpm/next-sanity@11.6.12_@emotion+is-prop-valid@1.4.0_@sanity+client@7.14.1_@sanity+icons@3._3574054e6f6d41cec1d117780f8c958c/node_modules/next-sanity/dist/NextStudio.js [Client Component SSR]
+    ./node_modules/.pnpm/next-sanity@11.6.12_@emotion+is-prop-valid@1.4.0_@sanity+client@7.14.1_@sanity+icons@3._3574054e6f6d41cec1d117780f8c958c/node_modules/next-sanity/dist/studio/client-component/index.js [Client Component SSR]
+    ./node_modules/.pnpm/next-sanity@11.6.12_@emotion+is-prop-valid@1.4.0_@sanity+client@7.14.1_@sanity+icons@3._3574054e6f6d41cec1d117780f8c958c/node_modules/next-sanity/dist/studio/client-component/index.js [Server Component]
+    ./node_modules/.pnpm/next-sanity@11.6.12_@emotion+is-prop-valid@1.4.0_@sanity+client@7.14.1_@sanity+icons@3._3574054e6f6d41cec1d117780f8c958c/node_modules/next-sanity/dist/studio/index.js [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./sanity.config.ts:8:1
+Module not found: Can't resolve 'sanity'
+[0m [90m  6 |[39m
+ [90m  7 |[39m [36mimport[39m {visionTool} [36mfrom[39m [32m'@sanity/vision'[39m
+[31m[1m>[22m[39m[90m  8 |[39m [36mimport[39m {defineConfig} [36mfrom[39m [32m'sanity'[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  9 |[39m [36mimport[39m {structureTool} [36mfrom[39m [32m'sanity/structure'[39m
+ [90m 10 |[39m
+ [90m 11 |[39m [90m// Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works[39m[0m
+
+
+
+Import trace:
+  Server Component:
+    ./sanity.config.ts
+    ./app/admin/[[...tool]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./sanity/schemaTypes/testimonial.ts:1:1
+Module not found: Can't resolve 'sanity'
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m { defineField[33m,[39m defineType } [36mfrom[39m [32m'sanity'[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 2 |[39m
+ [90m 3 |[39m [36mexport[39m [36mdefault[39m defineType({
+ [90m 4 |[39m     name[33m:[39m [32m'testimonial'[39m[33m,[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./sanity/schemaTypes/testimonial.ts [Client Component Browser]
+    ./sanity/schemaTypes/index.ts [Client Component Browser]
+    ./sanity.config.ts [Client Component Browser]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./sanity/schemaTypes/testimonial.ts [Client Component SSR]
+    ./sanity/schemaTypes/index.ts [Client Component SSR]
+    ./sanity.config.ts [Client Component SSR]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/SanityVision.js:29:1
+Module not found: Can't resolve 'sanity/router'
+[0m [90m 27 |[39m [36mimport[39m { [33mJsonInspector[39m } [36mfrom[39m [32m"@rexxars/react-json-inspector"[39m[33m;[39m
+ [90m 28 |[39m [36mimport[39m [33mLRU[39m [36mfrom[39m [32m"quick-lru"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 29 |[39m [36mimport[39m { [33mIntentLink[39m } [36mfrom[39m [32m"sanity/router"[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 30 |[39m [36mimport[39m { useObservable } [36mfrom[39m [32m"react-rx"[39m[33m;[39m
+ [90m 31 |[39m [36mimport[39m { [36mof[39m[33m,[39m map [36mas[39m map$1[33m,[39m catchError } [36mfrom[39m [32m"rxjs"[39m[33m;[39m
+ [90m 32 |[39m [36mconst[39m [33mAPI_VERSIONS[39m [33m=[39m [[32m"v1"[39m[33m,[39m [32m"vX"[39m[33m,[39m [32m"v2021-03-25"[39m[33m,[39m [32m"v2021-10-21"[39m[33m,[39m [32m"v2022-03-07"[39m[33m,[39m [32m"v2025-02-19"[39m[33m,[39m [32m`v${(/* @__PURE__ */ new Date()).toISOString().split("T")[0]}`[39m][33m,[39m [[33mDEFAULT_API_VERSION[39m] [33m=[39m [33mAPI_VERSIONS[39m[33m.[39mslice([33m-[39m[35m1[39m)[33m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/SanityVision.js [Client Component Browser]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component Browser]
+    ./sanity.config.ts [Client Component Browser]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/SanityVision.js [Client Component SSR]
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component SSR]
+    ./sanity.config.ts [Client Component SSR]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js:4:1
+Module not found: Can't resolve 'sanity/router'
+[0m [90m 2 |[39m [36mimport[39m { lazy } [36mfrom[39m [32m"react"[39m[33m;[39m
+ [90m 3 |[39m [36mimport[39m { defineLocaleResourceBundle[33m,[39m definePlugin } [36mfrom[39m [32m"sanity"[39m[33m;[39m
+[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { route } [36mfrom[39m [32m"sanity/router"[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 5 |[39m [36mconst[39m visionLocaleNamespace [33m=[39m [32m"vision"[39m[33m,[39m visionUsEnglishLocaleBundle [33m=[39m defineLocaleResourceBundle({
+ [90m 6 |[39m   locale[33m:[39m [32m"en-US"[39m[33m,[39m
+ [90m 7 |[39m   namespace[33m:[39m visionLocaleNamespace[33m,[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component Browser]
+    ./sanity.config.ts [Client Component Browser]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./node_modules/.pnpm/@sanity+vision@4.22.0_@babel+runtime@7.28.4_@codemirror+lint@6.9.3_@codemirror+theme-on_f95e35b40396c4d8ed13829783478d43/node_modules/@sanity/vision/lib/_chunks-es/index.js [Client Component SSR]
+    ./sanity.config.ts [Client Component SSR]
+    ./sanity.config.ts [Server Component]
+    ./app/admin/[[...tool]]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./sanity.config.ts:9:1
+Module not found: Can't resolve 'sanity/structure'
+[0m [90m  7 |[39m [36mimport[39m {visionTool} [36mfrom[39m [32m'@sanity/vision'[39m
+ [90m  8 |[39m [36mimport[39m {defineConfig} [36mfrom[39m [32m'sanity'[39m
+[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m {structureTool} [36mfrom[39m [32m'sanity/structure'[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 10 |[39m
+ [90m 11 |[39m [90m// Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works[39m
+ [90m 12 |[39m [36mimport[39m {apiVersion[33m,[39m dataset[33m,[39m projectId} [36mfrom[39m [32m'./sanity/env'[39m[0m
+
+
+
+Import trace:
+  Server Component:
+    ./sanity.config.ts
+    ./app/admin/[[...tool]]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./node_modules/.pnpm/react-dom@19.2.0_react@19.2.0/node_modules/react-dom/cjs/react-dom-client.production.js:15:17
+Module not found: Can't resolve 'scheduler'
+
+
+Import trace:
+  Browser:
+    ./node_modules/.pnpm/react-dom@19.2.0_react@19.2.0/node_modules/react-dom/cjs/react-dom-client.production.js
+    ./node_modules/.pnpm/react-dom@19.2.0_react@19.2.0/node_modules/react-dom/client.js
+    ./node_modules/.pnpm/next@16.0.10_@babel+core@7.28.5_@opentelemetry+api@1.9.0_babel-plugin-react-compiler@1._ae3e58926edfd4e7bb18b6bd40329e1e/node_modules/next/dist/client/index.js
+    ./node_modules/.pnpm/next@16.0.10_@babel+core@7.28.5_@opentelemetry+api@1.9.0_babel-plugin-react-compiler@1._ae3e58926edfd4e7bb18b6bd40329e1e/node_modules/next/dist/client/next-turbopack.js
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./components/crm/LeadCard.tsx:9:1
+Module not found: Can't resolve 'sonner'
+[0m [90m  7 |[39m [36mimport[39m { [33mCollapsible[39m[33m,[39m [33mCollapsibleContent[39m } [36mfrom[39m [32m'@/components/ui/collapsible'[39m[33m;[39m
+ [90m  8 |[39m [36mimport[39m { updateLeadStatusAction[33m,[39m updateLeadNotesAction } [36mfrom[39m [32m'@/app/actions/crm'[39m[33m;[39m
+[31m[1m>[22m[39m[90m  9 |[39m [36mimport[39m { toast } [36mfrom[39m [32m'sonner'[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 10 |[39m [36mimport[39m { [33mDialog[39m[33m,[39m [33mDialogContent[39m[33m,[39m [33mDialogHeader[39m[33m,[39m [33mDialogTitle[39m[33m,[39m [33mDialogFooter[39m[33m,[39m [33mDialogDescription[39m } [36mfrom[39m [32m'@/components/ui/dialog'[39m[33m;[39m
+ [90m 11 |[39m [36mimport[39m { [33mSelect[39m[33m,[39m [33mSelectContent[39m[33m,[39m [33mSelectItem[39m[33m,[39m [33mSelectTrigger[39m[33m,[39m [33mSelectValue[39m } [36mfrom[39m [32m'@/components/ui/select'[39m[33m;[39m
+ [90m 12 |[39m [36mimport[39m { [33mTextarea[39m } [36mfrom[39m [32m'@/components/ui/textarea'[39m[33m;[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./components/crm/LeadCard.tsx [Client Component Browser]
+    ./components/crm/LeadList.tsx [Client Component Browser]
+    ./components/crm/LeadList.tsx [Server Component]
+    ./app/CRM/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/crm/LeadCard.tsx [Client Component SSR]
+    ./components/crm/LeadList.tsx [Client Component SSR]
+    ./components/crm/LeadList.tsx [Server Component]
+    ./app/CRM/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./components/crm/LeadList.tsx:11:1
+Module not found: Can't resolve 'sonner'
+[0m [90m  9 |[39m [36mimport[39m { [33mLeadCard[39m } [36mfrom[39m [32m'./LeadCard'[39m[33m;[39m
+ [90m 10 |[39m [36mimport[39m { [33mSelect[39m[33m,[39m [33mSelectContent[39m[33m,[39m [33mSelectItem[39m[33m,[39m [33mSelectTrigger[39m[33m,[39m [33mSelectValue[39m } [36mfrom[39m [32m'@/components/ui/select'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 11 |[39m [36mimport[39m { toast } [36mfrom[39m [32m'sonner'[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 12 |[39m
+ [90m 13 |[39m [36mexport[39m [36mfunction[39m [33mLeadList[39m() {
+ [90m 14 |[39m     [36mconst[39m [leads[33m,[39m setLeads] [33m=[39m useState[33m<[39m[33mLead[39m[][33m>[39m([])[33m;[39m[0m
+
+
+
+Import trace:
+  Server Component:
+    ./components/crm/LeadList.tsx
+    ./app/CRM/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./components/modals/whatsapp-modal.tsx:20:1
+Module not found: Can't resolve 'sonner'
+[0m [90m 18 |[39m [36mimport[39m { identifyTikTokUser } [36mfrom[39m [32m"@/lib/tiktok-client"[39m
+ [90m 19 |[39m [36mimport[39m { getOrSetExternalId } [36mfrom[39m [32m"@/lib/cookie-utils"[39m
+[31m[1m>[22m[39m[90m 20 |[39m [36mimport[39m { toast } [36mfrom[39m [32m"sonner"[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 21 |[39m
+ [90m 22 |[39m [36mimport[39m { useRouter } [36mfrom[39m [32m"next/navigation"[39m
+ [90m 23 |[39m [36mimport[39m useEmblaCarousel [36mfrom[39m [32m"embla-carousel-react"[39m[0m
+
+
+
+Import traces:
+  Client Component Browser:
+    ./components/modals/whatsapp-modal.tsx [Client Component Browser]
+    ./components/layout/global-modal-wrapper.tsx [Client Component Browser]
+    ./components/layout/global-modal-wrapper.tsx [Server Component]
+    ./app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/modals/whatsapp-modal.tsx [Client Component SSR]
+    ./components/layout/global-modal-wrapper.tsx [Client Component SSR]
+    ./components/layout/global-modal-wrapper.tsx [Server Component]
+    ./app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./components/ui/sonner.tsx:4:1
+Module not found: Can't resolve 'sonner'
+[0m [90m 2 |[39m
+ [90m 3 |[39m [36mimport[39m { useTheme } [36mfrom[39m [32m'next-themes'[39m
+[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mToaster[39m [36mas[39m [33mSonner[39m[33m,[39m [33mToasterProps[39m } [36mfrom[39m [32m'sonner'[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 5 |[39m
+ [90m 6 |[39m [36mconst[39m [33mToaster[39m [33m=[39m ({ [33m...[39mprops }[33m:[39m [33mToasterProps[39m) [33m=>[39m {
+ [90m 7 |[39m   [36mconst[39m { theme [33m=[39m [32m'system'[39m } [33m=[39m useTheme()[0m
+
+
+
+Import trace:
+  Server Component:
+    ./components/ui/sonner.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./components/analytics/google-tag-manager.tsx:2:10)
+    at <unknown> (./components/analytics/google-tag-manager.tsx:2:21)
+    at <unknown> (./components/analytics/tiktok-pixel.tsx:3:10)
+    at <unknown> (./components/analytics/tiktok-pixel.tsx:1:10)
+    at <unknown> (./components/analytics/tiktok-pixel.tsx:1:23)
+    at <unknown> (./components/analytics/tiktok-pixel.tsx:3:21)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    ... collapsed 7 duplicate lines matching above 1 lines 7 times...
+    at <unknown> (./sanity.config.ts:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./sanity/schemaTypes/testimonial.ts:1:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./sanity.config.ts:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./components/crm/LeadCard.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./components/crm/LeadList.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./components/modals/whatsapp-modal.tsx:20:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./components/ui/sonner.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
