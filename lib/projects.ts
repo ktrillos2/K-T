@@ -26,6 +26,27 @@ export interface Project {
 
 export const projects: Project[] = [
     {
+        id: "brambila-inmobiliaria",
+        slug: "brambila-inmobiliaria",
+        title: "Brambila's Inmobiliaria",
+        shortDescription: "Plataforma inmobiliaria personalizada",
+        description: "Desarrollo personalizado para facilitar la gestión, visualización y compartición dinámica de propiedades inmobiliarias.",
+        year: "2026",
+        month: "Febrero",
+        category: "Inmobiliaria / Real Estate",
+        tech: ["Next.js", "React", "Tailwind CSS", "Dynamic Sharing"],
+        images: {
+            hero: "/images/projects/brambilas.png",
+            mobile: "/images/projects/brambilas-mobile.png",
+        },
+        liveUrl: "https://www.brambilasinmobiliaria.com",
+        content: {
+            challenge: "La inmobiliaria necesitaba una plataforma moderna que permitiera no solo mostrar propiedades, sino generar fichas técnicas al instante y compartirlas de manera dinámica con clientes.",
+            solution: "Desarrollamos una plataforma web a medida con un sistema de gestión de propiedades optimizado. Implementamos generación dinámica de fichas y una interfaz intuitiva que mejora la experiencia de búsqueda y promoción de inmuebles.",
+            seoFocus: "Venta y renta de propiedades, gestión inmobiliaria, bienes raíces exclusivos.",
+        },
+    },
+    {
         id: "nosky-group",
         slug: "nosky-group",
         title: "Noskygroup",
