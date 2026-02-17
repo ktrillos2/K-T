@@ -26,6 +26,27 @@ export interface Project {
 
 export const projects: Project[] = [
     {
+        id: "psicowork",
+        slug: "psicowork",
+        title: "Psicowork",
+        shortDescription: "Bienestar Integral para Personas & Empresas.",
+        description: "Psicología Clínica, Organizacional y Gestión del Talento Humano. Transformamos vidas y potenciamos entornos laborales.",
+        year: "2026",
+        month: "Febrero",
+        category: "Salud Mental y Bienestar",
+        tech: ["Next.js", "Tailwind CSS", "WhatsApp API"],
+        images: {
+            hero: "/images/projects/psicowork.png",
+            mobile: "/images/projects/psicowork-mobile.png",
+        },
+        liveUrl: "https://psicowork.com",
+        content: {
+            challenge: "La necesidad de conectar servicios de psicología clínica con el mundo corporativo, ofreciendo una plataforma unificada para personas y empresas.",
+            solution: "Desarrollamos una web institucional que transmite profesionalismo y confianza. Integramos secciones claras para servicios personales y empresariales, con contacto directo a WhatsApp para agilizar citas.",
+            seoFocus: "Psicología clínica, bienestar corporativo, gestión de talento humano, salud mental laboral.",
+        },
+    },
+    {
         id: "brambila-inmobiliaria",
         slug: "brambila-inmobiliaria",
         title: "Brambila's Inmobiliaria",
