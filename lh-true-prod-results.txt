@@ -1,0 +1,17 @@
+--- SCORES PROD ---
+Performance: 82
+Accessibility: 77
+Best Practices: 96
+SEO: 82
+
+--- TOP OPPORTUNITIES ---
+- Reduce unused JavaScript
+  Savings: 750ms
+  Description: Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).
+
+--- METRICS ---
+- First Contentful Paint: 1.1 s (Score: 99)
+- Largest Contentful Paint: 4.7 s (Score: 33)
+- Total Blocking Time: 130 ms (Score: 96)
+- Cumulative Layout Shift: 0 (Score: 100)
+- Speed Index: 2.0 s (Score: 99)

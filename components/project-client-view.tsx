@@ -3,7 +3,7 @@
 import { useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { m as motion, useScroll, useTransform } from "framer-motion"
 import { ArrowLeft, ExternalLink, Calendar, Layers, Globe } from "lucide-react"
 import { useCursor } from "@/context/cursor-context"
 import { Project } from "@/lib/projects"

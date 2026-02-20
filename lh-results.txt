@@ -1,0 +1,25 @@
+--- SCORES ---
+Performance: 42
+Accessibility: 100
+Best Practices: 100
+SEO: 100
+
+--- TOP OPPORTUNITIES ---
+- Reduce unused JavaScript
+  Savings: 2710ms
+  Description: Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).
+- Minify JavaScript
+  Savings: 2370ms
+  Description: Minifying JavaScript files can reduce payload sizes and script parse time. [Learn how to minify JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unminified-javascript/).
+
+--- DIAGNOSTICS & FAILED AUDITS ---
+- Largest Contentful Paint (Score: 0)
+  Description: Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)
+- Max Potential First Input Delay (Score: 0)
+  Description: The maximum potential First Input Delay that your users could experience is the duration of the longest task. [Learn more about the Maximum Potential First Input Delay metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/).
+- Minimize main-thread work (Score: 0)
+  Description: Consider reducing the time spent parsing, compiling and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to minimize main-thread work](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)
+- Reduce JavaScript execution time (Score: 0)
+  Description: Consider reducing the time spent parsing, compiling, and executing JS. You may find delivering smaller JS payloads helps with this. [Learn how to reduce Javascript execution time](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/).
+- Missing source maps for large first-party JavaScript (Score: 0)
+  Description: Source maps translate minified code to the original source code. This helps developers debug in production. In addition, Lighthouse is able to provide further insights. Consider deploying source maps to take advantage of these benefits. [Learn more about source maps](https://developer.chrome.com/docs/devtools/javascript/source-maps/).

@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { m as motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { Monitor, Cpu, Globe, Server, Code2, Terminal, Database, Cloud, Braces, Hash, Command } from "lucide-react"
 
 const symbols = [

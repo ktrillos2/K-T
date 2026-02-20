@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
+import { m as motion, AnimatePresence } from "framer-motion"
 import { countryCodes } from "@/lib/country-codes"
 import { useLanguage, Country } from "@/context/language-context"
 import { Button } from "@/components/ui/button"

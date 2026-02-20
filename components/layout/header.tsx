@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
+import { m as motion, AnimatePresence } from "framer-motion"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
 import { smoothScrollTo } from "@/lib/utils"

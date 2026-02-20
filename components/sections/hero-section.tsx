@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { motion } from "framer-motion"
+import { m as motion } from "framer-motion"
 import { ChevronDown } from "lucide-react"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
@@ -55,7 +55,7 @@ export default function HeroSection() {
 
     let rafId: number | null = null
     let idleId: number | null = null
-    let timeoutId: NodeJS.Timeout | number | null = null
+    let timeoutId: number | null = null
 
     const start = () => {
       // Optimize particle count based on screen size
@@ -78,6 +78,11 @@ export default function HeroSection() {
       const frameInterval = 1000 / fps
 
       const animate = (time: number) => {
+        if (document.hidden) {
+          rafId = requestAnimationFrame(animate)
+          return
+        }
+
         const deltaTime = time - lastTime
 
         if (deltaTime > frameInterval) {
@@ -108,7 +113,7 @@ export default function HeroSection() {
     if ("requestIdleCallback" in window) {
       idleId = (window as any).requestIdleCallback(start, { timeout: 1500 })
     } else {
-      timeoutId = window.setTimeout(start, 900) as unknown as number
+      timeoutId = setTimeout(start, 900) as unknown as number
     }
 
     return () => {
@@ -126,49 +131,30 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] z-0" />
 
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-        <motion.p
-          className="text-white font-mono text-sm md:text-base mb-6 min-h-[1.5em]"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
+        <p className="text-white font-mono text-sm md:text-base mb-6 min-h-[1.5em] animate-hero-text">
           {dictionary.hero.greeting}
-        </motion.p>
+        </p>
 
-        <motion.h1
-          className="relative text-4xl md:text-6xl lg:text-8xl font-bold font-title mb-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-        >
-          {/* Ghost text to reserve space and prevent CLS */}
-          <span className="invisible" aria-hidden="true">
-            {dictionary.hero.slogan}
+        <h1 className="relative text-4xl md:text-6xl lg:text-8xl font-bold font-title mb-8 flex justify-center animate-hero-text animation-delay-100">
+          {/* We replace the JS-heavy typewriter and ghost text with a direct render and elegant CSS animation to fix LCP */}
+          <span>
+            <span className="text-foreground">{dictionary.hero.slogan}</span>
+            <motion.span
+              className="inline-block w-[3px] h-[1em] bg-white ml-2 align-middle"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: [1, 0] }}
+              transition={{
+                duration: 0.7,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: "reverse",
+              }}
+            />
           </span>
-
-          {/* Actual animated text overlay */}
-          <span className="absolute inset-0 flex justify-center">
-            <span>
-              <span className="text-foreground">{displayedText}</span>
-              <motion.span
-                className="inline-block w-[3px] h-[1em] bg-white ml-1 align-middle"
-                animate={{ opacity: isTypingComplete ? [1, 0] : 1 }}
-                transition={{
-                  duration: 0.5,
-                  repeat: isTypingComplete ? Number.POSITIVE_INFINITY : 0,
-                  repeatType: "reverse",
-                }}
-              />
-            </span>
-          </span>
-        </motion.h1>
+        </h1>
 
         <motion.a
           href="#services"
-          className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-mono font-bold rounded hover:bg-white/80 transition-colors duration-300"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
+          className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-mono font-bold rounded hover:bg-white/80 transition-colors duration-300 animate-hero-text animation-delay-800"
           onMouseEnter={() => setCursorVariant("hover")}
           onMouseLeave={() => setCursorVariant("default")}
           whileHover={{ scale: 1.05 }}

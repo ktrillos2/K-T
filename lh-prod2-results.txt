@@ -1,0 +1,23 @@
+--- SCORES PROD ---
+Performance: 50
+Accessibility: 100
+Best Practices: 100
+SEO: 100
+
+--- TOP OPPORTUNITIES ---
+- Reduce unused JavaScript
+  Savings: 2930ms
+  Description: Reduce unused JavaScript and defer loading scripts until they are required to decrease bytes consumed by network activity. [Learn how to reduce unused JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unused-javascript/).
+- Minify JavaScript
+  Savings: 2360ms
+  Description: Minifying JavaScript files can reduce payload sizes and script parse time. [Learn how to minify JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unminified-javascript/).
+- Reduce initial server response time
+  Savings: 671ms
+  Description: Keep the server response time for the main document short because all other requests depend on it. [Learn more about the Time to First Byte metric](https://developer.chrome.com/docs/lighthouse/performance/time-to-first-byte/).
+
+--- METRICS ---
+- First Contentful Paint: 0.9 s (Score: 100)
+- Largest Contentful Paint: 13.0 s (Score: 0)
+- Total Blocking Time: 830 ms (Score: 35)
+- Cumulative Layout Shift: 0 (Score: 100)
+- Speed Index: 5.8 s (Score: 49)

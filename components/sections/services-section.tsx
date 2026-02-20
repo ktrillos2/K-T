@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { memo, useRef } from "react"
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { m as motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { Check, ArrowRight, Sparkles, Zap, ShoppingCart, Code2 } from "lucide-react"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"

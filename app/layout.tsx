@@ -8,13 +8,13 @@ import { LazyMotion, domAnimation } from "framer-motion"
 import "./globals.css"
 import { LanguageProvider } from "@/context/language-context"
 import { CursorProvider } from "@/context/cursor-context"
-import Header from "@/components/layout/header"
-import CustomCursor from "@/components/ui/custom-cursor"
+import dynamic from "next/dynamic"
 import CountrySelector from "@/components/layout/country-selector"
 import ContentWrapper from "@/components/layout/content-wrapper"
 import { Toaster } from "@/components/ui/sonner"
-import FloatingButtons from "@/components/ui/floating-buttons"
-import Wrapper from "@/components/layout/global-modal-wrapper"
+
+const Header = dynamic(() => import("@/components/layout/header"))
+import ClientSideUI from "@/components/layout/client-side-ui"
 import { ModalProvider } from "@/context/modal-context"
 
 
@@ -27,9 +27,9 @@ import GoogleTagManager from "@/components/analytics/google-tag-manager"
 import TikTokEventsTracker from "@/components/analytics/tiktok-events-tracker"
 
 
-const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-fira" })
-const vt323 = VT323({ weight: "400", subsets: ["latin"], variable: "--font-vt323" })
-const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"], variable: "--font-press-start-2p" })
+const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-fira", display: "swap" })
+const vt323 = VT323({ weight: "400", subsets: ["latin"], variable: "--font-vt323", display: "swap" })
+const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"], variable: "--font-press-start-2p", display: "swap" })
 
 const ariW9500 = localFont({
   src: "../public/fonts/ari-w9500-bold.ttf",
@@ -234,12 +234,10 @@ export default function RootLayout({
             <CursorProvider>
               <ModalProvider>
                 <CountrySelector />
-                <CustomCursor />
                 <ContentWrapper>
                   <Header />
                   <main>{children}</main>
-                  <FloatingButtons />
-                  <Wrapper />
+                  <ClientSideUI />
                 </ContentWrapper>
               </ModalProvider>
             </CursorProvider>

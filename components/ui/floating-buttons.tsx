@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, AnimatePresence } from "framer-motion"
+import { m as motion, AnimatePresence } from "framer-motion"
 import { useCursor } from "@/context/cursor-context"
 import { useModal } from "@/context/modal-context"
 import { Sparkles } from "lucide-react"

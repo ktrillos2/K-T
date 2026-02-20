@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { memo, useState, useRef, useEffect } from "react"
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { m as motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { Code2, Rocket, Users, Zap, ChevronRight, Terminal } from "lucide-react"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
