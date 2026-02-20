@@ -40,10 +40,10 @@ const ariW9500 = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.kytcode.lat"),
   title: {
-    default: "K&T - Desarrollo Web y Gestión de Redes en Colombia",
+    default: "K&T | Agencias de Desarrollo Web - Cómo crear una página web profesional",
     template: "%s | K&T Agencia Digital",
   },
-  description: "Desarrollo web, e-commerce, landing pages y gestión de redes sociales. Soluciones profesionales para tu negocio en Colombia. Transformamos ideas en código.",
+  description: "¿Buscando cómo crear una página web que convierta? En K&T desarrollamos ecosistemas digitales escalables y de máximo rendimiento, impulsados siempre por Vercel.",
   icons: {
     icon: [
       { url: "/icon.png", sizes: "192x192", type: "image/png" },
@@ -59,16 +59,15 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     title: "K&T CRM",
   },
-  // 3. KEYWORDS: Definitive Strategy (Headless + Modernization + Authority)
+  // 3. KEYWORDS: Definitive Strategy (Headless + Modernization + Authority + Genesis of creating sites)
   keywords: [
-    "Headless WooCommerce",
-    "Next.js para WooCommerce",
-    "Modernización E-commerce",
-    "WooCommerce de Alto Rendimiento",
-    "Desarrollo Software a Medida",
-    "Agencia React",
-    "Expertos en Woo",
-    "Optimización Web WPO",
+    "pagina web",
+    "desarrollo web",
+    "pagina web como crear",
+    "crear pagina web",
+    "como crear una pagina web",
+    "como crear una pagina",
+    "agencia react en colombia",
     "K&T",
   ],
   authors: [{ name: "K&T Agencia Digital", url: "https://www.kytcode.lat" }],
@@ -80,8 +79,8 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "K&T - Desarrollo Web y Gestión de Redes en Colombia",
-    description: "Agencia digital en Colombia. Desarrollo web, e-commerce, landing pages y gestión de redes sociales.",
+    title: "K&T | Agencias de Desarrollo Web - Cómo crear una página web profesional",
+    description: "¿Buscando cómo crear una página web que convierta? En K&T desarrollamos ecosistemas digitales escalables y de máximo rendimiento, impulsados siempre por Vercel.",
     url: "https://www.kytcode.lat",
 
 
@@ -91,8 +90,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "K&T - Desarrollo Web y Gestión de Redes en Colombia",
-    description: "Agencia digital en Colombia. Desarrollo web, e-commerce, landing pages y gestión de redes sociales.",
+    title: "K&T | Agencias de Desarrollo Web - Cómo crear una página web profesional",
+    description: "Desarrollamos páginas web corporativas y aplicaciones escalables optimizadas para SEO Técnico. Tu infraestructura en Vercel.",
 
     creator: "@kytweb",
   },
@@ -148,8 +147,8 @@ const jsonLd = {
     }
   ],
   "priceRange": "$$",
-  "description": "Agencia digital en Colombia especializada en desarrollo de páginas web, e-commerce y gestión de redes sociales. Ofrecemos servicios de diseño web, landing pages, tiendas online y marketing digital.",
-  "slogan": "Transformamos tu visión en realidad digital",
+  "description": "Agencia de desarrollo web élite en Colombia especializada en páginas web de alto rendimiento, e-commerce headless (Next.js) y arquitecturas digitales escalables.",
+  "slogan": "Desarrollo Web Elite | Creamos Experiencias Digitales",
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Servicios Digitales",

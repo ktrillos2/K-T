@@ -70,6 +70,7 @@ export default function Header() {
             onMouseEnter={() => setCursorVariant("hover")}
             onMouseLeave={() => setCursorVariant("default")}
             whileHover={{ scale: 1.05 }}
+            aria-label="Ir a la página de inicio de K&T Agencia Digital"
             onClick={() => {
               if (pathname === '/') {
                 window.scrollTo({ top: 0, behavior: "instant" })
@@ -79,7 +80,7 @@ export default function Header() {
               }
             }}
           >
-            <Image src="/images/logo.png" alt="K&T Agencia Digital - Desarrollo Web y Gestión de Redes Sociales en Colombia" fill sizes="(max-width: 768px) 150px, 200px" className="object-none" priority />
+            <Image src="/images/logo.png" alt="Logotipo K&T Agencia de Desarrollo Web en Colombia" fill sizes="(max-width: 768px) 150px, 200px" className="object-none" priority />
           </motion.button>
 
           <div className="flex items-center gap-4">
@@ -89,6 +90,9 @@ export default function Header() {
                 className="px-3 py-2 text-sm font-mono rounded hover:bg-white/10 hover:text-white transition-all duration-300 flex items-center justify-center border border-white/10 gap-2"
                 onMouseEnter={() => setCursorVariant("hover")}
                 onMouseLeave={() => setCursorVariant("default")}
+                aria-haspopup="listbox"
+                aria-expanded={isCountryOpen}
+                aria-label={`Seleccionar región. País actual: ${country}`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -143,6 +147,8 @@ export default function Header() {
               className="px-4 py-2 text-sm font-mono border border-white/30 rounded hover:border-white hover:bg-white hover:text-black transition-all duration-300"
               onMouseEnter={() => setCursorVariant("hover")}
               onMouseLeave={() => setCursorVariant("default")}
+              aria-label={isMenuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
+              aria-expanded={isMenuOpen}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

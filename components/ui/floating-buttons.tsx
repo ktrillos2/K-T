@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { m as motion, AnimatePresence } from "framer-motion"
 import { useCursor } from "@/context/cursor-context"
 import { useModal } from "@/context/modal-context"
@@ -13,6 +14,112 @@ export default function FloatingButtons() {
     const pathname = usePathname()
     const { setCursorVariant } = useCursor()
     const { openModal } = useModal()
+    const [showQuote, setShowQuote] = useState(false)
+
+    useEffect(() => {
+        let mounted = true;
+        let hasInteracted = false;
+        let timePassed = false;
+        let buttonShown = false;
+        let audio: HTMLAudioElement | null = null;
+
+        const initAudio = () => {
+            if (audio) return;
+            try {
+                audio = new Audio('/notificacion.mp3');
+
+                // Mute, play, and immediately pause to force browser authorization for this element
+                audio.muted = true;
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        if (audio) {
+                            audio.pause();
+                            audio.currentTime = 0;
+                            audio.muted = false; // Restore audio for the actual notification
+                        }
+                    }).catch(e => {
+                        console.log("Audio silent play failed:", e);
+                    });
+                }
+            } catch (e) {
+                console.log("Error creando objeto Audio", e);
+            }
+        };
+
+        const playNotificationSound = () => {
+            if (!mounted) return;
+            try {
+                if (!audio) initAudio();
+                if (!audio) return;
+
+                audio.currentTime = 0;
+                const playPromise = audio.play();
+
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Audio autoplay blocked by browser policy:", error);
+                    });
+                }
+            } catch (e) {
+                console.log("Audio reproduction failed", e);
+            }
+        };
+
+        const showButton = () => {
+            if (buttonShown || !mounted) return;
+            buttonShown = true;
+            setShowQuote(true);
+            setTimeout(playNotificationSound, 300); // Dar tiempo a la animación para que el audio coincida con la entrada
+        };
+
+        const checkAndShow = () => {
+            if (hasInteracted && timePassed && !buttonShown) {
+                showButton();
+            }
+        };
+
+        const onInteract = () => {
+            if (!hasInteracted) {
+                hasInteracted = true;
+                initAudio(); // Inicializamos el audio EXACTAMENTE cuando el usuario toca la web
+                checkAndShow();
+
+                // Limpiamos los listeners para no sobrecargar
+                window.removeEventListener('click', onInteract);
+                window.removeEventListener('scroll', onInteract);
+                window.removeEventListener('mousemove', onInteract);
+                window.removeEventListener('touchstart', onInteract);
+                window.removeEventListener('keydown', onInteract);
+            }
+        };
+
+        // Escuchar la primera interacción del usuario para destrabar el Audio de HTML5
+        window.addEventListener('click', onInteract);
+        window.addEventListener('scroll', onInteract);
+        window.addEventListener('mousemove', onInteract);
+        window.addEventListener('touchstart', onInteract);
+        window.addEventListener('keydown', onInteract);
+
+        const timer = setTimeout(() => {
+            timePassed = true;
+            checkAndShow();
+        }, 3000);
+
+        return () => {
+            mounted = false;
+            clearTimeout(timer);
+            window.removeEventListener('click', onInteract);
+            window.removeEventListener('scroll', onInteract);
+            window.removeEventListener('mousemove', onInteract);
+            window.removeEventListener('touchstart', onInteract);
+            window.removeEventListener('keydown', onInteract);
+            if (audio) {
+                audio.pause();
+                audio = null;
+            }
+        };
+    }, [])
 
     // Don't show on admin or studio pages
     if (pathname?.startsWith('/admin') || pathname?.startsWith('/studio')) return null
@@ -65,19 +172,24 @@ export default function FloatingButtons() {
         >
             <AnimatePresence>
                 {/* Quote Button */}
-                <motion.button
-                    key="quote-btn"
-                    onClick={handleQuoteClick}
-                    className="pointer-events-auto group flex items-center gap-3 bg-primary text-primary-foreground px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300"
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.05, x: -5 }}
-                    whileTap={{ scale: 0.95 }}
-                    onMouseEnter={() => setCursorVariant("hover")}
-                    onMouseLeave={() => setCursorVariant("default")}
-                >
-                    <Sparkles size={18} className="animate-pulse" />
-                    <span className="font-bold text-sm">Cotizar tu proyecto</span>
-                </motion.button>
+                {showQuote && (
+                    <motion.button
+                        key="quote-btn"
+                        onClick={handleQuoteClick}
+                        className="pointer-events-auto group flex items-center gap-3 bg-primary text-primary-foreground px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300"
+                        variants={itemVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        whileHover={{ scale: 1.05, x: -5 }}
+                        whileTap={{ scale: 0.95 }}
+                        onMouseEnter={() => setCursorVariant("hover")}
+                        onMouseLeave={() => setCursorVariant("default")}
+                    >
+                        <Sparkles size={18} className="animate-pulse" />
+                        <span className="font-bold text-sm">Cotizar tu proyecto</span>
+                    </motion.button>
+                )}
 
                 {/* WhatsApp Button */}
                 <motion.button

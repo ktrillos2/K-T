@@ -129,11 +129,11 @@ export function LeadCard({ lead, onStatusUpdate, isOpen, onToggle }: LeadCardPro
         const name = lead.nombre || 'estimado/a';
 
         if (type === 'info') {
-            message = `Hola ${name}, te saluda K&T Agencia Digital. Recibimos tu interés y nos gustaría conocer más sobre tu proyecto para brindarte una asesoría personalizada. ¿Tienes unos minutos?`;
+            message = `¡Hola ${name}! Te saludamos de K&T. Recibimos tu mensaje y nos encantaría conocer tu proyecto. Te adelanto que nuestras webs siempre van en Vercel, con SEO incluido y garantía técnica de rendimiento. ¿A qué hora te queda fácil que charlemos un ratico?`;
         } else if (type === 'landing') {
-            message = `Hola ${name}, un gusto saludarte. Recibimos tu interés en una Landing Page. Desarrollamos sitios de alto impacto con optimización SEO. ¿Te gustaría conocer más sobre nuestro proceso y los costos de inversión?`;
+            message = `¡Hola ${name}! Te escribimos de K&T. Vimos que te interesa crear una página web. Nosotros las hacemos a la medida, alojadas en Vercel, con SEO listo para Google y garantía total de estabilidad. ¿Te comparto algunas opciones y precios por aquí?`;
         } else if (type === 'ecommerce') {
-            message = `Hola ${name}, un gusto saludarte. Vemos que te interesa una Tienda Virtual. Nuestras soluciones incluyen pasarelas de pago y panel administrativo completo. ¿Tienes disponibilidad para conversar sobre los requerimientos de tu catálogo?`;
+            message = `¡Hola ${name}! Somos K&T. Vimos tu interés en una tienda virtual. Te la dejamos lista para recibir pagos, montada en Vercel, con SEO optimizado y garantía técnica de funcionamiento. ¿Tienes en mente cuántos productos vas a vender?`;
         }
 
         return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;

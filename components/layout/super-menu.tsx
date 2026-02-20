@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter, usePathname } from "next/navigation"
 import { m as motion, AnimatePresence } from "framer-motion"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
@@ -39,6 +40,7 @@ const menuItems = [
   { key: "about", href: "#about", image: "/images/about-preview.png" },
   { key: "services", href: "#services", image: "/images/services-preview.png" },
   { key: "work", href: "#projects", image: "/images/work-preview.png" },
+  { key: "blog", href: "/blog", image: "/images/work-preview.png" }, // Reusing an image for preview
   { key: "contact", href: "#contact", image: "/images/contact-preview.png" },
 ]
 
@@ -67,10 +69,33 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
     }),
   }
 
+  const router = useRouter()
+  const pathname = usePathname()
+
   const handleLinkClick = (href: string) => {
     onClose()
-    onClose()
-    smoothScrollTo(href, 1000)
+
+    // Dar tiempo a que el modal comience a cerrarse para no asfixiar el cálculo del scroll
+    setTimeout(() => {
+      if (href.startsWith("#")) {
+        if (pathname === "/") {
+          const element = document.querySelector(href)
+          if (element) {
+            const headerOffset = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth"
+            });
+          }
+        } else {
+          router.push(`/${href}`)
+        }
+      } else {
+        router.push(href)
+      }
+    }, 150)
   }
 
   return (

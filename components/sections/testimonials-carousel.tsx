@@ -90,6 +90,7 @@ export default function TestimonialsCarousel({ testimonials, dictionary }: Testi
                                             href={testimonial.projectUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
+                                            aria-label={`Visitar el proyecto web para ${testimonial.project}`}
                                             className="flex-shrink-0 px-3 py-1.5 bg-white/10 hover:bg-white text-white hover:text-black rounded-lg text-xs font-bold transition-all duration-300 flex items-center gap-2"
                                         >
                                             {dictionary.testimonials.visitProject}
@@ -106,15 +107,19 @@ export default function TestimonialsCarousel({ testimonials, dictionary }: Testi
             <div className="flex justify-center gap-4 mt-12">
                 <button
                     onClick={scrollPrev}
-                    className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+                    aria-label="Ver testimonio anterior"
+                    tabIndex={0}
+                    className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors focus:ring-2 focus:ring-white"
                 >
-                    <ChevronLeft className="w-6 h-6" />
+                    <ChevronLeft className="w-6 h-6" aria-hidden="true" />
                 </button>
                 <button
                     onClick={scrollNext}
-                    className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors"
+                    aria-label="Ver siguiente testimonio"
+                    tabIndex={0}
+                    className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-colors focus:ring-2 focus:ring-white"
                 >
-                    <ChevronRight className="w-6 h-6" />
+                    <ChevronRight className="w-6 h-6" aria-hidden="true" />
                 </button>
             </div>
         </>
