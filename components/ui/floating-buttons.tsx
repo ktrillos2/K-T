@@ -70,7 +70,7 @@ export default function FloatingButtons() {
             if (buttonShown || !mounted) return;
             buttonShown = true;
             setShowQuote(true);
-            setTimeout(playNotificationSound, 300); // Dar tiempo a la animación para que el audio coincida con la entrada
+            playNotificationSound();
         };
 
         const checkAndShow = () => {

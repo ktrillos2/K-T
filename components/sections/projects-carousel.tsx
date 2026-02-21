@@ -4,7 +4,7 @@ import { useState, useRef, useCallback, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { m as motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion"
-import { ArrowUpRight, MousePointer2 } from "lucide-react"
+import { ArrowUpRight, MousePointer2, ChevronLeft, ChevronRight } from "lucide-react"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
 
@@ -79,27 +79,55 @@ export default function ProjectsCarousel({ projects, language, setCursorVariant,
         }
     }, [emblaApi, onSelect])
 
+    const scrollPrev = useCallback(() => {
+        if (emblaApi) emblaApi.scrollPrev()
+    }, [emblaApi])
+
+    const scrollNext = useCallback(() => {
+        if (emblaApi) emblaApi.scrollNext()
+    }, [emblaApi])
+
     return (
-        <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex touch-pan-y shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]">
-                {projects.map((project, index) => (
-                    <div
-                        key={project.id}
-                        className="flex-[0_0_90%] md:flex-[0_0_60%] lg:flex-[0_0_45%] min-w-0 pl-6 md:pl-10"
-                    >
-                        <ProjectCard
-                            project={project}
-                            index={index}
-                            isActive={activeIndex === index}
-                            isCurrent={currentSlide === index}
-                            onHover={() => setActiveIndex(index)}
-                            onLeave={() => setActiveIndex(null)}
-                            language={language}
-                            setCursorVariant={setCursorVariant}
-                            dictionary={dictionary}
-                        />
-                    </div>
-                ))}
+        <div className="relative group/carousel">
+            <div className="overflow-hidden" ref={emblaRef}>
+                <div className="flex touch-pan-y shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]">
+                    {projects.map((project, index) => (
+                        <div
+                            key={project.id}
+                            className="flex-[0_0_90%] md:flex-[0_0_60%] lg:flex-[0_0_45%] min-w-0 pl-6 md:pl-10"
+                        >
+                            <ProjectCard
+                                project={project}
+                                index={index}
+                                isActive={activeIndex === index}
+                                isCurrent={currentSlide === index}
+                                onHover={() => setActiveIndex(index)}
+                                onLeave={() => setActiveIndex(null)}
+                                language={language}
+                                setCursorVariant={setCursorVariant}
+                                dictionary={dictionary}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between px-2 md:px-8 z-20">
+                <button
+                    onClick={scrollPrev}
+                    className="pointer-events-auto p-4 bg-black/40 hover:bg-black/80 backdrop-blur-md rounded-full border border-white/10 text-white opacity-0 group-hover/carousel:opacity-100 transition-all duration-300 hover:scale-110 shadow-lg"
+                    aria-label="Previous project"
+                >
+                    <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
+                </button>
+                <button
+                    onClick={scrollNext}
+                    className="pointer-events-auto p-4 bg-black/40 hover:bg-black/80 backdrop-blur-md rounded-full border border-white/10 text-white opacity-0 group-hover/carousel:opacity-100 transition-all duration-300 hover:scale-110 shadow-lg"
+                    aria-label="Next project"
+                >
+                    <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
+                </button>
             </div>
         </div>
     )
