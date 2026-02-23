@@ -17,7 +17,7 @@ export const es = {
   },
   hero: {
     greeting: "// Agencia de Ingeniería y Desarrollo",
-    slogan: "Desarrollo Web a la Medida y SEO Técnico para Latinoamérica",
+    slogan: "Desarrollo Web a la Medida para Latinoamérica",
     cta: "Cotizar mi web a la medida",
     scroll: "Conoce nuestra arquitectura",
   },

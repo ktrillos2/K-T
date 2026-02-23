@@ -73,7 +73,7 @@ const mockChats: Chat[] = [
 ];
 
 export default function WhatsAppWebClone() {
-    const [chats, setChats] = useState<Chat[]>(mockChats);
+    const [chats, setChats] = useState<Chat[]>([]);
     const [activeChatId, setActiveChatId] = useState<string | null>(null);
     const [inputText, setInputText] = useState('');
     const [isSending, setIsSending] = useState(false);
@@ -101,6 +101,50 @@ export default function WhatsAppWebClone() {
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const activeChat = chats.find(c => c.id === activeChatId);
+
+    // Fetch data from Turso
+    const fetchChats = async () => {
+        try {
+            const res = await fetch('/api/whatsapp/chats');
+            if (res.ok) {
+                const data = await res.json();
+
+                // Keep dates as Date objects
+                const parsedChats = data.chats.map((chat: any) => ({
+                    ...chat,
+                    messages: chat.messages.map((msg: any) => ({
+                        ...msg,
+                        timestamp: new Date(msg.timestamp)
+                    }))
+                }));
+
+                setChats(parsedChats);
+            }
+        } catch (error) {
+            console.error("Error fetching chats:", error);
+        }
+    };
+
+    // Polling effect
+    useEffect(() => {
+        fetchChats(); // Fetch immediately on mount
+        const intervalId = setInterval(fetchChats, 4000); // Poll every 4 seconds
+        return () => clearInterval(intervalId);
+    }, []);
+
+    // Helper to call PATCH API for chat metadata
+    const patchChatMetadata = async (chatId: string, updates: any) => {
+        try {
+            await fetch(`/api/whatsapp/chats/${chatId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updates)
+            });
+        } catch (e) {
+            console.error('Error updating chat metadata API', e);
+        }
+    };
+
 
     // Lista de chats filtrada y ordenada (Fijados primero)
     const filteredChats = chats
@@ -145,6 +189,8 @@ export default function WhatsAppWebClone() {
             chat.id === idToUpdate ? { ...chat, label } : chat
         ));
 
+        patchChatMetadata(idToUpdate, { label });
+
         setShowTagMenu(false);
         setChatTagMenuId(null);
     };
@@ -185,6 +231,11 @@ export default function WhatsAppWebClone() {
         setChats((prev: Chat[]) => prev.map((chat: Chat) =>
             chat.id === chatId ? { ...chat, isArchived: !chat.isArchived } : chat
         ));
+
+        const chatToUpdated = chats.find(c => c.id === chatId);
+        if (chatToUpdated) {
+            patchChatMetadata(chatId, { is_archived: !chatToUpdated.isArchived });
+        }
         setChatTagMenuId(null);
     };
 
@@ -194,6 +245,11 @@ export default function WhatsAppWebClone() {
         setChats((prev: Chat[]) => prev.map((chat: Chat) =>
             chat.id === chatId ? { ...chat, isPinned: !chat.isPinned } : chat
         ));
+
+        const chatToUpdated = chats.find(c => c.id === chatId);
+        if (chatToUpdated) {
+            patchChatMetadata(chatId, { is_pinned: !chatToUpdated.isPinned });
+        }
         setChatTagMenuId(null);
     };
 
@@ -209,14 +265,19 @@ export default function WhatsAppWebClone() {
     // Simulación de "marcar como leído"
     useEffect(() => {
         if (activeChatId) {
-            setChats((prev: Chat[]) => prev.map((chat: Chat) =>
-                chat.id === activeChatId ? { ...chat, unreadCount: 0 } : chat
-            ));
+            const activeChatData = chats.find(c => c.id === activeChatId);
+            if (activeChatData && activeChatData.unreadCount > 0) {
+                setChats((prev: Chat[]) => prev.map((chat: Chat) =>
+                    chat.id === activeChatId ? { ...chat, unreadCount: 0 } : chat
+                ));
+                patchChatMetadata(activeChatId, { unread_count: 0 });
+            }
+
             setIsSearchActive(false);
             setActiveChatSearchQuery('');
             setShowQuickReplies(false);
         }
-    }, [activeChatId]);
+    }, [activeChatId, chats]);
 
     // Manejar lógica del input para activar/filtrar los accesos rápidos "/"
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

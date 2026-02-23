@@ -1,14 +1,16 @@
 import { NextResponse } from 'next/server';
+import { saveMessage, upsertChat } from '@/lib/db';
+import { bufferMessage, bufferChatMeta, flushToDb } from '@/lib/message-buffer';
 
 const WHATSAPP_ACCESS_TOKEN = process.env.WHATSAPP_ACCESS_TOKEN;
 const WHATSAPP_PHONE_NUMBER_ID = process.env.WHATSAPP_PHONE_NUMBER_ID;
 
-// La versión de la API de Meta, ajusta la v18.0 a la versión más reciente si es necesario.
 const API_VERSION = 'v18.0';
 
 /**
  * POST /api/send-message
- * Endpoint llamado desde tu frontend para enviar mensajes.
+ * Endpoint llamado desde el frontend para enviar mensajes.
+ * Usa el buffer en memoria para acumular mensajes y flushear en batch.
  */
 export async function POST(request: Request) {
     try {
@@ -21,8 +23,7 @@ export async function POST(request: Request) {
             );
         }
 
-        // Limpieza básica del número de destino (Asegura que sólo tenga números. Ej. código de país + número)
-        const cleanNumber = to.replace(/\\D/g, '');
+        const cleanNumber = to.replace(/\D/g, '');
 
         const url = `https://graph.facebook.com/${API_VERSION}/${WHATSAPP_PHONE_NUMBER_ID}/messages`;
 
@@ -56,8 +57,18 @@ export async function POST(request: Request) {
             );
         }
 
+        // Acumular el mensaje saliente en el buffer en memoria
+        const messageId = data.messages?.[0]?.id || crypto.randomUUID();
+        bufferMessage(messageId, cleanNumber, 'model', text);
+
+        // Acumular metadatos del chat
+        bufferChatMeta(cleanNumber, '+' + cleanNumber, 'esperando', false);
+
+        // Flush inmediato: El mensaje fue enviado por un operador humano, garantizamos persistencia
+        await flushToDb(cleanNumber);
+
         return NextResponse.json(
-            { success: true, messageId: data.messages[0].id },
+            { success: true, messageId },
             { status: 200 }
         );
     } catch (error: any) {

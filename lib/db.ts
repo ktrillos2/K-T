@@ -13,7 +13,21 @@ export async function initDb() {
                 phone_number TEXT NOT NULL,
                 role TEXT NOT NULL CHECK(role IN ('user', 'model')),
                 content TEXT NOT NULL,
+                status TEXT DEFAULT 'sent',
                 timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        `);
+
+        await db.execute(`
+            CREATE TABLE IF NOT EXISTS chats (
+                phone_number TEXT PRIMARY KEY,
+                name TEXT,
+                avatar TEXT,
+                unread_count INTEGER DEFAULT 0,
+                label TEXT DEFAULT 'esperando' CHECK(label IN ('bot', 'esperando', 'completado')),
+                is_archived BOOLEAN DEFAULT 0,
+                is_pinned BOOLEAN DEFAULT 0,
+                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )
         `);
         console.log('Database initialized successfully');
@@ -41,7 +55,6 @@ export async function getMessageHistory(phoneNumber: string, limit: number = 20)
             args: [phoneNumber, limit],
         });
 
-        // We get DESC because of the LIMIT, but we want the history in ASC order for Gemini's context
         const messages = result.rows.map((row) => ({
             role: row.role as 'user' | 'model',
             content: row.content as string,
@@ -51,5 +64,86 @@ export async function getMessageHistory(phoneNumber: string, limit: number = 20)
     } catch (error) {
         console.error('Error getting message history:', error);
         return [];
+    }
+}
+
+export async function upsertChat(phoneNumber: string, name: string = 'Usuario', label: 'bot' | 'esperando' | 'completado' = 'esperando', incrementUnread: boolean = false) {
+    try {
+        await db.execute({
+            sql: `
+                INSERT INTO chats (phone_number, name, avatar, unread_count, label, updated_at)
+                VALUES (?, ?, 'https://i.pravatar.cc/150?u=' || ?, CASE WHEN ? THEN 1 ELSE 0 END, ?, CURRENT_TIMESTAMP)
+                ON CONFLICT(phone_number) DO UPDATE SET
+                    unread_count = unread_count + CASE WHEN ? THEN 1 ELSE 0 END,
+                    label = ?,
+                    updated_at = CURRENT_TIMESTAMP
+            `,
+            args: [
+                phoneNumber, name, phoneNumber, incrementUnread ? 1 : 0, label,
+                incrementUnread ? 1 : 0, label
+            ],
+        });
+    } catch (error) {
+        console.error('Error upserting chat:', error);
+    }
+}
+
+export async function getChats() {
+    try {
+        const result = await db.execute(`
+            SELECT * FROM chats ORDER BY is_pinned DESC, updated_at DESC
+        `);
+        return result.rows;
+    } catch (error) {
+        console.error('Error getting chats:', error);
+        return [];
+    }
+}
+
+export async function getMessagesByChat(phoneNumber: string) {
+    try {
+        const result = await db.execute({
+            sql: "SELECT id, content as text, CASE WHEN role = 'user' THEN 'them' ELSE 'me' END as sender, timestamp, status FROM messages WHERE phone_number = ? ORDER BY timestamp ASC",
+            args: [phoneNumber]
+        });
+        return result.rows;
+    } catch (error) {
+        console.error('Error getting messages by chat:', error);
+        return [];
+    }
+}
+
+export async function updateChatMetadata(phoneNumber: string, updates: { label?: string, unread_count?: number, is_archived?: boolean, is_pinned?: boolean }) {
+    try {
+        const setClauses: string[] = [];
+        const args: any[] = [];
+
+        if (updates.label !== undefined) {
+            setClauses.push('label = ?');
+            args.push(updates.label);
+        }
+        if (updates.unread_count !== undefined) {
+            setClauses.push('unread_count = ?');
+            args.push(updates.unread_count);
+        }
+        if (updates.is_archived !== undefined) {
+            setClauses.push('is_archived = ?');
+            args.push(updates.is_archived);
+        }
+        if (updates.is_pinned !== undefined) {
+            setClauses.push('is_pinned = ?');
+            args.push(updates.is_pinned);
+        }
+
+        if (setClauses.length === 0) return;
+
+        args.push(phoneNumber);
+
+        await db.execute({
+            sql: `UPDATE chats SET ${setClauses.join(', ')} WHERE phone_number = ?`,
+            args
+        });
+    } catch (error) {
+        console.error('Error updating chat metadata:', error);
     }
 }
