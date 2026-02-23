@@ -8,6 +8,8 @@ import {
     getFullContextForGemini,
 } from '@/lib/message-buffer';
 
+export const dynamic = 'force-dynamic';
+
 const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN;
 
 /** Etiqueta secreta que Gemini usa para escalar a un asesor humano */
