@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { saveMessage, upsertChat } from '@/lib/db';
+import { updateChatStatus } from '@/lib/db';
 import { bufferMessage, bufferChatMeta, flushToDb } from '@/lib/message-buffer';
 
 const WHATSAPP_ACCESS_TOKEN = process.env.WHATSAPP_ACCESS_TOKEN;
@@ -66,6 +66,9 @@ export async function POST(request: Request) {
 
         // Flush inmediato: El mensaje fue enviado por un operador humano, garantizamos persistencia
         await flushToDb(cleanNumber);
+
+        // Reactivar el bot: Si estaba en "esperando_asesor", el operador ya respondió
+        await updateChatStatus(cleanNumber, 'bot_activo');
 
         return NextResponse.json(
             { success: true, messageId },

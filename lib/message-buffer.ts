@@ -25,6 +25,7 @@ type BufferedMessage = {
 type ChatMetadataBuffer = {
     name: string;
     label: 'bot' | 'esperando' | 'completado';
+    status: 'bot_activo' | 'esperando_asesor';
     totalNewUnread: number;
     dirty: boolean; // Indica si hay cambios pendientes de flush
 };
@@ -67,19 +68,22 @@ export function bufferChatMeta(
     phoneNumber: string,
     name: string,
     label: 'bot' | 'esperando' | 'completado',
-    incrementUnread: boolean
+    incrementUnread: boolean,
+    status: 'bot_activo' | 'esperando_asesor' = 'bot_activo'
 ): void {
     const existing = chatMetaBuffer.get(phoneNumber);
 
     if (existing) {
         existing.label = label;
         existing.name = name;
+        existing.status = status;
         if (incrementUnread) existing.totalNewUnread += 1;
         existing.dirty = true;
     } else {
         chatMetaBuffer.set(phoneNumber, {
             name,
             label,
+            status,
             totalNewUnread: incrementUnread ? 1 : 0,
             dirty: true,
         });
@@ -139,16 +143,17 @@ export async function flushToDb(phoneNumber: string): Promise<void> {
             }
         }
 
-        // 2. Upsert de metadatos del chat
+        // 2. Upsert de metadatos del chat (incluyendo status)
         if (pendingMeta?.dirty) {
             statements.push({
                 sql: `
-                    INSERT INTO chats (phone_number, name, avatar, unread_count, label, updated_at)
-                    VALUES (?, ?, 'https://i.pravatar.cc/150?u=' || ?, ?, ?, CURRENT_TIMESTAMP)
+                    INSERT INTO chats (phone_number, name, avatar, unread_count, label, status, updated_at)
+                    VALUES (?, ?, 'https://i.pravatar.cc/150?u=' || ?, ?, ?, ?, CURRENT_TIMESTAMP)
                     ON CONFLICT(phone_number) DO UPDATE SET
                         name = CASE WHEN excluded.name != '' THEN excluded.name ELSE chats.name END,
                         unread_count = chats.unread_count + ?,
                         label = ?,
+                        status = ?,
                         updated_at = CURRENT_TIMESTAMP
                 `,
                 args: [
@@ -157,8 +162,10 @@ export async function flushToDb(phoneNumber: string): Promise<void> {
                     phoneNumber,
                     pendingMeta.totalNewUnread,
                     pendingMeta.label,
+                    pendingMeta.status,
                     pendingMeta.totalNewUnread,
                     pendingMeta.label,
+                    pendingMeta.status,
                 ],
             });
         }

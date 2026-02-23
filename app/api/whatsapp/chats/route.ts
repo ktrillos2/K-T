@@ -50,6 +50,7 @@ export async function GET() {
                     avatar: chatRow.avatar,
                     unreadCount: chatRow.unread_count,
                     label: chatRow.label,
+                    status: chatRow.status || 'bot_activo',
                     isArchived: Boolean(chatRow.is_archived),
                     isPinned: Boolean(chatRow.is_pinned),
                     messages: allMessages,

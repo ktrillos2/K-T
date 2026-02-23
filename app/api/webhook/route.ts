@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getMessageHistory, initDb } from '@/lib/db';
+import { initDb, getChatStatus, updateChatStatus } from '@/lib/db';
 import { generateGeminiResponse } from '@/lib/gemini';
 import {
     bufferMessage,
@@ -10,12 +10,16 @@ import {
 
 const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN;
 
-// Inicializa la tabla de base de datos si no existe (fire-and-forget)
+/** Etiqueta secreta que Gemini usa para escalar a un asesor humano */
+const ESCALATION_TAG = '[ESCALAR_ASESOR]';
+
+// Inicializa la tabla de base de datos si no existe (fire-and-forget, no bloquea)
 initDb().catch(console.error);
 
 /**
  * GET /api/webhook
- * Usado por Meta para verificar el Webhook (Hub Challenge).
+ * Verificación del Webhook por Meta (Hub Challenge).
+ * IMPORTANTE: Meta exige que la respuesta sea SOLO el challenge en texto plano.
  */
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
@@ -24,11 +28,17 @@ export async function GET(request: Request) {
     const token = searchParams.get('hub.verify_token');
     const challenge = searchParams.get('hub.challenge');
 
+    console.log('[Webhook GET] Verificación recibida:', { mode, token: token ? '***' : 'null', challenge });
+
     if (mode && token) {
         if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-            console.log('WEBHOOK_VERIFIED');
-            return new NextResponse(challenge, { status: 200 });
+            console.log('[Webhook GET] ✅ WEBHOOK_VERIFIED');
+            return new NextResponse(challenge, {
+                status: 200,
+                headers: { 'Content-Type': 'text/plain' },
+            });
         } else {
+            console.warn('[Webhook GET] ❌ Token no coincide');
             return new NextResponse('Forbidden', { status: 403 });
         }
     }
@@ -37,96 +47,178 @@ export async function GET(request: Request) {
 }
 
 /**
- * Función helper para enviar mensajes a través de WhatsApp API
+ * Función helper para enviar mensajes a través de WhatsApp API.
  */
 async function sendWhatsAppMessage(phoneNumberId: string, to: string, text: string) {
-    const response = await fetch(`https://graph.facebook.com/v17.0/${phoneNumberId}/messages`, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN}`,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            messaging_product: 'whatsapp',
-            to: to,
-            type: 'text',
-            text: { body: text },
-        }),
-    });
+    try {
+        const response = await fetch(`https://graph.facebook.com/v17.0/${phoneNumberId}/messages`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                messaging_product: 'whatsapp',
+                to,
+                type: 'text',
+                text: { body: text },
+            }),
+        });
 
-    if (!response.ok) {
-        console.error('Error enviando mensaje por WhatsApp:', await response.text());
+        if (!response.ok) {
+            const errorBody = await response.text();
+            console.error('[Webhook] Error enviando mensaje por WhatsApp:', errorBody);
+        }
+    } catch (error) {
+        console.error('[Webhook] Excepción enviando mensaje por WhatsApp:', error);
     }
 }
 
 /**
  * POST /api/webhook
- * Recibe mensajes entrantes de WhatsApp Business.
+ * Recibe TODOS los eventos entrantes de WhatsApp Business.
  * 
- * Optimización: Los mensajes se guardan en un buffer en memoria y se 
- * flushean a Turso en batch tras 5 segundos de inactividad.
- * Al final de cada request, se hace un flush de seguridad para 
- * garantizar que nada se pierda si la instancia muere.
+ * Flujo de Handoff:
+ * 1. Si el chat tiene status "esperando_asesor", el bot NO responde (silencio).
+ * 2. Si Gemini incluye [ESCALAR_ASESOR], se elimina la etiqueta antes de enviar
+ *    y se marca el chat como "esperando_asesor" en Turso.
+ * 3. SIEMPRE devuelve 200 OK a Meta.
  */
 export async function POST(request: Request) {
+    const OK_RESPONSE = NextResponse.json({ success: true }, { status: 200 });
+
     try {
         const body = await request.json();
 
-        if (body.object === 'whatsapp_business_account') {
+        // 🔍 LOG DE DIAGNÓSTICO
+        console.log('[Webhook POST] Payload recibido:', JSON.stringify(body, null, 2));
 
-            if (
-                body.entry &&
-                body.entry[0].changes &&
-                body.entry[0].changes[0].value.messages &&
-                body.entry[0].changes[0].value.messages[0]
-            ) {
-                const phoneNumberId = body.entry[0].changes[0].value.metadata.phone_number_id;
-                const from = body.entry[0].changes[0].value.messages[0].from;
-                const msgBody = body.entry[0].changes[0].value.messages[0].text?.body;
-                const contactName = body.entry[0].changes[0].value.contacts?.[0]?.profile?.name || `+${from}`;
+        if (body?.object !== 'whatsapp_business_account') {
+            console.log('[Webhook POST] Evento ignorado: object no es whatsapp_business_account');
+            return OK_RESPONSE;
+        }
 
-                if (msgBody) {
-                    console.log(`[Webhook] Mensaje entrante de: ${from} | Contenido: ${msgBody}`);
+        // Extraer datos con Optional Chaining completo
+        const entry = body?.entry?.[0];
+        const changes = entry?.changes?.[0];
+        const value = changes?.value;
 
-                    // a) Acumular el mensaje del usuario en el buffer (0 operaciones DB)
-                    const userMsgId = crypto.randomUUID();
-                    bufferMessage(userMsgId, from, 'user', msgBody);
+        if (!value) {
+            console.log('[Webhook POST] Evento sin value, ignorando');
+            return OK_RESPONSE;
+        }
 
-                    // a.2) Acumular metadatos del chat en el buffer
-                    bufferChatMeta(from, contactName, 'esperando', true);
+        const messages = value?.messages;
+        const statuses = value?.statuses;
 
-                    // b) Obtener contexto completo para Gemini (DB + buffer fusionados)
-                    // Solo 1 lectura a Turso, fusionada con el buffer en memoria
-                    const fullContext = await getFullContextForGemini(from);
+        // 📊 Eventos de STATUS (read receipts, delivery confirmations)
+        if (statuses && statuses.length > 0) {
+            console.log('[Webhook POST] Evento de status:', statuses[0]?.status, 'para:', statuses[0]?.recipient_id);
+            return OK_RESPONSE;
+        }
 
-                    // c) Generar respuesta con Gemini usando el contexto completo
-                    const aiResponse = await generateGeminiResponse(fullContext, msgBody);
+        // 💬 Validar que hay mensajes entrantes
+        if (!messages || messages.length === 0) {
+            console.log('[Webhook POST] Evento sin mensajes (evento de sistema), ignorando');
+            return OK_RESPONSE;
+        }
 
-                    // d) Acumular la respuesta del bot en el buffer (0 operaciones DB)
-                    const modelMsgId = crypto.randomUUID();
-                    bufferMessage(modelMsgId, from, 'model', aiResponse);
+        const message = messages[0];
+        const phoneNumberId = value?.metadata?.phone_number_id;
+        const from = message?.from;
+        const msgType = message?.type;
+        const msgBody = message?.text?.body;
+        const contactName = value?.contacts?.[0]?.profile?.name || `+${from}`;
 
-                    // d.2) Actualizar metadatos del chat en el buffer
-                    bufferChatMeta(from, contactName, 'bot', false);
+        // Solo procesamos mensajes de texto
+        if (msgType !== 'text' || !msgBody) {
+            console.log(`[Webhook POST] Mensaje no es texto (tipo: ${msgType}), ignorando`);
+            return OK_RESPONSE;
+        }
 
-                    // e) Enviar respuesta al usuario vía WhatsApp API
-                    await sendWhatsAppMessage(phoneNumberId, from, aiResponse);
+        if (!from || !phoneNumberId) {
+            console.warn('[Webhook POST] Mensaje sin remitente o phoneNumberId, ignorando');
+            return OK_RESPONSE;
+        }
 
-                    // f) Flush de seguridad: Garantiza persistencia inmediata después de
-                    //    procesar la request. Si llegan más mensajes rápido, el debounce 
-                    //    del buffer se encarga de batcharlos. Pero si es el último mensaje
-                    //    y la instancia muere, estos datos ya están en Turso.
-                    await flushToDb(from);
-                }
+        console.log(`[Webhook POST] ✅ Mensaje de texto de: ${from} (${contactName}) | Contenido: "${msgBody}"`);
+
+        // Procesar en try/catch separado — errores internos NO afectan la respuesta a Meta
+        try {
+            // ============================================================
+            // 🛑 PASO 1: Verificar si el chat está en modo "esperando_asesor"
+            // Si lo está, el bot guarda silencio para que Keyner responda.
+            // ============================================================
+            const chatStatus = await getChatStatus(from);
+
+            if (chatStatus === 'esperando_asesor') {
+                console.log(`[Webhook POST] 🟡 Chat ${from} está en modo ESPERANDO_ASESOR. Bot en silencio.`);
+
+                // Aún así guardamos el mensaje del usuario para que Keyner lo vea en el panel
+                const userMsgId = crypto.randomUUID();
+                bufferMessage(userMsgId, from, 'user', msgBody);
+                bufferChatMeta(from, contactName, 'esperando', true);
+                await flushToDb(from);
+
+                return OK_RESPONSE;
             }
 
-            // Meta requiere un 200 OK rápido
-            return NextResponse.json({ status: 'ok' }, { status: 200 });
-        } else {
-            return new NextResponse('Not Found', { status: 404 });
+            // ============================================================
+            // 🤖 PASO 2: Flujo normal del bot
+            // ============================================================
+
+            // a) Acumular mensaje del usuario en el buffer
+            const userMsgId = crypto.randomUUID();
+            bufferMessage(userMsgId, from, 'user', msgBody);
+            bufferChatMeta(from, contactName, 'esperando', true);
+
+            // b) Obtener contexto completo para Gemini (DB + buffer)
+            const fullContext = await getFullContextForGemini(from);
+
+            // c) Generar respuesta con Gemini
+            let aiResponse = await generateGeminiResponse(fullContext, msgBody);
+
+            // ============================================================
+            // 🎯 PASO 3: Interceptar la etiqueta [ESCALAR_ASESOR]
+            // ============================================================
+            let shouldEscalate = false;
+
+            if (aiResponse.includes(ESCALATION_TAG)) {
+                shouldEscalate = true;
+                // Limpiar la etiqueta para que el cliente NUNCA la vea
+                aiResponse = aiResponse.replace(ESCALATION_TAG, '').trim();
+                console.log(`[Webhook POST] 🚨 ESCALACIÓN detectada para ${from}. Marcando como esperando_asesor.`);
+            }
+
+            // d) Acumular la respuesta del bot en el buffer
+            const modelMsgId = crypto.randomUUID();
+            bufferMessage(modelMsgId, from, 'model', aiResponse);
+
+            // e) Determinar el status del chat tras la respuesta
+            const newStatus = shouldEscalate ? 'esperando_asesor' : 'bot_activo';
+            const newLabel = shouldEscalate ? 'esperando' : 'bot';
+            bufferChatMeta(from, contactName, newLabel as 'bot' | 'esperando', false, newStatus as 'bot_activo' | 'esperando_asesor');
+
+            // f) Enviar respuesta limpia al usuario vía WhatsApp
+            await sendWhatsAppMessage(phoneNumberId, from, aiResponse);
+
+            // g) Flush de seguridad a Turso
+            await flushToDb(from);
+
+            // h) Si hubo escalación, actualizar el status directamente en Turso
+            //    (por si el flush del buffer no lo actualizó correctamente)
+            if (shouldEscalate) {
+                await updateChatStatus(from, 'esperando_asesor');
+            }
+
+        } catch (processingError) {
+            console.error('[Webhook POST] ❌ Error procesando mensaje (no afecta respuesta a Meta):', processingError);
         }
+
+        return OK_RESPONSE;
+
     } catch (error) {
-        console.error('Error procesando el webhook:', error);
-        return new NextResponse('Internal Server Error', { status: 500 });
+        console.error('[Webhook POST] ❌ Error crítico en webhook:', error);
+        return OK_RESPONSE;
     }
 }
