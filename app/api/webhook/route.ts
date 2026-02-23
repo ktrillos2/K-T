@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { initDb, getChatStatus, updateChatStatus } from '@/lib/db';
 import { generateGeminiResponse } from '@/lib/gemini';
 import {
@@ -21,8 +21,8 @@ initDb().catch(console.error);
  * Verificación del Webhook por Meta (Hub Challenge).
  * IMPORTANTE: Meta exige que la respuesta sea SOLO el challenge en texto plano.
  */
-export async function GET(request: Request) {
-    const { searchParams } = new URL(request.url);
+export async function GET(request: NextRequest) {
+    const searchParams = request.nextUrl.searchParams;
 
     const mode = searchParams.get('hub.mode');
     const token = searchParams.get('hub.verify_token');
@@ -84,7 +84,7 @@ async function sendWhatsAppMessage(phoneNumberId: string, to: string, text: stri
  *    y se marca el chat como "esperando_asesor" en Turso.
  * 3. SIEMPRE devuelve 200 OK a Meta.
  */
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     const OK_RESPONSE = NextResponse.json({ success: true }, { status: 200 });
 
     try {
