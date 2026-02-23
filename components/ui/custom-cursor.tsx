@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useCallback, useState } from "react"
 import { useCursor } from "@/context/cursor-context"
+import { usePathname } from "next/navigation"
 
 // Utility to check mobile
 function isMobile() {
@@ -11,6 +12,8 @@ function isMobile() {
 
 export default function CustomCursor() {
   const { cursorVariant } = useCursor()
+  const pathname = usePathname()
+
   // Early return for mobile to avoid any JS execution
   const [mounted, setMounted] = useState(false)
 
@@ -71,6 +74,7 @@ export default function CustomCursor() {
   const isHover = cursorVariant === "hover"
 
   if (mounted && isMobile()) return null
+  if (pathname === '/whatsapp-clone') return null
 
   return (
     <>
