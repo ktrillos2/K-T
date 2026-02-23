@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
  */
 async function sendWhatsAppMessage(phoneNumberId: string, to: string, text: string) {
     try {
-        const response = await fetch(`https://graph.facebook.com/v17.0/${phoneNumberId}/messages`, {
+        const response = await fetch(`https://graph.facebook.com/v22.0/${phoneNumberId}/messages`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN}`,
@@ -169,15 +169,17 @@ export async function POST(request: NextRequest) {
             // 🤖 PASO 2: Flujo normal del bot
             // ============================================================
 
-            // a) Acumular mensaje del usuario en el buffer
+            // a) PRIMERO obtener el contexto histórico (DB + buffer previo)
+            //    ANTES de agregar el mensaje actual, para evitar que aparezca
+            //    duplicado (una vez en el historial y otra como sendMessage).
+            const fullContext = await getFullContextForGemini(from, 50);
+
+            // b) Ahora sí acumular el mensaje del usuario en el buffer
             const userMsgId = crypto.randomUUID();
             bufferMessage(userMsgId, from, 'user', msgBody);
             bufferChatMeta(from, contactName, 'esperando', true);
 
-            // b) Obtener contexto completo para Gemini (DB + buffer)
-            const fullContext = await getFullContextForGemini(from);
-
-            // c) Generar respuesta con Gemini
+            // c) Generar respuesta con Gemini usando el contexto histórico
             let aiResponse = await generateGeminiResponse(fullContext, msgBody);
 
             // ============================================================
@@ -187,7 +189,6 @@ export async function POST(request: NextRequest) {
 
             if (aiResponse.includes(ESCALATION_TAG)) {
                 shouldEscalate = true;
-                // Limpiar la etiqueta para que el cliente NUNCA la vea
                 aiResponse = aiResponse.replace(ESCALATION_TAG, '').trim();
                 console.log(`[Webhook POST] 🚨 ESCALACIÓN detectada para ${from}. Marcando como esperando_asesor.`);
             }
