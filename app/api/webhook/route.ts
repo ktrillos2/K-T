@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { initDb, getChatStatus, updateChatStatus } from '@/lib/db';
-import { generateGeminiResponse } from '@/lib/gemini';
+import { generateGeminiResponse, generateGeminiAudioResponse } from '@/lib/gemini';
 import {
     bufferMessage,
     bufferChatMeta,
@@ -95,6 +95,45 @@ async function sendWhatsAppMessage(phoneNumberId: string, to: string, text: stri
 }
 
 /**
+ * Descarga un archivo multimedia de WhatsApp.
+ * Paso 1: Obtener la URL del media con el media_id.
+ * Paso 2: Descargar el binario desde esa URL.
+ */
+async function downloadWhatsAppMedia(mediaId: string): Promise<{ buffer: Buffer; mimeType: string }> {
+    // Paso 1: Obtener URL del media
+    const metaResponse = await fetch(`https://graph.facebook.com/v22.0/${mediaId}`, {
+        headers: {
+            'Authorization': `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN}`,
+        },
+    });
+
+    if (!metaResponse.ok) {
+        throw new Error(`Error obteniendo media URL: ${metaResponse.status}`);
+    }
+
+    const mediaData = await metaResponse.json();
+    const mediaUrl = mediaData.url;
+    const mimeType = mediaData.mime_type || 'audio/ogg';
+
+    // Paso 2: Descargar el binario
+    const downloadResponse = await fetch(mediaUrl, {
+        headers: {
+            'Authorization': `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN}`,
+        },
+    });
+
+    if (!downloadResponse.ok) {
+        throw new Error(`Error descargando media: ${downloadResponse.status}`);
+    }
+
+    const arrayBuffer = await downloadResponse.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    console.log(`[Media] Audio descargado: ${buffer.length} bytes, mime: ${mimeType}`);
+    return { buffer, mimeType };
+}
+
+/**
  * POST /api/webhook
  * Recibe TODOS los eventos entrantes de WhatsApp Business.
  * 
@@ -149,6 +188,7 @@ export async function POST(request: NextRequest) {
         const from = message?.from;
         const msgType = message?.type;
         const msgBody = message?.text?.body;
+        const audioId = message?.audio?.id;
         const contactName = value?.contacts?.[0]?.profile?.name || `+${from}`;
 
         // 🔁 DEDUPLICACIÓN: Ignorar mensajes ya procesados (reintentos de Meta)
@@ -157,9 +197,9 @@ export async function POST(request: NextRequest) {
             return OK_RESPONSE;
         }
 
-        // Solo procesamos mensajes de texto
-        if (msgType !== 'text' || !msgBody) {
-            console.log(`[Webhook POST] Mensaje no es texto (tipo: ${msgType}), ignorando`);
+        // Solo procesamos mensajes de texto o audio
+        if (msgType !== 'text' && msgType !== 'audio') {
+            console.log(`[Webhook POST] Tipo no soportado (${msgType}), ignorando`);
             return OK_RESPONSE;
         }
 
@@ -168,7 +208,8 @@ export async function POST(request: NextRequest) {
             return OK_RESPONSE;
         }
 
-        console.log(`[Webhook POST] ✅ Mensaje de texto de: ${from} (${contactName}) | Contenido: "${msgBody}"`);
+        const isAudio = msgType === 'audio';
+        console.log(`[Webhook POST] ✅ Mensaje ${isAudio ? 'de AUDIO' : 'de texto'} de: ${from} (${contactName})${!isAudio ? ` | "${msgBody}"` : ''}`);
 
         // Procesar en try/catch separado — errores internos NO afectan la respuesta a Meta
         try {
@@ -186,13 +227,23 @@ export async function POST(request: NextRequest) {
             // a) PRIMERO obtener el contexto histórico (DB + buffer previo)
             const fullContext = await getFullContextForGemini(from, 50);
 
-            // b) Ahora sí acumular el mensaje del usuario en el buffer
+            // b) Acumular el mensaje del usuario en el buffer
             const userMsgId = crypto.randomUUID();
-            bufferMessage(userMsgId, from, 'user', msgBody);
+            const userContent = isAudio ? '[Audio recibido]' : msgBody;
+            bufferMessage(userMsgId, from, 'user', userContent);
             bufferChatMeta(from, contactName, 'bot', true);
 
-            // c) Generar respuesta con Gemini usando el contexto histórico
-            let aiResponse = await generateGeminiResponse(fullContext, msgBody);
+            // c) Generar respuesta con Gemini
+            let aiResponse: string;
+
+            if (isAudio && audioId) {
+                // 🎤 Flujo de audio: descargar de WhatsApp y enviar a Gemini
+                const { buffer: audioBuffer, mimeType } = await downloadWhatsAppMedia(audioId);
+                aiResponse = await generateGeminiAudioResponse(fullContext, audioBuffer, mimeType);
+            } else {
+                // 💬 Flujo de texto normal
+                aiResponse = await generateGeminiResponse(fullContext, msgBody);
+            }
 
             // ============================================================
             // 🎯 PASO 3: Interceptar la etiqueta [ESCALAR_ASESOR]

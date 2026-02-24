@@ -45,6 +45,10 @@ Tu objetivo es llevar una conversación fluida y natural, como un asesor humano 
 4. *Recomendar:* Cuando tengas suficiente información, sugiere el servicio ideal y explica los precios.
 5. *Cerrar:* Cuando el cliente muestre interés concreto y ya tengas su nombre, su objetivo y el tipo de proyecto, di que un asesor experto (Keyner) se pondrá en contacto para afinar los detalles y dar una cotización final. Incluye la etiqueta [ESCALAR_ASESOR] al final de este mensaje.
 
+MENSAJES DE AUDIO:
+- Los clientes pueden enviarte mensajes de voz. El sistema transcribirá el audio y te lo pasará como texto.
+- Responde normalmente al contenido del audio. Si la transcripción no es clara, pide amablemente que repitan.
+
 REGLAS DE ESCALACIÓN:
 - SOLO usa [ESCALAR_ASESOR] cuando hayas recopilado al menos: el nombre del cliente, qué necesita, y el tipo de proyecto.
 - También escala si el cliente lo pide explícitamente ("quiero hablar con alguien", "necesito un humano").
@@ -62,18 +66,16 @@ REGLAS GENERALES:
 /**
  * Convierte el formato Markdown de Gemini al formato WhatsApp:
  * - **texto** → *texto* (negrilla en WhatsApp)
- * - Limpia formateo residual que no sea compatible con WhatsApp.
  */
 function formatForWhatsApp(text: string): string {
-    // Convertir **texto** a *texto* (negrilla)
     let formatted = text.replace(/\*\*([^*]+)\*\*/g, '*$1*');
-
-    // Convertir __texto__ a _texto_ (cursiva, por si Gemini lo usa)
     formatted = formatted.replace(/__([^_]+)__/g, '_$1_');
-
     return formatted;
 }
 
+/**
+ * Genera respuesta de Gemini a partir de texto.
+ */
 export async function generateGeminiResponse(history: { role: 'user' | 'model'; content: string }[], newMessage: string): Promise<string> {
     try {
         const model = genAI.getGenerativeModel({
@@ -93,10 +95,54 @@ export async function generateGeminiResponse(history: { role: 'user' | 'model'; 
         const result = await chat.sendMessage(newMessage);
         const rawResponse = result.response.text();
 
-        // Post-procesar para formato WhatsApp
         return formatForWhatsApp(rawResponse);
     } catch (error) {
         console.error('Error generating response from Gemini:', error);
+        throw error;
+    }
+}
+
+/**
+ * Genera respuesta de Gemini a partir de audio (voice note).
+ * Envía el audio como contenido multimodal para que Gemini lo transcriba y responda.
+ */
+export async function generateGeminiAudioResponse(
+    history: { role: 'user' | 'model'; content: string }[],
+    audioBuffer: Buffer,
+    mimeType: string
+): Promise<string> {
+    try {
+        const model = genAI.getGenerativeModel({
+            model: 'gemini-2.5-flash-lite',
+            systemInstruction: SYSTEM_INSTRUCTION,
+        });
+
+        const formattedHistory = history.map((msg) => ({
+            role: msg.role === 'model' ? 'model' : 'user',
+            parts: [{ text: msg.content }],
+        }));
+
+        const chat = model.startChat({
+            history: formattedHistory,
+        });
+
+        // Enviar audio como datos inline + instrucción de transcripción
+        const result = await chat.sendMessage([
+            {
+                inlineData: {
+                    mimeType,
+                    data: audioBuffer.toString('base64'),
+                },
+            },
+            {
+                text: 'El cliente envió este mensaje de voz. Escúchalo, entiende lo que dice y responde a su solicitud de forma natural. Si no se entiende bien, pide que lo repita.',
+            },
+        ]);
+
+        const rawResponse = result.response.text();
+        return formatForWhatsApp(rawResponse);
+    } catch (error) {
+        console.error('Error generating audio response from Gemini:', error);
         throw error;
     }
 }
