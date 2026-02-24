@@ -77,7 +77,7 @@ function formatForWhatsApp(text: string): string {
 export async function generateGeminiResponse(history: { role: 'user' | 'model'; content: string }[], newMessage: string): Promise<string> {
     try {
         const model = genAI.getGenerativeModel({
-            model: 'gemini-2.5-flash',
+            model: 'gemini-2.5-flash-lite',
             systemInstruction: SYSTEM_INSTRUCTION,
         });
 

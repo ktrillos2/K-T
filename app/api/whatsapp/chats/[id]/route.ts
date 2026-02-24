@@ -1,9 +1,9 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { updateChatMetadata } from '@/lib/db';
 
-export async function PATCH(request: Request, { params }: { params: { id: string } }) {
+export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
     try {
-        const phoneNumber = params.id;
+        const { id: phoneNumber } = await params;
         if (!phoneNumber) {
             return NextResponse.json({ error: 'Phone number ID is required' }, { status: 400 });
         }
