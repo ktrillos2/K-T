@@ -15,6 +15,24 @@ const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN;
 /** Etiqueta secreta que Gemini usa para escalar a un asesor humano */
 const ESCALATION_TAG = '[ESCALAR_ASESOR]';
 
+/**
+ * Deduplicación: Map de IDs de mensajes ya procesados → timestamp.
+ * Evita que Meta reintente el mismo mensaje y el bot responda en loop.
+ * Se auto-limpia cada 10 minutos para evitar fugas de memoria.
+ */
+const processedMessages = new Map<string, number>();
+const DEDUP_TTL_MS = 10 * 60 * 1000; // 10 minutos
+
+// Auto-limpieza periódica del mapa de deduplicación
+setInterval(() => {
+    const now = Date.now();
+    for (const [id, timestamp] of processedMessages) {
+        if (now - timestamp > DEDUP_TTL_MS) {
+            processedMessages.delete(id);
+        }
+    }
+}, DEDUP_TTL_MS);
+
 // Inicializa la tabla de base de datos si no existe (fire-and-forget, no bloquea)
 initDb().catch(console.error);
 
@@ -126,11 +144,23 @@ export async function POST(request: NextRequest) {
         }
 
         const message = messages[0];
+        const messageId = message?.id; // ID único que Meta asigna a cada mensaje
         const phoneNumberId = value?.metadata?.phone_number_id;
         const from = message?.from;
         const msgType = message?.type;
         const msgBody = message?.text?.body;
         const contactName = value?.contacts?.[0]?.profile?.name || `+${from}`;
+
+        // 🔁 DEDUPLICACIÓN: Ignorar mensajes ya procesados (reintentos de Meta)
+        if (messageId && processedMessages.has(messageId)) {
+            console.log(`[Webhook POST] ⏭️ Mensaje ${messageId} ya procesado (reintento de Meta), ignorando`);
+            return OK_RESPONSE;
+        }
+
+        // Marcar como procesado inmediatamente
+        if (messageId) {
+            processedMessages.set(messageId, Date.now());
+        }
 
         // Solo procesamos mensajes de texto
         if (msgType !== 'text' || !msgBody) {
