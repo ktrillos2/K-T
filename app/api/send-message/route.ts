@@ -1,16 +1,13 @@
 import { NextResponse } from 'next/server';
-import { updateChatStatus } from '@/lib/db';
-import { bufferMessage, bufferChatMeta, flushToDb } from '@/lib/message-buffer';
+import { saveMessage, upsertChat, updateChatStatus } from '@/lib/db';
 
 const WHATSAPP_ACCESS_TOKEN = process.env.WHATSAPP_ACCESS_TOKEN;
 const WHATSAPP_PHONE_NUMBER_ID = process.env.WHATSAPP_PHONE_NUMBER_ID;
 
-const API_VERSION = 'v18.0';
-
 /**
  * POST /api/send-message
  * Endpoint llamado desde el frontend para enviar mensajes.
- * Usa el buffer en memoria para acumular mensajes y flushear en batch.
+ * Escribe directamente a Supabase (sin buffer).
  */
 export async function POST(request: Request) {
     try {
@@ -25,18 +22,8 @@ export async function POST(request: Request) {
 
         const cleanNumber = to.replace(/\D/g, '');
 
-        const url = `https://graph.facebook.com/${API_VERSION}/${WHATSAPP_PHONE_NUMBER_ID}/messages`;
-
-        const body = {
-            messaging_product: 'whatsapp',
-            recipient_type: 'individual',
-            to: cleanNumber,
-            type: 'text',
-            text: {
-                preview_url: false,
-                body: text,
-            },
-        };
+        // Enviar mensaje por WhatsApp
+        const url = `https://graph.facebook.com/v22.0/${WHATSAPP_PHONE_NUMBER_ID}/messages`;
 
         const response = await fetch(url, {
             method: 'POST',
@@ -44,7 +31,13 @@ export async function POST(request: Request) {
                 Authorization: `Bearer ${WHATSAPP_ACCESS_TOKEN}`,
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(body),
+            body: JSON.stringify({
+                messaging_product: 'whatsapp',
+                recipient_type: 'individual',
+                to: cleanNumber,
+                type: 'text',
+                text: { preview_url: false, body: text },
+            }),
         });
 
         const data = await response.json();
@@ -57,17 +50,14 @@ export async function POST(request: Request) {
             );
         }
 
-        // Acumular el mensaje saliente en el buffer en memoria
+        // Guardar mensaje directamente en Supabase
         const messageId = data.messages?.[0]?.id || crypto.randomUUID();
-        bufferMessage(messageId, cleanNumber, 'model', text);
+        await saveMessage(messageId, cleanNumber, 'model', text);
 
-        // Acumular metadatos del chat
-        bufferChatMeta(cleanNumber, '+' + cleanNumber, 'esperando', false);
+        // Actualizar chat metadata
+        await upsertChat(cleanNumber, '+' + cleanNumber, 'esperando', false);
 
-        // Flush inmediato: El mensaje fue enviado por un operador humano, garantizamos persistencia
-        await flushToDb(cleanNumber);
-
-        // Reactivar el bot: Si estaba en "esperando_asesor", el operador ya respondió
+        // Reactivar bot
         await updateChatStatus(cleanNumber, 'bot_activo');
 
         return NextResponse.json(

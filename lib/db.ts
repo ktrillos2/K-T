@@ -1,222 +1,217 @@
-import { createClient } from '@libsql/client';
+/**
+ * Supabase Database Client
+ * Reemplaza completamente a Turso — conexión directa, sin buffer en memoria.
+ */
+import { createClient } from '@supabase/supabase-js';
 
-export const db = createClient({
-    url: process.env.TURSO_DATABASE_URL as string,
-    authToken: process.env.TURSO_AUTH_TOKEN as string,
-});
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
-export async function initDb() {
-    try {
-        await db.execute(`
-            CREATE TABLE IF NOT EXISTS messages (
-                id TEXT PRIMARY KEY,
-                phone_number TEXT NOT NULL,
-                role TEXT NOT NULL CHECK(role IN ('user', 'model')),
-                content TEXT NOT NULL,
-                status TEXT DEFAULT 'sent',
-                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-            )
-        `);
+/**
+ * Cliente de Supabase con Service Role Key para operaciones de servidor.
+ * Bypass de RLS — solo usar en rutas API y webhooks.
+ */
+export const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-        await db.execute(`
-            CREATE TABLE IF NOT EXISTS chats (
-                phone_number TEXT PRIMARY KEY,
-                name TEXT,
-                avatar TEXT,
-                unread_count INTEGER DEFAULT 0,
-                label TEXT DEFAULT 'esperando' CHECK(label IN ('bot', 'esperando', 'completado')),
-                status TEXT DEFAULT 'bot_activo' CHECK(status IN ('bot_activo', 'esperando_asesor')),
-                is_archived BOOLEAN DEFAULT 0,
-                is_pinned BOOLEAN DEFAULT 0,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
-            )
-        `);
-
-        // Migración: Añadir columna status si la tabla ya existía sin ella
-        try {
-            await db.execute(`ALTER TABLE chats ADD COLUMN status TEXT DEFAULT 'bot_activo' CHECK(status IN ('bot_activo', 'esperando_asesor'))`);
-            console.log('Migration: status column added to chats table');
-        } catch {
-            // La columna ya existe, ignorar el error
-        }
-
-        // Migración: Resetear todos los chats en "esperando_asesor" a "bot_activo"
-        // (limpia estados residuales de testing)
-        await db.execute(`UPDATE chats SET status = 'bot_activo' WHERE status = 'esperando_asesor'`);
-
-        console.log('Database initialized successfully');
-    } catch (error) {
-        console.error('Failed to initialize database:', error);
-    }
-}
-
+/**
+ * Guarda un mensaje en Supabase.
+ */
 export async function saveMessage(id: string, phoneNumber: string, role: 'user' | 'model', content: string) {
     try {
-        await db.execute({
-            sql: 'INSERT INTO messages (id, phone_number, role, content) VALUES (?, ?, ?, ?)',
-            args: [id, phoneNumber, role, content],
+        const { error } = await supabase.from('messages').insert({
+            id,
+            phone_number: phoneNumber,
+            role,
+            content,
+            timestamp: new Date().toISOString(),
+            status: 'sent',
         });
+
+        if (error) throw error;
     } catch (error) {
-        console.error('Error saving message to DB:', error);
-        throw error;
+        console.error('Error saving message:', error);
     }
 }
 
-export async function getMessageHistory(phoneNumber: string, limit: number = 20) {
+/**
+ * Actualiza el estado de un mensaje (sent, delivered, read) enviado desde el Webhook de Meta.
+ */
+export async function updateMessageStatus(messageId: string, newStatus: string) {
     try {
-        const result = await db.execute({
-            sql: 'SELECT role, content FROM messages WHERE phone_number = ? ORDER BY timestamp DESC LIMIT ?',
-            args: [phoneNumber, limit],
-        });
+        const { error } = await supabase
+            .from('messages')
+            .update({ status: newStatus })
+            .eq('id', messageId);
 
-        const messages = result.rows.map((row) => ({
-            role: row.role as 'user' | 'model',
-            content: row.content as string,
-        }));
-
-        return messages.reverse();
+        if (error) throw error;
     } catch (error) {
-        console.error('Error getting message history:', error);
-        return [];
+        console.error(`Error updating message status for ${messageId}:`, error);
     }
 }
 
-export async function upsertChat(phoneNumber: string, name: string = 'Usuario', label: 'bot' | 'esperando' | 'completado' = 'esperando', incrementUnread: boolean = false) {
+/**
+ * Upsert de chat: crea o actualiza metadatos.
+ */
+export async function upsertChat(
+    phoneNumber: string,
+    name: string,
+    label: string = 'bot',
+    incrementUnread: boolean = true,
+    status: string = 'bot_activo'
+) {
     try {
-        await db.execute({
-            sql: `
-                INSERT INTO chats (phone_number, name, avatar, unread_count, label, updated_at)
-                VALUES (?, ?, 'https://i.pravatar.cc/150?u=' || ?, CASE WHEN ? THEN 1 ELSE 0 END, ?, CURRENT_TIMESTAMP)
-                ON CONFLICT(phone_number) DO UPDATE SET
-                    unread_count = unread_count + CASE WHEN ? THEN 1 ELSE 0 END,
-                    label = ?,
-                    updated_at = CURRENT_TIMESTAMP
-            `,
-            args: [
-                phoneNumber, name, phoneNumber, incrementUnread ? 1 : 0, label,
-                incrementUnread ? 1 : 0, label
-            ],
-        });
+        // Verificar si el chat ya existe
+        const { data: existing } = await supabase
+            .from('chats')
+            .select('phone_number, unread_count')
+            .eq('phone_number', phoneNumber)
+            .single();
+
+        if (existing) {
+            // Actualizar chat existente
+            const updates: Record<string, any> = {
+                name,
+                label,
+                status,
+                updated_at: new Date().toISOString(),
+            };
+            if (incrementUnread) {
+                updates.unread_count = (existing.unread_count || 0) + 1;
+            }
+
+            const { error } = await supabase
+                .from('chats')
+                .update(updates)
+                .eq('phone_number', phoneNumber);
+
+            if (error) throw error;
+        } else {
+            // Crear chat nuevo
+            const { error } = await supabase.from('chats').insert({
+                phone_number: phoneNumber,
+                name,
+                label,
+                status,
+                unread_count: incrementUnread ? 1 : 0,
+                updated_at: new Date().toISOString(),
+            });
+
+            if (error) throw error;
+        }
     } catch (error) {
         console.error('Error upserting chat:', error);
     }
 }
 
-export async function getChats() {
+/**
+ * Obtiene todos los chats con su último mensaje.
+ */
+export async function getChatsWithLastMessage() {
     try {
-        const result = await db.execute(`
-            SELECT * FROM chats ORDER BY is_pinned DESC, updated_at DESC
-        `);
-        return result.rows;
+        // Obtener todos los chats
+        const { data: chats, error: chatsError } = await supabase
+            .from('chats')
+            .select('*')
+            .order('is_pinned', { ascending: false })
+            .order('updated_at', { ascending: false });
+
+        if (chatsError) throw chatsError;
+        if (!chats || chats.length === 0) return [];
+
+        // Para cada chat, obtener el último mensaje (1 query con IN)
+        const phoneNumbers = chats.map(c => c.phone_number);
+
+        // Obtener el último mensaje por chat de forma eficiente
+        const result = await Promise.all(
+            chats.map(async (chat) => {
+                const { data: lastMsg } = await supabase
+                    .from('messages')
+                    .select('id, content, role, timestamp, status')
+                    .eq('phone_number', chat.phone_number)
+                    .order('timestamp', { ascending: false })
+                    .limit(1)
+                    .single();
+
+                return { ...chat, lastMsg };
+            })
+        );
+
+        return result;
     } catch (error) {
         console.error('Error getting chats:', error);
         return [];
     }
 }
 
+/**
+ * Obtiene mensajes de un chat específico con límite.
+ */
 export async function getMessagesByChat(phoneNumber: string, limit: number = 50) {
     try {
-        const result = await db.execute({
-            sql: `SELECT id, content as text, CASE WHEN role = 'user' THEN 'them' ELSE 'me' END as sender, timestamp, status 
-                  FROM messages WHERE phone_number = ? 
-                  ORDER BY timestamp DESC LIMIT ?`,
-            args: [phoneNumber, limit]
-        });
-        // Revertir para orden cronológico (DESC → ASC)
-        return result.rows.reverse();
+        const { data, error } = await supabase
+            .from('messages')
+            .select('id, content, role, timestamp, status')
+            .eq('phone_number', phoneNumber)
+            .order('timestamp', { ascending: false })
+            .limit(limit);
+
+        if (error) throw error;
+
+        // Revertir para orden cronológico
+        return (data || []).reverse();
     } catch (error) {
-        console.error('Error getting messages by chat:', error);
+        console.error('Error getting messages:', error);
         return [];
     }
 }
 
-export async function updateChatMetadata(phoneNumber: string, updates: { label?: string, status?: string, unread_count?: number, is_archived?: boolean, is_pinned?: boolean }) {
+/**
+ * Obtiene el contexto completo para Gemini (últimos N mensajes).
+ */
+export async function getFullContextForGemini(phoneNumber: string, limit: number = 50) {
     try {
-        const setClauses: string[] = [];
-        const args: any[] = [];
+        const messages = await getMessagesByChat(phoneNumber, limit);
 
-        if (updates.label !== undefined) {
-            setClauses.push('label = ?');
-            args.push(updates.label);
-        }
-        if (updates.status !== undefined) {
-            setClauses.push('status = ?');
-            args.push(updates.status);
-            // Invalidar cache de status
-            statusCache.delete(phoneNumber);
-        }
-        if (updates.unread_count !== undefined) {
-            setClauses.push('unread_count = ?');
-            args.push(updates.unread_count);
-        }
-        if (updates.is_archived !== undefined) {
-            setClauses.push('is_archived = ?');
-            args.push(updates.is_archived);
-        }
-        if (updates.is_pinned !== undefined) {
-            setClauses.push('is_pinned = ?');
-            args.push(updates.is_pinned);
-        }
+        return messages.map((msg: any) => ({
+            role: msg.role as 'user' | 'model',
+            content: msg.content,
+        }));
+    } catch (error) {
+        console.error('Error getting context for Gemini:', error);
+        return [];
+    }
+}
 
-        if (setClauses.length === 0) return;
+/**
+ * Actualiza metadatos de un chat (label, status, unread, etc.).
+ */
+export async function updateChatMetadata(
+    phoneNumber: string,
+    updates: { label?: string; status?: string; unread_count?: number; is_archived?: boolean; is_pinned?: boolean }
+) {
+    try {
+        const { error } = await supabase
+            .from('chats')
+            .update({ ...updates, updated_at: new Date().toISOString() })
+            .eq('phone_number', phoneNumber);
 
-        args.push(phoneNumber);
-
-        await db.execute({
-            sql: `UPDATE chats SET ${setClauses.join(', ')} WHERE phone_number = ?`,
-            args
-        });
+        if (error) throw error;
     } catch (error) {
         console.error('Error updating chat metadata:', error);
     }
 }
 
 /**
- * Cache en memoria para el status de chats.
- * Evita consultas repetidas a Turso en cada webhook.
+ * Actualiza el status de un chat (bot_activo / esperando_asesor).
  */
-const statusCache = new Map<string, { status: string; expiresAt: number }>();
-const STATUS_CACHE_TTL_MS = 60_000; // 60 segundos
-
-/**
- * Obtiene el status de un chat (bot_activo o esperando_asesor).
- * Usa cache en memoria con TTL de 60s para minimizar lecturas.
- */
-export async function getChatStatus(phoneNumber: string): Promise<string | null> {
-    // 1. Verificar cache
-    const cached = statusCache.get(phoneNumber);
-    if (cached && Date.now() < cached.expiresAt) {
-        return cached.status;
-    }
-
-    // 2. Leer de DB solo si el cache expiró
+export async function updateChatStatus(phoneNumber: string, status: 'bot_activo' | 'esperando_asesor') {
     try {
-        const result = await db.execute({
-            sql: 'SELECT status FROM chats WHERE phone_number = ?',
-            args: [phoneNumber],
-        });
-        if (result.rows.length === 0) return null;
+        const { error } = await supabase
+            .from('chats')
+            .update({ status, updated_at: new Date().toISOString() })
+            .eq('phone_number', phoneNumber);
 
-        const status = result.rows[0].status as string;
-        statusCache.set(phoneNumber, { status, expiresAt: Date.now() + STATUS_CACHE_TTL_MS });
-        return status;
-    } catch (error) {
-        console.error('Error getting chat status:', error);
-        return null;
-    }
-}
-
-/**
- * Actualiza el status de un chat (bot_activo | esperando_asesor).
- */
-export async function updateChatStatus(phoneNumber: string, status: 'bot_activo' | 'esperando_asesor'): Promise<void> {
-    try {
-        await db.execute({
-            sql: 'UPDATE chats SET status = ?, updated_at = CURRENT_TIMESTAMP WHERE phone_number = ?',
-            args: [status, phoneNumber],
-        });
-        // Actualizar cache inmediatamente
-        statusCache.set(phoneNumber, { status, expiresAt: Date.now() + STATUS_CACHE_TTL_MS });
+        if (error) throw error;
         console.log(`[DB] Status actualizado para ${phoneNumber}: ${status}`);
     } catch (error) {
         console.error('Error updating chat status:', error);

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Send, User, MoreVertical, Phone, Video, Search, Check, CheckCheck, Tag } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 import Head from 'next/head';
 
 // Tipos básicos para el estado
@@ -99,10 +100,16 @@ export default function WhatsAppWebClone() {
     const [newQuickReplyText, setNewQuickReplyText] = useState('');
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const activeChatIdRef = useRef<string | null>(activeChatId);
+
+    useEffect(() => {
+        activeChatIdRef.current = activeChatId;
+    }, [activeChatId]);
 
     const activeChat = chats.find(c => c.id === activeChatId);
 
-    // Fetch data from Turso
+    // Fetch data from Supabase
     const fetchChats = async () => {
         try {
             const res = await fetch('/api/whatsapp/chats');
@@ -118,18 +125,145 @@ export default function WhatsAppWebClone() {
                     }))
                 }));
 
-                setChats(parsedChats);
+                setChats(prevChats => {
+                    // Si es la primera carga, usamos lo que viene de la API directamente
+                    if (prevChats.length === 0) return parsedChats;
+
+                    // Fusionamos: conservamos el historial local de cada chat activo 
+                    // mientras actualizamos sus metadatos e inyectamos mensajes nuevos 
+                    return parsedChats.map((newChat: any) => {
+                        const existingChat = prevChats.find(c => c.id === newChat.id);
+                        if (!existingChat) return newChat; // Nuevo chat
+
+                        let mergedMessages = [...existingChat.messages];
+                        if (newChat.messages.length > 0) {
+                            const incomingLastMsg = newChat.messages[0];
+                            if (!mergedMessages.some(m => m.id === incomingLastMsg.id)) {
+                                mergedMessages.push(incomingLastMsg);
+                            } else {
+                                mergedMessages = mergedMessages.map(m =>
+                                    m.id === incomingLastMsg.id ? { ...m, status: incomingLastMsg.status } : m
+                                );
+                            }
+                        }
+
+                        // Eliminamos duplicados por ID (ej. previniendo colisión optimista vs poll)
+                        mergedMessages = Array.from(new Map(mergedMessages.map(m => [m.id, m])).values());
+
+                        return {
+                            ...newChat,
+                            messages: mergedMessages
+                        };
+                    });
+                });
+
+                // Si hay un chat activo, descargar su historial completo para no perder mensajes intermedios
+                const currentActiveId = activeChatIdRef.current;
+                if (currentActiveId) {
+                    const activeRes = await fetch(`/api/whatsapp/chats/${currentActiveId}`);
+                    if (activeRes.ok) {
+                        const activeData = await activeRes.json();
+                        const fullMessages = activeData.messages.map((msg: any) => ({
+                            ...msg,
+                            timestamp: new Date(msg.timestamp)
+                        }));
+
+                        setChats(prev => prev.map(c =>
+                            c.id === currentActiveId ? { ...c, messages: fullMessages } : c
+                        ));
+                    }
+                }
             }
         } catch (error) {
             console.error("Error fetching chats:", error);
         }
     };
 
-    // Polling effect
+    // Load full message history when a chat is selected
     useEffect(() => {
-        fetchChats(); // Fetch immediately on mount
-        const intervalId = setInterval(fetchChats, 4000); // Poll every 4 seconds
-        return () => clearInterval(intervalId);
+        if (!activeChatId) return;
+
+        const loadActiveChatMessages = async () => {
+            try {
+                const res = await fetch(`/api/whatsapp/chats/${activeChatId}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    const fullMessages = data.messages.map((msg: any) => ({
+                        ...msg,
+                        timestamp: new Date(msg.timestamp)
+                    }));
+
+                    setChats(prev => prev.map(c =>
+                        c.id === activeChatId ? { ...c, messages: fullMessages } : c
+                    ));
+                }
+            } catch (error) {
+                console.error("Error fetching full active chat history:", error);
+            }
+        };
+
+        loadActiveChatMessages();
+    }, [activeChatId]);
+
+    // Supabase Real-time Subscription
+    useEffect(() => {
+        fetchChats(); // Fetch initial state
+
+        // Escuchar inserciones en la tabla "messages" en tiempo real
+        const channel = supabase
+            .channel('custom-all-channel')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, (payload: any) => {
+                console.log('Mensaje en tiempo real recibido:', payload);
+                const newMsgData = payload.new;
+
+                const builtMsg: Message = {
+                    id: newMsgData.id,
+                    text: newMsgData.content,
+                    sender: newMsgData.role === 'user' ? 'them' : 'me', // "user" = cliente (them), "model" = bot/agente (me)
+                    timestamp: new Date(newMsgData.timestamp),
+                    status: newMsgData.status
+                };
+
+                // Inferir o extraer el teléfono del mensaje si no viene, 
+                // para inyectarlo en el chat correcto.
+                const targetPhone = newMsgData.phone_number;
+                if (!targetPhone) return;
+
+                setChats(prev => {
+                    const chatExists = prev.find(c => c.phoneNumber === targetPhone || c.phoneNumber === `+${targetPhone}`);
+
+                    if (chatExists) {
+                        return prev.map(c => {
+                            if (c.phoneNumber === targetPhone || c.phoneNumber === `+${targetPhone}`) {
+                                // No duplicar id existente
+                                if (c.messages.some(m => m.id === builtMsg.id)) return c;
+
+                                let updatedMessages = [...c.messages, builtMsg];
+                                updatedMessages.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
+                                return { ...c, messages: updatedMessages };
+                            }
+                            return c;
+                        });
+                    } else {
+                        // Si es un chat nuevo que justo entra, refetch manual rápido
+                        fetchChats();
+                        return prev;
+                    }
+                });
+            })
+            // Escuchar también actualizaciones de estado (doble check)
+            .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'messages' }, (payload: any) => {
+                const newMsgData = payload.new;
+                setChats(prev => prev.map(c => ({
+                    ...c,
+                    messages: c.messages.map(m => m.id === newMsgData.id ? { ...m, status: newMsgData.status } : m)
+                })));
+            })
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(channel);
+        };
     }, []);
 
     // Helper to call PATCH API for chat metadata
@@ -304,62 +438,40 @@ export default function WhatsAppWebClone() {
         if (e) e.preventDefault();
         if (!inputText.trim() || !activeChat || isSending) return;
 
-        const newMessage: Message = {
-            id: `m-${Date.now()}`,
-            text: inputText,
-            sender: 'me',
-            timestamp: new Date(),
-            status: 'sent',
-        };
+        const textToSend = inputText;
 
-        // Actualización optimista del UI
-        setChats((prev: Chat[]) => prev.map((chat: Chat) => {
-            if (chat.id === activeChat.id) {
-                return {
-                    ...chat,
-                    messages: [...chat.messages, newMessage]
-                };
-            }
-            return chat;
-        }));
         setInputText('');
         setShowQuickReplies(false);
         setIsSending(true);
 
+        // Autofocus back to the input immediately so they can keep typing
+        setTimeout(() => {
+            inputRef.current?.focus();
+        }, 10);
+
         try {
             // Llamada real al endpoint
+            // No hacemos inyección optimista (fakemessage), confiamos al 100%
+            // en que Supabase Realtime inyectará el mensaje real <200ms.
             const response = await fetch('/api/send-message', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     to: activeChat.phoneNumber,
-                    text: newMessage.text,
+                    text: textToSend,
                 }),
             });
 
             const data = await response.json();
 
             if (!response.ok) {
+                // If the message totally failed, we could restore the inputText
+                // For now just console error.
                 throw new Error(data.error || 'Error enviando mensaje');
             }
 
-            // Actualizar estado a "entregado" (simulado para el éxito de la API)
-            setChats((prev: Chat[]) => prev.map((chat: Chat) => {
-                if (chat.id === activeChat.id) {
-                    return {
-                        ...chat,
-                        messages: chat.messages.map((msg: Message) =>
-                            msg.id === newMessage.id ? { ...msg, status: 'delivered' } : msg
-                        )
-                    };
-                }
-                return chat;
-            }));
-
         } catch (error) {
             console.error('Error:', error);
-            // Opcional: Mostrar un toast de error o marcar el mensaje con error visual
-            // Para este demo, simplemente no lo marcamos como entregado y podríamos revertirlo
         } finally {
             setIsSending(false);
         }
@@ -531,6 +643,13 @@ export default function WhatsAppWebClone() {
                             );
                         })}
                     </div>
+
+                    {/* Branding Footer de Sidebar */}
+                    <div className="bg-[#f0f2f5] dark:bg-[#202c33] p-3 text-center text-xs text-[#54656f] dark:text-[#aebac1] border-t border-[#d1d7db] dark:border-[#222d34] flex-shrink-0">
+                        <a href="https://www.kytcode.lat" target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:underline flex items-center justify-center gap-1 font-semibold transition-colors dark:text-[#8696a0]">
+                            Desarrollado por K&T <span>❤️</span>
+                        </a>
+                    </div>
                 </div>
 
                 {/* PANEL PRINCIPAL (CHAT ACTIVO) */}
@@ -626,8 +745,8 @@ export default function WhatsAppWebClone() {
                                             <div className="flex items-center justify-end gap-1 mt-1 -mb-1 text-[11px] text-[#667781] dark:text-[#8696a0]">
                                                 <span>{formatTime(msg.timestamp)}</span>
                                                 {isMe && (
-                                                    <span className={`${msg.status === 'read' ? 'text-[#53bdeb]' : ''}`}>
-                                                        {msg.status === 'sent' ? <Check className="w-3.5 h-3.5" /> : <CheckCheck className="w-3.5 h-3.5" />}
+                                                    <span className={`${msg.status === 'read' ? 'text-[#53bdeb]' : 'text-[#8696a0]'}`}>
+                                                        {msg.status === 'sent' || !msg.status ? <Check className="w-3.5 h-3.5" /> : <CheckCheck className="w-3.5 h-3.5" />}
                                                     </span>
                                                 )}
                                             </div>
@@ -683,11 +802,11 @@ export default function WhatsAppWebClone() {
                             <div className="min-h-[62px] bg-[#f0f2f5] dark:bg-[#202c33] flex items-center px-4 py-2 gap-3">
                                 <form onSubmit={handleSendMessage} className="flex-1 flex gap-2 items-center relative">
                                     <Input
+                                        ref={inputRef}
                                         value={inputText}
                                         onChange={handleInputChange}
                                         placeholder="Escribe un mensaje o usa '/' para atajos"
                                         className="flex-1 rounded-lg border-none bg-white dark:bg-[#2a3942] focus-visible:ring-0 shadow-sm h-10 px-4 text-[15px]"
-                                        disabled={isSending}
                                     />
                                     {inputText.trim() ? (
                                         <Button type="submit" size="icon" className="bg-[#00a884] hover:bg-[#008f6f] w-10 h-10 rounded-full flex items-center justify-center shrink-0 shadow-sm transition-all active:scale-95 disabled:opacity-70 disabled:active:scale-100" disabled={isSending}>

@@ -1,12 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { initDb, getChatStatus, updateChatStatus } from '@/lib/db';
-import { generateGeminiResponse, generateGeminiAudioResponse } from '@/lib/gemini';
-import {
-    bufferMessage,
-    bufferChatMeta,
-    flushToDb,
-    getFullContextForGemini,
-} from '@/lib/message-buffer';
+import { saveMessage, upsertChat, updateChatStatus, getFullContextForGemini, updateMessageStatus } from '@/lib/db';
+import { generateAIResponse, generateAIAudioResponse } from '@/lib/ai';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,58 +10,44 @@ const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN;
 const ESCALATION_TAG = '[ESCALAR_ASESOR]';
 
 /**
- * Deduplicación: Map de IDs de mensajes ya procesados → timestamp.
- * Evita que Meta reintente el mismo mensaje y el bot responda en loop.
- * Se auto-limpia cada 10 minutos para evitar fugas de memoria.
+ * Deduplicación en memoria para evitar procesar reintentos de Meta.
+ * Se marca como procesado DESPUES de enviar la respuesta exitosamente.
  */
 const processedMessages = new Map<string, number>();
-const DEDUP_TTL_MS = 10 * 60 * 1000; // 10 minutos
-
-// Auto-limpieza periódica del mapa de deduplicación
 setInterval(() => {
     const now = Date.now();
-    for (const [id, timestamp] of processedMessages) {
-        if (now - timestamp > DEDUP_TTL_MS) {
-            processedMessages.delete(id);
-        }
+    for (const [id, ts] of processedMessages) {
+        if (now - ts > 600_000) processedMessages.delete(id); // 10 min TTL
     }
-}, DEDUP_TTL_MS);
+}, 60_000);
 
-// Inicializa la tabla de base de datos si no existe (fire-and-forget, no bloquea)
-initDb().catch(console.error);
+const OK_RESPONSE = new NextResponse('EVENT_RECEIVED', { status: 200 });
 
-/**
- * GET /api/webhook
- * Verificación del Webhook por Meta (Hub Challenge).
- * IMPORTANTE: Meta exige que la respuesta sea SOLO el challenge en texto plano.
- */
+// ================================================================
+// GET: Verificación del webhook de Meta
+// ================================================================
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
-
     const mode = searchParams.get('hub.mode');
     const token = searchParams.get('hub.verify_token');
     const challenge = searchParams.get('hub.challenge');
 
-    console.log('[Webhook GET] Verificación recibida:', { mode, token: token ? '***' : 'null', challenge });
-
-    if (mode && token) {
-        if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-            console.log('[Webhook GET] ✅ WEBHOOK_VERIFIED');
-            return new NextResponse(challenge, {
-                status: 200,
-                headers: { 'Content-Type': 'text/plain' },
-            });
-        } else {
-            console.warn('[Webhook GET] ❌ Token no coincide');
-            return new NextResponse('Forbidden', { status: 403 });
-        }
+    if (mode === 'subscribe' && token === VERIFY_TOKEN && challenge) {
+        console.log('[Webhook GET] ✅ WEBHOOK_VERIFIED');
+        return new NextResponse(challenge, {
+            status: 200,
+            headers: { 'Content-Type': 'text/plain' },
+        });
+    } else if (mode) {
+        console.warn('[Webhook GET] ❌ Token no coincide');
+        return new NextResponse('Forbidden', { status: 403 });
     }
 
     return new NextResponse('Bad Request', { status: 400 });
 }
 
 /**
- * Función helper para enviar mensajes a través de WhatsApp API.
+ * Envía un mensaje de texto a un usuario vía WhatsApp API.
  */
 async function sendWhatsAppMessage(phoneNumberId: string, to: string, text: string) {
     try {
@@ -100,7 +80,6 @@ async function sendWhatsAppMessage(phoneNumberId: string, to: string, text: stri
  * Paso 2: Descargar el binario desde esa URL.
  */
 async function downloadWhatsAppMedia(mediaId: string): Promise<{ buffer: Buffer; mimeType: string }> {
-    // Paso 1: Obtener URL del media
     const metaResponse = await fetch(`https://graph.facebook.com/v22.0/${mediaId}`, {
         headers: {
             'Authorization': `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN}`,
@@ -115,7 +94,6 @@ async function downloadWhatsAppMedia(mediaId: string): Promise<{ buffer: Buffer;
     const mediaUrl = mediaData.url;
     const mimeType = mediaData.mime_type || 'audio/ogg';
 
-    // Paso 2: Descargar el binario
     const downloadResponse = await fetch(mediaUrl, {
         headers: {
             'Authorization': `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN}`,
@@ -133,57 +111,41 @@ async function downloadWhatsAppMedia(mediaId: string): Promise<{ buffer: Buffer;
     return { buffer, mimeType };
 }
 
-/**
- * POST /api/webhook
- * Recibe TODOS los eventos entrantes de WhatsApp Business.
- * 
- * Flujo de Handoff:
- * 1. Si el chat tiene status "esperando_asesor", el bot NO responde (silencio).
- * 2. Si Gemini incluye [ESCALAR_ASESOR], se elimina la etiqueta antes de enviar
- *    y se marca el chat como "esperando_asesor" en Turso.
- * 3. SIEMPRE devuelve 200 OK a Meta.
- */
+// ================================================================
+// POST: Recibe TODOS los eventos entrantes de WhatsApp Business
+// ================================================================
 export async function POST(request: NextRequest) {
-    const OK_RESPONSE = NextResponse.json({ success: true }, { status: 200 });
-
     try {
         const body = await request.json();
 
-        // 🔍 LOG DE DIAGNÓSTICO
-        console.log('[Webhook POST] Payload recibido:', JSON.stringify(body, null, 2));
-
-        if (body?.object !== 'whatsapp_business_account') {
-            console.log('[Webhook POST] Evento ignorado: object no es whatsapp_business_account');
-            return OK_RESPONSE;
-        }
-
-        // Extraer datos con Optional Chaining completo
         const entry = body?.entry?.[0];
         const changes = entry?.changes?.[0];
         const value = changes?.value;
 
-        if (!value) {
-            console.log('[Webhook POST] Evento sin value, ignorando');
+        // Capturar eventos de status (read, delivered, sent)
+        if (value?.statuses && value.statuses.length > 0) {
+            const statusObj = value.statuses[0];
+            const msgId = statusObj.id;
+            const newStatus = statusObj.status; // 'sent', 'delivered', 'read'
+
+            if (msgId && newStatus) {
+                console.log(`[Webhook Status] 📌 Mensaje ${msgId} actualizado a: ${newStatus}`);
+                // Actuar de forma asíncrona ("fire and forget") para no bloquear el retorno inmediato a Meta
+                updateMessageStatus(msgId, newStatus).catch(err =>
+                    console.error('[Webhook Status] Error procesando estado:', err)
+                );
+            }
+
             return OK_RESPONSE;
         }
 
         const messages = value?.messages;
-        const statuses = value?.statuses;
-
-        // 📊 Eventos de STATUS (read receipts, delivery confirmations)
-        if (statuses && statuses.length > 0) {
-            console.log('[Webhook POST] Evento de status:', statuses[0]?.status, 'para:', statuses[0]?.recipient_id);
-            return OK_RESPONSE;
-        }
-
-        // 💬 Validar que hay mensajes entrantes
         if (!messages || messages.length === 0) {
-            console.log('[Webhook POST] Evento sin mensajes (evento de sistema), ignorando');
             return OK_RESPONSE;
         }
 
         const message = messages[0];
-        const messageId = message?.id; // ID único que Meta asigna a cada mensaje
+        const messageId = message?.id;
         const phoneNumberId = value?.metadata?.phone_number_id;
         const from = message?.from;
         const msgType = message?.type;
@@ -191,13 +153,13 @@ export async function POST(request: NextRequest) {
         const audioId = message?.audio?.id;
         const contactName = value?.contacts?.[0]?.profile?.name || `+${from}`;
 
-        // 🔁 DEDUPLICACIÓN: Ignorar mensajes ya procesados (reintentos de Meta)
+        // 🔁 DEDUPLICACIÓN: Ignorar mensajes ya procesados
         if (messageId && processedMessages.has(messageId)) {
-            console.log(`[Webhook POST] ⏭️ Mensaje ${messageId} ya procesado (reintento de Meta), ignorando`);
+            console.log(`[Webhook POST] ⏭️ Mensaje ${messageId} ya procesado, ignorando`);
             return OK_RESPONSE;
         }
 
-        // Solo procesamos mensajes de texto o audio
+        // Solo procesamos texto o audio
         if (msgType !== 'text' && msgType !== 'audio') {
             console.log(`[Webhook POST] Tipo no soportado (${msgType}), ignorando`);
             return OK_RESPONSE;
@@ -211,79 +173,57 @@ export async function POST(request: NextRequest) {
         const isAudio = msgType === 'audio';
         console.log(`[Webhook POST] ✅ Mensaje ${isAudio ? 'de AUDIO' : 'de texto'} de: ${from} (${contactName})${!isAudio ? ` | "${msgBody}"` : ''}`);
 
-        // Procesar en try/catch separado — errores internos NO afectan la respuesta a Meta
         try {
             // ============================================================
-            // 🛑 PASO 1: Verificación de handoff (DESACTIVADO TEMPORALMENTE)
-            // TODO: Reactivar cuando el panel de asesor esté listo.
-            // const chatStatus = await getChatStatus(from);
-            // if (chatStatus === 'esperando_asesor') { ... }
+            // 🤖 Flujo del bot — escritura directa a Supabase
             // ============================================================
 
-            // ============================================================
-            // 🤖 PASO 2: Flujo normal del bot
-            // ============================================================
-
-            // a) PRIMERO obtener el contexto histórico (DB + buffer previo)
+            // a) Obtener contexto histórico ANTES de guardar el mensaje actual
             const fullContext = await getFullContextForGemini(from, 50);
 
-            // b) Acumular el mensaje del usuario en el buffer
+            // b) Guardar mensaje del usuario en Supabase
             const userMsgId = crypto.randomUUID();
             const userContent = isAudio ? '[Audio recibido]' : msgBody;
-            bufferMessage(userMsgId, from, 'user', userContent);
-            bufferChatMeta(from, contactName, 'bot', true);
+            await saveMessage(userMsgId, from, 'user', userContent);
+            await upsertChat(from, contactName, 'bot', true);
 
             // c) Generar respuesta con Gemini
             let aiResponse: string;
 
             if (isAudio && audioId) {
-                // 🎤 Flujo de audio: descargar de WhatsApp y enviar a Gemini
                 const { buffer: audioBuffer, mimeType } = await downloadWhatsAppMedia(audioId);
-                aiResponse = await generateGeminiAudioResponse(fullContext, audioBuffer, mimeType);
+                aiResponse = await generateAIAudioResponse(fullContext, audioBuffer, mimeType);
             } else {
-                // 💬 Flujo de texto normal
-                aiResponse = await generateGeminiResponse(fullContext, msgBody);
+                aiResponse = await generateAIResponse(fullContext, msgBody);
             }
 
-            // ============================================================
-            // 🎯 PASO 3: Interceptar la etiqueta [ESCALAR_ASESOR]
-            // ============================================================
+            // d) Interceptar etiqueta de escalación
             let shouldEscalate = false;
-
             if (aiResponse.includes(ESCALATION_TAG)) {
                 shouldEscalate = true;
                 aiResponse = aiResponse.replace(ESCALATION_TAG, '').trim();
-                console.log(`[Webhook POST] 🚨 ESCALACIÓN detectada para ${from}. Marcando como esperando_asesor.`);
+                console.log(`[Webhook POST] 🚨 ESCALACIÓN detectada para ${from}`);
             }
 
-            // d) Acumular la respuesta del bot en el buffer
+            // e) Guardar respuesta del bot en Supabase
             const modelMsgId = crypto.randomUUID();
-            bufferMessage(modelMsgId, from, 'model', aiResponse);
+            await saveMessage(modelMsgId, from, 'model', aiResponse);
 
-            // e) Determinar el status del chat tras la respuesta
-            const newStatus = shouldEscalate ? 'esperando_asesor' : 'bot_activo';
+            // f) Actualizar status del chat
             const newLabel = shouldEscalate ? 'esperando' : 'bot';
-            bufferChatMeta(from, contactName, newLabel as 'bot' | 'esperando', false, newStatus as 'bot_activo' | 'esperando_asesor');
+            const newStatus = shouldEscalate ? 'esperando_asesor' : 'bot_activo';
+            await upsertChat(from, contactName, newLabel, false, newStatus);
 
-            // f) Enviar respuesta limpia al usuario vía WhatsApp
+            // g) Enviar respuesta al usuario vía WhatsApp
             await sendWhatsAppMessage(phoneNumberId, from, aiResponse);
 
-            // ✅ Marcar como procesado SOLO DESPUÉS de enviar exitosamente.
-            // Si falla antes de este punto, Meta reintentará y el bot procesará de nuevo.
+            // ✅ Marcar como procesado DESPUÉS de enviar exitosamente
             if (messageId) {
                 processedMessages.set(messageId, Date.now());
             }
 
-            // g) Flush de seguridad a Turso
-            await flushToDb(from);
-
-            // h) Si hubo escalación, actualizar el status directamente en Turso
-            if (shouldEscalate) {
-                await updateChatStatus(from, 'esperando_asesor');
-            }
-
         } catch (processingError) {
-            console.error('[Webhook POST] ❌ Error procesando mensaje (no afecta respuesta a Meta):', processingError);
+            console.error('[Webhook POST] ❌ Error procesando mensaje:', processingError);
         }
 
         return OK_RESPONSE;
