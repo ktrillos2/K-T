@@ -157,11 +157,6 @@ export async function POST(request: NextRequest) {
             return OK_RESPONSE;
         }
 
-        // Marcar como procesado inmediatamente
-        if (messageId) {
-            processedMessages.set(messageId, Date.now());
-        }
-
         // Solo procesamos mensajes de texto
         if (msgType !== 'text' || !msgBody) {
             console.log(`[Webhook POST] Mensaje no es texto (tipo: ${msgType}), ignorando`);
@@ -189,8 +184,6 @@ export async function POST(request: NextRequest) {
             // ============================================================
 
             // a) PRIMERO obtener el contexto histórico (DB + buffer previo)
-            //    ANTES de agregar el mensaje actual, para evitar que aparezca
-            //    duplicado (una vez en el historial y otra como sendMessage).
             const fullContext = await getFullContextForGemini(from, 50);
 
             // b) Ahora sí acumular el mensaje del usuario en el buffer
@@ -224,11 +217,16 @@ export async function POST(request: NextRequest) {
             // f) Enviar respuesta limpia al usuario vía WhatsApp
             await sendWhatsAppMessage(phoneNumberId, from, aiResponse);
 
+            // ✅ Marcar como procesado SOLO DESPUÉS de enviar exitosamente.
+            // Si falla antes de este punto, Meta reintentará y el bot procesará de nuevo.
+            if (messageId) {
+                processedMessages.set(messageId, Date.now());
+            }
+
             // g) Flush de seguridad a Turso
             await flushToDb(from);
 
             // h) Si hubo escalación, actualizar el status directamente en Turso
-            //    (por si el flush del buffer no lo actualizó correctamente)
             if (shouldEscalate) {
                 await updateChatStatus(from, 'esperando_asesor');
             }
