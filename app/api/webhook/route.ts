@@ -178,22 +178,11 @@ export async function POST(request: NextRequest) {
         // Procesar en try/catch separado — errores internos NO afectan la respuesta a Meta
         try {
             // ============================================================
-            // 🛑 PASO 1: Verificar si el chat está en modo "esperando_asesor"
-            // Si lo está, el bot guarda silencio para que Keyner responda.
+            // 🛑 PASO 1: Verificación de handoff (DESACTIVADO TEMPORALMENTE)
+            // TODO: Reactivar cuando el panel de asesor esté listo.
+            // const chatStatus = await getChatStatus(from);
+            // if (chatStatus === 'esperando_asesor') { ... }
             // ============================================================
-            const chatStatus = await getChatStatus(from);
-
-            if (chatStatus === 'esperando_asesor') {
-                console.log(`[Webhook POST] 🟡 Chat ${from} está en modo ESPERANDO_ASESOR. Bot en silencio.`);
-
-                // Aún así guardamos el mensaje del usuario para que Keyner lo vea en el panel
-                const userMsgId = crypto.randomUUID();
-                bufferMessage(userMsgId, from, 'user', msgBody);
-                bufferChatMeta(from, contactName, 'esperando', true);
-                await flushToDb(from);
-
-                return OK_RESPONSE;
-            }
 
             // ============================================================
             // 🤖 PASO 2: Flujo normal del bot
