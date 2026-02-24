@@ -40,6 +40,10 @@ export async function initDb() {
             // La columna ya existe, ignorar el error
         }
 
+        // Migración: Resetear todos los chats en "esperando_asesor" a "bot_activo"
+        // (limpia estados residuales de testing)
+        await db.execute(`UPDATE chats SET status = 'bot_activo' WHERE status = 'esperando_asesor'`);
+
         console.log('Database initialized successfully');
     } catch (error) {
         console.error('Failed to initialize database:', error);
@@ -126,7 +130,7 @@ export async function getMessagesByChat(phoneNumber: string, limit: number = 50)
     }
 }
 
-export async function updateChatMetadata(phoneNumber: string, updates: { label?: string, unread_count?: number, is_archived?: boolean, is_pinned?: boolean }) {
+export async function updateChatMetadata(phoneNumber: string, updates: { label?: string, status?: string, unread_count?: number, is_archived?: boolean, is_pinned?: boolean }) {
     try {
         const setClauses: string[] = [];
         const args: any[] = [];
@@ -134,6 +138,12 @@ export async function updateChatMetadata(phoneNumber: string, updates: { label?:
         if (updates.label !== undefined) {
             setClauses.push('label = ?');
             args.push(updates.label);
+        }
+        if (updates.status !== undefined) {
+            setClauses.push('status = ?');
+            args.push(updates.status);
+            // Invalidar cache de status
+            statusCache.delete(phoneNumber);
         }
         if (updates.unread_count !== undefined) {
             setClauses.push('unread_count = ?');
