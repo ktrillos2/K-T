@@ -59,18 +59,80 @@ async function sendWhatsAppMessage(phoneNumberId: string, to: string, text: stri
             },
             body: JSON.stringify({
                 messaging_product: 'whatsapp',
+                recipient_type: 'individual',
                 to,
                 type: 'text',
-                text: { body: text },
+                text: { preview_url: false, body: text },
             }),
         });
 
         if (!response.ok) {
-            const errorBody = await response.text();
-            console.error('[Webhook] Error enviando mensaje por WhatsApp:', errorBody);
+            const data = await response.json();
+            console.error('[WhatsApp API] Error enviando mensaje:', data);
         }
     } catch (error) {
-        console.error('[Webhook] Excepción enviando mensaje por WhatsApp:', error);
+        console.error('[WhatsApp API] Excepción al enviar mensaje:', error);
+    }
+}
+
+/**
+ * Envía un mensaje interactivo tipo Lista a un usuario vía WhatsApp API.
+ * @param dynamicText El saludo conversacional generado por la IA para inyectar en el body.
+ */
+async function sendWhatsAppInteractiveMessage(phoneNumberId: string, to: string, dynamicText?: string) {
+    try {
+        const bodyText = dynamicText || "Selecciona el servicio que deseas explorar para digitalizar tu negocio hoy:";
+        const response = await fetch(`https://graph.facebook.com/v22.0/${phoneNumberId}/messages`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${process.env.WHATSAPP_ACCESS_TOKEN}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "messaging_product": "whatsapp",
+                "to": to,
+                "type": "interactive",
+                "interactive": {
+                    "type": "list",
+                    "header": { "type": "text", "text": "Servicios Digitales K&T" },
+                    "body": { "text": bodyText },
+                    "footer": { "text": "Desarrollado por K&T ❤️" },
+                    "action": {
+                        "button": "📋 Ver Servicios",
+                        "sections": [
+                            {
+                                "title": "💻 Desarrollo Web",
+                                "rows": [
+                                    { "id": "cotizar_landing", "title": "Landing Page + SEO", "description": "Optimizada, veloz y alojada en Vercel." },
+                                    { "id": "cotizar_tienda", "title": "Tienda Online", "description": "E-commerce completo (Máx 35 productos)." }
+                                ]
+                            },
+                            {
+                                "title": "📱 Redes Sociales",
+                                "rows": [
+                                    { "id": "cotizar_redes", "title": "Gestión y Estrategia", "description": "Aumenta tus ventas y automatiza procesos." }
+                                ]
+                            },
+                            {
+                                "title": "🙋‍♂️ Atención Personalizada",
+                                "rows": [
+                                    { "id": "[ESCALAR_ASESOR]", "title": "Hablar con Keyner", "description": "Asesoría directa y humana." }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }),
+        });
+
+        if (!response.ok) {
+            const data = await response.json();
+            console.error('[WhatsApp API] Error enviando interactivo:', data);
+        } else {
+            console.log(`[WhatsApp API] ✅ Menú interactivo enviado a ${to}`);
+        }
+    } catch (error) {
+        console.error('[WhatsApp API] Excepción al enviar interactivo:', error);
     }
 }
 
@@ -159,8 +221,17 @@ export async function POST(request: NextRequest) {
             return OK_RESPONSE;
         }
 
-        // Solo procesamos texto o audio
-        if (msgType !== 'text' && msgType !== 'audio') {
+        // Interceptar respuestas interactivas
+        const isInteractive = msgType === 'interactive';
+        let extractedUserText = msgBody;
+
+        if (isInteractive && message?.interactive?.type === 'list_reply') {
+            extractedUserText = message.interactive.list_reply.title; // Extraer el título del botón tocado
+            // Nota: Si es 'Hablar con Keyner', Gemini interpretará el texto naturalmente y aplicará la escalación.
+        }
+
+        // Solo procesamos texto, audio o interactive
+        if (msgType !== 'text' && msgType !== 'audio' && !isInteractive) {
             console.log(`[Webhook POST] Tipo no soportado (${msgType}), ignorando`);
             return OK_RESPONSE;
         }
@@ -171,7 +242,7 @@ export async function POST(request: NextRequest) {
         }
 
         const isAudio = msgType === 'audio';
-        console.log(`[Webhook POST] ✅ Mensaje ${isAudio ? 'de AUDIO' : 'de texto'} de: ${from} (${contactName})${!isAudio ? ` | "${msgBody}"` : ''}`);
+        console.log(`[Webhook POST] ✅ Mensaje ${isAudio ? 'de AUDIO' : (isInteractive ? 'INTERACTIVO' : 'de texto')} de: ${from} (${contactName})${!isAudio ? ` | "${extractedUserText}"` : ''}`);
 
         try {
             // ============================================================
@@ -183,7 +254,7 @@ export async function POST(request: NextRequest) {
 
             // b) Guardar mensaje del usuario en Supabase
             const userMsgId = crypto.randomUUID();
-            const userContent = isAudio ? '[Audio recibido]' : msgBody;
+            const userContent = isAudio ? '[Audio recibido]' : extractedUserText;
             await saveMessage(userMsgId, from, 'user', userContent);
             await upsertChat(from, contactName, 'bot', true);
 
@@ -194,7 +265,7 @@ export async function POST(request: NextRequest) {
                 const { buffer: audioBuffer, mimeType } = await downloadWhatsAppMedia(audioId);
                 aiResponse = await generateAIAudioResponse(fullContext, audioBuffer, mimeType);
             } else {
-                aiResponse = await generateAIResponse(fullContext, msgBody);
+                aiResponse = await generateAIResponse(fullContext, extractedUserText);
             }
 
             // d) Interceptar etiqueta de escalación
@@ -205,17 +276,39 @@ export async function POST(request: NextRequest) {
                 console.log(`[Webhook POST] 🚨 ESCALACIÓN detectada para ${from}`);
             }
 
-            // e) Guardar respuesta del bot en Supabase
+            // g) Interceptar menú de servicios dinámico
+            let isMenuRequest = false;
+            let dynamicGreeting = "";
+
+            if (aiResponse.includes('[MENU_SERVICIOS]')) {
+                isMenuRequest = true;
+                // Extraer el saludo natural generado por la IA quitando la etiqueta
+                dynamicGreeting = aiResponse.replace('[MENU_SERVICIOS]', '').trim();
+
+                // Si la IA por alguna razón no generó texto, usar un fallback suave.
+                if (!dynamicGreeting) {
+                    dynamicGreeting = "¡Claro! Aquí tienes nuestros servicios detallados de K&T:";
+                }
+
+                // Guardaremos en la DB una versión amigable de lo que se envió
+                aiResponse = `[Menú Interactivo Enviado]: ${dynamicGreeting}`;
+            }
+
+            // h) Guardar respuesta del bot en Supabase
             const modelMsgId = crypto.randomUUID();
             await saveMessage(modelMsgId, from, 'model', aiResponse);
 
-            // f) Actualizar status del chat
+            // i) Actualizar status del chat
             const newLabel = shouldEscalate ? 'esperando' : 'bot';
             const newStatus = shouldEscalate ? 'esperando_asesor' : 'bot_activo';
             await upsertChat(from, contactName, newLabel, false, newStatus);
 
-            // g) Enviar respuesta al usuario vía WhatsApp
-            await sendWhatsAppMessage(phoneNumberId, from, aiResponse);
+            // j) Enviar respuesta al usuario vía WhatsApp
+            if (isMenuRequest) {
+                await sendWhatsAppInteractiveMessage(phoneNumberId, from, dynamicGreeting);
+            } else {
+                await sendWhatsAppMessage(phoneNumberId, from, aiResponse);
+            }
 
             // ✅ Marcar como procesado DESPUÉS de enviar exitosamente
             if (messageId) {
