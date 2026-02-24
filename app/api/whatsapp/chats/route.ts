@@ -5,14 +5,31 @@ import { getBufferedMessages } from '@/lib/message-buffer';
 // Force dynamic execution for polling
 export const dynamic = 'force-dynamic';
 
+/**
+ * Cache en memoria para la respuesta del API de chats.
+ * Evita consultar Turso en cada poll (cada 4s desde el frontend).
+ * Se invalida automáticamente después de un TTL corto.
+ */
+let chatsCache: { data: any; expiresAt: number } | null = null;
+const CHATS_CACHE_TTL_MS = 5_000; // 5 segundos (el frontend pollea cada 4s)
+
 export async function GET() {
     try {
+        const now = Date.now();
+
+        // Servir desde cache si aún es válido
+        if (chatsCache && now < chatsCache.expiresAt) {
+            return NextResponse.json({ chats: chatsCache.data }, { status: 200 });
+        }
+
+        // Cache expirado — recargar desde Turso
         const dbChats = await getChats();
 
-        // Populate messages for each chat (DB + buffer fusionados)
         const populatedChats = await Promise.all(
             dbChats.map(async (chatRow: any) => {
                 const phoneNumber = chatRow.phone_number as string;
+
+                // Obtener últimos 50 mensajes de DB
                 const dbMessages = await getMessagesByChat(phoneNumber);
 
                 // Obtener mensajes pendientes en el buffer
@@ -57,6 +74,9 @@ export async function GET() {
                 };
             })
         );
+
+        // Guardar en cache
+        chatsCache = { data: populatedChats, expiresAt: now + CHATS_CACHE_TTL_MS };
 
         return NextResponse.json({ chats: populatedChats }, { status: 200 });
 

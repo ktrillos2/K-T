@@ -110,13 +110,16 @@ export async function getChats() {
     }
 }
 
-export async function getMessagesByChat(phoneNumber: string) {
+export async function getMessagesByChat(phoneNumber: string, limit: number = 50) {
     try {
         const result = await db.execute({
-            sql: "SELECT id, content as text, CASE WHEN role = 'user' THEN 'them' ELSE 'me' END as sender, timestamp, status FROM messages WHERE phone_number = ? ORDER BY timestamp ASC",
-            args: [phoneNumber]
+            sql: `SELECT id, content as text, CASE WHEN role = 'user' THEN 'them' ELSE 'me' END as sender, timestamp, status 
+                  FROM messages WHERE phone_number = ? 
+                  ORDER BY timestamp DESC LIMIT ?`,
+            args: [phoneNumber, limit]
         });
-        return result.rows;
+        // Revertir para orden cronológico (DESC → ASC)
+        return result.rows.reverse();
     } catch (error) {
         console.error('Error getting messages by chat:', error);
         return [];
@@ -159,17 +162,34 @@ export async function updateChatMetadata(phoneNumber: string, updates: { label?:
 }
 
 /**
+ * Cache en memoria para el status de chats.
+ * Evita consultas repetidas a Turso en cada webhook.
+ */
+const statusCache = new Map<string, { status: string; expiresAt: number }>();
+const STATUS_CACHE_TTL_MS = 60_000; // 60 segundos
+
+/**
  * Obtiene el status de un chat (bot_activo o esperando_asesor).
- * Retorna null si el chat no existe aún.
+ * Usa cache en memoria con TTL de 60s para minimizar lecturas.
  */
 export async function getChatStatus(phoneNumber: string): Promise<string | null> {
+    // 1. Verificar cache
+    const cached = statusCache.get(phoneNumber);
+    if (cached && Date.now() < cached.expiresAt) {
+        return cached.status;
+    }
+
+    // 2. Leer de DB solo si el cache expiró
     try {
         const result = await db.execute({
             sql: 'SELECT status FROM chats WHERE phone_number = ?',
             args: [phoneNumber],
         });
         if (result.rows.length === 0) return null;
-        return result.rows[0].status as string;
+
+        const status = result.rows[0].status as string;
+        statusCache.set(phoneNumber, { status, expiresAt: Date.now() + STATUS_CACHE_TTL_MS });
+        return status;
     } catch (error) {
         console.error('Error getting chat status:', error);
         return null;
@@ -185,6 +205,8 @@ export async function updateChatStatus(phoneNumber: string, status: 'bot_activo'
             sql: 'UPDATE chats SET status = ?, updated_at = CURRENT_TIMESTAMP WHERE phone_number = ?',
             args: [status, phoneNumber],
         });
+        // Actualizar cache inmediatamente
+        statusCache.set(phoneNumber, { status, expiresAt: Date.now() + STATUS_CACHE_TTL_MS });
         console.log(`[DB] Status actualizado para ${phoneNumber}: ${status}`);
     } catch (error) {
         console.error('Error updating chat status:', error);
