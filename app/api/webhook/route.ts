@@ -207,7 +207,7 @@ export async function POST(request: NextRequest) {
             // b) Ahora sí acumular el mensaje del usuario en el buffer
             const userMsgId = crypto.randomUUID();
             bufferMessage(userMsgId, from, 'user', msgBody);
-            bufferChatMeta(from, contactName, 'esperando', true);
+            bufferChatMeta(from, contactName, 'bot', true);
 
             // c) Generar respuesta con Gemini usando el contexto histórico
             let aiResponse = await generateGeminiResponse(fullContext, msgBody);
