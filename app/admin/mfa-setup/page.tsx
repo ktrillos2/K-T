@@ -48,8 +48,8 @@ export default function MFASetupPage() {
                     })
                     if (enrollError) throw enrollError
 
-                    if (enrollData?.totp?.qr_code) {
-                        setQrCode(enrollData.totp.qr_code)
+                    if (enrollData?.totp?.uri) {
+                        setQrCode(enrollData.totp.uri)
                         setFactorId(enrollData.id)
                     }
                 } else {
@@ -66,8 +66,8 @@ export default function MFASetupPage() {
                     })
                     if (enrollError) throw enrollError
 
-                    if (enrollData?.totp?.qr_code) {
-                        setQrCode(enrollData.totp.qr_code)
+                    if (enrollData?.totp?.uri) {
+                        setQrCode(enrollData.totp.uri)
                         setFactorId(enrollData.id)
                     }
                 }
