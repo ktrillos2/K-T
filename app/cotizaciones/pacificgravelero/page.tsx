@@ -5,7 +5,7 @@ import Link from "next/link"
 import { CheckCircle2, ShieldCheck, Heart, ArrowRight, ExternalLink, Calendar, Receipt, Lock, Copy, Check, ThumbsUp, HelpCircle } from "lucide-react"
 import { m as motion, AnimatePresence } from "framer-motion"
 import Footer from "@/components/layout/footer"
-import ProjectsSection from "@/components/sections/projects-section"
+import QuotationProjectsSlider from "@/components/sections/quotation-projects-slider"
 import { notifyQuotationViewed, notifyQuotationAccepted } from "@/app/actions/cotizacion-actions"
 
 export default function CotizacionPacificGravelero() {
@@ -508,8 +508,8 @@ export default function CotizacionPacificGravelero() {
                     Revisa algunos de nuestros trabajos más recientes o procede a aceptar la cotización para dar el primer paso.
                   </p>
                   
-                  <div className="w-screen relative left-1/2 -translate-x-1/2 mb-16">
-                    <ProjectsSection />
+                  <div className="w-full relative mb-16">
+                    <QuotationProjectsSlider />
                   </div>
 
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
