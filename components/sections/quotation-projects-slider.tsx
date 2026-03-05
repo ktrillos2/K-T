@@ -12,14 +12,15 @@ export default function QuotationProjectsSlider() {
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
-      const scrollAmount = direction === 'left' ? -350 : 350
+      const scrollAmount = direction === 'left' ? -320 : 320
       scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' })
     }
   }
 
   return (
-    <div className="relative w-full max-w-full my-12 group/slider">
-      <div className="flex items-center justify-between mb-8 px-2">
+    <div className="relative w-full my-12 group/slider overflow-hidden">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-8">
         <h3 className="text-2xl font-bold font-title text-white">Casos de Éxito y Proyectos</h3>
         <div className="hidden sm:flex items-center gap-2">
           <button 
@@ -39,9 +40,10 @@ export default function QuotationProjectsSlider() {
         </div>
       </div>
 
+      {/* Scrollable container */}
       <div 
         ref={scrollContainerRef}
-        className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-4 px-2 -mx-2 hide-scrollbar w-full"
+        className="flex gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory pb-4 hide-scrollbar"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {projects.map((project, index) => (
@@ -50,40 +52,31 @@ export default function QuotationProjectsSlider() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
-            className="flex-none w-[280px] sm:w-[320px] snap-center sm:snap-start group cursor-pointer"
+            transition={{ duration: 0.4, delay: Math.min(index * 0.08, 0.5) }}
+            className="flex-none w-[260px] sm:w-[280px] md:w-[300px] snap-start group cursor-pointer"
           >
             <Link href={`/projects/${project.slug}`} target="_blank" className="block h-full">
-              <div className="relative h-[400px] sm:h-[450px] rounded-2xl overflow-hidden border border-white/10 bg-white/5 group-hover:border-white/20 transition-all duration-300 flex flex-col">
-                <div className="relative h-[200px] w-full shrink-0 overflow-hidden">
+              <div className="relative h-[320px] sm:h-[340px] rounded-2xl overflow-hidden border border-white/10 bg-white/5 group-hover:border-white/20 transition-all duration-300 flex flex-col">
+                {/* Image */}
+                <div className="relative h-[160px] sm:h-[180px] w-full shrink-0 overflow-hidden">
                   <Image
                     src={project.images.hero}
                     alt={project.title}
                     fill
                     className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 640px) 280px, 320px"
+                    sizes="(max-width: 640px) 260px, 300px"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-80" />
-                  <div className="absolute bottom-3 left-4 text-white/50 text-6xl font-black tracking-tighter mix-blend-overlay">
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
                 </div>
                 
-                <div className="flex flex-col flex-grow p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-mono text-white/60 uppercase tracking-wider">{project.category}</span>
-                    <ArrowUpRight className="w-4 h-4 text-white/40 group-hover:text-white transition-colors" />
+                {/* Content */}
+                <div className="flex flex-col flex-grow p-4 sm:p-5">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-[10px] font-mono text-white/50 uppercase tracking-wider leading-tight">{project.category}</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-white/30 group-hover:text-white transition-colors shrink-0" />
                   </div>
-                  <h4 className="text-xl font-bold text-white mb-2 leading-tight">{project.title}</h4>
-                  <p className="text-sm text-white/70 line-clamp-3 mb-4 flex-grow">{project.shortDescription}</p>
-                  
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {project.tech.slice(0, 3).map((t) => (
-                      <span key={t} className="text-[10px] py-1 px-2 rounded-full border border-white/10 bg-white/5 text-white/80">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
+                  <h4 className="text-lg font-bold text-white mb-1.5 leading-tight">{project.title}</h4>
+                  <p className="text-xs text-white/60 line-clamp-2">{project.shortDescription}</p>
                 </div>
               </div>
             </Link>
@@ -92,7 +85,7 @@ export default function QuotationProjectsSlider() {
       </div>
       
       {/* Mobile hint */}
-      <div className="sm:hidden flex items-center justify-center mt-2 text-white/40 text-xs gap-2">
+      <div className="sm:hidden flex items-center justify-center mt-3 text-white/40 text-xs gap-1.5">
         <span>Desliza para ver más</span>
         <ChevronRight className="w-3 h-3" />
       </div>
