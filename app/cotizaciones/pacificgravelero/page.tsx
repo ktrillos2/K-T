@@ -139,7 +139,7 @@ export default function CotizacionPacificGravelero() {
               <div className="inline-block px-4 py-1.5 mb-8 text-xs font-bold tracking-widest text-white uppercase border border-white/20 rounded-full bg-white/5 backdrop-blur-sm">
                 Propuesta Comercial
               </div>
-              <h1 className="font-title text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-tight mb-8 text-center">
+              <h1 className="font-title text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-tight mb-8 text-center">
                 COTIZACIÓN DE<br />
                 DESARROLLO WEB
               </h1>
@@ -541,7 +541,7 @@ export default function CotizacionPacificGravelero() {
                     )}
                     
                     <a 
-                      href="https://wa.me/573133087069?text=Hola,%20tengo%20dudas%20sobre%20la%20cotizaci%C3%B3n%20de%20Pacific%20Gravelero"
+                      href="https://wa.me/573116360057?text=Hola,%20tengo%20dudas%20sobre%20la%20cotizaci%C3%B3n%20de%20Pacific%20Gravelero"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full sm:w-auto flex items-center justify-center gap-2 bg-zinc-900 text-white hover:bg-zinc-800 border border-white/10 px-8 py-4 rounded-full font-medium transition-all"
