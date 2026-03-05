@@ -4,14 +4,17 @@ import { Lead, CreateLeadDTO } from '@/types/crm';
 
 const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL || '';
 
-export async function fetchLeadsAction(): Promise<{ success: boolean; data?: Lead[]; error?: string }> {
+export async function fetchLeadsAction(
+    page: number = 1,
+    limit: number = 50,
+    searchTerm: string = '',
+    filterStatus: string = 'all'
+): Promise<{ success: boolean; data?: Lead[]; totalCount?: number; totalPages?: number; pendingCount?: number; error?: string }> {
     if (!GOOGLE_SCRIPT_URL) {
         return { success: false, error: 'Configuration Error: GOOGLE_SCRIPT_URL is missing' };
     }
 
     try {
-        // Adding a cache breaker or revalidate config might be needed depending on needs
-        // For now, no-store to always get fresh data
         const GOOGLE_SCRIPT_WITH_KEY = `${GOOGLE_SCRIPT_URL}?key=${process.env.CR_SECRET_KEY}`;
 
         try {
@@ -21,28 +24,56 @@ export async function fetchLeadsAction(): Promise<{ success: boolean; data?: Lea
             });
 
             if (!response.ok) {
-                // Check if it's a redirect to login (HTML response instead of JSON)
                 const contentType = response.headers.get('content-type');
                 if (contentType && contentType.includes('text/html')) {
-                    return { success: false, error: 'Error de autenticación: El script no es público. Revisa los permisos de despliegue ("Anyone").' };
+                    return { success: false, error: 'Error de autenticación.' };
                 }
                 return { success: false, error: `Error HTTP: ${response.status}` };
             }
 
             const text = await response.text();
-            // Try to parse JSON
             let data;
             try {
                 data = JSON.parse(text);
             } catch (e) {
-                // If parsing fails, it might be the HTML login page if the previous check passed somehow
-                console.error('Server Action fetchLeads parse error. Response beginning:', text.substring(0, 150));
-                return { success: false, error: 'Respuesta inválida del servidor (posiblemente HTML en lugar de JSON). Revisa permisos.' };
+                console.error('Server Action fetchLeads parse error.');
+                return { success: false, error: 'Respuesta inválida del servidor.' };
             }
 
             if (data.status === 'success') {
-                console.log('Server Action fetchLeads success. Items:', data.data?.length);
-                return { success: true, data: data.data };
+                let leads: Lead[] = data.data || [];
+                // Reverse to show newest first
+                leads.reverse();
+
+                // Calculate pending count for notification
+                const pendingCount = leads.filter(l => l.estado === 'Nuevo' || l.estado === 'Volver a Contactar').length;
+
+                // Apply filtering
+                if (searchTerm || filterStatus !== 'all') {
+                    leads = leads.filter(lead => {
+                        const matchesSearch = !searchTerm ||
+                            lead.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                            lead.empresa.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                            (lead.servicio || '').toLowerCase().includes(searchTerm.toLowerCase());
+                        const matchesStatus = filterStatus === 'all' || lead.estado === filterStatus;
+                        return matchesSearch && matchesStatus;
+                    });
+                }
+
+                const totalCount = leads.length;
+                const totalPages = Math.ceil(totalCount / limit);
+
+                // Apply pagination
+                const startIndex = (page - 1) * limit;
+                const paginatedLeads = leads.slice(startIndex, startIndex + limit);
+
+                return {
+                    success: true,
+                    data: paginatedLeads,
+                    totalCount,
+                    totalPages,
+                    pendingCount
+                };
             } else {
                 return { success: false, error: data.message || 'Error desconocido del script' };
             }
