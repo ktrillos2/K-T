@@ -6,12 +6,20 @@ export async function middleware(request: NextRequest) {
     
     // Subdomain routing for Pacific Gravelero
     if (hostname.includes('pacificgravelero.kytcode.lat')) {
-        // If accessing the root of the subdomain, rewrite to the quote page silently
         if (request.nextUrl.pathname === '/') {
             return NextResponse.rewrite(new URL('/cotizaciones/pacificgravelero', request.url))
         }
-    } else {
-        // If someone tries to access ANY quote page directly from the main domain, redirect them home
+    }
+    
+    // Subdomain routing for Servicios Domicilio
+    if (hostname.includes('serviciosdomicilio.kytcode.lat')) {
+        if (request.nextUrl.pathname === '/') {
+            return NextResponse.rewrite(new URL('/cotizaciones/servicios-domicilio', request.url))
+        }
+    }
+    
+    // If someone tries to access ANY quote page directly from the main domain, redirect them home
+    if (!hostname.includes('pacificgravelero.kytcode.lat') && !hostname.includes('serviciosdomicilio.kytcode.lat')) {
         if (request.nextUrl.pathname.startsWith('/cotizaciones')) {
             return NextResponse.redirect(new URL('/', request.url))
         }
