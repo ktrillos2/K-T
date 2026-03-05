@@ -56,7 +56,7 @@ export default function Header() {
   return (
     <>
       <motion.header
-        className={`fixed top-0 left-0 right-0 z-40 px-6 py-4 transition-all duration-300 ${isScrolled && !isMenuOpen
+        className={`fixed top-0 left-0 right-0 z-[60] px-6 py-4 transition-all duration-300 ${isScrolled && !isMenuOpen
           ? "backdrop-blur-md bg-black/80 border-b border-white/10"
           : "bg-transparent border-b border-transparent"
           }`}
@@ -66,7 +66,7 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <motion.button
-            className="relative w-48 h-20 cursor-pointer"
+            className={`relative w-48 h-20 cursor-pointer transition-opacity duration-300 ${isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
             onMouseEnter={() => setCursorVariant("hover")}
             onMouseLeave={() => setCursorVariant("default")}
             whileHover={{ scale: 1.05 }}

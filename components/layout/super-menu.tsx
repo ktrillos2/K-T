@@ -102,7 +102,7 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-30 bg-black"
+          className="fixed inset-0 z-50 bg-black"
           variants={menuVariants}
           initial="closed"
           animate="open"
