@@ -2,14 +2,18 @@
 
 import React, { useState } from "react"
 import Link from "next/link"
-import { CheckCircle2, ShieldCheck, Heart, ArrowRight, ExternalLink, Calendar, Receipt, Lock, Copy, Check } from "lucide-react"
+import { CheckCircle2, ShieldCheck, Heart, ArrowRight, ExternalLink, Calendar, Receipt, Lock, Copy, Check, ThumbsUp, HelpCircle } from "lucide-react"
 import { m as motion, AnimatePresence } from "framer-motion"
 import Footer from "@/components/layout/footer"
+import { notifyQuotationViewed, notifyQuotationAccepted } from "@/app/actions/cotizacion-actions"
 
 export default function CotizacionPacificGravelero() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [password, setPassword] = useState("")
   const [error, setError] = useState(false)
+  const [hasViewed, setHasViewed] = useState(false)
+  const [isAccepted, setIsAccepted] = useState(false)
+  const [isAccepting, setIsAccepting] = useState(false)
   const [copiedNequi, setCopiedNequi] = useState(false)
   const [copiedCuenta, setCopiedCuenta] = useState(false)
 
@@ -24,16 +28,34 @@ export default function CotizacionPacificGravelero() {
     }
   }
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     if (password === "cot_pacificgravelero") {
       setIsAuthenticated(true)
       setError(false)
       // Small delay to allow smooth transition before scrolling to top
       setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100)
+      
+      // Fire action silently only once per session
+      if (!hasViewed) {
+        setHasViewed(true);
+        notifyQuotationViewed({ client: "Pacific Gravelero" }).catch(console.error);
+      }
     } else {
       setError(true)
       setPassword("")
+    }
+  }
+
+  const handleAccept = async () => {
+    setIsAccepting(true)
+    try {
+      await notifyQuotationAccepted({ client: "Pacific Gravelero" })
+      setIsAccepted(true)
+    } catch (error) {
+      console.error("Error accepting quote:", error)
+    } finally {
+      setIsAccepting(false)
     }
   }
 
@@ -468,6 +490,65 @@ export default function CotizacionPacificGravelero() {
                         <span>Desconfiguraciones por manipulación de código de terceros no autorizados.</span>
                       </li>
                     </ul>
+                  </div>
+                </div>
+              </motion.section>
+              {/* Section 6: Portfolio & Next Steps */}
+              <motion.section 
+                variants={fadeIn as any}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                className="scroll-mt-24"
+              >
+                <div className="flex flex-col items-center justify-center border-t border-white/10 pt-16 pb-8 text-center">
+                  <h2 className="text-3xl font-bold font-title text-white mb-4">¿Listo para comenzar tu proyecto?</h2>
+                  <p className="text-white/70 max-w-xl mx-auto mb-10 text-lg">
+                    Revisa algunos de nuestros trabajos más recientes o procede a aceptar la cotización para dar el primer paso.
+                  </p>
+                  
+                  <Link 
+                    href="/projects" 
+                    className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/5 border border-white/20 hover:bg-white/10 text-white transition-all font-medium mb-16 hover:scale-105"
+                  >
+                    Ver Portafolio de Proyectos <ArrowRight className="w-4 h-4" />
+                  </Link>
+
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+                    {isAccepted ? (
+                      <div className="flex items-center gap-2 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-8 py-4 rounded-full font-bold">
+                        <CheckCircle2 className="w-5 h-5" />
+                        ¡Cotización Aceptada!
+                      </div>
+                    ) : (
+                      <button 
+                        onClick={handleAccept}
+                        disabled={isAccepting}
+                        className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white text-black hover:bg-white/90 px-8 py-4 rounded-full font-bold transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
+                      >
+                        {isAccepting ? (
+                          <span className="flex items-center gap-2">
+                            <span className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin"></span>
+                            Procesando...
+                          </span>
+                        ) : (
+                          <>
+                            <ThumbsUp className="w-5 h-5" />
+                            Aceptar Cotización
+                          </>
+                        )}
+                      </button>
+                    )}
+                    
+                    <a 
+                      href="https://wa.me/573133087069?text=Hola,%20tengo%20dudas%20sobre%20la%20cotizaci%C3%B3n%20de%20Pacific%20Gravelero"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto flex items-center justify-center gap-2 bg-zinc-900 text-white hover:bg-zinc-800 border border-white/10 px-8 py-4 rounded-full font-medium transition-all"
+                    >
+                      <HelpCircle className="w-5 h-5" />
+                      Tengo dudas / Modificar
+                    </a>
                   </div>
                 </div>
               </motion.section>

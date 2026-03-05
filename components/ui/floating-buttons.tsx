@@ -121,8 +121,8 @@ export default function FloatingButtons() {
         };
     }, [])
 
-    // Don't show on admin or studio pages
-    if (pathname?.startsWith('/admin') || pathname?.startsWith('/studio')) return null
+    // Don't show on admin, studio, or quotation pages
+    if (pathname?.startsWith('/admin') || pathname?.startsWith('/studio') || pathname?.startsWith('/cotizaciones')) return null
 
     const handleWhatsAppClick = () => {
         notifyInteraction("WhatsApp Button (Direct)")

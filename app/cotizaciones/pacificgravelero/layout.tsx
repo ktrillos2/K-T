@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     description: 'Propuesta comercial exclusiva para el desarrollo de plataforma web de pagos recurrentes y gestión de membresías.',
     images: [
       {
-        url: '/images/seo-cover.jpg', // Reusing the global SEO cover or any default image
+        url: '/images/logo.png', // Usando el logo actual de la agencia
         width: 1200,
         height: 630,
         alt: 'K&T Desarrollo Web',
