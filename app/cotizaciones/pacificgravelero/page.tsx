@@ -508,7 +508,7 @@ export default function CotizacionPacificGravelero() {
                     Revisa algunos de nuestros trabajos más recientes o procede a aceptar la cotización para dar el primer paso.
                   </p>
                   
-                  <div className="w-[100vw] relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-16 overflow-hidden">
+                  <div className="w-screen relative left-1/2 -translate-x-1/2 mb-16">
                     <ProjectsSection />
                   </div>
 
