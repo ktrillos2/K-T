@@ -23,6 +23,31 @@ export default function Header() {
 
   const currentCountry = countryCodes.find((c) => c.name === country)
 
+  useEffect(() => {
+    const update = () => {
+      rafRef.current = null
+      const next = window.scrollY > 50
+      if (next !== lastScrolledRef.current) {
+        lastScrolledRef.current = next
+        setIsScrolled(next)
+      }
+    }
+
+    const handleScroll = () => {
+      if (rafRef.current !== null) return
+      rafRef.current = window.requestAnimationFrame(update)
+    }
+
+    // Initialize once
+    update()
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current)
+    }
+  }, [])
+
   // Hide header on admin pages
   if (pathname?.startsWith('/admin')) {
     return null
