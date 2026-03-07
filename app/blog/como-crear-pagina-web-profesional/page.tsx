@@ -4,12 +4,14 @@ import { ArrowLeft, CheckCircle2, Code2, Rocket, Server, Zap } from "lucide-reac
 import { CursorProvider } from "@/context/cursor-context"
 
 export const metadata: Metadata = {
-    title: "Cómo Crear una Página Web: Guía Definitiva Empresarial",
-    description: "Descubre cómo crear una página web que realmente convierta. Conoce los fundamentos de arquitectura, diseño UX y por qué Next.js domina el mercado actual.",
+    title: "Desarrollo Web Profesional: Guía Definitiva Empresarial | K&T",
+    description: "Descubre cómo estructurar una plataforma web empresarial que convierta. Fundamentos de arquitectura, UX y por qué Next.js domina el mercado B2B.",
+    keywords: ["desarrollo web empresarial", "arquitectura next.js", "agencia desarrollo SSR", "ux diseño web", "K&T"],
     openGraph: {
-        title: "Cómo Crear una Página Web Profesional: Arquitectura y Estrategia",
-        description: "Aprende el paso a paso desde código hasta Vercel. Una guía técnica para empresas y negocios digitales.",
+        title: "Desarrollo Web Profesional: Arquitectura y Estrategia Empresarial",
+        description: "Aprende el paso a paso desde código hasta Vercel. Una guía técnica para empresas y negocios digitales de alto nivel.",
         type: "article",
+        url: "https://www.kytcode.lat/blog/como-crear-pagina-web-profesional",
     }
 }
 

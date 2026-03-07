@@ -3,12 +3,14 @@ import Link from "next/link"
 import { ArrowLeft, Rocket, AlertTriangle, Blocks, Code2, ShieldCheck, CheckCircle2 } from "lucide-react"
 
 export const metadata: Metadata = {
-    title: "Desarrollo Web a Medida vs. Plantillas Genéricas | K&T",
-    description: "Por qué el desarrollo web basado en código a medida es el único camino para la rentabilidad digital. Ignora las plantillas y aloja en Vercel.",
+    title: "Desarrollo a Medida vs. Plantillas CMS Genéricas | K&T",
+    description: "Por qué el desarrollo de software a medida en Next.js supera en rendimiento, seguridad y escalabilidad a los CMS tradicionales como WordPress.",
+    keywords: ["desarrollo a medida", "plantillas vs codigo", "cms headless", "next.js vs wordpress", "seguridad web"],
     openGraph: {
-        title: "Desarrollo Web a Medida vs. Plantillas Genéricas: ¿Qué necesita tu negocio?",
-        description: "El verdadero costo de usar CMS tradicionales frente al rendimiento indiscutible de aplicaciones web escalables con Next.js.",
+        title: "Desarrollo a Medida vs. Plantillas Genéricas: La Decisión Corporativa",
+        description: "El verdadero costo técnico de usar CMS monolíticos frente al rendimiento indiscutible de aplicaciones escalables construidas a la medida.",
         type: "article",
+        url: "https://www.kytcode.lat/blog/desarrollo-web-medida-vs-plantillas",
     }
 }
 

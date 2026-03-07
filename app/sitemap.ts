@@ -13,6 +13,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }))
 
+    const blogSlugs = [
+        'como-crear-pagina-web-2026',
+        'como-crear-pagina-web-profesional',
+        'costo-oculto-pagina-web-lenta',
+        'desarrollo-web-medida-vs-plantillas',
+        'seo-desde-la-raiz-crear-pagina'
+    ]
+
+    const blogUrls = blogSlugs.map((slug) => ({
+        url: `${baseUrl}/blog/${slug}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.8,
+    }))
+
     return [
         {
             url: baseUrl,
@@ -32,6 +47,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'yearly',
             priority: 0.3,
         },
+        {
+            url: `${baseUrl}/blog`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
         ...projectUrls,
+        ...blogUrls,
     ]
 }

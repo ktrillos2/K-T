@@ -5,6 +5,13 @@ import { ArrowLeft, Clock, CalendarDays, ArrowRight } from "lucide-react"
 export const metadata: Metadata = {
     title: "Blog de Desarrollo Web y Estrategia Digital",
     description: "Recursos técnicos, guías y casos de estudio sobre ingeniería web, SEO y arquitectura de software de alto rendimiento impulsada por Next.js y Vercel.",
+    keywords: ["blog desarrollo web", "guías SEO técnico", "arquitectura next.js", "rendimiento web", "K&T blog"],
+    openGraph: {
+        title: "Blog K&T | Desarrollo Web y Estrategia Digital",
+        description: "Artículos técnicos sobre arquitectura web, SEO, Core Web Vitals y ecosistemas digitales escalables.",
+        type: "website",
+        url: "https://www.kytcode.lat/blog",
+    },
 }
 
 const posts = [
@@ -14,6 +21,13 @@ const posts = [
         excerpt: "Descubre el proceso técnico para construir un proyecto web que realmente convierta, ignorando plantillas.",
         date: "Feb 20, 2026",
         readTime: "8 min de lectura",
+    },
+    {
+        slug: "como-crear-pagina-web-profesional",
+        title: "Desarrollo Web Profesional: Guía Definitiva Empresarial",
+        excerpt: "Cómo estructurar una plataforma web empresarial que convierta. Fundamentos de arquitectura, UX y Next.js.",
+        date: "Feb 19, 2026",
+        readTime: "7 min de lectura",
     },
     {
         slug: "desarrollo-web-medida-vs-plantillas",

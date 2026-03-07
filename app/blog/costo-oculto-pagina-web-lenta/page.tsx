@@ -3,12 +3,14 @@ import Link from "next/link"
 import { ArrowLeft, ArrowRight, GaugeCircle, Server, Activity, ArrowDownRight, Globe2, ShieldCheck } from "lucide-react"
 
 export const metadata: Metadata = {
-    title: "El costo oculto de una página web lenta y cómo solucionarlo | K&T",
-    description: "Cada segundo extra que tarda tu sitio en cargar destruye un 20% de tus ventas. Descubre cómo K&T soluciona el problema de raíz con Next.js y Vercel.",
+    title: "El Costo Oculto de un Sitio Web Lento y su Solución Técnica | K&T",
+    description: "Un sitio lento destruye tu ratio de conversión. Descubre cómo K&T soluciona el Core Web Vitals y LCP desde la raíz con arquitectura Serverless.",
+    keywords: ["web lenta", "core web vitals", "optimización LCP", "edge computing", "Next.js rendimiento"],
     openGraph: {
-        title: "Por qué una página web lenta te cuesta dinero a diario",
-        description: "El costo oculto (y devastador) de un mal hosting. Soluciona métricas de LCP con nuestra infraestructura serverless.",
+        title: "El Costo Oculto de un Sitio Web Lento (Y cómo optimizarlo)",
+        description: "El costo oculto (y devastador) de un mal hosting. Soluciona métricas de LCP con nuestra infraestructura serverless alojada en Vercel.",
         type: "article",
+        url: "https://www.kytcode.lat/blog/costo-oculto-pagina-web-lenta",
     }
 }
 

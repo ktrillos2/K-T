@@ -3,12 +3,14 @@ import Link from "next/link"
 import { ArrowLeft, ArrowRight, Zap, Code2, ShieldCheck, CheckCircle2 } from "lucide-react"
 
 export const metadata: Metadata = {
-    title: "Cómo Crear una Página Web en 2026: La Guía Definitiva",
-    description: "Saber cómo crear una página web hoy exige conocer sobre rendimiento, accesibilidad y SEO técnico. Descubre por qué las agencias abandonaron las plantillas.",
+    title: "Arquitectura Web 2026: Construye Ecosistemas Escalables | K&T",
+    description: "Conoce el estándar técnico de 2026 para el desarrollo web profesional. Rendimiento, accesibilidad y arquitecturas headless sobre Next.js.",
+    keywords: ["arquitectura web", "desarrollo web 2026", "tecnología headless", "rendimiento web", "agencia K&T"],
     openGraph: {
-        title: "Cómo Crear una Página Web en 2026: La Guía Definitiva",
-        description: "El proceso técnico completo para lanzar un proyecto web escalable.",
+        title: "Arquitectura Web 2026: Construye Ecosistemas Escalables | K&T",
+        description: "El proceso técnico y arquitectónico completo para lanzar un proyecto web corporativo y de alto rendimiento.",
         type: "article",
+        url: "https://www.kytcode.lat/blog/como-crear-pagina-web-2026",
     }
 }
 

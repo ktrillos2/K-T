@@ -3,12 +3,14 @@ import Link from "next/link"
 import { ArrowLeft, ArrowRight, TrendingUp, Search, ShieldCheck, FileJson, CheckCircle2 } from "lucide-react"
 
 export const metadata: Metadata = {
-    title: "¿Por qué el SEO debe ir desde la raíz al crear una página? | K&T",
-    description: "Si esperas al mes 6 para hacer SEO en tu sitio, perderás tu inversión. Aprende cómo el SEO técnico en la arquitectura de código te posiciona más rápido.",
+    title: "SEO Técnico desde el Código: La Arquitectura del Posicionamiento | K&T",
+    description: "Por qué integrar optimización SEO en la fase de ingeniería es vital. Aprende sobre JSON-LD, Server-Side Rendering y posicionamiento real.",
+    keywords: ["seo técnico", "server side rendering", "json-ld markup", "optimización motores de búsqueda", "K&T seo"],
     openGraph: {
-        title: "El error de hacer SEO después de lanzar tu página web",
-        description: "En K&T inyectamos SEO desde el primer bloque de código (JSON-LD, Server-Side Rendering) impulsado por Next.js y Vercel.",
+        title: "SEO Técnico desde el Código: La Arquitectura del Posicionamiento",
+        description: "En K&T inyectamos rendimiento SEO desde el primer bloque de código lógico usando Next.js para un posicionamiento orgánico dominante.",
         type: "article",
+        url: "https://www.kytcode.lat/blog/seo-desde-la-raiz-crear-pagina",
     }
 }
 

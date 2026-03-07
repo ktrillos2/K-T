@@ -40,10 +40,10 @@ const ariW9500 = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.kytcode.lat"),
   title: {
-    default: "K&T | Agencias de Desarrollo Web - Cómo crear una página web profesional",
+    default: "K&T | Agencias de Desarrollo Web Profesional y E-commerce",
     template: "%s | K&T Agencia Digital",
   },
-  description: "¿Buscando cómo crear una página web que convierta? En K&T desarrollamos ecosistemas digitales escalables y de máximo rendimiento, impulsados siempre por Vercel.",
+  description: "En K&T desarrollamos ecosistemas digitales escalables, e-commerce headless y páginas web de máximo rendimiento para potenciar tu marca, impulsados por Vercel.",
   icons: {
     icon: [
       { url: "/icon.png", sizes: "192x192", type: "image/png" },
@@ -61,13 +61,12 @@ export const metadata: Metadata = {
   },
   // 3. KEYWORDS: Definitive Strategy (Headless + Modernization + Authority + Genesis of creating sites)
   keywords: [
-    "pagina web",
-    "desarrollo web",
-    "pagina web como crear",
-    "crear pagina web",
-    "como crear una pagina web",
-    "como crear una pagina",
+    "agencia de desarrollo web",
+    "desarrollo web profesional",
+    "desarrollo e-commerce headless",
     "agencia react en colombia",
+    "ecosistemas digitales",
+    "diseño web colombia",
     "K&T",
   ],
   authors: [{ name: "K&T Agencia Digital", url: "https://www.kytcode.lat" }],
@@ -79,8 +78,8 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "K&T | Agencias de Desarrollo Web - Cómo crear una página web profesional",
-    description: "¿Buscando cómo crear una página web que convierta? En K&T desarrollamos ecosistemas digitales escalables y de máximo rendimiento, impulsados siempre por Vercel.",
+    title: "K&T | Agencia de Desarrollo Web y E-commerce",
+    description: "Desarrollamos ecosistemas digitales escalables y de máximo rendimiento. Arquitecturas modernas y e-commerce headless para potenciar tu negocio online.",
     url: "https://www.kytcode.lat",
 
 
@@ -90,8 +89,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "K&T | Agencias de Desarrollo Web - Cómo crear una página web profesional",
-    description: "Desarrollamos páginas web corporativas y aplicaciones escalables optimizadas para SEO Técnico. Tu infraestructura en Vercel.",
+    title: "K&T | Agencia de Desarrollo Web y E-commerce",
+    description: "Desarrollamos páginas web corporativas y aplicaciones escalables optimizadas para SEO Técnico. Tu infraestructura web de alto rendimiento.",
 
     creator: "@kytweb",
   },
