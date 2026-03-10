@@ -25,6 +25,7 @@ import TiktokPixel from "@/components/analytics/tiktok-pixel"
 import MicrosoftClarity from "@/components/analytics/microsoft-clarity"
 import GoogleTagManager from "@/components/analytics/google-tag-manager"
 import TikTokEventsTracker from "@/components/analytics/tiktok-events-tracker"
+import MetaPixel from "@/components/analytics/meta-pixel"
 
 
 const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-fira", display: "swap" })
@@ -253,6 +254,7 @@ export default function RootLayout({
           <TiktokPixel />
         </React.Suspense>
         <TikTokEventsTracker />
+        <MetaPixel />
         <MicrosoftClarity />
 
         <GoogleTagManager />
