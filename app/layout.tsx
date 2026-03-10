@@ -252,9 +252,9 @@ export default function RootLayout({
         <GoogleAnalytics />
         <React.Suspense fallback={null}>
           <TiktokPixel />
+          <MetaPixel />
         </React.Suspense>
         <TikTokEventsTracker />
-        <MetaPixel />
         <MicrosoftClarity />
 
         <GoogleTagManager />
