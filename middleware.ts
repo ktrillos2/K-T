@@ -18,8 +18,23 @@ export async function middleware(request: NextRequest) {
         }
     }
     
+    // Subdomain routing for Clases de Actuación
+    if (hostname.includes('clases.kytcode.lat')) {
+        if (request.nextUrl.pathname === '/') {
+            return NextResponse.rewrite(new URL('/cotizaciones/curso-actuacion', request.url))
+        }
+    }
+    
     // If someone tries to access ANY quote page directly from the main domain, redirect them home
-    if (!hostname.includes('pacificgravelero.kytcode.lat') && !hostname.includes('serviciosdomicilio.kytcode.lat')) {
+    const allowedSubdomains = [
+        'pacificgravelero.kytcode.lat',
+        'serviciosdomicilio.kytcode.lat',
+        'clases.kytcode.lat'
+    ];
+    
+    const isAllowedHostname = allowedSubdomains.some(sub => hostname.includes(sub));
+
+    if (!isAllowedHostname) {
         if (request.nextUrl.pathname.startsWith('/cotizaciones')) {
             return NextResponse.redirect(new URL('/', request.url))
         }
