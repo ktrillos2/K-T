@@ -244,7 +244,7 @@ export default function CotizacionCursoActuacion() {
                 </div>
                 
                 <div className="overflow-x-auto rounded-xl border border-white/10 bg-zinc-900/50 shadow-xl">
-                  <table className="w-full text-left border-collapse min-w-[600px]">
+                  <table className="w-full text-left border-collapse min-w-full">
                     <thead>
                       <tr className="border-b border-white/10 bg-black/40">
                         <th className="p-4 sm:p-6 font-semibold text-white">Concepto</th>
