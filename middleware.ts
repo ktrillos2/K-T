@@ -29,7 +29,8 @@ export async function middleware(request: NextRequest) {
     const allowedSubdomains = [
         'pacificgravelero.kytcode.lat',
         'serviciosdomicilio.kytcode.lat',
-        'clases.kytcode.lat'
+        'clases.kytcode.lat',
+        'localhost'
     ];
     
     const isAllowedHostname = allowedSubdomains.some(sub => hostname.includes(sub));
