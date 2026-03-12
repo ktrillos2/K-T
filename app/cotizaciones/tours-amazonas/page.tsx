@@ -430,7 +430,7 @@ export default function CotizacionToursAmazonas() {
                     </p>
                   </div>
 
-                  <div className="p-5 sm:p-8 rounded-xl bg-zinc-900/50 border border-white/5 relative overflow-hidden">
+                  <div className="lg:col-span-2 p-5 sm:p-8 rounded-xl bg-zinc-900/50 border border-white/5 relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-1 h-full bg-gray-500"></div>
                     <h3 className="text-white font-bold text-lg mb-4">Tiempos de Desarrollo Web</h3>
                     <p className="text-white/80 text-sm sm:text-base leading-relaxed">
