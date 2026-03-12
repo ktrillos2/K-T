@@ -24,12 +24,19 @@ export async function middleware(request: NextRequest) {
             return NextResponse.rewrite(new URL('/cotizaciones/curso-actuacion', request.url))
         }
     }
+    // Subdomain routing for Tours Amazonas
+    if (hostname.includes('tours.kytcode.lat')) {
+        if (request.nextUrl.pathname === '/') {
+            return NextResponse.rewrite(new URL('/cotizaciones/tours-amazonas', request.url))
+        }
+    }
     
     // If someone tries to access ANY quote page directly from the main domain, redirect them home
     const allowedSubdomains = [
         'pacificgravelero.kytcode.lat',
         'serviciosdomicilio.kytcode.lat',
         'clases.kytcode.lat',
+        'tours.kytcode.lat',
         'localhost'
     ];
     
