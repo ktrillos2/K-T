@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     siteName: 'K&T Code',
     images: [
       {
-        url: 'https://www.kytcode.lat/og-image.png',
+        url: 'https://tours.kytcode.lat/images/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Cotización de Desarrollo Web y Marketing Digital - K&T Code',
