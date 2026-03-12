@@ -4,13 +4,13 @@ export const metadata: Metadata = {
   title: 'Cotización Desarrollo Web y Marketing - Tours Amazonas | K&T',
   description: 'Propuesta comercial confidencial de desarrollo web escalonado y gestión publicitaria en Meta Ads para agencia de turismo en el Amazonas.',
   openGraph: {
-    title: 'Cotización VIP: Tours Amazonas | K&T Code',
+    title: 'Cotización: Tours Amazonas | K&T Code',
     description: 'Propuesta de desarrollo web y marketing digital para captación de clientes extranjeros.',
     url: 'https://tours.kytcode.lat',
     siteName: 'K&T Code',
     images: [
       {
-        url: 'https://www.kytcode.lat/api/og?title=Cotización%20Tours%20Amazonas', // Fallback to a dynamic or generic OG image if available
+        url: 'https://www.kytcode.lat/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Cotización de Desarrollo Web y Marketing Digital - K&T Code',
