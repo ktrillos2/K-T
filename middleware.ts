@@ -1,48 +1,41 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { updateSession } from '@/utils/supabase/middleware'
 
+/**
+ * Mapeado de subdominios a slugs de cotizaciones en Sanity.
+ * Para agregar un nuevo subdominio, solo hay que agregar una entrada aquí
+ * y asegurarse de que el slug exista en Sanity como cotización activa.
+ */
+const SUBDOMAIN_MAP: Record<string, string> = {
+  pacificgravelero: 'pacificgravelero',
+  serviciosdomicilio: 'servicios-domicilio',
+  clases: 'curso-actuacion',
+  tours: 'tours-amazonas',
+  publicidad: 'gestion-publicitaria-contenido',
+}
+
 export async function middleware(request: NextRequest) {
     const hostname = request.headers.get('host') || ''
     
-    // Subdomain routing for Pacific Gravelero
-    if (hostname.includes('pacificgravelero.kytcode.lat')) {
-        if (request.nextUrl.pathname === '/') {
-            return NextResponse.rewrite(new URL('/cotizaciones/pacificgravelero', request.url))
-        }
-    }
+    // Extract subdomain from hostname (e.g. "tours.kytcode.lat" → "tours")
+    const subdomain = hostname.split('.')[0]
     
-    // Subdomain routing for Servicios Domicilio
-    if (hostname.includes('serviciosdomicilio.kytcode.lat')) {
-        if (request.nextUrl.pathname === '/') {
-            return NextResponse.rewrite(new URL('/cotizaciones/servicios-domicilio', request.url))
-        }
-    }
+    // Check if the subdomain matches any known quotation subdomain
+    const matchedSlug = SUBDOMAIN_MAP[subdomain]
     
-    // Subdomain routing for Clases de Actuación
-    if (hostname.includes('clases.kytcode.lat')) {
+    if (matchedSlug) {
         if (request.nextUrl.pathname === '/') {
-            return NextResponse.rewrite(new URL('/cotizaciones/curso-actuacion', request.url))
-        }
-    }
-    // Subdomain routing for Tours Amazonas
-    if (hostname.includes('tours.kytcode.lat')) {
-        if (request.nextUrl.pathname === '/') {
-            return NextResponse.rewrite(new URL('/cotizaciones/tours-amazonas', request.url))
+            return NextResponse.rewrite(new URL(`/cotizaciones/${matchedSlug}`, request.url))
         }
     }
     
     // If someone tries to access ANY quote page directly from the main domain, redirect them home
-    const allowedSubdomains = [
-        'pacificgravelero.kytcode.lat',
-        'serviciosdomicilio.kytcode.lat',
-        'clases.kytcode.lat',
-        'tours.kytcode.lat',
-        'localhost'
-    ];
-    
-    const isAllowedHostname = allowedSubdomains.some(sub => hostname.includes(sub));
+    const isSubdomainHost = Object.keys(SUBDOMAIN_MAP).some(sub => 
+        hostname.includes(`${sub}.kytcode.lat`)
+    )
+    const isLocalhost = hostname.includes('localhost')
 
-    if (!isAllowedHostname) {
+    if (!isSubdomainHost && !isLocalhost) {
         if (request.nextUrl.pathname.startsWith('/cotizaciones')) {
             return NextResponse.redirect(new URL('/', request.url))
         }

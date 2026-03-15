@@ -200,8 +200,7 @@ export default function CotizacionToursAmazonas() {
             <motion.header 
               variants={fadeIn as any}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              animate="visible"
               className="mb-12 border-b border-white/10 pb-10 flex flex-col items-center"
             >
               <div className="inline-block px-4 py-1.5 mb-8 text-xs font-bold tracking-widest text-white uppercase border border-white/20 rounded-full bg-white/5 backdrop-blur-sm">
@@ -236,8 +235,7 @@ export default function CotizacionToursAmazonas() {
               <motion.section 
                 variants={fadeIn as any}
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                animate="visible"
                 className="scroll-mt-24"
               >
                 <div className="flex items-center gap-4 mb-6">
@@ -251,8 +249,7 @@ export default function CotizacionToursAmazonas() {
                 <motion.div 
                   variants={staggerContainer as any}
                   initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
+                  animate="visible"
                   className="grid sm:grid-cols-2 gap-4 sm:gap-6"
                 >
                   {[
@@ -296,8 +293,7 @@ export default function CotizacionToursAmazonas() {
               <motion.section 
                 variants={fadeIn as any}
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                animate="visible"
                 className="scroll-mt-24"
               >
                 <div className="flex items-center gap-4 mb-6">
@@ -362,8 +358,7 @@ export default function CotizacionToursAmazonas() {
               <motion.section 
                 variants={fadeIn as any}
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                animate="visible"
                 className="scroll-mt-24"
               >
                 <div className="flex items-center gap-4 mb-6">
@@ -397,8 +392,7 @@ export default function CotizacionToursAmazonas() {
               <motion.section 
                 variants={fadeIn as any}
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                animate="visible"
                 className="scroll-mt-24"
               >
                 <div className="flex items-center gap-4 mb-6">
@@ -455,8 +449,7 @@ export default function CotizacionToursAmazonas() {
               <motion.section 
                 variants={fadeIn as any}
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                animate="visible"
                 className="scroll-mt-24"
               >
                 <div className="flex items-center gap-4 mb-6">
@@ -538,8 +531,7 @@ export default function CotizacionToursAmazonas() {
               <motion.section 
                 variants={fadeIn as any}
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                animate="visible"
                 className="scroll-mt-24"
               >
                 <div className="flex items-center gap-4 mb-6">
@@ -610,8 +602,7 @@ export default function CotizacionToursAmazonas() {
               <motion.section 
                 variants={fadeIn as any}
                 initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                animate="visible"
                 className="scroll-mt-24"
               >
                 <div className="flex flex-col items-center justify-center border-t border-white/10 pt-16 pb-8 text-center">
@@ -668,8 +659,7 @@ export default function CotizacionToursAmazonas() {
             <motion.div 
               variants={fadeIn as any}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
+              animate="visible"
               className="mt-24 pt-12 border-t border-white/5 flex flex-col items-center justify-center gap-2 mb-12"
             >
               <p className="text-white/60 text-sm mb-1">Atentamente,</p>

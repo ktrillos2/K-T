@@ -1,13 +1,13 @@
 "use client"
 
 import React, { useState } from "react"
-import { CheckCircle2, ShieldCheck, Heart, ArrowRight, ExternalLink, Calendar, Receipt, Lock, Copy, Check, ThumbsUp, HelpCircle } from "lucide-react"
+import { CheckCircle2, ShieldCheck, Lock, Copy, Check, ThumbsUp, HelpCircle, ArrowRight, Calendar, Receipt, Globe, CreditCard } from "lucide-react"
 import { m as motion, AnimatePresence } from "framer-motion"
 import Footer from "@/components/layout/footer"
 import QuotationProjectsSlider from "@/components/sections/quotation-projects-slider"
 import { notifyQuotationViewed, notifyQuotationAccepted } from "@/app/actions/cotizacion-actions"
 
-export default function CotizacionServiciosDomicilio() {
+export default function CotizacionGestionPublicitaria() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [password, setPassword] = useState("")
   const [error, setError] = useState(false)
@@ -30,14 +30,14 @@ export default function CotizacionServiciosDomicilio() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (password === "cot_serviciosdomicilio") {
+    if (password === "cot_publicidad2026") {
       setIsAuthenticated(true)
       setError(false)
       setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100)
       
       if (!hasViewed) {
         setHasViewed(true);
-        notifyQuotationViewed({ client: "Servicios Domicilio" }).catch(console.error);
+        notifyQuotationViewed({ client: "Gestión Publicitaria y Creación de Contenido" }).catch(console.error);
       }
     } else {
       setError(true)
@@ -48,7 +48,7 @@ export default function CotizacionServiciosDomicilio() {
   const handleAccept = async () => {
     setIsAccepting(true)
     try {
-      await notifyQuotationAccepted({ client: "Servicios Domicilio" })
+      await notifyQuotationAccepted({ client: "Gestión Publicitaria y Creación de Contenido" })
       setIsAccepted(true)
     } catch (error) {
       console.error("Error accepting quote:", error)
@@ -83,7 +83,7 @@ export default function CotizacionServiciosDomicilio() {
             className="flex items-center justify-center min-h-[70vh] px-4"
           >
             <div className="w-full max-w-md p-8 rounded-2xl bg-zinc-900/50 border border-white/10 shadow-2xl backdrop-blur-sm relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gray-500 to-gray-200"></div>
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400"></div>
               
               <div className="flex justify-center mb-6">
                 <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
@@ -106,7 +106,7 @@ export default function CotizacionServiciosDomicilio() {
                     placeholder="Contraseña"
                     className={`w-full bg-black/50 border ${error ? 'border-red-500/50 focus:border-red-500' : 'border-white/20 focus:border-white/50'} rounded-lg px-4 py-3 text-white placeholder:text-white/40 focus:outline-none transition-colors`}
                   />
-                  {error && <p className="text-white text-xs mt-2">Contraseña incorrecta. Intenta nuevamente.</p>}
+                  {error && <p className="text-white text-xs mt-2 mt-1">Contraseña incorrecta. Intenta nuevamente.</p>}
                 </div>
                 <button 
                   type="submit" 
@@ -135,18 +135,18 @@ export default function CotizacionServiciosDomicilio() {
               <div className="inline-block px-4 py-1.5 mb-8 text-xs font-bold tracking-widest text-white uppercase border border-white/20 rounded-full bg-white/5 backdrop-blur-sm">
                 Propuesta Comercial
               </div>
-              <h1 className="font-title text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-tight mb-4 text-center">
+              <h1 className="font-title text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight mb-8 text-center uppercase">
                 COTIZACIÓN DE<br />
-                DESARROLLO WEB
+                GESTIÓN PUBLICITARIA<br />
+                <span className="text-xl sm:text-2xl text-white/70 block mt-4">(Y CREACIÓN DE CONTENIDO)</span>
               </h1>
-              <p className="text-white/60 text-sm sm:text-base font-mono uppercase tracking-widest mb-8">Corporativo — Servicios a Domicilio</p>
               
               <div className="inline-flex flex-col sm:flex-row items-center gap-6 p-5 sm:p-6 rounded-2xl bg-zinc-900/80 border border-white/10 shadow-lg">
                 <div className="flex items-center gap-4 px-4">
                   <Calendar className="w-6 h-6 text-white/80" />
                   <div className="text-left leading-tight">
                     <p className="text-xs text-white/60 uppercase tracking-widest mb-1">Emisión</p>
-                    <p className="text-sm sm:text-base text-white font-medium">5 de marzo de 2026</p>
+                    <p className="text-sm sm:text-base text-white font-medium">15 de marzo de 2026</p>
                   </div>
                 </div>
                 <div className="hidden sm:block w-px h-10 bg-white/10"></div>
@@ -170,10 +170,10 @@ export default function CotizacionServiciosDomicilio() {
               >
                 <div className="flex items-center gap-4 mb-6">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black font-bold font-title text-sm">1</span>
-                  <h2 className="text-2xl sm:text-3xl font-bold font-title text-white">Alcance Detallado del Proyecto</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold font-title text-white">Alcance Detallado del Proyecto: Pauta y Contenido</h2>
                 </div>
                 <p className="text-white/80 mb-8 text-base sm:text-lg leading-relaxed">
-                  La presente propuesta contempla el diseño y desarrollo de una plataforma web profesional enfocada en la captación de clientes y personal para servicios a domicilio, con capacidades de adaptación regional:
+                  La presente propuesta contempla la administración profesional de campañas publicitarias y la producción gráfica necesaria para alimentar los anuncios y mantenerlos en constante optimización:
                 </p>
                 
                 <motion.div 
@@ -184,34 +184,30 @@ export default function CotizacionServiciosDomicilio() {
                 >
                   {[
                     {
-                      title: "Estructura Multipágina",
-                      desc: "Desarrollo del sitio con 5 secciones estratégicas: Inicio, Nosotros, Servicios, Contacto y Trabaja con Nosotros."
+                      title: "Administración y Optimización de Anuncios",
+                      desc: "Gestión técnica de las campañas en Meta Ads (Facebook e Instagram). Incluye segmentación de público objetivo, monitoreo de métricas, distribución de presupuesto y ajustes continuos para maximizar el retorno de inversión."
                     },
                     {
-                      title: "Sistema de Geolocalización Automática",
-                      desc: "Implementación de un script de detección de IP para identificar si el usuario visita desde Colombia o Argentina, adaptando automáticamente el contenido según el país."
+                      title: "Creación de Contenido (Creativos)",
+                      desc: "Diseño de piezas gráficas orientadas a la conversión. El paquete mensual incluye un total de cuatro (4) imágenes y cuatro (4) carruseles."
                     },
                     {
-                      title: "Formulario de Servicios",
-                      desc: "Formulario dinámico con enrutamiento de datos al correo corporativo para cotizar o solicitar servicios a domicilio."
+                      title: "Estrategia de Entrega (2 por semana)",
+                      desc: "Para evitar la fatiga del anuncio y mantener la optimización del algoritmo, se entregarán e implementarán dos (2) creativos nuevos cada semana."
                     },
                     {
-                      title: "Formulario de Empleo",
-                      desc: "Formulario 'Trabaja con nosotros' para la recepción de hojas de vida y captación de personal con enrutamiento al correo corporativo."
+                      title: "Optimización SEO en Copywriting",
+                      desc: "Redacción persuasiva de los textos (copys) de los anuncios aplicando principios de SEO (palabras clave relevantes) para mejorar la relevancia del anuncio y disminuir el costo por clic."
                     },
                     {
-                      title: "Tecnología e Infraestructura",
-                      desc: "Desarrollo de alto rendimiento alojado en Vercel, garantizando tiempos de carga ultrarrápidos y máxima estabilidad sin costos mensuales de servidor."
-                    },
-                    {
-                      title: "Optimización SEO Técnico",
-                      desc: "Implementación de estructuración de código y etiquetas meta para facilitar el posicionamiento orgánico en las búsquedas de Google."
+                      title: "Infraestructura Web (Opcional)",
+                      desc: "En caso de requerir el desarrollo de una Landing Page para dirigir el tráfico de estos anuncios, el hosting siempre será Vercel para todas las cotizaciones, garantizando máxima velocidad y conversión."
                     }
                   ].map((item, i) => (
                     <motion.div 
                       variants={fadeIn as any}
                       key={i} 
-                      className="flex flex-col sm:flex-row gap-4 p-5 sm:p-6 rounded-xl border border-white/5 bg-zinc-900/30 hover:bg-zinc-900/80 transition-all duration-300 group"
+                      className={`flex flex-col sm:flex-row gap-4 p-5 sm:p-6 rounded-xl border border-white/5 bg-zinc-900/30 hover:bg-zinc-900/80 transition-all duration-300 group ${i === 4 ? 'sm:col-span-2 sm:mx-auto sm:max-w-[calc(50%-0.75rem)]' : ''}`}
                     >
                       <CheckCircle2 className="w-6 h-6 text-white shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                       <div>
@@ -232,51 +228,37 @@ export default function CotizacionServiciosDomicilio() {
               >
                 <div className="flex items-center gap-4 mb-6">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black font-bold font-title text-sm">2</span>
-                  <h2 className="text-2xl sm:text-3xl font-bold font-title text-white">Inversión del Proyecto</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold font-title text-white">Inversión Mensual</h2>
                 </div>
                 
-                <div className="overflow-x-auto rounded-xl border border-white/10 bg-zinc-900/50 mb-8 shadow-xl">
+                <div className="overflow-x-auto rounded-xl border border-white/10 bg-zinc-900/50 shadow-xl">
                   <table className="w-full text-left border-collapse min-w-full">
                     <thead>
                       <tr className="border-b border-white/10 bg-black/40">
                         <th className="p-4 sm:p-6 font-semibold text-white">Concepto</th>
-                        <th className="p-4 sm:p-6 font-semibold text-white whitespace-nowrap text-right">Valor</th>
+                        <th className="p-4 sm:p-6 font-semibold text-white whitespace-nowrap text-right">Valor (USD)</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-white/5">
                       <tr className="hover:bg-white/[0.02] transition-colors">
-                        <td className="p-4 sm:p-6 text-white/90 text-sm sm:text-base">Desarrollo Web (5 secciones, 2 formularios y Geolocalización Col/Arg)</td>
-                        <td className="p-4 sm:p-6 text-white font-medium text-right whitespace-nowrap">$270 USD<br /><span className="text-white/60 text-xs">Aprox. $1.013.000 COP</span></td>
+                        <td className="p-4 sm:p-6 text-white/90 text-sm sm:text-base">Administración, Segmentación y Optimización de Anuncios en Meta Ads</td>
+                        <td className="p-4 sm:p-6 text-white font-medium text-right whitespace-nowrap">$150 USD</td>
                       </tr>
                       <tr className="hover:bg-white/[0.02] transition-colors">
-                        <td className="p-4 sm:p-6 text-white/90 text-sm sm:text-base">Infraestructura (Hosting Vercel) y Optimización SEO Técnico</td>
+                        <td className="p-4 sm:p-6 text-white/90 text-sm sm:text-base">Producción de Contenido (4 Imágenes y 4 Carruseles entregados a 2 por semana)</td>
+                        <td className="p-4 sm:p-6 text-white font-medium text-right whitespace-nowrap">$100 USD</td>
+                      </tr>
+                      <tr className="hover:bg-white/[0.02] transition-colors">
+                        <td className="p-4 sm:p-6 text-white/90 text-sm sm:text-base">Optimización SEO en textos publicitarios</td>
                         <td className="p-4 sm:p-6 text-white/80 text-right">Incluido</td>
                       </tr>
                       <tr className="bg-white/5 font-semibold">
-                        <td className="p-4 sm:p-6 text-white">Total Proyecto Base</td>
-                        <td className="p-4 sm:p-6 text-white text-lg sm:text-xl text-right whitespace-nowrap">$270 USD<br /><span className="text-sm font-normal text-white/60">$1.013.000 COP</span></td>
+                        <td className="p-4 sm:p-6 text-white">Total Inversión Mensual</td>
+                        <td className="p-4 sm:p-6 text-white text-lg sm:text-xl text-right whitespace-nowrap">$250 USD</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-
-                <motion.div 
-                  whileHover={{ scale: 1.01 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="rounded-xl border border-blue-900/30 bg-blue-950/10 p-5 sm:p-6 overflow-hidden relative"
-                >
-                  <div className="absolute top-0 left-0 w-1 h-full bg-blue-500/50"></div>
-                  <h3 className="text-lg font-bold text-white mb-4">Módulos Adicionales (Opcionales)</h3>
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div>
-                      <p className="text-white font-medium mb-1">Mantenimiento y Optimización</p>
-                      <p className="text-sm text-white/80 max-w-xl">Servicio mensual continuo para soporte técnico, optimización de contenido y actualizaciones generales del sitio. Altamente recomendado para mantener la seguridad de los formularios y la estabilidad del geolocalizador en el tiempo.</p>
-                    </div>
-                    <div className="text-white font-bold whitespace-nowrap bg-blue-500/10 px-4 py-3 rounded-lg border border-blue-500/20 text-center md:text-right">
-                      +$50.000 COP / mes
-                    </div>
-                  </div>
-                </motion.div>
               </motion.section>
 
               {/* Section 3: Terms */}
@@ -288,40 +270,35 @@ export default function CotizacionServiciosDomicilio() {
               >
                 <div className="flex items-center gap-4 mb-6">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black font-bold font-title text-sm">3</span>
-                  <h2 className="text-2xl sm:text-3xl font-bold font-title text-white">Condiciones Comerciales</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold font-title text-white">Condiciones Comerciales y Facturación</h2>
                 </div>
                 
                 <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
                   <div className="p-5 sm:p-8 rounded-xl bg-zinc-900/50 border border-white/5 relative overflow-hidden group">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gray-500 to-gray-700"></div>
-                    <h3 className="text-white font-bold text-lg mb-4">Forma de Pago</h3>
-                    <ul className="space-y-3 text-white/80 text-sm sm:text-base">
-                      <li className="flex justify-between border-b border-white/5 pb-3">
-                        <span>50% Inicio del desarrollo</span>
-                        <strong className="text-white font-medium">$135 USD / $506.500 COP</strong>
-                      </li>
-                      <li className="flex justify-between pt-1">
-                        <span>50% Contra entrega final</span>
-                        <strong className="text-white font-medium">$135 USD / $506.500 COP</strong>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div className="p-5 sm:p-8 rounded-xl bg-zinc-900/50 border border-white/5 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gray-500 to-gray-700"></div>
-                    <h3 className="text-white font-bold text-lg mb-4">Tiempos de Desarrollo</h3>
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400"></div>
+                    <h3 className="text-white font-bold text-lg mb-4">Ciclo de Trabajo</h3>
                     <p className="text-white/80 text-sm sm:text-base leading-relaxed">
-                      El tiempo de ejecución por parte de K&T es de <strong className="text-white font-semibold">1 a 2 semanas</strong> una vez recibida toda la información inicial (textos, logos, detalles de los servicios).
+                      El servicio tiene una duración de <strong className="text-white font-semibold">30 días calendario</strong> y se renueva mes a mes.
                     </p>
                   </div>
 
-                  <div className="lg:col-span-2 p-5 sm:p-8 rounded-xl border border-amber-900/30 bg-amber-950/20 text-sm sm:text-base">
+                  <div className="p-5 sm:p-8 rounded-xl bg-zinc-900/50 border border-white/5 relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400"></div>
+                    <h3 className="text-white font-bold text-lg mb-4">Forma de Pago</h3>
+                    <p className="text-white/80 text-sm sm:text-base leading-relaxed">
+                      El pago del servicio de gestión y creación de contenido se realiza <strong className="text-white font-semibold">100% por anticipado</strong> durante los primeros cinco (5) días del ciclo de trabajo. <br /><br />
+                      <span className="text-white/60 text-sm italic">(Nota: El presupuesto de inversión directa para pagarle a Facebook/Meta lo asume directamente el cliente desde su tarjeta).</span>
+                    </p>
+                  </div>
+
+                  <div className="lg:col-span-2 p-5 sm:p-8 rounded-xl border border-white/10 bg-white/5 text-sm sm:text-base">
                     <h3 className="text-white font-bold mb-3 flex items-center gap-2">
-                      <ShieldCheck className="w-5 h-5" />
-                      Cláusula de Límite Máximo
+                      <Receipt className="w-5 h-5" />
+                      Concepto de Facturación
                     </h3>
-                    <p className="text-white/80 leading-relaxed selection:bg-amber-500/30">
-                      El proyecto tiene un ciclo de vida máximo de 4 semanas. Si transcurrido este límite el proyecto no se ha podido concluir por problemas de comunicación o falta de entrega de material por parte del cliente, el desarrollo se dará por finalizado de manera unilateral, entregando el avance actual y procediendo con el cobro del saldo.
+                    <p className="text-white/80 leading-relaxed">
+                      Para futuras facturas o cuentas de cobro generadas a partir de esta cotización, el concepto de servicio se especificará de la siguiente manera (tomando como base la estructura acordada): <br /><br />
+                      <span className="font-mono bg-black/50 p-3 rounded-lg block border border-white/10 text-white">&quot;Servicio de gestión publicitaria y creación de contenido digital para [Nombre del Cliente/Empresa] - Mes [Mes correspondiente]&quot;</span>
                     </p>
                   </div>
                 </div>
@@ -336,22 +313,43 @@ export default function CotizacionServiciosDomicilio() {
               >
                 <div className="flex items-center gap-4 mb-6">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black font-bold font-title text-sm">4</span>
-                  <h2 className="text-2xl sm:text-3xl font-bold font-title text-white">Medios de Pago Recomendados</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold font-title text-white">Medios de Pago Internacional y Nacional</h2>
                 </div>
-
-                <p className="text-white/80 mb-6 text-sm sm:text-base leading-relaxed">
-                  Para mayor agilidad y evitar comisiones internacionales, recomendamos ampliamente realizar el pago en Pesos Colombianos (COP) a través de nuestras cuentas nacionales:
-                </p>
                 
-                <motion.div 
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.3 }}
-                  className="p-6 sm:p-8 rounded-2xl bg-zinc-900 border border-white/10 relative overflow-hidden shadow-2xl mb-6"
-                >
-                  <div className="absolute right-0 top-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.05)_0%,_transparent_60%)] pointer-events-none"></div>
-                  
-                  <div className="grid md:grid-cols-2 gap-8 md:gap-12 relative z-10">
-                    <div className="flex flex-col justify-between space-y-8">
+                <div className="grid md:grid-cols-2 gap-6 mb-8">
+                  {/* Pagos Internacionales */}
+                  <div className="p-6 sm:p-8 rounded-2xl bg-zinc-900 border border-white/10 relative overflow-hidden shadow-2xl">
+                    <div className="absolute left-0 top-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-blue-500"></div>
+                    <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                      <Globe className="w-5 h-5 text-emerald-400" />
+                      Pagos Internacionales (Exterior)
+                    </h3>
+                    
+                    <ul className="space-y-6">
+                      <li className="border-b border-white/10 pb-4">
+                        <p className="font-bold text-white mb-1 flex items-center">DolarApp <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full ml-2 uppercase tracking-wide">Recomendado</span></p>
+                        <p className="text-sm text-white/70">Plataforma rápida, sin comisiones ocultas y con acreditación inmediata.</p>
+                      </li>
+                      <li className="border-b border-white/10 pb-4">
+                        <p className="font-bold text-white mb-1">Western Union</p>
+                        <p className="text-sm text-white/70">Envío de divisas internacional a nombre del titular.</p>
+                      </li>
+                      <li>
+                        <p className="font-bold text-white mb-1">Consignación a Cuenta Bancaria Estadounidense</p>
+                        <p className="text-sm text-white/70">(Datos proporcionados al confirmar).</p>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Pagos Nacionales */}
+                  <div className="p-6 sm:p-8 rounded-2xl bg-zinc-900 border border-white/10 relative overflow-hidden shadow-2xl">
+                    <div className="absolute right-0 top-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-red-500"></div>
+                    <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                      <CreditCard className="w-5 h-5 text-yellow-400" />
+                      Pagos Nacionales (Colombia)
+                    </h3>
+                    
+                    <div className="flex flex-col space-y-6">
                       <div>
                         <div className="flex items-center justify-between mb-2">
                           <p className="text-[10px] text-white/60 uppercase tracking-widest font-bold">Banco</p>
@@ -359,61 +357,66 @@ export default function CotizacionServiciosDomicilio() {
                             <div className="w-2 h-2 rounded-full bg-white/50"></div>
                           </span>
                         </div>
-                        <p className="text-xl sm:text-2xl text-white font-bold tracking-tight">Bancolombia</p>
-                      </div>
-                      <div className="grid grid-cols-2 gap-6">
-                        <div>
-                          <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Tipo de Cuenta</p>
-                          <p className="text-white text-sm sm:text-base font-medium font-mono">AHORROS</p>
-                        </div>
-                        <div>
-                          <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Número</p>
-                          <div className="flex items-center gap-2">
-                            <p className="text-white text-sm sm:text-base tracking-widest font-mono">91290318578</p>
-                            <button 
-                              onClick={() => handleCopy('91290318578', 'cuenta')}
-                              className="p-1.5 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white"
-                              title="Copiar número de cuenta"
-                            >
-                              {copiedCuenta ? <Check className="w-4 h-4 text-white" /> : <Copy className="w-4 h-4" />}
-                            </button>
+                        <p className="text-xl text-white font-bold tracking-tight">Bancolombia</p>
+                        <div className="grid grid-cols-2 gap-4 mt-4">
+                          <div>
+                            <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Tipo</p>
+                            <p className="text-white text-sm font-medium font-mono">AHORROS</p>
+                          </div>
+                          <div>
+                            <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Número</p>
+                            <div className="flex items-center gap-2">
+                              <p className="text-white text-sm tracking-widest font-mono">91290318578</p>
+                              <button 
+                                onClick={() => handleCopy('91290318578', 'cuenta')}
+                                className="p-1.5 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white"
+                                title="Copiar número de cuenta"
+                              >
+                                {copiedCuenta ? <Check className="w-3 h-3 text-white" /> : <Copy className="w-3 h-3" />}
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    
-                    <div className="flex flex-col justify-between space-y-8 pt-8 md:pt-0 border-t border-white/10 md:border-t-0 md:border-l md:border-white/10 md:pl-12">
-                      <div>
-                        <p className="text-[10px] text-white/60 uppercase tracking-widest mb-2 font-bold">Titular</p>
-                        <p className="text-lg sm:text-xl text-white font-medium uppercase tracking-wide leading-tight">Keyner Steban<br/>Trillos Useche</p>
-                      </div>
-                      <div className="grid grid-cols-2 gap-6">
-                        <div>
-                          <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Cédula</p>
-                          <p className="text-white text-sm sm:text-base tracking-widest font-mono">1.090.384.736</p>
-                        </div>
-                        <div>
-                          <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Nequi</p>
-                          <div className="flex items-center gap-2">
-                            <p className="text-white text-sm sm:text-base tracking-widest font-mono">3133087069</p>
-                            <button 
-                              onClick={() => handleCopy('3133087069', 'nequi')}
-                              className="p-1.5 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white"
-                              title="Copiar número de Nequi"
-                            >
-                              {copiedNequi ? <Check className="w-4 h-4 text-white" /> : <Copy className="w-4 h-4" />}
-                            </button>
-                          </div>
-                        </div>
+
+                      <div className="border-t border-white/10 pt-4">
+                         <div className="grid grid-cols-2 gap-4">
+                           <div>
+                             <p className="text-[10px] text-white/60 uppercase tracking-widest font-bold mb-1">Nequi</p>
+                             <div className="flex items-center gap-2">
+                                <p className="text-white text-sm tracking-widest font-mono">3133087069</p>
+                                <button 
+                                  onClick={() => handleCopy('3133087069', 'nequi')}
+                                  className="p-1.5 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white"
+                                  title="Copiar número de Nequi"
+                                >
+                                  {copiedNequi ? <Check className="w-3 h-3 text-white" /> : <Copy className="w-3 h-3" />}
+                                </button>
+                              </div>
+                           </div>
+                         </div>
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
 
-                <div className="p-4 sm:p-5 rounded-xl bg-zinc-900/30 border border-white/5 text-sm text-white/70">
-                  <p className="text-white/50 text-xs uppercase tracking-wider mb-2 font-bold">RUT</p>
-                  <p className="text-white/80 font-mono">1090384736-8</p>
-                  <p className="mt-3 text-white/60 text-xs leading-relaxed">(En caso de requerir pago internacional, se podrá gestionar mediante DolarApp o Western Union por el valor exacto en USD).</p>
+                {/* Titular Details */}
+                <div className="p-6 sm:p-8 rounded-2xl bg-zinc-900 border border-white/10 shadow-lg">
+                    <p className="text-[10px] text-white/60 uppercase tracking-widest mb-4 font-bold">Datos del Titular para Transferencias</p>
+                    <div className="grid md:grid-cols-3 gap-6">
+                      <div>
+                        <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Nombre</p>
+                        <p className="text-white font-medium">Keyner Steban Trillos Useche</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Cédula</p>
+                        <p className="text-white font-mono">1.090.384.736</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">RUT</p>
+                        <p className="text-white font-mono">1090384736-8</p>
+                      </div>
+                    </div>
                 </div>
               </motion.section>
 
@@ -426,7 +429,7 @@ export default function CotizacionServiciosDomicilio() {
               >
                 <div className="flex items-center gap-4 mb-6">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black font-bold font-title text-sm">5</span>
-                  <h2 className="text-2xl sm:text-3xl font-bold font-title text-white">Garantía y Soporte</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold font-title text-white">Política de Garantía del Servicio Publicitario</h2>
                 </div>
                 
                 <div className="mb-8 p-5 sm:p-6 rounded-xl bg-white/5 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-lg">
@@ -434,35 +437,27 @@ export default function CotizacionServiciosDomicilio() {
                     <ShieldCheck className="w-6 h-6 text-white" />
                   </div>
                   <p className="text-white text-sm sm:text-base leading-relaxed">
-                    Se otorga una <strong className="font-bold text-white text-base sm:text-lg">Garantía Técnica de 1 mes (30 días)</strong> contados a partir de la fecha de entrega y publicación del sitio web en producción.
+                    Para este servicio continuo, se establece la siguiente <strong className="font-bold text-white text-base sm:text-lg">garantía estricta sobre la ejecución:</strong>
                   </p>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6 sm:gap-10">
                   <div className="bg-zinc-900/30 p-6 rounded-xl border border-white/5">
                     <h3 className="text-white flex items-center gap-3 font-bold mb-6 tracking-wide sm:text-lg">
-                      <CheckCircle2 className="w-5 h-5" /> Cobertura Incluida
+                      <CheckCircle2 className="w-5 h-5" /> Cobertura de Ejecución
                     </h3>
                     <ul className="space-y-4 text-sm sm:text-base text-white/90">
                       <li className="flex items-start gap-3">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 shrink-0 mt-2"></span>
-                        <span>Resolución de errores de código (bugs) que afecten la navegación del usuario.</span>
+                        <span>K&T garantiza el cumplimiento riguroso en los tiempos de entrega pautados (2 creativos semanales listos para pauta).</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 shrink-0 mt-2"></span>
-                        <span>Corrección de fallos en el sistema de geolocalización (identificación errónea de IP entre Colombia y Argentina).</span>
+                        <span>Se garantiza la revisión y optimización semanal de las campañas para evitar el gasto ineficiente del presupuesto publicitario.</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 shrink-0 mt-2"></span>
-                        <span>Garantía de correcto envío y recepción de datos en los 2 formularios desarrollados (Servicios y Trabaja con nosotros).</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 shrink-0 mt-2"></span>
-                        <span>Corrección de fallos de diseño responsivo (visualización incorrecta en dispositivos móviles).</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 shrink-0 mt-2"></span>
-                        <span>Soporte frente a posibles intermitencias derivadas netamente de la infraestructura del Hosting en Vercel.</span>
+                        <span>En caso de detectarse un error en la segmentación aplicada por la agencia, se corregirá de manera inmediata.</span>
                       </li>
                     </ul>
                   </div>
@@ -470,26 +465,21 @@ export default function CotizacionServiciosDomicilio() {
                   <div className="bg-zinc-900/30 p-6 rounded-xl border border-white/5">
                     <h3 className="text-white flex items-center gap-3 font-bold mb-6 tracking-wide sm:text-lg">
                       <div className="w-5 h-5 rounded-full border-2 border-red-400 flex items-center justify-center text-xs">✕</div> 
-                      Exclusiones
+                      Exclusiones Estrictas
                     </h3>
                     <ul className="space-y-4 text-sm sm:text-base text-white/80">
                       <li className="flex items-start gap-3">
                         <span className="w-1.5 h-1.5 rounded-full bg-red-500/30 shrink-0 mt-2"></span>
-                        <span>Cambios en la estructura de diseño, colores o layout una vez aprobada la fase inicial del proyecto.</span>
+                        <span>K&T no puede garantizar un número exacto de ventas, seguidores o ingresos monetarios, ya que esto depende del comportamiento del mercado, la competitividad del precio del producto/servicio y la gestión comercial interna que el cliente realice con los prospectos (leads) generados.</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <span className="w-1.5 h-1.5 rounded-full bg-red-500/30 shrink-0 mt-2"></span>
-                        <span>Desarrollo de nuevas funcionalidades o páginas adicionales no contratadas inicialmente.</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="w-1.5 h-1.5 rounded-full bg-red-500/30 shrink-0 mt-2"></span>
-                        <span>Desconfiguraciones causadas por manipulación del código o uso indebido por parte de terceros no autorizados por K&T.</span>
+                        <span>La garantía no cubre bloqueos de cuentas publicitarias generados por incumplimiento de las políticas de Meta ajenos a los creativos diseñados por la agencia.</span>
                       </li>
                     </ul>
                   </div>
                 </div>
               </motion.section>
-
               {/* Section 6: Portfolio & Next Steps */}
               <motion.section 
                 variants={fadeIn as any}
@@ -534,7 +524,7 @@ export default function CotizacionServiciosDomicilio() {
                     )}
                     
                     <a 
-                      href="https://wa.me/573116360057?text=Hola,%20tengo%20dudas%20sobre%20la%20cotizaci%C3%B3n%20de%20Servicios%20a%20Domicilio"
+                      href="https://wa.me/573133087069?text=Hola,%20tengo%20dudas%20sobre%20la%20cotizaci%C3%B3n%20del%20Proyecto%20de%20Gesti%C3%B3n%20Publicitaria"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full sm:w-auto flex items-center justify-center gap-2 bg-zinc-900 text-white hover:bg-zinc-800 border border-white/10 px-8 py-4 rounded-full font-medium transition-all"
