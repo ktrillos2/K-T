@@ -16,26 +16,45 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     }
   }
 
+  // Construir URL canónica: usar subdominio si existe, sino usar la ruta de slug
+  const canonicalUrl = data.subdomain
+    ? `https://${data.subdomain}.kytcode.lat`
+    : `https://www.kytcode.lat/cotizaciones/${slug}`
+
+  // Descripción SEO dinámica
+  const seoDescription = `Propuesta comercial profesional de ${data.headerTitle?.toLowerCase()} para ${data.clientName}. ${data.scopeDescription?.slice(0, 100) || ''}`.trim()
+
   return {
     title: `${data.headerTitle} | K&T`,
-    description: `Cotización profesional para ${data.clientName}. ${data.scopeDescription?.slice(0, 120)}...`,
+    description: seoDescription,
     robots: {
       index: false,
       follow: false,
     },
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
-      title: `${data.headerTitle} | K&T`,
-      description: `Cotización profesional para ${data.clientName}`,
-      url: `https://www.kytcode.lat/cotizaciones/${slug}`,
-      type: 'website',
+      title: `Cotización: ${data.clientName} | K&T Code`,
+      description: seoDescription,
+      url: canonicalUrl,
+      siteName: 'K&T Code',
       images: [
         {
-          url: 'https://www.kytcode.lat/images/og-image-cotizacion.webp',
+          url: `${data.subdomain ? `https://${data.subdomain}.kytcode.lat` : 'https://www.kytcode.lat'}/images/og-image.png`,
           width: 1200,
           height: 630,
-          alt: `Cotización K&T — ${data.clientName}`,
+          alt: `Cotización de ${data.headerTitle} — K&T Code`,
         },
       ],
+      locale: 'es_CO',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `Cotización: ${data.clientName} | K&T Code`,
+      description: seoDescription,
+      images: [`${data.subdomain ? `https://${data.subdomain}.kytcode.lat` : 'https://www.kytcode.lat'}/images/og-image.png`],
     },
   }
 }
