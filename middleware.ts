@@ -1,43 +1,50 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { updateSession } from '@/utils/supabase/middleware'
 
-/**
- * Mapeado de subdominios a slugs de cotizaciones en Sanity.
- * Para agregar un nuevo subdominio, solo hay que agregar una entrada aquí
- * y asegurarse de que el slug exista en Sanity como cotización activa.
- */
-const SUBDOMAIN_MAP: Record<string, string> = {
-  pacificgravelero: 'pacificgravelero',
-  serviciosdomicilio: 'servicios-domicilio',
-  clases: 'curso-actuacion',
-  tours: 'tours-amazonas',
-  publicidad: 'gestion-publicitaria-contenido',
-}
-
 export async function middleware(request: NextRequest) {
     const hostname = request.headers.get('host') || ''
     
     // Extract subdomain from hostname (e.g. "tours.kytcode.lat" → "tours")
     const subdomain = hostname.split('.')[0]
+    const isLocalhost = hostname.includes('localhost') || hostname.includes('127.0.0.1')
     
-    // Check if the subdomain matches any known quotation subdomain
-    const matchedSlug = SUBDOMAIN_MAP[subdomain]
+    // Default domains that are not quotations
+    const isMainDomain = subdomain === 'www' || subdomain === 'kytcode' || isLocalhost
     
-    if (matchedSlug) {
-        if (request.nextUrl.pathname === '/') {
-            return NextResponse.rewrite(new URL(`/cotizaciones/${matchedSlug}`, request.url))
+    let matchedSlug = null
+
+    // If it's a potential quotation subdomain, check Sanity dynamically
+    if (!isMainDomain && subdomain) {
+        const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'bc3zxc91'
+        const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+        
+        const query = `*[_type == "cotizacion" && subdomain == "${subdomain}" && isActive == true][0].slug.current`
+        const url = `https://${projectId}.apicdn.sanity.io/v2022-03-07/data/query/${dataset}?query=${encodeURIComponent(query)}`
+        
+        try {
+            // Using CDN and caching the result in Edge for 60 seconds
+            const res = await fetch(url, { next: { revalidate: 60 } })
+            const data = await res.json()
+            matchedSlug = data.result
+        } catch (error) {
+            console.error('Error fetching subdomain from Sanity:', error)
         }
     }
     
-    // If someone tries to access ANY quote page directly from the main domain, redirect them home
-    const isSubdomainHost = Object.keys(SUBDOMAIN_MAP).some(sub => 
-        hostname.includes(`${sub}.kytcode.lat`)
-    )
-    const isLocalhost = hostname.includes('localhost')
+    if (matchedSlug) {
+        // Rewrite the root path to the specific quotation
+        if (request.nextUrl.pathname === '/') {
+            return NextResponse.rewrite(new URL(`/cotizaciones/${matchedSlug}`, request.url))
+        }
+    } 
 
-    if (!isSubdomainHost && !isLocalhost) {
-        if (request.nextUrl.pathname.startsWith('/cotizaciones')) {
-            return NextResponse.redirect(new URL('/', request.url))
+    if (isMainDomain && request.nextUrl.pathname.startsWith('/cotizaciones')) {
+        // Block direct access to /cotizaciones from the main domain
+        return NextResponse.redirect(new URL('https://www.kytcode.lat', request.url))
+    } else if (!isMainDomain && !matchedSlug) {
+        // If they access a subdomain that doesn't match any quotation, redirect to home
+        if (request.nextUrl.pathname.startsWith('/cotizaciones') || request.nextUrl.pathname === '/') {
+            return NextResponse.redirect(new URL('https://www.kytcode.lat', request.url))
         }
     }
 
