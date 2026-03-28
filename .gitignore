@@ -35,3 +35,4 @@ crm-backend.gs
 # auth.ts (Opcional si quieres ocultar lógica auth)
 # Sentry Config File
 .env.sentry-build-plugin
+scripts/seed-cotizaciones.ts

@@ -41,6 +41,7 @@ interface CotizacionData {
 
 export default function CotizacionDynamicPage({ data }: { data: CotizacionData }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [showWelcomeScreen, setShowWelcomeScreen] = useState(false)
   const [password, setPassword] = useState("")
   const [error, setError] = useState(false)
   const [hasViewed, setHasViewed] = useState(false)
@@ -64,17 +65,22 @@ export default function CotizacionDynamicPage({ data }: { data: CotizacionData }
     e.preventDefault()
     if (password === data.password) {
       setIsAuthenticated(true)
+      setShowWelcomeScreen(true)
       setError(false)
       setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100)
-      
-      if (!hasViewed) {
-        setHasViewed(true)
-        notifyQuotationViewed({ client: data.clientName }).catch(console.error)
-      }
     } else {
       setError(true)
       setPassword("")
     }
+  }
+
+  const handleContinueToQuotation = () => {
+    setShowWelcomeScreen(false)
+    if (!hasViewed) {
+      setHasViewed(true)
+      notifyQuotationViewed({ client: data.clientName }).catch(console.error)
+    }
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100)
   }
 
   const handleAccept = async () => {
@@ -149,6 +155,56 @@ export default function CotizacionDynamicPage({ data }: { data: CotizacionData }
                   Acceder a la Cotización <ArrowRight className="w-4 h-4" />
                 </button>
               </form>
+            </div>
+          </motion.div>
+        ) : showWelcomeScreen ? (
+          <motion.div 
+            key="welcome"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center justify-center min-h-[75vh] px-4 pt-12 pb-24"
+          >
+            <div className="w-full max-w-2xl p-8 sm:p-12 my-auto rounded-3xl bg-zinc-900/80 border border-white/10 shadow-2xl backdrop-blur-md text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+              >
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-title font-bold text-white mb-6">
+                  ¡Saludos, <span className="text-emerald-400">{data.clientName}</span>! 👋
+                </h1>
+                
+                <p className="text-xl sm:text-2xl text-white/90 mb-8 font-light leading-relaxed">
+                  Esta es tu cotización oficial de desarrollo web a la medida.
+                </p>
+                
+                <div className="bg-white/5 border border-white/10 p-6 rounded-2xl mb-10 text-left">
+                  <p className="text-white/80 text-lg leading-relaxed mb-4">
+                    Toma tu tiempo para revisar toda la información detallada a continuación.
+                  </p>
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" />
+                      <span className="text-white/90">Si estás de acuerdo con la propuesta, podrás <strong>Aceptar la Cotización</strong> al finalizar la página.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <HelpCircle className="w-6 h-6 text-blue-400 shrink-0 mt-0.5" />
+                      <span className="text-white/90">Si deseas realizar cambios o tienes alguna duda, puedes darle al botón de <strong>Tengo dudas / Modificar</strong> al final para escribirme por WhatsApp.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleContinueToQuotation}
+                  className="bg-white text-black font-bold py-4 px-10 rounded-full text-lg hover:bg-white/90 transition-all flex items-center justify-center gap-2 mx-auto"
+                >
+                  Ver mi Cotización <ArrowRight className="w-5 h-5" />
+                </motion.button>
+              </motion.div>
             </div>
           </motion.div>
         ) : (
@@ -288,10 +344,27 @@ export default function CotizacionDynamicPage({ data }: { data: CotizacionData }
                 </div>
                 
                 <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
-                  {data.termsCards?.map((card, i) => (
+                  {data.termsCards?.map((card, i, arr) => {
+                    let isIsolated = false;
+                    if (!card.isFullWidth) {
+                      let nonFullCount = 0;
+                      for (let j = i; j >= 0; j--) {
+                        if (arr[j].isFullWidth) break;
+                        nonFullCount++;
+                      }
+                      
+                      const isLastCard = i === arr.length - 1;
+                      const nextIsFullWidth = !isLastCard && arr[i + 1].isFullWidth;
+                      
+                      if (nonFullCount % 2 !== 0 && (isLastCard || nextIsFullWidth)) {
+                        isIsolated = true;
+                      }
+                    }
+
+                    return (
                     <div 
                       key={i} 
-                      className={`p-5 sm:p-8 rounded-xl ${card.isWarning ? 'border border-amber-900/30 bg-amber-950/20' : 'bg-zinc-900/50 border border-white/5'} relative overflow-hidden ${card.isFullWidth ? 'lg:col-span-2' : ''}`}
+                      className={`p-5 sm:p-8 rounded-xl ${card.isWarning ? 'border border-amber-900/30 bg-amber-950/20' : 'bg-zinc-900/50 border border-white/5'} relative overflow-hidden ${card.isFullWidth || isIsolated ? 'lg:col-span-2' : ''}`}
                     >
                       {card.isWarning ? (
                         <div className="absolute top-0 left-0 w-1 h-full bg-amber-500"></div>
@@ -306,7 +379,8 @@ export default function CotizacionDynamicPage({ data }: { data: CotizacionData }
                         {card.content}
                       </p>
                     </div>
-                  ))}
+                    )
+                  })}
                 </div>
               </motion.section>
 
