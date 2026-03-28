@@ -36,3 +36,4 @@ crm-backend.gs
 # Sentry Config File
 .env.sentry-build-plugin
 scripts/seed-cotizaciones.ts
+scripts/seed-cotizaciones.ts
