@@ -179,8 +179,7 @@
 
   .animate-hero-text {
     animation: heroFadeInUp 0.8s ease-out forwards;
-    opacity: 0;
-    /* Keep it 0 until the animation plays to avoid flash, or just let the animation handle it */
+    /* Removed opacity: 0 to improve LCP scoring by allowing immediate rendering context */
   }
 
   .animation-delay-100 {

@@ -312,20 +312,63 @@ export default function CotizacionDynamicPage({ data }: { data: CotizacionData }
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-white/5">
-                      {data.investmentItems?.map((item, i) => (
-                        <tr key={i} className="hover:bg-white/[0.02] transition-colors">
-                          <td className="p-4 sm:p-6 text-white/90 text-sm sm:text-base">{item.concept}</td>
-                          <td className="p-4 sm:p-6 text-white font-medium text-right whitespace-nowrap">
-                            {item.isIncluded ? <span className="text-white/80">Incluido</span> : item.value}
-                          </td>
-                        </tr>
-                      ))}
-                      {data.totalLabel && (
-                        <tr className="bg-white/5 font-semibold">
-                          <td className="p-4 sm:p-6 text-white">{data.totalLabel}</td>
-                          <td className="p-4 sm:p-6 text-white text-lg sm:text-xl text-right whitespace-nowrap">{data.totalValue}</td>
-                        </tr>
-                      )}
+                      {(() => {
+                        const isItemExtra = (concept: string, value?: string) => {
+                          const lowerConcept = concept.toLowerCase()
+                          return lowerConcept.includes('extra') || 
+                                 lowerConcept.includes('adicional') || 
+                                 lowerConcept.includes('opcional') ||
+                                 lowerConcept.includes('mantenimiento') ||
+                                 (value && value.trim().startsWith('+'))
+                        }
+
+                        const baseItems = data.investmentItems?.filter(item => !isItemExtra(item.concept, item.value)) || []
+                        const extraItems = data.investmentItems?.filter(item => isItemExtra(item.concept, item.value)) || []
+
+                        return (
+                          <>
+                            {baseItems.map((item, i) => (
+                              <tr key={`base-${i}`} className="hover:bg-white/[0.02] transition-colors">
+                                <td className="p-4 sm:p-6 text-white/90 text-sm sm:text-base">{item.concept}</td>
+                                <td className="p-4 sm:p-6 text-white font-medium text-right whitespace-nowrap">
+                                  {item.isIncluded ? <span className="text-white/80">Incluido</span> : item.value}
+                                </td>
+                              </tr>
+                            ))}
+
+                            {data.totalLabel && (
+                              <tr className="bg-white/5 font-semibold relative">
+                                <td className="p-4 sm:p-6 text-white border-t border-white/20">{data.totalLabel}</td>
+                                <td className="p-4 sm:p-6 text-white text-lg sm:text-xl text-right whitespace-nowrap border-t border-white/20">{data.totalValue}</td>
+                              </tr>
+                            )}
+
+                            {extraItems.length > 0 && (
+                              <>
+                                <tr className="bg-black/60 border-t-4 border-t-black">
+                                  <td colSpan={2} className="p-3 sm:px-6 text-[10px] sm:text-xs uppercase tracking-widest text-emerald-400/80 font-bold border-t border-white/10">
+                                    Adicionales / Servicios Opcionales (No sumados al total base)
+                                  </td>
+                                </tr>
+                                {extraItems.map((item, i) => (
+                                  <tr key={`extra-${i}`} className="hover:bg-zinc-900/60 transition-colors bg-zinc-900/30 opacity-90 hover:opacity-100">
+                                    <td className="p-4 sm:p-6 text-white/70 text-sm sm:text-base">
+                                      <span className="inline-flex w-fit px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded text-[10px] uppercase tracking-wider text-emerald-400 mb-2 font-bold">
+                                        Opcional
+                                      </span>
+                                      <br/>
+                                      {item.concept.replace(/^(Extra|Adicional|Opcional):\s*/i, '')}
+                                    </td>
+                                    <td className="p-4 sm:p-6 text-emerald-400 font-medium text-right whitespace-nowrap">
+                                      {item.isIncluded ? <span className="text-emerald-400/60">Incluido</span> : item.value}
+                                    </td>
+                                  </tr>
+                                ))}
+                              </>
+                            )}
+                          </>
+                        )
+                      })()}
                     </tbody>
                   </table>
                 </div>
