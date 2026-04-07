@@ -449,17 +449,33 @@ export default function CotizacionDynamicPage({ data }: { data: CotizacionData }
                         Pagos Internacionales (Exterior)
                       </h3>
                       <ul className="space-y-6">
-                        {data.internationalPaymentMethods.map((method, i) => (
+                        {data.internationalPaymentMethods.map((method, i) => {
+                          const isDolarApp = method.name.toLowerCase().includes('dolarapp');
+                          return (
                           <li key={i} className={i < data.internationalPaymentMethods!.length - 1 ? 'border-b border-white/10 pb-4' : ''}>
-                            <p className="font-bold text-white mb-1 flex items-center">
+                            <p className="font-bold text-white mb-2 flex items-center">
                               {method.name}
                               {method.recommended && (
                                 <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full ml-2 uppercase tracking-wide">Recomendado</span>
                               )}
                             </p>
-                            <p className="text-sm text-white/70">{method.description}</p>
+                            
+                            {isDolarApp ? (
+                              <div className="mt-3">
+                                <p className="text-xs text-white/60 uppercase tracking-widest mb-1.5 font-bold">DolarTag ($)</p>
+                                <div className="flex items-center gap-2">
+                                  <p className="text-emerald-400 text-sm sm:text-base font-bold tracking-widest font-mono bg-emerald-950/40 px-3 py-1.5 rounded-lg border border-emerald-500/20">$keynertrillos</p>
+                                  <button onClick={() => handleCopy('$keynertrillos', 'cuenta')} className="p-2 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white bg-black/20" title="Copiar DolarTag">
+                                    {copiedCuenta ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                                  </button>
+                                </div>
+                                <p className="text-xs text-white/50 mt-3 max-w-sm">DolarApp permite recibir dólares rápidos desde cualquier lugar del mundo. (Descarga la app en tu país y transfiere al DolarTag).</p>
+                              </div>
+                            ) : (
+                              <p className="text-sm text-white/70">{method.description}</p>
+                            )}
                           </li>
-                        ))}
+                        )})}
                       </ul>
                     </div>
 
