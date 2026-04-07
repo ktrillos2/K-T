@@ -2,6 +2,14 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function updateSession(request: NextRequest) {
+    // Avoid doing expensive queries on purely public routes. Let's do it on anything aiming for CRM.
+    // Note: /admin is reserved for Sanity Studio which handles its own authentication.
+    const isProtectedPath = request.nextUrl.pathname.startsWith('/CRM');
+
+    if (!isProtectedPath) {
+        return NextResponse.next({ request });
+    }
+
     let supabaseResponse = NextResponse.next({
         request,
     })
@@ -27,10 +35,6 @@ export async function updateSession(request: NextRequest) {
             },
         }
     )
-
-    // Avoid doing expensive queries on purely public routes. Let's do it on anything aiming for CRM.
-    // Note: /admin is reserved for Sanity Studio which handles its own authentication.
-    const isProtectedPath = request.nextUrl.pathname.startsWith('/CRM')
 
     if (isProtectedPath) {
         const { data: { user } } = await supabase.auth.getUser()

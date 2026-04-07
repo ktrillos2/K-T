@@ -3,29 +3,28 @@
 import { m as motion } from "framer-motion"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
-import { projects as projectData } from "@/lib/projects"
 import dynamic from "next/dynamic"
 
 const ProjectsCarousel = dynamic(() => import("./projects-carousel"), { ssr: false })
 
-const projects = projectData.map((p, i) => ({
-  id: i,
-  titleEn: p.title,
-  titleEs: p.title,
-  descEn: p.shortDescription,
-  descEs: p.shortDescription,
-  image: p.images.hero,
-  imageMobile: p.images.mobile,
-  tech: p.tech,
-  year: p.year,
-  month: p.month,
-  link: `/projects/${p.slug}`,
-  externalLink: p.liveUrl
-}))
-
-export default function ProjectsSection() {
+export default function ProjectsSection({ initialProjects = [] }: { initialProjects?: any[] }) {
   const { language, dictionary } = useLanguage()
   const { setCursorVariant } = useCursor()
+
+  const projects = initialProjects.map((p, i) => ({
+    id: i,
+    titleEn: p.title,
+    titleEs: p.title,
+    descEn: p.shortDescription || p.description,
+    descEs: p.shortDescription || p.description,
+    image: p.hero,
+    imageMobile: p.mobile,
+    tech: p.tech || [],
+    year: p.year,
+    month: p.month,
+    link: `/projects/${p.slug}`,
+    externalLink: p.liveUrl
+  }))
 
   return (
     <section id="work" className="relative py-16 lg:py-24 overflow-hidden cv-auto">

@@ -39,7 +39,7 @@ interface CotizacionData {
   whatsappMessage: string
 }
 
-export default function CotizacionDynamicPage({ data }: { data: CotizacionData }) {
+export default function CotizacionDynamicPage({ data, projects = [] }: { data: CotizacionData, projects?: any[] }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [showWelcomeScreen, setShowWelcomeScreen] = useState(false)
   const [password, setPassword] = useState("")
@@ -684,7 +684,7 @@ export default function CotizacionDynamicPage({ data }: { data: CotizacionData }
                   </p>
                   
                   <div className="w-full relative mb-16">
-                    <QuotationProjectsSlider />
+                    <QuotationProjectsSlider projects={projects} />
                   </div>
 
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">

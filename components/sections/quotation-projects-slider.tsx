@@ -5,9 +5,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { m as motion } from "framer-motion"
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react"
-import { projects } from "@/lib/projects"
 
-export default function QuotationProjectsSlider() {
+export default function QuotationProjectsSlider({ projects = [] }: { projects?: any[] }) {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   const scroll = (direction: 'left' | 'right') => {
@@ -60,7 +59,7 @@ export default function QuotationProjectsSlider() {
                 {/* Image */}
                 <div className="relative h-[160px] sm:h-[180px] w-full shrink-0 overflow-hidden">
                   <Image
-                    src={project.images.hero}
+                    src={project.hero}
                     alt={project.title}
                     fill
                     className="object-cover object-top group-hover:scale-105 transition-transform duration-500"

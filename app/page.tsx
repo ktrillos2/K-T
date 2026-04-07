@@ -12,6 +12,8 @@ const InternationalSection = dynamic(() => import("@/components/sections/interna
 const ContactSection = dynamic(() => import("@/components/sections/contact-section"))
 const Footer = dynamic(() => import("@/components/layout/footer"))
 
+import { getAllProjects } from "@/sanity/lib/queries"
+
 export const revalidate = 60;
 
 async function getTestimonials() {
@@ -31,6 +33,7 @@ async function getTestimonials() {
 
 export default async function Home() {
   const testimonials = await getTestimonials()
+  const projects = await getAllProjects()
 
   return (
     <>
@@ -38,7 +41,7 @@ export default async function Home() {
       <AboutSection />
       <InternationalSection />
       <ServicesSection />
-      <ProjectsSection />
+      <ProjectsSection initialProjects={projects} />
       <TestimonialsSection initialTestimonials={testimonials} />
       <ContactSection />
       <Footer />

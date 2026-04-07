@@ -16,6 +16,24 @@ export default function FloatingButtons() {
     const { openModal } = useModal()
     const [showQuote, setShowQuote] = useState(false)
 
+    const [isQuotationUrl, setIsQuotationUrl] = useState(false)
+
+    useEffect(() => {
+        // Detect if we are on a quotation subdomain or path
+        if (typeof window !== 'undefined') {
+            const hostname = window.location.hostname
+            const subdomain = hostname.split('.')[0]
+            const isLocalhost = hostname.includes('localhost') || hostname.includes('127.0.0.1')
+            const isMainDomain = subdomain === 'www' || subdomain === 'kytcode' || isLocalhost
+            
+            if ((!isMainDomain && subdomain) || pathname?.startsWith('/cotizaciones')) {
+                setIsQuotationUrl(true)
+            } else {
+                setIsQuotationUrl(false)
+            }
+        }
+    }, [pathname])
+
     useEffect(() => {
         let mounted = true;
         let hasInteracted = false;
@@ -74,7 +92,8 @@ export default function FloatingButtons() {
         };
 
         const checkAndShow = () => {
-            if (hasInteracted && timePassed && !buttonShown) {
+            // No mostrar el boton de cotizar ni sonar notificacion si es cotizacion
+            if (hasInteracted && timePassed && !buttonShown && !isQuotationUrl) {
                 showButton();
             }
         };
@@ -119,10 +138,10 @@ export default function FloatingButtons() {
                 audio = null;
             }
         };
-    }, [])
+    }, [isQuotationUrl])
 
-    // Don't show on admin, studio, or quotation pages
-    if (pathname?.startsWith('/admin') || pathname?.startsWith('/studio') || pathname?.startsWith('/cotizaciones')) return null
+    // Don't show any floating UI on admin or studio routes
+    if (pathname?.startsWith('/admin') || pathname?.startsWith('/studio')) return null
 
     const handleWhatsAppClick = () => {
         notifyInteraction("WhatsApp Button (Direct)")
@@ -172,7 +191,7 @@ export default function FloatingButtons() {
         >
             <AnimatePresence>
                 {/* Quote Button */}
-                {showQuote && (
+                {(showQuote && !isQuotationUrl) && (
                     <motion.button
                         key="quote-btn"
                         onClick={handleQuoteClick}

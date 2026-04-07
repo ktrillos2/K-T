@@ -63,3 +63,28 @@ export async function getAllCotizacionSubdomains() {
     { next: { revalidate: 60 } }
   )
 }
+
+/** Obtener todos los proyectos del portafolio ordenados */
+export async function getAllProjects() {
+  return client.fetch(
+    `*[_type == "project"] | order(orderId asc){
+      _id,
+      title,
+      "slug": slug.current,
+      shortDescription,
+      description,
+      year,
+      month,
+      category,
+      tech,
+      "hero": heroImage.asset->url,
+      "mobile": mobileImage.asset->url,
+      liveUrl,
+      challenge,
+      solution,
+      seoFocus
+    }`,
+    {},
+    { next: { revalidate: 60 } }
+  )
+}

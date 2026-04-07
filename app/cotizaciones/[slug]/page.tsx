@@ -1,4 +1,4 @@
-import { getCotizacionBySlug } from '@/sanity/lib/queries'
+import { getCotizacionBySlug, getAllProjects } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
 import CotizacionDynamicPage from '@/components/cotizacion/cotizacion-dynamic'
 
@@ -8,11 +8,16 @@ interface PageProps {
 
 export default async function CotizacionPage({ params }: PageProps) {
   const { slug } = await params
-  const data = await getCotizacionBySlug(slug)
+  
+  // Parallel fetch for performance
+  const [data, projects] = await Promise.all([
+    getCotizacionBySlug(slug),
+    getAllProjects()
+  ])
 
   if (!data) {
     notFound()
   }
 
-  return <CotizacionDynamicPage data={data} />
+  return <CotizacionDynamicPage data={data} projects={projects} />
 }
