@@ -88,3 +88,28 @@ export async function getAllProjects() {
     { next: { revalidate: 60 } }
   )
 }
+
+/** Obtener un proyecto por su slug */
+export async function getProjectBySlug(slug: string) {
+  return client.fetch(
+    `*[_type == "project" && slug.current == $slug][0]{
+      _id,
+      title,
+      "slug": slug.current,
+      shortDescription,
+      description,
+      year,
+      month,
+      category,
+      tech,
+      "hero": heroImage.asset->url,
+      "mobile": mobileImage.asset->url,
+      liveUrl,
+      challenge,
+      solution,
+      seoFocus
+    }`,
+    { slug },
+    { next: { revalidate: 60 } }
+  )
+}

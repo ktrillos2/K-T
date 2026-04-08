@@ -1,12 +1,38 @@
-
 import { notFound } from "next/navigation"
-import { projects } from "@/lib/projects"
+import { getAllProjects, getProjectBySlug } from "@/sanity/lib/queries"
 import ProjectClientView from "@/components/project-client-view"
 import { Metadata } from "next"
+import { Project } from "@/lib/projects"
+
+function mapSanityProjectToClientProject(sanityProject: any): Project {
+    return {
+        id: sanityProject._id || sanityProject.slug,
+        slug: sanityProject.slug,
+        title: sanityProject.title,
+        description: sanityProject.description || "",
+        shortDescription: sanityProject.shortDescription || "",
+        year: sanityProject.year || "",
+        month: sanityProject.month || "",
+        category: sanityProject.category || "",
+        tech: sanityProject.tech || [],
+        images: {
+            hero: sanityProject.hero || "",
+            mobile: sanityProject.mobile || sanityProject.hero || "",
+            gallery: []
+        },
+        liveUrl: sanityProject.liveUrl || "",
+        content: {
+            challenge: sanityProject.challenge || "",
+            solution: sanityProject.solution || "",
+            seoFocus: sanityProject.seoFocus || "",
+        }
+    }
+}
 
 // Force static generation for these routes - Great for SEO and performance
 export async function generateStaticParams() {
-    return projects.map((project) => ({
+    const projects = await getAllProjects()
+    return projects.map((project: { slug: string }) => ({
         slug: project.slug,
     }))
 }
@@ -14,14 +40,16 @@ export async function generateStaticParams() {
 // Generate dynamic metadata for each project
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params
-    const project = projects.find((p) => p.slug === slug)
+    const sanityProject = await getProjectBySlug(slug)
 
-    if (!project) {
+    if (!sanityProject) {
         return {
             title: "Proyecto no encontrado | K&T Agencia Digital",
             description: "El proyecto que buscas no existe."
         }
     }
+
+    const project = mapSanityProjectToClientProject(sanityProject)
 
     return {
         title: project.title,
@@ -57,11 +85,13 @@ interface ProjectPageProps {
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
     const { slug } = await params
-    const project = projects.find((p) => p.slug === slug)
+    const sanityProject = await getProjectBySlug(slug)
 
-    if (!project) {
+    if (!sanityProject) {
         notFound()
     }
 
-    return <ProjectClientView project={project} />
+    const mappedProject = mapSanityProjectToClientProject(sanityProject)
+
+    return <ProjectClientView project={mappedProject} />
 }

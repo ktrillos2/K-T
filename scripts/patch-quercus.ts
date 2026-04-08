@@ -26,10 +26,8 @@ async function run() {
   for (let i = 0; i < items.length; i++) {
     const item = items[i]
     if (item.concept.toLowerCase().includes('mapa')) {
-      console.log('--- ENCONTRADO MAPA ---')
-      console.log(item)
       // Modificar
-      item.concept = "Opcional: Mapa Interactivo Desarrollado a la Medida (Se desarrollará específicamente para la planimetría de cada proyecto. Costo individual por mapa: $50 USD / Gran promoción de 5 mapas por $150 USD con descuento aplicado)"
+      item.concept = "Adicional: Mapa Interactivo Desarrollado a la Medida (Por el desarrollo inicial de la página, hay un descuento en promoción de 5 mapas por $150 USD. Normalmente, cada mapa interactivo individual tiene un valor de $50 USD)"
       item.value = "$150 USD"
       found = true
     }

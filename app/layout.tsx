@@ -214,11 +214,8 @@ export default function RootLayout({
   return (
     <html lang="es" className="dark">
       <link rel="dns-prefetch" href="https://api.exchangerate-api.com" />
-      <link rel="preconnect" href="https://api.exchangerate-api.com" crossOrigin="" />
       <link rel="dns-prefetch" href="https://ipapi.co" />
-      <link rel="preconnect" href="https://ipapi.co" crossOrigin="" />
       <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-      <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="" />
       <body className={`${firaCode.variable} ${vt323.variable} ${pressStart2P.variable} ${ariW9500.variable} font-mono antialiased`}>
         <noscript>
           <iframe
