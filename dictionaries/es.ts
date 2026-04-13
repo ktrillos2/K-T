@@ -16,7 +16,7 @@ export const es = {
     viewProject: "Ver Proyecto",
   },
   hero: {
-    greeting: "// Agencia de Ingeniería y Desarrollo",
+    greeting: "// Agencia de Desarrollo",
     slogan: "Desarrollo Web a la Medida para Latinoamérica",
     cta: "Cotizar mi web a la medida",
     scroll: "Conoce nuestra arquitectura",

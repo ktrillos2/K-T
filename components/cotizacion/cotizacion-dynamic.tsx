@@ -7,6 +7,22 @@ import Footer from "@/components/layout/footer"
 import QuotationProjectsSlider from "@/components/sections/quotation-projects-slider"
 import { notifyQuotationViewed, notifyQuotationAccepted } from "@/app/actions/cotizacion-actions"
 
+const formatText = (text: string) => {
+  if (!text) return null;
+  const cleanText = text.replace(/\*\*\*(.*?)(?:\*\*|\*\*\*)/g, "**$1**");
+  const parts = cleanText.split(/(\*\*.*?\*\*|\*.*?\*)/g);
+  
+  return parts.map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={index} className="text-white font-bold">{part.slice(2, -2)}</strong>;
+    }
+    if (part.startsWith('*') && part.endsWith('*') && part.length > 2) {
+      return <em key={index} className="text-white/90 italic">{part.slice(1, -1)}</em>;
+    }
+    return <span key={index}>{part}</span>;
+  });
+};
+
 interface CotizacionData {
   _id: string
   title: string
@@ -265,7 +281,7 @@ export default function CotizacionDynamicPage({ data, projects = [] }: { data: C
                 </div>
                 {data.scopeDescription && (
                   <p className="text-white/80 mb-8 text-base sm:text-lg leading-relaxed">
-                    {data.scopeDescription}
+                    {formatText(data.scopeDescription)}
                   </p>
                 )}
                 
@@ -283,8 +299,8 @@ export default function CotizacionDynamicPage({ data, projects = [] }: { data: C
                     >
                       <CheckCircle2 className="w-6 h-6 text-white shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
                       <div>
-                        <h3 className="text-white font-semibold mb-2 sm:text-lg">{item.title}</h3>
-                        <p className="text-white/80 leading-relaxed text-sm">{item.description}</p>
+                        <h3 className="text-white font-semibold mb-2 sm:text-lg">{formatText(item.title)}</h3>
+                        <p className="text-white/80 leading-relaxed text-sm">{formatText(item.description)}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -416,10 +432,10 @@ export default function CotizacionDynamicPage({ data, projects = [] }: { data: C
                       )}
                       <h3 className={`text-white font-bold text-lg mb-4 ${card.isWarning ? 'flex items-center gap-2 pl-2' : ''}`}>
                         {card.isWarning && <ShieldCheck className="w-5 h-5 text-amber-500" />}
-                        {card.title}
+                        {formatText(card.title)}
                       </h3>
                       <p className={`${card.isWarning ? 'text-white/80 leading-relaxed selection:bg-amber-500/30 pl-2' : 'text-white/80 text-sm sm:text-base leading-relaxed'}`} style={{ whiteSpace: 'pre-line' }}>
-                        {card.content}
+                        {formatText(card.content)}
                       </p>
                     </div>
                     )
@@ -472,7 +488,7 @@ export default function CotizacionDynamicPage({ data, projects = [] }: { data: C
                                 <p className="text-xs text-white/50 mt-3 max-w-sm">DolarApp permite recibir dólares rápidos desde cualquier lugar del mundo. (Descarga la app en tu país y transfiere al DolarTag).</p>
                               </div>
                             ) : (
-                              <p className="text-sm text-white/70">{method.description}</p>
+                                <p className="text-sm text-white/70">{formatText(method.description)}</p>
                             )}
                           </li>
                         )})}
@@ -629,9 +645,7 @@ export default function CotizacionDynamicPage({ data, projects = [] }: { data: C
                       <ShieldCheck className="w-6 h-6 text-white" />
                     </div>
                     <p className="text-white text-sm sm:text-base leading-relaxed">
-                      {data.warrantyDescription}
-                    </p>
-                  </div>
+                        {formatText(data.warrantyDescription)}
                 )}
 
                 <div className="grid md:grid-cols-2 gap-6 sm:gap-10">
@@ -644,7 +658,7 @@ export default function CotizacionDynamicPage({ data, projects = [] }: { data: C
                         {data.warrantyCoverage.map((item, i) => (
                           <li key={i} className="flex items-start gap-3">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 shrink-0 mt-2"></span>
-                            <span>{item}</span>
+                              <span>{formatText(item)}</span>
                           </li>
                         ))}
                       </ul>
@@ -661,7 +675,7 @@ export default function CotizacionDynamicPage({ data, projects = [] }: { data: C
                         {data.warrantyExclusions.map((item, i) => (
                           <li key={i} className="flex items-start gap-3">
                             <span className="w-1.5 h-1.5 rounded-full bg-red-500/30 shrink-0 mt-2"></span>
-                            <span>{item}</span>
+                              <span>{formatText(item)}</span>
                           </li>
                         ))}
                       </ul>
