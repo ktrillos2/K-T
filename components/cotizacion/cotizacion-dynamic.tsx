@@ -645,8 +645,8 @@ export default function CotizacionDynamicPage({ data, projects = [] }: { data: C
                       <ShieldCheck className="w-6 h-6 text-white" />
                     </div>
                     <p className="text-white text-sm sm:text-base leading-relaxed">
-                        {formatText(data.warrantyDescription)}
-                )}
+                        {formatText(data.warrantyDescription)}                      </p>
+                    </div>                )}
 
                 <div className="grid md:grid-cols-2 gap-6 sm:gap-10">
                   {data.warrantyCoverage && data.warrantyCoverage.length > 0 && (
