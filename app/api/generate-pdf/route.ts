@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
 import puppeteer from 'puppeteer-core';
-import chromium from '@sparticuz/chromium';
+import chromium from '@sparticuz/chromium-min';
 import { z } from 'zod';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs'; // Puppeteer requires Node.js runtime, not Edge
+export const maxDuration = 30; // 30 Segundos de máximo en vez de 10s porque los PDFs tardan en bootear
 
 // 1. Validación estricta del entorno
 const envSchema = z.object({
@@ -44,11 +45,17 @@ export async function POST(req: Request) {
     pdfUrl.searchParams.append('servicio', servicio);
     if (tipo) pdfUrl.searchParams.append('tipo', tipo);
 
-    // 5. Configuración y Lanzamiento de Puppeteer (Optimizado para Vercel)
+    // 5. Configuración y Lanzamiento de Puppeteer (Optimizado para Vercel via Tarball Min)
+    const isLocal = process.env.NODE_ENV === 'development';
+
     const browser = await puppeteer.launch({
-      args: chromium.args,
+      args: isLocal ? puppeteer.defaultArgs() : chromium.args,
       defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath(), // Sparticuz Chromium se encarga de descargar/brindar el binario válido para Serverless
+      executablePath: isLocal
+        ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' // Chrome Local de Mac
+        : await chromium.executablePath(
+            "https://github.com/Sparticuz/chromium/releases/download/v131.0.1/chromium-v131.0.1-pack.tar"
+          ),
       headless: chromium.headless,
     });
 
