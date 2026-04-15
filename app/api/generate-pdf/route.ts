@@ -1,13 +1,11 @@
 import { NextResponse } from 'next/server';
-import puppeteer from 'puppeteer-core';
-import chromium from '@sparticuz/chromium-min';
+import { renderToBuffer } from '@react-pdf/renderer';
 import { z } from 'zod';
+import { KTDocumentNative } from '@/components/pdf/KTDocumentNative';
 
 export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs'; // Puppeteer requires Node.js runtime, not Edge
-export const maxDuration = 30; // 30 Segundos de máximo en vez de 10s porque los PDFs tardan en bootear
+export const runtime = 'nodejs'; // @react-pdf/renderer requires Node limits
 
-// 1. Validación estricta del entorno
 const envSchema = z.object({
   TELEGRAM_WEBHOOK_SECRET: z.string().min(1, 'Falta TELEGRAM_WEBHOOK_SECRET'),
 });
@@ -33,56 +31,22 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Faltan parámetros obligatorios (cliente, valor, servicio).' }, { status: 400 });
     }
 
-    // 4. Determinar la URL Base (Ruta Oculta)
-    // En Vercel, req.headers.get('host') nos da el dominio actual de producción o preview
-    const host = req.headers.get('host') || 'localhost:3000';
-    const protocol = host.includes('localhost') ? 'http' : 'https';
+    // 4. Renderizar el PDF de manera nativa
+    console.log('[Generate PDF] Iniciando renderToBuffer con @react-pdf/renderer...');
     
-    // Construimos la URL con los *Search Params* para inyectar los datos a la ruta oculta
-    const pdfUrl = new URL(`${protocol}://${host}/pdf-render`);
-    pdfUrl.searchParams.append('cliente', cliente);
-    pdfUrl.searchParams.append('valor', valor.toString());
-    pdfUrl.searchParams.append('servicio', servicio);
-    if (tipo) pdfUrl.searchParams.append('tipo', tipo);
+    // Aquí invocamos el componente estricto de React PDF
+    const pdfBuffer = await renderToBuffer(
+      <KTDocumentNative 
+        cliente={cliente} 
+        valor={valor} 
+        servicio={servicio} 
+        tipo={tipo || 'cotizacion'} 
+      />
+    );
 
-    // 5. Configuración y Lanzamiento de Puppeteer (Optimizado para Vercel via Tarball Min)
-    const isLocal = process.env.NODE_ENV === 'development';
+    console.log(`[Generate PDF] Rendering finalizado. Tamaño: ${pdfBuffer.length} bytes`);
 
-    const browser = await puppeteer.launch({
-      args: isLocal ? puppeteer.defaultArgs() : chromium.args,
-      defaultViewport: chromium.defaultViewport,
-      executablePath: isLocal
-        ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' // Chrome Local de Mac
-        : await chromium.executablePath(
-            "https://github.com/Sparticuz/chromium/releases/download/v131.0.1/chromium-v131.0.1-pack.tar"
-          ),
-      headless: chromium.headless,
-    });
-
-    const page = await browser.newPage();
-    
-    // 6. Navegar a la Ruta Oculta y esperar que la red se estabilice
-    // waitUntil: 'networkidle0' garantiza que las fuentes, el CSS de Tailwind y las imágenes (logofonedo.png, etc) carguen antes de tomar la foto.
-    await page.goto(pdfUrl.toString(), {
-      waitUntil: 'networkidle0',
-      timeout: 15000,
-    });
-
-    // 7. Generar PDF
-    const pdfBuffer = await page.pdf({
-      format: 'A4',
-      printBackground: true, // Requerido para gráficas e imágenes de CSS (bg-*)
-      margin: {
-        top: '0px',
-        right: '0px',
-        bottom: '0px',
-        left: '0px',
-      },
-    });
-
-    await browser.close();
-
-    // 8. Retornar el documento PDF como un Buffer listo para ser consumido
+    // 5. Retornar el documento PDF como un Buffer
     return new NextResponse(pdfBuffer, {
       headers: {
         'Content-Type': 'application/pdf',
@@ -90,10 +54,10 @@ export async function POST(req: Request) {
       },
     });
   } catch (error) {
-    console.error('[Generate PDF] Error interno en Puppeteer:', error);
+    console.error('[Generate PDF] Error interno en React PDF:', error);
     return NextResponse.json(
       { 
-        error: 'Error interno en la generación de PDF',
+        error: 'Error interno en la generación de PDF nativa',
         details: error instanceof Error ? error.message : String(error) 
       },
       { status: 500 }
