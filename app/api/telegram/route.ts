@@ -572,7 +572,7 @@ async function buildFinanzasWorkbook(records: any[]): Promise<Buffer> {
     if (tipo === 'INGRESO') ingresos += monto;
     if (tipo === 'GASTO') gastos += monto;
 
-    return {
+    const baseRow = {
       '#': index + 1,
       ID: record.id ?? '',
       Fecha: fecha,
@@ -581,6 +581,14 @@ async function buildFinanzasWorkbook(records: any[]): Promise<Buffer> {
       'Monto (COP)': monto,
       'Monto Neto (COP)': neto,
     };
+    
+    const excluded = ['id', 'created_at', 'fecha', 'tipo', 'concepto', 'monto'];
+    Object.keys(record).forEach(k => {
+      if (!excluded.includes(k)) {
+        baseRow[k.toUpperCase()] = record[k] ?? '';
+      }
+    });
+    return baseRow;
   });
 
   const balance = ingresos - gastos;
@@ -912,12 +920,41 @@ export async function POST(req: Request) {
             await sendMessage(chatId, `❌ Error consultando balance: ${error.message}`);
           } else {
             let ingresos = 0; let gastos = 0;
+            const sumatoriosExtra = {};
+            const keysAsText = {};
+            const excludedKeys = ['id', 'tipo', 'concepto', 'fecha', 'created_at', 'monto', 'origen', 'estado'];
+
             records?.forEach(r => {
-              if (r.tipo === 'ingreso') ingresos += Number(r.monto);
-              if (r.tipo === 'gasto') gastos += Number(r.monto);
+              if (r.tipo === 'ingreso') ingresos += Number(r.monto || 0);
+              if (r.tipo === 'gasto') gastos += Number(r.monto || 0);
+              
+              Object.keys(r).forEach(k => {
+                if (!excludedKeys.includes(k) && r[k] !== null && r[k] !== undefined) {
+                  if (typeof r[k] === 'number') {
+                     const val = r.tipo === 'gasto' ? -Number(r[k]) : Number(r[k]);
+                     sumatoriosExtra[k] = (sumatoriosExtra[k] || 0) + val;
+                  } else if (typeof r[k] === 'boolean' || typeof r[k] === 'string') {
+                     if (!keysAsText[k]) keysAsText[k] = 0;
+                     if (r[k]) keysAsText[k]++;
+                  }
+                }
+              });
             });
             const balance = ingresos - gastos;
             const balEmoji = balance >= 0 ? '🟢' : '🔴';
+            
+            let extrasText = '';
+            const extrasKeys = Object.keys(sumatoriosExtra);
+            if (extrasKeys.length > 0) {
+              extrasText += '\n\n🏦 <b>Saldos en Cuentas/Variables (Acumulados):</b>\n' + 
+                extrasKeys.map(k => `• <b>${k.charAt(0).toUpperCase() + k.slice(1)}:</b> ${sumatoriosExtra[k].toLocaleString('es-CO')}`).join('\n');
+            }
+            const textKeys = Object.keys(keysAsText);
+            if (textKeys.length > 0) {
+              extrasText += '\n\n🏷 <b>Otros datos guardados:</b>\n' + 
+                textKeys.map(k => `• <b>${k.charAt(0).toUpperCase() + k.slice(1)}:</b> Registrado ${keysAsText[k]} veces`).join('\n');
+            }
+
             const replyMarkup = {
               inline_keyboard: [
                 [{ text: '📤 Exportar Excel', callback_data: 'EXPORT_FIN_XLSX' }],
@@ -925,7 +962,7 @@ export async function POST(req: Request) {
               ],
             };
             
-            await sendMessage(chatId, `📊 <b>RESUMEN FINANCIERO K&T</b>\n\n📈 <b>Ingresos:</b> $${ingresos.toLocaleString('es-CO')}\n📉 <b>Gastos:</b> $${gastos.toLocaleString('es-CO')}\n${balEmoji} <b>Balance:</b> $${balance.toLocaleString('es-CO')}\n\n<i>¿Deseas exportar ahora todos los movimientos a Excel?</i>`, replyMarkup);
+            await sendMessage(chatId, `📊 <b>RESUMEN FINANCIERO K&T</b>\n\n📈 <b>Ingresos:</b> $${ingresos.toLocaleString('es-CO')}\n📉 <b>Gastos:</b> $${gastos.toLocaleString('es-CO')}\n${balEmoji} <b>Balance:</b> $${balance.toLocaleString('es-CO')}${extrasText}\n\n<i>¿Deseas exportar ahora todos los movimientos a Excel?</i>`, replyMarkup);
           }
 
         } else if (data.intent === 'finanza_exportar_excel') {
