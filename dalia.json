@@ -1,0 +1,53 @@
+{
+  "_type": "cotizacion",
+  "title": "Cotización - Dalia Comfort",
+  "slug": { "_type": "slug", "current": "dalia" },
+  "subdomain": "dalia",
+  "password": "dalia",
+  "clientName": "Dalia Comfort",
+  "isActive": true,
+  "headerTitle": "COTIZACIÓN DE DESARROLLO WEB Y GESTIÓN DIGITAL",
+  "date": "15 de abril de 2026",
+  "validityDays": "15 días calendario",
+  "scopeTitle": "1. Alcance del Proyecto: Tienda Virtual Personalizada",
+  "scopeDescription": "La propuesta contempla el diseño y desarrollo desde cero de una plataforma de e-commerce a la medida, enfocada en la identidad de Dalia Comfort para garantizar una experiencia de compra premium:",
+  "scopeItems": [
+    { "_key": "1", "_type": "scopeItem", "title": "Desarrollo a la Medida", "description": "Programación de alto rendimiento utilizando tecnologías modernas para asegurar una carga instantánea y una interfaz fluida." },
+    { "_key": "2", "_type": "scopeItem", "title": "Catálogo de Productos", "description": "Estructuración de categorías, galerías de imágenes y descripciones detalladas para los productos de la marca." },
+    { "_key": "3", "_type": "scopeItem", "title": "Infraestructura en Vercel", "description": "Alojamiento en servidores de última generación que garantizan máxima velocidad y estabilidad sin costos mensuales fijos por servidor web." },
+    { "_key": "4", "_type": "scopeItem", "title": "Optimización SEO Técnico", "description": "Configuración de etiquetas meta, arquitectura de información y jerarquía de encabezados para facilitar el posicionamiento orgánico en Google." },
+    { "_key": "5", "_type": "scopeItem", "title": "Diseño Responsivo", "description": "Adaptación completa para una visualización perfecta en dispositivos móviles, tablets y computadoras de escritorio." }
+  ],
+  "investmentTitle": "2. Inversión del Proyecto",
+  "currency": "COP",
+  "investmentItems": [
+    { "_key": "1", "_type": "investmentItem", "concept": "Desarrollo de Tienda Virtual Personalizada (Diseño, SEO y Vercel)", "value": "$1.300.000", "isIncluded": false },
+    { "_key": "2", "_type": "investmentItem", "concept": "Panel Administrativo Autogestionable (Límite base de tráfico)", "value": "Incluido", "isIncluded": true }
+  ],
+  "totalLabel": "Total Inversión Única de Desarrollo",
+  "totalValue": "$1.300.000",
+  "termsTitle": "Condiciones Comerciales y Operativas",
+  "termsCards": [
+    { "_key": "1", "_type": "termsCard", "title": "Servicios Mensuales (Opcionales)", "content": "**Gestión de Pautas y Redes Sociales:** Administración profesional de campañas publicitarias y manejo de redes (servicio disponible tras finalizar la web). **$400.000 / mes**\n\n**Mantenimiento y Optimización:** Soporte técnico, actualizaciones de seguridad y monitoreo de rendimiento web. **$50.000 / mes**", "isFullWidth": true, "isWarning": false },
+    { "_key": "2", "_type": "termsCard", "title": "3. Condiciones de Infraestructura y Tráfico (Importante)", "content": "Para la autonomía de la marca, el sitio se entrega con un panel administrativo. Es fundamental tener en cuenta las siguientes políticas de los proveedores de infraestructura:\n\n**Límite Mensual del Panel:** El sistema incluye una capacidad gratuita de hasta 250.000 API Requests (peticiones de datos) mensuales, estadística que se reinicia el primer día de cada mes.\n\n**Excedentes por Alto Tráfico:** En caso de que se realicen campañas de pauta masiva y se supere el límite de las 250.000 peticiones, el proveedor del panel generará un cobro por excedentes de aproximadamente $60.000 COP mensuales mientras dure el flujo masivo.", "isFullWidth": true, "isWarning": true },
+    { "_key": "3", "_type": "termsCard", "title": "4. Condiciones Comerciales y Tiempos de Entrega", "content": "**Forma de pago:** 50% de abono inicial para comenzar el desarrollo ($650.000) y 50% contra entrega final en producción ($650.000).\n\n**Tiempos de Ejecución:** El primer boceto o avance visual se entregará en un plazo de 1 a 2 semanas. La entrega final del proyecto completo se estima en un periodo de 1 a 2 meses, dependiendo de la agilidad en las revisiones.\n\n**Ciclo de Vida del Proyecto:** El desarrollo tiene un límite máximo de 8 semanas para su cierre.", "isFullWidth": true, "isWarning": false }
+  ],
+  "paymentTitle": "5. Medios de Pago",
+  "warrantyTitle": "6. Política de Garantía Técnica",
+  "warrantyDescription": "Se otorga una Garantía Técnica de 1 mes (30 días calendario) tras la publicación del sitio.",
+  "warrantyCoverageTitle": "Cobertura",
+  "warrantyCoverage": [
+    "Corrección de errores de código (bugs)",
+    "Fallos en el proceso de compra",
+    "Errores de diseño responsivo",
+    "Soporte sobre la infraestructura de Vercel"
+  ],
+  "warrantyExclusionsTitle": "Exclusiones",
+  "warrantyExclusions": [
+    "Cambios en el diseño ya aprobado",
+    "Costos por exceder los límites de API Requests",
+    "Problemas externos de pasarelas de pago",
+    "Daños causados por manipulación de terceros"
+  ],
+  "whatsappMessage": "Hola Keyner, he revisado la cotización de Desarrollo Web para Dalia Comfort y tengo dudas al respecto:"
+}

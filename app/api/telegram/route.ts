@@ -1,268 +1,9 @@
-import { NextResponse } from 'next/server';
-import { z } from 'zod';
-import Groq from 'groq-sdk';
-import { createClient } from '@supabase/supabase-js';
-import * as XLSX from 'xlsx';
-
-// ==========================================
-// 1. VALIDACIÓN DE ENTORNO (Zod)
-// ==========================================
-const envSchema = z.object({
-  TELEGRAM_BOT_TOKEN: z.string().min(1, 'Falta TELEGRAM_BOT_TOKEN'),
-  TELEGRAM_WEBHOOK_SECRET: z.string().min(1, 'Falta TELEGRAM_WEBHOOK_SECRET'),
-  ALLOWED_TELEGRAM_USER_IDS: z.string().min(1, 'Falta ALLOWED_TELEGRAM_USER_IDS'),
-  GROQ_API_KEY: z.string().min(1, 'Falta GROQ_API_KEY'),
-  NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
-  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1, 'Falta Service Role de Supabase'),
-});
-
-const env = envSchema.parse({
-  TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
-  TELEGRAM_WEBHOOK_SECRET: process.env.TELEGRAM_WEBHOOK_SECRET,
-  ALLOWED_TELEGRAM_USER_IDS: process.env.ALLOWED_TELEGRAM_USER_IDS,
-  GROQ_API_KEY: process.env.GROQ_API_KEY,
-  NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
-  SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
-});
-
-const groq = new Groq({ apiKey: env.GROQ_API_KEY });
-const supabase = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY);
-
-const botToken = env.TELEGRAM_BOT_TOKEN.replace(/^"|"$/g, '').replace(/^'|'$/g, '');
-const TELEGRAM_API_URL = `https://api.telegram.org/bot${botToken}`;
-
-// ==========================================
-// 2. TIPOS E INTERFACES DE TELEGRAM
-// ==========================================
-interface TelegramUser {
-  id: number;
-  is_bot: boolean;
-  first_name: string;
-  username?: string;
-}
-
-interface TelegramChat {
-  id: number;
-  type: 'private' | 'group' | 'supergroup' | 'channel';
-}
-
-interface TelegramMessage {
-  message_id: number;
-  from?: TelegramUser;
-  chat: TelegramChat;
-  date: number;
-  text?: string;
-}
-
-interface TelegramCallbackQuery {
-  id: string;
-  from: TelegramUser;
-  message?: TelegramMessage;
-  data?: string;
-}
-
-interface TelegramUpdate {
-  update_id: number;
-  message?: TelegramMessage;
-  callback_query?: TelegramCallbackQuery;
-}
-
-// ==========================================
-// 3. REGLAS DE NEGOCIO K&T (PLANTILLAS)
-// ==========================================
-// NOTA: Abstenerse de usar la palabra "CODE". Siempre K&T.
-
-export function getCotizacionTemplate(cliente: string, valor: number | string, servicio: string) {
-  return `
-    <div style="font-family: sans-serif; color: #333;">
-      <h1>Cotización - K&T</h1>
-      <p><strong>Cliente:</strong> ${cliente}</p>
-      <p><strong>Servicio:</strong> ${servicio}</p>
-      <p><strong>Valor Estimado:</strong> $${valor}</p>
-      
-      <h2>Especificaciones Técnicas</h2>
-      <ul>
-        <li><strong>Optimización SEO:</strong> Implementación de metadatos, sitemaps y optimización de rendimiento inicial para posicionamiento.</li>
-        <li><strong>Infraestructura:</strong> El Hosting será Vercel para garantizar máxima velocidad y disponibilidad CDN global.</li>
-      </ul>
-      
-      <h2>Garantía</h2>
-      <p>K&T garantiza la correcta funcionalidad del código desplegado. Se incluye una garantía de 3 meses para corrección de bugs críticos sin costo adicional después del lanzamiento oficial a producción.</p>
-    </div>
-  `;
-}
-
-export function getCuentaDeCobroTemplate(cliente: string, valor: number | string, concepto: string) {
-  return `
-    <div style="font-family: sans-serif; color: #333;">
-      <h1>K&T - Cuenta de Cobro</h1>
-      <hr />
-      <p><strong>A nombre de:</strong> Keyner Steban Trillos Useche</p>
-      <p><strong>RUT:</strong> 1090384736-8</p>
-      <br />
-      <p><strong>Cliente:</strong> ${cliente}</p>
-      
-      <h2>Concepto del Servicio</h2>
-      <!-- Formato estándar Vegaltex Tactical Colombia -->
-      <p style="white-space: pre-line;">${concepto}</p>
-      
-      <h2 style="margin-top: 30px;">Total a Pagar: $${valor}</h2>
-    </div>
-  `;
-}
-
-// ==========================================
-// 4. FUNCIONES UTILITARIAS Y LLAMADAS A IA
-// ==========================================
-
-async function sendMessage(chatId: number, text: string, replyMarkup?: any) {
-  await fetch(`${TELEGRAM_API_URL}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text,
-      parse_mode: 'HTML',
-      reply_markup: replyMarkup,
-    }),
-  });
-}
-
-async function sendDocument(chatId: number, fileName: string, fileBuffer: Buffer, caption?: string) {
-  const binary = new Uint8Array(fileBuffer);
-  const formData = new FormData();
-  formData.append('chat_id', String(chatId));
-  if (caption) formData.append('caption', caption);
-  formData.append(
-    'document',
-    new Blob([
-      binary,
-    ], {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    }),
-    fileName,
-  );
-
-  await fetch(`${TELEGRAM_API_URL}/sendDocument`, {
-    method: 'POST',
-    body: formData,
-  });
-}
-
-async function answerCallbackQuery(callbackQueryId: string, text?: string) {
-  await fetch(`${TELEGRAM_API_URL}/answerCallbackQuery`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      callback_query_id: callbackQueryId,
-      text,
-    }),
-  });
-}
-
-function sanitizeColumnName(input: unknown): string | null {
-  if (!input || typeof input !== 'string') return null;
-  const normalized = input
-    .trim()
-    .toLowerCase()
-    .replace(/\s+/g, '_')
-    .replace(/[^a-z0-9_]/g, '');
-
-  if (!/^[a-z_][a-z0-9_]*$/.test(normalized)) return null;
-  return normalized;
-}
-
-function normalizeSqlType(input: unknown): string {
-  if (!input || typeof input !== 'string') return 'text';
-  const value = input.trim().toLowerCase();
-
-  const fixedAllowed = new Set([
-    'text',
-    'integer',
-    'bigint',
-    'numeric',
-    'boolean',
-    'date',
-    'timestamp',
-    'timestamptz',
-    'jsonb',
-    'uuid',
-  ]);
-
-  if (fixedAllowed.has(value)) return value;
-  if (/^varchar\((\d{1,5})\)$/.test(value)) return value;
-  if (/^numeric\((\d{1,5}),(\d{1,5})\)$/.test(value)) return value;
-
-  return 'text';
-}
-
-function parseMoneyValue(raw: unknown): number {
-  const amount = Number(raw);
-  return Number.isFinite(amount) ? amount : 0;
-}
-
-async function buildFinanzasWorkbook(records: any[]): Promise<Buffer> {
-  const workbook = XLSX.utils.book_new();
-  let ingresos = 0;
-  let gastos = 0;
-
-  const movimientosRows = records.map((record, index) => {
-    const tipoRaw = String(record.tipo || '').toLowerCase();
-    const tipo = tipoRaw === 'ingreso' ? 'INGRESO' : tipoRaw === 'gasto' ? 'GASTO' : 'OTRO';
-    const monto = parseMoneyValue(record.monto);
-    const neto = tipo === 'GASTO' ? -monto : monto;
-    const rawFecha = record.fecha || record.created_at || null;
-    const fechaObj = rawFecha ? new Date(rawFecha) : null;
-    const fecha = fechaObj && !Number.isNaN(fechaObj.getTime())
-      ? fechaObj.toLocaleString('es-CO')
-      : String(rawFecha || '');
-
-    if (tipo === 'INGRESO') ingresos += monto;
-    if (tipo === 'GASTO') gastos += monto;
-
-    return {
-      '#': index + 1,
-      ID: record.id ?? '',
-      Fecha: fecha,
-      Tipo: tipo,
-      Concepto: record.concepto || '',
-      'Monto (COP)': monto,
-      'Monto Neto (COP)': neto,
-    };
-  });
-
-  const balance = ingresos - gastos;
-  const resumenRows = [
-    { Indicador: 'Registros exportados', Valor: records.length },
-    { Indicador: 'Total ingresos (COP)', Valor: ingresos },
-    { Indicador: 'Total gastos (COP)', Valor: gastos },
-    { Indicador: 'Balance neto (COP)', Valor: balance },
-    { Indicador: 'Fecha de exportación', Valor: new Date().toLocaleString('es-CO') },
-  ];
-
-  const movimientosSheet = XLSX.utils.json_to_sheet(movimientosRows);
-  movimientosSheet['!cols'] = [
-    { wch: 6 },
-    { wch: 10 },
-    { wch: 22 },
-    { wch: 14 },
-    { wch: 56 },
-    { wch: 20 },
-    { wch: 20 },
-  ];
-
-  const resumenSheet = XLSX.utils.json_to_sheet(resumenRows);
-  resumenSheet['!cols'] = [{ wch: 42 }, { wch: 24 }];
-
-  XLSX.utils.book_append_sheet(workbook, movimientosSheet, 'Movimientos');
-  XLSX.utils.book_append_sheet(workbook, resumenSheet, 'Resumen');
-
-  const buffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
-  return Buffer.isBuffer(buffer) ? buffer : Buffer.from(buffer);
-}
-
-async function analyzeTelegramMessage(prompt: string) {
+async function analyzeTelegramMessage(prompt: string, userId: string = '', userContext: string = '') {
   try {
+    const memoryInstruction = userContext 
+      ? `\n\n📌 MEMORIA Y CONTEXTO DE ESTE USUARIO (ID: ${userId}):\n${userContext}\n\nTen en cuenta obligatoriamente este contexto en tus respuestas. Además, si el mensaje del usuario indica un NUEVO patrón, preferencia personal, regla de negocio o aprendizaje clave que aún no esté en la memoria, devuélvelo de forma resumida en la clave "nuevo_aprendizaje" dentro de tu JSON (ej. "El usuario prefiere respuestas sin emojis"). Si no hay nada crítico que aprender, déjalo nulo u omítelo.`
+      : `\n\n📌 MEMORIA Y CONTEXTO: Eres nuevo interactuando con este usuario (ID: ${userId}). Si el usuario menciona una preferencia, regla, deseo de negocio o dato importante que debas recordar a futuro sobre cómo hablarle o qué necesita, añádelo resumido a la clave "nuevo_aprendizaje" dentro de tu JSON.`;
+
     const systemPrompt = `
       Eres el asistente ejecutivo, financiero y general de la agencia digital K&T (NUNCA utilices 'K&T CODE', solo 'K&T'). Tu jefe es Keyner Steban Trillos Useche, RUT: 1090384736-8, Web: www.kytcode.lat.
       Debes ser muy amigable y humano; siempre confirma las operaciones importantes con tu jefe antes de hacerlas y da respuestas cortas y precisas.
@@ -299,10 +40,10 @@ async function analyzeTelegramMessage(prompt: string) {
       - NUNCA utilices la frase "formato para convertir con tabla" en tus respuestas.
       - Separa los conceptos y los precios utilizando punto y coma (;) para que sea fácil trasladarlos a un documento, en lugar de generar tablas visuales complejas. NUNCA uses tablas Markdown complejas.
       
-      Debes devolver SIEMPRE un único JSON estructurado seleccionando el intent más adecuado.
+      Debes devolver SIEMPRE un único JSON estructurado seleccionando el intent más adecuado. Y OPCIONALMENTE la clave "nuevo_aprendizaje" si corresponde según la memoria.
 
       1. Si el usuario pide generar una COTIZACIÓN:
-      { "intent": "cotizacion", "respuesta": "Claro jefe, he preparado los datos de la cotización. Revísalos antes de enviarla en texto:", "cliente": "Nombre", "valor": 0, "servicio": "Resumen técnico; Hosting en Vercel; SEO Técnico; Límite de Sanity..." }
+      { "intent": "cotizacion", "respuesta": "Claro jefe, he preparado los datos de la cotización. Revísalos antes de enviarla en texto:", "cliente": "Nombre", "valor": 0, "servicio": "Resumen técnico..." }
       
       2. Si pide generar CUENTA DE COBRO:
       { "intent": "cuenta_cobro", "respuesta": "Excelente, aquí tienes el desglose para cobrar. Confírmame.", "cliente": "Nombre", "valor": 0, "servicio": "Detalle del cobro" }
@@ -313,21 +54,22 @@ async function analyzeTelegramMessage(prompt: string) {
       4. Si el usuario pregunta por ESTADO financiero, resumen o balances:
       { "intent": "finanza_resumen", "respuesta": "Entendido jefe, aquí tienes tus números:" }
 
-      5. Si el usuario pide ELIMINAR O BORRAR un registro financiero (por monto o concepto):
+      5. Si el usuario pide ELIMINAR O BORRAR un registro financiero:
       { "intent": "finanza_buscar_eliminar", "respuesta": "Buscando esos registros para eliminar...", "busqueda": "Monto o palabra clave a buscar" }
 
-      6. Si el usuario pide EXPORTAR finanzas a Excel (xlsx), descargar informe, reporte para contabilidad o archivo de movimientos:
-      { "intent": "finanza_exportar_excel", "respuesta": "Listo jefe, preparo el Excel con todos los movimientos para exportarlo." }
+      6. Si el usuario pide EXPORTAR finanzas:
+      { "intent": "finanza_exportar_excel", "respuesta": "Listo jefe, preparo el Excel..." }
 
-      7. Si el usuario pide AGREGAR/CREAR una nueva columna en la tabla de finanzas, o si detectas que sería útil proponer una nueva columna:
-      { "intent": "finanza_propuesta_columna", "respuesta": "Antes de tocar estructura, te pido autorización.", "columna": "nombre_columna", "tipo_sql": "text", "motivo": "Razón de negocio" }
+      7. Si el usuario pide AGREGAR una nueva columna:
+      { "intent": "finanza_propuesta_columna", "respuesta": "Te pido autorización.", "columna": "nombre", "tipo_sql": "text", "motivo": "Razón" }
 
       8. Chatter general, inversión:
-      { "intent": "chat", "respuesta": "Tu respuesta amistosa." }
+      { "intent": "chat", "respuesta": "Tu respuesta amistosa que respete la memoria del usuario." }
 
       REGLA CRÍTICA DE SEGURIDAD DE DATOS:
       - JAMÁS asumas que puedes alterar el esquema de la base de datos automáticamente.
       - Si se necesita una columna nueva, SIEMPRE pide autorización explícita del jefe primero.
+      ${memoryInstruction}
 `;
 
     const chatCompletion = await groq.chat.completions.create({
@@ -401,10 +143,79 @@ export async function POST(req: Request) {
       const text = update.message.text.trim();
       
       if (text.startsWith('/start')) {
-        await sendMessage(chatId, 'Hola jefe 🚀. Soy la IA administrativa de K&T. Pídeme cotizaciones, cuentas de cobro, reporta ingresos/gastos (ej: pago del 50%), o hablemos de estrategias.');
+        await sendMessage(chatId, 'Hola jefe 🚀. Soy la IA administrativa de K&T. Pídeme cotizaciones, cuentas de cobro, reporta ingresos/gastos, envíame imágenes para analizarlas o usa /sync-correo y /pendientes.');
+
+        try {
+          const syncResult = await syncEmailInboxToPending();
+          if (syncResult.enabled) {
+            await sendMessage(
+              chatId,
+              `📬 Revisé el correo. Correos leídos: ${syncResult.reviewed}. Sugerencias nuevas: ${syncResult.queued}. Omitidos: ${syncResult.skipped}.`,
+            );
+          } else {
+            await sendMessage(chatId, 'ℹ️ Integración de correo desactivada. Configura EMAIL_IMAP_HOST, EMAIL_IMAP_USER y EMAIL_IMAP_PASSWORD para activarla.');
+          }
+        } catch (emailError) {
+          console.error('[K&T Bot] Error sincronizando correo en /start:', emailError);
+          await sendMessage(chatId, '⚠️ No pude sincronizar correo en este momento, pero puedes seguir usando el bot normalmente.');
+        }
+
+        const pendingCount = await sendPendingFinanceReminders(chatId);
+        if (pendingCount === 0) {
+          await sendMessage(chatId, '✅ No tienes movimientos pendientes por confirmar en este momento.');
+        }
+      } else if (text.startsWith('/sync-correo')) {
+        await sendMessage(chatId, '⏳ Sincronizando correo y analizando posibles ingresos/gastos...');
+
+        try {
+          const syncResult = await syncEmailInboxToPending();
+          if (!syncResult.enabled) {
+            await sendMessage(chatId, 'ℹ️ Integración de correo desactivada. Configura EMAIL_IMAP_HOST, EMAIL_IMAP_USER y EMAIL_IMAP_PASSWORD.');
+          } else {
+            await sendMessage(
+              chatId,
+              `✅ Sincronización completada. Correos leídos: ${syncResult.reviewed}. Sugerencias nuevas: ${syncResult.queued}. Omitidos: ${syncResult.skipped}.`,
+            );
+          }
+        } catch (emailError) {
+          console.error('[K&T Bot] Error en /sync-correo:', emailError);
+          await sendMessage(chatId, '❌ Ocurrió un error sincronizando el correo. Revisa credenciales IMAP y vuelve a intentarlo.');
+        }
+
+        const pendingCount = await sendPendingFinanceReminders(chatId);
+        if (pendingCount === 0) {
+          await sendMessage(chatId, '📭 No encontré movimientos pendientes para confirmar.');
+        }
+      } else if (text.startsWith('/pendientes')) {
+        const pendingCount = await sendPendingFinanceReminders(chatId);
+        if (pendingCount === 0) {
+          await sendMessage(chatId, '📭 No hay movimientos pendientes por confirmar.');
+        }
       } else {
         await sendMessage(chatId, '🧠 <i>K&T Brain trabajando...</i>');
-        const data = await analyzeTelegramMessage(text);
+        
+        // 5.4.1. Extraer Memoria del Usuario (Aprendizaje Continuo)
+        const fromIdStr = update.message.from?.id.toString() || '';
+        let userContext = '';
+        if (fromIdStr) {
+          const { data: memData } = await supabase.from('telegram_users_memory').select('general_context').eq('user_id', fromIdStr).single();
+          userContext = memData?.general_context || '';
+        }
+
+        const data = await analyzeTelegramMessage(text, fromIdStr, userContext);
+        
+        // 5.4.2. Guardar nuevos aprendizajes si la IA lo detectó
+        if (data.nuevo_aprendizaje && fromIdStr) {
+          const appendedContext = userContext ? `${userContext}\n- ${data.nuevo_aprendizaje}` : `- ${data.nuevo_aprendizaje}`;
+          await supabase.from('telegram_users_memory').upsert({
+            user_id: fromIdStr,
+            first_name: update.message.from?.first_name || '',
+            username: update.message.from?.username || '',
+            general_context: appendedContext,
+            updated_at: new Date().toISOString()
+          }, { onConflict: 'user_id' });
+          console.log(`[K&T Bot] Nuevo aprendizaje guardado para ${fromIdStr}: ${data.nuevo_aprendizaje}`);
+        }
 
         if (data.intent === 'cotizacion') {
           const replyMarkup = { inline_keyboard: [[ { text: '✅ Generar Texto', callback_data: `GEN_COT` }, { text: '❌ Cancelar', callback_data: 'CANCEL' } ]] };
@@ -423,7 +234,12 @@ export async function POST(req: Request) {
           await sendMessage(chatId, msgText, replyMarkup);
 
         } else if (data.intent === 'finanza_buscar_eliminar') {
-          const { data: records, error } = await supabase.from('kt_finanzas').select('*').order('id', { ascending: false }).limit(5);
+          const { data: records, error } = await supabase
+            .from('kt_finanzas')
+            .select('*')
+            .in('tipo', ['ingreso', 'gasto'])
+            .order('id', { ascending: false })
+            .limit(5);
           if (error) {
              await sendMessage(chatId, `❌ Error consultando para eliminar: ${error.message}`);
           } else if (!records || records.length === 0) {
@@ -440,7 +256,10 @@ export async function POST(req: Request) {
           }
 
         } else if (data.intent === 'finanza_resumen') {
-          const { data: records, error } = await supabase.from('kt_finanzas').select('*');
+          const { data: records, error } = await supabase
+            .from('kt_finanzas')
+            .select('*')
+            .in('tipo', ['ingreso', 'gasto']);
           if (error) {
             await sendMessage(chatId, `❌ Error consultando balance: ${error.message}`);
           } else {
@@ -489,6 +308,74 @@ export async function POST(req: Request) {
           await sendMessage(chatId, `🤖 ${data.respuesta}`);
         } else {
           await sendMessage(chatId, '🤷‍♂️ Disculpa jefe, hubo una confusión en mi circuito. Reformula por favor.');
+        }
+      }
+    }
+
+    // 5.4.1. FLUJO DE IMÁGENES (FACTURAS, COTIZACIONES, COMPROBANTES)
+    if (
+      update.message
+      && (
+        (update.message.photo && update.message.photo.length > 0)
+        || (update.message.document && update.message.document.mime_type?.startsWith('image/'))
+      )
+    ) {
+      const caption = update.message.caption?.trim() || '';
+      const photoFileId = update.message.photo?.[update.message.photo.length - 1]?.file_id;
+      const documentFileId = update.message.document?.file_id;
+      const fileId = photoFileId || documentFileId;
+
+      if (!fileId) {
+        await sendMessage(chatId, '❌ No pude obtener el archivo de imagen para analizar.');
+      } else {
+        await sendMessage(chatId, '🖼️ <i>Analizando imagen con IA...</i>');
+
+        try {
+          const { buffer, mimeType } = await fetchTelegramFileBuffer(fileId);
+          const analysis = await analyzeImageWithGemini(buffer, mimeType, caption);
+
+          const intent = String(analysis.intent || 'desconocido').toLowerCase();
+          const cliente = String(analysis.cliente || 'Cliente').trim();
+          const servicio = String(analysis.servicio || analysis.concepto || caption || 'Servicio por validar').trim();
+          const monto = normalizeAmount(analysis.monto);
+          const tipoDetectado = String(analysis.tipo || 'desconocido').toLowerCase();
+
+          if (intent === 'cotizacion') {
+            const replyMarkup = { inline_keyboard: [[{ text: '✅ Generar Texto', callback_data: 'GEN_COT' }, { text: '❌ Cancelar', callback_data: 'CANCEL' }]] };
+            const msgText = `🧾 <b>Detecté una cotización desde imagen</b>\n\n👤 <b>Cliente:</b> ${escapeHtml(cliente)}\n🛠 <b>Servicio:</b> ${escapeHtml(servicio)}\n💰 <b>Valor:</b> $${monto.toLocaleString('es-CO')}\n\n¿Deseas generarla en texto final?`;
+            await sendMessage(chatId, msgText, replyMarkup);
+          } else if (intent === 'cuenta_cobro') {
+            const replyMarkup = { inline_keyboard: [[{ text: '✅ Generar Cobro Escrito', callback_data: 'GEN_CUE' }, { text: '❌ Cancelar', callback_data: 'CANCEL' }]] };
+            const msgText = `📄 <b>Detecté una cuenta de cobro desde imagen</b>\n\n👤 <b>Facturar a:</b> ${escapeHtml(cliente)}\n📌 <b>Detalle:</b> ${escapeHtml(servicio)}\n💰 <b>Valor:</b> $${monto.toLocaleString('es-CO')}\n\n¿Procedo a crear la cuenta de cobro final?`;
+            await sendMessage(chatId, msgText, replyMarkup);
+          } else if ((intent === 'finanza_registro' || tipoDetectado === 'ingreso' || tipoDetectado === 'gasto') && isValidFinanceBaseType(tipoDetectado)) {
+            const concepto = String(analysis.concepto || caption || 'Movimiento detectado desde imagen').trim();
+            const savedPending = await savePendingFinanceSuggestion({
+              tipo: tipoDetectado,
+              monto,
+              concepto,
+              origen: 'IMAGEN',
+            });
+
+            const tipoLabel = tipoDetectado === 'ingreso' ? 'Ingreso' : 'Gasto';
+            const replyMarkup = {
+              inline_keyboard: [[
+                { text: '✅ Guardar movimiento', callback_data: `CONFIRM_PEND_${savedPending.id}` },
+                { text: '🗑️ Descartar', callback_data: `DISMISS_PEND_${savedPending.id}` },
+              ]],
+            };
+
+            await sendMessage(
+              chatId,
+              `🧠 <b>Registro detectado desde imagen</b>\n\n<b>Tipo sugerido:</b> ${tipoLabel}\n<b>Monto:</b> $${monto.toLocaleString('es-CO')}\n<b>Concepto:</b> ${escapeHtml(concepto)}\n\n¿Deseas guardarlo en finanzas?`,
+              replyMarkup,
+            );
+          } else {
+            await sendMessage(chatId, `🤔 Analicé la imagen pero no pude clasificarla con seguridad.\n\nResumen IA: ${analysis.resumen || 'Sin resumen útil.'}\n\nPuedes escribirme manualmente el registro o reenviar la imagen con una descripción.`);
+          }
+        } catch (imageError) {
+          console.error('[K&T Bot] Error analizando imagen:', imageError);
+          await sendMessage(chatId, '❌ Ocurrió un error procesando la imagen. Intenta de nuevo con una foto más nítida.');
         }
       }
     }
@@ -720,6 +607,63 @@ export async function POST(req: Request) {
            await sendMessage(chatId, '❌ No pude extraer los datos del mensaje para guardarlos.');
            alertText = 'Error extrayendo datos';
         }
+      } else if (callbackData?.startsWith('CONFIRM_PEND_')) {
+        const pendingId = callbackData.replace('CONFIRM_PEND_', '');
+        const { data: pendingRecord, error: pendingError } = await supabase
+          .from('kt_finanzas')
+          .select('id,tipo,monto,concepto')
+          .eq('id', pendingId)
+          .maybeSingle();
+
+        if (pendingError || !pendingRecord) {
+          await sendMessage(chatId, '❌ No encontré ese pendiente. Puede que ya se haya procesado.');
+          alertText = 'Pendiente no encontrado';
+        } else {
+          const mappedType: FinanceBaseType | null = pendingRecord.tipo === 'pendiente_ingreso'
+            ? 'ingreso'
+            : pendingRecord.tipo === 'pendiente_gasto'
+              ? 'gasto'
+              : null;
+
+          if (!mappedType) {
+            await sendMessage(chatId, '⚠️ Ese registro no corresponde a un pendiente de ingreso/gasto.');
+            alertText = 'Tipo inválido';
+          } else {
+            const conceptoLimpio = stripPendingMarkers(String(pendingRecord.concepto || 'Movimiento confirmado')) || 'Movimiento confirmado';
+            const { error: updateError } = await supabase
+              .from('kt_finanzas')
+              .update({ tipo: mappedType, concepto: conceptoLimpio })
+              .eq('id', pendingId);
+
+            if (updateError) {
+              await sendMessage(chatId, `❌ No pude confirmar el pendiente: ${updateError.message}`);
+              alertText = 'Error confirmando';
+            } else {
+              const tipoLabel = mappedType === 'ingreso' ? 'Ingreso' : 'Gasto';
+              const montoLabel = Number(pendingRecord.monto || 0).toLocaleString('es-CO');
+              await sendMessage(chatId, `✅ <b>Pendiente confirmado y guardado.</b>\n\n<b>Tipo:</b> ${tipoLabel}\n<b>Monto:</b> $${montoLabel}\n<b>Concepto:</b> ${escapeHtml(conceptoLimpio)}`);
+              alertText = 'Pendiente guardado';
+            }
+          }
+        }
+      } else if (callbackData?.startsWith('DISMISS_PEND_')) {
+        const pendingId = callbackData.replace('DISMISS_PEND_', '');
+        const { data: pendingRecord } = await supabase
+          .from('kt_finanzas')
+          .select('concepto,monto,tipo')
+          .eq('id', pendingId)
+          .maybeSingle();
+
+        const { error: deleteError } = await supabase.from('kt_finanzas').delete().eq('id', pendingId);
+        if (deleteError) {
+          await sendMessage(chatId, `❌ No pude descartar ese pendiente: ${deleteError.message}`);
+          alertText = 'Error descartando';
+        } else {
+          const concepto = escapeHtml(stripPendingMarkers(String(pendingRecord?.concepto || 'Sugerencia')));
+          const monto = Number(pendingRecord?.monto || 0).toLocaleString('es-CO');
+          await sendMessage(chatId, `🗑️ <b>Pendiente descartado.</b>\n\n<b>Monto:</b> $${monto}\n<b>Concepto:</b> ${concepto}`);
+          alertText = 'Pendiente descartado';
+        }
       } else if (callbackData?.startsWith('DEL_FIN_')) {
         const recordId = callbackData.replace('DEL_FIN_', '');
         const { data: record, error: fetchError } = await supabase
@@ -735,7 +679,7 @@ export async function POST(req: Request) {
           const tipoLabel = record.tipo === 'ingreso' ? 'Ingreso' : record.tipo === 'gasto' ? 'Gasto' : 'Movimiento';
           const montoLabel = Number(record.monto || 0).toLocaleString('es-CO');
           const fecha = record.fecha ? new Date(record.fecha).toLocaleString('es-CO') : 'Sin fecha';
-          const concepto = String(record.concepto || 'Sin concepto');
+          const concepto = escapeHtml(String(record.concepto || 'Sin concepto'));
           const replyMarkup = {
             inline_keyboard: [[
               { text: '☠️ Sí, eliminar', callback_data: `CONFIRM_DEL_${recordId}` },
@@ -766,13 +710,17 @@ export async function POST(req: Request) {
         } else {
            const tipoLabel = recordBeforeDelete?.tipo === 'ingreso' ? 'Ingreso' : recordBeforeDelete?.tipo === 'gasto' ? 'Gasto' : 'Movimiento';
            const montoLabel = Number(recordBeforeDelete?.monto || 0).toLocaleString('es-CO');
-           const concepto = String(recordBeforeDelete?.concepto || 'Registro financiero');
+            const concepto = escapeHtml(String(recordBeforeDelete?.concepto || 'Registro financiero'));
            await sendMessage(chatId, `🗑️ <b>Registro eliminado correctamente.</b>\n\n<b>Tipo:</b> ${tipoLabel}\n<b>Monto:</b> $${montoLabel}\n<b>Concepto:</b> ${concepto}`);
            alertText = 'Eliminado';
         }
       } else if (callbackData === 'EXPORT_FIN_XLSX') {
         await sendMessage(chatId, '⏳ Generando Excel financiero con distribución de columnas...');
-        const { data: records, error } = await supabase.from('kt_finanzas').select('*').order('fecha', { ascending: false });
+        const { data: records, error } = await supabase
+          .from('kt_finanzas')
+          .select('*')
+          .in('tipo', ['ingreso', 'gasto'])
+          .order('fecha', { ascending: false });
 
         if (error) {
           await sendMessage(chatId, `❌ No pude exportar el Excel: ${error.message}`);
