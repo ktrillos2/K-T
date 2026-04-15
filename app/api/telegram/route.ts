@@ -248,13 +248,13 @@ export async function POST(req: Request) {
         const data = await analyzeTelegramMessage(text);
 
         if (data.intent === 'cotizacion') {
-          const replyMarkup = { inline_keyboard: [[ { text: '✅ Generar PDF', callback_data: `GEN_COT` }, { text: '❌ Cancelar', callback_data: 'CANCEL' } ]] };
-          const msgText = `${data.respuesta}\n\n👤 <b>Cliente:</b> ${data.cliente}\n🛠 <b>Servicio:</b> ${data.servicio}\n💰 <b>Valor:</b> $${(data.valor || 0).toLocaleString('es-CO')}\n\n¿Deseas imprimir PDF?`;
+          const replyMarkup = { inline_keyboard: [[ { text: '✅ Generar Texto', callback_data: `GEN_COT` }, { text: '❌ Cancelar', callback_data: 'CANCEL' } ]] };
+          const msgText = `${data.respuesta}\n\n👤 <b>Cliente:</b> ${data.cliente}\n🛠 <b>Servicio:</b> ${data.servicio}\n💰 <b>Valor:</b> $${(data.valor || 0).toLocaleString('es-CO')}\n\n¿Deseas enviar la cotización en texto?`;
           await sendMessage(chatId, msgText, replyMarkup);
 
         } else if (data.intent === 'cuenta_cobro') {
-          const replyMarkup = { inline_keyboard: [[ { text: '✅ Generar PDF de Cobro', callback_data: `GEN_CUE` }, { text: '❌ Cancelar', callback_data: 'CANCEL' } ]] };
-          const msgText = `${data.respuesta}\n\n👤 <b>Facturar a:</b> ${data.cliente}\n📌 <b>Detalle:</b> ${data.servicio}\n💰 <b>Valor:</b> $${(data.valor || 0).toLocaleString('es-CO')}\n\n¿Procedo a crear PDF?`;
+          const replyMarkup = { inline_keyboard: [[ { text: '✅ Generar Cobro Escrito', callback_data: `GEN_CUE` }, { text: '❌ Cancelar', callback_data: 'CANCEL' } ]] };
+          const msgText = `${data.respuesta}\n\n👤 <b>Facturar a:</b> ${data.cliente}\n📌 <b>Detalle:</b> ${data.servicio}\n💰 <b>Valor:</b> $${(data.valor || 0).toLocaleString('es-CO')}\n\n¿Procedo a crear la cuenta de cobro en texto?`;
           await sendMessage(chatId, msgText, replyMarkup);
 
         } else if (data.intent === 'finanza_registro') {
@@ -310,7 +310,7 @@ export async function POST(req: Request) {
 
       if (callbackData?.startsWith('GEN_COT') || callbackData?.startsWith('GEN_CUE')) {
         const esCuenta = callbackData.startsWith('GEN_CUE');
-        await sendMessage(chatId, `⏳ Imprimiendo PDF jefe... \n<i>Inyectando estándares K&T... Esto toma sus segundos según Vercel.</i>`);
+        await sendMessage(chatId, `⏳ Procesando cotización jefe... \n<i>Inyectando estándares K&T...</i>`);
         
         // 1. Extraer los datos del texto del mensaje original
         const originalText = update.callback_query.message?.text || '';
@@ -322,49 +322,28 @@ export async function POST(req: Request) {
         const servicio = servicioMatch ? servicioMatch[1].trim() : 'Servicio Web';
         const valor = valorMatch ? valorMatch[1].replace(/,/g, '').trim() : '0';
 
-        // 2. Llamar a la propia API de Puppeteer (asegurándonos de usar el secret)
+        // 2. Generar el texto y enviar a Telegram directamente
         try {
-          const host = req.headers.get('host') || 'localhost:3000';
-          const protocol = host.includes('localhost') ? 'http' : 'https';
+          const tipoTexto = esCuenta ? 'CUENTA DE COBRO' : 'COTIZACIÓN K&T';
+          const tituloCliente = esCuenta ? 'Facturar a' : 'Cliente';
           
-          const pdfResponse = await fetch(`${protocol}://${host}/api/generate-pdf`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'x-telegram-bot-api-secret-token': env.TELEGRAM_WEBHOOK_SECRET
-            },
-            body: JSON.stringify({
-              tipo: esCuenta ? 'cuenta' : 'cotizacion',
-              cliente,
-              servicio,
-              valor
-            })
-          });
+          const fecha = new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
+          
+          const textoEscrito = `📄 <b>${tipoTexto}</b> 📄\n\n` +
+            `🗓 <b>Fecha:</b> ${fecha}\n` +
+            `👤 <b>${tituloCliente}:</b> ${cliente}\n` +
+            `🛠 <b>Detalle:</b> ${servicio}\n\n` +
+            `💰 <b>TOTAL:</b> $${Number(valor).toLocaleString('es-CO')}\n\n` +
+            `—\n<i>K&T Agency - Innovación y Desarrollo</i>\n` +
+            `✅ <i>Generado y aprobado exitosamente. ¡A facturar se dijo jefe!</i>`;
 
-          if (!pdfResponse.ok) {
-            throw new Error(`Error en Puppeteer: ${pdfResponse.status} ${await pdfResponse.text()}`);
-          }
+          await sendMessage(chatId, textoEscrito);
 
-          const pdfBuffer = await pdfResponse.arrayBuffer();
-
-          // 3. Enviar el Documento(Buffer) por Telegram Form Data
-          const formData = new FormData();
-          formData.append('chat_id', chatId.toString());
-          const blob = new Blob([pdfBuffer], { type: 'application/pdf' });
-          const nombreArchivo = esCuenta ? `Cuenta_Cobro_${cliente}` : `Cotizacion_${cliente}`;
-          formData.append('document', blob, `${nombreArchivo.replace(/\s+/g, '_')}.pdf`);
-          formData.append('caption', '✅ Creado y timbrado. ¡A facturar se dijo!');
-
-          await fetch(`${TELEGRAM_API_URL}/sendDocument`, {
-            method: 'POST',
-            body: formData
-          });
-
-          alertText = 'PDF Generado y Enviado!';
-        } catch (pdfErr) {
-          console.error('[Telegram API] Error conectando a generate-pdf:', pdfErr);
-          await sendMessage(chatId, '❌ Hubo un error procesando el PDF en Vercel. Intenta de nuevo.');
-          alertText = 'Error en PDF';
+          alertText = '✅ Cotización enviada en texto';
+        } catch (err) {
+          console.error('[Telegram API] Error enviando cotización en texto:', err);
+          await sendMessage(chatId, '❌ Hubo un error enviando la cotización. Intenta de nuevo.');
+          alertText = 'Error en Cotización';
         }
       } else if (callbackData === 'CONFIRM_FIN') {
         await sendMessage(chatId, `⏳ Guardando...`);
