@@ -951,6 +951,90 @@ export async function POST(req: Request) {
           const msgText = `🧩 <b>Propuesta de Nueva Columna (kt_finanzas)</b>\n\n<b>Columna propuesta:</b> ${columna}\n<b>Tipo SQL sugerido:</b> ${tipoSql}\n<b>Motivo:</b> ${motivo}\n\n⚠️ <i>No haré ningún cambio estructural sin tu aprobación explícita.</i>\n\n¿Autorizas preparar el SQL para crear esta columna?`;
           await sendMessage(chatId, msgText, replyMarkup);
 
+        } else if (data.intent === 'finanza_estadisticas') {
+          await sendMessage(chatId, '📊 <i>Calculando mejoras y estadísticas de este mes vs mes pasado...</i>');
+          
+          const today = new Date();
+          const startOfThisMonth = new Date(today.getFullYear(), today.getMonth(), 1).toISOString();
+          const startOfLastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1).toISOString();
+          const endOfLastMonth = new Date(today.getFullYear(), today.getMonth(), 0, 23, 59, 59).toISOString();
+
+          const { data: thisMonthData } = await supabase.from('kt_finanzas')
+             .select('monto').eq('tipo', 'ingreso').gte('fecha', startOfThisMonth);
+          const { data: lastMonthData } = await supabase.from('kt_finanzas')
+             .select('monto').eq('tipo', 'ingreso').gte('fecha', startOfLastMonth).lte('fecha', endOfLastMonth);
+
+          const totalThisMonth = (thisMonthData || []).reduce((acc, row) => acc + (row.monto||0), 0);
+          const totalLastMonth = (lastMonthData || []).reduce((acc, row) => acc + (row.monto||0), 0);
+
+          let porcentaje = 0;
+          if (totalLastMonth > 0) {
+            porcentaje = ((totalThisMonth - totalLastMonth) / totalLastMonth) * 100;
+          } else if (totalThisMonth > 0) {
+            porcentaje = 100;
+          }
+
+          const txtE = `📈 <b>Resumen de Rendimiento</b>\n\n💰 <b>Ingresos Mes Pasado:</b> $${totalLastMonth.toLocaleString('es-CO')}\n💰 <b>Ingresos Mes Actual:</b> $${totalThisMonth.toLocaleString('es-CO')}\n\n${porcentaje >= 0 ? '🚀 <b>Crecimiento:</b> +' : '📉 <b>Descenso:</b> '}${porcentaje.toFixed(2)}%`;
+          await sendMessage(chatId, txtE);
+
+        } else if (data.intent === 'db_creacion') {
+          const replyMarkup = {
+            inline_keyboard: [
+              [
+                { text: '✅ Autorizar Ejecución SQL', callback_data: `EXEC_SQL` },
+                { text: '❌ Cancelar', callback_data: 'CANCEL' }
+              ]
+            ]
+          };
+          const safeSql = (data.sql_query || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          const msgText = `⚠️ <b>SOLICITUD DE DDL / NUEVA TABLA</b>\n\n<b>Motivo:</b> ${data.motivo}\n<b>SQL Generado:</b>\n<pre>${safeSql}</pre>\n\n¿Deseas autorizar esta alteración estructurada en Base de Datos?`;
+          
+          await supabase.from('kt_pendientes').insert({
+            tipo: 'db_creacion',
+            monto: 0,
+            concepto: `${safeSql}`,
+            estado: 'pendiente'
+          });
+          await sendMessage(chatId, msgText, replyMarkup);
+
+        } else if (data.intent === 'empleado_pago') {
+          const actualUserId = update.message?.from?.id.toString() || '';
+          if (actualUserId !== '8378831437') {
+             await sendMessage(chatId, '❌ <b>Acceso Denegado:</b> Solo Keyner puede registrar o modificar deudas y pagos de empleados.');
+          } else {
+            const replyMarkup = { inline_keyboard: [[ { text: '✅ Registrar Adelanto/Deuda', callback_data: `CONFIRM_EMP` }, { text: '❌ Cancelar', callback_data: 'CANCEL' } ]] };
+            const msgText = `👷🏻‍♀️ <b>Gestión de Nómina / Proyectos</b>\n\n<b>Empleado:</b> ${data.empleado}\n<b>Proyecto:</b> ${data.proyecto}\n💰 <b>Monto Total Proyecto:</b> $${(data.monto_total || 0).toLocaleString('es-CO')}\n💵 <b>Monto Pagado a empleado:</b> $${(data.monto_pagado || 0).toLocaleString('es-CO')}\n⚠️ <b>Pendiente de Pago:</b> $${(data.monto_pendiente || 0).toLocaleString('es-CO')}\n\n¿Deseas registrar/actualizar este saldo para el empleado?`;
+            
+            await supabase.from('kt_pendientes').insert({
+              tipo: 'empleado_pago',
+              monto: data.monto_pagado || 0,
+              concepto: JSON.stringify({ empleado: data.empleado, proyecto: data.proyecto, total: data.monto_total, pagado: data.monto_pagado, pendiente: data.monto_pendiente }),
+              estado: 'pendiente'
+            });
+            await sendMessage(chatId, msgText, replyMarkup);
+          }
+
+        } else if (data.intent === 'empleado_estado') {
+          await sendMessage(chatId, '👷🏻 Buscando estado de empleados y deudas operativas...');
+          let query = supabase.from('kt_empleados_pagos').select('*').gt('monto_pendiente', 0);
+          if (data.empleado && data.empleado.toLowerCase() !== 'todos') {
+             query = query.ilike('empleado', `%${data.empleado}%`);
+          }
+          
+          const { data: empl, error } = await query;
+          if (error || !empl || empl.length === 0) {
+            await sendMessage(chatId, '✅ Nadie tiene deudas pendientes ahora mismo (o no encontré registros de ese empleado).');
+          } else {
+            let msg = `⚠️ <b>Deudas Operativas Vigentes:</b>\n\n`;
+            let gran_total = 0;
+            for (const r of empl) {
+               msg += `👤 <b>${r.empleado}</b> - <i>${r.proyecto}</i>\n   Pendiente: <b>$${Number(r.monto_pendiente).toLocaleString('es-CO')}</b> (Pagado: $${Number(r.monto_pagado).toLocaleString('es-CO')})\n\n`;
+               gran_total += Number(r.monto_pendiente);
+            }
+            msg += `💸 <b>Gran Total Deuda Acumulada: $${gran_total.toLocaleString('es-CO')}</b>`;
+            await sendMessage(chatId, msg);
+          }
+
         } else if (data.intent === 'chat') {
           // Simplemente respondemos lo que Groq determinó amistosamente
           await sendMessage(chatId, `🤖 ${data.respuesta}`);
@@ -1248,6 +1332,12 @@ export async function POST(req: Request) {
           } catch(e) { console.error(e); }
         }
       } else if (callbackData === 'CONFIRM_EMP') {
+        const actualUserId = update.callback_query.from.id.toString();
+        if (actualUserId !== '8378831437') {
+           await sendMessage(chatId, '❌ <b>Acceso Denegado:</b> Solo Keyner puede confirmar el pago de deudas operativas.');
+           await answerCallbackQuery(callbackId, 'Acceso Denegado');
+           return NextResponse.json({ success: true });
+        }
         const { data: pend, error: pendErr } = await supabase.from('kt_pendientes').select('*').eq('tipo', 'empleado_pago').eq('estado', 'pendiente').order('id', { ascending: false }).limit(1).single();
         if (pendErr || !pend) {
           await sendMessage(chatId, '❌ No encontré datos de empleado pendientes.');
