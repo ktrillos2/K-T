@@ -140,53 +140,36 @@ async function answerCallbackQuery(callbackQueryId: string, text?: string) {
 async function analyzeTelegramMessage(prompt: string) {
   try {
     const systemPrompt = `
-      Eres el asistente ejecutivo, financiero y general de la agencia digital K&T. Tu jefe (yo) está chateando contigo por Telegram.
-      Debes ser muy amigable, dar respuestas cortas (para ahorrar tokens) directas y útiles.
-      Puedes opinar sobre inversiones, responder preguntas y manejar finanzas o documentos.
+      Eres el asistente ejecutivo, financiero y general de la agencia digital K&T (NUNCA digas K&T CODE). Tu jefe es Keyner Steban Trillos Useche, RUT: 1090384736-8, Web: www.kytcode.lat.
+      Debes ser muy amigable y humano; siempre confirma las operaciones importantes con tu jefe antes de hacerlas y da respuestas cortas (para ahorrar tokens) directas y útiles.
+
+      Al redactar cotizaciones o cuentas de cobro, debes cumplir ESTRICTAMENTE:
+      - Los precios van por defecto en pesos colombianos (COP), a menos que el jefe mencione explícitamente Dólares (USD).
+      - Separar los conceptos y los precios utilizando punto y coma (;) para que sea fácil trasladarlos, NUNCA uses "formato para convertir con tabla" o tablas Markdown complejas.
+      - Para cotizaciones: Incluir siempre que el Hosting es Vercel (garantiza velocidad/sin costo mensual de servidor). Enfocarse en desarrollo a la medida (Next.js, Tailwind), NO ofrecer WordPress a menos que se pida. El SEO Técnico siempre va incluido en la base. Mantenimiento opcional mensual por $50.000 COP ($15 USD). Pago: 50% inicial, 50% contra entrega. Garantía: 1 mes (30 días) para código, excluyendo desconfiguraciones de 3ros/límites API. Límite del proyecto: 4 a 6 semanas o se da por finalizado. Incluir advertencia sobre límites de Sanity (250k peticiones gratis, excedente base $15 USD o 60mil COP).
+      - Para Cuentas de Cobro: Pagos a nombre de Keyner Steban Trillos Useche, RUT 1090384736-8. Medios nacionales: Bancolombia Ahorros 91290318578, Nequi 3133087069. Medios Internacionales: DolarApp (recomendado para baja comisión).
       
-      Debes devolver SIEMPRE un único JSON estructurado, seleccionando el intent más adecuado.
+      Debes devolver SIEMPRE un único JSON estructurado seleccionando el intent más adecuado.
 
       1. Si el usuario pide generar una COTIZACIÓN:
-      {
-        "intent": "cotizacion",
-        "respuesta": "Claro jefe, he extraído los datos para la cotización.",
-        "cliente": "Nombre",
-        "valor": 0,
-        "servicio": "Resumen"
-      }
+      { "intent": "cotizacion", "respuesta": "Claro jefe, he preparado los datos de la cotización. Revísalos antes de mandarlos al PDF:", "cliente": "Nombre", "valor": 0, "servicio": "Resumen técnico; Hosting en Vercel; SEO Técnico; Límite de Sanity..." }
       
-      2. Si el usuario pide generar una CUENTA DE COBRO:
-      {
-        "intent": "cuenta_cobro",
-        "respuesta": "Listo, datos extraídos para la cuenta de cobro.",
-        "cliente": "Nombre",
-        "valor": 0,
-        "servicio": "Detalle del cobro"
-      }
+      2. Si pide generar CUENTA DE COBRO:
+      { "intent": "cuenta_cobro", "respuesta": "Excelente, aquí tienes el desglose para cobrar. Confírmame.", "cliente": "Nombre", "valor": 0, "servicio": "Detalle del cobro" }
 
-      3. Si el usuario reporta un INGRESO o GASTO (detecta si es pago del 50% de inicio/fin de proyecto, inclúyelo en el concepto):
-      {
-        "intent": "finanza_registro",
-        "respuesta": "Anotado en nuestros libros de finanzas.",
-        "tipo": "ingreso" | "gasto", 
-        "monto": 0,
-        "concepto": "Motivo del pago (ej: 50% inicial proyecto X)"
-      }
+      3. Si el usuario reporta un INGRESO o GASTO:
+      { "intent": "finanza_registro", "respuesta": "¿Estás de acuerdo en registrar esto en los libros jefe?", "tipo": "ingreso" o "gasto", "monto": 0, "concepto": "Motivo del pago" }
 
-      4. Si el usuario pregunta por el ESTADO de las finanzas, dinero total, balances o reportes:
-      {
-        "intent": "finanza_resumen",
-        "respuesta": "Entendido, consultando base de datos..."
-      }
+      4. Si el usuario pregunta por ESTADO financiero, resumen o balances:
+      { "intent": "finanza_resumen", "respuesta": "Entendido jefe, aquí tienes tus números:" }
 
-      5. Para TODO lo demás (charlas normales, preguntas de inversión, consejos):
-      {
-        "intent": "chat",
-        "respuesta": "Tu respuesta amistosa, directa y analítica aquí."
-      }
+      5. Si el usuario pide ELIMINAR O BORRAR un registro financiero (por monto o concepto):
+      { "intent": "finanza_buscar_eliminar", "respuesta": "Buscando esos registros para eliminar...", "busqueda": "Monto o palabra clave a buscar" }
 
-      Recuerda: Los campos valor/monto DEBEN ser numéricos. NUNCA respondas con texto fuera del JSON.
-    `;
+      6. Chatter general, inversión:
+      { "intent": "chat", "respuesta": "Tu respuesta amistosa." }
+`;
+
 
     const chatCompletion = await groq.chat.completions.create({
       messages: [{ role: "system", content: systemPrompt }, { role: "user", content: prompt }],
@@ -274,13 +257,21 @@ export async function POST(req: Request) {
           await sendMessage(chatId, msgText, replyMarkup);
 
         } else if (data.intent === 'finanza_registro') {
-          const { error: dbError } = await supabase.from('kt_finanzas').insert([{ tipo: data.tipo, monto: data.monto, concepto: data.concepto, fecha: new Date().toISOString() }]);
+          const emoji = data.tipo === 'ingreso' ? '📈' : '📉';
+          const replyMarkup = { inline_keyboard: [[ { text: '✅ Guardar Registro', callback_data: `CONFIRM_FIN` }, { text: '❌ Cancelar', callback_data: 'CANCEL' } ]] };
+          const msgText = `${emoji} <b>Confirma el Registro Financiero</b>\n\n<b>Movimiento:</b> ${data.tipo.toUpperCase()}\n<b>Monto:</b> $${(data.monto || 0).toLocaleString('es-CO')}\n<b>Nota:</b> ${data.concepto}\n\n<i>${data.respuesta}</i>`;
+          await sendMessage(chatId, msgText, replyMarkup);
 
-          if (dbError) {
-            await sendMessage(chatId, `❌ Jefe, falló Supabase: ${dbError.message}`);
+        } else if (data.intent === 'finanza_buscar_eliminar') {
+          const { data: records, error } = await supabase.from('kt_finanzas').select('*').order('id', { ascending: false }).limit(5);
+          if (error) {
+             await sendMessage(chatId, `❌ Error consultando para eliminar: ${error.message}`);
+          } else if (!records || records.length === 0) {
+             await sendMessage(chatId, '📭 No encontré registros recientes para eliminar, jefe.');
           } else {
-            const emoji = data.tipo === 'ingreso' ? '📈' : '📉';
-            await sendMessage(chatId, `${emoji} <b>¡Registrado!</b>\n<b>Movimiento:</b> ${data.tipo.toUpperCase()}\n<b>Monto:</b> $${data.monto.toLocaleString('es-CO')}\n<b>Nota:</b> ${data.concepto}\n\n<i>${data.respuesta}</i>`);
+             const inline_keyboard = records.map(r => ([{ text: `🗑️ $${r.monto.toLocaleString('es-CO')} - ${r.concepto.substring(0, 20)}`, callback_data: `DEL_FIN_${r.id}` }]));
+             inline_keyboard.push([{ text: '❌ Cancelar', callback_data: 'CANCEL' }]);
+             await sendMessage(chatId, `🔍 <b>${data.respuesta}</b>\nAquí están los últimos 5 registros. Selecciona cuál eliminar:`, { inline_keyboard });
           }
 
         } else if (data.intent === 'finanza_resumen') {
@@ -374,8 +365,48 @@ export async function POST(req: Request) {
           await sendMessage(chatId, '❌ Hubo un error procesando el PDF en Vercel. Intenta de nuevo.');
           alertText = 'Error en PDF';
         }
+      } else if (callbackData === 'CONFIRM_FIN') {
+        await sendMessage(chatId, `⏳ Guardando...`);
+        const originalText = update.callback_query.message?.text || '';
+        const tipoMatch = originalText.match(/Movimiento:\s*([A-Z]+)/);
+        const montoMatch = originalText.match(/Monto:\s*\$([0-9,.]+)/);
+        const conceptoMatch = originalText.match(/Nota:\s*([^\n]+)/);
+
+        if (tipoMatch && montoMatch && conceptoMatch) {
+          const tipo = tipoMatch[1].toLowerCase();
+          const monto = parseFloat(montoMatch[1].replace(/,/g, '').replace(/\./g, '')); // Quitar formato de millares colombianos
+          const concepto = conceptoMatch[1].trim();
+
+          const { error: dbError } = await supabase.from('kt_finanzas').insert([{ tipo, monto, concepto, fecha: new Date().toISOString() }]);
+          if (dbError) {
+             await sendMessage(chatId, `❌ Jefe, falló Supabase: ${dbError.message}`);
+             alertText = 'Error en DB';
+          } else {
+             await sendMessage(chatId, `✅ <b>¡Guardado!</b> Registro de ${monto.toLocaleString('es-CO')} completado y anexado al balance.`);
+             alertText = 'Guardado';
+          }
+        } else {
+           await sendMessage(chatId, '❌ No pude extraer los datos del mensaje para guardarlos.');
+           alertText = 'Error extrayendo datos';
+        }
+      } else if (callbackData?.startsWith('DEL_FIN_')) {
+        const recordId = callbackData.replace('DEL_FIN_', '');
+        const replyMarkup = { inline_keyboard: [[ { text: '☠️ SÍ, ELIMINAR', callback_data: `CONFIRM_DEL_${recordId}` }, { text: '❌ No, conservar', callback_data: 'CANCEL' } ]] };
+        await sendMessage(chatId, `🚧 <b>Cuidado Jefe</b>\n¿Estás totalmente seguro de eliminar el registro financiero #${recordId}? Esta acción es irreversible y afectará el balance de K&T.`, replyMarkup);
+        alertText = 'Esperando confirmación';
+      } else if (callbackData?.startsWith('CONFIRM_DEL_')) {
+        const recordId = callbackData.replace('CONFIRM_DEL_', '');
+        await sendMessage(chatId, `⏳ Eliminando...`);
+        const { error: dbError } = await supabase.from('kt_finanzas').delete().eq('id', recordId);
+        if (dbError) {
+           await sendMessage(chatId, `❌ Error eliminando en Supabase: ${dbError.message}`);
+           alertText = 'Error en DB';
+        } else {
+           await sendMessage(chatId, `🗑️ <b>Registro #${recordId} Eliminado</b> exitosamente de los libros de K&T.`);
+           alertText = 'Eliminado';
+        }
       } else if (callbackData === 'CANCEL') {
-        await sendMessage(chatId, '❌ <b>Acción cancelada</b> por K&T Admin.');
+        await sendMessage(chatId, '❌ <b>Acción cancelada</b> por K&T Admin de manera segura.');
         alertText = 'Cancelado';
       }
 
