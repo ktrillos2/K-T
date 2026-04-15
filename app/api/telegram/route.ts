@@ -140,28 +140,52 @@ async function answerCallbackQuery(callbackQueryId: string, text?: string) {
 async function analyzeTelegramMessage(prompt: string) {
   try {
     const systemPrompt = `
-      Eres el asistente ejecutivo y financiero de la agencia digital K&T (Vercel, Tailwind, Next.js).
-      El usuario es tu jefe. Él te hablará para hacer UNA de dos cosas:
-      1) Pedirte que generes una cotización/documento para un cliente.
-      2) Pedirte que registres un ingreso o un gasto en las finanzas de la agencia.
+      Eres el asistente ejecutivo, financiero y general de la agencia digital K&T. Tu jefe (yo) está chateando contigo por Telegram.
+      Debes ser muy amigable, dar respuestas cortas (para ahorrar tokens) directas y útiles.
+      Puedes opinar sobre inversiones, responder preguntas y manejar finanzas o documentos.
+      
+      Debes devolver SIEMPRE un único JSON estructurado, seleccionando el intent más adecuado.
 
-      Si es una COTIZACIÓN, extrae y devuelve exactamente la siguiente estructura JSON:
+      1. Si el usuario pide generar una COTIZACIÓN:
       {
         "intent": "cotizacion",
-        "cliente": "Nombre Empresa/Persona",
+        "respuesta": "Claro jefe, he extraído los datos para la cotización.",
+        "cliente": "Nombre",
         "valor": 0,
-        "servicio": "Breve resumen del servicio web/software"
+        "servicio": "Resumen"
+      }
+      
+      2. Si el usuario pide generar una CUENTA DE COBRO:
+      {
+        "intent": "cuenta_cobro",
+        "respuesta": "Listo, datos extraídos para la cuenta de cobro.",
+        "cliente": "Nombre",
+        "valor": 0,
+        "servicio": "Detalle del cobro"
       }
 
-      Si es una FINANZA (Gasto o Ingreso), extrae y devuelve exactamente la siguiente estructura JSON:
+      3. Si el usuario reporta un INGRESO o GASTO (detecta si es pago del 50% de inicio/fin de proyecto, inclúyelo en el concepto):
       {
-        "intent": "finanza",
+        "intent": "finanza_registro",
+        "respuesta": "Anotado en nuestros libros de finanzas.",
         "tipo": "ingreso" | "gasto", 
         "monto": 0,
-        "concepto": "Descripción corta de qué fue este movimiento"
+        "concepto": "Motivo del pago (ej: 50% inicial proyecto X)"
       }
 
-      Recuerda: valor y monto deben ser NÚMEROS (sin signos, sin comas, e.g., 500000). Responde ÚNICAMENTE EN JSON válido.
+      4. Si el usuario pregunta por el ESTADO de las finanzas, dinero total, balances o reportes:
+      {
+        "intent": "finanza_resumen",
+        "respuesta": "Entendido, consultando base de datos..."
+      }
+
+      5. Para TODO lo demás (charlas normales, preguntas de inversión, consejos):
+      {
+        "intent": "chat",
+        "respuesta": "Tu respuesta amistosa, directa y analítica aquí."
+      }
+
+      Recuerda: Los campos valor/monto DEBEN ser numéricos. NUNCA respondas con texto fuera del JSON.
     `;
 
     const chatCompletion = await groq.chat.completions.create({
@@ -233,48 +257,54 @@ export async function POST(req: Request) {
     if (update.message?.text) {
       const text = update.message.text.trim();
       
-      // Solo processamos si no es comando o si es un texto normal
       if (text.startsWith('/start')) {
-        await sendMessage(chatId, 'Hola equipo K&T. Envíame datos para generar una "Cotización" o registrar un "Gasto/Ingreso" (ej: "Registra un ingreso de 500000 por pago de la web").');
+        await sendMessage(chatId, 'Hola jefe 🚀. Soy la IA administrativa de K&T. Pídeme cotizaciones, cuentas de cobro, reporta ingresos/gastos (ej: pago del 50%), o hablemos de estrategias.');
       } else {
-        await sendMessage(chatId, '🧠 Analizando mensaje con K&T AI...');
+        await sendMessage(chatId, '🧠 <i>K&T Brain trabajando...</i>');
         const data = await analyzeTelegramMessage(text);
 
         if (data.intent === 'cotizacion') {
-          // Armamos el Inline Keyboard
-          const replyMarkup = {
-            inline_keyboard: [
-              [
-                { text: '✅ Generar Documento', callback_data: `GEN_COT` },
-                { text: '❌ Cancelar', callback_data: 'CANCEL' }
-              ]
-            ]
-          };
-
-          const msgText = `🤖 <b>K&T IA Analysis (Cotización):</b>\nHe extraído los datos:\n\n👤 <b>Cliente:</b> ${data.cliente}\n🛠 <b>Servicio:</b> ${data.servicio}\n💰 <b>Valor:</b> $${data.valor}\n\n¿Deseas generar el PDF?`;
+          const replyMarkup = { inline_keyboard: [[ { text: '✅ Generar PDF', callback_data: `GEN_COT` }, { text: '❌ Cancelar', callback_data: 'CANCEL' } ]] };
+          const msgText = `${data.respuesta}\n\n👤 <b>Cliente:</b> ${data.cliente}\n🛠 <b>Servicio:</b> ${data.servicio}\n💰 <b>Valor:</b> $${(data.valor || 0).toLocaleString('es-CO')}\n\n¿Deseas imprimir PDF?`;
           await sendMessage(chatId, msgText, replyMarkup);
-        } else if (data.intent === 'finanza') {
-          // Guardar en la base de datos de Supabase, tabla "kt_finanzas"
-          const { error: dbError } = await supabase
-            .from('kt_finanzas')
-            .insert([
-              { 
-                tipo: data.tipo, 
-                monto: data.monto, 
-                concepto: data.concepto,
-                fecha: new Date().toISOString()
-              }
-            ]);
+
+        } else if (data.intent === 'cuenta_cobro') {
+          const replyMarkup = { inline_keyboard: [[ { text: '✅ Generar PDF de Cobro', callback_data: `GEN_CUE` }, { text: '❌ Cancelar', callback_data: 'CANCEL' } ]] };
+          const msgText = `${data.respuesta}\n\n👤 <b>Facturar a:</b> ${data.cliente}\n📌 <b>Detalle:</b> ${data.servicio}\n💰 <b>Valor:</b> $${(data.valor || 0).toLocaleString('es-CO')}\n\n¿Procedo a crear PDF?`;
+          await sendMessage(chatId, msgText, replyMarkup);
+
+        } else if (data.intent === 'finanza_registro') {
+          const { error: dbError } = await supabase.from('kt_finanzas').insert([{ tipo: data.tipo, monto: data.monto, concepto: data.concepto, fecha: new Date().toISOString() }]);
 
           if (dbError) {
-            console.error('[Supabase Error]:', dbError);
-            await sendMessage(chatId, `❌ Error al guardar en Supabase: ${dbError.message}`);
+            await sendMessage(chatId, `❌ Jefe, falló Supabase: ${dbError.message}`);
           } else {
             const emoji = data.tipo === 'ingreso' ? '📈' : '📉';
-            await sendMessage(chatId, `✅ <b>Finanza Registrada:</b>\n${emoji} <b>Tipo:</b> ${data.tipo.toUpperCase()}\n💸 <b>Monto:</b> $${data.monto.toLocaleString('es-CO')}\n📝 <b>Concepto:</b> ${data.concepto}`);
+            await sendMessage(chatId, `${emoji} <b>¡Registrado!</b>\n<b>Movimiento:</b> ${data.tipo.toUpperCase()}\n<b>Monto:</b> $${data.monto.toLocaleString('es-CO')}\n<b>Nota:</b> ${data.concepto}\n\n<i>${data.respuesta}</i>`);
           }
+
+        } else if (data.intent === 'finanza_resumen') {
+          const { data: records, error } = await supabase.from('kt_finanzas').select('*');
+          if (error) {
+            await sendMessage(chatId, `❌ Error consultando balance: ${error.message}`);
+          } else {
+            let ingresos = 0; let gastos = 0;
+            records?.forEach(r => {
+              if (r.tipo === 'ingreso') ingresos += Number(r.monto);
+              if (r.tipo === 'gasto') gastos += Number(r.monto);
+            });
+            const balance = ingresos - gastos;
+            const balEmoji = balance >= 0 ? '🟢' : '🔴';
+            
+            // Si estuviéramos creando gráficas sofisticadas se haría un render igual a generate-pdf
+            await sendMessage(chatId, `📊 <b>RESUMEN FINANCIERO K&T</b>\n\n📈 <b>Ingresos:</b> $${ingresos.toLocaleString('es-CO')}\n📉 <b>Gastos:</b> $${gastos.toLocaleString('es-CO')}\n${balEmoji} <b>Balance:</b> $${balance.toLocaleString('es-CO')}\n\n<i>(En el futuro podré exportarte Excels directos desde acá jefe, por ahora así están nuestros números generales).</i>`);
+          }
+
+        } else if (data.intent === 'chat') {
+          // Simplemente respondemos lo que Groq determinó amistosamente
+          await sendMessage(chatId, `🤖 ${data.respuesta}`);
         } else {
-          await sendMessage(chatId, '🤔 No entendí el mensaje. Asegúrate de pedir "Crear cotización" o "Registrar gasto/ingreso".');
+          await sendMessage(chatId, '🤷‍♂️ Disculpa jefe, hubo una confusión en mi circuito. Reformula por favor.');
         }
       }
     }
@@ -286,13 +316,14 @@ export async function POST(req: Request) {
 
       let alertText = '';
 
-      if (callbackData?.startsWith('GEN_COT')) {
-        await sendMessage(chatId, `⏳ Generando PDF de cotización... \n<i>Nota: Incluyendo directrices de K&T. Este proceso puede tardar unos segundos.</i>`);
+      if (callbackData?.startsWith('GEN_COT') || callbackData?.startsWith('GEN_CUE')) {
+        const esCuenta = callbackData.startsWith('GEN_CUE');
+        await sendMessage(chatId, `⏳ Imprimiendo PDF jefe... \n<i>Inyectando estándares K&T... Esto toma sus segundos según Vercel.</i>`);
         
         // 1. Extraer los datos del texto del mensaje original
         const originalText = update.callback_query.message?.text || '';
-        const clienteMatch = originalText.match(/Cliente:\s*(.+)/);
-        const servicioMatch = originalText.match(/Servicio:\s*(.+)/);
+        const clienteMatch = originalText.match(/(?:Cliente|Facturar a):\s*([^\n]+)/);
+        const servicioMatch = originalText.match(/(?:Servicio|Detalle):\s*([^\n]+)/);
         const valorMatch = originalText.match(/Valor:\s*\$([0-9,.]+)/);
 
         const cliente = clienteMatch ? clienteMatch[1].trim() : 'Cliente';
@@ -311,7 +342,7 @@ export async function POST(req: Request) {
               'x-telegram-bot-api-secret-token': env.TELEGRAM_WEBHOOK_SECRET
             },
             body: JSON.stringify({
-              tipo: 'cotizacion',
+              tipo: esCuenta ? 'cuenta' : 'cotizacion',
               cliente,
               servicio,
               valor
@@ -319,7 +350,7 @@ export async function POST(req: Request) {
           });
 
           if (!pdfResponse.ok) {
-            throw new Error(`Error desde PDF API: ${pdfResponse.status}`);
+            throw new Error(`Error en Puppeteer: ${pdfResponse.status} ${await pdfResponse.text()}`);
           }
 
           const pdfBuffer = await pdfResponse.arrayBuffer();
@@ -328,8 +359,9 @@ export async function POST(req: Request) {
           const formData = new FormData();
           formData.append('chat_id', chatId.toString());
           const blob = new Blob([pdfBuffer], { type: 'application/pdf' });
-          formData.append('document', blob, `Cotizacion_KT_${cliente.replace(/\s+/g, '_')}.pdf`);
-          formData.append('caption', '✅ Aquí tienes tu archivo PDF listo y optimizado para K&T.');
+          const nombreArchivo = esCuenta ? `Cuenta_Cobro_${cliente}` : `Cotizacion_${cliente}`;
+          formData.append('document', blob, `${nombreArchivo.replace(/\s+/g, '_')}.pdf`);
+          formData.append('caption', '✅ Creado y timbrado. ¡A facturar se dijo!');
 
           await fetch(`${TELEGRAM_API_URL}/sendDocument`, {
             method: 'POST',
