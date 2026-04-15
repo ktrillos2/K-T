@@ -1,16 +1,18 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import Groq from 'groq-sdk';
+import { createClient } from '@supabase/supabase-js';
 
 // ==========================================
 // 1. VALIDACIÓN DE ENTORNO (Zod)
 // ==========================================
-// Aseguramos de que el servidor no arranque o la API falle temprano si faltan variables.
 const envSchema = z.object({
   TELEGRAM_BOT_TOKEN: z.string().min(1, 'Falta TELEGRAM_BOT_TOKEN'),
   TELEGRAM_WEBHOOK_SECRET: z.string().min(1, 'Falta TELEGRAM_WEBHOOK_SECRET'),
   ALLOWED_TELEGRAM_USER_ID: z.string().min(1, 'Falta ALLOWED_TELEGRAM_USER_ID'),
   GROQ_API_KEY: z.string().min(1, 'Falta GROQ_API_KEY'),
+  NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
+  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1, 'Falta Service Role de Supabase'),
 });
 
 const env = envSchema.parse({
@@ -18,9 +20,12 @@ const env = envSchema.parse({
   TELEGRAM_WEBHOOK_SECRET: process.env.TELEGRAM_WEBHOOK_SECRET,
   ALLOWED_TELEGRAM_USER_ID: process.env.ALLOWED_TELEGRAM_USER_ID,
   GROQ_API_KEY: process.env.GROQ_API_KEY,
+  NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+  SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
 });
 
 const groq = new Groq({ apiKey: env.GROQ_API_KEY });
+const supabase = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY);
 
 const TELEGRAM_API_URL = `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}`;
 
@@ -132,41 +137,45 @@ async function answerCallbackQuery(callbackQueryId: string, text?: string) {
   });
 }
 
-async function extractDataWithGroq(prompt: string) {
+async function analyzeTelegramMessage(prompt: string) {
   try {
+    const systemPrompt = `
+      Eres el asistente ejecutivo y financiero de la agencia digital K&T (Vercel, Tailwind, Next.js).
+      El usuario es tu jefe. Él te hablará para hacer UNA de dos cosas:
+      1) Pedirte que generes una cotización/documento para un cliente.
+      2) Pedirte que registres un ingreso o un gasto en las finanzas de la agencia.
+
+      Si es una COTIZACIÓN, extrae y devuelve exactamente la siguiente estructura JSON:
+      {
+        "intent": "cotizacion",
+        "cliente": "Nombre Empresa/Persona",
+        "valor": 0,
+        "servicio": "Breve resumen del servicio web/software"
+      }
+
+      Si es una FINANZA (Gasto o Ingreso), extrae y devuelve exactamente la siguiente estructura JSON:
+      {
+        "intent": "finanza",
+        "tipo": "ingreso" | "gasto", 
+        "monto": 0,
+        "concepto": "Descripción corta de qué fue este movimiento"
+      }
+
+      Recuerda: valor y monto deben ser NÚMEROS (sin signos, sin comas, e.g., 500000). Responde ÚNICAMENTE EN JSON válido.
+    `;
+
     const chatCompletion = await groq.chat.completions.create({
-      messages: [
-        {
-          role: "system",
-          content: "Eres el asistente financiero de la agencia digital K&T. Tu única tarea es extraer datos de un mensaje para generar una cotización. Responde ÚNICAMENTE con un JSON válido que contenga la siguiente estructura exacta: {\"cliente\": \"Nombre de la empresa o persona\", \"valor\": 0, \"servicio\": \"Breve descripción del servicio\"}. El valor debe ser un número entero (solo números, sin símbolos de dólar ni comas)."
-        },
-        {
-          role: "user",
-          content: prompt
-        }
-      ],
+      messages: [{ role: "system", content: systemPrompt }, { role: "user", content: prompt }],
       model: "llama-3.3-70b-versatile",
       temperature: 0,
       response_format: { type: "json_object" },
     });
 
     const responseContent = chatCompletion.choices[0]?.message?.content || "{}";
-    const data = JSON.parse(responseContent);
-
-    // Basic validation to ensure the required fields are present
-    return {
-      cliente: data.cliente || "Cliente Desconocido",
-      valor: Number(data.valor) || 0,
-      servicio: data.servicio || "Servicio no especificado"
-    };
+    return JSON.parse(responseContent);
   } catch (error) {
-    console.error("[Groq Extraction Error]:", error);
-    // Retorno por defecto para evitar que el bot de Telegram se caiga
-    return {
-      cliente: "Error en extracción (revisar manual)",
-      valor: 0,
-      servicio: "Error en extracción (revisar manual)"
-    };
+    console.error("[Groq Analysis Error]:", error);
+    return { intent: "error" };
   }
 }
 
@@ -223,29 +232,50 @@ export async function POST(req: Request) {
     // 5.4. FLUJO DE MENSAJES DE TEXTO
     if (update.message?.text) {
       const text = update.message.text.trim();
-      const lowerText = text.toLowerCase();
+      
+      // Solo processamos si no es comando o si es un texto normal
+      if (text.startsWith('/start')) {
+        await sendMessage(chatId, 'Hola equipo K&T. Envíame datos para generar una "Cotización" o registrar un "Gasto/Ingreso" (ej: "Registra un ingreso de 500000 por pago de la web").');
+      } else {
+        await sendMessage(chatId, '🧠 Analizando mensaje con K&T AI...');
+        const data = await analyzeTelegramMessage(text);
 
-      // Trigger para Cotizaciones
-      if (lowerText.startsWith('/cotizacion') || lowerText.includes('cotizar')) {
-        // Ejecutamos la IA para extraer la metadata
-        const data = await extractDataWithGroq(text);
-
-        // Armamos el Inline Keyboard
-        const replyMarkup = {
-          inline_keyboard: [
-            [
-              { text: '✅ Generar Documento', callback_data: `GEN_COT` },
-              { text: '❌ Cancelar', callback_data: 'CANCEL' }
+        if (data.intent === 'cotizacion') {
+          // Armamos el Inline Keyboard
+          const replyMarkup = {
+            inline_keyboard: [
+              [
+                { text: '✅ Generar Documento', callback_data: `GEN_COT` },
+                { text: '❌ Cancelar', callback_data: 'CANCEL' }
+              ]
             ]
-          ]
-        };
+          };
 
-        const msgText = `🤖 <b>K&T IA Analysis:</b>\nHe extraído los siguientes datos para la cotización:\n\n👤 <b>Cliente:</b> ${data.cliente}\n🛠 <b>Servicio:</b> ${data.servicio}\n💰 <b>Valor:</b> $${data.valor}\n\n¿Deseas generar el PDF de la cotización?`;
-        await sendMessage(chatId, msgText, replyMarkup);
-      } 
-      // Comandos por defecto
-      else {
-        await sendMessage(chatId, 'Hola equipo K&T. Usa el comando <code>/cotizacion [Detalles]</code> para preparar un documento.');
+          const msgText = `🤖 <b>K&T IA Analysis (Cotización):</b>\nHe extraído los datos:\n\n👤 <b>Cliente:</b> ${data.cliente}\n🛠 <b>Servicio:</b> ${data.servicio}\n💰 <b>Valor:</b> $${data.valor}\n\n¿Deseas generar el PDF?`;
+          await sendMessage(chatId, msgText, replyMarkup);
+        } else if (data.intent === 'finanza') {
+          // Guardar en la base de datos de Supabase, tabla "kt_finanzas"
+          const { error: dbError } = await supabase
+            .from('kt_finanzas')
+            .insert([
+              { 
+                tipo: data.tipo, 
+                monto: data.monto, 
+                concepto: data.concepto,
+                fecha: new Date().toISOString()
+              }
+            ]);
+
+          if (dbError) {
+            console.error('[Supabase Error]:', dbError);
+            await sendMessage(chatId, `❌ Error al guardar en Supabase: ${dbError.message}`);
+          } else {
+            const emoji = data.tipo === 'ingreso' ? '📈' : '📉';
+            await sendMessage(chatId, `✅ <b>Finanza Registrada:</b>\n${emoji} <b>Tipo:</b> ${data.tipo.toUpperCase()}\n💸 <b>Monto:</b> $${data.monto.toLocaleString('es-CO')}\n📝 <b>Concepto:</b> ${data.concepto}`);
+          }
+        } else {
+          await sendMessage(chatId, '🤔 No entendí el mensaje. Asegúrate de pedir "Crear cotización" o "Registrar gasto/ingreso".');
+        }
       }
     }
 
