@@ -27,7 +27,8 @@ const env = envSchema.parse({
 const groq = new Groq({ apiKey: env.GROQ_API_KEY });
 const supabase = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY);
 
-const TELEGRAM_API_URL = `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}`;
+const botToken = env.TELEGRAM_BOT_TOKEN.replace(/^"|"$/g, '').replace(/^'|'$/g, '');
+const TELEGRAM_API_URL = `https://api.telegram.org/bot${botToken}`;
 
 // ==========================================
 // 2. TIPOS E INTERFACES DE TELEGRAM
