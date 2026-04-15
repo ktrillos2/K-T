@@ -46,13 +46,9 @@ export const metadata: Metadata = {
   },
   description: "En K&T desarrollamos ecosistemas digitales escalables, e-commerce headless y páginas web de máximo rendimiento para potenciar tu marca, impulsados por Vercel.",
   icons: {
-    icon: [
-      { url: "/icon.png", sizes: "192x192", type: "image/png" },
-      { url: "/icon.png", sizes: "512x512", type: "image/png" },
-    ],
-    apple: [
-      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
-    ],
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   manifest: "/manifest.webmanifest",
   appleWebApp: {
@@ -119,12 +115,25 @@ export const metadata: Metadata = {
   },
 }
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": "https://www.kytcode.lat/#organization",
-  "name": "K&T Agencia Digital",
-  "alternateName": "K&T Agency",
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "K&T Agencia Digital",
+    "alternateName": "K&T Agency",
+    "url": "https://www.kytcode.lat/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.kytcode.lat/blog?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": "https://www.kytcode.lat/#organization",
+    "name": "K&T Agencia Digital",
+    "alternateName": "K&T Agency",
   "image": "https://www.kytcode.lat/images/logo.png",
   "logo": "https://www.kytcode.lat/images/logo.png",
   "url": "https://www.kytcode.lat",
@@ -205,6 +214,7 @@ const jsonLd = {
     "https://www.tiktok.com/@kytweb"
   ]
 }
+]
 
 export default function RootLayout({
   children,

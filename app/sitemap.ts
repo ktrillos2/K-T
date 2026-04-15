@@ -42,6 +42,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.9,
         },
         {
+            url: `${baseUrl}/redes`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
             url: `${baseUrl}/politicas-de-privacidad`,
             lastModified: currentDate,
             changeFrequency: 'yearly',
