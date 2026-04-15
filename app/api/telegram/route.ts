@@ -234,7 +234,7 @@ export async function POST(req: Request) {
         const replyMarkup = {
           inline_keyboard: [
             [
-              { text: '✅ Generar Documento', callback_data: `GEN_COT_${data.valor}` },
+              { text: '✅ Generar Documento', callback_data: `GEN_COT` },
               { text: '❌ Cancelar', callback_data: 'CANCEL' }
             ]
           ]
@@ -256,13 +256,62 @@ export async function POST(req: Request) {
 
       let alertText = '';
 
-      if (callbackData?.startsWith('GEN_COT_')) {
-        const valor = callbackData.replace('GEN_COT_', '');
-        await sendMessage(chatId, `⏳ Generando PDF de cotización por $${valor}...\n<i>Nota: Incluyendo directrices de K&T (Vercel, SEO, Garantía).</i>`);
+      if (callbackData?.startsWith('GEN_COT')) {
+        await sendMessage(chatId, `⏳ Generando PDF de cotización... \n<i>Nota: Incluyendo directrices de K&T. Este proceso puede tardar unos segundos.</i>`);
         
-        // Aquí llamarías a un servicio para convertir las plantillas de HTML a PDF
-        // e.g. generatePdf(getCotizacionTemplate(...))
-        alertText = 'Generando documento...';
+        // 1. Extraer los datos del texto del mensaje original
+        const originalText = update.callback_query.message?.text || '';
+        const clienteMatch = originalText.match(/Cliente:\s*(.+)/);
+        const servicioMatch = originalText.match(/Servicio:\s*(.+)/);
+        const valorMatch = originalText.match(/Valor:\s*\$([0-9,.]+)/);
+
+        const cliente = clienteMatch ? clienteMatch[1].trim() : 'Cliente';
+        const servicio = servicioMatch ? servicioMatch[1].trim() : 'Servicio Web';
+        const valor = valorMatch ? valorMatch[1].replace(/,/g, '').trim() : '0';
+
+        // 2. Llamar a la propia API de Puppeteer (asegurándonos de usar el secret)
+        try {
+          const host = req.headers.get('host') || 'localhost:3000';
+          const protocol = host.includes('localhost') ? 'http' : 'https';
+          
+          const pdfResponse = await fetch(`${protocol}://${host}/api/generate-pdf`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-telegram-bot-api-secret-token': env.TELEGRAM_WEBHOOK_SECRET
+            },
+            body: JSON.stringify({
+              tipo: 'cotizacion',
+              cliente,
+              servicio,
+              valor
+            })
+          });
+
+          if (!pdfResponse.ok) {
+            throw new Error(`Error desde PDF API: ${pdfResponse.status}`);
+          }
+
+          const pdfBuffer = await pdfResponse.arrayBuffer();
+
+          // 3. Enviar el Documento(Buffer) por Telegram Form Data
+          const formData = new FormData();
+          formData.append('chat_id', chatId.toString());
+          const blob = new Blob([pdfBuffer], { type: 'application/pdf' });
+          formData.append('document', blob, `Cotizacion_KT_${cliente.replace(/\s+/g, '_')}.pdf`);
+          formData.append('caption', '✅ Aquí tienes tu archivo PDF listo y optimizado para K&T.');
+
+          await fetch(`${TELEGRAM_API_URL}/sendDocument`, {
+            method: 'POST',
+            body: formData
+          });
+
+          alertText = 'PDF Generado y Enviado!';
+        } catch (pdfErr) {
+          console.error('[Telegram API] Error conectando a generate-pdf:', pdfErr);
+          await sendMessage(chatId, '❌ Hubo un error procesando el PDF en Vercel. Intenta de nuevo.');
+          alertText = 'Error en PDF';
+        }
       } else if (callbackData === 'CANCEL') {
         await sendMessage(chatId, '❌ <b>Acción cancelada</b> por K&T Admin.');
         alertText = 'Cancelado';
