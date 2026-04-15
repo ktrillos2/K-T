@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import Groq from 'groq-sdk';
 import { createClient } from '@supabase/supabase-js';
+import * as XLSX from 'xlsx';
 
 // ==========================================
 // 1. VALIDACIÓN DE ENTORNO (Zod)
@@ -9,7 +10,7 @@ import { createClient } from '@supabase/supabase-js';
 const envSchema = z.object({
   TELEGRAM_BOT_TOKEN: z.string().min(1, 'Falta TELEGRAM_BOT_TOKEN'),
   TELEGRAM_WEBHOOK_SECRET: z.string().min(1, 'Falta TELEGRAM_WEBHOOK_SECRET'),
-  ALLOWED_TELEGRAM_USER_ID: z.string().min(1, 'Falta ALLOWED_TELEGRAM_USER_ID'),
+  ALLOWED_TELEGRAM_USER_IDS: z.string().min(1, 'Falta ALLOWED_TELEGRAM_USER_IDS'),
   GROQ_API_KEY: z.string().min(1, 'Falta GROQ_API_KEY'),
   NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1, 'Falta Service Role de Supabase'),
@@ -18,7 +19,7 @@ const envSchema = z.object({
 const env = envSchema.parse({
   TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
   TELEGRAM_WEBHOOK_SECRET: process.env.TELEGRAM_WEBHOOK_SECRET,
-  ALLOWED_TELEGRAM_USER_ID: process.env.ALLOWED_TELEGRAM_USER_ID,
+  ALLOWED_TELEGRAM_USER_IDS: process.env.ALLOWED_TELEGRAM_USER_IDS,
   GROQ_API_KEY: process.env.GROQ_API_KEY,
   NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
   SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
@@ -127,6 +128,27 @@ async function sendMessage(chatId: number, text: string, replyMarkup?: any) {
   });
 }
 
+async function sendDocument(chatId: number, fileName: string, fileBuffer: Buffer, caption?: string) {
+  const binary = new Uint8Array(fileBuffer);
+  const formData = new FormData();
+  formData.append('chat_id', String(chatId));
+  if (caption) formData.append('caption', caption);
+  formData.append(
+    'document',
+    new Blob([
+      binary,
+    ], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    }),
+    fileName,
+  );
+
+  await fetch(`${TELEGRAM_API_URL}/sendDocument`, {
+    method: 'POST',
+    body: formData,
+  });
+}
+
 async function answerCallbackQuery(callbackQueryId: string, text?: string) {
   await fetch(`${TELEGRAM_API_URL}/answerCallbackQuery`, {
     method: 'POST',
@@ -136,6 +158,107 @@ async function answerCallbackQuery(callbackQueryId: string, text?: string) {
       text,
     }),
   });
+}
+
+function sanitizeColumnName(input: unknown): string | null {
+  if (!input || typeof input !== 'string') return null;
+  const normalized = input
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '_')
+    .replace(/[^a-z0-9_]/g, '');
+
+  if (!/^[a-z_][a-z0-9_]*$/.test(normalized)) return null;
+  return normalized;
+}
+
+function normalizeSqlType(input: unknown): string {
+  if (!input || typeof input !== 'string') return 'text';
+  const value = input.trim().toLowerCase();
+
+  const fixedAllowed = new Set([
+    'text',
+    'integer',
+    'bigint',
+    'numeric',
+    'boolean',
+    'date',
+    'timestamp',
+    'timestamptz',
+    'jsonb',
+    'uuid',
+  ]);
+
+  if (fixedAllowed.has(value)) return value;
+  if (/^varchar\((\d{1,5})\)$/.test(value)) return value;
+  if (/^numeric\((\d{1,5}),(\d{1,5})\)$/.test(value)) return value;
+
+  return 'text';
+}
+
+function parseMoneyValue(raw: unknown): number {
+  const amount = Number(raw);
+  return Number.isFinite(amount) ? amount : 0;
+}
+
+async function buildFinanzasWorkbook(records: any[]): Promise<Buffer> {
+  const workbook = XLSX.utils.book_new();
+  let ingresos = 0;
+  let gastos = 0;
+
+  const movimientosRows = records.map((record, index) => {
+    const tipoRaw = String(record.tipo || '').toLowerCase();
+    const tipo = tipoRaw === 'ingreso' ? 'INGRESO' : tipoRaw === 'gasto' ? 'GASTO' : 'OTRO';
+    const monto = parseMoneyValue(record.monto);
+    const neto = tipo === 'GASTO' ? -monto : monto;
+    const rawFecha = record.fecha || record.created_at || null;
+    const fechaObj = rawFecha ? new Date(rawFecha) : null;
+    const fecha = fechaObj && !Number.isNaN(fechaObj.getTime())
+      ? fechaObj.toLocaleString('es-CO')
+      : String(rawFecha || '');
+
+    if (tipo === 'INGRESO') ingresos += monto;
+    if (tipo === 'GASTO') gastos += monto;
+
+    return {
+      '#': index + 1,
+      ID: record.id ?? '',
+      Fecha: fecha,
+      Tipo: tipo,
+      Concepto: record.concepto || '',
+      'Monto (COP)': monto,
+      'Monto Neto (COP)': neto,
+    };
+  });
+
+  const balance = ingresos - gastos;
+  const resumenRows = [
+    { Indicador: 'Registros exportados', Valor: records.length },
+    { Indicador: 'Total ingresos (COP)', Valor: ingresos },
+    { Indicador: 'Total gastos (COP)', Valor: gastos },
+    { Indicador: 'Balance neto (COP)', Valor: balance },
+    { Indicador: 'Fecha de exportación', Valor: new Date().toLocaleString('es-CO') },
+  ];
+
+  const movimientosSheet = XLSX.utils.json_to_sheet(movimientosRows);
+  movimientosSheet['!cols'] = [
+    { wch: 6 },
+    { wch: 10 },
+    { wch: 22 },
+    { wch: 14 },
+    { wch: 56 },
+    { wch: 20 },
+    { wch: 20 },
+  ];
+
+  const resumenSheet = XLSX.utils.json_to_sheet(resumenRows);
+  resumenSheet['!cols'] = [{ wch: 42 }, { wch: 24 }];
+
+  XLSX.utils.book_append_sheet(workbook, movimientosSheet, 'Movimientos');
+  XLSX.utils.book_append_sheet(workbook, resumenSheet, 'Resumen');
+
+  const buffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
+  return Buffer.isBuffer(buffer) ? buffer : Buffer.from(buffer);
 }
 
 async function analyzeTelegramMessage(prompt: string) {
@@ -193,8 +316,18 @@ async function analyzeTelegramMessage(prompt: string) {
       5. Si el usuario pide ELIMINAR O BORRAR un registro financiero (por monto o concepto):
       { "intent": "finanza_buscar_eliminar", "respuesta": "Buscando esos registros para eliminar...", "busqueda": "Monto o palabra clave a buscar" }
 
-      6. Chatter general, inversión:
+      6. Si el usuario pide EXPORTAR finanzas a Excel (xlsx), descargar informe, reporte para contabilidad o archivo de movimientos:
+      { "intent": "finanza_exportar_excel", "respuesta": "Listo jefe, preparo el Excel con todos los movimientos para exportarlo." }
+
+      7. Si el usuario pide AGREGAR/CREAR una nueva columna en la tabla de finanzas, o si detectas que sería útil proponer una nueva columna:
+      { "intent": "finanza_propuesta_columna", "respuesta": "Antes de tocar estructura, te pido autorización.", "columna": "nombre_columna", "tipo_sql": "text", "motivo": "Razón de negocio" }
+
+      8. Chatter general, inversión:
       { "intent": "chat", "respuesta": "Tu respuesta amistosa." }
+
+      REGLA CRÍTICA DE SEGURIDAD DE DATOS:
+      - JAMÁS asumas que puedes alterar el esquema de la base de datos automáticamente.
+      - Si se necesita una columna nueva, SIEMPRE pide autorización explícita del jefe primero.
 `;
 
     const chatCompletion = await groq.chat.completions.create({
@@ -231,13 +364,14 @@ export async function POST(req: Request) {
     // 5.3. VALIDACIÓN WHITELIST (LISTA BLANCA)
     let isAllowed = false;
     let chatId: number | undefined;
+    const allowedTelegramUserIds = env.ALLOWED_TELEGRAM_USER_IDS.split(',').map((id) => id.trim()).filter(Boolean);
 
     if (update.message) {
       const fromId = update.message.from?.id.toString();
       const cId = update.message.chat.id.toString();
       chatId = update.message.chat.id;
       
-      if (fromId === env.ALLOWED_TELEGRAM_USER_ID || cId === env.ALLOWED_TELEGRAM_USER_ID) {
+      if ((fromId && allowedTelegramUserIds.includes(fromId)) || allowedTelegramUserIds.includes(cId)) {
         isAllowed = true;
       }
     } else if (update.callback_query && update.callback_query.message) {
@@ -245,7 +379,7 @@ export async function POST(req: Request) {
       const cId = update.callback_query.message.chat.id.toString();
       chatId = update.callback_query.message.chat.id;
 
-      if (fromId === env.ALLOWED_TELEGRAM_USER_ID || cId === env.ALLOWED_TELEGRAM_USER_ID) {
+      if (allowedTelegramUserIds.includes(fromId) || allowedTelegramUserIds.includes(cId)) {
         isAllowed = true;
       }
     }
@@ -295,7 +429,12 @@ export async function POST(req: Request) {
           } else if (!records || records.length === 0) {
              await sendMessage(chatId, '📭 No encontré registros recientes para eliminar, jefe.');
           } else {
-             const inline_keyboard = records.map(r => ([{ text: `🗑️ $${r.monto.toLocaleString('es-CO')} - ${r.concepto.substring(0, 20)}`, callback_data: `DEL_FIN_${r.id}` }]));
+             const inline_keyboard = records.map(r => {
+              const tipoEmoji = r.tipo === 'ingreso' ? '📈' : r.tipo === 'gasto' ? '📉' : '📌';
+              const monto = Number(r.monto || 0);
+              const resumen = String(r.concepto || 'Sin concepto').substring(0, 22);
+              return ([{ text: `🗑️ ${tipoEmoji} $${monto.toLocaleString('es-CO')} - ${resumen}`, callback_data: `DEL_FIN_${r.id}` }]);
+             });
              inline_keyboard.push([{ text: '❌ Cancelar', callback_data: 'CANCEL' }]);
              await sendMessage(chatId, `🔍 <b>${data.respuesta}</b>\nAquí están los últimos 5 registros. Selecciona cuál eliminar:`, { inline_keyboard });
           }
@@ -312,10 +451,38 @@ export async function POST(req: Request) {
             });
             const balance = ingresos - gastos;
             const balEmoji = balance >= 0 ? '🟢' : '🔴';
+            const replyMarkup = {
+              inline_keyboard: [
+                [{ text: '📤 Exportar Excel', callback_data: 'EXPORT_FIN_XLSX' }],
+                [{ text: '❌ Cancelar', callback_data: 'CANCEL' }],
+              ],
+            };
             
-            // Si estuviéramos creando gráficas sofisticadas se haría un render igual a generate-pdf
-            await sendMessage(chatId, `📊 <b>RESUMEN FINANCIERO K&T</b>\n\n📈 <b>Ingresos:</b> $${ingresos.toLocaleString('es-CO')}\n📉 <b>Gastos:</b> $${gastos.toLocaleString('es-CO')}\n${balEmoji} <b>Balance:</b> $${balance.toLocaleString('es-CO')}\n\n<i>(En el futuro podré exportarte Excels directos desde acá jefe, por ahora así están nuestros números generales).</i>`);
+            await sendMessage(chatId, `📊 <b>RESUMEN FINANCIERO K&T</b>\n\n📈 <b>Ingresos:</b> $${ingresos.toLocaleString('es-CO')}\n📉 <b>Gastos:</b> $${gastos.toLocaleString('es-CO')}\n${balEmoji} <b>Balance:</b> $${balance.toLocaleString('es-CO')}\n\n<i>¿Deseas exportar ahora todos los movimientos a Excel?</i>`, replyMarkup);
           }
+
+        } else if (data.intent === 'finanza_exportar_excel') {
+          const replyMarkup = {
+            inline_keyboard: [
+              [{ text: '✅ Exportar Ahora', callback_data: 'EXPORT_FIN_XLSX' }],
+              [{ text: '❌ Cancelar', callback_data: 'CANCEL' }],
+            ],
+          };
+          await sendMessage(chatId, `${data.respuesta}\n\n¿Procedo a generar el archivo .xlsx con toda la data financiera?`, replyMarkup);
+
+        } else if (data.intent === 'finanza_propuesta_columna') {
+          const columna = sanitizeColumnName(data.columna) || 'nueva_columna';
+          const tipoSql = normalizeSqlType(data.tipo_sql);
+          const motivo = typeof data.motivo === 'string' && data.motivo.trim() ? data.motivo.trim() : 'Mejorar la trazabilidad financiera.';
+          const replyMarkup = {
+            inline_keyboard: [
+              [{ text: '✅ Sí, preparar SQL', callback_data: 'CONFIRM_COL_PROPOSAL' }],
+              [{ text: '❌ No crear columna', callback_data: 'CANCEL' }],
+            ],
+          };
+
+          const msgText = `🧩 <b>Propuesta de Nueva Columna (kt_finanzas)</b>\n\n<b>Columna propuesta:</b> ${columna}\n<b>Tipo SQL sugerido:</b> ${tipoSql}\n<b>Motivo:</b> ${motivo}\n\n⚠️ <i>No haré ningún cambio estructural sin tu aprobación explícita.</i>\n\n¿Autorizas preparar el SQL para crear esta columna?`;
+          await sendMessage(chatId, msgText, replyMarkup);
 
         } else if (data.intent === 'chat') {
           // Simplemente respondemos lo que Groq determinó amistosamente
@@ -333,11 +500,9 @@ export async function POST(req: Request) {
 
       let alertText = '';
 
-      if (callbackData?.startsWith('GEN_COT') || callbackData?.startsWith('GEN_CUE')) {
-        const esCuenta = callbackData.startsWith('GEN_CUE');
+      if (callbackData?.startsWith('GEN_COT')) {
         await sendMessage(chatId, `⏳ Procesando cotización jefe... \n<i>Inyectando estándares K&T...</i>`);
-        
-        // 1. Extraer los datos del texto del mensaje original
+
         const originalText = update.callback_query.message?.text || '';
         const clienteMatch = originalText.match(/(?:Cliente|Facturar a):\s*([^\n]+)/);
         const servicioMatch = originalText.match(/(?:Servicio|Detalle):\s*([^\n]+)/);
@@ -347,18 +512,17 @@ export async function POST(req: Request) {
         const servicio = servicioMatch ? servicioMatch[1].trim() : 'Servicio Web';
         const valor = valorMatch ? valorMatch[1].replace(/,/g, '').trim() : '0';
 
-        // 2. Generar el texto completo con Groq usando las reglas estrictas
         try {
-          const tipoTexto = esCuenta ? 'CUENTA DE COBRO' : 'COTIZACIÓN K&T';
+          const tipoTexto = 'COTIZACIÓN K&T';
           const fecha = new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
-          
+
           const completion = await groq.chat.completions.create({
             messages: [
-              { 
-                role: "system", 
+              {
+                role: 'system',
                 content: `Eres el asistente ejecutivo de la agencia K&T. Tu objetivo es generar el TEXTO FINAL Y COMPLETO de una ${tipoTexto} para enviar al cliente.
                 Debes cumplir ESTRICTAMENTE con estas reglas y formato (usa el estilo del siguiente ejemplo adaptado al servicio solicitado):
-                
+
                 "COTIZACIÓN: [TÍTULO BASADO EN EL SERVICIO]
                 Fecha: ${fecha}
                 Cliente: [Nombre del Cliente]
@@ -402,28 +566,135 @@ export async function POST(req: Request) {
                 Desarrollo Web y Gestionamiento de Redes
                 Representado por Keyner Trillos
                 www.kytcode.lat"
-                
-                REGLAS EXTRA: 
+
+                REGLAS EXTRA:
                 - NUNCA uses tablas en formato Markdown (ej: "| Concepto | Valor |"). Siempre usa texto plano con los datos separados por punto y coma (;) para las listas, exactamente como el ejemplo.
                 - NO envíes un JSON, genera el documento FINAL directamente.
                 - NUNCA menciones 'K&T CODE', solo K&T o K&T Agency.
-                - Siempre muestra todos los precios por defecto en moneda colombiana (COP) a menos que se hayan pedido en USD.` 
+                - Siempre muestra todos los precios por defecto en moneda colombiana (COP) a menos que se hayan pedido en USD.`,
               },
-              { role: "user", content: `Genera la ${tipoTexto} final y ultradetallada para el cliente ${cliente} por el servicio: ${servicio}. Debe tener un valor de Desarrollo Principal exacto de $${Number(valor).toLocaleString('es-CO')} COP e incluir absolutamente todas las 7 secciones indicadas.` }
+              {
+                role: 'user',
+                content: `Genera la ${tipoTexto} final y ultradetallada para el cliente ${cliente} por el servicio: ${servicio}. Debe tener un valor de Desarrollo Principal exacto de $${Number(valor).toLocaleString('es-CO')} COP e incluir absolutamente todas las 7 secciones indicadas.`,
+              },
             ],
-            model: "llama-3.3-70b-versatile",
+            model: 'llama-3.3-70b-versatile',
             temperature: 0.3,
           });
 
-          const textoEscrito = completion.choices[0]?.message?.content || "❌ Error generando el documento detallado mediante Groq.";
+          const textoEscrito = completion.choices[0]?.message?.content || '❌ Error generando el documento detallado mediante Groq.';
 
           await sendMessage(chatId, textoEscrito);
-
           alertText = '✅ Cotización enviada en texto';
         } catch (err) {
           console.error('[Telegram API] Error enviando cotización en texto:', err);
           await sendMessage(chatId, '❌ Hubo un error enviando la cotización. Intenta de nuevo.');
           alertText = 'Error en Cotización';
+        }
+      } else if (callbackData?.startsWith('GEN_CUE')) {
+        await sendMessage(chatId, `⏳ Generando cuenta de cobro en formato K&T...`);
+
+        const originalText = update.callback_query.message?.text || '';
+        const clienteMatch = originalText.match(/(?:Cliente|Facturar a):\s*([^\n]+)/);
+        const detalleMatch = originalText.match(/(?:Servicio|Detalle):\s*([^\n]+)/);
+        const valorMatch = originalText.match(/Valor:\s*\$([0-9,.]+)/);
+
+        const cliente = clienteMatch ? clienteMatch[1].trim() : 'Cliente';
+        const detalle = detalleMatch ? detalleMatch[1].trim() : 'Servicios profesionales de gestión digital';
+        const valor = valorMatch ? valorMatch[1].replace(/,/g, '').trim() : '0';
+
+        try {
+          const now = new Date();
+          const fecha = now.toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
+          let numeroCuenta = `${now.getFullYear()}-0001`;
+          const { data: lastFinance, error: seqError } = await supabase
+            .from('kt_finanzas')
+            .select('id')
+            .order('id', { ascending: false })
+            .limit(1)
+            .maybeSingle();
+
+          if (!seqError) {
+            const lastId = Number(lastFinance?.id || 0);
+            if (Number.isFinite(lastId) && lastId >= 0) {
+              numeroCuenta = `${now.getFullYear()}-${String(lastId + 1).padStart(4, '0')}`;
+            }
+          }
+
+          const valorCop = Number(valor || '0').toLocaleString('es-CO');
+
+          const completion = await groq.chat.completions.create({
+            messages: [
+              {
+                role: 'system',
+                content: `Redacta ÚNICAMENTE una cuenta de cobro final en texto plano para K&T, sin JSON.
+                Debe seguir esta estructura exacta (mismos encabezados y orden):
+
+                K&T
+                CUENTA DE COBRO No. ${numeroCuenta}
+
+                Fecha: ${fecha}
+                Ciudad: Cúcuta, Norte de Santander
+
+                DEBE A:
+                Keyner Steban Trillos Useche
+                RUT: 1090384736-8
+
+                A CARGO DE:
+                [Razón social / cliente]
+
+                CONCEPTO DE SERVICIO:
+
+                Se presenta el siguiente desglose correspondiente al periodo de facturación por los servicios contratados:
+
+                Concepto Técnico;Valor (COP)
+                [Detalle técnico bien explicado y adaptado al servicio solicitado];$[valor]
+                TOTAL A PAGAR;$[valor]
+
+                SON: [Valor en letras] pesos m/cte.
+
+                MÉTODOS DE PAGO:
+                Para formalizar la cancelación de esta cuenta de cobro, por favor realizar la transferencia a los siguientes datos bancarios:
+
+                Banco: Bancolombia
+                Tipo de Cuenta: Ahorros
+                Número de Cuenta: 91290318578
+                Nequi: 3133087069
+                Titular: Keyner Steban Trillos Useche
+                C.C.: 1.090.384.736
+
+                Agradezco el envío del soporte de pago una vez realizada la transacción para la correspondiente conciliación.
+
+                Cordialmente,
+
+                Keyner Steban Trillos Useche
+                Director - K&T
+                RUT: 1090384736-8
+                Sitio web: www.kytcode.lat
+
+                REGLAS ESTRICTAS:
+                - Si cambia la razón social o el concepto, adáptalo correctamente en A CARGO DE y en el detalle técnico.
+                - No uses tablas markdown, solo líneas separadas por punto y coma donde corresponde.
+                - Mantén moneda COP.
+                - NUNCA escribas K&T CODE.
+                - No agregues campos fuera del formato solicitado.`,
+              },
+              {
+                role: 'user',
+                content: `Genera la cuenta de cobro para A CARGO DE: ${cliente}.\nDetalle del servicio: ${detalle}.\nTotal exacto a cobrar: $${valorCop} COP.`,
+              },
+            ],
+            model: 'llama-3.3-70b-versatile',
+            temperature: 0.2,
+          });
+
+          const cuentaText = completion.choices[0]?.message?.content || '❌ Error generando la cuenta de cobro.';
+          await sendMessage(chatId, cuentaText);
+          alertText = '✅ Cuenta de cobro enviada';
+        } catch (err) {
+          console.error('[Telegram API] Error enviando cuenta de cobro:', err);
+          await sendMessage(chatId, '❌ Hubo un error enviando la cuenta de cobro. Intenta de nuevo.');
+          alertText = 'Error en Cuenta';
         }
       } else if (callbackData === 'CONFIRM_FIN') {
         await sendMessage(chatId, `⏳ Guardando...`);
@@ -451,20 +722,93 @@ export async function POST(req: Request) {
         }
       } else if (callbackData?.startsWith('DEL_FIN_')) {
         const recordId = callbackData.replace('DEL_FIN_', '');
-        const replyMarkup = { inline_keyboard: [[ { text: '☠️ SÍ, ELIMINAR', callback_data: `CONFIRM_DEL_${recordId}` }, { text: '❌ No, conservar', callback_data: 'CANCEL' } ]] };
-        await sendMessage(chatId, `🚧 <b>Cuidado Jefe</b>\n¿Estás totalmente seguro de eliminar el registro financiero #${recordId}? Esta acción es irreversible y afectará el balance de K&T.`, replyMarkup);
-        alertText = 'Esperando confirmación';
+        const { data: record, error: fetchError } = await supabase
+          .from('kt_finanzas')
+          .select('tipo,monto,concepto,fecha')
+          .eq('id', recordId)
+          .maybeSingle();
+
+        if (fetchError || !record) {
+          await sendMessage(chatId, '❌ No encontré ese registro para eliminar. Puede que ya no exista.');
+          alertText = 'Registro no encontrado';
+        } else {
+          const tipoLabel = record.tipo === 'ingreso' ? 'Ingreso' : record.tipo === 'gasto' ? 'Gasto' : 'Movimiento';
+          const montoLabel = Number(record.monto || 0).toLocaleString('es-CO');
+          const fecha = record.fecha ? new Date(record.fecha).toLocaleString('es-CO') : 'Sin fecha';
+          const concepto = String(record.concepto || 'Sin concepto');
+          const replyMarkup = {
+            inline_keyboard: [[
+              { text: '☠️ Sí, eliminar', callback_data: `CONFIRM_DEL_${recordId}` },
+              { text: '❌ No, conservar', callback_data: 'CANCEL' },
+            ]],
+          };
+
+          await sendMessage(
+            chatId,
+            `🚧 <b>Confirmación de Eliminación</b>\n\n<b>Tipo:</b> ${tipoLabel}\n<b>Monto:</b> $${montoLabel}\n<b>Concepto:</b> ${concepto}\n<b>Fecha:</b> ${fecha}\n\n⚠️ Esta acción es irreversible. ¿Deseas eliminar este registro?`,
+            replyMarkup,
+          );
+          alertText = 'Esperando confirmación';
+        }
       } else if (callbackData?.startsWith('CONFIRM_DEL_')) {
         const recordId = callbackData.replace('CONFIRM_DEL_', '');
         await sendMessage(chatId, `⏳ Eliminando...`);
+        const { data: recordBeforeDelete } = await supabase
+          .from('kt_finanzas')
+          .select('tipo,monto,concepto,fecha')
+          .eq('id', recordId)
+          .maybeSingle();
+
         const { error: dbError } = await supabase.from('kt_finanzas').delete().eq('id', recordId);
         if (dbError) {
            await sendMessage(chatId, `❌ Error eliminando en Supabase: ${dbError.message}`);
            alertText = 'Error en DB';
         } else {
-           await sendMessage(chatId, `🗑️ <b>Registro #${recordId} Eliminado</b> exitosamente de los libros de K&T.`);
+           const tipoLabel = recordBeforeDelete?.tipo === 'ingreso' ? 'Ingreso' : recordBeforeDelete?.tipo === 'gasto' ? 'Gasto' : 'Movimiento';
+           const montoLabel = Number(recordBeforeDelete?.monto || 0).toLocaleString('es-CO');
+           const concepto = String(recordBeforeDelete?.concepto || 'Registro financiero');
+           await sendMessage(chatId, `🗑️ <b>Registro eliminado correctamente.</b>\n\n<b>Tipo:</b> ${tipoLabel}\n<b>Monto:</b> $${montoLabel}\n<b>Concepto:</b> ${concepto}`);
            alertText = 'Eliminado';
         }
+      } else if (callbackData === 'EXPORT_FIN_XLSX') {
+        await sendMessage(chatId, '⏳ Generando Excel financiero con distribución de columnas...');
+        const { data: records, error } = await supabase.from('kt_finanzas').select('*').order('fecha', { ascending: false });
+
+        if (error) {
+          await sendMessage(chatId, `❌ No pude exportar el Excel: ${error.message}`);
+          alertText = 'Error exportando';
+        } else if (!records || records.length === 0) {
+          await sendMessage(chatId, '📭 No hay movimientos en la tabla de finanzas para exportar.');
+          alertText = 'Sin datos';
+        } else {
+          try {
+            const workbookBuffer = await buildFinanzasWorkbook(records);
+            const stamp = new Date().toISOString().slice(0, 10);
+            const fileName = `finanzas-kt-${stamp}.xlsx`;
+            await sendDocument(chatId, fileName, workbookBuffer, '📊 Exportación financiera de K&T en formato Excel.');
+            alertText = 'Excel enviado';
+          } catch (xlsxError) {
+            console.error('[Telegram API] Error creando Excel:', xlsxError);
+            await sendMessage(chatId, '❌ Ocurrió un error construyendo el archivo Excel.');
+            alertText = 'Error Excel';
+          }
+        }
+      } else if (callbackData === 'CONFIRM_COL_PROPOSAL') {
+        const originalText = update.callback_query.message?.text || '';
+        const colMatch = originalText.match(/Columna propuesta:\s*([^\n]+)/i);
+        const typeMatch = originalText.match(/Tipo SQL sugerido:\s*([^\n]+)/i);
+        const reasonMatch = originalText.match(/Motivo:\s*([^\n]+)/i);
+
+        const colName = sanitizeColumnName(colMatch?.[1]) || 'nueva_columna';
+        const sqlType = normalizeSqlType(typeMatch?.[1]);
+        const reason = reasonMatch?.[1]?.trim() || 'Sin razón detallada.';
+
+        const sqlSnippet = `ALTER TABLE kt_finanzas ADD COLUMN IF NOT EXISTS ${colName} ${sqlType};`;
+        await sendMessage(
+          chatId,
+          `✅ <b>Aprobación registrada</b>\n\n<b>Motivo:</b> ${reason}\n\nEste es el SQL recomendado para ejecutar manualmente en Supabase SQL Editor:\n<pre>${sqlSnippet}</pre>\n⚠️ <i>Por seguridad, no ejecuto cambios de esquema automáticamente sin revisión humana.</i>`,
+        );
+        alertText = 'SQL listo';
       } else if (callbackData === 'CANCEL') {
         await sendMessage(chatId, '❌ <b>Acción cancelada</b> por K&T Admin de manera segura.');
         alertText = 'Cancelado';
