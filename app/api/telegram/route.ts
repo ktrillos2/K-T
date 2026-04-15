@@ -347,20 +347,75 @@ export async function POST(req: Request) {
         const servicio = servicioMatch ? servicioMatch[1].trim() : 'Servicio Web';
         const valor = valorMatch ? valorMatch[1].replace(/,/g, '').trim() : '0';
 
-        // 2. Generar el texto y enviar a Telegram directamente
+        // 2. Generar el texto completo con Groq usando las reglas estrictas
         try {
           const tipoTexto = esCuenta ? 'CUENTA DE COBRO' : 'COTIZACIÓN K&T';
-          const tituloCliente = esCuenta ? 'Facturar a' : 'Cliente';
-          
           const fecha = new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
           
-          const textoEscrito = `📄 <b>${tipoTexto}</b> 📄\n\n` +
-            `🗓 <b>Fecha:</b> ${fecha}\n` +
-            `👤 <b>${tituloCliente}:</b> ${cliente}\n` +
-            `🛠 <b>Detalle:</b> ${servicio}\n\n` +
-            `💰 <b>TOTAL:</b> $${Number(valor).toLocaleString('es-CO')}\n\n` +
-            `—\n<i>K&T Agency - Innovación y Desarrollo</i>\n` +
-            `✅ <i>Generado y aprobado exitosamente. ¡A facturar se dijo jefe!</i>`;
+          const completion = await groq.chat.completions.create({
+            messages: [
+              { 
+                role: "system", 
+                content: `Eres el asistente ejecutivo de la agencia K&T. Tu objetivo es generar el TEXTO FINAL Y COMPLETO de una ${tipoTexto} para enviar al cliente.
+                Debes cumplir ESTRICTAMENTE con estas reglas y formato (usa el estilo del siguiente ejemplo adaptado al servicio solicitado):
+                
+                "COTIZACIÓN: [TÍTULO BASADO EN EL SERVICIO]
+                Fecha: ${fecha}
+                Cliente: [Nombre del Cliente]
+
+                1. Alcance Detallado del Proyecto
+                [Desglose profesional del servicio. Menciona que el alojamiento y la infraestructura será en Vercel, resaltando el rendimiento y el ahorro de hosting tradicional. Incluye setup de dominio y optimización SEO Técnico].
+
+                2. Análisis Comparativo de Inversión
+                Concepto;Plan Tradicional (Estimado Anual);Propuesta K&T (Pago Único)
+                Hosting Anual;$500.000;$0 (Incluido en Vercel)
+                Dominio Anual;$100.000;$100.000
+                Subtotal Inversión Inicial;[Calculado];[Valor de la cotización calculando]
+
+                3. Inversión del Proyecto y Módulos
+                Concepto;Valor (COP)
+                Desarrollo Principal (según requisitos);[Valor de la cotización]
+                Total Inversión Única;[Valor total de la cotización en COP]
+
+                Módulos de Mantenimiento (Recomendado):
+                Mantenimiento y Optimización mensual;+$50.000 / mes
+
+                4. Condiciones de Infraestructura y Tráfico (Importante)
+                Límite Mensual del Panel (Sanity): El sistema incluye una capacidad gratuita muy amplia de hasta 250.000 API Requests (peticiones) mensuales.
+                Si se recibe un flujo web masivo y repentino que supere este límite, podría generar posibles cobros por plataforma por aproximadamente $60.000 COP / $15 USD.
+
+                5. Condiciones Comerciales y Tiempos de Entrega
+                Forma de pago: 50% de abono para iniciar y 50% contra entrega.
+                Límite Máximo: El proyecto tiene un ciclo de vida máximo de 2 meses.
+
+                6. Medios de Pago
+                Banco: Bancolombia (Ahorros) No: 91290318578
+                Nequi: 3133087069
+                Titular: Keyner Steban Trillos Useche (C.C. 1.090.384.736, RUT 1090384736-8)
+
+                7. Política de Garantía Estricta
+                Se otorga una Garantía Técnica de 1 mes (30 días calendario) para correcciones técnicas y fallos responsivos.
+                Excluye desconfiguraciones hechas por el cliente o costos de dominio/límite de peticiones de API.
+
+                Atentamente,
+                K&T
+                Desarrollo Web y Gestionamiento de Redes
+                Representado por Keyner Trillos
+                www.kytcode.lat"
+                
+                REGLAS EXTRA: 
+                - NUNCA uses tablas en formato Markdown (ej: "| Concepto | Valor |"). Siempre usa texto plano con los datos separados por punto y coma (;) para las listas, exactamente como el ejemplo.
+                - NO envíes un JSON, genera el documento FINAL directamente.
+                - NUNCA menciones 'K&T CODE', solo K&T o K&T Agency.
+                - Siempre muestra todos los precios por defecto en moneda colombiana (COP) a menos que se hayan pedido en USD.` 
+              },
+              { role: "user", content: `Genera la ${tipoTexto} final y ultradetallada para el cliente ${cliente} por el servicio: ${servicio}. Debe tener un valor de Desarrollo Principal exacto de $${Number(valor).toLocaleString('es-CO')} COP e incluir absolutamente todas las 7 secciones indicadas.` }
+            ],
+            model: "llama-3.3-70b-versatile",
+            temperature: 0.3,
+          });
+
+          const textoEscrito = completion.choices[0]?.message?.content || "❌ Error generando el documento detallado mediante Groq.";
 
           await sendMessage(chatId, textoEscrito);
 
