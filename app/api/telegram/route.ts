@@ -613,7 +613,7 @@ async function buildFinanzasWorkbook(records: any[]): Promise<Buffer> {
   return Buffer.isBuffer(buffer) ? buffer : Buffer.from(buffer);
 }
 
-async function analyzeTelegramMessage(prompt: string, userId: string = '', userContext: string = '') {
+async function analyzeTelegramMessage(prompt: string, userId: string = '', userContext: string = '', chatHistory: any[] = []) {
   try {
     const memoryInstruction = userContext 
       ? `\n\n📌 MEMORIA Y CONTEXTO DE ESTE USUARIO (ID: ${userId}):\n${userContext}\n\nTen en cuenta obligatoriamente este contexto en tus respuestas. Además, si el mensaje del usuario indica un NUEVO patrón, preferencia personal, regla de negocio o aprendizaje clave que aún no esté en la memoria, devuélvelo de forma resumida en la clave "nuevo_aprendizaje" dentro de tu JSON (ej. "El usuario prefiere respuestas sin emojis"). Si no hay nada crítico que aprender, déjalo nulo u omítelo.`
@@ -687,8 +687,14 @@ async function analyzeTelegramMessage(prompt: string, userId: string = '', userC
       ${memoryInstruction}
 `;
 
+    const messagesArray = [
+      { role: "system", content: systemPrompt },
+      ...chatHistory,
+      { role: "user", content: prompt }
+    ];
+    // Cast strict a cualquier tipo válido de Groq para evitar errores de type:
     const chatCompletion = await groq.chat.completions.create({
-      messages: [{ role: "system", content: systemPrompt }, { role: "user", content: prompt }],
+      messages: messagesArray as any,
       model: "llama-3.3-70b-versatile",
       temperature: 0,
       response_format: { type: "json_object" },
@@ -812,24 +818,42 @@ export async function POST(req: Request) {
         // Extraer Memoria del Usuario
         const fromIdStr = update.message?.from?.id.toString() || update.callback_query?.from.id.toString() || '';
         let userContext = '';
+        let chatHistory: any[] = [];
         if (fromIdStr) {
-          const { data: memData } = await supabase.from('telegram_users_memory').select('general_context').eq('user_id', fromIdStr).single();
+          const { data: memData } = await supabase.from('telegram_users_memory').select('general_context, chat_history').eq('user_id', fromIdStr).single();
           userContext = memData?.general_context || '';
+          if (memData?.chat_history && Array.isArray(memData.chat_history)) {
+             chatHistory = memData.chat_history;
+          }
         }
 
-        const data = await analyzeTelegramMessage(text, fromIdStr, userContext);
+        const data = await analyzeTelegramMessage(text, fromIdStr, userContext, chatHistory);
+
+        // Actualizar chat history local y truncarlo para evitar saturar tokens
+        chatHistory.push({ role: 'user', content: text });
+        let expectedAssistantResponse = data.respuesta || '';
+        if (expectedAssistantResponse) {
+           chatHistory.push({ role: 'assistant', content: expectedAssistantResponse });
+        }
+        if (chatHistory.length > 20) chatHistory = chatHistory.slice(-20);
+
+        // Mantener también la lógica de nuevo aprendizaje:
+        const appendedContext = (data.nuevo_aprendizaje && fromIdStr)
+             ? (userContext ? `${userContext}\n- ${data.nuevo_aprendizaje}` : `- ${data.nuevo_aprendizaje}`)
+             : userContext;
         
-        // Guardar nuevos aprendizajes si la IA lo detectó
-        if (data.nuevo_aprendizaje && fromIdStr) {
-          const appendedContext = userContext ? `${userContext}\n- ${data.nuevo_aprendizaje}` : `- ${data.nuevo_aprendizaje}`;
+        if (fromIdStr) {
           await supabase.from('telegram_users_memory').upsert({
             user_id: fromIdStr,
             first_name: update.message?.from?.first_name || update.callback_query?.from.first_name || '',
             username: update.message?.from?.username || update.callback_query?.from.username || '',
             general_context: appendedContext,
+            chat_history: chatHistory,
             updated_at: new Date().toISOString()
           }, { onConflict: 'user_id' });
-          console.log(`[K&T Bot] Nuevo aprendizaje guardado: ${data.nuevo_aprendizaje}`);
+          if (data.nuevo_aprendizaje) {
+             console.log(`[K&T Bot] Nuevo aprendizaje guardado: ${data.nuevo_aprendizaje}`);
+          }
         }
 
         if (data.intent === 'cotizacion') {
