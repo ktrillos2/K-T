@@ -877,6 +877,7 @@ export async function POST(req: Request) {
         // 🔒 SISTEMA DE SEGURIDAD: RESTRICCIÓN DE ROLES
         // ==============================================================
         const adminId = '8378831437';
+        const actualSenderId = (update.message?.from?.id || update.callback_query?.from?.id)?.toString();
         const restrictedIntents = [
           'finanza_registro', 
           'finanza_buscar_eliminar', 
@@ -888,7 +889,7 @@ export async function POST(req: Request) {
           'empleado_pago'
         ];
 
-        if (restrictedIntents.includes(data.intent as string) && String(fromIdStr) !== adminId) {
+        if (restrictedIntents.includes(data.intent as string) && actualSenderId !== adminId) {
           await sendMessage(chatId, `⛔ <b>ACCESO DENEGADO</b>\n\nNo posees privilegios de administrador para ver o modificar finanzas de la agencia, ni gestionar pagos operativos. Módulos permitidos: "Cotizaciones", "Cuentas de Cobro" o "Revisar tus pagos pendientes".`);
           return NextResponse.json({ ok: true });
         }
