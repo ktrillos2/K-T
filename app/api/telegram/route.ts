@@ -672,7 +672,7 @@ async function analyzeTelegramMessage(prompt: string, userId: string = '', userC
       { "intent": "cuenta_cobro", "respuesta": "Excelente, aquí tienes el desglose para cobrar. Confírmame.", "cliente": "Nombre", "valor": 0, "servicio": "Detalle del cobro" }
 
       3. Si el usuario reporta un INGRESO o GASTO:
-      { "intent": "finanza_registro", "respuesta": "¿Estás de acuerdo en registrar esto en los libros jefe?", "tipo": "ingreso" o "gasto", "monto": 0, "concepto": "Motivo del pago" }
+      { "intent": "finanza_registro", "respuesta": "¿Estás de acuerdo en registrar esto en los libros jefe?", "tipo": "ingreso" o "gasto", "monto": 0, "concepto": "Motivo del pago", "cuenta": "ej: nequi, bancolombia, efectivo o dejar en vacio" }
 
       4. Si el usuario pregunta por ESTADO financiero, resumen o balances:
       { "intent": "finanza_resumen", "respuesta": "Entendido jefe, aquí tienes tus números:" }
@@ -885,8 +885,9 @@ export async function POST(req: Request) {
 
         } else if (data.intent === 'finanza_registro') {
           const emoji = data.tipo === 'ingreso' ? '📈' : '📉';
+          const cuentaLabel = data.cuenta && data.cuenta.toLowerCase() !== 'vacio' ? `\n<b>Cuenta:</b> ${data.cuenta.toLowerCase()}` : '';
           const replyMarkup = { inline_keyboard: [[ { text: '✅ Guardar Registro', callback_data: `CONFIRM_FIN` }, { text: '❌ Cancelar', callback_data: 'CANCEL' } ]] };
-          const msgText = `${emoji} <b>Confirma el Registro Financiero</b>\n\n<b>Movimiento:</b> ${data.tipo.toUpperCase()}\n<b>Monto:</b> $${(data.monto || 0).toLocaleString('es-CO')}\n<b>Nota:</b> ${data.concepto}\n\n<i>${data.respuesta}</i>`;
+          const msgText = `${emoji} <b>Confirma el Registro Financiero</b>\n\n<b>Movimiento:</b> ${data.tipo.toUpperCase()}\n<b>Monto:</b> $${(data.monto || 0).toLocaleString('es-CO')}\n<b>Nota:</b> ${data.concepto}${cuentaLabel}\n\n<i>${data.respuesta}</i>`;
           await sendMessage(chatId, msgText, replyMarkup);
 
         } else if (data.intent === 'finanza_buscar_eliminar') {
@@ -924,18 +925,34 @@ export async function POST(req: Request) {
             const keysAsText = {};
             const excludedKeys = ['id', 'tipo', 'concepto', 'fecha', 'created_at', 'monto', 'origen', 'estado'];
 
+            // Inicializar absolutamente todas las columnas customizadas encontradas para que muestren 0 si están vacías.
+            if (records && records.length > 0) {
+               Object.keys(records[0]).forEach(k => {
+                  if (!excludedKeys.includes(k)) {
+                     sumatoriosExtra[k] = 0;
+                  }
+               });
+            }
+
             records?.forEach(r => {
               if (r.tipo === 'ingreso') ingresos += Number(r.monto || 0);
               if (r.tipo === 'gasto') gastos += Number(r.monto || 0);
               
               Object.keys(r).forEach(k => {
-                if (!excludedKeys.includes(k) && r[k] !== null && r[k] !== undefined) {
-                  if (typeof r[k] === 'number') {
-                     const val = r.tipo === 'gasto' ? -Number(r[k]) : Number(r[k]);
-                     sumatoriosExtra[k] = (sumatoriosExtra[k] || 0) + val;
-                  } else if (typeof r[k] === 'boolean' || typeof r[k] === 'string') {
-                     if (!keysAsText[k]) keysAsText[k] = 0;
-                     if (r[k]) keysAsText[k]++;
+                if (!excludedKeys.includes(k)) {
+                  const rawVal = r[k];
+                  if (rawVal !== null && rawVal !== undefined && rawVal !== '') {
+                     const numToSum = Number(rawVal);
+                     if (!isNaN(numToSum)) {
+                        // Respetamos su signo porque al guardarse en confirmar ya le pusimos el signo, 
+                        // pero por seguridad simplemente lo sumamos al total de la cuenta.
+                        sumatoriosExtra[k] += numToSum;
+                     } else {
+                        // En realidad es un texto
+                        if (sumatoriosExtra[k] === 0) delete sumatoriosExtra[k];
+                        if (!keysAsText[k]) keysAsText[k] = 0;
+                        keysAsText[k]++;
+                     }
                   }
                 }
               });
@@ -1413,13 +1430,20 @@ export async function POST(req: Request) {
         const tipoMatch = originalText.match(/Movimiento:\s*([A-Z]+)/);
         const montoMatch = originalText.match(/Monto:\s*\$([0-9,.]+)/);
         const conceptoMatch = originalText.match(/Nota:\s*([^\n]+)/);
+        const cuentaMatch = originalText.match(/Cuenta:\s*([^\n]+)/);
 
         if (tipoMatch && montoMatch && conceptoMatch) {
           const tipo = tipoMatch[1].toLowerCase();
           const monto = parseFloat(montoMatch[1].replace(/,/g, '').replace(/\./g, '')); // Quitar formato de millares colombianos
           const concepto = conceptoMatch[1].trim();
 
-          const { error: dbError } = await supabase.from('kt_finanzas').insert([{ tipo, monto, concepto, fecha: new Date().toISOString() }]);
+          const insertData = { tipo, monto, concepto, fecha: new Date().toISOString() };
+          if (cuentaMatch && cuentaMatch[1]) {
+             const colName = cuentaMatch[1].trim().toLowerCase().replace(/[^a-z0-9_]/g, '');
+             insertData[colName] = (tipo === 'gasto' ? -monto : monto); // Gastos son negativos en la columna destino
+          }
+
+          const { error: dbError } = await supabase.from('kt_finanzas').insert([insertData]);
           if (dbError) {
              await sendMessage(chatId, `❌ Jefe, falló Supabase: ${dbError.message}`);
              alertText = 'Error en DB';
