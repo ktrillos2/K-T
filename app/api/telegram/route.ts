@@ -873,6 +873,27 @@ export async function POST(req: Request) {
           }
         }
 
+        // ==============================================================
+        // 🔒 SISTEMA DE SEGURIDAD: RESTRICCIÓN DE ROLES
+        // ==============================================================
+        const adminId = '8378831437';
+        const restrictedIntents = [
+          'finanza_registro', 
+          'finanza_buscar_eliminar', 
+          'finanza_resumen', 
+          'finanza_exportar_excel', 
+          'finanza_estadisticas', 
+          'finanza_propuesta_columna', 
+          'db_creacion',
+          'empleado_pago'
+        ];
+
+        if (restrictedIntents.includes(data.intent as string) && String(fromIdStr) !== adminId) {
+          await sendMessage(chatId, `⛔ <b>ACCESO DENEGADO</b>\n\nNo posees privilegios de administrador para ver o modificar finanzas de la agencia, ni gestionar pagos operativos. Módulos permitidos: "Cotizaciones", "Cuentas de Cobro" o "Revisar tus pagos pendientes".`);
+          return NextResponse.json({ ok: true });
+        }
+        // ==============================================================
+
         if (data.intent === 'cotizacion') {
           const replyMarkup = { inline_keyboard: [[ { text: '✅ Generar Texto', callback_data: `GEN_COT` }, { text: '❌ Cancelar', callback_data: 'CANCEL' } ]] };
           const msgText = `${data.respuesta}\n\n👤 <b>Cliente:</b> ${data.cliente}\n🛠 <b>Servicio:</b> ${data.servicio}\n💰 <b>Valor:</b> $${(data.valor || 0).toLocaleString('es-CO')}\n\n¿Deseas enviar la cotización en texto?`;
@@ -1425,6 +1446,11 @@ export async function POST(req: Request) {
           } catch(e) { console.error(e); }
         }
       } else if (callbackData === 'CONFIRM_FIN') {
+        const actualUserId = update.callback_query.from.id.toString();
+        if (actualUserId !== '8378831437') {
+           await sendMessage(chatId, '❌ <b>Acceso Denegado:</b> No tienes permisos para confirmar registros financieros de la agencia.');
+           return NextResponse.json({ success: true });
+        }
         await sendMessage(chatId, `⏳ Guardando...`);
         const originalText = update.callback_query.message?.text || '';
         const tipoMatch = originalText.match(/Movimiento:\s*([A-Z]+)/);
@@ -1513,6 +1539,11 @@ export async function POST(req: Request) {
           alertText = 'Pendiente descartado';
         }
       } else if (callbackData?.startsWith('DEL_FIN_')) {
+        const actualUserId = update.callback_query.from.id.toString();
+        if (actualUserId !== '8378831437') {
+           await sendMessage(chatId, '❌ <b>Acceso Denegado:</b> No tienes permisos para eliminar registros financieros de la agencia.');
+           return NextResponse.json({ success: true });
+        }
         const recordId = callbackData.replace('DEL_FIN_', '');
         const { data: record, error: fetchError } = await supabase
           .from('kt_finanzas')
