@@ -1,3 +1,618 @@
+import { NextResponse } from 'next/server';
+import { z } from 'zod';
+import Groq from 'groq-sdk';
+import { createClient } from '@supabase/supabase-js';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import { ImapFlow } from 'imapflow';
+import { simpleParser } from 'mailparser';
+import * as XLSX from 'xlsx';
+
+export const runtime = 'nodejs';
+
+// ==========================================
+// 1. VALIDACIÓN DE ENTORNO (Zod)
+// ==========================================
+const envSchema = z.object({
+  TELEGRAM_BOT_TOKEN: z.string().min(1, 'Falta TELEGRAM_BOT_TOKEN'),
+  TELEGRAM_WEBHOOK_SECRET: z.string().min(1, 'Falta TELEGRAM_WEBHOOK_SECRET'),
+  ALLOWED_TELEGRAM_USER_IDS: z.string().min(1, 'Falta ALLOWED_TELEGRAM_USER_IDS'),
+  GROQ_API_KEY: z.string().min(1, 'Falta GROQ_API_KEY'),
+  GEMINI_API_KEY: z.string().optional(),
+  EMAIL_IMAP_HOST: z.string().optional(),
+  EMAIL_IMAP_PORT: z.string().optional(),
+  EMAIL_IMAP_USER: z.string().optional(),
+  EMAIL_IMAP_PASSWORD: z.string().optional(),
+  EMAIL_IMAP_TLS: z.string().optional(),
+  NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
+  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1, 'Falta Service Role de Supabase'),
+});
+
+const env = envSchema.parse({
+  TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
+  TELEGRAM_WEBHOOK_SECRET: process.env.TELEGRAM_WEBHOOK_SECRET,
+  ALLOWED_TELEGRAM_USER_IDS: process.env.ALLOWED_TELEGRAM_USER_IDS,
+  GROQ_API_KEY: process.env.GROQ_API_KEY,
+  GEMINI_API_KEY: process.env.GEMINI_API_KEY,
+  EMAIL_IMAP_HOST: process.env.EMAIL_IMAP_HOST,
+  EMAIL_IMAP_PORT: process.env.EMAIL_IMAP_PORT,
+  EMAIL_IMAP_USER: process.env.EMAIL_IMAP_USER,
+  EMAIL_IMAP_PASSWORD: process.env.EMAIL_IMAP_PASSWORD,
+  EMAIL_IMAP_TLS: process.env.EMAIL_IMAP_TLS,
+  NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+  SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
+});
+
+const groq = new Groq({ apiKey: env.GROQ_API_KEY });
+const geminiKey = env.GEMINI_API_KEY?.replace(/^"|"$/g, '').replace(/^'|'$/g, '').trim();
+const gemini = geminiKey ? new GoogleGenerativeAI(geminiKey) : null;
+const supabase = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY);
+
+const botToken = env.TELEGRAM_BOT_TOKEN.replace(/^"|"$/g, '').replace(/^'|'$/g, '');
+const TELEGRAM_API_URL = `https://api.telegram.org/bot${botToken}`;
+const PENDING_TYPES = ['pendiente_ingreso', 'pendiente_gasto'] as const;
+
+type PendingType = (typeof PENDING_TYPES)[number];
+type FinanceBaseType = 'ingreso' | 'gasto';
+
+interface FinanceSuggestion {
+  tipo: FinanceBaseType;
+  monto: number;
+  concepto: string;
+  origen: 'IMAGEN' | 'CORREO';
+}
+
+// ==========================================
+// 2. TIPOS E INTERFACES DE TELEGRAM
+// ==========================================
+interface TelegramUser {
+  id: number;
+  is_bot: boolean;
+  first_name: string;
+  username?: string;
+}
+
+interface TelegramChat {
+  id: number;
+  type: 'private' | 'group' | 'supergroup' | 'channel';
+}
+
+interface TelegramMessage {
+  message_id: number;
+  from?: TelegramUser;
+  chat: TelegramChat;
+  date: number;
+  text?: string;
+  caption?: string;
+  photo?: TelegramPhotoSize[];
+  document?: TelegramDocument;
+}
+
+interface TelegramPhotoSize {
+  file_id: string;
+  width: number;
+  height: number;
+  file_size?: number;
+}
+
+interface TelegramDocument {
+  file_id: string;
+  file_name?: string;
+  mime_type?: string;
+  file_size?: number;
+}
+
+interface TelegramCallbackQuery {
+  id: string;
+  from: TelegramUser;
+  message?: TelegramMessage;
+  data?: string;
+}
+
+interface TelegramUpdate {
+  update_id: number;
+  message?: TelegramMessage;
+  callback_query?: TelegramCallbackQuery;
+}
+
+// ==========================================
+// 3. REGLAS DE NEGOCIO K&T (PLANTILLAS)
+// ==========================================
+// NOTA: Abstenerse de usar la palabra "CODE". Siempre K&T.
+
+export function getCotizacionTemplate(cliente: string, valor: number | string, servicio: string) {
+  return `
+    <div style="font-family: sans-serif; color: #333;">
+      <h1>Cotización - K&T</h1>
+      <p><strong>Cliente:</strong> ${cliente}</p>
+      <p><strong>Servicio:</strong> ${servicio}</p>
+      <p><strong>Valor Estimado:</strong> $${valor}</p>
+      
+      <h2>Especificaciones Técnicas</h2>
+      <ul>
+        <li><strong>Optimización SEO:</strong> Implementación de metadatos, sitemaps y optimización de rendimiento inicial para posicionamiento.</li>
+        <li><strong>Infraestructura:</strong> El Hosting será Vercel para garantizar máxima velocidad y disponibilidad CDN global.</li>
+      </ul>
+      
+      <h2>Garantía</h2>
+      <p>K&T garantiza la correcta funcionalidad del código desplegado. Se incluye una garantía de 3 meses para corrección de bugs críticos sin costo adicional después del lanzamiento oficial a producción.</p>
+    </div>
+  `;
+}
+
+export function getCuentaDeCobroTemplate(cliente: string, valor: number | string, concepto: string) {
+  return `
+    <div style="font-family: sans-serif; color: #333;">
+      <h1>K&T - Cuenta de Cobro</h1>
+      <hr />
+      <p><strong>A nombre de:</strong> Keyner Steban Trillos Useche</p>
+      <p><strong>RUT:</strong> 1090384736-8</p>
+      <br />
+      <p><strong>Cliente:</strong> ${cliente}</p>
+      
+      <h2>Concepto del Servicio</h2>
+      <!-- Formato estándar Vegaltex Tactical Colombia -->
+      <p style="white-space: pre-line;">${concepto}</p>
+      
+      <h2 style="margin-top: 30px;">Total a Pagar: $${valor}</h2>
+    </div>
+  `;
+}
+
+// ==========================================
+// 4. FUNCIONES UTILITARIAS Y LLAMADAS A IA
+// ==========================================
+
+async function sendMessage(chatId: number, text: string, replyMarkup?: any) {
+  await fetch(`${TELEGRAM_API_URL}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text,
+      parse_mode: 'HTML',
+      reply_markup: replyMarkup,
+    }),
+  });
+}
+
+async function sendDocument(chatId: number, fileName: string, fileBuffer: Buffer, caption?: string) {
+  const binary = new Uint8Array(fileBuffer);
+  const formData = new FormData();
+  formData.append('chat_id', String(chatId));
+  if (caption) formData.append('caption', caption);
+  formData.append(
+    'document',
+    new Blob([
+      binary,
+    ], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    }),
+    fileName,
+  );
+
+  await fetch(`${TELEGRAM_API_URL}/sendDocument`, {
+    method: 'POST',
+    body: formData,
+  });
+}
+
+async function answerCallbackQuery(callbackQueryId: string, text?: string) {
+  await fetch(`${TELEGRAM_API_URL}/answerCallbackQuery`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      callback_query_id: callbackQueryId,
+      text,
+    }),
+  });
+}
+
+function sanitizeColumnName(input: unknown): string | null {
+  if (!input || typeof input !== 'string') return null;
+  const normalized = input
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, '_')
+    .replace(/[^a-z0-9_]/g, '');
+
+  if (!/^[a-z_][a-z0-9_]*$/.test(normalized)) return null;
+  return normalized;
+}
+
+function normalizeSqlType(input: unknown): string {
+  if (!input || typeof input !== 'string') return 'text';
+  const value = input.trim().toLowerCase();
+
+  const fixedAllowed = new Set([
+    'text',
+    'integer',
+    'bigint',
+    'numeric',
+    'boolean',
+    'date',
+    'timestamp',
+    'timestamptz',
+    'jsonb',
+    'uuid',
+  ]);
+
+  if (fixedAllowed.has(value)) return value;
+  if (/^varchar\((\d{1,5})\)$/.test(value)) return value;
+  if (/^numeric\((\d{1,5}),(\d{1,5})\)$/.test(value)) return value;
+
+  return 'text';
+}
+
+function parseMoneyValue(raw: unknown): number {
+  const amount = Number(raw);
+  return Number.isFinite(amount) ? amount : 0;
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function normalizeAmount(raw: unknown): number {
+  if (typeof raw === 'number' && Number.isFinite(raw)) return raw;
+  if (typeof raw === 'string') {
+    const cleaned = raw
+      .trim()
+      .replace(/[^0-9,.-]/g, '')
+      .replace(/\./g, '')
+      .replace(',', '.');
+    const parsed = Number(cleaned);
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+  return 0;
+}
+
+function stripPendingMarkers(concepto: string): string {
+  return concepto
+    .replace(/^\[PENDIENTE_[A-Z]+\]\s*/i, '')
+    .replace(/^\[EMAIL_UID:[^\]]+\]\s*/i, '')
+    .trim();
+}
+
+function isValidFinanceBaseType(input: unknown): input is FinanceBaseType {
+  return input === 'ingreso' || input === 'gasto';
+}
+
+function inferMimeType(filePath: string, fallbackHeader?: string | null): string {
+  const lower = filePath.toLowerCase();
+  if (lower.endsWith('.jpg') || lower.endsWith('.jpeg')) return 'image/jpeg';
+  if (lower.endsWith('.png')) return 'image/png';
+  if (lower.endsWith('.webp')) return 'image/webp';
+  if (lower.endsWith('.gif')) return 'image/gif';
+  return fallbackHeader || 'image/jpeg';
+}
+
+async function fetchTelegramFileBuffer(fileId: string): Promise<{ buffer: Buffer; mimeType: string }> {
+  const fileMetaResponse = await fetch(`${TELEGRAM_API_URL}/getFile`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ file_id: fileId }),
+  });
+  const fileMeta = await fileMetaResponse.json() as { ok?: boolean; result?: { file_path?: string } };
+
+  if (!fileMeta.ok || !fileMeta.result?.file_path) {
+    throw new Error('No se pudo obtener la ruta del archivo en Telegram.');
+  }
+
+  const filePath = fileMeta.result.file_path;
+  const fileUrl = `https://api.telegram.org/file/bot${botToken}/${filePath}`;
+  const binaryResponse = await fetch(fileUrl);
+
+  if (!binaryResponse.ok) {
+    throw new Error(`Error descargando archivo de Telegram: ${binaryResponse.status}`);
+  }
+
+  const mimeType = inferMimeType(filePath, binaryResponse.headers.get('content-type'));
+  const arrayBuffer = await binaryResponse.arrayBuffer();
+  return { buffer: Buffer.from(arrayBuffer), mimeType };
+}
+
+async function savePendingFinanceSuggestion(suggestion: FinanceSuggestion) {
+  const pendingType: PendingType = suggestion.tipo === 'ingreso' ? 'pendiente_ingreso' : 'pendiente_gasto';
+  const concepto = `[PENDIENTE_${suggestion.origen}] ${suggestion.concepto}`;
+
+  const { data, error } = await supabase
+    .from('kt_finanzas')
+    .insert([{ tipo: pendingType, monto: suggestion.monto, concepto, fecha: new Date().toISOString() }])
+    .select('id,tipo,monto,concepto,fecha')
+    .single();
+
+  if (error) throw error;
+  return data;
+}
+
+async function sendPendingFinanceReminders(chatId: number, limit = 5): Promise<number> {
+  const { data: pending, error } = await supabase
+    .from('kt_finanzas')
+    .select('id,tipo,monto,concepto,fecha')
+    .in('tipo', [...PENDING_TYPES])
+    .order('fecha', { ascending: false })
+    .limit(limit);
+
+  if (error || !pending || pending.length === 0) return 0;
+
+  const lines = pending.map((item, idx) => {
+    const tipo = item.tipo === 'pendiente_ingreso' ? 'Ingreso' : 'Gasto';
+    const monto = Number(item.monto || 0).toLocaleString('es-CO');
+    const concepto = escapeHtml(stripPendingMarkers(String(item.concepto || 'Sin concepto')));
+    return `${idx + 1}. ${tipo} | $${monto} | ${concepto}`;
+  });
+
+  const inline_keyboard = pending.flatMap((item, idx) => {
+    const tipo = item.tipo === 'pendiente_ingreso' ? 'Ingreso' : 'Gasto';
+    return [[
+      { text: `✅ Guardar #${idx + 1} (${tipo})`, callback_data: `CONFIRM_PEND_${item.id}` },
+      { text: `🗑️ Descartar #${idx + 1}`, callback_data: `DISMISS_PEND_${item.id}` },
+    ]];
+  });
+
+  await sendMessage(
+    chatId,
+    `🧠 <b>Recordatorio de Movimientos Pendientes</b>\n\nEncontré ${pending.length} sugerencias por confirmar:\n${lines.join('\n')}\n\n¿Deseas guardar o descartar alguno?`,
+    { inline_keyboard },
+  );
+
+  return pending.length;
+}
+
+async function analyzeImageWithGemini(imageBuffer: Buffer, mimeType: string, caption?: string) {
+  if (!gemini) {
+    return { intent: 'desconocido', resumen: 'GEMINI_API_KEY no está configurada.' };
+  }
+
+  const model = gemini.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
+  const prompt = `Analiza esta imagen (factura, cuenta de cobro, cotización, comprobante o recibo) y responde SOLO un JSON válido con la estructura:
+  {
+    "intent": "finanza_registro|cotizacion|cuenta_cobro|desconocido",
+    "tipo": "ingreso|gasto|desconocido",
+    "monto": 0,
+    "cliente": "",
+    "servicio": "",
+    "concepto": "",
+    "resumen": "",
+    "confianza": 0
+  }
+
+  Reglas:
+  - Si es comprobante de pago recibido por K&T, clasifícalo como ingreso.
+  - Si es factura de proveedor o pago hecho por K&T, clasifícalo como gasto.
+  - Si es una cotización, usa intent=cotizacion.
+  - Si es cuenta de cobro, usa intent=cuenta_cobro.
+  - Si no se entiende, usa intent=desconocido.
+  - monto debe ser numérico sin símbolo.
+  - concepto y resumen deben ser cortos y claros en español.
+  - Contexto adicional de caption: ${caption || 'Sin caption'}`;
+
+  const result = await model.generateContent([
+    {
+      inlineData: {
+        mimeType,
+        data: imageBuffer.toString('base64'),
+      },
+    },
+    { text: prompt },
+  ]);
+
+  const raw = result.response.text();
+  const cleaned = raw.replace(/```json/gi, '').replace(/```/g, '').trim();
+
+  try {
+    const parsed = JSON.parse(cleaned) as Record<string, unknown>;
+    return {
+      intent: typeof parsed.intent === 'string' ? parsed.intent : 'desconocido',
+      tipo: typeof parsed.tipo === 'string' ? parsed.tipo : 'desconocido',
+      monto: normalizeAmount(parsed.monto),
+      cliente: typeof parsed.cliente === 'string' ? parsed.cliente : '',
+      servicio: typeof parsed.servicio === 'string' ? parsed.servicio : '',
+      concepto: typeof parsed.concepto === 'string' ? parsed.concepto : '',
+      resumen: typeof parsed.resumen === 'string' ? parsed.resumen : '',
+      confianza: typeof parsed.confianza === 'number' ? parsed.confianza : 0,
+    };
+  } catch {
+    return { intent: 'desconocido', tipo: 'desconocido', monto: 0, concepto: '', servicio: '', cliente: '', resumen: cleaned, confianza: 0 };
+  }
+}
+
+async function analyzeEmailForFinance(subject: string, from: string, body: string) {
+  const system = `Eres un clasificador financiero de K&T. Debes responder SOLO JSON con este formato:
+  {
+    "tipo": "ingreso|gasto|otro",
+    "monto": 0,
+    "concepto": "",
+    "confianza": 0
+  }
+
+  Reglas:
+  - ingreso: dinero que entra a K&T.
+  - gasto: dinero que sale de K&T.
+  - otro: si no es movimiento financiero claro.
+  - monto numérico sin símbolos, 0 si no se detecta.
+  - concepto en una sola frase corta.
+  - confianza entre 0 y 1.`;
+
+  const completion = await groq.chat.completions.create({
+    messages: [
+      { role: 'system', content: system },
+      { role: 'user', content: `From: ${from}\nSubject: ${subject}\nBody: ${body.slice(0, 6000)}` },
+    ],
+    model: 'llama-3.3-70b-versatile',
+    temperature: 0,
+    response_format: { type: 'json_object' },
+  });
+
+  const content = completion.choices[0]?.message?.content || '{}';
+  const parsed = JSON.parse(content) as Record<string, unknown>;
+  const tipoRaw = String(parsed.tipo || 'otro').toLowerCase();
+  const tipo = tipoRaw === 'ingreso' || tipoRaw === 'gasto' ? tipoRaw : 'otro';
+  return {
+    tipo,
+    monto: normalizeAmount(parsed.monto),
+    concepto: typeof parsed.concepto === 'string' ? parsed.concepto.trim() : '',
+    confianza: typeof parsed.confianza === 'number' ? parsed.confianza : 0,
+  };
+}
+
+function emailSyncConfigured(): boolean {
+  return Boolean(env.EMAIL_IMAP_HOST && env.EMAIL_IMAP_USER && env.EMAIL_IMAP_PASSWORD);
+}
+
+async function syncEmailInboxToPending() {
+  if (!emailSyncConfigured()) {
+    return { enabled: false, reviewed: 0, queued: 0, skipped: 0 };
+  }
+
+  const host = env.EMAIL_IMAP_HOST!.replace(/^"|"$/g, '').replace(/^'|'$/g, '').trim();
+  const user = env.EMAIL_IMAP_USER!.replace(/^"|"$/g, '').replace(/^'|'$/g, '').trim();
+  const pass = env.EMAIL_IMAP_PASSWORD!.replace(/^"|"$/g, '').replace(/^'|'$/g, '').trim();
+  const port = Number((env.EMAIL_IMAP_PORT || '993').replace(/^"|"$/g, '').replace(/^'|'$/g, '').trim());
+  const secure = String(env.EMAIL_IMAP_TLS || 'true').toLowerCase() !== 'false';
+
+  const client = new ImapFlow({
+    host,
+    port: Number.isFinite(port) ? port : 993,
+    secure,
+    auth: { user, pass },
+  });
+
+  let reviewed = 0;
+  let queued = 0;
+  let skipped = 0;
+
+  try {
+    await client.connect();
+    const lock = await client.getMailboxLock('INBOX');
+
+    try {
+      await client.mailboxOpen('INBOX');
+      const unseenUids = await client.search({ seen: false });
+      const uidCandidates: number[] = Array.isArray(unseenUids) ? unseenUids : [];
+      const targetUids = uidCandidates.slice(-15);
+
+      for await (const msg of client.fetch(targetUids, { uid: true, envelope: true, source: true })) {
+        reviewed += 1;
+        const uid = Number(msg.uid || 0);
+        const marker = `[EMAIL_UID:${uid}]`;
+
+        const { data: already } = await supabase
+          .from('kt_finanzas')
+          .select('id')
+          .ilike('concepto', `%${marker}%`)
+          .limit(1);
+
+        if (already && already.length > 0) {
+          skipped += 1;
+          continue;
+        }
+
+        const parsedMail = await simpleParser(msg.source as Buffer);
+        const from = parsedMail.from?.text || msg.envelope?.from?.map((a) => a.address || a.name || '').join(', ') || 'Desconocido';
+        const subject = parsedMail.subject || msg.envelope?.subject || 'Sin asunto';
+        const body = (parsedMail.text || '').trim();
+
+        if (!body) {
+          skipped += 1;
+          continue;
+        }
+
+        const analysis = await analyzeEmailForFinance(subject, from, body);
+        if (!isValidFinanceBaseType(analysis.tipo) || analysis.confianza < 0.45) {
+          skipped += 1;
+          continue;
+        }
+
+        const monto = analysis.monto > 0 ? analysis.monto : 0;
+        const conceptoBase = analysis.concepto || `${subject} (${from})`;
+        await savePendingFinanceSuggestion({
+          tipo: analysis.tipo,
+          monto,
+          concepto: `${marker} ${conceptoBase}`,
+          origen: 'CORREO',
+        });
+        queued += 1;
+      }
+    } finally {
+      lock.release();
+    }
+  } finally {
+    try {
+      await client.logout();
+    } catch {
+      // noop
+    }
+  }
+
+  return { enabled: true, reviewed, queued, skipped };
+}
+
+async function buildFinanzasWorkbook(records: any[]): Promise<Buffer> {
+  const workbook = XLSX.utils.book_new();
+  let ingresos = 0;
+  let gastos = 0;
+
+  const movimientosRows = records.map((record, index) => {
+    const tipoRaw = String(record.tipo || '').toLowerCase();
+    const tipo = tipoRaw === 'ingreso' ? 'INGRESO' : tipoRaw === 'gasto' ? 'GASTO' : 'OTRO';
+    const monto = parseMoneyValue(record.monto);
+    const neto = tipo === 'GASTO' ? -monto : monto;
+    const rawFecha = record.fecha || record.created_at || null;
+    const fechaObj = rawFecha ? new Date(rawFecha) : null;
+    const fecha = fechaObj && !Number.isNaN(fechaObj.getTime())
+      ? fechaObj.toLocaleString('es-CO')
+      : String(rawFecha || '');
+
+    if (tipo === 'INGRESO') ingresos += monto;
+    if (tipo === 'GASTO') gastos += monto;
+
+    return {
+      '#': index + 1,
+      ID: record.id ?? '',
+      Fecha: fecha,
+      Tipo: tipo,
+      Concepto: record.concepto || '',
+      'Monto (COP)': monto,
+      'Monto Neto (COP)': neto,
+    };
+  });
+
+  const balance = ingresos - gastos;
+  const resumenRows = [
+    { Indicador: 'Registros exportados', Valor: records.length },
+    { Indicador: 'Total ingresos (COP)', Valor: ingresos },
+    { Indicador: 'Total gastos (COP)', Valor: gastos },
+    { Indicador: 'Balance neto (COP)', Valor: balance },
+    { Indicador: 'Fecha de exportación', Valor: new Date().toLocaleString('es-CO') },
+  ];
+
+  const movimientosSheet = XLSX.utils.json_to_sheet(movimientosRows);
+  movimientosSheet['!cols'] = [
+    { wch: 6 },
+    { wch: 10 },
+    { wch: 22 },
+    { wch: 14 },
+    { wch: 56 },
+    { wch: 20 },
+    { wch: 20 },
+  ];
+
+  const resumenSheet = XLSX.utils.json_to_sheet(resumenRows);
+  resumenSheet['!cols'] = [{ wch: 42 }, { wch: 24 }];
+
+  XLSX.utils.book_append_sheet(workbook, movimientosSheet, 'Movimientos');
+  XLSX.utils.book_append_sheet(workbook, resumenSheet, 'Resumen');
+
+  const buffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
+  return Buffer.isBuffer(buffer) ? buffer : Buffer.from(buffer);
+}
+
 async function analyzeTelegramMessage(prompt: string, userId: string = '', userContext: string = '') {
   try {
     const memoryInstruction = userContext 
@@ -43,7 +658,7 @@ async function analyzeTelegramMessage(prompt: string, userId: string = '', userC
       Debes devolver SIEMPRE un único JSON estructurado seleccionando el intent más adecuado. Y OPCIONALMENTE la clave "nuevo_aprendizaje" si corresponde según la memoria.
 
       1. Si el usuario pide generar una COTIZACIÓN:
-      { "intent": "cotizacion", "respuesta": "Claro jefe, he preparado los datos de la cotización. Revísalos antes de enviarla en texto:", "cliente": "Nombre", "valor": 0, "servicio": "Resumen técnico..." }
+      { "intent": "cotizacion", "respuesta": "Claro jefe, he preparado los datos de la cotización. Revísalos antes de enviarla en texto:", "cliente": "Nombre", "valor": 0, "servicio": "Resumen técnico; Hosting en Vercel; SEO Técnico; Límite de Sanity..." }
       
       2. Si pide generar CUENTA DE COBRO:
       { "intent": "cuenta_cobro", "respuesta": "Excelente, aquí tienes el desglose para cobrar. Confírmame.", "cliente": "Nombre", "valor": 0, "servicio": "Detalle del cobro" }
@@ -54,14 +669,14 @@ async function analyzeTelegramMessage(prompt: string, userId: string = '', userC
       4. Si el usuario pregunta por ESTADO financiero, resumen o balances:
       { "intent": "finanza_resumen", "respuesta": "Entendido jefe, aquí tienes tus números:" }
 
-      5. Si el usuario pide ELIMINAR O BORRAR un registro financiero:
+      5. Si el usuario pide ELIMINAR O BORRAR un registro financiero (por monto o concepto):
       { "intent": "finanza_buscar_eliminar", "respuesta": "Buscando esos registros para eliminar...", "busqueda": "Monto o palabra clave a buscar" }
 
-      6. Si el usuario pide EXPORTAR finanzas:
-      { "intent": "finanza_exportar_excel", "respuesta": "Listo jefe, preparo el Excel..." }
+      6. Si el usuario pide EXPORTAR finanzas a Excel (xlsx), descargar informe, reporte para contabilidad o archivo de movimientos:
+      { "intent": "finanza_exportar_excel", "respuesta": "Listo jefe, preparo el Excel con todos los movimientos para exportarlo." }
 
-      7. Si el usuario pide AGREGAR una nueva columna:
-      { "intent": "finanza_propuesta_columna", "respuesta": "Te pido autorización.", "columna": "nombre", "tipo_sql": "text", "motivo": "Razón" }
+      7. Si el usuario pide AGREGAR/CREAR una nueva columna en la tabla de finanzas, o si detectas que sería útil proponer una nueva columna:
+      { "intent": "finanza_propuesta_columna", "respuesta": "Antes de tocar estructura, te pido autorización.", "columna": "nombre_columna", "tipo_sql": "text", "motivo": "Razón de negocio" }
 
       8. Chatter general, inversión:
       { "intent": "chat", "respuesta": "Tu respuesta amistosa que respete la memoria del usuario." }
@@ -193,9 +808,9 @@ export async function POST(req: Request) {
         }
       } else {
         await sendMessage(chatId, '🧠 <i>K&T Brain trabajando...</i>');
-        
-        // 5.4.1. Extraer Memoria del Usuario (Aprendizaje Continuo)
-        const fromIdStr = update.message.from?.id.toString() || '';
+
+        // Extraer Memoria del Usuario
+        const fromIdStr = update.message?.from?.id.toString() || update.callback_query?.from.id.toString() || '';
         let userContext = '';
         if (fromIdStr) {
           const { data: memData } = await supabase.from('telegram_users_memory').select('general_context').eq('user_id', fromIdStr).single();
@@ -204,17 +819,17 @@ export async function POST(req: Request) {
 
         const data = await analyzeTelegramMessage(text, fromIdStr, userContext);
         
-        // 5.4.2. Guardar nuevos aprendizajes si la IA lo detectó
+        // Guardar nuevos aprendizajes si la IA lo detectó
         if (data.nuevo_aprendizaje && fromIdStr) {
           const appendedContext = userContext ? `${userContext}\n- ${data.nuevo_aprendizaje}` : `- ${data.nuevo_aprendizaje}`;
           await supabase.from('telegram_users_memory').upsert({
             user_id: fromIdStr,
-            first_name: update.message.from?.first_name || '',
-            username: update.message.from?.username || '',
+            first_name: update.message?.from?.first_name || update.callback_query?.from.first_name || '',
+            username: update.message?.from?.username || update.callback_query?.from.username || '',
             general_context: appendedContext,
             updated_at: new Date().toISOString()
           }, { onConflict: 'user_id' });
-          console.log(`[K&T Bot] Nuevo aprendizaje guardado para ${fromIdStr}: ${data.nuevo_aprendizaje}`);
+          console.log(`[K&T Bot] Nuevo aprendizaje guardado: ${data.nuevo_aprendizaje}`);
         }
 
         if (data.intent === 'cotizacion') {
