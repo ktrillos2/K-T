@@ -675,10 +675,19 @@ async function analyzeTelegramMessage(prompt: string, userId: string = '', userC
       6. Si el usuario pide EXPORTAR finanzas a Excel (xlsx), descargar informe, reporte para contabilidad o archivo de movimientos:
       { "intent": "finanza_exportar_excel", "respuesta": "Listo jefe, preparo el Excel con todos los movimientos para exportarlo." }
 
-      7. Si el usuario pide AGREGAR/CREAR una nueva columna en la tabla de finanzas, o si detectas que sería útil proponer una nueva columna:
-      { "intent": "finanza_propuesta_columna", "respuesta": "Antes de tocar estructura, te pido autorización.", "columna": "nombre_columna", "tipo_sql": "text", "motivo": "Razón de negocio" }
+      7. Si el usuario pide ESTADÍSTICAS de ingresos, comparativas de mejoramiento de ingresos del mes o reportes de crecimiento:
+      { "intent": "finanza_estadisticas", "respuesta": "Voy a calcular la mejora de ingresos..." }
 
-      8. Chatter general, inversión:
+      8. Si el usuario reporta un PAGO a EMPLEADO, DEUDA o ASIGNACIÓN DE PROYECTO (ej. "pagado 50% a Saidy por Quercus", "falta pagar a Saidy..."):
+      { "intent": "empleado_pago", "respuesta": "¿Actualizo la deuda de este empleado en el sistema?", "empleado": "Nombre (ej. Saidy)", "proyecto": "Nombre proyecto", "monto_total": 0, "monto_pagado": 0, "monto_pendiente": 0 }
+
+      9. Si el usuario pregunta por ESTADO DE DEUDAS de TODOS los empleados o de uno específico:
+      { "intent": "empleado_estado", "respuesta": "Buscando deudas de empleados...", "empleado": "Nombre o 'todos'" }
+
+      10. Si el usuario explícitamente pide CREAR UNA NUEVA TABLA EN BASE DE DATOS (que no sea de finanzas ni de empleados) o agregar columnas a otras tablas:
+      { "intent": "db_creacion", "respuesta": "Antes de crear la tabla, requiero tu confirmación jefe.", "sql_query": "CREATE TABLE IF NOT EXISTS tabla_nueva (id uuid DEFAULT gen_random_uuid() PRIMARY KEY, ...);", "motivo": "Motivo deducido" }
+
+      11. Chatter general:
       { "intent": "chat", "respuesta": "Tu respuesta amistosa que respete la memoria del usuario." }
 
       REGLA CRÍTICA DE SEGURIDAD DE DATOS:
@@ -815,8 +824,8 @@ export async function POST(req: Request) {
       } else {
         await sendMessage(chatId, '🧠 <i>K&T Brain trabajando...</i>');
 
-        // Extraer Memoria del Usuario
-        const fromIdStr = update.message?.from?.id.toString() || update.callback_query?.from.id.toString() || '';
+        // Memoria Global para la Agencia (TODOS los autorizados comparten contexto)
+        const fromIdStr = 'global_agencia';
         let userContext = '';
         let chatHistory: any[] = [];
         if (fromIdStr) {
@@ -1221,6 +1230,55 @@ export async function POST(req: Request) {
           console.error('[Telegram API] Error enviando cuenta de cobro:', err);
           await sendMessage(chatId, '❌ Hubo un error enviando la cuenta de cobro. Intenta de nuevo.');
           alertText = 'Error en Cuenta';
+        }
+      } else if (callbackData === 'EXEC_SQL') {
+        const { data: pend, error: pendErr } = await supabase.from('kt_pendientes').select('*').eq('tipo', 'db_creacion').eq('estado', 'pendiente').order('id', { ascending: false }).limit(1).single();
+        if (pendErr || !pend) {
+          await sendMessage(chatId, '❌ No encontré comandos SQL pendientes o la sesión expiró.');
+        } else {
+          try {
+            const sqlQuery = (pend.concepto || '').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+            const { error: rpcErr } = await supabase.rpc('exec_sql', { query_text: sqlQuery });
+            if (rpcErr) { 
+               await sendMessage(chatId, `❌ <b>Error Postgres:</b>\n${rpcErr.message}\n\n<i>Asegúrate de agregar la función 'exec_sql' en Supabase.</i>`); 
+            } else {
+               await sendMessage(chatId, `✅ ¡Operación de Base de Datos ejecutada con éxito!`);
+               await supabase.from('kt_pendientes').update({ estado: 'completado' }).eq('id', pend.id);
+            }
+          } catch(e) { console.error(e); }
+        }
+      } else if (callbackData === 'CONFIRM_EMP') {
+        const { data: pend, error: pendErr } = await supabase.from('kt_pendientes').select('*').eq('tipo', 'empleado_pago').eq('estado', 'pendiente').order('id', { ascending: false }).limit(1).single();
+        if (pendErr || !pend) {
+          await sendMessage(chatId, '❌ No encontré datos de empleado pendientes.');
+        } else {
+          try {
+            const payload = JSON.parse(pend.concepto);
+            let pAcum = 0;
+            const { data: eData } = await supabase.from('kt_empleados_pagos').select('*').eq('empleado', payload.empleado).eq('proyecto', payload.proyecto).limit(1).single();
+            if (eData) { pAcum = Number(eData.monto_pagado || 0); }
+            
+            const nuevoPagado = pAcum + Number(payload.pagado || 0);
+            const total = Number(payload.total || (eData?.monto_total||0));
+            const nuevoPendiente = total - nuevoPagado;
+
+            const { error: dbErr } = await supabase.from('kt_empleados_pagos').upsert({
+               empleado: payload.empleado,
+               proyecto: payload.proyecto,
+               monto_total: total,
+               monto_pagado: nuevoPagado,
+               monto_pendiente: nuevoPendiente < 0 ? 0 : nuevoPendiente,
+               estado: nuevoPendiente <= 0 ? 'pagado' : 'pendiente',
+               fecha: new Date().toISOString()
+            }, { onConflict: 'empleado,proyecto' });
+
+            if (dbErr) {
+              await sendMessage(chatId, `❌ Error DB: ${dbErr.message}\n\n<i>Instala la tabla kt_empleados_pagos.</i>`);
+            } else {
+               await sendMessage(chatId, `✅ <b>Registro Actualizado</b>\n\n👷🏻 <b>${payload.empleado}</b> en ${payload.proyecto}\n💵 Pagado: ${nuevoPagado.toLocaleString('es-CO')}\n⚠️ Restante: ${(nuevoPendiente<0?0:nuevoPendiente).toLocaleString('es-CO')}`);
+               await supabase.from('kt_pendientes').update({ estado: 'completado' }).eq('id', pend.id);
+            }
+          } catch(e) { console.error(e); }
         }
       } else if (callbackData === 'CONFIRM_FIN') {
         await sendMessage(chatId, `⏳ Guardando...`);
