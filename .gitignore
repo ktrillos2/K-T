@@ -35,3 +35,6 @@ scripts/
 *.config*.ts
 *.local
 .env.sentry-build-plugin
+
+# Temporal Patch Scripts
+patch_*.js
