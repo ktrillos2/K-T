@@ -439,7 +439,7 @@ export default function InternationalSection() {
                             {[
                                 { title: "Horario Global", desc: "Soporte flexible para tu zona" },
                                 { title: "Pagos Multi-divisa", desc: "USD, COP recibidos" },
-                                { title: "Tecnología", desc: "Stack moderno y escalable" },
+                                { title: "Stack de Alto Rendimiento", desc: "Next.js, Tailwind, Vercel & Sanity" },
                                 { title: "Calidad Remota", desc: "Flujos de trabajo asíncronos" }
                             ].map((item, idx) => (
                                 <motion.div

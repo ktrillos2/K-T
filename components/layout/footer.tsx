@@ -43,13 +43,27 @@ export default function Footer() {
           </Link>
         </motion.div>
 
-        <motion.p
-          className="text-sm text-muted-foreground font-mono flex items-center gap-1"
+        <motion.div
+          className="text-sm text-muted-foreground font-mono text-center md:text-left max-w-sm"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          {dictionary.footer.made} <Heart className="w-4 h-4 text-white fill-white" />
+          {/* @ts-ignore */}
+          <p className="font-semibold text-neutral-300 mb-1">{dictionary.footer.guarantee}</p>
+          {/* @ts-ignore */}
+          <p className="text-xs">{dictionary.footer.legal}</p>
+        </motion.div>
+
+        <motion.p
+          className="text-sm text-muted-foreground font-mono w-full md:w-auto text-center mt-4 md:mt-0"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <a href="https://www.kytcode.lat" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-end gap-1 hover:text-white transition-colors">
+            Desarrollado por K&T <Heart className="w-4 h-4 text-white fill-white" />
+          </a>
         </motion.p>
       </div>
     </footer>

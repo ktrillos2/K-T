@@ -221,7 +221,22 @@ export default function AboutSection() {
             transition={{ duration: 0.6 }}
             className="h-full flex flex-col"
           >
-            <p className="text-white font-mono text-lg mb-8 leading-relaxed">{dictionary.about.description}</p>
+            <p className="text-white font-mono text-lg mb-6 leading-relaxed">{dictionary.about.description}</p>
+            
+            {/* EEAT Authority Section */}
+            <div className="flex items-center gap-4 mb-8 bg-white/5 p-4 rounded-xl border border-white/10 w-fit">
+              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500/50 flex-shrink-0">
+                {/* Fallback image if no personal headshot exists, using a developer icon */}
+                <div className="w-full h-full bg-blue-900 flex items-center justify-center">
+                  <Users className="w-6 h-6 text-blue-300" />
+                </div>
+              </div>
+              <div>
+                <p className="text-white font-bold font-title text-sm">Keyner Steban Trillos</p>
+                <p className="text-neutral-400 font-mono text-xs max-w-xs">{/* @ts-ignore */}
+                {dictionary.about.teamAuthority || "Arquitecto de Software & CEO"}</p>
+              </div>
+            </div>
 
             <div className="space-y-4">
               {values.map((value, i) => (

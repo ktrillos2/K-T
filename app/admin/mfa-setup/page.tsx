@@ -33,7 +33,7 @@ export default function MFASetupPage() {
                 // 1. Si ya tiene un factorTOTP enrolado Y verificado, en teoría no debería estar en esta página, pero si lo está:
                 if (enrolledFactors.length > 0) {
                     // Ya tiene. Simplemente redirigimos al CRM o al verify.
-                    router.push('/CRM')
+                    router.push('/escritorio')
                     return
                 }
 
@@ -101,7 +101,7 @@ export default function MFASetupPage() {
             if (verify.error) throw verify.error
 
             // ¡Verificación completada!
-            router.push('/CRM')
+            router.push('/escritorio')
             router.refresh()
         } catch (err: any) {
             setError(err.message || 'El código es inválido o ha caducado.')

@@ -25,7 +25,8 @@ export const es = {
     title: "Expertos en Desarrollo Web de Máximo Rendimiento",
     subtitle: "// Estructura, Código y SEO Técnico",
     description:
-      "Construimos ecosistemas digitales invencibles. Aplicamos SEO desde la raíz de código y alojamos siempre en Vercel para garantizar velocidades de carga perfectas. Si quieres crear una página web que domine tu sector, nuestro código en Next.js es la respuesta.",
+      "Construimos ecosistemas digitales invencibles. Liderados por ingenieros de software, garantizamos arquitecturas escalables de alto rendimiento utilizando Next.js, Tailwind CSS, Vercel y CMS Headless como Sanity. No hacemos plantillas, hacemos ingeniería.",
+    teamAuthority: "Arquitectura y código bajo supervisión de Ingenieros de Software calificados.",
     values: {
       innovation: {
         title: "Evolución WPO",
@@ -101,7 +102,7 @@ export const es = {
   international: {
     title: "Sin Fronteras",
     subtitle: "// Global Mindset",
-    description: "Aunque nuestra base está en Colombia, nuestro código viaja por todo el mundo. Trabajamos con clientes en toda Latinoamérica y Estados Unidos.",
+    description: "Aunque nuestra base está constituida legalmente en Colombia, nuestro software respalda operaciones a nivel global. Hemos entregado más de 100 proyectos web a la medida e impactado negocios de alto valor en toda Latinoamérica y Estados Unidos.",
     activeClients: "Clientes Activos",
     americas: "Las Américas"
   },
@@ -150,5 +151,7 @@ export const es = {
     made: "Hecho con",
     by: "por K&T",
     privacy: "Política de Privacidad",
+    legal: "Agencia constituida en Cúcuta, Colombia (RUT: 1090384736-8). Operación global.",
+    guarantee: "100% Garantía de Código • Mantenimiento • Soporte Post-Lanzamiento",
   },
 }
