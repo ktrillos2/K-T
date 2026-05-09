@@ -81,7 +81,7 @@ export default function LoginPage() {
             if (verify.error) throw verify.error
 
             // Redirige
-            router.push('/escritorio')
+            router.push('/crm')
             router.refresh()
         } catch (err: any) {
             setMessage(err.message || 'Código inválido o expirado.')

@@ -2,6 +2,7 @@
 
 import Script from "next/script"
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 
 export default function GoogleAnalytics() {
     const [shouldLoad, setShouldLoad] = useState(false)
@@ -9,8 +10,15 @@ export default function GoogleAnalytics() {
     const gaId = "G-6SBSC9LHSY"
     const adsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-17825211485"
 
+    const pathname = usePathname()
+    const isAdminRoute = pathname?.startsWith('/admin') || 
+                        pathname?.startsWith('/studio') ||
+                        pathname?.startsWith('/crm') ||
+                        pathname?.startsWith('/proyectos') ||
+                        pathname?.startsWith('/finanzas')
+
     useEffect(() => {
-        if (process.env.NODE_ENV !== "production") return
+        if (process.env.NODE_ENV !== "production" || isAdminRoute) return
 
         const enable = () => {
             setShouldLoad(true)
@@ -33,7 +41,7 @@ export default function GoogleAnalytics() {
         }
     }, [])
 
-    if (process.env.NODE_ENV !== "production") return null
+    if (process.env.NODE_ENV !== "production" || isAdminRoute) return null
     if (!shouldLoad) return null
 
     return (

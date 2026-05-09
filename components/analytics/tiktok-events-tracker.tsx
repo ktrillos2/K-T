@@ -8,6 +8,8 @@ export default function TikTokEventsTracker() {
     const pathname = usePathname()
 
     useEffect(() => {
+        if (pathname.startsWith('/admin') || pathname.startsWith('/crm') || pathname.startsWith('/proyectos') || pathname.startsWith('/finanzas') || pathname.startsWith('/usuarios')) return
+
         // Track ViewContent on path change
         trackTikTokEvent("ViewContent", {
             properties: {

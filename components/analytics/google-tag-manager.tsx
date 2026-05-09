@@ -2,11 +2,21 @@
 
 import Script from "next/script"
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 
 export default function GoogleTagManager() {
     const [shouldLoad, setShouldLoad] = useState(false)
 
+    const pathname = usePathname()
+    const isAdminRoute = pathname?.startsWith('/admin') || 
+                        pathname?.startsWith('/studio') ||
+                        pathname?.startsWith('/crm') ||
+                        pathname?.startsWith('/proyectos') ||
+                        pathname?.startsWith('/finanzas') ||
+                        pathname?.startsWith('/usuarios')
+
     useEffect(() => {
+        if (isAdminRoute) return
         const enable = () => {
             setShouldLoad(true)
         }
@@ -24,7 +34,7 @@ export default function GoogleTagManager() {
         }
     }, [])
 
-    if (!shouldLoad) return null
+    if (!shouldLoad || isAdminRoute) return null
 
     return (
         <>

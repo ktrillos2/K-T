@@ -1,7 +1,7 @@
 import { withSentryConfig } from '@sentry/nextjs';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  serverExternalPackages: ['imapflow', 'mailparser', 'pino', 'thread-stream', 'pino-elasticsearch'],
+  serverExternalPackages: ['imapflow', 'mailparser', 'pino', 'thread-stream', 'pino-elasticsearch', 'import-in-the-middle'],
   typescript: {
     ignoreBuildErrors: true,
   },

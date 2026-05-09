@@ -12,6 +12,11 @@ export default function MetaPixel() {
 
     useEffect(() => {
         if (process.env.NODE_ENV !== "production") return
+        const isAdmin = pathname.startsWith('/admin') || 
+                        pathname.startsWith('/crm') || 
+                        pathname.startsWith('/proyectos') || 
+                        pathname.startsWith('/finanzas')
+        if (isAdmin) return
 
         const enable = () => {
             setShouldLoad(true)
@@ -32,7 +37,7 @@ export default function MetaPixel() {
             window.removeEventListener("scroll", enable)
             window.removeEventListener("touchstart", enable)
         }
-    }, [])
+    }, [pathname])
 
     useEffect(() => {
         if (shouldLoad && typeof window !== "undefined") {
@@ -44,7 +49,11 @@ export default function MetaPixel() {
         }
     }, [pathname, searchParams, shouldLoad])
 
-    if (process.env.NODE_ENV !== "production") return null
+    const isAdmin = pathname.startsWith('/admin') || 
+                    pathname.startsWith('/crm') || 
+                    pathname.startsWith('/proyectos') || 
+                    pathname.startsWith('/finanzas')
+    if (process.env.NODE_ENV !== "production" || isAdmin) return null
 
     return (
         <>

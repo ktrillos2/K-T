@@ -2,9 +2,11 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function updateSession(request: NextRequest) {
-    // Avoid doing expensive queries on purely public routes. Let's do it on anything aiming for CRM.
-    // Note: /admin is reserved for Sanity Studio which handles its own authentication.
-    const isProtectedPath = request.nextUrl.pathname.startsWith('/escritorio');
+    const pathname = request.nextUrl.pathname
+    const isProtectedPath = pathname.startsWith('/crm') || 
+                          pathname.startsWith('/proyectos') || 
+                          pathname.startsWith('/finanzas') ||
+                          pathname.startsWith('/usuarios')
 
     if (!isProtectedPath) {
         return NextResponse.next({ request });
@@ -49,21 +51,18 @@ export async function updateSession(request: NextRequest) {
         const { data } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel()
         const currentLevel = data?.currentLevel
 
-        const isSetupPath = request.nextUrl.pathname.startsWith('/admin/mfa-setup') || request.nextUrl.pathname.startsWith('/escritorio/mfa-setup')
+        const isSetupPath = pathname.startsWith('/admin/mfa-setup')
 
         if (currentLevel !== 'aal2') {
-            // User is at aal1 but looking for generic guarded paths. Redirect to MFA setup/verify.
-            // We will handle enrollment or verifying within the same setup challenge page / components.
             if (!isSetupPath) {
                 const url = request.nextUrl.clone()
-                url.pathname = '/admin/mfa-setup' // We can put our component here
+                url.pathname = '/admin/mfa-setup'
                 return NextResponse.redirect(url)
             }
         } else {
-            // They are aal2, if they try to go to the setup path, boot them to the CRM so they don't get stuck finding a QR code again
             if (isSetupPath) {
                 const url = request.nextUrl.clone()
-                url.pathname = '/escritorio'
+                url.pathname = '/crm'
                 return NextResponse.redirect(url)
             }
         }

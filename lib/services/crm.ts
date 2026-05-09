@@ -1,9 +1,12 @@
-import { supabase } from '../db'
+'use server'
+
+import { supabase } from '../db' // uses service role, bypasses RLS for panel
 
 export interface Lead {
     id: string
     name: string
     phone: string
+    country: string
     source: string // 'TikTok', 'Organico', etc.
     status: string // 'Nuevo', 'Contactado', 'Convertido'
     created_at: string
@@ -17,25 +20,28 @@ export async function syncLeadsFromExcel(fileUrl?: string) {
     try {
         console.log(`Simulando sincronización de leads desde: ${fileUrl || 'URL por defecto'}`)
         
-        // Aquí iría la lógica real usando 'xlsx' o un fetch a Google Sheets CSV,
-        // por ahora simulamos la inserción de 2 leads de TikTok:
         const mockLeads = [
             {
-                name: 'Cliente TikTok 1',
-                phone: '+573000000001',
+                name: 'Juan Valdez',
+                phone: '+573101234567',
+                country: 'Colombia',
                 source: 'TikTok',
                 status: 'Nuevo'
             },
             {
-                name: 'Cliente TikTok 2',
-                phone: '+573000000002',
-                source: 'TikTok',
-                status: 'Contactado'
+                name: 'Carla Mendez',
+                phone: '+573209876543',
+                country: 'México',
+                source: 'Web',
+                status: 'Nuevo'
             }
         ]
 
-        // Simulamos inserción en Supabase (debes tener la tabla 'leads' creada)
-        // await supabase.from('leads').upsert(mockLeads, { onConflict: 'phone' })
+        const { error } = await supabase
+            .from('leads')
+            .upsert(mockLeads, { onConflict: 'phone' })
+
+        if (error) throw error
 
         return { success: true, count: mockLeads.length }
     } catch (error) {
@@ -45,23 +51,24 @@ export async function syncLeadsFromExcel(fileUrl?: string) {
 }
 
 export async function getLeads(): Promise<Lead[]> {
-    // Para probar la UI mientras configuras la BD
-    return [
-        {
-            id: '1',
-            name: 'Juan Pérez',
-            phone: '+57 321 000 0000',
-            source: 'TikTok',
-            status: 'Nuevo',
-            created_at: new Date().toISOString()
-        },
-        {
-            id: '2',
-            name: 'María Gómez',
-            phone: '+57 310 000 0000',
-            source: 'Organico',
-            status: 'Contactado',
-            created_at: new Date().toISOString()
-        }
-    ]
+    const { data, error } = await supabase
+        .from('leads')
+        .select('*')
+        .order('created_at', { ascending: false })
+    
+    if (error) {
+        console.error('Error fetching leads:', error)
+        return []
+    }
+    return data || []
+}
+
+export async function updateLeadStatus(id: string, status: string) {
+    const { error } = await supabase
+        .from('leads')
+        .update({ status, updated_at: new Date().toISOString() })
+        .eq('id', id)
+    
+    if (error) throw error
+    return { success: true }
 }

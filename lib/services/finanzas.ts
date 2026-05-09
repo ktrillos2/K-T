@@ -1,4 +1,7 @@
+'use server'
+
 import { supabase } from '../db' // uses service role, bypasses RLS for panel
+import { getUserProfile } from './auth'
 
 export interface Transaction {
     id: string
@@ -6,16 +9,16 @@ export interface Transaction {
     amount: number
     account: 'Nequi' | 'Bancolombia' | 'Efectivo'
     description: string
+    user_email?: string
     created_at: string
 }
 
 export async function getBalances() {
-    // We will do a generic query to get all transactions and calculate on server
-    // In a huge app this would be an RPC call doing SUM, but for a personal agency this is fine.
     try {
         const { data, error } = await supabase
             .from('financial_transactions')
             .select('*')
+            .order('created_at', { ascending: false })
 
         if (error) {
             console.error('Error fetching transactions:', error)
@@ -42,15 +45,18 @@ export async function getBalances() {
     }
 }
 
-export async function addTransaction(data: Omit<Transaction, 'id' | 'created_at'>) {
+export async function addTransaction(data: Omit<Transaction, 'id' | 'created_at' | 'user_email'>) {
     try {
+        const profile = await getUserProfile()
+        
         const { error } = await supabase
             .from('financial_transactions')
             .insert([{
                 type: data.type,
                 amount: data.amount,
                 account: data.account,
-                description: data.description
+                description: data.description,
+                user_email: profile?.email || 'unknown'
             }])
 
         if (error) throw error

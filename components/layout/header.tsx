@@ -48,35 +48,13 @@ export default function Header() {
     }
   }, [])
 
-  // Hide header on admin pages
-  if (pathname?.startsWith('/admin')) {
+  // Hide header on admin and dashboard pages
+  const adminRoutes = ['/crm', '/proyectos', '/finanzas', '/usuarios', '/admin', '/studio'];
+  const isAdminPage = adminRoutes.some(route => pathname?.startsWith(route));
+
+  if (isAdminPage) {
     return null
   }
-
-  useEffect(() => {
-    const update = () => {
-      rafRef.current = null
-      const next = window.scrollY > 50
-      if (next !== lastScrolledRef.current) {
-        lastScrolledRef.current = next
-        setIsScrolled(next)
-      }
-    }
-
-    const handleScroll = () => {
-      if (rafRef.current !== null) return
-      rafRef.current = window.requestAnimationFrame(update)
-    }
-
-    // Initialize once
-    update()
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-      if (rafRef.current !== null) window.cancelAnimationFrame(rafRef.current)
-    }
-  }, [])
 
   return (
     <>

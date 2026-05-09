@@ -140,8 +140,14 @@ export default function FloatingButtons() {
         };
     }, [isQuotationUrl])
 
-    // Don't show any floating UI on admin or studio routes
-    if (pathname?.startsWith('/admin') || pathname?.startsWith('/studio')) return null
+    // Don't show any floating UI on admin, studio, or dashboard routes
+    const isDashboardRoute = pathname?.startsWith('/admin') || 
+                            pathname?.startsWith('/studio') || 
+                            pathname?.startsWith('/crm') || 
+                            pathname?.startsWith('/proyectos') ||
+                            pathname?.startsWith('/finanzas');
+                            
+    if (isDashboardRoute) return null
 
     const handleWhatsAppClick = () => {
         notifyInteraction("WhatsApp Button (Direct)")

@@ -11,6 +11,13 @@ export default function TiktokPixel() {
     const [shouldLoad, setShouldLoad] = useState(false)
 
     useEffect(() => {
+        if (process.env.NODE_ENV !== "production") return
+        const isAdmin = pathname.startsWith('/admin') || 
+                        pathname.startsWith('/crm') || 
+                        pathname.startsWith('/proyectos') || 
+                        pathname.startsWith('/finanzas')
+        if (isAdmin) return
+
         const enable = () => {
             setShouldLoad(true)
         }
@@ -26,7 +33,7 @@ export default function TiktokPixel() {
             window.removeEventListener("scroll", enable)
             window.removeEventListener("touchstart", enable)
         }
-    }, [])
+    }, [pathname])
 
     useEffect(() => {
         // Este efecto gestiona TANTO la carga inicial como la navegación
@@ -38,6 +45,11 @@ export default function TiktokPixel() {
         }
     }, [pathname, searchParams, isLoaded, shouldLoad])
 
+    const isAdmin = pathname.startsWith('/admin') || 
+                    pathname.startsWith('/crm') || 
+                    pathname.startsWith('/proyectos') || 
+                    pathname.startsWith('/finanzas')
+    if (process.env.NODE_ENV !== 'production' || isAdmin) return null
     if (!shouldLoad) return null
 
     return (

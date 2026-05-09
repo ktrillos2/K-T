@@ -115,25 +115,25 @@ export const metadata: Metadata = {
   },
 }
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "K&T Agencia Digital",
-    "alternateName": "K&T Agency",
-    "url": "https://www.kytcode.lat/",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://www.kytcode.lat/blog?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "@id": "https://www.kytcode.lat/#organization",
-    "name": "K&T Agencia Digital",
-    "alternateName": "K&T Agency",
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "K&T Agencia Digital",
+  "alternateName": "K&T Agency",
+  "url": "https://www.kytcode.lat/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.kytcode.lat/blog?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+
+const professionalServiceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://www.kytcode.lat/#organization",
+  "name": "K&T Agencia Digital",
+  "alternateName": "K&T Agency",
   "image": "https://www.kytcode.lat/images/logo.png",
   "logo": "https://www.kytcode.lat/images/logo.png",
   "url": "https://www.kytcode.lat",
@@ -214,7 +214,6 @@ const jsonLd = [
     "https://www.tiktok.com/@kytweb"
   ]
 }
-]
 
 export default function RootLayout({
   children,
@@ -251,7 +250,11 @@ export default function RootLayout({
         </LazyMotion>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceJsonLd) }}
         />
         <Analytics />
         <SpeedInsights />
