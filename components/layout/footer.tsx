@@ -61,7 +61,12 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <a href="https://www.kytcode.lat" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center md:justify-end gap-1 hover:text-white transition-colors">
+          <a 
+            href="https://www.kytcode.lat" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="flex items-center justify-center md:justify-end gap-1 hover:text-white transition-colors"
+          >
             Desarrollado por K&T <Heart className="w-4 h-4 text-white fill-white" />
           </a>
         </motion.p>

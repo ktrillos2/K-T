@@ -34,7 +34,11 @@ scripts/
 *.gs
 *.config*.ts
 *.local
+*.log
+*.sql
 .env.sentry-build-plugin
+dalia.json
 
 # Temporal Patch Scripts
 patch_*.js
+

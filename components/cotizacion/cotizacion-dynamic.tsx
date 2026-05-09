@@ -45,6 +45,7 @@ interface CotizacionData {
   termsCards: { title: string; content: string; isFullWidth: boolean; isWarning: boolean }[]
   paymentTitle: string
   showInternationalPayments: boolean
+  showNationalPayments: boolean
   internationalPaymentMethods?: { name: string; description: string; recommended: boolean }[]
   warrantyTitle: string
   warrantyDescription: string
@@ -456,175 +457,95 @@ export default function CotizacionDynamicPage({ data, projects = [] }: { data: C
                 </div>
 
                 {data.showInternationalPayments && data.internationalPaymentMethods && data.internationalPaymentMethods.length > 0 && (
-                  <div className="grid md:grid-cols-2 gap-6 mb-8">
-                    {/* International Payments */}
-                    <div className="p-6 sm:p-8 rounded-2xl bg-zinc-900 border border-white/10 relative overflow-hidden shadow-2xl">
-                      <div className="absolute left-0 top-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-blue-500"></div>
-                      <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                        <Globe className="w-5 h-5 text-emerald-400" />
-                        Pagos Internacionales (Exterior)
-                      </h3>
-                      <ul className="space-y-6">
-                        {data.internationalPaymentMethods.map((method, i) => {
-                          const isDolarApp = method.name.toLowerCase().includes('dolarapp');
-                          return (
-                          <li key={i} className={i < data.internationalPaymentMethods!.length - 1 ? 'border-b border-white/10 pb-4' : ''}>
-                            <p className="font-bold text-white mb-2 flex items-center">
-                              {method.name}
-                              {method.recommended && (
-                                <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full ml-2 uppercase tracking-wide">Recomendado</span>
-                              )}
-                            </p>
-                            
-                            {isDolarApp ? (
-                              <div className="mt-3">
-                                <p className="text-xs text-white/60 uppercase tracking-widest mb-1.5 font-bold">DolarTag ($)</p>
-                                <div className="flex items-center gap-2">
-                                  <p className="text-emerald-400 text-sm sm:text-base font-bold tracking-widest font-mono bg-emerald-950/40 px-3 py-1.5 rounded-lg border border-emerald-500/20">$keynertrillos</p>
-                                  <button onClick={() => handleCopy('$keynertrillos', 'cuenta')} className="p-2 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white bg-black/20" title="Copiar DolarTag">
-                                    {copiedCuenta ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
-                                  </button>
-                                </div>
-                                <p className="text-xs text-white/50 mt-3 max-w-sm">DolarApp permite recibir dólares rápidos desde cualquier lugar del mundo. (Descarga la app en tu país y transfiere al DolarTag).</p>
-                              </div>
-                            ) : (
-                                <p className="text-sm text-white/70">{formatText(method.description)}</p>
+                  <div className="p-6 sm:p-8 rounded-2xl bg-zinc-900 border border-white/10 mb-8 relative overflow-hidden shadow-2xl">
+                    <div className="absolute left-0 top-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-blue-500"></div>
+                    <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                      <Globe className="w-5 h-5 text-emerald-400" />
+                      Pagos Internacionales (Exterior)
+                    </h3>
+                    <ul className="space-y-6">
+                      {data.internationalPaymentMethods.map((method, i) => (
+                        <li key={i} className={i < data.internationalPaymentMethods!.length - 1 ? 'border-b border-white/10 pb-4' : ''}>
+                          <p className="font-bold text-white mb-2 flex items-center">
+                            {method.name}
+                            {method.recommended && (
+                              <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full ml-2 uppercase tracking-wide">Recomendado</span>
                             )}
-                          </li>
-                        )})}
-                      </ul>
-                    </div>
-
-                    {/* National Payments */}
-                    <div className="p-6 sm:p-8 rounded-2xl bg-zinc-900 border border-white/10 relative overflow-hidden shadow-2xl">
-                      <div className="absolute right-0 top-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-red-500"></div>
-                      <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                        <CreditCard className="w-5 h-5 text-yellow-400" />
-                        Pagos Nacionales (Colombia)
-                      </h3>
-                      <div className="flex flex-col space-y-6">
-                        <div>
-                          <div className="flex items-center justify-between mb-2">
-                            <p className="text-[10px] text-white/60 uppercase tracking-widest font-bold">Banco</p>
-                            <span className="w-8 h-5 rounded bg-white/10 flex items-center justify-center border border-white/20">
-                              <div className="w-2 h-2 rounded-full bg-white/50"></div>
-                            </span>
-                          </div>
-                          <p className="text-xl text-white font-bold tracking-tight">Bancolombia</p>
-                          <div className="grid grid-cols-2 gap-4 mt-4">
-                            <div>
-                              <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Tipo</p>
-                              <p className="text-white text-sm font-medium font-mono">AHORROS</p>
-                            </div>
-                            <div>
-                              <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Número</p>
-                              <div className="flex items-center gap-2">
-                                <p className="text-white text-sm tracking-widest font-mono">91290318578</p>
-                                <button onClick={() => handleCopy('91290318578', 'cuenta')} className="p-1.5 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white" title="Copiar número de cuenta">
-                                  {copiedCuenta ? <Check className="w-3 h-3 text-white" /> : <Copy className="w-3 h-3" />}
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="border-t border-white/10 pt-4">
-                          <div className="grid grid-cols-2 gap-4">
-                            <div>
-                              <p className="text-[10px] text-white/60 uppercase tracking-widest font-bold mb-1">Nequi</p>
-                              <div className="flex items-center gap-2">
-                                <p className="text-white text-sm tracking-widest font-mono">3133087069</p>
-                                <button onClick={() => handleCopy('3133087069', 'nequi')} className="p-1.5 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white" title="Copiar número de Nequi">
-                                  {copiedNequi ? <Check className="w-3 h-3 text-white" /> : <Copy className="w-3 h-3" />}
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                          </p>
+                          <p className="text-sm text-white/70">{formatText(method.description)}</p>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 )}
 
-                {/* Titular Details (shared, always shown) */}
-                {!data.showInternationalPayments && (
-                  <motion.div 
-                    whileHover={{ y: -2 }}
-                    transition={{ duration: 0.3 }}
-                    className="p-6 sm:p-8 rounded-2xl bg-zinc-900 border border-white/10 relative overflow-hidden shadow-2xl mb-6"
-                  >
-                    <div className="absolute right-0 top-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.05)_0%,_transparent_60%)] pointer-events-none"></div>
-                    <div className="grid md:grid-cols-2 gap-8 md:gap-12 relative z-10">
-                      <div className="flex flex-col justify-between space-y-8">
-                        <div>
-                          <div className="flex items-center justify-between mb-2">
-                            <p className="text-[10px] text-white/60 uppercase tracking-widest font-bold">Banco</p>
-                            <span className="w-8 h-5 rounded bg-white/10 flex items-center justify-center border border-white/20">
-                              <div className="w-2 h-2 rounded-full bg-white/50"></div>
-                            </span>
-                          </div>
-                          <p className="text-xl sm:text-2xl text-white font-bold tracking-tight">Bancolombia</p>
-                        </div>
-                        <div className="grid grid-cols-2 gap-6">
+                <motion.div 
+                  whileHover={{ y: -2 }}
+                  transition={{ duration: 0.3 }}
+                  className="p-6 sm:p-8 rounded-2xl bg-zinc-900 border border-white/10 relative overflow-hidden shadow-2xl"
+                >
+                  <div className="absolute right-0 top-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.05)_0%,_transparent_60%)] pointer-events-none"></div>
+                  <div className="grid md:grid-cols-2 gap-8 md:gap-12 relative z-10">
+                    <div className="flex flex-col justify-between space-y-8">
+                      {data.showInternationalPayments ? (
+                        <>
                           <div>
-                            <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Tipo de Cuenta</p>
-                            <p className="text-white text-sm sm:text-base font-medium font-mono">AHORROS</p>
+                            <p className="text-[10px] text-white/60 uppercase tracking-widest mb-2 font-bold">Método Directo</p>
+                            <p className="text-xl sm:text-2xl text-white font-bold tracking-tight">Western Union</p>
                           </div>
                           <div>
-                            <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Número</p>
+                            <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Celular / Contacto</p>
                             <div className="flex items-center gap-2">
-                              <p className="text-white text-sm sm:text-base tracking-widest font-mono">91290318578</p>
-                              <button onClick={() => handleCopy('91290318578', 'cuenta')} className="p-1.5 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white" title="Copiar número de cuenta">
+                              <p className="text-white text-sm sm:text-base tracking-widest font-mono">3116360057</p>
+                              <button onClick={() => handleCopy('3116360057', 'cuenta')} className="p-1.5 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white" title="Copiar celular">
                                 {copiedCuenta ? <Check className="w-4 h-4 text-white" /> : <Copy className="w-4 h-4" />}
                               </button>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-col justify-between space-y-8 pt-8 md:pt-0 border-t border-white/10 md:border-t-0 md:border-l md:border-white/10 md:pl-12">
-                        <div>
-                          <p className="text-[10px] text-white/60 uppercase tracking-widest mb-2 font-bold">Titular</p>
-                          <p className="text-lg sm:text-xl text-white font-medium uppercase tracking-wide leading-tight">Keyner Steban<br/>Trillos Useche</p>
-                        </div>
-                        <div className="grid grid-cols-2 gap-6">
+                        </>
+                      ) : (
+                        <>
                           <div>
-                            <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Cédula y RUT</p>
-                            <p className="text-white text-sm tracking-widest font-mono leading-tight">C.C. 1.090.384.736<br/>RUT: 1090384736-8</p>
+                            <p className="text-[10px] text-white/60 uppercase tracking-widest mb-2 font-bold">Banco</p>
+                            <p className="text-xl sm:text-2xl text-white font-bold tracking-tight">Bancolombia</p>
                           </div>
+                          <div>
+                            <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Número de Cuenta</p>
+                            <div className="flex items-center gap-2">
+                              <p className="text-white text-sm sm:text-base tracking-widest font-mono">91290318578</p>
+                              <button onClick={() => handleCopy('91290318578', 'cuenta')} className="p-1.5 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white" title="Copiar cuenta">
+                                {copiedCuenta ? <Check className="w-4 h-4 text-white" /> : <Copy className="w-4 h-4" />}
+                              </button>
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    <div className="flex flex-col justify-between space-y-8 pt-8 md:pt-0 border-t border-white/10 md:border-t-0 md:border-l md:border-white/10 md:pl-12">
+                      <div>
+                        <p className="text-[10px] text-white/60 uppercase tracking-widest mb-2 font-bold">Beneficiario / Titular</p>
+                        <p className="text-lg sm:text-xl text-white font-medium uppercase tracking-wide leading-tight">Keyner Steban<br/>Trillos Useche</p>
+                      </div>
+                      <div className="grid grid-cols-2 gap-6">
+                        <div>
+                          <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Identificación</p>
+                          <p className="text-white text-sm tracking-widest font-mono">1.090.384.736</p>
+                        </div>
+                        {!data.showInternationalPayments && (
                           <div>
                             <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Nequi</p>
                             <div className="flex items-center gap-2">
-                              <p className="text-white text-sm sm:text-base tracking-widest font-mono">3133087069</p>
-                              <button onClick={() => handleCopy('3133087069', 'nequi')} className="p-1.5 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white" title="Copiar número de Nequi">
+                              <p className="text-white text-sm tracking-widest font-mono">3133087069</p>
+                              <button onClick={() => handleCopy('3133087069', 'nequi')} className="p-1.5 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white" title="Copiar Nequi">
                                 {copiedNequi ? <Check className="w-4 h-4 text-white" /> : <Copy className="w-4 h-4" />}
                               </button>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-
-                {/* Titular Details for international layout */}
-                {data.showInternationalPayments && (
-                  <div className="p-6 sm:p-8 rounded-2xl bg-zinc-900 border border-white/10 shadow-lg">
-                    <p className="text-[10px] text-white/60 uppercase tracking-widest mb-4 font-bold">Datos del Titular para Transferencias</p>
-                    <div className="grid md:grid-cols-3 gap-6">
-                      <div>
-                        <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Nombre</p>
-                        <p className="text-white font-medium">Keyner Steban Trillos Useche</p>
-                      </div>
-                      <div>
-                        <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Cédula</p>
-                        <p className="text-white font-mono">1.090.384.736</p>
-                      </div>
-                      <div>
-                        <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">RUT</p>
-                        <p className="text-white font-mono">1090384736-8</p>
+                        )}
                       </div>
                     </div>
                   </div>
-                )}
+                </motion.div>
               </motion.section>
 
               {/* Section 5: Warranty */}

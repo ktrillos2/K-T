@@ -291,6 +291,14 @@ export default defineType({
       description: 'Si se muestran las opciones de DolarApp, Western Union, etc.',
     }),
     defineField({
+      name: 'showNationalPayments',
+      title: '¿Mostrar pagos nacionales?',
+      type: 'boolean',
+      group: 'payment',
+      initialValue: false,
+      description: 'Si se muestran las opciones de Bancolombia y Nequi.',
+    }),
+    defineField({
       name: 'internationalPaymentMethods',
       title: 'Métodos de pago internacionales',
       type: 'array',

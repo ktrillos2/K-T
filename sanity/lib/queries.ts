@@ -27,6 +27,7 @@ export async function getCotizacionBySlug(slug: string) {
       termsCards[]{title, content, isFullWidth, isWarning},
       paymentTitle,
       showInternationalPayments,
+      showNationalPayments,
       internationalPaymentMethods[]{name, description, recommended},
       warrantyTitle,
       warrantyDescription,
