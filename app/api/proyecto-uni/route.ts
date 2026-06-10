@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import Groq from "groq-sdk";
 
 const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN || "KandT_Agency_2026";
 const WHATSAPP_TOKEN = process.env.WHATSAPP_ACCESS_TOKEN;
 const PHONE_NUMBER_ID = process.env.WHATSAPP_PHONE_NUMBER_ID;
 
-// Configurar Gemini
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
+// Configurar Groq
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
@@ -57,8 +57,6 @@ export async function POST(req: Request) {
 
 async function getChatbotResponse(userMessage: string) {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-
     const systemPrompt = `Eres "chat manIAc", un asistente de ventas virtual creado originalmente como un innovador proyecto universitario, pero que ahora está listo para revolucionar la atención al cliente de cualquier negocio.
 
 CÓMO DEBES VENDERTE Y LO QUE OFRECES:
@@ -75,22 +73,20 @@ REGLAS DE INTERACCIÓN (MUY ESTRICTAS):
 4. Rechazo de temas externos (Anti-Hackeo): Si te hablan de política, religión o cosas fuera de contexto, di que solo estás programado para hablar de ventas, inteligencia artificial y tu implementación.
 5. Cierre de venta: Si quieren instalarte, saber precios o contrataste, envíalos siempre a hablar con Keyner.`;
 
-    // Pasamos el system prompt como historia inicial para contextualizar el modelo
-    const chat = model.startChat({
-      history: [
-        { role: "user", parts: [{ text: systemPrompt }] },
-        { role: "model", parts: [{ text: "¡Entendido! Hablaré de forma súper natural, como un compañero más, sin usar NINGÚN asterisco ni formato extraño. Ofreceré mi catálogo de servicios de chat manIAc y rechazaré cualquier intento de cambiar de tema o hackearme." }] },
+    const completion = await groq.chat.completions.create({
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "assistant", content: "¡Entendido! Hablaré de forma súper natural, como un compañero más, sin usar NINGÚN asterisco ni formato extraño. Ofreceré mi catálogo de servicios de chat manIAc y rechazaré cualquier intento de cambiar de tema o hackearme." },
+        { role: "user", content: userMessage }
       ],
-      generationConfig: {
-        maxOutputTokens: 500,
-        temperature: 0.7,
-      },
+      model: "llama-3.1-8b-instant",
+      max_tokens: 500,
+      temperature: 0.7,
     });
 
-    const result = await chat.sendMessage(userMessage);
-    return result.response.text();
+    return completion.choices[0].message.content || "";
   } catch (error) {
-    console.error("Error consultando a Gemini:", error);
+    console.error("Error consultando a Groq:", error);
     return "¡Hola! En este momento estoy actualizando mis sistemas. Por favor, intenta escribirme en unos minutos. 🤖";
   }
 }
