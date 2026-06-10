@@ -31,6 +31,7 @@ export async function middleware(request: NextRequest) {
         }
     }
     
+
     if (matchedSlug) {
         // Rewrite the root path to the specific quotation
         if (request.nextUrl.pathname === '/') {
