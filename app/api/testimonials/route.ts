@@ -16,13 +16,19 @@ export async function POST(req: Request) {
             return NextResponse.json({ success: false, error: 'Missing required fields' }, { status: 400 });
         }
 
+        const token = process.env.SANITY_API_TOKEN;
+        if (!token) {
+            console.error('SANITY_API_TOKEN is not defined in the environment');
+            return NextResponse.json({ success: false, error: 'Sanity API token is missing' }, { status: 500 });
+        }
+
         // Configure write client with token
         const writeClient = createClient({
             projectId,
             dataset,
             apiVersion,
             useCdn: false, // We're writing, so no CDN
-            token: process.env.SANITY_API_TOKEN, // Required for write permissions
+            token: token, // Required for write permissions
         });
 
         // 1. Upload Image to Sanity (if exists)

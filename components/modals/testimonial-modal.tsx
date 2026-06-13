@@ -73,10 +73,9 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
             }
 
             setStep(2)
-        } catch (error) {
+        } catch (error: any) {
             console.error('Submission error:', error)
-            // Ideally show error to user, but for now just log it
-            // Could add an error state here
+            alert(`Error al enviar testimonio: ${error.message}`)
         } finally {
             setIsSubmitting(false)
         }
