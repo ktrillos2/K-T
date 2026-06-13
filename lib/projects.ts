@@ -235,27 +235,7 @@ export const projects: Project[] = [
             seoFocus: "Posicionamiento de marca personal para el autor y palabras clave relacionadas con desarrollo personal y espiritualidad.",
         },
     },
-    {
-        id: "caro-pady",
-        slug: "caro-pady",
-        title: "Caro Pady",
-        shortDescription: "Tienda Oficial de Artista",
-        description: "E-commerce personalizado de merchandising para la artista Caro Pady.",
-        year: "2025",
-        month: "Noviembre",
-        category: "E-commerce / Merch",
-        tech: ["Shopify Integration"],
-        images: {
-            hero: "/images/projects/caro-pady.png",
-            mobile: "/images/projects/caro-pady-mobile.png",
-        },
-        liveUrl: "https://caropady.com",
-        content: {
-            challenge: "La artista necesitaba una tienda online que reflejara su estética visual única (dorado y rojo oscuro) y permitiera a los fans comprar merchandising exclusivo de manera intuitiva.",
-            solution: "Diseñamos una interfaz elegante y moderna con Next.js, integrando animaciones fluidas y una experiencia de compra sin fricciones. La paleta de colores y la tipografía fueron cuidadosamente seleccionadas para alinearse con la marca personal de la artista.",
-            seoFocus: "Posicionamiento de marca personal y venta de merchandising exclusivo.",
-        },
-    },
+
     {
         id: "brahneyker",
         slug: "brahneyker",

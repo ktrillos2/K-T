@@ -4,19 +4,74 @@ import type React from "react"
 
 import { memo, useState, useRef, useEffect } from "react"
 import { m as motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion"
-import { Code2, Rocket, Users, Zap, ChevronRight, Terminal } from "lucide-react"
+import {
+  Code2,
+  Rocket,
+  Users,
+  Zap,
+  ChevronRight,
+  Terminal,
+  Globe,
+  ShieldCheck,
+  TrendingUp,
+  Building2,
+  HeartPulse,
+  Home,
+  Cpu,
+  ShoppingBag,
+  Plane,
+  Car,
+  Sparkles,
+  BookOpen,
+} from "lucide-react"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
 
+// ─── Types ────────────────────────────────────────────────────────────────────
 const values = ["innovation", "quality", "speed", "collaboration"] as const
 
 const iconMap = {
   innovation: Code2,
-  quality: Rocket,
+  quality: ShieldCheck,
   speed: Zap,
-  collaboration: Users,
+  collaboration: TrendingUp,
 }
 
+// Real tech stack used across all projects
+const techStack = [
+  { name: "Next.js" },
+  { name: "TypeScript" },
+  { name: "React" },
+  { name: "Tailwind CSS" },
+  { name: "Framer Motion" },
+  { name: "Headless CMS" },
+  { name: "Vercel" },
+  { name: "Supabase" },
+  { name: "WhatsApp API" },
+  { name: "SEO Técnico" },
+]
+
+// Real sectors covered from projects.ts
+const sectors = [
+  { key: "health", Icon: HeartPulse },
+  { key: "realestate", Icon: Home },
+  { key: "engineering", Icon: Cpu },
+  { key: "ecommerce", Icon: ShoppingBag },
+  { key: "tourism", Icon: Plane },
+  { key: "automotive", Icon: Car },
+  { key: "beauty", Icon: Sparkles },
+  { key: "publishing", Icon: BookOpen },
+]
+
+// Real stats from portfolio
+const stats = [
+  { value: "20+", labelKey: "projects" },
+  { value: "20+", labelKey: "clients" },
+  { value: "7+", labelKey: "countries" },
+  { value: "100%", labelKey: "satisfaction" },
+]
+
+// ─── ValueCard ────────────────────────────────────────────────────────────────
 const ValueCard = memo(function ValueCard({
   value,
   data,
@@ -24,6 +79,7 @@ const ValueCard = memo(function ValueCard({
   onClick,
   setCursorVariant,
   dictionary,
+  index,
 }: {
   value: (typeof values)[number]
   data: { title: string; description: string }
@@ -31,14 +87,15 @@ const ValueCard = memo(function ValueCard({
   onClick: () => void
   setCursorVariant: (v: "default" | "text" | "hover") => void
   dictionary: any
+  index: number
 }) {
   const Icon = iconMap[value]
   const ref = useRef<HTMLButtonElement>(null)
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), { stiffness: 300, damping: 30 })
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), { stiffness: 300, damping: 30 })
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), { stiffness: 300, damping: 30 })
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), { stiffness: 300, damping: 30 })
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!ref.current) return
@@ -59,52 +116,51 @@ const ValueCard = memo(function ValueCard({
     <motion.button
       ref={ref}
       onClick={onClick}
-      className={`w-full text-left p-5 rounded-xl border backdrop-blur-sm transition-colors duration-200 ${isActive
-        ? "bg-white text-black border-white shadow-[0_0_40px_rgba(255,255,255,0.15)]"
-        : "bg-white/5 text-white border-white/10 hover:border-white/30 hover:bg-white/10"
-        }`}
+      className={`relative w-full text-left p-5 overflow-hidden font-mono transition-all duration-300 ${
+        isActive
+          ? "bg-[#e0e0e0] text-black shadow-[inset_8px_8px_16px_#bebebe,inset_-8px_-8px_16px_#ffffff] rounded-xl"
+          : "bg-[#111111] text-white border border-white/5 shadow-[inset_8px_8px_16px_#070707,inset_-8px_-8px_16px_#1b1b1b] hover:border-white/20 hover:-translate-y-1 hover:shadow-[inset_8px_8px_16px_#070707,inset_-8px_-8px_16px_#222222,4px_4px_10px_rgba(0,0,0,0.5)] rounded-xl"
+      }`}
       onMouseEnter={() => setCursorVariant("hover")}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      whileTap={{ scale: 0.98, x: 2, y: 2, boxShadow: "0px 0px 0 rgba(255,255,255,0)" }}
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      whileTap={{ scale: 0.97 }}
     >
-      <div className="flex items-center justify-between" style={{ transform: "translateZ(20px)" }}>
+      {/* Glitch / scanline effect for active state */}
+      {isActive && (
+        <div className="absolute inset-0 pointer-events-none opacity-10 bg-[linear-gradient(transparent_50%,rgba(0,0,0,1)_50%)] bg-[length:100%_4px]" />
+      )}
+
+      <div className="relative z-10 flex items-center justify-between" style={{ transform: "translateZ(20px)" }}>
         <div className="flex items-center gap-4">
+          <div className={`font-bold text-xs w-4 md:w-6 tracking-tighter ${isActive ? "opacity-30 text-black" : "opacity-30 text-white"}`}>0{index + 1}</div>
           <motion.div
-            className={`p-2.5 rounded-lg ${isActive ? "bg-black/10" : "bg-white/10"}`}
-            animate={isActive ? { rotate: [0, -10, 10, 0] } : {}}
-            transition={{ duration: 0.5 }}
+            className={`p-2 border ${isActive ? "border-black/20 bg-black/5" : "border-white/10 bg-white/5"}`}
+            animate={isActive ? { rotate: [0, -90, 0], scale: [1, 1.2, 1] } : {}}
+            transition={{ duration: 0.5, ease: "anticipate" }}
           >
             <Icon className={`w-5 h-5 ${isActive ? "text-black" : "text-white"}`} />
           </motion.div>
           <div>
-            <h3 className="font-mono font-bold text-lg block">{data.title}</h3>
-            {isActive && (
-              <motion.span
-                className="text-black/60 text-xs font-mono"
-                initial={{ opacity: 0, y: -5 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                {/* @ts-ignore */}
-                {dictionary.about.clickToExplore}
-              </motion.span>
-            )}
+            <h3 className="font-bold text-sm md:text-lg uppercase tracking-wide block">{data.title}</h3>
+            <div className={`overflow-hidden transition-all duration-300 ${isActive ? "max-h-8 mt-1 opacity-100" : "max-h-0 opacity-0"}`}>
+               <span className="text-black/70 text-[10px] md:text-xs tracking-widest uppercase">
+                 {/* @ts-ignore */}
+                 {dictionary.about.clickToExplore || ">> EXPLORAR"}
+               </span>
+            </div>
           </div>
         </div>
-        <motion.div
-          animate={{ rotate: isActive ? 90 : 0, x: isActive ? 0 : -5 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          <ChevronRight className={`w-5 h-5 ${isActive ? "text-black" : "text-white"}`} />
-        </motion.div>
+        <div className={`font-bold text-xl md:text-2xl transition-transform duration-300 ${isActive ? "rotate-180 opacity-50" : "opacity-30"}`}>
+          {isActive ? "—" : "+"}
+        </div>
       </div>
     </motion.button>
   )
 })
 
-
-
+// ─── TypingCode ───────────────────────────────────────────────────────────────
 const TypingCode = memo(function TypingCode({ text, delay = 0 }: { text: string; delay?: number }) {
   const [displayed, setDisplayed] = useState("")
   const [showCursor, setShowCursor] = useState(true)
@@ -120,7 +176,7 @@ const TypingCode = memo(function TypingCode({ text, delay = 0 }: { text: string;
         } else {
           clearInterval(interval)
         }
-      }, 30)
+      }, 28)
       return () => clearInterval(interval)
     }, delay)
     return () => clearTimeout(timeout)
@@ -139,6 +195,148 @@ const TypingCode = memo(function TypingCode({ text, delay = 0 }: { text: string;
   )
 })
 
+// ─── StatCard ─────────────────────────────────────────────────────────────────
+const StatCard = memo(function StatCard({
+  value,
+  label,
+  index,
+}: {
+  value: string
+  label: string
+  index: number
+}) {
+  const delay = (3 - index) * 0.15 + 0.2; // Right to left entrance
+  
+  return (
+    <motion.div 
+      className="relative rounded-none bg-transparent overflow-hidden group cursor-crosshair border-t-2 border-white/20 hover:border-white hover:rounded-lg transition-all duration-300"
+      whileHover={{ y: -5 }}
+    >
+      {/* Race Car Streak */}
+      <motion.div
+        className="absolute inset-y-0 w-full bg-white blur-xl z-30 pointer-events-none skew-x-[-30deg]"
+        initial={{ left: "150%" }}
+        whileInView={{ left: "-150%" }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.2, ease: "linear", delay }}
+      />
+      
+      {/* Content wrapper */}
+      <motion.div
+        className="p-6 w-full h-full"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ delay: delay + 0.1, duration: 0.1 }}
+      >
+        <div className="absolute top-0 right-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          <span className="text-[10px] text-white/40 font-mono tracking-tighter">[{index}] SYS.STAT</span>
+        </div>
+        <motion.div
+          className="absolute -inset-1 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity -z-10"
+        />
+        <p className="text-4xl md:text-5xl font-black font-title text-white tracking-tighter group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/50 transition-all duration-300">
+          {value}
+        </p>
+        <p className="text-xs text-white/50 font-mono mt-2 uppercase tracking-[0.2em] group-hover:text-white/90 transition-colors">
+          // {label}
+        </p>
+      </motion.div>
+    </motion.div>
+  )
+})
+
+// ─── Brick Wall Components ───────────────────────────────────────────────────
+const AnimatedBrick = memo(function AnimatedBrick({ 
+  children, 
+  isEmpty = false, 
+  index = 0 
+}: { 
+  children?: React.ReactNode, 
+  isEmpty?: boolean, 
+  index?: number 
+}) {
+  const macColors = [
+    "rgba(255, 95, 86, 0.8)",   // Mac Red
+    "rgba(255, 189, 46, 0.8)",  // Mac Yellow
+    "rgba(39, 201, 63, 0.8)",   // Mac Green
+  ];
+  const hoverColor = macColors[index % macColors.length];
+
+  return (
+    <motion.div
+      className={`relative rounded-md border flex items-center justify-center font-mono overflow-hidden
+        ${isEmpty 
+          ? "border-white/10 bg-white/[0.03] min-w-[50px] md:min-w-[80px] h-[46px]" 
+          : "border-white/20 bg-white/5 text-white px-4 h-[46px] min-w-max cursor-crosshair"
+        }`}
+      initial={{ opacity: 0, scale: 0.8, y: 20 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.04, type: "spring", stiffness: 300, damping: 20 }}
+      whileHover={
+        isEmpty
+          ? { scale: 1.05, backgroundColor: "rgba(255,255,255,0.03)", transition: { duration: 0.2 } }
+          : {
+              scale: 1.15,
+              x: [0, -4, 4, -4, 4, 0],
+              y: -8,
+              backgroundColor: "rgba(0,0,0,1)", 
+              borderColor: hoverColor,
+              boxShadow: `0 20px 30px -10px ${hoverColor.replace('0.8', '0.2')}`,
+              zIndex: 50,
+              transition: { 
+                x: { repeat: Number.POSITIVE_INFINITY, duration: 0.3, ease: "linear" },
+                scale: { type: "spring", stiffness: 400, damping: 10 }
+              }
+            }
+      }
+      whileTap={!isEmpty ? { scale: 0.9, x: 0, y: 0 } : undefined}
+    >
+      {children}
+    </motion.div>
+  )
+})
+
+const BrickWall = memo(function BrickWall({ 
+  items, 
+  renderItem, 
+  layout,
+  align = "left"
+}: { 
+  items: any[], 
+  renderItem: (item: any) => React.ReactNode,
+  layout: number[][],
+  align?: "left" | "right" | "center"
+}) {
+  let itemIndex = 0;
+  
+  const alignClass = 
+    align === "right" ? "items-center lg:items-end mx-auto lg:ml-auto lg:mr-0" : 
+    align === "left" ? "items-center lg:items-start mx-auto lg:mx-0" : 
+    "items-center mx-auto";
+
+  return (
+    <div className={`flex flex-col gap-2 w-fit ${alignClass}`}>
+      {layout.map((row, rowIndex) => (
+        <div key={rowIndex} className="flex gap-2 justify-center">
+          {row.map((p, colIndex) => {
+            const isItem = p === 1 && itemIndex < items.length;
+            const data = isItem ? items[itemIndex++] : null;
+            
+            return (
+              <AnimatedBrick key={`${rowIndex}-${colIndex}`} isEmpty={!isItem} index={rowIndex * 5 + colIndex}>
+                {isItem ? renderItem(data) : null}
+              </AnimatedBrick>
+            )
+          })}
+        </div>
+      ))}
+    </div>
+  )
+})
+
+// ─── Main Component ───────────────────────────────────────────────────────────
 export default function AboutSection() {
   const { dictionary } = useLanguage()
   const { setCursorVariant } = useCursor()
@@ -149,10 +347,10 @@ export default function AboutSection() {
   const [particles, setParticles] = useState<Array<{ x: number; y: number; duration: number; delay: number }>>([])
 
   useEffect(() => {
-    const newParticles = [...Array(8)].map(() => ({
+    const newParticles = [...Array(10)].map(() => ({
       x: Math.random() * window.innerWidth,
-      y: Math.random() * 800,
-      duration: Math.random() * 5 + 5,
+      y: Math.random() * 900,
+      duration: Math.random() * 6 + 5,
       delay: Math.random() * 5,
     }))
     setParticles(newParticles)
@@ -166,22 +364,49 @@ export default function AboutSection() {
     return () => clearTimeout(timer)
   }, [activeValue])
 
+  // Terminal lines for the right panel
+  const terminalLines: Record<(typeof values)[number], Array<{ label: string; value: string; color: string }>> = {
+    innovation: [
+      { label: "framework", value: '"Next.js 15 App Router"', color: "text-cyan-400" },
+      { label: "language", value: '"TypeScript 5"', color: "text-blue-400" },
+      { label: "pattern", value: '"Headless Architecture"', color: "text-purple-400" },
+      { label: "cms", value: '"Sanity v3"', color: "text-orange-400" },
+    ],
+    quality: [
+      { label: "lcp", value: '"< 1.2s"', color: "text-green-400" },
+      { label: "cls", value: '"0.01"', color: "text-green-400" },
+      { label: "fid", value: '"< 50ms"', color: "text-green-400" },
+      { label: "lighthouse", value: '"95-100 / 100"', color: "text-yellow-400" },
+    ],
+    speed: [
+      { label: "hosting", value: '"Vercel Edge Network"', color: "text-white" },
+      { label: "cdn", value: '"Global CDN"', color: "text-teal-400" },
+      { label: "caching", value: '"ISR + SSG Hybrid"', color: "text-cyan-400" },
+      { label: "ttfb", value: '"< 200ms"', color: "text-green-400" },
+    ],
+    collaboration: [
+      { label: "clients", value: '"12+ activos"', color: "text-emerald-400" },
+      { label: "countries", value: '"CO, PE, MX, US, EC"', color: "text-blue-400" },
+      { label: "support", value: '"24/7 WhatsApp"', color: "text-green-400" },
+      { label: "delivery", value: '"On Time ✓"', color: "text-yellow-400" },
+    ],
+  }
+
   return (
-    <section id="about" className="relative pt-16 lg:pt-24 px-6 bg-black overflow-hidden cv-auto">
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/[0.015] rounded-full blur-2xl" />
+    <section
+      id="about"
+      aria-label="Sobre nosotros"
+      className="relative pt-16 lg:pt-24 px-6 bg-black overflow-hidden"
+    >
+      {/* Background glow + particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-white/[0.012] rounded-full blur-3xl" />
         {particles.map((particle, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-white/10 rounded-full"
-            initial={{
-              x: particle.x,
-              y: particle.y,
-            }}
-            animate={{
-              y: [null, -100],
-              opacity: [0, 0.8, 0],
-            }}
+            initial={{ x: particle.x, y: particle.y }}
+            animate={{ y: [null, -120], opacity: [0, 0.7, 0] }}
             transition={{
               duration: particle.duration,
               repeat: Number.POSITIVE_INFINITY,
@@ -193,7 +418,8 @@ export default function AboutSection() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Header */}
+
+        {/* ── Section Header ── */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -202,43 +428,57 @@ export default function AboutSection() {
           transition={{ duration: 0.5 }}
         >
           <motion.p
-            className="text-white font-mono text-sm mb-4 flex items-center justify-center gap-2"
-            initial={{ opacity: 1 }}
+            className="text-white/60 font-mono text-sm mb-4 flex items-center justify-center gap-2"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
           >
             <Terminal className="w-4 h-4" />
             {dictionary.about.subtitle}
           </motion.p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-title text-white">{dictionary.about.title}</h2>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-title text-white leading-tight">
+            {dictionary.about.title}
+          </h2>
         </motion.div>
 
-        {/* Main content */}
+        {/* ── Stats Row ── */}
+        <div className="mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {stats.map((stat, i) => (
+              <StatCard
+                key={stat.labelKey}
+                value={stat.value}
+                label={(dictionary.about.stats as any)[stat.labelKey]}
+                index={i}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* ── Main Grid: Values + Terminal ── */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 mb-20">
-          {/* Left - Interactive values */}
+
+          {/* Left — Description + Interactive values */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="h-full flex flex-col"
+            className="flex flex-col gap-6"
           >
-            <p className="text-white font-mono text-lg mb-6 leading-relaxed">{dictionary.about.description}</p>
-            
-            {/* EEAT Authority Section */}
-            <div className="flex items-center gap-4 mb-8 bg-white/5 p-4 rounded-xl border border-white/10 w-fit">
-              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-500/50 flex-shrink-0">
-                {/* Fallback image if no personal headshot exists, using a developer icon */}
-                <div className="w-full h-full bg-blue-900 flex items-center justify-center">
-                  <Users className="w-6 h-6 text-blue-300" />
-                </div>
-              </div>
-              <div>
-                <p className="text-white font-bold font-title text-sm">Keyner Steban Trillos</p>
-                <p className="text-neutral-400 font-mono text-xs max-w-xs">{/* @ts-ignore */}
-                {dictionary.about.teamAuthority || "Arquitecto de Software & CEO"}</p>
-              </div>
+            <p className="text-white/70 font-mono text-base leading-relaxed">
+              {dictionary.about.description}
+            </p>
+
+            {/* Team authority badge */}
+            <div className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 w-fit">
+              <Globe className="w-4 h-4 text-white/60 flex-shrink-0" />
+              {/* @ts-ignore */}
+              <span className="text-white/60 text-xs font-mono">{dictionary.about.teamAuthority}</span>
             </div>
 
-            <div className="space-y-4">
+            {/* Value cards */}
+            <div className="space-y-3">
               {values.map((value, i) => (
                 <motion.div
                   key={value}
@@ -254,110 +494,196 @@ export default function AboutSection() {
                     onClick={() => setActiveValue(value)}
                     setCursorVariant={setCursorVariant}
                     dictionary={dictionary}
+                    index={i}
                   />
                 </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* Right - Terminal with typing effect */}
+          {/* Right — Terminal */}
           <motion.div
-            className="relative h-full"
+            className="relative"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <div className="h-full">
-              {/* Terminal window with glow */}
-              <motion.div
-                className="rounded-xl overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl h-full flex flex-col transition-shadow duration-300 hover:shadow-[0_0_80px_rgba(255,255,255,0.1)]"
-                initial={{ boxShadow: "0 0 0 rgba(0,0,0,0)" }}
-                whileInView={{ boxShadow: "0 0 60px rgba(255,255,255,0.05)" }}
-                viewport={{ once: true }}
-              >
-                <div className="flex items-center gap-2 px-4 py-3 bg-zinc-900/80 border-b border-white/10">
-                  <motion.div className="w-3 h-3 rounded-full bg-[#FF5F56]" whileHover={{ scale: 1.4 }} />
-                  <motion.div className="w-3 h-3 rounded-full bg-[#FFBD2E]" whileHover={{ scale: 1.4 }} />
-                  <motion.div className="w-3 h-3 rounded-full bg-[#27C93F]" whileHover={{ scale: 1.4 }} />
-                  <span className="ml-3 text-xs text-white font-mono">~/k&t/{activeValue}.ts</span>
-                </div>
+            <motion.div
+              className="rounded-xl overflow-hidden border border-white/10 bg-zinc-950 shadow-2xl flex flex-col transition-shadow duration-300 hover:shadow-[0_0_80px_rgba(255,255,255,0.08)]"
+              initial={{ boxShadow: "0 0 0 rgba(0,0,0,0)" }}
+              whileInView={{ boxShadow: "0 0 60px rgba(255,255,255,0.05)" }}
+              viewport={{ once: true }}
+            >
+              {/* Title bar */}
+              <div className="flex items-center gap-2 px-4 py-3 bg-zinc-900/80 border-b border-white/10">
+                <motion.div className="w-3 h-3 rounded-full bg-[#FF5F56]" whileHover={{ scale: 1.4 }} />
+                <motion.div className="w-3 h-3 rounded-full bg-[#FFBD2E]" whileHover={{ scale: 1.4 }} />
+                <motion.div className="w-3 h-3 rounded-full bg-[#27C93F]" whileHover={{ scale: 1.4 }} />
+                <span className="ml-3 text-xs text-white/50 font-mono">~/k&t/{activeValue}.config.ts</span>
+              </div>
 
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <AnimatePresence mode="wait">
+              {/* Code body */}
+              <div className="p-6 flex-1 min-h-[280px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeValue}
+                    initial={{ opacity: 0, filter: "blur(8px)" }}
+                    animate={{ opacity: 1, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, filter: "blur(8px)" }}
+                    transition={{ duration: 0.25 }}
+                    className="font-mono text-sm space-y-2"
+                  >
+                    {/* Comment */}
+                    <p className="text-white/30">
+                      <TypingCode text={`// ${dictionary.about.values[activeValue].title}`} />
+                    </p>
+
+                    {/* export const block */}
+                    <p>
+                      <span className="text-purple-400">export const </span>
+                      <span className="text-cyan-400">{activeValue}</span>
+                      <span className="text-white"> = </span>
+                      <span className="text-yellow-400">{"{"}</span>
+                    </p>
+
+                    {/* Dynamic fields */}
                     <motion.div
-                      key={activeValue}
-                      initial={{ opacity: 0, filter: "blur(10px)" }}
-                      animate={{ opacity: 1, filter: "blur(0px)" }}
-                      exit={{ opacity: 0, filter: "blur(10px)" }}
-                      transition={{ duration: 0.3 }}
-                      className="h-full flex flex-col justify-between"
+                      className="pl-4 space-y-1.5"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.25 }}
                     >
-                      <div className="font-mono text-sm space-y-2">
-                        <p className="text-white/30">
-                          <TypingCode text={`// ${dictionary.about.values[activeValue].title}`} />
-                        </p>
-                        <p>
-                          <span className="text-purple-400">export const</span>{" "}
-                          <span className="text-cyan-400">{activeValue}</span> <span className="text-white">=</span>{" "}
-                          <span className="text-yellow-400">{"{"}</span>
-                        </p>
-                        <motion.div
-                          className="pl-4 space-y-2"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ delay: 0.3 }}
-                        >
-                          <p>
-                            <span className="text-cyan-400">message</span>
-                            <span className="text-white">:</span>{" "}
-                            <span className="text-green-400">
-                              "<TypingCode text={dictionary.about.values[activeValue].description} delay={200} />"
-                            </span>
-                            <span className="text-white">,</span>
-                          </p>
-                          <p>
-                            <span className="text-cyan-400">active</span>
-                            <span className="text-white">:</span> <span className="text-orange-400">true</span>
-                            <span className="text-white">,</span>
-                          </p>
-                          <p>
-                            <span className="text-cyan-400">level</span>
-                            <span className="text-white">:</span> <span className="text-orange-400">"maximum"</span>
-                          </p>
-                        </motion.div>
-                        <p>
-                          <span className="text-yellow-400">{"}"}</span>{" "}
-                          <span className="text-purple-400">as const</span>
-                        </p>
-                      </div>
+                      {/* Description line */}
+                      <p>
+                        <span className="text-cyan-400">description</span>
+                        <span className="text-white">: </span>
+                        <span className="text-green-400">
+                          &quot;<TypingCode text={dictionary.about.values[activeValue].description} delay={150} />&quot;
+                        </span>
+                        <span className="text-white">,</span>
+                      </p>
 
-                      {/* Animated progress bar */}
-                      <div className="mt-8 space-y-2">
-                        <div className="flex justify-between text-xs text-white font-mono">
-                          {/* @ts-ignore */}
-                          <span>{dictionary.about.compiling}</span>
-                          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.5 }}>
-                            {/* @ts-ignore */}
-                            {dictionary.about.done}
-                          </motion.span>
-                        </div>
-                        <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                          <motion.div
-                            className={`h-full rounded-full transition-colors duration-500 ${isCompiled ? "bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]" : "bg-gradient-to-r from-white/50 to-white"
-                              }`}
-                            initial={{ width: "0%" }}
-                            animate={{ width: "100%" }}
-                            transition={{ duration: 1.5, ease: "easeOut" }}
-                          />
-                        </div>
-                      </div>
+                      {/* Dynamic extra fields per value */}
+                      {terminalLines[activeValue].map((line, idx) => (
+                        <motion.p
+                          key={line.label}
+                          initial={{ opacity: 0, x: -8 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.3 + idx * 0.08 }}
+                        >
+                          <span className="text-cyan-400">{line.label}</span>
+                          <span className="text-white">: </span>
+                          <span className={line.color}>{line.value}</span>
+                          <span className="text-white">,</span>
+                        </motion.p>
+                      ))}
                     </motion.div>
-                  </AnimatePresence>
+
+                    <p>
+                      <span className="text-yellow-400">{"}"}</span>
+                      <span className="text-purple-400"> as const</span>
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {/* Compile progress bar */}
+              <div className="px-6 pb-5 space-y-2">
+                <div className="flex justify-between text-xs text-white/40 font-mono">
+                  {/* @ts-ignore */}
+                  <span>{dictionary.about.compiling}</span>
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: isCompiled ? 1 : 0 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    {/* @ts-ignore */}
+                    {dictionary.about.done}
+                  </motion.span>
                 </div>
-              </motion.div>
-            </div>
+                <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                  <motion.div
+                    className={`h-full rounded-full transition-colors duration-500 ${
+                      isCompiled
+                        ? "bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]"
+                        : "bg-gradient-to-r from-white/40 to-white"
+                    }`}
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                  />
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
+        </div>
+
+        {/* ── Bottom Grid: Tech Stack & Sectors ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-start pb-16">
+          {/* ── Tech Stack ── */}
+          <motion.div
+            className="flex flex-col items-center lg:items-start text-left w-full"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <Building2 className="w-4 h-4 text-white/40" />
+              {/* @ts-ignore */}
+              <p className="text-white/40 font-mono text-xs uppercase tracking-widest">{dictionary.about.techStack}</p>
+            </div>
+            <BrickWall 
+              items={techStack}
+              layout={[
+                [1, 0, 1],
+                [1, 0, 0, 1],
+                [0, 1, 0, 1, 0],
+                [1, 0, 0, 1],
+                [1, 0, 1]
+              ]}
+              renderItem={(tech) => (
+                <span className="text-[10px] md:text-sm font-medium px-2 text-center leading-tight">{tech.name}</span>
+              )}
+              align="left"
+            />
+          </motion.div>
+
+          {/* ── Sectors / Industries ── */}
+          <motion.div
+            className="flex flex-col items-center lg:items-end text-right w-full"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+          <div className="flex items-center gap-3 mb-6 flex-row-reverse">
+            <Rocket className="w-4 h-4 text-white/40" />
+            {/* @ts-ignore */}
+            <p className="text-white/40 font-mono text-xs uppercase tracking-widest">{dictionary.about.sectorsTitle}</p>
+          </div>
+          <BrickWall 
+            items={sectors}
+            layout={[
+              [0, 1, 0],
+              [1, 0, 0, 1],
+              [0, 1, 0, 1, 0],
+              [1, 0, 0, 1],
+              [0, 1, 0]
+            ]}
+            renderItem={(sector) => {
+              const Icon = sector.Icon;
+              return (
+                <div className="flex items-center gap-1.5 md:gap-2 text-white/90 px-1">
+                  <Icon className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+                  <span className="text-[10px] md:text-xs font-medium text-center leading-tight">{(dictionary.about.sectors as any)[sector.key]}</span>
+                </div>
+              )
+            }}
+            align="right"
+          />
+        </motion.div>
         </div>
 
       </div>

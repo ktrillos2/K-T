@@ -154,14 +154,16 @@ export default function HeroSection() {
 
         <motion.a
           href="#services"
-          className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-mono font-bold rounded hover:bg-white/80 transition-colors duration-300 animate-hero-text animation-delay-800"
+          className="relative overflow-hidden inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-mono font-bold rounded-xl border-2 border-white shadow-[6px_6px_0_rgba(255,255,255,0.2)] hover:shadow-[2px_2px_0_rgba(255,255,255,0.2)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-300 animate-hero-text animation-delay-800"
           onMouseEnter={() => setCursorVariant("hover")}
           onMouseLeave={() => setCursorVariant("default")}
-          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          {dictionary.hero.cta}
-          <span className="text-lg">→</span>
+          <div className="absolute inset-0 pointer-events-none opacity-10 bg-[linear-gradient(transparent_50%,rgba(0,0,0,1)_50%)] bg-[length:100%_4px] z-0" />
+          <span className="relative z-10 flex items-center gap-2">
+            {dictionary.hero.cta}
+            <span className="text-lg">→</span>
+          </span>
         </motion.a>
       </div>
 

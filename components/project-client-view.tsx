@@ -23,19 +23,24 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
 
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
 
+    const handleBack = (e: React.MouseEvent) => {
+        e.preventDefault()
+        window.history.back()
+    }
+
     return (
         <main ref={containerRef} className="bg-background min-h-screen">
             {/* Navigation Back */}
-            <div className="fixed top-24 left-6 z-50 mix-blend-difference hidden lg:block">
-                <Link
-                    href="/#work"
-                    className="flex items-center gap-2 text-white/80 hover:text-white transition-colors group"
+            <div className="fixed top-24 left-6 z-[100] hidden lg:block">
+                <button
+                    onClick={handleBack}
+                    className="flex items-center gap-2 text-white/80 hover:text-white transition-colors group cursor-pointer pointer-events-auto mix-blend-difference"
                     onMouseEnter={() => setCursorVariant("hover")}
                     onMouseLeave={() => setCursorVariant("default")}
                 >
                     <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
                     <span className="font-mono text-sm uppercase tracking-wider">Volver</span>
-                </Link>
+                </button>
             </div>
 
             {/* Hero Section */}
@@ -111,12 +116,15 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
                                     href={project.liveUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-colors group"
+                                    className="relative overflow-hidden inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-mono font-bold rounded-xl border-2 border-white shadow-[6px_6px_0_rgba(255,255,255,0.2)] hover:shadow-[2px_2px_0_rgba(255,255,255,0.2)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-300 group"
                                     onMouseEnter={() => setCursorVariant("hover")}
                                     onMouseLeave={() => setCursorVariant("default")}
                                 >
-                                    Visitar Sitio
-                                    <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                    <div className="absolute inset-0 pointer-events-none opacity-10 bg-[linear-gradient(transparent_50%,rgba(0,0,0,1)_50%)] bg-[length:100%_4px] z-0" />
+                                    <span className="relative z-10 flex items-center gap-2">
+                                        Visitar Sitio
+                                        <ExternalLink className="w-4 h-4" />
+                                    </span>
                                 </a>
                             </div>
                         </div>
@@ -177,7 +185,7 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
             {/* Next Project (Optional - loop or just footer) */}
             <section className="py-24 flex justify-center border-t border-white/10">
                 <Link
-                    href="/#work"
+                    href="/"
                     className="text-white/50 hover:text-white font-title text-2xl transition-colors"
                 >
                     Ver Todos los Proyectos

@@ -22,6 +22,7 @@ export default function ProjectsSection({ initialProjects = [] }: { initialProje
     tech: p.tech || [],
     year: p.year,
     month: p.month,
+    slug: p.slug,
     link: `/projects/${p.slug}`,
     externalLink: p.liveUrl
   }))

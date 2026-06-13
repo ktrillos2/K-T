@@ -59,7 +59,7 @@ interface ProjectsCarouselProps {
 export default function ProjectsCarousel({ projects, language, setCursorVariant, dictionary }: ProjectsCarouselProps) {
     const [activeIndex, setActiveIndex] = useState<number | null>(null)
     const [currentSlide, setCurrentSlide] = useState(0)
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center", skipSnaps: false, dragFree: false }, [
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center", skipSnaps: false, dragFree: false, watchDrag: false }, [
         Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true }),
     ])
 
@@ -87,8 +87,27 @@ export default function ProjectsCarousel({ projects, language, setCursorVariant,
         if (emblaApi) emblaApi.scrollNext()
     }, [emblaApi])
 
+    const wheelTimeout = useRef<NodeJS.Timeout | null>(null)
+
+    const handleWheel = useCallback((e: React.WheelEvent) => {
+        if (!emblaApi) return
+        
+        // Detect horizontal scroll (trackpad lateral swipe or shift+wheel)
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+            if (wheelTimeout.current) return
+            
+            if (e.deltaX > 10) {
+                emblaApi.scrollNext()
+                wheelTimeout.current = setTimeout(() => { wheelTimeout.current = null }, 250)
+            } else if (e.deltaX < -10) {
+                emblaApi.scrollPrev()
+                wheelTimeout.current = setTimeout(() => { wheelTimeout.current = null }, 250)
+            }
+        }
+    }, [emblaApi])
+
     return (
-        <div className="relative group/carousel">
+        <div className="relative group/carousel" onWheel={handleWheel}>
             <div className="overflow-hidden" ref={emblaRef}>
                 <div className="flex touch-pan-y shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]">
                     {projects.map((project, index) => (
@@ -205,6 +224,7 @@ function ProjectCard({ project, index, isActive, isCurrent, onHover, onLeave, la
                                         sizes="(max-width: 768px) 100vw, 50vw"
                                         className="object-cover lg:object-cover"
                                         unoptimized
+                                        draggable={false}
                                     />
                                 </div>
                                 <div className="w-full h-full hidden lg:block relative">
@@ -219,6 +239,7 @@ function ProjectCard({ project, index, isActive, isCurrent, onHover, onLeave, la
                                             fill
                                             sizes="(max-width: 1200px) 50vw, 50vw"
                                             className="object-cover object-top"
+                                            draggable={false}
                                         />
                                     </motion.div>
                                 </div>
@@ -236,6 +257,7 @@ function ProjectCard({ project, index, isActive, isCurrent, onHover, onLeave, la
                                         fill
                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
                                         className="object-cover object-top"
+                                        draggable={false}
                                     />
                                 </motion.div>
                             </div>
@@ -307,9 +329,11 @@ function ProjectCard({ project, index, isActive, isCurrent, onHover, onLeave, la
         </motion.div>
     )
 
-    if (project.link) {
+    const projectHref = project.slug ? `/projects/${project.slug}` : project.link
+
+    if (projectHref) {
         return (
-            <Link href={project.link} className="block outline-none h-full">
+            <Link href={projectHref} className="block outline-none h-full" draggable={false}>
                 {CardContent}
             </Link>
         )

@@ -65,19 +65,19 @@ export default function TestimonialsSection({ initialTestimonials = [] }: Testim
                 {/* CTA Button */}
                 <div className="mt-16 flex justify-center">
                     <motion.button
-                        whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => {
                             setHasOpened(true)
                             setIsModalOpen(true)
                         }}
-                        className="group relative px-8 py-4 bg-white text-black font-bold rounded-xl flex items-center gap-3 overflow-hidden outline-none"
+                        className="group relative px-8 py-4 bg-white text-black font-mono font-bold rounded-xl border-2 border-white shadow-[6px_6px_0_rgba(255,255,255,0.2)] hover:shadow-[2px_2px_0_rgba(255,255,255,0.2)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-300 flex items-center gap-3 overflow-hidden outline-none"
                     >
+                        <div className="absolute inset-0 pointer-events-none opacity-10 bg-[linear-gradient(transparent_50%,rgba(0,0,0,1)_50%)] bg-[length:100%_4px] z-0" />
                         <span className="relative z-10 font-title flex items-center gap-2">
                             <MessageSquare className="w-4 h-4" />
                             {dictionary.testimonials.leaveReview}
                         </span>
-                        <div className="absolute inset-0 bg-neutral-200 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+                        <div className="absolute inset-0 bg-neutral-200 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 z-0" />
                     </motion.button>
                 </div>
             </div>
