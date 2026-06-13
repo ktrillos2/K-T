@@ -437,17 +437,17 @@ export default function InternationalSection() {
 
                         <div className="grid grid-cols-2 gap-4 text-left">
                             {[
-                                { title: "Horario Global", desc: "Soporte flexible para tu zona" },
-                                { title: "Pagos Multi-divisa", desc: "USD, COP recibidos" },
-                                { title: "Stack de Alto Rendimiento", desc: "Next.js, Tailwind, Vercel & Sanity" },
-                                { title: "Calidad Remota", desc: "Flujos de trabajo asíncronos" }
+                                { title: "Horario Global", desc: "Soporte flexible para tu zona", borderColor: "border-white" },
+                                { title: "Pagos Multi-divisa", desc: "USD, COP recibidos", borderColor: "border-white" },
+                                { title: "Stack de Alto Rendimiento", desc: "Next.js, Tailwind, Vercel & Sanity", borderColor: "border-white" },
+                                { title: "Calidad Remota", desc: "Flujos de trabajo asíncronos", borderColor: "border-white" }
                             ].map((item, idx) => (
                                 <motion.div
                                     key={idx}
                                     initial={{ opacity: 0, x: -10 }}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.2 + (idx * 0.1) }}
-                                    className="border-l-2 border-blue-500/30 pl-4 py-1"
+                                    className={`border-l-2 pl-4 py-1 ${item.borderColor}`}
                                 >
                                     <h3 className="text-white font-bold text-sm font-title">{item.title}</h3>
                                     <p className="text-neutral-500 text-xs font-mono">{item.desc}</p>

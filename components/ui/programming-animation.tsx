@@ -70,7 +70,7 @@ export default function ProgrammingAnimation() {
 
                 {/* Animated Grid Floor */}
                 <div
-                    className="absolute inset-0 bg-[linear-gradient(rgba(0,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.05)_1px,transparent_1px)] bg-[size:50px_50px]"
+                    className="absolute inset-0 bg-[linear-gradient(rgba(0,255,100,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,100,0.05)_1px,transparent_1px)] bg-[size:50px_50px]"
                     style={{ transform: "perspective(500px) rotateX(60deg) translateY(100px) scale(2)", opacity: 0.3 }}
                 />
 
@@ -78,7 +78,7 @@ export default function ProgrammingAnimation() {
                 {drops.map((drop, i) => (
                     <motion.div
                         key={i}
-                        className="absolute top-0 text-[10px] font-mono leading-none text-cyan-500/30 writing-vertical"
+                        className="absolute top-0 text-[10px] font-mono leading-none text-emerald-500/30 writing-vertical"
                         style={{ left: `${drop.x}%` }}
                         initial={{ y: -100, opacity: 0 }}
                         animate={{ y: ["0%", "1000%"], opacity: [0, 1, 0] }}
@@ -101,18 +101,18 @@ export default function ProgrammingAnimation() {
                         transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
                     >
                         {/* Multiple Rotating Rings */}
-                        <div className="absolute inset-0 border-2 border-dashed border-cyan-500/40 rounded-full animate-[spin_20s_linear_infinite]" />
+                        <div className="absolute inset-0 border-2 border-dashed border-emerald-500/40 rounded-full animate-[spin_20s_linear_infinite]" />
                         <div className="absolute inset-2 border border-dotted border-purple-500/40 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
                         <div className="absolute inset-4 border border-white/10 rounded-full animate-[spin_10s_linear_infinite]" />
 
                         {/* Inner Core Energy */}
-                        <div className="absolute inset-8 bg-cyan-500/20 blur-xl rounded-full animate-pulse" />
+                        <div className="absolute inset-8 bg-emerald-500/20 blur-xl rounded-full animate-pulse" />
                         <div className="absolute inset-10 bg-white/10 rounded-full backdrop-blur-sm border border-white/20 flex items-center justify-center">
                             <Globe className="w-8 h-8 text-white relative z-10 animate-[pulse_3s_ease-in-out_infinite]" strokeWidth={1.5} />
                         </div>
 
                         {/* Scanning Radar */}
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-t from-transparent via-cyan-500/10 to-transparent opacity-30 animate-spin transition-transform duration-[3s]" />
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-t from-transparent via-emerald-500/10 to-transparent opacity-30 animate-spin transition-transform duration-[3s]" />
                     </motion.div>
                 </div>
 
@@ -122,7 +122,7 @@ export default function ProgrammingAnimation() {
                     return (
                         <motion.div
                             key={i}
-                            className="absolute p-3 rounded-xl bg-black/40 border border-white/10 backdrop-blur-md shadow-lg z-30 group-hover:border-cyan-500/30 transition-colors duration-500"
+                            className="absolute p-3 rounded-xl bg-black/40 border border-white/10 backdrop-blur-md shadow-lg z-30 group-hover:border-emerald-500/30 transition-colors duration-500"
                             style={{
                                 left: `${item.x}%`,
                                 top: `${item.y}%`,
@@ -142,11 +142,11 @@ export default function ProgrammingAnimation() {
                             whileHover={{
                                 scale: 1.2,
                                 zIndex: 50,
-                                backgroundColor: "rgba(34, 211, 238, 0.1)",
-                                boxShadow: "0 0 20px rgba(34, 211, 238, 0.2)"
+                                backgroundColor: "rgba(16, 185, 129, 0.1)",
+                                boxShadow: "0 0 20px rgba(16, 185, 129, 0.2)"
                             }}
                         >
-                            <Icon className="w-5 h-5 text-white/80 group-hover:text-cyan-400 transition-colors" strokeWidth={1.5} />
+                            <Icon className="w-5 h-5 text-white/80 group-hover:text-emerald-400 transition-colors" strokeWidth={1.5} />
                         </motion.div>
                     )
                 })}
@@ -179,9 +179,9 @@ export default function ProgrammingAnimation() {
                     ))}
                     <defs>
                         <linearGradient id="data-gradient" gradientUnits="userSpaceOnUse">
-                            <stop offset="0%" stopColor="#22d3ee" stopOpacity="0" />
-                            <stop offset="50%" stopColor="#22d3ee" stopOpacity="0.8" />
-                            <stop offset="100%" stopColor="#c084fc" stopOpacity="0" />
+                            <stop offset="0%" stopColor="#10b981" stopOpacity="0" />
+                            <stop offset="50%" stopColor="#10b981" stopOpacity="0.8" />
+                            <stop offset="100%" stopColor="#34d399" stopOpacity="0" />
                         </linearGradient>
                     </defs>
                 </svg>
@@ -191,7 +191,7 @@ export default function ProgrammingAnimation() {
                     {[...Array(15)].map((_, i) => (
                         <motion.div
                             key={`p-${i}`}
-                            className="absolute w-1 h-1 bg-cyan-400/50 rounded-full"
+                            className="absolute w-1 h-1 bg-emerald-400/50 rounded-full"
                             initial={{
                                 x: Math.random() * 400 - 200,
                                 y: Math.random() * 400 - 200,

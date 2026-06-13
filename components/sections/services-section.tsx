@@ -185,28 +185,29 @@ const ServiceCard = memo(function ServiceCard({
               price: planData.price
             })
           }}
-          className="w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold bg-white text-black relative overflow-hidden group cursor-pointer"
+          className="w-full flex items-center justify-center gap-2 py-4 font-mono font-bold bg-white text-black rounded-xl border-2 border-white shadow-[6px_6px_0_rgba(255,255,255,0.2)] hover:shadow-[2px_2px_0_rgba(255,255,255,0.2)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-300 relative overflow-hidden group cursor-pointer"
           onMouseEnter={() => setCursorVariant("hover")}
           onMouseLeave={() => setCursorVariant("default")}
-          whileHover={{ scale: 1.03, boxShadow: "0 0 30px rgba(255,255,255,0.2)" }}
           whileTap={{ scale: 0.97 }}
         >
+          <div className="absolute inset-0 pointer-events-none opacity-10 bg-[linear-gradient(transparent_50%,rgba(0,0,0,1)_50%)] bg-[length:100%_4px] z-0" />
           {/* Shine effect */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-black/10 to-transparent -skew-x-12"
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-black/10 to-transparent -skew-x-12 z-0"
             initial={{ x: "-150%" }}
             whileHover={{ x: "150%" }}
             transition={{ duration: 0.7, ease: "easeInOut" }}
           />
-          <span className="relative z-10 font-mono">{planData.cta}</span>
-          <motion.span
-            className="relative z-10"
-            initial={{ x: 0 }}
-            whileHover={{ x: 8 }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            <ArrowRight className="w-5 h-5" />
-          </motion.span>
+          <span className="relative z-10 font-mono flex items-center gap-2">
+            {planData.cta}
+            <motion.span
+              initial={{ x: 0 }}
+              whileHover={{ x: 8 }}
+              transition={{ type: "spring", stiffness: 400 }}
+            >
+              <ArrowRight className="w-5 h-5" />
+            </motion.span>
+          </span>
         </motion.button>
       </div>
     </motion.div>

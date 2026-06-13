@@ -260,24 +260,25 @@ export default function ContactSection() {
                     <motion.button
                       key={service.id}
                       onClick={() => setSelectedService(service.id)}
-                      className={`relative p-6 rounded-xl border-2 transition-all duration-300 ${isSelected
-                        ? "border-white/20 bg-black text-white"
-                        : "border-white bg-white text-black hover:bg-black hover:text-white hover:border-white/20"
+                      className={`relative p-6 rounded-xl border-2 transition-all duration-300 overflow-hidden ${isSelected
+                        ? "border-white/20 bg-black text-white shadow-[inset_0_0_20px_rgba(0,0,0,0.8)]"
+                        : "border-white bg-white text-black shadow-[4px_4px_0_rgba(255,255,255,0.5)] hover:bg-black hover:text-white hover:border-transparent hover:shadow-[8px_8px_0_#ffffff,-8px_-8px_0_#ffffff]"
                         }`}
                       onMouseEnter={() => setCursorVariant("hover")}
                       onMouseLeave={() => setCursorVariant("default")}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0, scale: 0, rotate: index % 2 === 0 ? -90 : 90 }}
+                      whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: index * 0.1, duration: 0.4 }}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      transition={{ type: "spring", bounce: 0.6, duration: 0.8, delay: index * 0.1 }}
+                      whileHover={{ scale: 1.05, rotate: index % 2 === 0 ? 3 : -3 }}
+                      whileTap={{ scale: 0.9, rotate: 0 }}
                     >
+
                       <div className="relative z-10 flex flex-col items-center gap-3">
                         <div
                           className={`w-12 h-12 rounded-lg flex items-center justify-center transition-colors ${isSelected
                             ? "bg-white text-black"
-                            : "bg-black text-white group-hover:bg-white group-hover:text-black"
+                            : "bg-black text-white group-hover:bg-transparent group-hover:text-white"
                             }`}
                         >
                           <Icon className="w-6 h-6" />
@@ -294,9 +295,10 @@ export default function ContactSection() {
                         {isSelected && (
                           <motion.div
                             className="absolute top-2 right-2"
-                            initial={{ scale: 0, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0, opacity: 0 }}
+                            initial={{ scale: 0, rotate: -180 }}
+                            animate={{ scale: 1, rotate: 0 }}
+                            exit={{ scale: 0, rotate: 180 }}
+                            transition={{ type: "spring", bounce: 0.5 }}
                           >
                             <CheckCircle className="w-5 h-5 text-white" />
                           </motion.div>
@@ -312,24 +314,29 @@ export default function ContactSection() {
               {!selectedService ? (
                 <motion.div
                   key="placeholder"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
-                  className="ide-window p-8 flex flex-col items-center justify-center text-center space-y-4 min-h-[300px] border border-dashed border-white/10 bg-white/5 rounded-xl"
+                  initial={{ opacity: 0, scale: 0, rotateX: 180 }}
+                  animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+                  exit={{ opacity: 0, scale: 0, y: 100 }}
+                  transition={{ type: "spring", bounce: 0.6, duration: 0.8 }}
+                  whileHover={{ rotate: [-2, 2, -2, 2, 0], scale: 1.02 }}
+                  className="ide-window p-8 flex flex-col items-center justify-center text-center space-y-4 min-h-[300px] border-2 border-dashed border-white/20 bg-black/40 rounded-xl relative overflow-hidden group cursor-crosshair"
                 >
-                  <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-2">
-                    <div className="w-2 h-2 bg-white/40 rounded-full animate-pulse" />
+                  <div className="absolute inset-0 opacity-20 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_0%,transparent_70%)] animate-pulse" />
                   </div>
-                  <h3 className="text-xl font-title font-bold text-white">
-                    {dictionary.contact.readyToStart || "Ready to Start?"}
+                  <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                    <div className="w-3 h-3 bg-white/60 rounded-full animate-ping" />
+                  </div>
+                  <h3 className="text-xl font-title font-bold text-green-500 group-hover:text-green-400 transition-colors">
+                    {dictionary.contact.readyToStart || "¿Listo para empezar?"}
                   </h3>
                   <p className="text-white font-mono text-sm max-w-xs">
-                    {dictionary.contact.selectPrompt || "Select an option above to initialize the contact protocol."}
+                    {dictionary.contact.selectPrompt || "Selecciona una opción arriba para iniciar el protocolo."}
                   </p>
-                  <div className="flex gap-2 mt-4">
-                    <span className="w-2 h-2 rounded-full bg-red-500/50" />
-                    <span className="w-2 h-2 rounded-full bg-yellow-500/50" />
-                    <span className="w-2 h-2 rounded-full bg-green-500/50" />
+                  <div className="flex gap-2 mt-4 group-hover:animate-bounce">
+                    <span className="w-2 h-2 rounded-full bg-red-500" />
+                    <span className="w-2 h-2 rounded-full bg-yellow-500" />
+                    <span className="w-2 h-2 rounded-full bg-green-500" />
                   </div>
                 </motion.div>
               ) : !isSubmitted ? (
@@ -487,13 +494,13 @@ export default function ContactSection() {
                       <motion.button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full py-4 px-6 rounded-xl bg-white text-black font-bold text-lg border-2 border-white hover:bg-transparent hover:text-white transition-all duration-300 disabled:opacity-70"
+                        className="relative overflow-hidden w-full py-4 px-6 rounded-xl bg-white text-black font-mono font-bold text-lg border-2 border-white shadow-[6px_6px_0_rgba(255,255,255,0.2)] hover:shadow-[2px_2px_0_rgba(255,255,255,0.2)] hover:translate-x-[4px] hover:translate-y-[4px] hover:bg-transparent hover:text-white transition-all duration-300 disabled:opacity-70 group"
                         onMouseEnter={() => setCursorVariant("hover")}
                         onMouseLeave={() => setCursorVariant("default")}
-                        whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
-                        <span className="flex items-center justify-center gap-3">
+                        <div className="absolute inset-0 pointer-events-none opacity-10 bg-[linear-gradient(transparent_50%,rgba(0,0,0,1)_50%)] bg-[length:100%_4px] z-0" />
+                        <span className="relative z-10 flex items-center justify-center gap-3">
                           {isSubmitting ? (
                             <motion.div
                               className="w-6 h-6 border-3 border-black border-t-transparent rounded-full"

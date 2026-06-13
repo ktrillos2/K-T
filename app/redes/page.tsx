@@ -4,9 +4,9 @@ import { m as motion } from "framer-motion"
 import { ArrowRight, Globe, Instagram, MessageCircle, Code2, Briefcase, Heart } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { projects } from "@/lib/projects"
 import { useCursor } from "@/context/cursor-context"
 import { useState, useEffect } from "react"
+
 
 const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg
@@ -24,12 +24,20 @@ export default function RedesPage() {
     const { setCursorVariant } = useCursor()
 
     // Almacenamos los proyectos aleatorios en el state para evitar Hydration Errors (SSR / CSR mismatches)
-    const [topProjects, setTopProjects] = useState<typeof projects>([])
+    const [topProjects, setTopProjects] = useState<any[]>([])
 
     useEffect(() => {
-        // Ordenamos aleatoriamente todos los proyectos y obtenemos 4
-        const shuffled = [...projects].sort(() => 0.5 - Math.random())
-        setTopProjects(shuffled.slice(0, 4))
+        // Obtener proyectos del CMS y mostrar 4 aleatorios
+        fetch('/api/projects')
+            .then(res => res.json())
+            .then((data: any[]) => {
+                const shuffled = [...data].sort(() => 0.5 - Math.random())
+                setTopProjects(shuffled.slice(0, 4))
+            })
+            .catch(() => {
+                // fallback vacío si falla el fetch
+                setTopProjects([])
+            })
     }, [])
 
     const socialLinks = [
@@ -156,7 +164,7 @@ export default function RedesPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
                         {topProjects.map((project, idx) => (
                             <motion.div
-                                key={project.id}
+                                key={project._id || project.id || idx}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
@@ -165,12 +173,12 @@ export default function RedesPage() {
                                 <Link href={`/projects/${project.slug}`} className="block group">
                                     <div className="relative aspect-[16/9] rounded-xl overflow-hidden mb-3 border border-border">
                                         <Image
-                                            src={project.images.hero}
+                                            src={project.hero || project.images?.hero || '/images/placeholder.png'}
                                             alt={project.title}
                                             fill
                                             sizes="(max-width: 768px) 100vw, 50vw"
                                             className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                            unoptimized={project.slug === 'estrella-de-david'}
+                                            unoptimized
                                         />
                                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                             <span className="bg-white text-black px-4 py-2 rounded-full font-mono text-xs font-bold font-title">

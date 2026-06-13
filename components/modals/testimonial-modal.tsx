@@ -1,11 +1,17 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { m as motion, AnimatePresence } from "framer-motion"
 import { X, Upload, Star, CheckCircle, Search, ChevronDown, ImageIcon } from "lucide-react"
 import { useLanguage } from "@/context/language-context"
-import { projects } from "@/lib/projects"
 import Image from "next/image"
+
+interface CmsProject {
+    _id: string
+    title: string
+    slug: string
+    hero?: string
+}
 
 interface TestimonialModalProps {
     isOpen: boolean
@@ -16,6 +22,9 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
     const { dictionary, language } = useLanguage()
     const [step, setStep] = useState(1) // 1: Form, 2: Success
     const [isSubmitting, setIsSubmitting] = useState(false)
+
+    // CMS Projects State
+    const [cmsProjects, setCmsProjects] = useState<CmsProject[]>([])
 
     // Form State
     const [selectedProject, setSelectedProject] = useState("")
@@ -28,7 +37,21 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
     const [imagePreview, setImagePreview] = useState<string | null>(null)
     const [projectSearch, setProjectSearch] = useState("")
 
-    const filteredProjects = projects.filter(p =>
+    // Fetch projects from CMS when modal opens
+    useEffect(() => {
+        if (isOpen && cmsProjects.length === 0) {
+            fetch('/api/projects')
+                .then(res => res.json())
+                .then((data: CmsProject[]) => {
+                    setCmsProjects(data)
+                })
+                .catch(() => {
+                    setCmsProjects([])
+                })
+        }
+    }, [isOpen, cmsProjects.length])
+
+    const filteredProjects = cmsProjects.filter(p =>
         p.title.toLowerCase().includes(projectSearch.toLowerCase())
     )
 
@@ -75,8 +98,6 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
             setStep(2)
         } catch (error) {
             console.error('Submission error:', error)
-            // Ideally show error to user, but for now just log it
-            // Could add an error state here
         } finally {
             setIsSubmitting(false)
         }
@@ -160,7 +181,7 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
                                                                     <Search className="w-4 h-4 text-white/40 mr-2" />
                                                                     <input
                                                                         type="text"
-                                                                        placeholder="Search..."
+                                                                        placeholder="Buscar proyecto..."
                                                                         value={projectSearch}
                                                                         onChange={(e) => setProjectSearch(e.target.value)}
                                                                         className="bg-transparent border-none outline-none text-sm text-white placeholder-white/20 w-full"
@@ -168,9 +189,12 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
                                                                 </div>
                                                             </div>
                                                             <div className="overflow-y-auto flex-1 p-1">
+                                                                {cmsProjects.length === 0 && (
+                                                                    <p className="text-white/40 text-sm text-center py-4">Cargando proyectos...</p>
+                                                                )}
                                                                 {filteredProjects.map((project) => (
                                                                     <button
-                                                                        key={project.id}
+                                                                        key={project._id}
                                                                         type="button"
                                                                         onClick={() => {
                                                                             setSelectedProject(project.title)
@@ -179,17 +203,26 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
                                                                         className="w-full text-left px-3 py-2 rounded-lg hover:bg-white/10 text-sm text-white/80 hover:text-white transition-colors flex items-center gap-3"
                                                                     >
                                                                         <div className="relative w-8 h-8 rounded-md overflow-hidden flex-shrink-0 bg-white/10">
-                                                                            {/* Project thumbnail if available, else initial */}
-                                                                            <Image
-                                                                                src={project.images.hero}
-                                                                                alt={project.title}
-                                                                                fill
-                                                                                className="object-cover"
-                                                                            />
+                                                                            {project.hero ? (
+                                                                                <Image
+                                                                                    src={project.hero}
+                                                                                    alt={project.title}
+                                                                                    fill
+                                                                                    className="object-cover"
+                                                                                    unoptimized
+                                                                                />
+                                                                            ) : (
+                                                                                <div className="w-full h-full flex items-center justify-center text-white/40 text-xs font-bold">
+                                                                                    {project.title.charAt(0)}
+                                                                                </div>
+                                                                            )}
                                                                         </div>
                                                                         {project.title}
                                                                     </button>
                                                                 ))}
+                                                                {filteredProjects.length === 0 && cmsProjects.length > 0 && (
+                                                                    <p className="text-white/40 text-sm text-center py-4">Sin resultados</p>
+                                                                )}
                                                             </div>
                                                         </motion.div>
                                                     )}
@@ -290,11 +323,11 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
                                                             }}
                                                             className="text-red-400 hover:text-red-300 text-xs mt-1"
                                                         >
-                                                            Remove
+                                                            Eliminar
                                                         </button>
                                                     </div>
                                                 ) : (
-                                                    <p className="text-xs text-white/40">JPG, PNG up to 5MB</p>
+                                                    <p className="text-xs text-white/40">JPG, PNG hasta 5MB</p>
                                                 )}
                                             </div>
                                         </div>
@@ -336,7 +369,7 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
                                             onClick={handleClose}
                                             className="px-8 py-3 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-colors font-medium"
                                         >
-                                            Close
+                                            Cerrar
                                         </button>
                                     </div>
                                 )}

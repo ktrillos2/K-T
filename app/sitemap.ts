@@ -1,12 +1,19 @@
 import { MetadataRoute } from 'next'
-import { projects } from '@/lib/projects'
+import { getAllProjects } from '@/sanity/lib/queries'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://www.kytcode.lat'
     const currentDate = new Date()
 
-    // Generar dinámicamente rutas para proyectos
-    const projectUrls = projects.map((project) => ({
+    // Generar dinámicamente rutas para proyectos desde el CMS
+    let cmsProjects: { slug: string }[] = []
+    try {
+        cmsProjects = await getAllProjects()
+    } catch {
+        cmsProjects = []
+    }
+
+    const projectUrls = cmsProjects.map((project) => ({
         url: `${baseUrl}/projects/${project.slug}`,
         lastModified: currentDate,
         changeFrequency: 'monthly' as const,
@@ -63,3 +70,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...blogUrls,
     ]
 }
+
