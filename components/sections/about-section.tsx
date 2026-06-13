@@ -209,7 +209,7 @@ const StatCard = memo(function StatCard({
   
   return (
     <motion.div 
-      className="relative rounded-lg bg-transparent overflow-hidden group cursor-crosshair border border-border hover:border-white transition-all duration-300"
+      className="relative rounded-none bg-transparent overflow-hidden group cursor-crosshair border-t-2 border-white/20 hover:border-white hover:rounded-lg transition-all duration-300"
       whileHover={{ y: -5 }}
     >
       {/* Race Car Streak */}
@@ -234,7 +234,6 @@ const StatCard = memo(function StatCard({
         </div>
         <motion.div
           className="absolute -inset-1 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity -z-10"
-          style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 10% 100%, 0 90%)" }}
         />
         <p className="text-4xl md:text-5xl font-black font-title text-white tracking-tighter group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/50 transition-all duration-300">
           {value}
