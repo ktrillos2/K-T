@@ -1,0 +1,682 @@
+"use client"
+
+import React, { useState, useEffect } from "react"
+import { CheckCircle2, ShieldCheck, Lock, Copy, Check, ThumbsUp, HelpCircle, ArrowRight, Calendar, Receipt, Globe, CreditCard } from "lucide-react"
+import { m as motion, AnimatePresence } from "framer-motion"
+import Footer from "@/components/layout/footer"
+import QuotationProjectsSlider from "@/components/sections/quotation-projects-slider"
+import { notifyQuotationViewed, notifyQuotationAccepted } from "@/app/actions/cotizacion-actions"
+
+const formatText = (text: string) => {
+  if (!text) return null;
+  const cleanText = text.replace(/\*\*\*(.*?)(?:\*\*|\*\*\*)/g, "**$1**");
+  const parts = cleanText.split(/(\*\*.*?\*\*|\*.*?\*)/g);
+  
+  return parts.map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={index} className="text-white font-bold">{part.slice(2, -2)}</strong>;
+    }
+    if (part.startsWith('*') && part.endsWith('*') && part.length > 2) {
+      return <em key={index} className="text-white/90 italic">{part.slice(1, -1)}</em>;
+    }
+    return <span key={index}>{part}</span>;
+  });
+};
+
+interface CotizacionData {
+  _id: string
+  title: string
+  slug: string
+  password: string
+  clientName: string
+  headerTitle: string
+  headerSubtitle?: string
+  date: string
+  validityDays: string
+  scopeTitle: string
+  scopeDescription: string
+  scopeItems: { title: string; description: string }[]
+  investmentTitle: string
+  currency: string
+  investmentItems: { concept: string; value?: string; isIncluded: boolean }[]
+  totalLabel: string
+  totalValue: string
+  termsTitle: string
+  termsCards: { title: string; content: string; isFullWidth: boolean; isWarning: boolean }[]
+  paymentTitle: string
+  showInternationalPayments: boolean
+  showNationalPayments: boolean
+  internationalPaymentMethods?: { name: string; description: string; recommended: boolean }[]
+  warrantyTitle: string
+  warrantyDescription: string
+  warrantyCoverageTitle: string
+  warrantyCoverage: string[]
+  warrantyExclusionsTitle: string
+  warrantyExclusions: string[]
+  whatsappMessage: string
+}
+
+export default function CotizacionDynamicPage({ data, projects = [] }: { data: CotizacionData, projects?: any[] }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [showWelcomeScreen, setShowWelcomeScreen] = useState(false)
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState(false)
+  const [hasViewed, setHasViewed] = useState(false)
+  const [isAccepted, setIsAccepted] = useState(false)
+  const [isAccepting, setIsAccepting] = useState(false)
+  const [copiedNequi, setCopiedNequi] = useState(false)
+  const [copiedCuenta, setCopiedCuenta] = useState(false)
+
+  const handleCopy = (text: string, type: 'nequi' | 'cuenta') => {
+    navigator.clipboard.writeText(text)
+    if (type === 'nequi') {
+      setCopiedNequi(true)
+      setTimeout(() => setCopiedNequi(false), 2000)
+    } else {
+      setCopiedCuenta(true)
+      setTimeout(() => setCopiedCuenta(false), 2000)
+    }
+  }
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (password === data.password) {
+      setIsAuthenticated(true)
+      setShowWelcomeScreen(true)
+      setError(false)
+      setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100)
+    } else {
+      setError(true)
+      setPassword("")
+    }
+  }
+
+  const handleContinueToQuotation = () => {
+    setShowWelcomeScreen(false)
+    if (!hasViewed) {
+      setHasViewed(true)
+      notifyQuotationViewed({ client: data.clientName }).catch(console.error)
+    }
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100)
+  }
+
+  const handleAccept = async () => {
+    setIsAccepting(true)
+    try {
+      await notifyQuotationAccepted({ client: data.clientName })
+      setIsAccepted(true)
+    } catch (error) {
+      console.error("Error accepting quote:", error)
+    } finally {
+      setIsAccepting(false)
+    }
+  }
+
+  const fadeIn = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  }
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  }
+
+  const whatsappLink = `https://wa.me/573133087069?text=${encodeURIComponent(data.whatsappMessage || 'Hola, tengo dudas sobre la cotización')}`
+
+  return (
+    <div className="min-h-screen bg-black text-white/90 font-mono selection:bg-white/20 pt-24">
+      <AnimatePresence mode="wait">
+        {!isAuthenticated ? (
+          <motion.div 
+            key="login"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.4 }}
+            className="flex items-center justify-center min-h-[70vh] px-4"
+          >
+            <div className="w-full max-w-md p-8 rounded-2xl bg-zinc-900/50 border border-white/10 shadow-2xl backdrop-blur-sm relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400"></div>
+              
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+                  <Lock className="w-8 h-8 text-white" />
+                </div>
+              </div>
+              
+              <h2 className="text-2xl font-bold font-title text-center text-white mb-2">Acceso Protegido</h2>
+              <p className="text-white/80 text-center text-sm mb-8">Ingresa la credencial proporcionada por K&T para ver tu cotización.</p>
+              
+              <form onSubmit={handleLogin} className="space-y-4">
+                <div>
+                  <input 
+                    type="password" 
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value)
+                      setError(false)
+                    }}
+                    placeholder="Contraseña"
+                    className={`w-full bg-black/50 border ${error ? 'border-red-500/50 focus:border-red-500' : 'border-white/20 focus:border-white/50'} rounded-lg px-4 py-3 text-white placeholder:text-white/40 focus:outline-none transition-colors`}
+                  />
+                  {error && <p className="text-white text-xs mt-2">Contraseña incorrecta. Intenta nuevamente.</p>}
+                </div>
+                <button 
+                  type="submit" 
+                  className="w-full bg-white text-black font-bold py-3 rounded-lg hover:bg-white/90 transition-colors flex items-center justify-center gap-2"
+                >
+                  Acceder a la Cotización <ArrowRight className="w-4 h-4" />
+                </button>
+              </form>
+            </div>
+          </motion.div>
+        ) : showWelcomeScreen ? (
+          <motion.div 
+            key="welcome"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center justify-center min-h-[75vh] px-4 pt-12 pb-24"
+          >
+            <div className="w-full max-w-2xl p-8 sm:p-12 my-auto rounded-3xl bg-zinc-900/80 border border-white/10 shadow-2xl backdrop-blur-md text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+              >
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-title font-bold text-white mb-6">
+                  ¡Saludos, <span className="text-emerald-400">{data.clientName}</span>! 👋
+                </h1>
+                
+                <p className="text-xl sm:text-2xl text-white/90 mb-8 font-light leading-relaxed">
+                  Esta es tu cotización oficial de desarrollo web a la medida.
+                </p>
+                
+                <div className="bg-white/5 border border-white/10 p-6 rounded-2xl mb-10 text-left">
+                  <p className="text-white/80 text-lg leading-relaxed mb-4">
+                    Toma tu tiempo para revisar toda la información detallada a continuación.
+                  </p>
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" />
+                      <span className="text-white/90">Si estás de acuerdo con la propuesta, podrás <strong>Aceptar la Cotización</strong> al finalizar la página.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <HelpCircle className="w-6 h-6 text-blue-400 shrink-0 mt-0.5" />
+                      <span className="text-white/90">Si deseas realizar cambios o tienes alguna duda, puedes darle al botón de <strong>Tengo dudas / Modificar</strong> al final para escribirme por WhatsApp.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleContinueToQuotation}
+                  className="bg-white text-black font-bold py-4 px-10 rounded-full text-lg hover:bg-white/90 transition-all flex items-center justify-center gap-2 mx-auto"
+                >
+                  Ver mi Cotización <ArrowRight className="w-5 h-5" />
+                </motion.button>
+              </motion.div>
+            </div>
+          </motion.div>
+        ) : (
+          <motion.main 
+            key="content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16"
+          >
+            {/* Header Section */}
+            <motion.header 
+              variants={fadeIn as any}
+              initial="hidden"
+              animate="visible"
+              className="mb-12 border-b border-white/10 pb-10 flex flex-col items-center"
+            >
+              <div className="inline-block px-4 py-1.5 mb-8 text-xs font-bold tracking-widest text-white uppercase border border-white/20 rounded-full bg-white/5 backdrop-blur-sm">
+                Propuesta Comercial
+              </div>
+              <h1 className="font-title text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white leading-tight mb-8 text-center uppercase">
+                {data.headerTitle}
+                {data.headerSubtitle && (
+                  <span className="text-xl sm:text-2xl text-white/70 block mt-4">{data.headerSubtitle}</span>
+                )}
+              </h1>
+              
+              <div className="inline-flex flex-col sm:flex-row items-center gap-6 p-5 sm:p-6 rounded-2xl bg-zinc-900/80 border border-white/10 shadow-lg">
+                <div className="flex items-center gap-4 px-4">
+                  <Calendar className="w-6 h-6 text-white/80" />
+                  <div className="text-left leading-tight">
+                    <p className="text-xs text-white/60 uppercase tracking-widest mb-1">Emisión</p>
+                    <p className="text-sm sm:text-base text-white font-medium">{data.date}</p>
+                  </div>
+                </div>
+                <div className="hidden sm:block w-px h-10 bg-white/10"></div>
+                <div className="flex items-center gap-4 px-4 border-t sm:border-t-0 border-white/10 pt-4 sm:pt-0 w-full sm:w-auto">
+                  <Receipt className="w-6 h-6 text-white/80" />
+                  <div className="text-left leading-tight">
+                    <p className="text-xs text-white/60 uppercase tracking-widest mb-1">Validez</p>
+                    <p className="text-sm sm:text-base text-white font-medium">{data.validityDays}</p>
+                  </div>
+                </div>
+              </div>
+            </motion.header>
+
+            <article className="space-y-12">
+              {/* Section 1: Scope */}
+              <motion.section 
+                variants={fadeIn as any}
+                initial="hidden"
+                animate="visible"
+                className="scroll-mt-24"
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black font-bold font-title text-sm">1</span>
+                  <h2 className="text-2xl sm:text-3xl font-bold font-title text-white">{data.scopeTitle}</h2>
+                </div>
+                {data.scopeDescription && (
+                  <p className="text-white/80 mb-8 text-base sm:text-lg leading-relaxed">
+                    {formatText(data.scopeDescription)}
+                  </p>
+                )}
+                
+                <motion.div 
+                  variants={staggerContainer as any}
+                  initial="hidden"
+                  animate="visible"
+                  className="grid sm:grid-cols-2 gap-4 sm:gap-6"
+                >
+                  {data.scopeItems?.map((item, i) => (
+                    <motion.div 
+                      variants={fadeIn as any}
+                      key={i} 
+                      className={`flex flex-col sm:flex-row gap-4 p-5 sm:p-6 rounded-xl border border-white/5 bg-zinc-900/30 hover:bg-zinc-900/80 transition-all duration-300 group ${data.scopeItems.length % 2 !== 0 && i === data.scopeItems.length - 1 ? 'sm:col-span-2 sm:mx-auto sm:max-w-[calc(50%-0.75rem)]' : ''}`}
+                    >
+                      <CheckCircle2 className="w-6 h-6 text-white shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                      <div>
+                        <h3 className="text-white font-semibold mb-2 sm:text-lg">{formatText(item.title)}</h3>
+                        <p className="text-white/80 leading-relaxed text-sm">{formatText(item.description)}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </motion.section>
+
+              {/* Section 2: Investment */}
+              <motion.section 
+                variants={fadeIn as any}
+                initial="hidden"
+                animate="visible"
+                className="scroll-mt-24"
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black font-bold font-title text-sm">2</span>
+                  <h2 className="text-2xl sm:text-3xl font-bold font-title text-white">{data.investmentTitle}</h2>
+                </div>
+                
+                <div className="overflow-x-auto rounded-xl border border-white/10 bg-zinc-900/50 shadow-xl">
+                  <table className="w-full text-left border-collapse min-w-full">
+                    <thead>
+                      <tr className="border-b border-white/10 bg-black/40">
+                        <th className="p-4 sm:p-6 font-semibold text-white">Concepto</th>
+                        <th className="p-4 sm:p-6 font-semibold text-white whitespace-nowrap text-right">Valor{data.currency ? ` (${data.currency})` : ''}</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-white/5">
+                      {(() => {
+                        const isItemExtra = (concept: string, value?: string) => {
+                          const lowerConcept = concept.toLowerCase()
+                          return lowerConcept.includes('extra') || 
+                                 lowerConcept.includes('adicional') || 
+                                 lowerConcept.includes('opcional') ||
+                                 lowerConcept.includes('mantenimiento') ||
+                                 (value && value.trim().startsWith('+'))
+                        }
+
+                        const baseItems = data.investmentItems?.filter(item => !isItemExtra(item.concept, item.value)) || []
+                        const extraItems = data.investmentItems?.filter(item => isItemExtra(item.concept, item.value)) || []
+
+                        return (
+                          <>
+                            {baseItems.map((item, i) => (
+                              <tr key={`base-${i}`} className="hover:bg-white/[0.02] transition-colors">
+                                <td className="p-4 sm:p-6 text-white/90 text-sm sm:text-base">{item.concept}</td>
+                                <td className="p-4 sm:p-6 text-white font-medium text-right whitespace-nowrap">
+                                  {item.isIncluded ? <span className="text-white/80">Incluido</span> : item.value}
+                                </td>
+                              </tr>
+                            ))}
+
+                            {data.totalLabel && (
+                              <tr className="bg-white/5 font-semibold relative">
+                                <td className="p-4 sm:p-6 text-white border-t border-white/20">{data.totalLabel}</td>
+                                <td className="p-4 sm:p-6 text-white text-lg sm:text-xl text-right whitespace-nowrap border-t border-white/20">{data.totalValue}</td>
+                              </tr>
+                            )}
+
+                            {extraItems.length > 0 && (
+                              <>
+                                <tr className="bg-black/60 border-t-4 border-t-black">
+                                  <td colSpan={2} className="p-3 sm:px-6 text-[10px] sm:text-xs uppercase tracking-widest text-emerald-400/80 font-bold border-t border-white/10">
+                                    Adicionales / Servicios Opcionales (No sumados al total base)
+                                  </td>
+                                </tr>
+                                {extraItems.map((item, i) => (
+                                  <tr key={`extra-${i}`} className="hover:bg-zinc-900/60 transition-colors bg-zinc-900/30 opacity-90 hover:opacity-100">
+                                    <td className="p-4 sm:p-6 text-white/70 text-sm sm:text-base">
+                                      <span className="inline-flex w-fit px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded text-[10px] uppercase tracking-wider text-emerald-400 mb-2 font-bold">
+                                        Opcional
+                                      </span>
+                                      <br/>
+                                      {item.concept.replace(/^(Extra|Adicional|Opcional):\s*/i, '')}
+                                    </td>
+                                    <td className="p-4 sm:p-6 text-emerald-400 font-medium text-right whitespace-nowrap">
+                                      {item.isIncluded ? <span className="text-emerald-400/60">Incluido</span> : item.value}
+                                    </td>
+                                  </tr>
+                                ))}
+                              </>
+                            )}
+                          </>
+                        )
+                      })()}
+                    </tbody>
+                  </table>
+                </div>
+              </motion.section>
+
+              {/* Section 3: Terms */}
+              <motion.section 
+                variants={fadeIn as any}
+                initial="hidden"
+                animate="visible"
+                className="scroll-mt-24"
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black font-bold font-title text-sm">3</span>
+                  <h2 className="text-2xl sm:text-3xl font-bold font-title text-white">{data.termsTitle}</h2>
+                </div>
+                
+                <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
+                  {data.termsCards?.map((card, i, arr) => {
+                    let isIsolated = false;
+                    if (!card.isFullWidth) {
+                      let nonFullCount = 0;
+                      for (let j = i; j >= 0; j--) {
+                        if (arr[j].isFullWidth) break;
+                        nonFullCount++;
+                      }
+                      
+                      const isLastCard = i === arr.length - 1;
+                      const nextIsFullWidth = !isLastCard && arr[i + 1].isFullWidth;
+                      
+                      if (nonFullCount % 2 !== 0 && (isLastCard || nextIsFullWidth)) {
+                        isIsolated = true;
+                      }
+                    }
+
+                    return (
+                    <div 
+                      key={i} 
+                      className={`p-5 sm:p-8 rounded-xl ${card.isWarning ? 'border border-amber-900/30 bg-amber-950/20' : 'bg-zinc-900/50 border border-white/5'} relative overflow-hidden ${card.isFullWidth || isIsolated ? 'lg:col-span-2' : ''}`}
+                    >
+                      {card.isWarning ? (
+                        <div className="absolute top-0 left-0 w-1 h-full bg-amber-500"></div>
+                      ) : (
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400"></div>
+                      )}
+                      <h3 className={`text-white font-bold text-lg mb-4 ${card.isWarning ? 'flex items-center gap-2 pl-2' : ''}`}>
+                        {card.isWarning && <ShieldCheck className="w-5 h-5 text-amber-500" />}
+                        {formatText(card.title)}
+                      </h3>
+                      <p className={`${card.isWarning ? 'text-white/80 leading-relaxed selection:bg-amber-500/30 pl-2' : 'text-white/80 text-sm sm:text-base leading-relaxed'}`} style={{ whiteSpace: 'pre-line' }}>
+                        {formatText(card.content)}
+                      </p>
+                    </div>
+                    )
+                  })}
+                </div>
+              </motion.section>
+
+              {/* Section 4: Payment Methods */}
+              <motion.section 
+                variants={fadeIn as any}
+                initial="hidden"
+                animate="visible"
+                className="scroll-mt-24"
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black font-bold font-title text-sm">4</span>
+                  <h2 className="text-2xl sm:text-3xl font-bold font-title text-white">{data.paymentTitle}</h2>
+                </div>
+
+                {data.showInternationalPayments && data.internationalPaymentMethods && data.internationalPaymentMethods.length > 0 && (
+                  <div className="p-6 sm:p-8 rounded-2xl bg-zinc-900 border border-white/10 mb-8 relative overflow-hidden shadow-2xl">
+                    <div className="absolute left-0 top-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-blue-500"></div>
+                    <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                      <Globe className="w-5 h-5 text-emerald-400" />
+                      Pagos Internacionales (Exterior)
+                    </h3>
+                    <ul className="space-y-6">
+                      {data.internationalPaymentMethods.map((method, i) => (
+                        <li key={i} className={i < data.internationalPaymentMethods!.length - 1 ? 'border-b border-white/10 pb-4' : ''}>
+                          <p className="font-bold text-white mb-2 flex items-center">
+                            {method.name}
+                            {method.recommended && (
+                              <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full ml-2 uppercase tracking-wide">Recomendado</span>
+                            )}
+                          </p>
+                          <p className="text-sm text-white/70">{formatText(method.description)}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <motion.div 
+                  whileHover={{ y: -2 }}
+                  transition={{ duration: 0.3 }}
+                  className="p-6 sm:p-8 rounded-2xl bg-zinc-900 border border-white/10 relative overflow-hidden shadow-2xl"
+                >
+                  <div className="absolute right-0 top-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.05)_0%,_transparent_60%)] pointer-events-none"></div>
+                  <div className="grid md:grid-cols-2 gap-8 md:gap-12 relative z-10">
+                    <div className="flex flex-col justify-between space-y-8">
+                      {data.showInternationalPayments ? (
+                        <>
+                          <div>
+                            <p className="text-[10px] text-white/60 uppercase tracking-widest mb-2 font-bold">Método Directo</p>
+                            <p className="text-xl sm:text-2xl text-white font-bold tracking-tight">Western Union</p>
+                          </div>
+                          <div>
+                            <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Celular / Contacto</p>
+                            <div className="flex items-center gap-2">
+                              <p className="text-white text-sm sm:text-base tracking-widest font-mono">3116360057</p>
+                              <button onClick={() => handleCopy('3116360057', 'cuenta')} className="p-1.5 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white" title="Copiar celular">
+                                {copiedCuenta ? <Check className="w-4 h-4 text-white" /> : <Copy className="w-4 h-4" />}
+                              </button>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div>
+                            <p className="text-[10px] text-white/60 uppercase tracking-widest mb-2 font-bold">Banco</p>
+                            <p className="text-xl sm:text-2xl text-white font-bold tracking-tight">Bancolombia</p>
+                          </div>
+                          <div>
+                            <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Número de Cuenta</p>
+                            <div className="flex items-center gap-2">
+                              <p className="text-white text-sm sm:text-base tracking-widest font-mono">91290318578</p>
+                              <button onClick={() => handleCopy('91290318578', 'cuenta')} className="p-1.5 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white" title="Copiar cuenta">
+                                {copiedCuenta ? <Check className="w-4 h-4 text-white" /> : <Copy className="w-4 h-4" />}
+                              </button>
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    <div className="flex flex-col justify-between space-y-8 pt-8 md:pt-0 border-t border-white/10 md:border-t-0 md:border-l md:border-white/10 md:pl-12">
+                      <div>
+                        <p className="text-[10px] text-white/60 uppercase tracking-widest mb-2 font-bold">Beneficiario / Titular</p>
+                        <p className="text-lg sm:text-xl text-white font-medium uppercase tracking-wide leading-tight">Keyner Steban<br/>Trillos Useche</p>
+                      </div>
+                      <div className="grid grid-cols-2 gap-6">
+                        <div>
+                          <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Identificación</p>
+                          <p className="text-white text-sm tracking-widest font-mono">1.090.384.736</p>
+                        </div>
+                        {!data.showInternationalPayments && (
+                          <div>
+                            <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">Nequi</p>
+                            <div className="flex items-center gap-2">
+                              <p className="text-white text-sm tracking-widest font-mono">3133087069</p>
+                              <button onClick={() => handleCopy('3133087069', 'nequi')} className="p-1.5 hover:bg-white/10 rounded-md transition-colors text-white/50 hover:text-white" title="Copiar Nequi">
+                                {copiedNequi ? <Check className="w-4 h-4 text-white" /> : <Copy className="w-4 h-4" />}
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.section>
+
+              {/* Section 5: Warranty */}
+              <motion.section 
+                variants={fadeIn as any}
+                initial="hidden"
+                animate="visible"
+                className="scroll-mt-24"
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-white text-black font-bold font-title text-sm">5</span>
+                  <h2 className="text-2xl sm:text-3xl font-bold font-title text-white">{data.warrantyTitle}</h2>
+                </div>
+                
+                {data.warrantyDescription && (
+                  <div className="mb-8 p-5 sm:p-6 rounded-xl bg-white/5 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-lg">
+                    <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center shrink-0">
+                      <ShieldCheck className="w-6 h-6 text-white" />
+                    </div>
+                    <p className="text-white text-sm sm:text-base leading-relaxed">
+                        {formatText(data.warrantyDescription)}                      </p>
+                    </div>                )}
+
+                <div className="grid md:grid-cols-2 gap-6 sm:gap-10">
+                  {data.warrantyCoverage && data.warrantyCoverage.length > 0 && (
+                    <div className="bg-zinc-900/30 p-6 rounded-xl border border-white/5">
+                      <h3 className="text-white flex items-center gap-3 font-bold mb-6 tracking-wide sm:text-lg">
+                        <CheckCircle2 className="w-5 h-5" /> {data.warrantyCoverageTitle || 'Cobertura Incluida'}
+                      </h3>
+                      <ul className="space-y-4 text-sm sm:text-base text-white/90">
+                        {data.warrantyCoverage.map((item, i) => (
+                          <li key={i} className="flex items-start gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 shrink-0 mt-2"></span>
+                              <span>{formatText(item)}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  
+                  {data.warrantyExclusions && data.warrantyExclusions.length > 0 && (
+                    <div className="bg-zinc-900/30 p-6 rounded-xl border border-white/5">
+                      <h3 className="text-white flex items-center gap-3 font-bold mb-6 tracking-wide sm:text-lg">
+                        <div className="w-5 h-5 rounded-full border-2 border-red-400 flex items-center justify-center text-xs text-red-400">✕</div> 
+                        {data.warrantyExclusionsTitle || 'Exclusiones'}
+                      </h3>
+                      <ul className="space-y-4 text-sm sm:text-base text-white/80">
+                        {data.warrantyExclusions.map((item, i) => (
+                          <li key={i} className="flex items-start gap-3">
+                            <span className="w-1.5 h-1.5 rounded-full bg-red-500/30 shrink-0 mt-2"></span>
+                              <span>{formatText(item)}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </motion.section>
+
+              {/* Section 6: Portfolio & Next Steps */}
+              <motion.section 
+                variants={fadeIn as any}
+                initial="hidden"
+                animate="visible"
+                className="scroll-mt-24"
+              >
+                <div className="flex flex-col items-center justify-center border-t border-white/10 pt-16 pb-8 text-center">
+                  <h2 className="text-3xl font-bold font-title text-white mb-4">¿Listo para comenzar tu proyecto?</h2>
+                  <p className="text-white/70 max-w-xl mx-auto mb-10 text-lg">
+                    Revisa algunos de nuestros trabajos más recientes o procede a aceptar la cotización para dar el primer paso.
+                  </p>
+                  
+                  <div className="w-full relative mb-16">
+                    <QuotationProjectsSlider projects={projects} />
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+                    {isAccepted ? (
+                      <div className="flex items-center gap-2 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-8 py-4 rounded-full font-bold">
+                        <CheckCircle2 className="w-5 h-5" />
+                        ¡Cotización Aceptada!
+                      </div>
+                    ) : (
+                      <button 
+                        onClick={handleAccept}
+                        disabled={isAccepting}
+                        className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white text-black hover:bg-white/90 px-8 py-4 rounded-full font-bold transition-all hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
+                      >
+                        {isAccepting ? (
+                          <span className="flex items-center gap-2">
+                            <span className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin"></span>
+                            Procesando...
+                          </span>
+                        ) : (
+                          <>
+                            <ThumbsUp className="w-5 h-5" />
+                            Aceptar Cotización
+                          </>
+                        )}
+                      </button>
+                    )}
+                    
+                    <a 
+                      href={whatsappLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto flex items-center justify-center gap-2 bg-zinc-900 text-white hover:bg-zinc-800 border border-white/10 px-8 py-4 rounded-full font-medium transition-all"
+                    >
+                      <HelpCircle className="w-5 h-5" />
+                      Tengo dudas / Modificar
+                    </a>
+                  </div>
+                </div>
+              </motion.section>
+            </article>
+
+            {/* In-page Signature */}
+            <motion.div 
+              variants={fadeIn as any}
+              initial="hidden"
+              animate="visible"
+              className="mt-24 pt-12 border-t border-white/5 flex flex-col items-center justify-center gap-2 mb-12"
+            >
+              <p className="text-white/60 text-sm mb-1">Atentamente,</p>
+              <p className="text-white font-bold font-title tracking-widest text-2xl">K&T</p>
+              <p className="text-white/80 text-sm">Representado por Keyner Trillos</p>
+            </motion.div>
+          </motion.main>
+        )}
+      </AnimatePresence>
+      <Footer />
+    </div>
+  )
+}

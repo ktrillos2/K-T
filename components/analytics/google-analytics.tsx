@@ -1,0 +1,63 @@
+"use client"
+
+import Script from "next/script"
+import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
+
+export default function GoogleAnalytics() {
+    const [shouldLoad, setShouldLoad] = useState(false)
+
+    const gaId = "G-6SBSC9LHSY"
+    const adsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-17825211485"
+
+    const pathname = usePathname()
+    const isAdminRoute = pathname?.startsWith('/admin') || 
+                        pathname?.startsWith('/studio') ||
+                        pathname?.startsWith('/crm') ||
+                        pathname?.startsWith('/proyectos') ||
+                        pathname?.startsWith('/finanzas')
+
+    useEffect(() => {
+        if (process.env.NODE_ENV !== "production" || isAdminRoute) return
+
+        const enable = () => {
+            setShouldLoad(true)
+            window.removeEventListener("pointerdown", enable)
+            window.removeEventListener("keydown", enable)
+            window.removeEventListener("scroll", enable)
+            window.removeEventListener("touchstart", enable)
+        }
+
+        window.addEventListener("pointerdown", enable, { passive: true, once: true })
+        window.addEventListener("keydown", enable, { passive: true, once: true })
+        window.addEventListener("scroll", enable, { passive: true, once: true })
+        window.addEventListener("touchstart", enable, { passive: true, once: true })
+
+        return () => {
+            window.removeEventListener("pointerdown", enable)
+            window.removeEventListener("keydown", enable)
+            window.removeEventListener("scroll", enable)
+            window.removeEventListener("touchstart", enable)
+        }
+    }, [])
+
+    if (process.env.NODE_ENV !== "production" || isAdminRoute) return null
+    if (!shouldLoad) return null
+
+    return (
+        <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="lazyOnload" />
+            <Script id="google-analytics" strategy="lazyOnload">
+                {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '${gaId}');
+          gtag('config', '${adsId}');
+        `}
+            </Script>
+        </>
+    )
+}
+

@@ -1,0 +1,119 @@
+import { client } from './client'
+
+/** Obtener una cotización por su slug */
+export async function getCotizacionBySlug(slug: string) {
+  return client.fetch(
+    `*[_type == "cotizacion" && slug.current == $slug && isActive == true][0]{
+      _id,
+      _updatedAt,
+      title,
+      "slug": slug.current,
+      subdomain,
+      password,
+      clientName,
+      isActive,
+      headerTitle,
+      headerSubtitle,
+      date,
+      validityDays,
+      scopeTitle,
+      scopeDescription,
+      scopeItems[]{title, description},
+      investmentTitle,
+      currency,
+      investmentItems[]{concept, value, isIncluded},
+      totalLabel,
+      totalValue,
+      termsTitle,
+      termsCards[]{title, content, isFullWidth, isWarning},
+      paymentTitle,
+      showInternationalPayments,
+      showNationalPayments,
+      internationalPaymentMethods[]{name, description, recommended},
+      warrantyTitle,
+      warrantyDescription,
+      warrantyCoverageTitle,
+      warrantyCoverage,
+      warrantyExclusionsTitle,
+      warrantyExclusions,
+      whatsappMessage
+    }`,
+    { slug },
+    { next: { revalidate: 60 } }
+  )
+}
+
+/** Obtener una cotización por su subdominio */
+export async function getCotizacionBySubdomain(subdomain: string) {
+  return client.fetch(
+    `*[_type == "cotizacion" && subdomain == $subdomain && isActive == true][0]{
+      "slug": slug.current
+    }`,
+    { subdomain },
+    { next: { revalidate: 60 } }
+  )
+}
+
+/** Obtener todos los subdominios activos para el middleware */
+export async function getAllCotizacionSubdomains() {
+  return client.fetch<{ subdomain: string; slug: string }[]>(
+    `*[_type == "cotizacion" && isActive == true && defined(subdomain) && subdomain != ""]{
+      subdomain,
+      "slug": slug.current
+    }`,
+    {},
+    { next: { revalidate: 60 } }
+  )
+}
+
+/** Obtener todos los proyectos del portafolio ordenados */
+export async function getAllProjects() {
+  return client.fetch(
+    `*[_type == "project"] | order(orderId asc){
+      _id,
+      _updatedAt,
+      title,
+      "slug": slug.current,
+      shortDescription,
+      description,
+      year,
+      month,
+      category,
+      tech,
+      "hero": heroImage.asset->url,
+      "mobile": mobileImage.asset->url,
+      liveUrl,
+      challenge,
+      solution,
+      seoFocus
+    }`,
+    {},
+    { next: { revalidate: 60 } }
+  )
+}
+
+/** Obtener un proyecto por su slug */
+export async function getProjectBySlug(slug: string) {
+  return client.fetch(
+    `*[_type == "project" && slug.current == $slug][0]{
+      _id,
+      _updatedAt,
+      title,
+      "slug": slug.current,
+      shortDescription,
+      description,
+      year,
+      month,
+      category,
+      tech,
+      "hero": heroImage.asset->url,
+      "mobile": mobileImage.asset->url,
+      liveUrl,
+      challenge,
+      solution,
+      seoFocus
+    }`,
+    { slug },
+    { next: { revalidate: 60 } }
+  )
+}

@@ -1,0 +1,22 @@
+URL,Indexable,Canonical,Primary intent,Structured data
+/,yes,https://www.kytcode.lat/,agencia de desarrollo web en Colombia,"Organization; WebSite; WebPage; ItemList"
+/servicios,yes,https://www.kytcode.lat/servicios,servicios de desarrollo web,"ItemList; BreadcrumbList"
+/servicios/desarrollo-web-a-medida,yes,https://www.kytcode.lat/servicios/desarrollo-web-a-medida,desarrollo web a medida,"Service; BreadcrumbList; FAQPage"
+/servicios/diseno-web-corporativo,yes,https://www.kytcode.lat/servicios/diseno-web-corporativo,diseño web corporativo,"Service; BreadcrumbList; FAQPage"
+/servicios/tiendas-virtuales,yes,https://www.kytcode.lat/servicios/tiendas-virtuales,desarrollo de tiendas virtuales,"Service; BreadcrumbList; FAQPage"
+/servicios/software-a-medida,yes,https://www.kytcode.lat/servicios/software-a-medida,software a medida,"Service; BreadcrumbList; FAQPage"
+/servicios/seo-tecnico,yes,https://www.kytcode.lat/servicios/seo-tecnico,SEO técnico,"Service; BreadcrumbList; FAQPage"
+/servicios/mantenimiento-web,yes,https://www.kytcode.lat/servicios/mantenimiento-web,mantenimiento web,"Service; BreadcrumbList; FAQPage"
+/precios,yes,https://www.kytcode.lat/precios,precio de páginas web,"CollectionPage; BreadcrumbList; FAQPage"
+/portafolio,yes,https://www.kytcode.lat/portafolio,portafolio y casos de estudio,"CollectionPage; ItemList; BreadcrumbList"
+/projects/[slug],yes,dynamic,caso de estudio,"CreativeWork; BreadcrumbList"
+/blog,yes,https://www.kytcode.lat/blog,blog de desarrollo web y SEO,"Blog; BreadcrumbList"
+/blog/[slug],yes,dynamic,guía informativa,"BlogPosting; BreadcrumbList; FAQPage"
+/preguntas-frecuentes,yes,https://www.kytcode.lat/preguntas-frecuentes,preguntas sobre desarrollo web,"FAQPage; BreadcrumbList"
+/redes,yes,https://www.kytcode.lat/redes,canales digitales,WebPage metadata
+/politica-de-privacidad,yes,https://www.kytcode.lat/politica-de-privacidad,política de privacidad,WebPage metadata
+/login,no,,acceso privado,noindex
+/admin/*,no,,administración,noindex
+/cotizaciones/*,no,,propuestas privadas,noindex
+/sentry-example-page,no,,demostración técnica,noindex
+/whatsapp-clone,no,,demostración técnica,noindex
