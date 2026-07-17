@@ -39,7 +39,6 @@ next-env.d.ts
 # Scripts
 scripts/
 *.gs
-*.config*.ts
 *.local
 *.log
 *.sql
