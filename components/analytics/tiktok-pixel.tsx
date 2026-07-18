@@ -7,7 +7,6 @@ import { useEffect, useState } from "react"
 export default function TiktokPixel() {
     const pathname = usePathname()
     const searchParams = useSearchParams()
-    const [isLoaded, setIsLoaded] = useState(false)
     const [shouldLoad, setShouldLoad] = useState(false)
 
     useEffect(() => {
@@ -36,14 +35,10 @@ export default function TiktokPixel() {
     }, [pathname])
 
     useEffect(() => {
-        // Este efecto gestiona TANTO la carga inicial como la navegación
-        // Se activa cuando el script termina de cargar (isLoaded) o cuando cambia la ruta
-        // @ts-ignore
-        if (shouldLoad && isLoaded && window.ttq) {
-            // @ts-ignore
-            window.ttq.page()
+        if (shouldLoad && typeof window !== 'undefined' && (window as any).ttq) {
+            (window as any).ttq.page()
         }
-    }, [pathname, searchParams, isLoaded, shouldLoad])
+    }, [pathname, searchParams, shouldLoad])
 
     const isAdmin = pathname.startsWith('/admin') || 
                     pathname.startsWith('/crm') || 
@@ -53,14 +48,12 @@ export default function TiktokPixel() {
     if (!shouldLoad) return null
 
     return (
-        <Script
-            id="tiktok-pixel"
-            strategy="afterInteractive"
-            onLoad={() => {
-                // Solo avisamos que cargó. El useEffect de arriba hará el disparo.
-                setIsLoaded(true)
-            }}
-            dangerouslySetInnerHTML={{
+        <>
+            {shouldLoad && (
+                <Script
+                    id="tiktok-pixel"
+                    strategy="afterInteractive"
+                    dangerouslySetInnerHTML={{
                 __html: `
           !function (w, d, t) {
             w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
@@ -68,10 +61,12 @@ export default function TiktokPixel() {
             ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
           
             ttq.load('D5PGFD3C77UAU1QU4SH0');
-            // MANTENER COMENTADO: ttq.page(); 
+            ttq.page(); 
           }(window, document, 'ttq');
         `,
-            }}
-        />
+                    }}
+                />
+            )}
+        </>
     )
 }
