@@ -13,7 +13,7 @@ export const World = ({
     className?: string;
 }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const pointerInteracting = useRef(null);
+    const pointerInteracting = useRef<number | null>(null);
     const pointerInteractionMovement = useRef(0);
     const [r, setR] = useState(0);
 

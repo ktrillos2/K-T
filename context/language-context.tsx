@@ -122,8 +122,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       return () => (window as any).cancelIdleCallback?.(id)
     }
 
-    const t = window.setTimeout(schedule, 800)
-    return () => window.clearTimeout(t)
+    const t = setTimeout(schedule, 800)
+    return () => clearTimeout(t)
   }, [country])
 
   const convertPrice = (usdAmount: number) => {
@@ -237,8 +237,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       return () => (window as any).cancelIdleCallback?.(id)
     }
 
-    const t = window.setTimeout(schedule, 1200)
-    return () => window.clearTimeout(t)
+    const t = setTimeout(schedule, 1200)
+    return () => clearTimeout(t)
   }, [])
 
   return (
