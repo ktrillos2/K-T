@@ -18,7 +18,7 @@ export const es = {
   },
   hero: {
     greeting: "// Agencia de Desarrollo",
-    slogan: "Desarrollo Web a la Medida para Latinoamérica",
+    slogan: "Desarrollo Web a la Medida",
     cta: "Ver portafolio",
     scroll: "Conoce nuestra arquitectura",
   },
