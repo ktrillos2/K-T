@@ -6,6 +6,7 @@ import { smoothScrollTo } from "@/lib/utils"
 import { ArrowRight, ChevronDown } from "lucide-react"
 import { useEffect } from "react"
 import { useLanguage } from "@/context/language-context"
+import { reportPixelLead } from "@/lib/gtag"
 
 export default function PricingHero() {
   const { setCursorVariant } = useCursor()
@@ -41,6 +42,7 @@ export default function PricingHero() {
         event_label: "Solicitar cotizacion"
       })
     }
+    reportPixelLead()
     window.open("https://wa.me/573116360057?text=Hola,%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n%20para%20un%20proyecto.", "_blank")
   }
 

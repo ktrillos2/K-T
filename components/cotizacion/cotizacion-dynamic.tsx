@@ -6,6 +6,7 @@ import { m as motion, AnimatePresence } from "framer-motion"
 import Footer from "@/components/layout/footer"
 import QuotationProjectsSlider from "@/components/sections/quotation-projects-slider"
 import { notifyQuotationViewed, notifyQuotationAccepted } from "@/app/actions/cotizacion-actions"
+import { reportPixelLead } from "@/lib/gtag"
 
 const formatText = (text: string) => {
   if (!text) return null;
@@ -652,6 +653,7 @@ export default function CotizacionDynamicPage({ data, projects = [] }: { data: C
                       href={whatsappLink}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => reportPixelLead()}
                       className="w-full sm:w-auto flex items-center justify-center gap-2 bg-zinc-900 text-white hover:bg-zinc-800 border border-white/10 px-8 py-4 rounded-full font-medium transition-all"
                     >
                       <HelpCircle className="w-5 h-5" />

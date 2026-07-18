@@ -10,6 +10,7 @@ import { notifyInteraction } from "@/app/actions/notify-click"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
 import { useLanguage } from "@/context/language-context"
+import { reportPixelLead } from "@/lib/gtag"
 
 export default function FloatingButtons() {
     const pathname = usePathname()
@@ -157,6 +158,7 @@ export default function FloatingButtons() {
             content_name: "Open WhatsApp Direct",
             content_type: "button"
         })
+        reportPixelLead()
         window.open('https://wa.me/573116360057?text=Hola%20K%26T%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios.', '_blank')
     }
 

@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { useCursor } from "@/context/cursor-context"
+import { reportPixelLead } from "@/lib/gtag"
 
 import { useLanguage } from "@/context/language-context"
 
@@ -104,6 +105,7 @@ ${formData.message}
         event_label: "Hablar por WhatsApp"
       })
     }
+    reportPixelLead()
     window.open("https://wa.me/573116360057?text=Hola,%20me%20gustar%C3%ADa%20solicitar%20una%20propuesta%20personalizada.", "_blank")
   }
 

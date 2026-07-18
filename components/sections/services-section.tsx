@@ -8,7 +8,7 @@ import { m as motion, useMotionValue, useSpring, useTransform } from "framer-mot
 import { Check, ArrowRight, Sparkles, Zap, ShoppingCart, Code2 } from "lucide-react"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
-import { reportConversion } from "@/lib/gtag"
+import { reportPixelLead } from "@/lib/gtag"
 import { usePricing } from "@/hooks/use-pricing"
 import { useModal } from "@/context/modal-context"
 import { notifyInteraction } from "@/app/actions/notify-click"
@@ -189,9 +189,10 @@ const ServiceCard = memo(function ServiceCard({
           onClick={(e) => {
             e.preventDefault()
             // onSelect() - Triggering straight navigation as per user request
-            reportConversion(`https://wa.me/573116360057?text=${encodeURIComponent(
+            reportPixelLead()
+            window.open(`https://wa.me/573116360057?text=${encodeURIComponent(
               planData.whatsapp_message || "Hola, me gustaría recibir más información."
-            )}`)
+            )}`, "_blank")
             notifyInteraction(`Service Button: ${planData.cta}`, {
               plan: plan,
               price: planData.price
