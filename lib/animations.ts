@@ -12,13 +12,13 @@ export const ANIMATION_DURATION = {
 
 export const ANIMATION_EASING = {
   // Smooth deceleration for entries
-  smooth: [0.22, 1, 0.36, 1],
+  smooth: [0.22, 1, 0.36, 1] as [number, number, number, number],
   // Quick and clean exits
-  exit: [0.76, 0, 0.24, 1],
+  exit: [0.76, 0, 0.24, 1] as [number, number, number, number],
   // Mechanical feel for technological elements
-  mechanical: [0.85, 0, 0.15, 1],
+  mechanical: [0.85, 0, 0.15, 1] as [number, number, number, number],
   // Slight elasticity for buttons/micro-interactions
-  elastic: [0.34, 1.56, 0.64, 1],
+  elastic: [0.34, 1.56, 0.64, 1] as [number, number, number, number],
 }
 
 // ==========================================

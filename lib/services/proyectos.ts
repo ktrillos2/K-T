@@ -37,7 +37,7 @@ export async function getPendingProjects(): Promise<PendingProject[]> {
         return []
     }
 
-    return (data || []).map(p => ({
+    return (data || []).map((p: any) => ({
         id: p.id,
         title: p.title,
         client: p.client,
