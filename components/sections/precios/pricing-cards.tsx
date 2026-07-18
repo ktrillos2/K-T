@@ -5,6 +5,7 @@ import { Check, Info, ArrowRight } from "lucide-react"
 import { useCursor } from "@/context/cursor-context"
 
 import { useLanguage } from "@/context/language-context"
+import { reportMetaLead } from "@/lib/gtag"
 
 export default function PricingCards() {
   const { setCursorVariant } = useCursor()
@@ -41,6 +42,7 @@ export default function PricingCards() {
         event_label: planTitle
       })
     }
+    reportMetaLead()
     window.open(`https://wa.me/573116360057?text=${whatsappMessage}`, "_blank")
   }
 

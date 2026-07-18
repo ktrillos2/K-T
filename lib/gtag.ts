@@ -1,7 +1,14 @@
 export const GA_CONVERSION_ID = 'AW-17825211485/4ScFCMvO9tUbEN3I3LNC'
 
+export const reportMetaLead = () => {
+    if (typeof window !== 'undefined' && typeof (window as any).fbq !== 'undefined') {
+        (window as any).fbq('track', 'Lead');
+    }
+}
+
 // @ts-ignore
 export const reportConversion = (url: string) => {
+    reportMetaLead();
     const callback = () => {
         if (typeof url !== 'undefined') {
             window.location.href = url

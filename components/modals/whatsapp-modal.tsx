@@ -18,6 +18,7 @@ import { sendLeadEmail } from "@/app/actions/send-lead"
 import { identifyTikTokUser } from "@/lib/tiktok-client"
 import { getOrSetExternalId } from "@/lib/cookie-utils"
 import { toast } from "sonner"
+import { reportMetaLead } from "@/lib/gtag"
 
 import { useRouter } from "next/navigation"
 import useEmblaCarousel from "embla-carousel-react"
@@ -162,8 +163,7 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
             // email: no email in this form
         })
 
-        // 2. Open WhatsApp IMMEDIATELY (to bypass popup blockers)
-
+        reportMetaLead()
 
         // 2. Open WhatsApp IMMEDIATELY (to bypass popup blockers)
         // Adding 'noopener,noreferrer' is good practice but _blank is standard.
