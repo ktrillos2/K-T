@@ -87,10 +87,10 @@ export default async function Home() {
       <main>
         <HeroSection />
         <AboutSection />
-        <ServicesSection />
         <InternationalSection />
         <CxellenceSection initialProjects={projects} />
         <ProjectsSection initialProjects={projects} />
+        <ServicesSection />
         <TestimonialsSection initialTestimonials={testimonials} />
         <ContactSection />
       </main>
