@@ -1,3 +1,5 @@
+import { trackTikTokEvent } from "@/app/actions/tiktok"
+
 export const GA_CONVERSION_ID = 'AW-17825211485/4ScFCMvO9tUbEN3I3LNC'
 
 export const reportPixelLead = () => {
@@ -9,6 +11,10 @@ export const reportPixelLead = () => {
             (window as any).ttq.track('Contact');
         }
     }
+    // Dispara el evento también mediante la API de servidor (Events API)
+    trackTikTokEvent("Contact", {
+        content_name: "WhatsApp Lead",
+    }).catch(err => console.error("Error triggering server TikTok event:", err));
 }
 
 // @ts-ignore
