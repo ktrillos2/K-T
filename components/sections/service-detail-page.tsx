@@ -34,7 +34,7 @@ export default function ServiceDetailPage({ service }: { service: ServicePageDat
           }),
           buildBreadcrumbJsonLd([
             { name: "Inicio", path: "/" },
-            { name: "Servicios", path: "/servicios" },
+            { name: "Servicios", path: "/precios" },
             { name: service.shortTitle, path },
           ]),
           buildFaqJsonLd(service.faqs),
@@ -50,7 +50,7 @@ export default function ServiceDetailPage({ service }: { service: ServicePageDat
             <ol className="flex flex-wrap items-center gap-2">
               <li><Link href="/" className="transition-colors hover:text-white">Inicio</Link></li>
               <li aria-hidden="true"><ChevronRight className="h-4 w-4" /></li>
-              <li><Link href="/servicios" className="transition-colors hover:text-white">Servicios</Link></li>
+              <li><Link href="/precios" className="transition-colors hover:text-white">Servicios</Link></li>
               <li aria-hidden="true"><ChevronRight className="h-4 w-4" /></li>
               <li aria-current="page" className="text-white">{service.shortTitle}</li>
             </ol>
