@@ -2,6 +2,7 @@ import { createHash } from "crypto"
 
 const TIKTOK_ACCESS_TOKEN = process.env.TIKTOK_ACCESS_TOKEN
 const TIKTOK_PIXEL_ID = process.env.TIKTOK_PIXEL_ID
+const TIKTOK_TEST_EVENT_CODE = process.env.TIKTOK_TEST_EVENT_CODE
 
 // Standard events supported by TikTok
 export type TikTokEventName =
@@ -79,7 +80,7 @@ export async function sendTikTokEvent(eventData: TikTokEventData) {
         }
 
         // Correct structure for batch endpoint
-        const requestBody = {
+        const requestBody: any = {
             pixel_code: TIKTOK_PIXEL_ID,
             event_source_id: TIKTOK_PIXEL_ID,
             event_source: "web",
@@ -100,6 +101,10 @@ export async function sendTikTokEvent(eventData: TikTokEventData) {
                     }
                 }
             ]
+        }
+
+        if (TIKTOK_TEST_EVENT_CODE) {
+            requestBody.test_event_code = TIKTOK_TEST_EVENT_CODE
         }
 
         const response = await fetch("https://business-api.tiktok.com/open_api/v1.3/event/track/", {
