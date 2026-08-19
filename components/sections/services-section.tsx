@@ -1,14 +1,13 @@
 "use client"
 
 import type React from "react"
-import Link from "next/link"
 
 import { memo, useRef } from "react"
 import { m as motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { Check, ArrowRight, Sparkles, Zap, ShoppingCart, Code2 } from "lucide-react"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
-import { reportPixelLead } from "@/lib/gtag"
+import { reportConversion } from "@/lib/gtag"
 import { usePricing } from "@/hooks/use-pricing"
 import { useModal } from "@/context/modal-context"
 import { notifyInteraction } from "@/app/actions/notify-click"
@@ -21,12 +20,6 @@ const planIcons = {
   ecommerce: ShoppingCart,
   custom: Code2,
 }
-
-const planServicePaths = {
-  landing: "/servicios/diseno-web-corporativo",
-  ecommerce: "/servicios/tiendas-virtuales",
-  custom: "/servicios/software-a-medida",
-} as const
 
 const ServiceCard = memo(function ServiceCard({
   plan,
@@ -142,8 +135,8 @@ const ServiceCard = memo(function ServiceCard({
           <div>
             <h3 className="text-xl font-bold text-white font-title">{planData.title}</h3>
             <motion.p
-              className="text-3xl font-bold text-white mt-1 font-mono"
-              whileHover={{ scale: 1.05, x: 5 }}
+              className="text-lg sm:text-xl font-bold text-white/90 mt-1 font-mono tracking-tight"
+              whileHover={{ scale: 1.03, x: 3 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
               {planData.price}
@@ -177,22 +170,14 @@ const ServiceCard = memo(function ServiceCard({
           ))}
         </ul>
 
-        <Link
-          href={planServicePaths[plan]}
-          className="mb-3 inline-flex items-center justify-center gap-2 font-mono text-xs text-white/60 transition-colors hover:text-white"
-        >
-          Ver alcance y preguntas frecuentes <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
-
         {/* Interactive CTA Button with ripple effect */}
         <motion.button
           onClick={(e) => {
             e.preventDefault()
             // onSelect() - Triggering straight navigation as per user request
-            reportPixelLead()
-            window.open(`https://wa.me/573116360057?text=${encodeURIComponent(
+            reportConversion(`https://wa.me/573116360057?text=${encodeURIComponent(
               planData.whatsapp_message || "Hola, me gustaría recibir más información."
-            )}`, "_blank")
+            )}`)
             notifyInteraction(`Service Button: ${planData.cta}`, {
               plan: plan,
               price: planData.price

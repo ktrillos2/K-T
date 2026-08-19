@@ -106,7 +106,7 @@ export default function CRMPage() {
         
         // Open WhatsApp
         const cleanPhone = lead.phone.replace(/\D/g, '')
-        const message = encodeURIComponent(`Hola ${lead.name}, te contacto desde K&T Agencia Digital...`)
+        const message = encodeURIComponent(`Hola ${lead.name}, te contacto desde K&T Code...`)
         window.open(`https://wa.me/${cleanPhone}?text=${message}`, '_blank')
     }
 

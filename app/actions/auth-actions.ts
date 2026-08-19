@@ -1,24 +1,23 @@
 'use server';
 
 import * as TOTP from 'otpauth';
-import { createSmtpTransport, mailAddresses } from "@/lib/email";
+import nodemailer from 'nodemailer';
 
-const AUTH_SECRET = process.env.AUTH_SECRET
-
-function getAuthSecret() {
-  if (!AUTH_SECRET) {
-    throw new Error("AUTH_SECRET is not configured")
-  }
-  return AUTH_SECRET
-}
+const AUTH_SECRET = process.env.AUTH_SECRET || 'secret';
+// Hardcoded admin email as requested
+const ADMIN_EMAIL = 'keteruse@gmail.com';
 
 export async function verifyPasswordAndSendOTP(password: string) {
-  const authSecret = getAuthSecret()
+  console.log('--- Debug: verifyPasswordAndSendOTP Called ---');
+  console.log('Env Password present:', !!AUTH_SECRET);
 
   // 1. Validate Password First
-  if (password !== authSecret) {
+  if (password !== AUTH_SECRET) {
+    console.log('Error: Password mismatch');
     return { success: false, error: 'Contraseña incorrecta' };
   }
+
+  console.log('Password OK. Generating OTP...');
 
   // 2. Generate OTP
   const totp = new TOTP.TOTP({
@@ -27,13 +26,23 @@ export async function verifyPasswordAndSendOTP(password: string) {
     algorithm: 'SHA1',
     digits: 6,
     period: 300,
-    secret: TOTP.Secret.fromUTF8(authSecret)
+    secret: TOTP.Secret.fromUTF8(AUTH_SECRET)
   });
 
   const code = totp.generate();
+  console.log('OTP Generated. Sending via Brevo to', ADMIN_EMAIL);
+
   // 3. Send via Brevo (Nodemailer) with User's Template
   try {
-    const transporter = createSmtpTransport();
+    const transporter = nodemailer.createTransport({
+      host: "smtp-relay.sendinblue.com",
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: "9e752d001@smtp-brevo.com",
+        pass: "6rRVAHNgq9aXBhPs",
+      },
+    });
 
     const htmlTemplate = `
         <!DOCTYPE html>
@@ -160,7 +169,7 @@ export async function verifyPasswordAndSendOTP(password: string) {
             </div>
 
             <div class="footer">
-              <p>K&T Agencia Digital © ${new Date().getFullYear()}</p>
+              <p>K&T Code © ${new Date().getFullYear()}</p>
               <p style="margin-top: 5px;">Seguridad Automática</p>
             </div>
           </div>
@@ -169,12 +178,13 @@ export async function verifyPasswordAndSendOTP(password: string) {
         `;
 
     const info = await transporter.sendMail({
-      from: mailAddresses.from,
-      to: mailAddresses.admin,
+      from: '"K&T Security" <info@kytcode.lat>',
+      to: ADMIN_EMAIL,
       subject: '🔐 Código de Acceso - K&T CRM',
       html: htmlTemplate
     });
 
+    console.log('Mail sent successfully via Brevo. MessageId:', info.messageId);
     return { success: true };
 
   } catch (error) {

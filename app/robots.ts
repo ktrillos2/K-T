@@ -1,35 +1,23 @@
-import type { MetadataRoute } from "next"
-
-import { siteConfig } from "@/lib/site-config"
+import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
-  const privatePaths = [
-    "/api/",
-    "/admin/",
-    "/login/",
-    "/cotizaciones/",
-  ]
-
-  return {
-    rules: [
-      {
-        userAgent: "*",
-        allow: "/",
-        disallow: privatePaths,
-      },
-      {
-        userAgent: "OAI-SearchBot",
-        allow: "/",
-        disallow: privatePaths,
-      },
-      {
-        // Separado de OAI-SearchBot: bloquea el posible uso para entrenamiento,
-        // sin impedir que las páginas públicas aparezcan en ChatGPT Search.
-        userAgent: "GPTBot",
-        disallow: "/",
-      },
-    ],
-    sitemap: `${siteConfig.url}/sitemap.xml`,
-    host: siteConfig.url,
-  }
+    return {
+        rules: [
+            {
+                userAgent: '*',
+                allow: '/',
+                disallow: ['/api/', '/admin/', '/login/'],
+            },
+            {
+                userAgent: 'OAI-SearchBot',
+                allow: '/',
+            },
+            {
+                userAgent: 'GPTBot',
+                disallow: '/',
+            }
+        ],
+        sitemap: 'https://www.kytcode.lat/sitemap.xml',
+        host: 'https://www.kytcode.lat',
+    }
 }

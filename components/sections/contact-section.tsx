@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { m as motion, AnimatePresence } from "framer-motion"
 import {
   Mail,
@@ -46,7 +46,7 @@ import { fadeUpVariant, staggerContainer, textRevealVariant } from "@/lib/animat
 
 
 const contactInfo = [
-  { icon: Mail, label: "email", value: "contacto@kytcode.lat", href: "mailto:contacto@kytcode.lat" },
+  { icon: Mail, label: "email", value: "contactktweb@gmail.com", href: "mailto:contactktweb@gmail.com" },
   { icon: Phone, label: "phone", value: "+57 311 636 0057", href: "tel:+573116360057" },
   { icon: MapPin, label: "location", value: "locationValue", href: null },
 ]
@@ -87,12 +87,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-const NeonEscapeGame = dynamic(() => import("@/components/ui/neon-escape-game"), {
+const AlienRunner = dynamic(() => import("@/components/ui/alien-runner"), {
   ssr: false,
-  loading: () => <div className="min-h-[720px] w-full animate-pulse rounded-2xl bg-white/5" />,
+  loading: () => <div className="h-64 w-full max-w-4xl animate-pulse bg-white/5 rounded-xl"></div>
 })
 import { countryCodes } from "@/lib/country-codes"
 import { usePricing, type PlanType } from "@/hooks/use-pricing"
+import { useEffect } from "react"
 
 export default function ContactSection() {
   const { dictionary, country } = useLanguage()
@@ -101,41 +102,11 @@ export default function ContactSection() {
 
   const [selectedService, setSelectedService] = useState<string | null>(null)
   const [countryCode, setCountryCode] = useState("+57")
-  const [discountCode, setDiscountCode] = useState("")
-  const [rewardToken, setRewardToken] = useState("")
 
   useEffect(() => {
     const code = countryCodes.find(c => c.name === country)?.code || "+57"
     setCountryCode(code)
   }, [country])
-
-  useEffect(() => {
-    const handleReward = (event: Event) => {
-      const detail = (event as CustomEvent<{ code?: string; claimToken?: string }>).detail
-      if (!detail?.code) return
-
-      setDiscountCode(detail.code)
-      setRewardToken(detail.claimToken || "")
-      setSelectedService("custom")
-      setFormData((current) => ({
-        ...current,
-        message: current.message || `Obtuve el código ${detail.code} al superar los 3 bosses. Quiero cotizar mi proyecto web.`,
-      }))
-      document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth", block: "center" })
-    }
-
-    const handleContactRequest = () => {
-      setSelectedService("custom")
-      document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth", block: "center" })
-    }
-
-    window.addEventListener("kyt:discount-earned", handleReward)
-    window.addEventListener("kyt:game-contact-click", handleContactRequest)
-    return () => {
-      window.removeEventListener("kyt:discount-earned", handleReward)
-      window.removeEventListener("kyt:game-contact-click", handleContactRequest)
-    }
-  }, [])
 
   const [formData, setFormData] = useState({
     name: "",
@@ -144,12 +115,10 @@ export default function ContactSection() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
-  const [submitError, setSubmitError] = useState("")
   const [focusedField, setFocusedField] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSubmitError("")
     setIsSubmitting(true)
 
     try {
@@ -162,9 +131,7 @@ export default function ContactSection() {
           name: formData.name,
           phone: `${countryCode} ${formData.phone}`,
           message: formData.message,
-          service: selectedService,
-          discountCode,
-          rewardToken,
+          service: selectedService
         }),
       })
 
@@ -174,23 +141,19 @@ export default function ContactSection() {
           setIsSubmitted(false)
           setSelectedService(null)
           setFormData({ name: "", phone: "", message: "" })
-          setDiscountCode("")
-          setRewardToken("")
         }, 3000)
       } else {
-        const errorBody = await response.json().catch(() => null)
-        setSubmitError(errorBody?.error || "No fue posible enviar el mensaje. Intenta nuevamente.")
+        console.error("Failed to send message")
       }
     } catch (error) {
       console.error("Error submitting form", error)
-      setSubmitError("No fue posible conectar con el servidor. Revisa tu conexión e intenta nuevamente.")
     } finally {
       setIsSubmitting(false)
     }
   }
 
   return (
-    <section id="contact" data-contact-section className="relative py-16 lg:py-24 px-6 overflow-hidden cv-auto">
+    <section id="contact" className="relative py-16 lg:py-24 px-6 overflow-hidden cv-auto">
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/30 to-background" />
 
       <div className="absolute inset-0 opacity-10">
@@ -320,7 +283,7 @@ export default function ContactSection() {
                   animate={{ opacity: 1, scale: 1, rotateX: 0 }}
                   exit={{ opacity: 0, scale: 0, y: 100 }}
                   transition={{ type: "spring", bounce: 0.6, duration: 0.8 }}
-                  whileHover={{ rotate: [-2, 2, -2, 2, 0], scale: 1.02, transition: { rotate: { type: "tween", duration: 0.4 } } }}
+                  whileHover={{ rotate: [-2, 2, -2, 2, 0], scale: 1.02 }}
                   className="flex-1 ide-window p-8 flex flex-col items-center justify-center text-center space-y-4 min-h-[300px] border-2 border-dashed border-white/20 bg-black/40 rounded-xl relative overflow-hidden group cursor-crosshair"
                 >
                   <div className="absolute inset-0 opacity-20 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
@@ -343,21 +306,15 @@ export default function ContactSection() {
                 </motion.div>
               ) : !isSubmitted ? (
                 <motion.form
-                  id="contact-form"
                   key="form"
                   onSubmit={handleSubmit}
                   className="space-y-4"
-                  initial={{ opacity: 0, height: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, height: "auto", scale: 1 }}
-                  exit={{ opacity: 0, height: 0, scale: 0.95 }}
-                  transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.4 }}
                 >
-                  <motion.div 
-                    className="ide-window overflow-hidden"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 0.5 }}
-                  >
+                  <div className="ide-window overflow-hidden">
                     {/* Size and Price Display */}
                     <div className="px-4 pt-4 pb-0 space-y-3">
 
@@ -499,18 +456,6 @@ export default function ContactSection() {
                         />
                       </div>
 
-                      {submitError && (
-                        <p role="alert" aria-live="assertive" className="rounded-lg border border-red-400/40 bg-red-400/10 px-4 py-3 font-mono text-xs text-red-200">
-                          {submitError}
-                        </p>
-                      )}
-
-                      {discountCode && (
-                        <div className="rounded-lg border border-emerald-400/40 bg-emerald-400/10 px-4 py-3 font-mono text-xs text-emerald-200">
-                          Descuento desbloqueado: <strong>{discountCode}</strong> · 10% sujeto a validación.
-                        </div>
-                      )}
-
                       <motion.button
                         type="submit"
                         disabled={isSubmitting}
@@ -537,7 +482,7 @@ export default function ContactSection() {
                         </span>
                       </motion.button>
                     </div>
-                  </motion.div>
+                  </div>
                 </motion.form>
               ) : null}
 
@@ -564,8 +509,8 @@ export default function ContactSection() {
           </motion.div>
 
         </div>
-        <div className="w-full mt-12">
-          <NeonEscapeGame />
+        <div className="w-full mt-8">
+          <AlienRunner />
         </div>
 
         {/* Contact Info & Socials Centered at Bottom */}

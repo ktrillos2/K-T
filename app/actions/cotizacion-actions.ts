@@ -1,10 +1,22 @@
 'use server';
 
-import { createSmtpTransport, mailAddresses } from "@/lib/email";
+import nodemailer from 'nodemailer';
+
+// Email configurations
+const ADMIN_EMAIL = 'keteruse@gmail.com';
+const TRANSPOTER_OPTIONS = {
+  host: "smtp-relay.sendinblue.com",
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: "9e752d001@smtp-brevo.com",
+    pass: "6rRVAHNgq9aXBhPs",
+  },
+};
 
 export async function notifyQuotationViewed({ client }: { client: string }) {
   try {
-    const transporter = createSmtpTransport();
+    const transporter = nodemailer.createTransport(TRANSPOTER_OPTIONS);
 
     const htmlTemplate = `
       <div style="font-family: sans-serif; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
@@ -15,8 +27,8 @@ export async function notifyQuotationViewed({ client }: { client: string }) {
     `;
 
     await transporter.sendMail({
-      from: mailAddresses.from,
-      to: mailAddresses.admin,
+      from: '"K&T CRM" <info@kytcode.lat>',
+      to: ADMIN_EMAIL,
       subject: `[K&T CRM] 👁️ ${client} está viendo la cotización`,
       html: htmlTemplate
     });
@@ -30,7 +42,7 @@ export async function notifyQuotationViewed({ client }: { client: string }) {
 
 export async function notifyQuotationAccepted({ client }: { client: string }) {
   try {
-    const transporter = createSmtpTransport();
+    const transporter = nodemailer.createTransport(TRANSPOTER_OPTIONS);
 
     const htmlTemplate = `
       <div style="font-family: sans-serif; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; border: 2px solid #10b981; border-radius: 8px; background-color: #f0fdf4;">
@@ -42,8 +54,8 @@ export async function notifyQuotationAccepted({ client }: { client: string }) {
     `;
 
     await transporter.sendMail({
-      from: mailAddresses.from,
-      to: mailAddresses.admin,
+      from: '"K&T CRM" <info@kytcode.lat>',
+      to: ADMIN_EMAIL,
       subject: `[K&T CRM] 💰 ¡¡${client} ACEPTÓ LA COTIZACIÓN!!`,
       html: htmlTemplate
     });

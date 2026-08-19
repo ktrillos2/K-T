@@ -9,12 +9,9 @@ import { trackTikTokEvent } from "@/app/actions/tiktok"
 import { notifyInteraction } from "@/app/actions/notify-click"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
-import { useLanguage } from "@/context/language-context"
-import { reportPixelLead } from "@/lib/gtag"
 
 export default function FloatingButtons() {
     const pathname = usePathname()
-    const { dictionary } = useLanguage()
     const { setCursorVariant } = useCursor()
     const { openModal } = useModal()
     const [showQuote, setShowQuote] = useState(false)
@@ -158,7 +155,6 @@ export default function FloatingButtons() {
             content_name: "Open WhatsApp Direct",
             content_type: "button"
         })
-        reportPixelLead()
         window.open('https://wa.me/573116360057?text=Hola%20K%26T%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios.', '_blank')
     }
 
@@ -202,7 +198,7 @@ export default function FloatingButtons() {
             <AnimatePresence>
                 {/* Quote Button (Bottom Left) */}
                 {(showQuote && !isQuotationUrl) && (
-                    <motion.div key="quote-button" className="absolute bottom-0 left-0" variants={itemVariants} initial="hidden" animate="visible" exit="hidden">
+                    <motion.div className="absolute bottom-0 left-0" variants={itemVariants} initial="hidden" animate="visible" exit="hidden">
                         <motion.button
                             onClick={handleQuoteClick}
                             className="pointer-events-auto relative overflow-hidden group flex items-center gap-3 bg-white text-black px-6 md:px-8 py-3 md:py-4 rounded-full border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] transition-all duration-500"
@@ -227,15 +223,14 @@ export default function FloatingButtons() {
                                     opacity: { duration: 0.1, delay: 0.4 }
                                 }}
                             >
-                                {/* @ts-ignore */}
-                                {dictionary.floatingButtons.quote}
+                                Cotizar tu proyecto
                             </motion.div>
                         </motion.button>
                     </motion.div>
                 )}
 
                 {/* WhatsApp Button (Bottom Right) */}
-                <motion.div key="whatsapp-button" className="absolute bottom-0 right-0" variants={itemVariants} initial="hidden" animate="visible" exit="hidden">
+                <motion.div className="absolute bottom-0 right-0" variants={itemVariants} initial="hidden" animate="visible" exit="hidden">
                     <motion.button
                         onClick={handleWhatsAppClick}
                         className="pointer-events-auto group relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-lg hover:shadow-[0_0_20px_rgba(37,211,102,0.5)] transition-shadow duration-300"

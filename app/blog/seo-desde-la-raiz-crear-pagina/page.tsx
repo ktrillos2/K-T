@@ -1,24 +1,70 @@
 import { Metadata } from "next"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, TrendingUp, Search, ShieldCheck, FileJson, CheckCircle2 } from "lucide-react"
-import BlogArticleEnhancements from "@/components/seo/blog-article-enhancements"
 
 export const metadata: Metadata = {
-    title: "SEO desde el inicio: arquitectura para posicionamiento",
-    description: "Cómo planear rastreo, contenido, datos estructurados y rendimiento desde el comienzo de un proyecto web.",
-    alternates: { canonical: "https://www.kytcode.lat/blog/seo-desde-la-raiz-crear-pagina" },
+    title: "SEO Técnico desde el Código: La Arquitectura del Posicionamiento",
+    description: "Por qué integrar optimización SEO en la fase de ingeniería es vital. Aprende sobre JSON-LD, Server-Side Rendering y posicionamiento real.",
     keywords: ["seo técnico", "server side rendering", "json-ld markup", "optimización motores de búsqueda", "K&T seo"],
+    alternates: {
+        canonical: "https://www.kytcode.lat/blog/seo-desde-la-raiz-crear-pagina",
+        languages: {
+            "es-CO": "https://www.kytcode.lat/blog/seo-desde-la-raiz-crear-pagina",
+            "es": "https://www.kytcode.lat/blog/seo-desde-la-raiz-crear-pagina",
+            "x-default": "https://www.kytcode.lat/blog/seo-desde-la-raiz-crear-pagina",
+        },
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-video-preview": -1,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+        },
+    },
     openGraph: {
         title: "SEO Técnico desde el Código: La Arquitectura del Posicionamiento",
-        description: "En K&T inyectamos rendimiento SEO desde el primer bloque de código lógico usando Next.js para una base orgánica rastreable y medible.",
+        description: "En K&T inyectamos rendimiento SEO desde el primer bloque de código lógico usando Next.js para un posicionamiento orgánico dominante.",
         type: "article",
         url: "https://www.kytcode.lat/blog/seo-desde-la-raiz-crear-pagina",
+        siteName: "K&T Code",
+    }
+}
+
+const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "SEO Técnico desde el Código: La Arquitectura del Posicionamiento",
+    "description": "Por qué integrar optimización SEO en la fase de ingeniería es vital. Aprende sobre JSON-LD, Server-Side Rendering y posicionamiento real.",
+    "url": "https://www.kytcode.lat/blog/seo-desde-la-raiz-crear-pagina",
+    "datePublished": "2026-02-01",
+    "dateModified": "2026-02-01",
+    "author": {
+        "@type": "Organization",
+        "name": "K&T Code",
+        "url": "https://www.kytcode.lat/"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "K&T Code",
+        "url": "https://www.kytcode.lat/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.kytcode.lat/icon.png"
+        }
     }
 }
 
 export default function SEODesdeLaRaiz() {
     return (
         <main className="min-h-screen bg-background pt-32 pb-24 px-4 sm:px-6">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+            />
             <div className="max-w-3xl mx-auto">
                 <Link
                     href="/blog"
@@ -40,7 +86,7 @@ export default function SEODesdeLaRaiz() {
                             ¿Por qué el SEO debe ir desde la raíz al crear una página?
                         </h1>
                         <p className="text-xl text-neutral-300 leading-relaxed border-l-2 border-primary pl-6">
-                            Las personas nos preguntan todo el tiempo <strong>cómo crear una pagina web</strong> que tenga mejores condiciones para competir en resultados orgánicos. No existe un único secreto: la arquitectura, el contenido, la experiencia, la autoridad y la medición deben trabajar en conjunto.
+                            Las personas nos preguntan todo el tiempo <strong>cómo crear una pagina web</strong> que rankee en el número 1 de Google. El secreto no está en un "plugin de semáforo verde", está escondido en la ingeniería misma con la que la página fue construida.
                         </p>
                     </header>
 
@@ -51,10 +97,10 @@ export default function SEODesdeLaRaiz() {
                             El error de "primero el diseño, luego el SEO"
                         </h2>
                         <p>
-                            Al crear una página web, un error frecuente es dejar el SEO para el final. Construyen una interfaz visual atractiva primero y, una vez finalizado, deciden "comprar un paquete SEO" e instalarlo. Para ese momento, la arquitectura ya está consolidada.
+                            Al <strong>crear pagina web</strong>, el 90% de las agencias comete el mismo error. Construyen una interfaz visual atractiva primero y, una vez finalizado, deciden "comprar un paquete SEO" e instalarlo. Para ese momento, la arquitectura ya está consolidada.
                         </p>
                         <p>
-                            Existen métricas críticas ("Server-Side Rendering" vs "Client-Side Rendering") que definen cómo los bots de Google leerán tu sitio. Si la base de código inicial no transpiló apropiadamente la jerarquía (H1 a H6), los metadatos globales o la legibilidad de la red, corregirlo después puede requerir cambios de arquitectura, contenido, redirecciones y componentes.
+                            Existen métricas críticas ("Server-Side Rendering" vs "Client-Side Rendering") que definen cómo los bots de Google leerán tu sitio. Si la base de código inicial no transpiló apropiadamente la jerarquía (H1 a H6), los metadatos globales o la legibilidad de la red, ninguna varita mágica de marketing lo podrá solucionar sin reescribir la plataforma entera.
                         </p>
                     </div>
 
@@ -71,7 +117,7 @@ export default function SEODesdeLaRaiz() {
                     <ul className="list-none space-y-4 mb-8">
                         <li className="flex items-start gap-3 bg-white/5 border border-white/10 p-4 rounded-xl">
                             <CheckCircle2 className="w-6 h-6 text-green-500 mt-1 shrink-0" />
-                            <span><strong>Páginas Estáticas Generadas (SSG):</strong> Cada blog, producto o servicio se entrega como un recurso pre-renderizado cuando el contenido y la frecuencia de actualización lo permiten. Esto puede reducir trabajo en el servidor y mejorar la entrega.</span>
+                            <span><strong>Páginas Estáticas Generadas (SSG):</strong> Cada blog, producto o servicio se entrega como un archivo puramente estático ultra veloz, no a través de una base de datos saturada. Google ama esto.</span>
                         </li>
                         <li className="flex items-start gap-3 bg-white/5 border border-white/10 p-4 rounded-xl">
                             <CheckCircle2 className="w-6 h-6 text-green-500 mt-1 shrink-0" />
@@ -83,23 +129,30 @@ export default function SEODesdeLaRaiz() {
                     <div className="bg-gradient-to-br from-neutral-900 to-black border border-white/10 rounded-2xl p-8 lg:p-10 mt-16">
                         <h3 className="text-2xl font-bold text-white font-title mb-4 flex items-center gap-3">
                             <ShieldCheck className="w-8 h-8 text-blue-500" />
-                            El estándar K&T: Transparencia en nuestras Cotizaciones
+                            El Estándar K&T Code: SEO Técnico Integrado
                         </h3>
-                        <p className="text-neutral-300 mb-8">
-                            A diferencia del <i>desarrollo web</i> tradicional, en <strong>K&T Code</strong> definimos desde la propuesta qué tareas de SEO técnico forman parte del alcance. La disponibilidad, el alojamiento y la distribución dependen del proveedor y del plan seleccionado, por lo que se documentan sin promesas absolutas.
+                        <p className="text-neutral-300 mb-8 font-mono text-sm leading-relaxed">
+                            En <strong className="text-white"><Link href="/nosotros" className="underline hover:text-neutral-300">K&T Code</Link></strong> el SEO técnico y Core Web Vitals no son un costo oculto; forman parte esencial de nuestros servicios de <Link href="/servicios/desarrollo-web-a-medida" className="underline hover:text-neutral-300">desarrollo web a medida</Link>. Consulta nuestros <Link href="/precios" className="underline hover:text-neutral-300">planes y precios</Link> o solicita una asesoría técnica.
                         </p>
-                        <a
-                            href="https://wa.me/573116360057?text=Hola%20K%26T%2C%20le%C3%AD%20sobre%20SEO%20desde%20la%20ra%C3%ADz.%20Me%20interesa%20estructurar%20mi%20web%20correctamente%20con%20ustedes."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-bold font-mono hover:bg-neutral-200 transition-colors w-full sm:w-auto"
-                        >
-                            <Search className="w-5 h-5" />
-                            Estructurar mi Web de Inmediato
-                        </a>
+                        <div className="flex flex-col sm:flex-row gap-4">
+                            <Link
+                                href="/precios"
+                                className="inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-3 rounded-xl font-bold font-mono hover:bg-neutral-200 transition-colors w-full sm:w-auto"
+                            >
+                                <Search className="w-4 h-4" />
+                                Cotizar mi página web
+                            </Link>
+                            <a
+                                href="https://wa.me/573116360057?text=Hola%20K%26T%20Code,%20le%C3%AD%20sobre%20SEO%20desde%20la%20ra%C3%ADz%20y%20quiero%20cotizar%20un%20proyecto."
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-white/20 px-6 py-3 rounded-xl font-bold font-mono hover:bg-white/20 transition-colors w-full sm:w-auto"
+                            >
+                                Hablar por WhatsApp
+                            </a>
+                        </div>
                     </div>
 
-                                    <BlogArticleEnhancements slug="seo-desde-la-raiz-crear-pagina" />
                 </article>
             </div>
         </main>

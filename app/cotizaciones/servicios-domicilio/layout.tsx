@@ -4,20 +4,20 @@ export const metadata: Metadata = {
   title: 'Cotización Desarrollo Web Corporativo | Servicios a Domicilio',
   description: 'Propuesta comercial exclusiva para el desarrollo de plataforma web corporativa enfocada en captación de clientes y personal para servicios a domicilio.',
   openGraph: {
-    title: 'Cotización Desarrollo Web | K&T Agencia Digital',
+    title: 'Cotización Desarrollo Web | K&T Code',
     description: 'Propuesta comercial exclusiva para el desarrollo de plataforma web corporativa con geolocalización automática Colombia/Argentina.',
     images: [
       {
         url: '/images/og-image.webp',
         width: 1200,
         height: 630,
-        alt: 'K&T Desarrollo Web',
+        alt: 'K&T Code Desarrollo Web',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Cotización Desarrollo Web | K&T',
+    title: 'Cotización Desarrollo Web | K&T Code',
     description: 'Propuesta comercial exclusiva para el desarrollo de plataforma web corporativa de servicios a domicilio.',
   },
 }

@@ -16,36 +16,20 @@ const services = [
   { name: "Soporte técnico", icon: Wrench },
 ]
 
-import { useLanguage } from "@/context/language-context"
-
 export default function AdditionalServices() {
-  const { dictionary } = useLanguage()
-
-  // @ts-ignore
-  const servicesData = dictionary.additionalServices.services
-
   return (
     <section className="relative px-6 max-w-7xl mx-auto w-full">
       <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-5xl font-bold font-title mb-6">
-          {/* @ts-ignore */}
-          {dictionary.additionalServices.title}
-        </h2>
-        <p className="text-white/60 font-mono text-lg">
-          {/* @ts-ignore */}
-          {dictionary.additionalServices.description}
-        </p>
+        <h2 className="text-3xl md:text-5xl font-bold font-title mb-6">Servicios adicionales</h2>
+        <p className="text-white/60 font-mono text-lg">Soluciones extra para potenciar tu ecosistema digital</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        {/* @ts-ignore */}
-        {servicesData.map((serviceInfo: any, index: number) => {
-          const serviceStatic = services[index]
-          if (!serviceStatic) return null;
-          const Icon = serviceStatic.icon
+        {services.map((service, index) => {
+          const Icon = service.icon
           return (
             <motion.div
-              key={serviceStatic.name}
+              key={service.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -56,11 +40,8 @@ export default function AdditionalServices() {
                 <Icon className="w-6 h-6 text-white/70" />
               </div>
               <div>
-                <h3 className="font-mono text-sm text-white/90 mb-2">{serviceInfo.name}</h3>
-                <p className="text-xs text-white/40 font-mono">
-                  {/* @ts-ignore */}
-                  {dictionary.additionalServices.priceLabel}
-                </p>
+                <h3 className="font-mono text-sm text-white/90 mb-2">{service.name}</h3>
+                <p className="text-xs text-white/40 font-mono">Valor según requerimientos</p>
               </div>
             </motion.div>
           )

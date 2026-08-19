@@ -50,7 +50,7 @@ export function BlogClient({ posts }: { posts: Post[] }) {
                         Blog Técnico
                     </h1>
                     <p className="text-lg md:text-xl text-white/60 max-w-2xl font-mono">
-                        Guías claras sobre arquitectura, SEO, rendimiento y decisiones digitales para empresas.
+                        Arquitectura, SEO y Desarrollo Web de alto nivel. Construimos experiencias digitales indomables.
                     </p>
                 </motion.div>
 

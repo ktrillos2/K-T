@@ -26,7 +26,7 @@ interface TestimonialsCarouselProps {
 
 export default function TestimonialsCarousel({ testimonials, dictionary }: TestimonialsCarouselProps) {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center" }, [
-        Autoplay({ delay: 5000, stopOnInteraction: true })
+        Autoplay({ delay: 5000, stopOnInteraction: true }) as any
     ])
 
     const scrollPrev = () => emblaApi && emblaApi.scrollPrev()
@@ -72,6 +72,7 @@ export default function TestimonialsCarousel({ testimonials, dictionary }: Testi
                                                     src={urlFor(testimonial.image).width(100).height(100).url()}
                                                     alt={testimonial.name}
                                                     fill
+                                                    sizes="40px"
                                                     className="object-cover"
                                                 />
                                             ) : (

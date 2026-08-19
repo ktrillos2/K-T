@@ -15,15 +15,52 @@ const ServicesSection = dynamic(() => import("@/components/sections/services-sec
 
 import { getAllProjects } from "@/sanity/lib/queries"
 import type { Metadata } from "next"
-import JsonLd from "@/components/seo/json-ld"
-import { absoluteUrl, siteConfig } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Agencia de desarrollo web en Colombia",
-  description: "Desarrollamos páginas web, tiendas virtuales y software a medida de alto rendimiento para empresas en Colombia y Latinoamérica.",
+  title: {
+    absolute: "Empresa de Desarrollo Web y Software en Colombia | K&T Code",
+  },
+  description: "K&T Code es una empresa colombiana de desarrollo web y software a medida. Creamos páginas web, tiendas virtuales y plataformas digitales para empresas en Colombia y Latinoamérica.",
+  keywords: [
+    "empresa de desarrollo web colombia",
+    "desarrollo web y software a medida",
+    "diseño de paginas web bogota",
+    "desarrollo web medellin",
+    "desarrollo web a medida",
+    "tiendas virtuales colombia",
+    "software a medida para empresas",
+    "e-commerce headless",
+    "agencia digital colombia",
+    "programacion web next.js",
+    "K&T Code",
+  ],
   alternates: {
-    canonical: absoluteUrl('/'),
-  }
+    canonical: "https://www.kytcode.lat",
+    languages: {
+      "es-CO": "https://www.kytcode.lat",
+      "es": "https://www.kytcode.lat",
+      "x-default": "https://www.kytcode.lat",
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    title: "Empresa de Desarrollo Web y Software en Colombia | K&T Code",
+    description: "K&T Code es una empresa colombiana de desarrollo web y software a medida. Creamos páginas web, tiendas virtuales y plataformas digitales para empresas en Colombia y Latinoamérica.",
+    url: "https://www.kytcode.lat",
+    siteName: "K&T Code",
+    locale: "es_CO",
+    type: "website",
+  },
 }
 
 export const revalidate = 60;
@@ -44,56 +81,20 @@ async function getTestimonials() {
 }
 
 export default async function Home() {
-  const [testimonials, projects] = await Promise.all([
-    getTestimonials().catch(() => []),
-    getAllProjects().catch(() => []),
-  ])
+  const testimonials = await getTestimonials()
+  const projects = await getAllProjects()
+  const projectCount = projects?.length ?? 0
 
   return (
     <>
-      <JsonLd
-        data={[
-          {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            "@id": `${siteConfig.url}/#webpage`,
-            url: siteConfig.url,
-            name: "Agencia de desarrollo web en Colombia",
-            description: siteConfig.description,
-            isPartOf: { "@id": `${siteConfig.url}/#website` },
-            about: { "@id": `${siteConfig.url}/#organization` },
-            inLanguage: "es-CO",
-          },
-          {
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            name: "Servicios de K&T Code",
-            itemListElement: [
-              ["Desarrollo web a medida", "/servicios/desarrollo-web-a-medida"],
-              ["Diseño web corporativo", "/servicios/diseno-web-corporativo"],
-              ["Tiendas virtuales", "/servicios/tiendas-virtuales"],
-              ["Software a medida", "/servicios/software-a-medida"],
-              ["SEO técnico", "/servicios/seo-tecnico"],
-              ["Mantenimiento web", "/servicios/mantenimiento-web"],
-            ].map(([name, path], index) => ({
-              "@type": "ListItem",
-              position: index + 1,
-              name,
-              url: absoluteUrl(path),
-            })),
-          },
-        ]}
-      />
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <InternationalSection />
-        <CxellenceSection initialProjects={projects} />
-        <ProjectsSection initialProjects={projects} />
-        <ServicesSection />
-        <TestimonialsSection initialTestimonials={testimonials} />
-        <ContactSection />
-      </main>
+      <HeroSection />
+      <AboutSection projectCount={projectCount} />
+      <ServicesSection />
+      <InternationalSection />
+      <CxellenceSection initialProjects={projects} />
+      <ProjectsSection initialProjects={projects} />
+      <TestimonialsSection initialTestimonials={testimonials} />
+      <ContactSection />
       <Footer />
     </>
   )

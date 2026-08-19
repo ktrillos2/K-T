@@ -159,7 +159,7 @@ export default function HeroSection() {
         </motion.p>
 
         <motion.h1 
-          className="relative text-4xl md:text-6xl lg:text-8xl font-bold font-title mb-8 flex justify-center"
+          className="relative text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-title leading-snug md:leading-tight max-w-4xl mx-auto mb-8 flex justify-center text-center"
           variants={{
             hidden: { clipPath: "inset(100% 0 0 0)", opacity: 0, y: 20 },
             visible: { 

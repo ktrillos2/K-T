@@ -60,8 +60,8 @@ interface ProjectsCarouselProps {
 export default function ProjectsCarousel({ projects, language, setCursorVariant, dictionary }: ProjectsCarouselProps) {
     const [activeIndex, setActiveIndex] = useState<number | null>(null)
     const [currentSlide, setCurrentSlide] = useState(0)
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center", skipSnaps: false, dragFree: false, watchDrag: false }, [
-        Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true }),
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center", skipSnaps: false, dragFree: false }, [
+        Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true }) as any,
     ])
 
     const onSelect = useCallback((api: any) => {
@@ -224,7 +224,6 @@ function ProjectCard({ project, index, isActive, isCurrent, onHover, onLeave, la
                                         fill
                                         sizes="(max-width: 768px) 100vw, 50vw"
                                         className="object-contain lg:object-contain"
-                                        unoptimized
                                         draggable={false}
                                     />
                                 </div>
@@ -296,9 +295,9 @@ function ProjectCard({ project, index, isActive, isCurrent, onHover, onLeave, la
                         </motion.h3>
                         <p className="text-white font-mono text-sm relative z-10 flex-grow">{desc}</p>
                         <div className="flex flex-wrap gap-2 mb-8 mt-auto">
-                            {project.tech.slice(0, 3).map((tech: string, i: number) => (
+                            {project.tech.slice(0, 3).map((tech: string) => (
                                 <span
-                                    key={`${tech}-${i}`}
+                                    key={tech}
                                     className="px-2 py-1 text-[10px] lg:text-xs font-mono border border-white/20 rounded-full text-white"
                                 >
                                     {tech}

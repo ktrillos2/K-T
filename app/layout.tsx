@@ -1,109 +1,102 @@
 import React from "react"
-import type { Metadata, Viewport } from "next"
-import { Fira_Code, Press_Start_2P, VT323 } from "next/font/google"
+import type { Metadata } from "next"
+import { Fira_Code, VT323, Press_Start_2P } from "next/font/google"
 import localFont from "next/font/local"
-import dynamic from "next/dynamic"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { LazyMotion, domAnimation } from "framer-motion"
-
 import "./globals.css"
-import JsonLd from "@/components/seo/json-ld"
+import { LanguageProvider } from "@/context/language-context"
+import { CursorProvider } from "@/context/cursor-context"
+import dynamic from "next/dynamic"
 import CountrySelector from "@/components/layout/country-selector"
 import ContentWrapper from "@/components/layout/content-wrapper"
-import ClientSideUI from "@/components/layout/client-side-ui"
-import GoogleAnalytics from "@/components/analytics/google-analytics"
-import GoogleTagManager from "@/components/analytics/google-tag-manager"
-import MetaPixel from "@/components/analytics/meta-pixel"
-import MicrosoftClarity from "@/components/analytics/microsoft-clarity"
-import TikTokEventsTracker from "@/components/analytics/tiktok-events-tracker"
 import { Toaster } from "@/components/ui/sonner"
-import { CursorProvider } from "@/context/cursor-context"
-import { LanguageProvider } from "@/context/language-context"
-import { ModalProvider } from "@/context/modal-context"
-import { buildOrganizationJsonLd, buildWebsiteJsonLd } from "@/lib/seo"
-import { absoluteUrl, siteConfig } from "@/lib/site-config"
 
 const Header = dynamic(() => import("@/components/layout/header"))
+import ClientSideUI from "@/components/layout/client-side-ui"
+import { ModalProvider } from "@/context/modal-context"
 
-const firaCode = Fira_Code({
-  subsets: ["latin"],
-  variable: "--font-fira",
-  display: "swap",
-})
 
-const vt323 = VT323({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-vt323",
-  display: "swap",
-})
 
-const pressStart2P = Press_Start_2P({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-press-start-2p",
-  display: "swap",
-})
+
+import GoogleAnalytics from "@/components/analytics/google-analytics"
+import TiktokPixel from "@/components/analytics/tiktok-pixel"
+import MicrosoftClarity from "@/components/analytics/microsoft-clarity"
+import GoogleTagManager from "@/components/analytics/google-tag-manager"
+import TikTokEventsTracker from "@/components/analytics/tiktok-events-tracker"
+import MetaPixel from "@/components/analytics/meta-pixel"
+
+
+const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-fira", display: "swap" })
+const vt323 = VT323({ weight: "400", subsets: ["latin"], variable: "--font-vt323", display: "swap" })
+const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"], variable: "--font-press-start-2p", display: "swap" })
 
 const ariW9500 = localFont({
   src: "../public/fonts/ari-w9500-bold.ttf",
   variable: "--font-ari",
   display: "swap",
-  preload: true,
 })
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  themeColor: "#050505",
-  colorScheme: "dark",
-}
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
-  applicationName: siteConfig.name,
+  metadataBase: new URL("https://www.kytcode.lat"),
   title: {
-    default: "Agencia de Desarrollo Web en Colombia | K&T Code",
+    default: "K&T Code | Agencia de Desarrollo Web y E-commerce en Colombia",
     template: "%s | K&T Code",
   },
-  description: siteConfig.description,
+  description: "En K&T desarrollamos páginas web a medida, tiendas virtuales, software corporativo y ecosistemas digitales escalables de alto rendimiento para Colombia y Latinoamérica.",
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon.png", type: "image/png" },
+    ],
     shortcut: "/favicon.ico",
-    apple: "/apple-icon.png",
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
   manifest: "/manifest.webmanifest",
-  authors: [{ name: siteConfig.organizationName, url: siteConfig.url }],
-  creator: siteConfig.organizationName,
-  publisher: siteConfig.organizationName,
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "K&T Code",
+  },
+  keywords: [
+    "agencia de desarrollo web",
+    "desarrollo web en colombia",
+    "desarrollo web profesional",
+    "diseño de paginas web bogota",
+    "desarrollo web medellin",
+    "creacion de tiendas virtuales",
+    "desarrollo e-commerce headless",
+    "software a medida para empresas",
+    "agencia react en colombia",
+    "next.js colombia",
+    "ecosistemas digitales",
+    "diseño web colombia",
+    "K&T Code",
+  ],
+  authors: [{ name: "K&T Code", url: "https://www.kytcode.lat" }],
+  creator: "K&T Code",
+  publisher: "K&T Code",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   openGraph: {
-    title: "Agencia de Desarrollo Web en Colombia | K&T Code",
-    description: siteConfig.description,
-    url: siteConfig.url,
-    siteName: siteConfig.name,
-    locale: siteConfig.locale,
+    title: "K&T Code | Empresa de Desarrollo Web y Software en Colombia",
+    description: "Desarrollamos ecosistemas digitales escalables, tiendas virtuales y páginas web de alto rendimiento impulsadas por Next.js y Vercel.",
+    url: "https://www.kytcode.lat",
+    siteName: "K&T Code",
+    locale: "es_CO",
     type: "website",
-    images: [
-      {
-        url: absoluteUrl(siteConfig.ogImage),
-        width: 1200,
-        height: 630,
-        alt: "K&T Code, agencia de desarrollo web en Colombia",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agencia de Desarrollo Web en Colombia | K&T Code",
-    description: siteConfig.description,
-    images: [absoluteUrl(siteConfig.ogImage)],
-    creator: "@kytweb",
+    title: "K&T Code | Agencia de Desarrollo Web y E-commerce",
+    description: "Desarrollamos páginas web corporativas y aplicaciones escalables optimizadas para SEO Técnico. Tu infraestructura web de alto rendimiento.",
+    creator: "@kytcode",
   },
   robots: {
     index: true,
@@ -118,11 +111,107 @@ export const metadata: Metadata = {
   },
   category: "technology",
   alternates: {
-    types: { "application/rss+xml": absoluteUrl("/rss.xml") },
+    canonical: "https://www.kytcode.lat",
+    languages: {
+      "es-CO": "https://www.kytcode.lat",
+      "es": "https://www.kytcode.lat",
+      "x-default": "https://www.kytcode.lat",
+    },
   },
   verification: {
     google: "dqsrEf4u6-TWpy3i2r3S-BJbGb7LV6J7cWob35JSKD4",
   },
+}
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://www.kytcode.lat/#website",
+  "name": "K&T Code",
+  "alternateName": ["kytcode", "KYT Code"],
+  "url": "https://www.kytcode.lat/",
+  "publisher": {
+    "@id": "https://www.kytcode.lat/#organization"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.kytcode.lat/blog?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://www.kytcode.lat/#organization",
+  "name": "K&T Code",
+  "alternateName": ["kytcode", "KYT Code"],
+  "url": "https://www.kytcode.lat/",
+  "logo": "https://www.kytcode.lat/icon.png",
+  "image": "https://www.kytcode.lat/icon.png",
+  "email": "contactktweb@gmail.com",
+  "telephone": "+573116360057",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "CO",
+    "addressRegion": "Cundinamarca",
+    "addressLocality": "Bogotá"
+  },
+  "areaServed": [
+    {
+      "@type": "Country",
+      "name": "Colombia"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Latin America"
+    }
+  ],
+  "description": "K&T Code es una empresa colombiana especializada en desarrollo web, tiendas virtuales y software a medida para empresas en Colombia y Latinoamérica.",
+  "slogan": "Desarrollo de Páginas Web y Software a Medida en Colombia",
+  "sameAs": [
+    "https://www.facebook.com/KTSolutionsWeb",
+    "https://www.instagram.com/ktweb_/",
+    "https://www.tiktok.com/@kytweb"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios de Desarrollo y Software",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Desarrollo de Páginas Web",
+          "description": "Diseño y desarrollo de páginas web a medida, optimizadas para velocidad y SEO técnico."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Desarrollo de Tiendas Virtuales",
+          "description": "E-commerce headless de alto rendimiento y pasarelas de pago integradas."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Software a Medida",
+          "description": "Desarrollo de aplicaciones web personalizadas, dashboards y arquitecturas serverless."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Mantenimiento y SEO Técnico",
+          "description": "Optimización continua de Core Web Vitals y posicionamiento web orgánico."
+        }
+      }
+    ]
+  }
 }
 
 export default function RootLayout({
@@ -132,41 +221,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="dark">
-      <head>
-        <link rel="dns-prefetch" href="https://api.exchangerate-api.com" />
-        <link rel="dns-prefetch" href="https://ipapi.co" />
-        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="" />
-        {/* TikTok Pixel Code Start */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-
-
-  ttq.load('D9DUGJRC77U03DOJFV7G');
-  ttq.page();
-}(window, document, 'ttq');
-            `,
-          }}
-        />
-        {/* TikTok Pixel Code End */}
-      </head>
-      <body
-        className={`${firaCode.variable} ${vt323.variable} ${pressStart2P.variable} ${ariW9500.variable} font-mono antialiased`}
-      >
+      <link rel="dns-prefetch" href="https://api.exchangerate-api.com" />
+      <link rel="dns-prefetch" href="https://ipapi.co" />
+      <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+      <body className={`${firaCode.variable} ${vt323.variable} ${pressStart2P.variable} ${ariW9500.variable} font-mono antialiased`}>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-WZJSH8FV"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
-            title="Google Tag Manager"
           />
         </noscript>
-
         <LazyMotion features={domAnimation}>
           <LanguageProvider>
             <CursorProvider>
@@ -174,24 +240,32 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
                 <CountrySelector />
                 <ContentWrapper>
                   <Header />
-                  {children}
+                  <main>{children}</main>
                   <ClientSideUI />
                 </ContentWrapper>
               </ModalProvider>
             </CursorProvider>
           </LanguageProvider>
         </LazyMotion>
-
-        <JsonLd data={[buildOrganizationJsonLd(), buildWebsiteJsonLd()]} />
-
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <Analytics />
         <SpeedInsights />
+
         <GoogleAnalytics />
         <React.Suspense fallback={null}>
+          <TiktokPixel />
           <MetaPixel />
         </React.Suspense>
         <TikTokEventsTracker />
         <MicrosoftClarity />
+
         <GoogleTagManager />
         <Toaster />
       </body>

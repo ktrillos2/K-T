@@ -55,7 +55,7 @@
     "date-fns": "4.1.0",
     "embla-carousel-auto-scroll": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
-    "embla-carousel-react": "^8.6.0",
+    "embla-carousel-react": "8.5.1",
     "framer-motion": "12.23.26",
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
@@ -90,8 +90,8 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "dataloader": "^2.2.3",
-    "import-in-the-middle": "2.0.6",
-    "jsdom": "26.1.0",
+    "import-in-the-middle": "^3.0.1",
+    "jsdom": "^29.0.2",
     "postcss": "^8.5",
     "require-in-the-middle": "^8.0.1",
     "tailwindcss": "^4.1.9",
@@ -106,6 +106,5 @@
     "not ie <= 11",
     "not dead",
     "not op_mini all"
-  ],
-  "packageManager": "pnpm@11.13.1+sha512.b2fc7683b8a6525414e7d13e1ba28caaddde96bf66ec540bfaeb7e702b81f3e0be4d1f295edf7f9fe0396740a8dce4509c582ddf79891f4543fea32d37645f25"
+  ]
 }

@@ -369,7 +369,7 @@ export default function ProyectosPage() {
                                 <Label>Asignado a</Label>
                                 <Select 
                                     value={selectedProject?.assigned_to || ''} 
-                                    onValueChange={(v: any) => setSelectedProject({ ...selectedProject, assigned_to: v })}
+                                    onValueChange={v => setSelectedProject({ ...selectedProject, assigned_to: v })}
                                 >
                                     <SelectTrigger className="bg-neutral-950 border-neutral-800">
                                         <SelectValue placeholder="Seleccionar..." />

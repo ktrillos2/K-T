@@ -182,7 +182,7 @@ export const KTDocumentNative: React.FC<KTDocumentProps> = ({ cliente, valor, se
             <Text style={styles.title}>
               {isCtaCobro ? 'CUENTA DE COBRO' : 'COTIZACIÓN DE SERVICIOS'}
             </Text>
-            <Text style={styles.subtitle}>K&T Agencia Digital & Comercial</Text>
+            <Text style={styles.subtitle}>K&T Code</Text>
           </View>
           <View style={styles.logoContainer}>
             <Text style={styles.logoText}>K&T</Text>

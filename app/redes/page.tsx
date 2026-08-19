@@ -107,10 +107,10 @@ export default function RedesPage() {
                     transition={{ delay: 0.2 }}
                 >
                     <h1 className="text-3xl md:text-5xl font-bold text-white font-title mb-4 leading-tight">
-                        ¿Estás curioseando <br className="hidden md:block" /> sobre <span className="text-white ">K&T</span>?
+                        Conecta con <br className="hidden md:block" /> <span className="text-white ">K&T Code</span>
                     </h1>
                     <p className="text-neutral-400 font-mono text-sm md:text-base leading-relaxed max-w-lg mx-auto">
-                        Somos una <strong>agencia de desarrollo web élite</strong>. Especializados en crear software a la medida, sitios corporativos inmersivos con alto enfoque en experiencia de usuario y rendimiento. Elevamos marcas globalmente desde Colombia.
+                        <strong className="text-white">K&T Code</strong> es una empresa colombiana especializada en desarrollo web, e-commerce y software a medida para empresas en Colombia y Latinoamérica.
                     </p>
                 </motion.div>
 
@@ -178,7 +178,6 @@ export default function RedesPage() {
                                             fill
                                             sizes="(max-width: 768px) 100vw, 50vw"
                                             className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                            unoptimized
                                         />
                                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                             <span className="bg-white text-black px-4 py-2 rounded-full font-mono text-xs font-bold font-title">

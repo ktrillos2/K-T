@@ -18,7 +18,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const lastScrolledRef = useRef<boolean>(false)
   const rafRef = useRef<number | null>(null)
-  const { dictionary, country, setCountry, language, toggleLanguage } = useLanguage()
+  const { dictionary, country, setCountry } = useLanguage()
   const { setCursorVariant } = useCursor()
   const [isCountryOpen, setIsCountryOpen] = useState(false)
 
@@ -74,7 +74,7 @@ export default function Header() {
             onMouseEnter={() => setCursorVariant("hover")}
             onMouseLeave={() => setCursorVariant("default")}
             whileHover={{ scale: 1.05 }}
-            aria-label="Ir a la página de inicio de K&T Agencia Digital"
+            aria-label="Ir a la página de inicio de K&T Code"
             onClick={() => {
               if (pathname === '/') {
                 window.scrollTo({ top: 0, behavior: "instant" })
@@ -84,15 +84,16 @@ export default function Header() {
               }
             }}
           >
-            <Image src="/images/logo.webp" alt="Logotipo K&T Agencia de Desarrollo Web en Colombia" fill sizes="(max-width: 768px) 150px, 200px" className="object-contain object-left" priority />
+            <Image src="/images/logo.webp" alt="Logo de K&T Code" fill sizes="(max-width: 768px) 150px, 200px" className="object-contain object-left" priority />
           </motion.button>
 
           {/* Subtle Desktop Navigation Menu */}
           <nav className="hidden lg:flex items-center gap-8 text-sm font-mono text-white/50">
             {[
               { key: "home", href: "/#hero" },
-              { key: "about", href: "/#about" },
-              { key: "services", href: "/precios" },
+              { key: "about", href: "/nosotros" },
+              { key: "services", href: "/servicios" },
+              { key: "prices", href: "/precios" },
               { key: "work", href: "/portafolio" },
               { key: "blog", href: "/blog" },
               { key: "contact", href: "/#contact" }
@@ -124,19 +125,6 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
-            
-            <motion.button
-              onClick={toggleLanguage}
-              className="px-3 py-2 text-sm font-mono rounded hover:bg-white/10 hover:text-white transition-all duration-300 flex items-center justify-center border border-white/10 gap-2"
-              onMouseEnter={() => setCursorVariant("hover")}
-              onMouseLeave={() => setCursorVariant("default")}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label={`Cambiar idioma. Idioma actual: ${language}`}
-            >
-              <span className="font-bold text-white">{language === "es" ? "ES" : "EN"}</span>
-            </motion.button>
-
             <div className="relative">
               <motion.button
                 onClick={() => setIsCountryOpen(!isCountryOpen)}

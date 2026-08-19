@@ -23,14 +23,14 @@ export default function Footer() {
           className="relative w-32 h-32"
           variants={fadeUpVariant}
         >
-          <Image src="/images/logo.webp" alt="K&T Agencia Digital - Desarrollo Web y Gestión de Redes Sociales en Colombia" fill sizes="80px" className="object-contain" />
+          <Image src="/images/logo.webp" alt="Logo de K&T Code" fill sizes="80px" className="object-contain" />
         </motion.div>
 
         <motion.p
           className="text-sm text-muted-foreground font-mono text-center"
           variants={fadeUpVariant}
         >
-          © {new Date().getFullYear()} K&T. {dictionary.footer.rights}.
+          © {new Date().getFullYear()} K&T Code. {dictionary.footer.rights}.
         </motion.p>
 
         <motion.div
@@ -38,15 +38,10 @@ export default function Footer() {
           variants={fadeUpVariant}
         >
           {/* @ts-ignore */}
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/preguntas-frecuentes" className="hover:text-white transition-colors">
-              Preguntas frecuentes
-            </Link>
-            <Link href="/politica-de-privacidad" className="hover:text-white transition-colors">
-              {/* @ts-ignore */}
-              {dictionary.footer.privacy}
-            </Link>
-          </div>
+          <Link href="/politica-de-privacidad" className="hover:text-white transition-colors">
+            {/* @ts-ignore */}
+            {dictionary.footer.privacy}
+          </Link>
         </motion.div>
 
         <motion.div
@@ -57,7 +52,7 @@ export default function Footer() {
           <p className="font-semibold text-neutral-300 mb-1">{dictionary.footer.guarantee}</p>
         </motion.div>
 
-        <motion.div
+        <motion.p
           className="text-sm text-muted-foreground font-mono w-full md:w-auto text-center mt-4 md:mt-0"
           variants={fadeUpVariant}
         >
@@ -68,15 +63,15 @@ export default function Footer() {
             className="flex items-center justify-center md:justify-end gap-1 hover:text-white transition-colors whitespace-nowrap"
           >
             <span>Desarrollado por K&T</span>
-            <motion.span
+            <motion.div
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1, ease: "easeInOut" }}
               className="inline-flex"
             >
               <Heart className="w-4 h-4 text-white fill-white" />
-            </motion.span>
+            </motion.div>
           </a>
-        </motion.div>
+        </motion.p>
       </motion.div>
     </footer>
   )

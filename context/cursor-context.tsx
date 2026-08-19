@@ -2,15 +2,17 @@
 
 import { createContext, useContext, useState, type ReactNode } from "react"
 
+export type CursorVariant = "default" | "hover" | "text" | "hidden"
+
 interface CursorContextType {
-  cursorVariant: "default" | "hover" | "text" | "hidden"
-  setCursorVariant: (variant: "default" | "hover" | "text" | "hidden") => void
+  cursorVariant: CursorVariant
+  setCursorVariant: (variant: CursorVariant) => void
 }
 
 const CursorContext = createContext<CursorContextType | undefined>(undefined)
 
 export function CursorProvider({ children }: { children: ReactNode }) {
-  const [cursorVariant, setCursorVariant] = useState<"default" | "hover" | "text" | "hidden">("default")
+  const [cursorVariant, setCursorVariant] = useState<CursorVariant>("default")
 
   return <CursorContext.Provider value={{ cursorVariant, setCursorVariant }}>{children}</CursorContext.Provider>
 }

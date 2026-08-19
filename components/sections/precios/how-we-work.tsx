@@ -2,22 +2,40 @@
 
 import { m as motion } from "framer-motion"
 
-import { useLanguage } from "@/context/language-context"
+const steps = [
+  {
+    num: "01",
+    title: "Conocemos tu proyecto",
+    desc: "Revisamos tus objetivos, público, funcionalidades y presupuesto."
+  },
+  {
+    num: "02",
+    title: "Preparamos la propuesta",
+    desc: "Definimos alcance, precio, tiempos y entregables."
+  },
+  {
+    num: "03",
+    title: "Diseñamos la experiencia",
+    desc: "Creamos una propuesta visual alineada con tu marca."
+  },
+  {
+    num: "04",
+    title: "Desarrollamos y probamos",
+    desc: "Construimos el proyecto y verificamos su funcionamiento en diferentes dispositivos."
+  },
+  {
+    num: "05",
+    title: "Publicamos y acompañamos",
+    desc: "Lanzamos el proyecto y te orientamos durante la implementación."
+  }
+]
 
 export default function HowWeWork() {
-  const { dictionary } = useLanguage()
-
   return (
     <section className="relative px-6 max-w-7xl mx-auto w-full">
       <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-5xl font-bold font-title mb-6">
-          {/* @ts-ignore */}
-          {dictionary.howWeWork.title}
-        </h2>
-        <p className="text-white/60 font-mono text-lg max-w-2xl mx-auto">
-          {/* @ts-ignore */}
-          {dictionary.howWeWork.description}
-        </p>
+        <h2 className="text-3xl md:text-5xl font-bold font-title mb-6">¿Cómo trabajamos?</h2>
+        <p className="text-white/60 font-mono text-lg max-w-2xl mx-auto">Nuestro proceso de desarrollo de software está diseñado para ser transparente, organizado y eficiente.</p>
       </div>
 
       <div className="relative">
@@ -25,8 +43,7 @@ export default function HowWeWork() {
         <div className="hidden lg:block absolute top-[50px] left-0 right-0 h-px bg-white/10" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
-          {/* @ts-ignore */}
-          {dictionary.howWeWork.steps.map((step: any, index: number) => (
+          {steps.map((step, index) => (
             <motion.div
               key={step.num}
               initial={{ opacity: 0, y: 20 }}

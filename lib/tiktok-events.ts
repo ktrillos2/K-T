@@ -45,7 +45,9 @@ function sha256(value: string): string {
 
 export async function sendTikTokEvent(eventData: TikTokEventData) {
     if (!TIKTOK_ACCESS_TOKEN || !TIKTOK_PIXEL_ID) {
-        console.warn("TikTok Events API: Missing credentials in environment variables.")
+        if (process.env.NODE_ENV === "production") {
+            console.warn("TikTok Events API: Missing credentials in environment variables.")
+        }
         return { success: false, error: "Missing config" }
     }
 
@@ -53,38 +55,33 @@ export async function sendTikTokEvent(eventData: TikTokEventData) {
         const timestamp = eventData.event_time || Math.floor(Date.now() / 1000)
 
         // Prepare user data
+        // Prepare user data with explicit empty strings if missing (for EMQ)
         const userPayload: any = {
             ip: eventData.user?.ip || "",
             user_agent: eventData.user?.user_agent || "",
             ttclid: eventData.user?.ttclid || "",
-            ttp: eventData.user?.ttp || ""
-        }
-
-        if (eventData.user?.external_id) {
-            userPayload.external_id = sha256(String(eventData.user.external_id).trim())
+            ttp: eventData.user?.ttp || "",
+            external_id: eventData.user?.external_id ? sha256(eventData.user.external_id) : "",
+            email: "",
+            phone_number: ""
         }
 
         // Email hashing
-        if (eventData.user?.email) {
-            const rawEmail = String(eventData.user.email).trim().toLowerCase()
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-            const dummyEmails = ['mail@example.com', 'test@test.com', 'null', 'undefined']
-            
-            if (rawEmail !== "" && emailRegex.test(rawEmail) && !dummyEmails.includes(rawEmail)) {
-                userPayload.email = sha256(rawEmail)
-            }
+        if (eventData.user?.email && eventData.user.email.trim() !== "") {
+            const email = eventData.user.email.trim().toLowerCase()
+            userPayload.email = sha256(email)
         }
 
         // Phone hashing
-        if (eventData.user?.phone) {
-            const phone = String(eventData.user.phone).replace(/[^\d+]/g, "")
-            if (phone.length > 5 && phone !== "null" && phone !== "undefined") {
+        if (eventData.user?.phone && eventData.user.phone.trim() !== "") {
+            const phone = eventData.user.phone.replace(/[^\d+]/g, "")
+            if (phone.length > 5) {
                 userPayload.phone_number = sha256(phone)
             }
         }
 
         // Correct structure for batch endpoint
-        const requestBody: any = {
+        const requestBody = {
             pixel_code: TIKTOK_PIXEL_ID,
             event_source_id: TIKTOK_PIXEL_ID,
             event_source: "web",

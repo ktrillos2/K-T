@@ -5,17 +5,14 @@ import { useCursor } from "@/context/cursor-context"
 import { smoothScrollTo } from "@/lib/utils"
 import { ArrowRight, ChevronDown } from "lucide-react"
 import { useEffect } from "react"
-import { useLanguage } from "@/context/language-context"
-import { reportPixelLead } from "@/lib/gtag"
 
 export default function PricingHero() {
   const { setCursorVariant } = useCursor()
-  const { dictionary } = useLanguage()
 
   useEffect(() => {
     // Send event on mount
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "view_pricing", {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "view_pricing", {
         event_category: "pricing",
         event_label: "Pricing Page Loaded"
       })
@@ -36,13 +33,12 @@ export default function PricingHero() {
   }
 
   const handleContactClick = () => {
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "click_whatsapp", {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "click_whatsapp", {
         event_category: "pricing_hero",
         event_label: "Solicitar cotizacion"
       })
     }
-    reportPixelLead()
     window.open("https://wa.me/573116360057?text=Hola,%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n%20para%20un%20proyecto.", "_blank")
   }
 
@@ -56,18 +52,15 @@ export default function PricingHero() {
       >
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm font-mono mb-4">
           <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-          {/* @ts-ignore */}
-          {dictionary.pricingHero.badge}
+          Precios claros · Soluciones a medida
         </div>
 
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold font-title leading-normal tracking-tight py-2 mt-2">
-          {/* @ts-ignore */}
-          {dictionary.pricingHero.title}
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-title leading-tight tracking-tight py-2 mt-2">
+          Precios de Páginas Web y Desarrollo Web en Colombia
         </h1>
 
         <p className="text-lg md:text-xl text-white/60 font-mono max-w-3xl mx-auto leading-relaxed">
-          {/* @ts-ignore */}
-          {dictionary.pricingHero.description}
+          En K&T Code ofrecemos planes transparentes para páginas web profesionales, tiendas virtuales y software a medida en Colombia. Arquitectura moderna sobre Next.js, SEO técnico y alto rendimiento.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">
@@ -79,8 +72,7 @@ export default function PricingHero() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            {/* @ts-ignore */}
-            <span className="relative z-10">{dictionary.pricingHero.viewPlans}</span>
+            <span className="relative z-10">Ver planes</span>
             <ChevronDown className="w-4 h-4 relative z-10 group-hover:translate-y-1 transition-transform" />
             <div className="absolute inset-0 bg-neutral-200 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
           </motion.button>
@@ -93,8 +85,7 @@ export default function PricingHero() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            {/* @ts-ignore */}
-            <span className="relative z-10">{dictionary.pricingHero.requestQuote}</span>
+            <span className="relative z-10">Solicitar cotización</span>
             <ArrowRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" />
             <div className="absolute inset-0 bg-white/5 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
           </motion.button>

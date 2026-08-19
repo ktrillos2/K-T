@@ -1,11 +1,29 @@
 import { client } from './client'
+import { getOptimizedHeroUrl, getOptimizedMobileHeroUrl } from './image'
+
+export interface SanityProject {
+  _id: string
+  title: string
+  slug: string
+  shortDescription?: string
+  description?: string
+  year?: string
+  month?: string
+  category?: string
+  tech?: string[]
+  hero?: string
+  mobile?: string
+  liveUrl?: string
+  challenge?: string
+  solution?: string
+  seoFocus?: string
+}
 
 /** Obtener una cotización por su slug */
 export async function getCotizacionBySlug(slug: string) {
   return client.fetch(
     `*[_type == "cotizacion" && slug.current == $slug && isActive == true][0]{
       _id,
-      _updatedAt,
       title,
       "slug": slug.current,
       subdomain,
@@ -66,12 +84,11 @@ export async function getAllCotizacionSubdomains() {
   )
 }
 
-/** Obtener todos los proyectos del portafolio ordenados */
-export async function getAllProjects() {
-  return client.fetch(
-    `*[_type == "project"] | order(orderId asc){
+/** Obtener todos los proyectos del portafolio ordenados con imágenes optimizadas (< 500KB) */
+export async function getAllProjects(): Promise<SanityProject[]> {
+  const rawProjects = await client.fetch<SanityProject[]>(
+    `*[_type == "project" && !(_id in path("drafts.**"))] | order(orderId asc){
       _id,
-      _updatedAt,
       title,
       "slug": slug.current,
       shortDescription,
@@ -90,14 +107,25 @@ export async function getAllProjects() {
     {},
     { next: { revalidate: 60 } }
   )
+
+  if (!Array.isArray(rawProjects)) return []
+
+  return rawProjects.map((p) => ({
+    ...p,
+    hero: p.hero ? getOptimizedHeroUrl(p.hero) : p.hero,
+    mobile: p.mobile
+      ? getOptimizedMobileHeroUrl(p.mobile)
+      : p.hero
+      ? getOptimizedMobileHeroUrl(p.hero)
+      : p.mobile,
+  }))
 }
 
-/** Obtener un proyecto por su slug */
-export async function getProjectBySlug(slug: string) {
-  return client.fetch(
-    `*[_type == "project" && slug.current == $slug][0]{
+/** Obtener un proyecto por su slug con imágenes optimizadas (< 500KB) */
+export async function getProjectBySlug(slug: string): Promise<SanityProject | null> {
+  const project = await client.fetch<SanityProject | null>(
+    `*[_type == "project" && !(_id in path("drafts.**")) && slug.current == $slug][0]{
       _id,
-      _updatedAt,
       title,
       "slug": slug.current,
       shortDescription,
@@ -116,4 +144,16 @@ export async function getProjectBySlug(slug: string) {
     { slug },
     { next: { revalidate: 60 } }
   )
+
+  if (!project) return null
+
+  return {
+    ...project,
+    hero: project.hero ? getOptimizedHeroUrl(project.hero) : project.hero,
+    mobile: project.mobile
+      ? getOptimizedMobileHeroUrl(project.mobile)
+      : project.hero
+      ? getOptimizedMobileHeroUrl(project.hero)
+      : project.mobile,
+  }
 }

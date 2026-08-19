@@ -4,8 +4,7 @@ import { Resend } from "resend"
 import { sendTikTokEvent } from "@/lib/tiktok-events"
 
 
-const resendApiKey = process.env.RESEND_API_KEY
-const resend = resendApiKey ? new Resend(resendApiKey) : null
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 interface LeadData {
   name: string
@@ -39,13 +38,9 @@ export async function sendLeadEmail(data: LeadData) {
     const agencyReplyMessage = `Hola ${name}, recibimos tu solicitud sobre ${serviceName} (Presupuesto visto: ${priceQuote}). ¿Cómo podemos ayudarte?`
     const agencyWhatsappUrl = `https://wa.me/${phone.replace('+', '')}?text=${encodeURIComponent(agencyReplyMessage)}`
 
-    if (!resend) {
-      throw new Error("RESEND_API_KEY is not configured")
-    }
-
     await resend.emails.send({
-      from: process.env.RESEND_FROM || "K&T Code <info@kytcode.lat>",
-      to: [process.env.CONTACT_EMAIL || "contacto@kytcode.lat"],
+      from: "K&T Code <onboarding@resend.dev>",
+      to: ["contactktweb@gmail.com"],
       subject: emailSubject,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 8px;">

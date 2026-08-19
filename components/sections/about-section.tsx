@@ -64,14 +64,6 @@ const sectors = [
   { key: "publishing", Icon: BookOpen },
 ]
 
-// Verifiable capabilities represented in the current website
-const stats = [
-  { value: "13+", labelKey: "projects" },
-  { value: "6", labelKey: "clients" },
-  { value: "2", labelKey: "countries" },
-  { value: "PC + Móvil", labelKey: "satisfaction" },
-]
-
 // ─── ValueCard ────────────────────────────────────────────────────────────────
 const ValueCard = memo(function ValueCard({
   value,
@@ -332,10 +324,21 @@ const BrickWall = memo(function BrickWall({
   )
 })
 
+interface AboutSectionProps {
+  projectCount: number
+}
+
 // ─── Main Component ───────────────────────────────────────────────────────────
-export default function AboutSection() {
+export default function AboutSection({ projectCount }: AboutSectionProps) {
   const { dictionary } = useLanguage()
   const { setCursorVariant } = useCursor()
+
+  const dynamicStats = [
+    { value: `${projectCount}+`, labelKey: "projects" },
+    { value: "20+", labelKey: "clients" },
+    { value: "7+", labelKey: "countries" },
+    { value: "100%", labelKey: "satisfaction" },
+  ]
 
   const [activeValue, setActiveValue] = useState<(typeof values)[number]>("innovation")
   const [isCompiled, setIsCompiled] = useState(false)
@@ -369,22 +372,22 @@ export default function AboutSection() {
       { label: "cms", value: '"Sanity v3"', color: "text-orange-400" },
     ],
     quality: [
-      { label: "lcp", value: '"objetivo ≤ 2.5s"', color: "text-green-400" },
-      { label: "cls", value: '"objetivo ≤ 0.1"', color: "text-green-400" },
-      { label: "inp", value: '"objetivo ≤ 200ms"', color: "text-green-400" },
-      { label: "audit", value: '"medición real"', color: "text-yellow-400" },
+      { label: "lcp", value: '"< 1.2s"', color: "text-green-400" },
+      { label: "cls", value: '"0.01"', color: "text-green-400" },
+      { label: "fid", value: '"< 50ms"', color: "text-green-400" },
+      { label: "lighthouse", value: '"95-100 / 100"', color: "text-yellow-400" },
     ],
     speed: [
-      { label: "hosting", value: '"según el proyecto"', color: "text-white" },
-      { label: "cdn", value: '"cuando aplica"', color: "text-teal-400" },
-      { label: "render", value: '"SSR · SSG · ISR"', color: "text-cyan-400" },
-      { label: "monitoring", value: '"por región"', color: "text-green-400" },
+      { label: "hosting", value: '"Vercel Edge Network"', color: "text-white" },
+      { label: "cdn", value: '"Global CDN"', color: "text-teal-400" },
+      { label: "caching", value: '"ISR + SSG Hybrid"', color: "text-cyan-400" },
+      { label: "ttfb", value: '"< 200ms"', color: "text-green-400" },
     ],
     collaboration: [
-      { label: "process", value: '"documentado"', color: "text-emerald-400" },
-      { label: "work", value: '"remoto"', color: "text-blue-400" },
-      { label: "support", value: '"según el plan"', color: "text-green-400" },
-      { label: "delivery", value: '"por hitos"', color: "text-yellow-400" },
+      { label: "clients", value: '"12+ activos"', color: "text-emerald-400" },
+      { label: "countries", value: '"CO, PE, MX, US, EC"', color: "text-blue-400" },
+      { label: "support", value: '"24/7 WhatsApp"', color: "text-green-400" },
+      { label: "delivery", value: '"On Time ✓"', color: "text-yellow-400" },
     ],
   }
 
@@ -441,7 +444,7 @@ export default function AboutSection() {
         {/* ── Stats Row ── */}
         <div className="mb-16">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {stats.map((stat, i) => (
+            {dynamicStats.map((stat, i) => (
               <StatCard
                 key={stat.labelKey}
                 value={stat.value}

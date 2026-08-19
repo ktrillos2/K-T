@@ -9,7 +9,7 @@ import { ArrowUpRight, Code2 } from "lucide-react"
 interface PortfolioGridProps {
   projects: any[]
   dictionary: any
-  setCursorVariant: (variant: any) => void
+  setCursorVariant: (variant: "default" | "text" | "hover") => void
 }
 
 export default function PortfolioGrid({ projects, dictionary, setCursorVariant }: PortfolioGridProps) {
@@ -110,14 +110,15 @@ export default function PortfolioGrid({ projects, dictionary, setCursorVariant }
                 }}
               >
                 {/* Project Image */}
-                <Link href={project.link || `/projects/${project.slug}`} className="block relative w-full aspect-[4/3] overflow-hidden bg-neutral-950">
+                <Link href={project.link || `/projects/${project.slug}`} className="block relative w-full aspect-[16/9] overflow-hidden bg-neutral-950">
                   {project.image ? (
                     <Image
                       src={project.image}
                       alt={project.titleEs || project.title || "Project"}
                       fill
-                      className={`object-cover transition-all duration-700 ease-out ${
-                        isHovered ? "scale-105 opacity-60" : "scale-100 opacity-80"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className={`object-contain object-top transition-all duration-700 ease-out ${
+                        isHovered ? "scale-105 opacity-70" : "scale-100 opacity-90"
                       }`}
                     />
                   ) : (
@@ -170,8 +171,8 @@ export default function PortfolioGrid({ projects, dictionary, setCursorVariant }
                   {/* Tech Stack */}
                   {project.tech && project.tech.length > 0 && (
                     <div className="flex flex-wrap gap-2 mt-auto">
-                      {project.tech.slice(0, 4).map((t: string, i: number) => (
-                        <span key={`${t}-${i}`} className="text-xs font-mono text-white/40 bg-white/5 px-2 py-1 rounded">
+                      {project.tech.slice(0, 4).map((t: string) => (
+                        <span key={t} className="text-xs font-mono text-white/40 bg-white/5 px-2 py-1 rounded">
                           {t}
                         </span>
                       ))}

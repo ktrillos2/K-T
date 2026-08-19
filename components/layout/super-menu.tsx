@@ -36,12 +36,13 @@ interface SuperMenuProps {
 }
 
 const menuItems = [
-  { key: "home", href: "#hero", image: "/images/home-preview.webp" },
-  { key: "about", href: "#about", image: "/images/about-preview.webp" },
-  { key: "services", href: "/precios", image: "/images/services-preview.webp" },
+  { key: "home", href: "/", image: "/images/home-preview.webp" },
+  { key: "about", href: "/nosotros", image: "/images/about-preview.webp" },
+  { key: "services", href: "/servicios", image: "/images/services-preview.webp" },
+  { key: "prices", href: "/precios", image: "/images/services-preview.webp" },
   { key: "work", href: "/portafolio", image: "/images/work-preview.webp" },
-  { key: "blog", href: "/blog", image: "/images/work-preview.webp" }, // Reusing an image for preview
-  { key: "contact", href: "#contact", image: "/images/contact-preview.webp" },
+  { key: "blog", href: "/blog", image: "/images/work-preview.webp" },
+  { key: "contact", href: "/#contact", image: "/images/contact-preview.webp" },
 ]
 
 export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
@@ -162,12 +163,12 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
                 <p>{dictionary.nav.agency}</p>
                 <div className="flex flex-col gap-2 mt-2">
                   <a
-                    href="mailto:contacto@kytcode.lat"
+                    href="mailto:contactktweb@gmail.com"
                     className="text-white hover:text-white/80 transition-colors w-fit"
                     onMouseEnter={() => setCursorVariant("text")}
                     onMouseLeave={() => setCursorVariant("default")}
                   >
-                    contacto@kytcode.lat
+                    contactktweb@gmail.com
                   </a>
                   <a
                     href="tel:+573116360057"

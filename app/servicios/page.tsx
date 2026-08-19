@@ -1,116 +1,89 @@
-import type { Metadata } from "next"
-import Link from "next/link"
-import { ArrowRight, ChevronRight } from "lucide-react"
-
+import { Metadata } from "next"
 import Footer from "@/components/layout/footer"
-import JsonLd from "@/components/seo/json-ld"
-import { servicePageList } from "@/lib/service-pages"
-import { buildBreadcrumbJsonLd } from "@/lib/seo"
-import { absoluteUrl } from "@/lib/site-config"
+import ServicesSection from "@/components/sections/services-section"
+import PricingCTA from "@/components/sections/precios/pricing-cta"
+import Link from "next/link"
+import { ChevronRight } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Servicios de Desarrollo Web y Software",
-  description:
-    "Conoce los servicios de desarrollo web, diseño corporativo, tiendas virtuales, software a medida, SEO técnico y mantenimiento de K&T Code.",
+  title: "Servicios de Desarrollo Web y Software en Colombia",
+  description: "K&T Code ofrece servicios de desarrollo de páginas web a medida, tiendas virtuales, software corporativo, SEO técnico y mantenimiento para empresas en Colombia y Latinoamérica.",
+  keywords: [
+    "servicios desarrollo web colombia",
+    "desarrollo paginas web bogota",
+    "diseño web profesional colombia",
+    "creacion tiendas online colombia",
+    "desarrollo software a medida colombia",
+    "mantenimiento paginas web",
+    "integracion api whatsapp",
+    "K&T Code servicios",
+  ],
   alternates: {
-    canonical: absoluteUrl("/servicios"),
+    canonical: "https://www.kytcode.lat/servicios",
+    languages: {
+      "es-CO": "https://www.kytcode.lat/servicios",
+      "es": "https://www.kytcode.lat/servicios",
+      "x-default": "https://www.kytcode.lat/servicios",
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   openGraph: {
-    title: "Servicios de Desarrollo Web y Software | K&T Code",
-    description:
-      "Soluciones web para empresas: sitios corporativos, e-commerce, software, SEO técnico y mantenimiento.",
-    url: absoluteUrl("/servicios"),
+    title: "Servicios de Desarrollo Web y Software en Colombia | K&T Code",
+    description: "K&T Code ofrece servicios de desarrollo de páginas web a medida, tiendas virtuales, software corporativo, SEO técnico y mantenimiento en Colombia y Latinoamérica.",
+    url: "https://www.kytcode.lat/servicios",
+    siteName: "K&T Code",
+    locale: "es_CO",
     type: "website",
   },
-}
-
-const itemListJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  name: "Servicios de K&T Code",
-  itemListElement: servicePageList.map((service, index) => ({
-    "@type": "ListItem",
-    position: index + 1,
-    name: service.shortTitle,
-    url: absoluteUrl(`/servicios/${service.slug}`),
-  })),
 }
 
 export default function ServiciosPage() {
   return (
     <>
-      <JsonLd
-        data={[
-          itemListJsonLd,
-          buildBreadcrumbJsonLd([
-            { name: "Inicio", path: "/" },
-            { name: "Servicios", path: "/servicios" },
-          ]),
-        ]}
-      />
-
-      <main className="relative min-h-screen overflow-hidden bg-black pb-24 pt-32">
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.018)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.018)_1px,transparent_1px)] bg-[size:54px_54px]" />
-        <div className="relative z-10 mx-auto max-w-7xl px-6">
-          <nav aria-label="Breadcrumb" className="mb-12 font-mono text-sm text-white/55">
-            <ol className="flex items-center gap-2">
-              <li><Link href="/" className="transition-colors hover:text-white">Inicio</Link></li>
-              <li aria-hidden="true"><ChevronRight className="h-4 w-4" /></li>
-              <li aria-current="page" className="text-white">Servicios</li>
+      <main className="min-h-screen pt-32 pb-16 relative overflow-hidden bg-black">
+        {/* Background grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none" />
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-6 mb-4">
+          <nav className="flex text-white/60 text-sm font-mono mb-8" aria-label="Breadcrumb">
+            <ol className="inline-flex items-center space-x-1 md:space-x-3">
+              <li className="inline-flex items-center">
+                <Link href="/" className="hover:text-white transition-colors">Inicio</Link>
+              </li>
+              <li>
+                <div className="flex items-center">
+                  <ChevronRight className="w-4 h-4 mx-1" />
+                  <span className="text-white">Servicios</span>
+                </div>
+              </li>
             </ol>
           </nav>
 
-          <header className="max-w-4xl">
-            <p className="font-mono text-sm text-white/55">// Soluciones digitales para empresas</p>
-            <h1 className="mt-5 font-title text-4xl font-bold leading-[.95] md:text-6xl lg:text-7xl">
-              Desarrollo web, e-commerce y software a medida
+          <header className="text-center max-w-4xl mx-auto mb-12">
+            <p className="text-white/60 font-mono text-sm uppercase tracking-widest mb-3">// Soluciones Digitales</p>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-title text-white leading-tight mb-4">
+              Servicios de Desarrollo Web y Software en Colombia
             </h1>
-            <p className="mt-7 max-w-3xl font-mono text-base leading-8 text-white/65 md:text-lg">
-              Cada servicio parte de una necesidad concreta: presentar una empresa, vender en línea,
-              automatizar procesos, mejorar la visibilidad orgánica o mantener una plataforma estable.
+            <p className="text-neutral-400 font-mono text-sm md:text-base max-w-2xl mx-auto">
+              Diseño, desarrollo y mantenimiento de páginas web, tiendas virtuales y aplicaciones a medida con arquitectura moderna en Next.js.
             </p>
           </header>
+        </div>
 
-          <section className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3" aria-label="Servicios disponibles">
-            {servicePageList.map((service, index) => (
-              <article
-                key={service.slug}
-                className="group flex min-h-[310px] flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.05]"
-              >
-                <span className="font-mono text-xs text-white/30">0{index + 1}</span>
-                <h2 className="mt-8 font-title text-2xl font-bold leading-tight">{service.shortTitle}</h2>
-                <p className="mt-4 flex-1 font-mono text-sm leading-7 text-white/58">{service.metaDescription}</p>
-                <Link
-                  href={`/servicios/${service.slug}`}
-                  className="mt-7 inline-flex items-center gap-2 font-mono text-sm font-bold text-white"
-                >
-                  Ver servicio
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                </Link>
-              </article>
-            ))}
-          </section>
-
-          <section className="mt-20 rounded-3xl border border-white/10 bg-white/[0.035] p-8 md:p-12">
-            <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
-              <div>
-                <p className="font-mono text-sm text-white/55">// El alcance se define contigo</p>
-                <h2 className="mt-3 font-title text-3xl font-bold md:text-4xl">
-                  ¿No sabes qué tipo de solución necesitas?
-                </h2>
-                <p className="mt-4 max-w-2xl font-mono text-sm leading-7 text-white/60">
-                  Cuéntanos el problema, el proceso actual y el resultado que esperas. Te ayudamos a definir
-                  una primera etapa realista antes de hablar de tecnología.
-                </p>
-              </div>
-              <Link
-                href="/#contact"
-                className="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 font-mono font-bold text-black"
-              >
-                Solicitar orientación
-              </Link>
-            </div>
-          </section>
+        <ServicesSection />
+        
+        <div className="mt-20">
+            <PricingCTA />
         </div>
       </main>
       <Footer />

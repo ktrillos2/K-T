@@ -1,29 +1,54 @@
 import { getAllProjects } from "@/sanity/lib/queries"
 import Footer from "@/components/layout/footer"
 import PortafolioClient from "./portafolio-client"
-import JsonLd from "@/components/seo/json-ld"
-import { buildBreadcrumbJsonLd } from "@/lib/seo"
-import { absoluteUrl } from "@/lib/site-config"
 
 export const revalidate = 60;
 
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Portafolio y casos de estudio",
-  description: "Explora nuestros casos de éxito y proyectos de desarrollo web a medida, tiendas virtuales y software para empresas.",
+  title: "Portafolio de Proyectos y Software",
+  description: "Explora nuestros casos de éxito y proyectos de desarrollo web a medida, tiendas virtuales y software para empresas en Colombia.",
+  keywords: [
+    "portafolio desarrollo web",
+    "casos de exito paginas web",
+    "proyectos desarrollo react next.js",
+    "ejemplos tiendas virtuales colombia",
+    "proyectos software a medida",
+    "portafolio sitios corporativos",
+    "K&T Code portafolio",
+  ],
   alternates: {
-    canonical: absoluteUrl('/portafolio'),
-  }
+    canonical: "https://www.kytcode.lat/portafolio",
+    languages: {
+      "es-CO": "https://www.kytcode.lat/portafolio",
+      "es": "https://www.kytcode.lat/portafolio",
+      "x-default": "https://www.kytcode.lat/portafolio",
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    title: "Portafolio y Casos de Estudio | K&T Code",
+    description: "Explora nuestros casos de éxito y proyectos de desarrollo web a medida, tiendas virtuales y software para empresas.",
+    url: "https://www.kytcode.lat/portafolio",
+    siteName: "K&T Code",
+    locale: "es_CO",
+    type: "website",
+  },
 }
 
 export default async function PortafolioPage() {
-  let sanityProjects: any[] = []
-  try {
-    sanityProjects = await getAllProjects()
-  } catch {
-    sanityProjects = []
-  }
+  const sanityProjects = await getAllProjects()
   
   // Combine Sanity projects with hardcoded projects from lib/projects.ts
   const { projects: hardcodedProjects } = await import("@/lib/projects")
@@ -34,29 +59,6 @@ export default async function PortafolioPage() {
 
   return (
     <>
-      <JsonLd
-        data={[
-          buildBreadcrumbJsonLd([
-            { name: "Inicio", path: "/" },
-            { name: "Portafolio", path: "/portafolio" },
-          ]),
-          {
-            "@context": "https://schema.org",
-            "@type": "CollectionPage",
-            name: "Portafolio y casos de estudio de K&T Code",
-            url: absoluteUrl("/portafolio"),
-            mainEntity: {
-              "@type": "ItemList",
-              itemListElement: projects.slice(0, 30).map((project: any, index: number) => ({
-                "@type": "ListItem",
-                position: index + 1,
-                name: project.title,
-                url: absoluteUrl(`/projects/${project.slug}`),
-              })),
-            },
-          },
-        ]}
-      />
       <main className="min-h-screen pt-32 pb-16 px-6 lg:px-12 relative">
         {/* Background grid */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none" />

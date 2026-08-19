@@ -4,10 +4,42 @@ import { useState } from "react"
 import { m as motion, AnimatePresence } from "framer-motion"
 import { Plus, Minus } from "lucide-react"
 
-import { useLanguage } from "@/context/language-context"
+const faqs = [
+  {
+    question: "¿El precio incluye dominio y hosting?",
+    answer: "La configuración puede estar incluida, pero el pago anual del dominio y hosting depende del proveedor y del plan seleccionado."
+  },
+  {
+    question: "¿Debo pagar todo antes de comenzar?",
+    answer: "No. El proyecto puede manejarse mediante pagos por etapas definidos en la propuesta comercial."
+  },
+  {
+    question: "¿Los precios son definitivos?",
+    answer: "Son precios iniciales. El valor final depende del alcance, funcionalidades e integraciones requeridas."
+  },
+  {
+    question: "¿Pueden rediseñar una página que ya existe?",
+    answer: "Sí. Primero se realiza una revisión técnica y visual para definir el alcance del rediseño."
+  },
+  {
+    question: "¿Cuánto tarda el desarrollo?",
+    answer: "El tiempo depende del tipo de proyecto. Una landing page puede tomar entre 7 y 12 días, mientras que proyectos más avanzados requieren un plazo mayor."
+  },
+  {
+    question: "¿Trabajan con clientes fuera de Colombia?",
+    answer: "Sí. K&T Code puede trabajar con empresas y emprendedores de diferentes países de manera remota."
+  },
+  {
+    question: "¿La página quedará adaptada para celulares?",
+    answer: "Sí. Todos los proyectos se desarrollan para funcionar correctamente en computadores, tablets y dispositivos móviles."
+  },
+  {
+    question: "¿Ofrecen mantenimiento después de publicar la web?",
+    answer: "Sí. Se pueden contratar planes de mantenimiento, soporte y mejoras continuas."
+  }
+]
 
 export default function PricingFAQ() {
-  const { dictionary } = useLanguage()
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const toggleFAQ = (index: number) => {
@@ -17,19 +49,12 @@ export default function PricingFAQ() {
   return (
     <section className="relative px-6 max-w-4xl mx-auto w-full">
       <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-5xl font-bold font-title mb-6">
-          {/* @ts-ignore */}
-          {dictionary.pricingFaq.title}
-        </h2>
-        <p className="text-white/60 font-mono text-lg max-w-2xl mx-auto">
-          {/* @ts-ignore */}
-          {dictionary.pricingFaq.description}
-        </p>
+        <h2 className="text-3xl md:text-5xl font-bold font-title mb-6">Preguntas frecuentes</h2>
+        <p className="text-white/60 font-mono text-lg max-w-2xl mx-auto">Resuelve tus dudas antes de iniciar tu proyecto con nosotros.</p>
       </div>
 
       <div className="space-y-4">
-        {/* @ts-ignore */}
-        {dictionary.pricingFaq.faqs.map((faq: any, index: number) => {
+        {faqs.map((faq, index) => {
           const isOpen = openIndex === index
 
           return (

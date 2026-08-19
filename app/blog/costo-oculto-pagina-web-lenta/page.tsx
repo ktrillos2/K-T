@@ -1,24 +1,70 @@
 import { Metadata } from "next"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, GaugeCircle, Server, Activity, ArrowDownRight, Globe2, ShieldCheck } from "lucide-react"
-import BlogArticleEnhancements from "@/components/seo/blog-article-enhancements"
 
 export const metadata: Metadata = {
-    title: "El costo de una página web lenta y cómo mejorarlo",
-    description: "Guía para detectar problemas de carga, mejorar Core Web Vitals y reducir fricción en la conversión.",
-    alternates: { canonical: "https://www.kytcode.lat/blog/costo-oculto-pagina-web-lenta" },
+    title: "El Costo Oculto de un Sitio Web Lento y su Solución Técnica",
+    description: "Un sitio lento destruye tu ratio de conversión. Descubre cómo K&T soluciona el Core Web Vitals y LCP desde la raíz con arquitectura Serverless.",
     keywords: ["web lenta", "core web vitals", "optimización LCP", "edge computing", "Next.js rendimiento"],
+    alternates: {
+        canonical: "https://www.kytcode.lat/blog/costo-oculto-pagina-web-lenta",
+        languages: {
+            "es-CO": "https://www.kytcode.lat/blog/costo-oculto-pagina-web-lenta",
+            "es": "https://www.kytcode.lat/blog/costo-oculto-pagina-web-lenta",
+            "x-default": "https://www.kytcode.lat/blog/costo-oculto-pagina-web-lenta",
+        },
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-video-preview": -1,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+        },
+    },
     openGraph: {
         title: "El Costo Oculto de un Sitio Web Lento (Y cómo optimizarlo)",
         description: "El costo oculto (y devastador) de un mal hosting. Soluciona métricas de LCP con nuestra infraestructura serverless alojada en Vercel.",
         type: "article",
         url: "https://www.kytcode.lat/blog/costo-oculto-pagina-web-lenta",
+        siteName: "K&T Code",
+    }
+}
+
+const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "El Costo Oculto de un Sitio Web Lento y su Solución Técnica",
+    "description": "Un sitio lento destruye tu ratio de conversión. Descubre cómo K&T soluciona el Core Web Vitals y LCP desde la raíz con arquitectura Serverless.",
+    "url": "https://www.kytcode.lat/blog/costo-oculto-pagina-web-lenta",
+    "datePublished": "2026-02-10",
+    "dateModified": "2026-02-10",
+    "author": {
+        "@type": "Organization",
+        "name": "K&T Code",
+        "url": "https://www.kytcode.lat/"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "K&T Code",
+        "url": "https://www.kytcode.lat/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.kytcode.lat/icon.png"
+        }
     }
 }
 
 export default function CostoWebLenta() {
     return (
         <main className="min-h-screen bg-background pt-32 pb-24 px-4 sm:px-6">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+            />
             <div className="max-w-3xl mx-auto">
                 <Link
                     href="/blog"
@@ -85,23 +131,30 @@ export default function CostoWebLenta() {
                     <div className="bg-gradient-to-br from-neutral-900 to-black border border-white/10 rounded-2xl p-8 lg:p-10 mt-16 text-center">
                         <ShieldCheck className="w-12 h-12 text-blue-500 mx-auto mb-6" />
                         <h3 className="text-2xl font-bold text-white font-title mb-4">
-                            Toda cotización nuestra nace con garantía de Red
+                            Garantía de Alto Rendimiento en Cada Proyecto
                         </h3>
-                        <p className="text-neutral-300 mb-8 max-w-xl mx-auto">
-                            El alojamiento se selecciona según tráfico, región, presupuesto y operación. Una plataforma distribuida puede ayudar, pero debe acompañarse de optimización de imágenes, JavaScript, caché, consultas y scripts externos.
+                        <p className="text-neutral-300 mb-8 max-w-xl mx-auto font-mono text-sm leading-relaxed">
+                            En <Link href="/nosotros" className="text-white underline">K&T Code</Link>, diseñamos y desplegamos plataformas de <Link href="/servicios/desarrollo-web-a-medida" className="text-white underline">desarrollo web a medida</Link> en infraestructura global de borde (Edge Network). Conoce nuestros <Link href="/precios" className="text-white underline">planes y precios</Link> o solicita una auditoría de rendimiento.
                         </p>
-                        <a
-                            href="https://wa.me/573116360057?text=Hola%20K%26T%2C%20le%C3%AD%20sobre%20el%20costo%20oculto%20de%20una%20web%20lenta.%20Quisiera%20auditar%20y%20mejorar%20la%20velocidad%20de%20mi%20proyecto."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-xl font-bold font-mono hover:bg-neutral-200 transition-colors w-full sm:w-auto"
-                        >
-                            Auditar la Velocidad de mi Proyecto Hoy
-                            <ArrowRight className="w-4 h-4 ml-2" />
-                        </a>
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <Link
+                                href="/precios"
+                                className="inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-4 rounded-xl font-bold font-mono hover:bg-neutral-200 transition-colors w-full sm:w-auto"
+                            >
+                                Cotizar mi página web
+                                <ArrowRight className="w-4 h-4" />
+                            </Link>
+                            <a
+                                href="https://wa.me/573116360057?text=Hola%20K%26T%20Code,%20le%C3%AD%20sobre%20el%20costo%20oculto%20de%20una%20web%20lenta%20y%20quiero%20auditar%20mi%20proyecto."
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-white/20 px-8 py-4 rounded-xl font-bold font-mono hover:bg-white/20 transition-colors w-full sm:w-auto"
+                            >
+                                Hablar por WhatsApp
+                            </a>
+                        </div>
                     </div>
 
-                                    <BlogArticleEnhancements slug="costo-oculto-pagina-web-lenta" />
                 </article>
             </div>
         </main>

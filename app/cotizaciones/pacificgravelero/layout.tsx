@@ -4,20 +4,20 @@ export const metadata: Metadata = {
   title: 'Cotización Desarrollo Web | Sistema de Suscripción',
   description: 'Propuesta comercial exclusiva para el desarrollo de plataforma web de pagos recurrentes y gestión de membresías.',
   openGraph: {
-    title: 'Cotización Desarrollo Web | K&T Agencia Digital',
+    title: 'Cotización Desarrollo Web | K&T Code',
     description: 'Propuesta comercial exclusiva para el desarrollo de plataforma web de pagos recurrentes y gestión de membresías.',
     images: [
       {
         url: '/images/og-image.webp', // Usando la imagen específica para SEO de cotizaciones
         width: 1200,
         height: 630,
-        alt: 'K&T Desarrollo Web',
+        alt: 'K&T Code Desarrollo Web',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Cotización Desarrollo Web | K&T',
+    title: 'Cotización Desarrollo Web | K&T Code',
     description: 'Propuesta comercial exclusiva para el desarrollo de plataforma web de pagos recurrentes.',
   },
 }

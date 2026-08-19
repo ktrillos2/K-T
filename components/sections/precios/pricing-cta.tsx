@@ -11,13 +11,28 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { useCursor } from "@/context/cursor-context"
-import { reportPixelLead } from "@/lib/gtag"
 
-import { useLanguage } from "@/context/language-context"
+const budgetOptions = [
+  "Menos de $1.000.000 COP",
+  "Entre $1.000.000 y $2.500.000 COP",
+  "Entre $2.500.000 y $5.000.000 COP",
+  "Entre $5.000.000 y $10.000.000 COP",
+  "Más de $10.000.000 COP",
+  "Necesito orientación"
+]
+
+const projectTypes = [
+  "Landing page",
+  "Sitio web corporativo",
+  "Tienda virtual",
+  "Software a medida",
+  "Rediseño web",
+  "Automatización",
+  "Otro"
+]
 
 export default function PricingCTA() {
   const { setCursorVariant } = useCursor()
-  const { dictionary } = useLanguage()
   
   const [formData, setFormData] = useState({
     name: "",
@@ -38,8 +53,8 @@ export default function PricingCTA() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "submit_lead", {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "submit_lead", {
         event_category: "pricing_cta",
         event_label: formData.projectType
       })
@@ -105,7 +120,6 @@ ${formData.message}
         event_label: "Hablar por WhatsApp"
       })
     }
-    reportPixelLead()
     window.open("https://wa.me/573116360057?text=Hola,%20me%20gustar%C3%ADa%20solicitar%20una%20propuesta%20personalizada.", "_blank")
   }
 
@@ -126,12 +140,10 @@ ${formData.message}
               className="relative z-10 space-y-8"
             >
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-title">
-                {/* @ts-ignore */}
-                {dictionary.pricingCta.title}
+                ¿Tienes un proyecto diferente?
               </h2>
               <p className="text-white/60 font-mono text-lg max-w-2xl mx-auto">
-                {/* @ts-ignore */}
-                {dictionary.pricingCta.description}
+                Cuéntanos qué necesitas y prepararemos una propuesta personalizada para tu negocio.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
@@ -144,8 +156,7 @@ ${formData.message}
                   whileTap={{ scale: 0.95 }}
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
-                    {/* @ts-ignore */}
-                    {dictionary.pricingCta.requestQuote}
+                    Solicitar cotización
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </span>
                   <div className="absolute inset-0 bg-neutral-200 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
@@ -159,20 +170,16 @@ ${formData.message}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  {/* @ts-ignore */}
-                  {dictionary.pricingCta.whatsappLink}
+                  Hablar por WhatsApp
                 </motion.button>
               </div>
 
               <div className="flex items-center justify-center gap-2 text-xs font-mono text-white/40 pt-6">
-                {/* @ts-ignore */}
-                <span>{dictionary.pricingCta.perks[0]}</span>
+                <span>Respuesta personalizada</span>
                 <span className="w-1 h-1 rounded-full bg-white/20" />
-                {/* @ts-ignore */}
-                <span>{dictionary.pricingCta.perks[1]}</span>
+                <span>Propuesta detallada</span>
                 <span className="w-1 h-1 rounded-full bg-white/20" />
-                {/* @ts-ignore */}
-                <span>{dictionary.pricingCta.perks[2]}</span>
+                <span>Sin compromiso</span>
               </div>
             </motion.div>
           ) : !isSubmitted ? (
@@ -186,37 +193,25 @@ ${formData.message}
               className="relative z-10 text-left space-y-6 max-w-2xl mx-auto"
             >
               <div className="text-center mb-8">
-                {/* @ts-ignore */}
-                <h3 className="text-2xl font-bold font-title mb-2">{dictionary.pricingCta.formTitle}</h3>
-                {/* @ts-ignore */}
-                <p className="text-white/50 font-mono text-sm">{dictionary.pricingCta.formDescription}</p>
+                <h3 className="text-2xl font-bold font-title mb-2">Cuéntanos sobre tu proyecto</h3>
+                <p className="text-white/50 font-mono text-sm">Completa este breve formulario y te contactaremos pronto.</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-xs font-mono text-white/50 uppercase tracking-wider">
-                    {/* @ts-ignore */}
-                    {dictionary.pricingCta.formFields.name}
-                  </label>
+                  <label className="text-xs font-mono text-white/60 ml-1">Nombre completo *</label>
                   <input
                     type="text"
                     required
-                    /* @ts-ignore */
-                    placeholder={dictionary.pricingCta.formFields.namePlaceholder}
                     value={formData.name}
                     onChange={e => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-white/[0.02] border border-white/10 rounded-lg px-4 py-3 text-white font-mono text-sm focus:outline-none focus:border-white/30 focus:bg-white/[0.05] transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-white focus:outline-none transition-colors"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-mono text-white/50 uppercase tracking-wider">
-                    {/* @ts-ignore */}
-                    {dictionary.pricingCta.formFields.company}
-                  </label>
+                  <label className="text-xs font-mono text-white/60 ml-1">Empresa</label>
                   <input
                     type="text"
-                    /* @ts-ignore */
-                    placeholder={dictionary.pricingCta.formFields.companyPlaceholder}
                     value={formData.company}
                     onChange={e => setFormData({ ...formData, company: e.target.value })}
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-white focus:outline-none transition-colors"
@@ -226,30 +221,20 @@ ${formData.message}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-xs font-mono text-white/50 uppercase tracking-wider">
-                    {/* @ts-ignore */}
-                    {dictionary.pricingCta.formFields.email}
-                  </label>
+                  <label className="text-xs font-mono text-white/60 ml-1">Correo electrónico *</label>
                   <input
                     type="email"
                     required
-                    /* @ts-ignore */
-                    placeholder={dictionary.pricingCta.formFields.emailPlaceholder}
                     value={formData.email}
                     onChange={e => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-white/[0.02] border border-white/10 rounded-lg px-4 py-3 text-white font-mono text-sm focus:outline-none focus:border-white/30 focus:bg-white/[0.05] transition-all"
+                    className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-white focus:outline-none transition-colors"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-mono text-white/50 uppercase tracking-wider">
-                    {/* @ts-ignore */}
-                    {dictionary.pricingCta.formFields.whatsapp}
-                  </label>
+                  <label className="text-xs font-mono text-white/60 ml-1">WhatsApp *</label>
                   <input
                     type="tel"
                     required
-                    /* @ts-ignore */
-                    placeholder={dictionary.pricingCta.formFields.whatsappPlaceholder}
                     value={formData.whatsapp}
                     onChange={e => setFormData({ ...formData, whatsapp: e.target.value })}
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-white focus:outline-none transition-colors"
@@ -259,36 +244,26 @@ ${formData.message}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-xs font-mono text-white/50 uppercase tracking-wider">
-                    {/* @ts-ignore */}
-                    {dictionary.pricingCta.formFields.projectType}
-                  </label>
+                  <label className="text-xs font-mono text-white/60 ml-1">Tipo de proyecto *</label>
                   <Select required value={formData.projectType} onValueChange={val => setFormData({ ...formData, projectType: val })}>
-                    <SelectTrigger className="w-full bg-white/[0.02] border border-white/10 rounded-lg text-white font-mono text-sm h-[46px] focus:ring-0 focus:border-white/20">
-                      {/* @ts-ignore */}
-                      <SelectValue placeholder={dictionary.pricingCta.formFields.projectTypePlaceholder} />
+                    <SelectTrigger className="w-full bg-white/5 border border-white/10 rounded-lg text-white font-mono text-sm h-[46px] focus:ring-0 focus:border-white/20">
+                      <SelectValue placeholder="Selecciona..." />
                     </SelectTrigger>
                     <SelectContent className="bg-neutral-900 border-white/20 text-white">
-                      {/* @ts-ignore */}
-                      {dictionary.pricingCta.projectTypes.map((type: string) => (
+                      {projectTypes.map(type => (
                         <SelectItem key={type} value={type} className="font-mono text-sm focus:bg-white/10 focus:text-white">{type}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-mono text-white/50 uppercase tracking-wider">
-                    {/* @ts-ignore */}
-                    {dictionary.pricingCta.formFields.budget}
-                  </label>
+                  <label className="text-xs font-mono text-white/60 ml-1">Presupuesto aproximado *</label>
                   <Select required value={formData.budget} onValueChange={val => setFormData({ ...formData, budget: val })}>
-                    <SelectTrigger className="w-full bg-white/[0.02] border border-white/10 rounded-lg text-white font-mono text-sm h-[46px] focus:ring-0 focus:border-white/20">
-                      {/* @ts-ignore */}
-                      <SelectValue placeholder={dictionary.pricingCta.formFields.budgetPlaceholder} />
+                    <SelectTrigger className="w-full bg-white/5 border border-white/10 rounded-lg text-white font-mono text-sm h-[46px] focus:ring-0 focus:border-white/20">
+                      <SelectValue placeholder="Selecciona..." />
                     </SelectTrigger>
                     <SelectContent className="bg-neutral-900 border-white/20 text-white">
-                      {/* @ts-ignore */}
-                      {dictionary.pricingCta.budgetOptions.map((opt: string) => (
+                      {budgetOptions.map(opt => (
                         <SelectItem key={opt} value={opt} className="font-mono text-sm focus:bg-white/10 focus:text-white">{opt}</SelectItem>
                       ))}
                     </SelectContent>
@@ -297,32 +272,24 @@ ${formData.message}
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-mono text-white/50 uppercase tracking-wider">
-                  {/* @ts-ignore */}
-                  {dictionary.pricingCta.formFields.date}
-                </label>
+                <label className="text-xs font-mono text-white/60 ml-1">Fecha estimada para comenzar</label>
                 <input
                   type="date"
                   value={formData.date}
                   onChange={e => setFormData({ ...formData, date: e.target.value })}
-                  className="w-full bg-white/[0.02] border border-white/10 rounded-lg px-4 py-3 text-white font-mono text-sm focus:outline-none focus:border-white/30 focus:bg-white/[0.05] transition-all"
-                  style={{ colorScheme: 'dark' }}
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-white focus:outline-none transition-colors"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-mono text-white/50 uppercase tracking-wider">
-                  {/* @ts-ignore */}
-                  {dictionary.pricingCta.formFields.message}
-                </label>
+                <label className="text-xs font-mono text-white/60 ml-1">Descripción del proyecto *</label>
                 <textarea
                   required
                   rows={4}
-                  /* @ts-ignore */
-                  placeholder={dictionary.pricingCta.formFields.messagePlaceholder}
                   value={formData.message}
                   onChange={e => setFormData({ ...formData, message: e.target.value })}
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white font-mono text-sm focus:border-white focus:outline-none transition-colors resize-none"
+                  placeholder="Detalla un poco tus necesidades, objetivos y referencias..."
                 />
               </div>
 

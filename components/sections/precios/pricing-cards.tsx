@@ -5,44 +5,106 @@ import { Check, Info, ArrowRight } from "lucide-react"
 import { useCursor } from "@/context/cursor-context"
 
 import { useLanguage } from "@/context/language-context"
-import { reportPixelLead } from "@/lib/gtag"
+
+const plans = [
+  {
+    title: "Landing Page",
+    copPrice: "Desde $450.000 COP",
+    usdPrice: 200,
+    description: "Ideal para campañas publicitarias, presentación de servicios, captación de clientes y lanzamientos.",
+    features: [
+      "Diseño personalizado",
+      "Página responsive",
+      "Hasta 5 secciones",
+      "Formulario de contacto",
+      "Integración con WhatsApp",
+      "Optimización SEO básica",
+      "Configuración de dominio y hosting",
+      "Botones de conversión",
+      "Entrega aproximada entre 7 y 12 días",
+    ],
+    buttonText: "Solicitar este plan",
+    recommended: false,
+    whatsappMessage: "Hola,%20me%20gustar%C3%ADa%20solicitar%20el%20plan%20Landing%20Page."
+  },
+  {
+    title: "Sitio Web Corporativo",
+    copPrice: "Desde $2.500.000 COP",
+    usdPrice: 600,
+    description: "Pensado para empresas que necesitan una presencia digital profesional, completa y preparada para crecer.",
+    features: [
+      "Diseño personalizado",
+      "Hasta 8 páginas internas",
+      "Página de servicios",
+      "Portafolio o proyectos",
+      "Testimonios",
+      "Formulario de contacto",
+      "Integración con WhatsApp",
+      "SEO técnico inicial",
+      "Google Analytics",
+      "Diseño responsive",
+      "Entrega aproximada entre 15 y 25 días",
+    ],
+    buttonText: "Solicitar este plan",
+    recommended: true,
+    whatsappMessage: "Hola,%20me%20gustar%C3%ADa%20solicitar%20el%20plan%20Sitio%20Web%20Corporativo."
+  },
+  {
+    title: "Tienda Virtual",
+    copPrice: "Desde $1.300.000 COP",
+    usdPrice: 450,
+    description: "Para negocios que quieren vender productos o servicios en línea con una experiencia moderna y confiable.",
+    features: [
+      "Diseño personalizado",
+      "Catálogo de productos",
+      "Carrito de compras",
+      "Pasarela de pagos",
+      "Gestión de pedidos",
+      "Panel administrativo",
+      "Integración con WhatsApp",
+      "Configuración de envíos",
+      "Diseño responsive",
+      "SEO técnico inicial",
+      "Entrega aproximada entre 25 y 40 días",
+    ],
+    buttonText: "Solicitar este plan",
+    recommended: false,
+    whatsappMessage: "Hola,%20me%20gustar%C3%ADa%20solicitar%20el%20plan%20Tienda%20Virtual."
+  },
+  {
+    title: "Software a Medida",
+    copPrice: "Cotización personalizada",
+    usdPrice: null,
+    description: "Para plataformas, sistemas internos, aplicaciones web, automatizaciones, paneles administrativos y soluciones con funcionalidades especiales.",
+    features: [
+      "Análisis de requerimientos",
+      "Arquitectura personalizada",
+      "Desarrollo frontend y backend",
+      "Base de datos",
+      "Panel administrativo",
+      "Integraciones con APIs",
+      "Automatizaciones",
+      "Autenticación de usuarios",
+      "Escalabilidad",
+      "Soporte durante la implementación",
+    ],
+    buttonText: "Hablar sobre mi proyecto",
+    recommended: false,
+    whatsappMessage: "Hola,%20tengo%20un%20proyecto%20de%20software%20a%20medida%20y%20me%20gustar%C3%ADa%20cotizarlo."
+  }
+]
 
 export default function PricingCards() {
   const { setCursorVariant } = useCursor()
-  const { country, convertPrice, dictionary } = useLanguage()
-
-  // @ts-ignore
-  const plans = [
-    {
-      ...dictionary.pricingCards.plans.landing,
-      usdPrice: 200,
-      recommended: false,
-    },
-    {
-      ...dictionary.pricingCards.plans.tienda,
-      usdPrice: 450,
-      recommended: false,
-    },
-    {
-      ...dictionary.pricingCards.plans.corporativo,
-      usdPrice: 600,
-      recommended: true,
-    },
-    {
-      ...dictionary.pricingCards.plans.software,
-      usdPrice: null,
-      recommended: false,
-    }
-  ]
+  const { country, convertPrice } = useLanguage()
 
   const handleSelectPlan = (planTitle: string, whatsappMessage: string) => {
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "select_plan", {
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", "select_plan", {
         event_category: "pricing_cards",
         event_label: planTitle
       })
     }
-    reportPixelLead()
     window.open(`https://wa.me/573116360057?text=${whatsappMessage}`, "_blank")
   }
 
@@ -54,9 +116,8 @@ export default function PricingCards() {
     }
     
     const converted = convertPrice(plan.usdPrice);
-    if (converted === "Loading...") return dictionary.pricingCards.calculating;
-    // @ts-ignore
-    return `${dictionary.pricingCards.copPrice} ${converted}`;
+    if (converted === "Loading...") return "Calculando...";
+    return `Desde ${converted}`;
   }
 
   return (
@@ -80,8 +141,7 @@ export default function PricingCards() {
             
             {plan.recommended && (
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-black text-xs font-bold font-mono px-4 py-1.5 rounded-full shadow-lg z-10 whitespace-nowrap">
-                {/* @ts-ignore */}
-                {dictionary.pricingCards.recommendedBadge}
+                Más recomendado
               </div>
             )}
 
@@ -134,12 +194,10 @@ export default function PricingCards() {
           <Info className="w-5 h-5 text-white/50 shrink-0 mt-0.5" />
           <div className="text-left font-mono text-sm text-white/60 space-y-2">
             <p>
-              {/* @ts-ignore */}
-              {dictionary.pricingCards.disclaimer.p1}
+              Los precios presentados son valores iniciales y pueden variar según el alcance, número de secciones, funcionalidades, integraciones, idiomas, diseño y nivel de personalización del proyecto.
             </p>
             <p className="text-white/80 font-medium">
-              {/* @ts-ignore */}
-              {dictionary.pricingCards.disclaimer.p2}
+              Antes de iniciar, realizamos una reunión para entender tus necesidades y entregarte una propuesta detallada.
             </p>
           </div>
         </div>

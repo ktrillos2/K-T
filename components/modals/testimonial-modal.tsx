@@ -58,6 +58,10 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0]
+            if (file.size > 5 * 1024 * 1024) {
+                alert(language === 'es' ? 'La imagen no debe superar los 5MB' : 'Image size must be under 5MB')
+                return
+            }
             setImage(file)
             setImagePreview(URL.createObjectURL(file))
         }
@@ -233,13 +237,12 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
 
                                         {/* Name Input */}
                                         <div className="space-y-2">
-                                            {/* @ts-ignore */}
                                             <label className="text-sm font-mono text-white/80">{dictionary.testimonials.name || "Tu Nombre"}</label>
                                             <input
                                                 type="text"
                                                 value={name}
                                                 onChange={(e) => setName(e.target.value)}
-                                                placeholder={(dictionary.testimonials as any).namePlaceholder || "Ej. Juan Pérez"}
+                                                placeholder={dictionary.testimonials.namePlaceholder || "Ej. Juan Pérez"}
                                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 h-12 text-white placeholder-white/30 focus:border-white/30 focus:outline-none transition-colors"
                                             />
                                         </div>
@@ -251,7 +254,7 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
                                                 type="text"
                                                 value={role}
                                                 onChange={(e) => setRole(e.target.value)}
-                                                placeholder={(dictionary.testimonials as any).rolePlaceholder || "Ej. CEO"}
+                                                placeholder={dictionary.testimonials.rolePlaceholder}
                                                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 h-12 text-white placeholder-white/30 focus:border-white/30 focus:outline-none transition-colors"
                                             />
                                         </div>

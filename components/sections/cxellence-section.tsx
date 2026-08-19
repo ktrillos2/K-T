@@ -77,8 +77,8 @@ export default function CxellenceSection({ initialProjects = [] }: { initialProj
                       src={featuredProject.image}
                       alt={language === "en" ? featuredProject.titleEn : featuredProject.titleEs}
                       fill
+                      sizes="(max-width: 1024px) 100vw, 60vw"
                       className="object-cover object-top"
-                      unoptimized
                       draggable={false}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 lg:from-transparent via-transparent to-transparent pointer-events-none" />
@@ -102,9 +102,9 @@ export default function CxellenceSection({ initialProjects = [] }: { initialProj
                       </p>
                       
                       <div className="flex flex-wrap gap-2 mb-8 lg:mb-12">
-                        {featuredProject.tech?.map((tech: string, i: number) => (
+                        {featuredProject.tech?.map((tech: string) => (
                           <span
-                            key={`${tech}-${i}`}
+                            key={tech}
                             className="px-3 py-1.5 text-xs font-mono border border-white/20 rounded-full text-white/90 bg-white/5"
                           >
                             {tech}

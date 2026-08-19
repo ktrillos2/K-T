@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from 'next-sanity';
 import { apiVersion, dataset, projectId } from '@/sanity/env';
-import { createSmtpTransport, mailAddresses } from "@/lib/email";
+import nodemailer from 'nodemailer';
 
 export async function POST(req: Request) {
     try {
@@ -34,6 +34,14 @@ export async function POST(req: Request) {
         // 1. Upload Image to Sanity (if exists)
         let imageAssetId = null;
         if (imageFile) {
+            // Validar límite máximo de subida a 5MB
+            if (imageFile.size > 5 * 1024 * 1024) {
+                return NextResponse.json(
+                    { success: false, error: 'El archivo de imagen no debe superar los 5MB' },
+                    { status: 400 }
+                );
+            }
+
             const buffer = Buffer.from(await imageFile.arrayBuffer());
             const asset = await writeClient.assets.upload('image', buffer, {
                 filename: imageFile.name,
@@ -63,11 +71,19 @@ export async function POST(req: Request) {
         await writeClient.create(doc);
 
         // 3. Send Email Notification
-        const transporter = createSmtpTransport();
+        const transporter = nodemailer.createTransport({
+            host: "smtp-relay.sendinblue.com",
+            port: 587,
+            secure: false,
+            auth: {
+                user: "9e752d001@smtp-brevo.com",
+                pass: "6rRVAHNgq9aXBhPs",
+            },
+        });
 
         const mailOptions = {
-            from: mailAddresses.from,
-            to: mailAddresses.contact,
+            from: '"K&T Code System" <info@kytcode.lat>',
+            to: "contactktweb@gmail.com",
             subject: `Nuevo Testimonio Recibido - ${project}`,
             html: `
                 <h2>Nuevo Testimonio para ${project}</h2>

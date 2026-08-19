@@ -72,10 +72,9 @@ export default function CustomCursor() {
   }, [animate, mounted])
 
   const isHover = cursorVariant === "hover"
-  const isHidden = cursorVariant === "hidden"
 
   if (mounted && isMobile()) return null
-  if (pathname === '/whatsapp-clone') return null
+  if (pathname === '/whatsapp-clone' || cursorVariant === 'hidden') return null
 
   return (
     <>
@@ -88,8 +87,7 @@ export default function CustomCursor() {
           height: isHover ? 60 : 8,
           backgroundColor: isHover ? "transparent" : "#fff",
           border: isHover ? "2px solid #fff" : "none",
-          opacity: isHidden ? 0 : 1,
-          transition: "width 0.2s, height 0.2s, background-color 0.2s, border 0.2s, opacity 0.2s",
+          transition: "width 0.2s, height 0.2s, background-color 0.2s, border 0.2s",
         }}
       />
       {/* Trailing ring */}
@@ -99,7 +97,7 @@ export default function CustomCursor() {
         style={{
           width: 32,
           height: 32,
-          opacity: isHover || isHidden ? 0 : 0.6,
+          opacity: isHover ? 0 : 0.6,
           transition: "opacity 0.2s",
         }}
       />

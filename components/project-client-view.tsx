@@ -50,6 +50,7 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
                         src={project.images.hero}
                         alt={project.title}
                         fill
+                        sizes="100vw"
                         className="object-cover"
                         priority
                     />
@@ -170,7 +171,7 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
                                     className="bg-white/5 border border-white/10 rounded-2xl p-8"
                                 >
                                     <h3 className="text-2xl font-bold text-white font-title mb-4">
-                                        Impacto SEO
+                                        Enfoque SEO
                                     </h3>
                                     <p className="text-gray-300">
                                         {project.content.seoFocus}
