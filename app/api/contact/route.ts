@@ -18,8 +18,8 @@ export async function POST(req: Request) {
     });
 
     const mailOptions = {
-      from: '"K&T Code" <info@kytcode.lat>', // Sender address
-      to: "contactktweb@gmail.com", // List of receivers
+      from: '"K&T Code" <contactoktweb@gmail.com>', // Sender address
+      to: "contactoktweb@gmail.com", // List of receivers
       subject: `Nueva Solicitud de Servicio - ${service || 'General'}`, // Subject line
       html: `
         <!DOCTYPE html>

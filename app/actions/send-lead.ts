@@ -40,7 +40,7 @@ export async function sendLeadEmail(data: LeadData) {
 
     await resend.emails.send({
       from: "K&T Code <onboarding@resend.dev>",
-      to: ["contactktweb@gmail.com"],
+      to: ["contactoktweb@gmail.com"],
       subject: emailSubject,
       html: `
         <div style="font-family: Arial, sans-serif; padding: 20px; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 8px;">

@@ -66,8 +66,9 @@ const ServiceCard = memo(function ServiceCard({
   return (
     <motion.div
       ref={ref}
-      className={`relative rounded-xl overflow-hidden border bg-zinc-950 flex flex-col ${isPopular ? "border-white lg:-mt-6 lg:mb-6" : "border-white/10"
-        }`}
+      className={`relative rounded-2xl overflow-hidden border bg-zinc-950/90 flex flex-col w-full transition-all duration-300 ${
+        isPopular ? "border-white shadow-[0_0_30px_rgba(255,255,255,0.08)] lg:-translate-y-2" : "border-white/15 hover:border-white/30"
+      }`}
       variants={cardDepthVariant}
       style={{
         rotateX,
@@ -88,28 +89,28 @@ const ServiceCard = memo(function ServiceCard({
       />
 
       {/* macOS window header with interactive buttons */}
-      <motion.div
-        className="flex items-center gap-2 px-4 py-3 bg-zinc-900/80 border-b border-white/10"
-        style={{ transform: "translateZ(30px)" }}
+      <div
+        className="flex items-center gap-2 px-4 py-3 bg-zinc-900/90 border-b border-white/10 shrink-0"
+        style={{ transform: "translateZ(20px)" }}
       >
-        {["#FF5F56", "#FFBD2E", "#27C93F"].map((color, i) => (
+        {["#FF5F56", "#FFBD2E", "#27C93F"].map((color) => (
           <motion.div
             key={color}
-            className="w-3 h-3 rounded-full cursor-pointer"
+            className="w-3 h-3 rounded-full cursor-pointer shrink-0"
             style={{ backgroundColor: color }}
-            whileHover={{ scale: 1.5, boxShadow: `0 0 15px ${color}` }}
+            whileHover={{ scale: 1.4, boxShadow: `0 0 15px ${color}` }}
             whileTap={{ scale: 0.8 }}
             transition={{ type: "spring", stiffness: 500, damping: 15 }}
           />
         ))}
-        <span className="ml-3 text-xs text-white font-mono">{plan}.config.ts</span>
+        <span className="ml-2 text-xs text-white/80 font-mono truncate">{plan}.config.ts</span>
         {isPopular && (
           <motion.span
-            className="ml-auto text-xs bg-white text-black px-3 py-1 rounded-full font-bold flex items-center gap-1"
+            className="ml-auto text-[10px] sm:text-xs bg-white text-black px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1 shrink-0 shadow-md"
             animate={{
               boxShadow: [
                 "0 0 0 0 rgba(255,255,255,0)",
-                "0 0 0 8px rgba(255,255,255,0.1)",
+                "0 0 0 6px rgba(255,255,255,0.12)",
                 "0 0 0 0 rgba(255,255,255,0)",
               ],
             }}
@@ -120,61 +121,60 @@ const ServiceCard = memo(function ServiceCard({
             {dictionary.services.popular}
           </motion.span>
         )}
-      </motion.div>
+      </div>
 
-      <div className="p-6 lg:p-8 flex flex-col h-full" style={{ transform: "translateZ(20px)" }}>
-        {/* Icon and title */}
-        <div className="flex items-start gap-4 mb-6">
-          <motion.div
-            className="p-3 rounded-xl bg-white/10 border border-white/10"
-            whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Icon className="w-6 h-6 text-white" />
-          </motion.div>
-          <div>
-            <h3 className="text-xl font-bold text-white font-title">{planData.title}</h3>
-            <motion.p
-              className="text-lg sm:text-xl font-bold text-white/90 mt-1 font-mono tracking-tight"
-              whileHover={{ scale: 1.03, x: 3 }}
-              transition={{ type: "spring", stiffness: 400 }}
+      <div className="p-5 sm:p-6 lg:p-7 flex flex-col flex-grow justify-between" style={{ transform: "translateZ(15px)" }}>
+        <div>
+          {/* Icon and title */}
+          <div className="flex items-start gap-3.5 mb-5">
+            <motion.div
+              className="p-2.5 rounded-xl bg-white/10 border border-white/10 shrink-0 text-white"
+              whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
+              transition={{ duration: 0.5 }}
             >
-              {planData.price}
-            </motion.p>
+              <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+            </motion.div>
+            <div className="min-w-0 flex-1">
+              <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white font-title leading-snug break-words">
+                {planData.title}
+              </h3>
+              <motion.p
+                className="text-base sm:text-lg font-bold text-emerald-400 mt-1 font-mono tracking-tight"
+                whileHover={{ scale: 1.02, x: 2 }}
+                transition={{ type: "spring", stiffness: 400 }}
+              >
+                {planData.price}
+              </motion.p>
+            </div>
           </div>
+
+          {/* Features with stagger and hover effects */}
+          <ul className="space-y-2.5 mb-8 font-mono text-xs text-neutral-300 leading-relaxed">
+            {planData.features.map((feature, i) => (
+              <motion.li
+                key={i}
+                className="flex items-start gap-2.5 group cursor-default"
+                initial={{ opacity: 0, x: -15 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06 + index * 0.08 }}
+                whileHover={{ x: 6, transition: { type: "spring", stiffness: 400 } }}
+              >
+                <div className="mt-0.5 p-0.5 rounded-full bg-emerald-500/20 text-emerald-400 shrink-0">
+                  <Check className="w-3 h-3" />
+                </div>
+                <span className="text-neutral-300 group-hover:text-white transition-colors duration-200">
+                  {feature}
+                </span>
+              </motion.li>
+            ))}
+          </ul>
         </div>
 
-        {/* Features with stagger and hover effects */}
-        <ul className="space-y-3 mb-8 flex-grow">
-          {planData.features.map((feature, i) => (
-            <motion.li
-              key={i}
-              className="flex items-start gap-3 group cursor-default"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 + index * 0.1 }}
-              whileHover={{ x: 10, transition: { type: "spring", stiffness: 400 } }}
-            >
-              <motion.div
-                className="mt-0.5 p-1 rounded-full bg-white/20 group-hover:bg-white transition-colors duration-200"
-                whileHover={{ scale: 1.3, rotate: 360 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <Check className="w-3 h-3 text-white group-hover:text-black transition-colors duration-200" />
-              </motion.div>
-              <span className="text-sm text-white font-mono group-hover:text-white transition-colors duration-200">
-                {feature}
-              </span>
-            </motion.li>
-          ))}
-        </ul>
-
-        {/* Interactive CTA Button with ripple effect */}
+        {/* Interactive CTA Button */}
         <motion.button
           onClick={(e) => {
             e.preventDefault()
-            // onSelect() - Triggering straight navigation as per user request
             reportConversion(`https://wa.me/573116360057?text=${encodeURIComponent(
               planData.whatsapp_message || "Hola, me gustaría recibir más información."
             )}`)
@@ -183,10 +183,11 @@ const ServiceCard = memo(function ServiceCard({
               price: planData.price
             })
           }}
-          className="w-full flex items-center justify-center gap-2 py-4 font-mono font-bold bg-white text-black rounded-xl border-2 border-white hover:bg-neutral-200 transition-all duration-300 relative overflow-hidden group cursor-pointer"
+          className="w-full flex items-center justify-center gap-2 py-3.5 px-4 font-mono font-bold text-xs sm:text-sm bg-white text-black rounded-xl border-2 border-white hover:bg-neutral-200 transition-all duration-300 relative overflow-hidden group cursor-pointer shadow-lg"
+          aria-label={`Solicitar cotización del plan ${planData.title} por ${planData.price}`}
           onMouseEnter={() => setCursorVariant("hover")}
           onMouseLeave={() => setCursorVariant("default")}
-          whileTap={{ scale: 0.97 }}
+          whileTap={{ scale: 0.98 }}
         >
           <div className="absolute inset-0 pointer-events-none opacity-10 bg-[linear-gradient(transparent_50%,rgba(0,0,0,1)_50%)] bg-[length:100%_4px] z-0" />
           {/* Shine effect */}
@@ -198,13 +199,7 @@ const ServiceCard = memo(function ServiceCard({
           />
           <span className="relative z-10 font-mono flex items-center gap-2">
             {planData.cta}
-            <motion.span
-              initial={{ x: 0 }}
-              whileHover={{ x: 8 }}
-              transition={{ type: "spring", stiffness: 400 }}
-            >
-              <ArrowRight className="w-5 h-5" />
-            </motion.span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </span>
         </motion.button>
       </div>
@@ -212,14 +207,14 @@ const ServiceCard = memo(function ServiceCard({
   )
 })
 
-export default function ServicesSection() {
+export default function ServicesSection({ showHeader = true }: { showHeader?: boolean }) {
   const { dictionary } = useLanguage()
   const { setCursorVariant } = useCursor()
   const { getPrice } = usePricing()
   const { openModal } = useModal()
 
   return (
-    <section id="services" className="relative pt-0 pb-16 lg:pt-0 lg:pb-24 px-6 bg-black overflow-hidden cv-auto">
+    <section id="services" aria-label="Planes y servicios de desarrollo web y software" className="relative pt-0 pb-16 lg:pt-0 lg:pb-24 px-4 sm:px-6 lg:px-8 bg-black overflow-hidden cv-auto">
       <div className="absolute inset-0">
         <motion.div
           className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px]"
@@ -229,33 +224,35 @@ export default function ServicesSection() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        <motion.div
-          className="text-center mb-16"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          <motion.p
-            className="text-white font-mono text-sm mb-4"
-            variants={fadeUpVariant}
+        {showHeader && (
+          <motion.div
+            className="text-center mb-14 sm:mb-16"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
           >
-            {dictionary.services.subtitle}
-          </motion.p>
-          <motion.h2 
-            className="text-4xl md:text-5xl lg:text-6xl font-bold font-title text-white"
-            variants={textRevealVariant}
-          >
-            {dictionary.services.title}
-          </motion.h2>
-        </motion.div>
+            <motion.p
+              className="text-white font-mono text-sm mb-4"
+              variants={fadeUpVariant}
+            >
+              {dictionary.services.subtitle}
+            </motion.p>
+            <motion.h2 
+              className="text-4xl md:text-5xl lg:text-6xl font-bold font-title text-white"
+              variants={textRevealVariant}
+            >
+              {dictionary.services.title}
+            </motion.h2>
+          </motion.div>
+        )}
 
         <motion.div 
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 perspective-1000"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch w-full"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
         >
           {plans.map((plan, index) => {
             const planInfo = dictionary.services[plan]

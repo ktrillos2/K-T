@@ -32,6 +32,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     } catch (e) {
         console.error("Error reading blog directories for sitemap", e)
         blogSlugs = [
+            'nextjs-vs-wordpress',
+            'shopify-vs-woocommerce-colombia',
+            'agencia-vs-freelance-desarrollo-web',
+            'nextjs-vs-react',
+            'pagina-web-vs-tienda-virtual',
+            'cuanto-cuesta-una-pagina-web-en-colombia',
             'como-elegir-empresa-desarrollo-web-colombia',
             'como-crear-pagina-web-2026',
             'como-crear-pagina-web-profesional',
@@ -48,6 +54,69 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
     }))
 
+    const serviceSlugs = [
+        'desarrollo-web-a-medida',
+        'diseno-web-corporativo',
+        'desarrollo-nextjs',
+        'software-a-medida',
+        'tiendas-virtuales',
+        'woocommerce-headless',
+        'seo-tecnico',
+        'mantenimiento-web',
+    ]
+
+    const serviceUrls = serviceSlugs.map((slug) => ({
+        url: `${baseUrl}/servicios/${slug}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.9,
+    }))
+
+    const pricingGuideSlugs = [
+        'precio-pagina-web-colombia',
+        'precio-tienda-virtual-colombia',
+        'precio-software-a-medida',
+    ]
+
+    const pricingUrls = pricingGuideSlugs.map((slug) => ({
+        url: `${baseUrl}/precios/${slug}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.85,
+    }))
+
+    const industrySlugs = [
+        'desarrollo-web-inmobiliarias',
+        'desarrollo-web-salud',
+        'desarrollo-web-ingenieria',
+        'ecommerce-b2b',
+        'desarrollo-web-turismo',
+        'desarrollo-web-automotriz',
+        'desarrollo-web-estetica',
+        'desarrollo-web-editorial',
+    ]
+
+    const industryUrls = industrySlugs.map((slug) => ({
+        url: `${baseUrl}/industrias/${slug}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.85,
+    }))
+
+    const englishRoutes = [
+        { url: `${baseUrl}/en`, priority: 0.95 },
+        { url: `${baseUrl}/en/about`, priority: 0.85 },
+        { url: `${baseUrl}/en/services`, priority: 0.85 },
+        { url: `${baseUrl}/en/pricing`, priority: 0.85 },
+        { url: `${baseUrl}/en/portfolio`, priority: 0.85 },
+        { url: `${baseUrl}/en/contact`, priority: 0.85 },
+    ].map((r) => ({
+        url: r.url,
+        lastModified: currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: r.priority,
+    }))
+
     return [
         {
             url: baseUrl,
@@ -55,6 +124,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: 'weekly',
             priority: 1.0,
         },
+        ...englishRoutes,
         {
             url: `${baseUrl}/nosotros`,
             lastModified: currentDate,
@@ -67,12 +137,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: 'weekly',
             priority: 0.9,
         },
+        ...serviceUrls,
         {
-            url: `${baseUrl}/servicios/desarrollo-web-a-medida`,
+            url: `${baseUrl}/precios`,
             lastModified: currentDate,
             changeFrequency: 'weekly',
             priority: 0.9,
         },
+        ...pricingUrls,
+        {
+            url: `${baseUrl}/industrias`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
+        ...industryUrls,
         {
             url: `${baseUrl}/portafolio`,
             lastModified: currentDate,
@@ -80,10 +159,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.9,
         },
         {
-            url: `${baseUrl}/precios`,
+            url: `${baseUrl}/preguntas-frecuentes`,
             lastModified: currentDate,
             changeFrequency: 'weekly',
-            priority: 0.9,
+            priority: 0.8,
         },
         {
             url: `${baseUrl}/blog`,
@@ -103,8 +182,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: 'yearly',
             priority: 0.3,
         },
+        {
+            url: `${baseUrl}/autores/keyner-trillos`,
+            lastModified: currentDate,
+            changeFrequency: 'monthly',
+            priority: 0.8,
+        },
         ...projectUrls,
         ...blogUrls,
     ]
 }
+
+
 

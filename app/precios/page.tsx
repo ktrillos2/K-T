@@ -25,7 +25,8 @@ export const metadata: Metadata = {
     canonical: "https://www.kytcode.lat/precios",
     languages: {
       "es-CO": "https://www.kytcode.lat/precios",
-      "es": "https://www.kytcode.lat/precios",
+      es: "https://www.kytcode.lat/precios",
+      en: "https://www.kytcode.lat/en/pricing",
       "x-default": "https://www.kytcode.lat/precios",
     },
   },

@@ -36,19 +36,28 @@ export const metadata: Metadata = {
 
 const articleJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "SEO Técnico desde el Código: La Arquitectura del Posicionamiento",
-    "description": "Por qué integrar optimización SEO en la fase de ingeniería es vital. Aprende sobre JSON-LD, Server-Side Rendering y posicionamiento real.",
+    "@type": "BlogPosting",
+    "@id": "https://www.kytcode.lat/blog/seo-desde-la-raiz-crear-pagina#article",
+    "headline": "¿Por qué el SEO debe planificarse desde la arquitectura inicial de una web?",
+    "description": "El posicionamiento orgánico depende de una base técnica sólida: renderizado eficiente, jerarquía semántica y datos estructurados integrados en el código.",
     "url": "https://www.kytcode.lat/blog/seo-desde-la-raiz-crear-pagina",
+    "mainEntityOfPage": "https://www.kytcode.lat/blog/seo-desde-la-raiz-crear-pagina",
     "datePublished": "2026-02-01",
     "dateModified": "2026-02-01",
+    "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.kytcode.lat/#website",
+        "name": "K&T Code"
+    },
     "author": {
         "@type": "Organization",
+        "@id": "https://www.kytcode.lat/#organization",
         "name": "K&T Code",
         "url": "https://www.kytcode.lat/"
     },
     "publisher": {
         "@type": "Organization",
+        "@id": "https://www.kytcode.lat/#organization",
         "name": "K&T Code",
         "url": "https://www.kytcode.lat/",
         "logo": {
@@ -58,12 +67,37 @@ const articleJsonLd = {
     }
 }
 
+const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://www.kytcode.lat/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://www.kytcode.lat/blog"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "¿Por qué el SEO debe planificarse desde la raíz?",
+            "item": "https://www.kytcode.lat/blog/seo-desde-la-raiz-crear-pagina"
+        }
+    ]
+}
+
 export default function SEODesdeLaRaiz() {
     return (
         <main className="min-h-screen bg-background pt-32 pb-24 px-4 sm:px-6">
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify([articleJsonLd, breadcrumbJsonLd]) }}
             />
             <div className="max-w-3xl mx-auto">
                 <Link
@@ -83,10 +117,25 @@ export default function SEODesdeLaRaiz() {
                             <span>7 min de lectura</span>
                         </div>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                            ¿Por qué el SEO debe ir desde la raíz al crear una página?
+                            ¿Por qué el SEO debe planificarse desde la arquitectura inicial de una web?
                         </h1>
+
+                        <div className="flex items-center gap-3 py-4 border-t border-b border-white/10 my-6 font-mono text-xs text-neutral-400 not-prose">
+                            <div className="w-8 h-8 rounded-full bg-neutral-800 border border-white/20 flex items-center justify-center text-white font-bold text-xs shrink-0">
+                                KT
+                            </div>
+                            <div>
+                                <span>Escrito por </span>
+                                <Link href="/autores/keyner-trillos" className="text-white font-bold hover:underline">
+                                    Keyner Trillos
+                                </Link>
+                                <span className="text-neutral-400"> • Lead Software Engineer — K&T Code</span>
+                                <span className="block text-[11px] text-neutral-500 mt-0.5">Revisado el 19 de agosto de 2026</span>
+                            </div>
+                        </div>
+
                         <p className="text-xl text-neutral-300 leading-relaxed border-l-2 border-primary pl-6">
-                            Las personas nos preguntan todo el tiempo <strong>cómo crear una pagina web</strong> que rankee en el número 1 de Google. El secreto no está en un "plugin de semáforo verde", está escondido en la ingeniería misma con la que la página fue construida.
+                            El posicionamiento orgánico depende de una base técnica sólida: renderizado eficiente, jerarquía semántica, tiempos de respuesta óptimos y datos estructurados integrados desde el diseño de la arquitectura.
                         </p>
                     </header>
 
@@ -94,34 +143,31 @@ export default function SEODesdeLaRaiz() {
                     <div className="mt-16">
                         <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
                             <TrendingUp className="w-8 h-8 text-green-500" />
-                            El error de "primero el diseño, luego el SEO"
+                            Integración del SEO Técnico en la Fase de Desarrollo
                         </h2>
                         <p>
-                            Al <strong>crear pagina web</strong>, el 90% de las agencias comete el mismo error. Construyen una interfaz visual atractiva primero y, una vez finalizado, deciden "comprar un paquete SEO" e instalarlo. Para ese momento, la arquitectura ya está consolidada.
-                        </p>
-                        <p>
-                            Existen métricas críticas ("Server-Side Rendering" vs "Client-Side Rendering") que definen cómo los bots de Google leerán tu sitio. Si la base de código inicial no transpiló apropiadamente la jerarquía (H1 a H6), los metadatos globales o la legibilidad de la red, ninguna varita mágica de marketing lo podrá solucionar sin reescribir la plataforma entera.
+                            Al <strong>crear una página web</strong>, postergar la estrategia técnica de SEO hasta después del lanzamiento suele generar retrabajos complejos. Aspectos como el modelo de renderizado (Server-Side Rendering vs. Client-Side Rendering), la jerarquía semántica (H1 a H6), los metadatos y la accesibilidad deben concebirse en conjunto con la arquitectura del software.
                         </p>
                     </div>
 
                     {/* H2 Explicación Técnica */}
                     <h2 className="text-3xl font-bold text-white mt-16 mb-6 flex items-center gap-3">
                         <FileJson className="w-8 h-8 text-primary" />
-                        ¿Qué es SEO Técnico "Desde la Raíz"?
+                        Componentes Fundamentales del SEO Técnico
                     </h2>
 
                     <p>
-                        Es la práctica de ingeniería dictada por frameworks modernos (como Next.js) donde el contenido es optimizado milisegundos antes de llegar a la pantalla del cliente:
+                        Frameworks modernos como Next.js facilitan la implementación de patrones recomendados por motores de búsqueda:
                     </p>
 
                     <ul className="list-none space-y-4 mb-8">
                         <li className="flex items-start gap-3 bg-white/5 border border-white/10 p-4 rounded-xl">
                             <CheckCircle2 className="w-6 h-6 text-green-500 mt-1 shrink-0" />
-                            <span><strong>Páginas Estáticas Generadas (SSG):</strong> Cada blog, producto o servicio se entrega como un archivo puramente estático ultra veloz, no a través de una base de datos saturada. Google ama esto.</span>
+                            <span><strong>Generación Estática (SSG) y Renderizado Híbrido:</strong> Servir contenido pre-renderizado reduce la latencia del servidor y facilita un rastreo e indexación más predecible por parte de los motores de búsqueda.</span>
                         </li>
                         <li className="flex items-start gap-3 bg-white/5 border border-white/10 p-4 rounded-xl">
                             <CheckCircle2 className="w-6 h-6 text-green-500 mt-1 shrink-0" />
-                            <span><strong>JSON-LD Markup:</strong> Las agencias élite inyectan estructuras legibles solo por los bots de Google (Schema Markup) enseñándole explícitamente qué servicios ofrece tu empresa corporativa.</span>
+                            <span><strong>Marcado Estructurado Schema JSON-LD:</strong> Estructurar datos explícitos (Organization, Service, FAQPage) ayuda a los motores de búsqueda y asistentes de IA a contextualizar con precisión los servicios y la entidad comercial.</span>
                         </li>
                     </ul>
 

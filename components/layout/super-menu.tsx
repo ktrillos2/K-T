@@ -35,20 +35,21 @@ interface SuperMenuProps {
   onClose: () => void
 }
 
-const menuItems = [
-  { key: "home", href: "/", image: "/images/home-preview.webp" },
-  { key: "about", href: "/nosotros", image: "/images/about-preview.webp" },
-  { key: "services", href: "/servicios", image: "/images/services-preview.webp" },
-  { key: "prices", href: "/precios", image: "/images/services-preview.webp" },
-  { key: "work", href: "/portafolio", image: "/images/work-preview.webp" },
-  { key: "blog", href: "/blog", image: "/images/work-preview.webp" },
-  { key: "contact", href: "/#contact", image: "/images/contact-preview.webp" },
-]
-
 export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
-  const { dictionary } = useLanguage()
+  const { dictionary, language } = useLanguage()
   const { setCursorVariant } = useCursor()
+  const isEn = language === "en"
+
+  const menuItems = [
+    { key: "home", href: isEn ? "/en" : "/", image: "/images/home-preview.webp" },
+    { key: "about", href: isEn ? "/en/about" : "/nosotros", image: "/images/about-preview.webp" },
+    { key: "services", href: isEn ? "/en/services" : "/servicios", image: "/images/services-preview.webp" },
+    { key: "prices", href: isEn ? "/en/pricing" : "/precios", image: "/images/services-preview.webp" },
+    { key: "work", href: isEn ? "/en/portfolio" : "/portafolio", image: "/images/work-preview.webp" },
+    { key: "blog", href: "/blog", image: "/images/work-preview.webp" },
+    { key: "contact", href: isEn ? "/en/contact" : "/#contact", image: "/images/contact-preview.webp" },
+  ]
 
   const menuVariants = {
     closed: {
@@ -104,6 +105,9 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
       {isOpen && (
         <motion.div
           className="fixed inset-0 z-50 bg-black"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menú principal de navegación"
           variants={menuVariants}
           initial="closed"
           animate="open"
@@ -112,7 +116,7 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
           <div className="h-full flex max-w-7xl mx-auto">
             {/* Left side - Navigation links */}
             <div className="w-full lg:w-1/2 h-full flex flex-col justify-center px-6 lg:px-0 pt-24">
-              <nav className="space-y-4">
+              <nav aria-label="Menú de navegación extendido" className="space-y-4">
                 {menuItems.map((item, index) => {
                   const isHovered = hoveredItem === item.key
                   const hasHover = hoveredItem !== null
@@ -123,6 +127,7 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
                       <motion.button
                         onClick={() => handleLinkClick(item.href)}
                         className="block text-left w-full"
+                        aria-label={`Ir a ${dictionary.nav[item.key as keyof typeof dictionary.nav]}`}
                         onMouseEnter={() => {
                           setHoveredItem(item.key)
                           setCursorVariant("text")
@@ -163,12 +168,12 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
                 <p>{dictionary.nav.agency}</p>
                 <div className="flex flex-col gap-2 mt-2">
                   <a
-                    href="mailto:contactktweb@gmail.com"
+                    href="mailto:contactoktweb@gmail.com"
                     className="text-white hover:text-white/80 transition-colors w-fit"
                     onMouseEnter={() => setCursorVariant("text")}
                     onMouseLeave={() => setCursorVariant("default")}
                   >
-                    contactktweb@gmail.com
+                    contactoktweb@gmail.com
                   </a>
                   <a
                     href="tel:+573116360057"

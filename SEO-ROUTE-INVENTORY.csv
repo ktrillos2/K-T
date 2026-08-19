@@ -3,11 +3,22 @@ URL,Indexable,Canonical,Primary intent,Structured data
 /servicios,yes,https://www.kytcode.lat/servicios,servicios de desarrollo web,"ItemList; BreadcrumbList"
 /servicios/desarrollo-web-a-medida,yes,https://www.kytcode.lat/servicios/desarrollo-web-a-medida,desarrollo web a medida,"Service; BreadcrumbList; FAQPage"
 /servicios/diseno-web-corporativo,yes,https://www.kytcode.lat/servicios/diseno-web-corporativo,diseño web corporativo,"Service; BreadcrumbList; FAQPage"
+/servicios/desarrollo-nextjs,yes,https://www.kytcode.lat/servicios/desarrollo-nextjs,desarrollo nextjs colombia,"Service; BreadcrumbList; FAQPage"
 /servicios/tiendas-virtuales,yes,https://www.kytcode.lat/servicios/tiendas-virtuales,desarrollo de tiendas virtuales,"Service; BreadcrumbList; FAQPage"
+/servicios/woocommerce-headless,yes,https://www.kytcode.lat/servicios/woocommerce-headless,desarrollo woocommerce headless colombia,"Service; BreadcrumbList; FAQPage"
 /servicios/software-a-medida,yes,https://www.kytcode.lat/servicios/software-a-medida,software a medida,"Service; BreadcrumbList; FAQPage"
 /servicios/seo-tecnico,yes,https://www.kytcode.lat/servicios/seo-tecnico,SEO técnico,"Service; BreadcrumbList; FAQPage"
 /servicios/mantenimiento-web,yes,https://www.kytcode.lat/servicios/mantenimiento-web,mantenimiento web,"Service; BreadcrumbList; FAQPage"
 /precios,yes,https://www.kytcode.lat/precios,precio de páginas web,"CollectionPage; BreadcrumbList; FAQPage"
+/precios/precio-pagina-web-colombia,yes,https://www.kytcode.lat/precios/precio-pagina-web-colombia,cuanto cuesta una pagina web colombia,"BreadcrumbList; FAQPage"
+/precios/precio-tienda-virtual-colombia,yes,https://www.kytcode.lat/precios/precio-tienda-virtual-colombia,cuanto cuesta una tienda virtual colombia,"BreadcrumbList; FAQPage"
+/precios/precio-software-a-medida,yes,https://www.kytcode.lat/precios/precio-software-a-medida,precio software a medida colombia,"BreadcrumbList; FAQPage"
+/industrias,yes,https://www.kytcode.lat/industrias,desarrollo web por industrias,"ItemList; BreadcrumbList"
+/industrias/desarrollo-web-inmobiliarias,yes,https://www.kytcode.lat/industrias/desarrollo-web-inmobiliarias,paginas web inmobiliarias colombia,"Service; BreadcrumbList; FAQPage"
+/industrias/desarrollo-web-ingenieria,yes,https://www.kytcode.lat/industrias/desarrollo-web-ingenieria,paginas web constructoras ingenieria,"Service; BreadcrumbList; FAQPage"
+/industrias/desarrollo-web-turismo,yes,https://www.kytcode.lat/industrias/desarrollo-web-turismo,paginas web agencias de viajes hoteles,"Service; BreadcrumbList; FAQPage"
+/industrias/desarrollo-web-salud,yes,https://www.kytcode.lat/industrias/desarrollo-web-salud,paginas web clinicas medicos,"Service; BreadcrumbList; FAQPage"
+/industrias/ecommerce-b2b,yes,https://www.kytcode.lat/industrias/ecommerce-b2b,ecommerce b2b portales mayoristas,"Service; BreadcrumbList; FAQPage"
 /portafolio,yes,https://www.kytcode.lat/portafolio,portafolio y casos de estudio,"CollectionPage; ItemList; BreadcrumbList"
 /projects/[slug],yes,dynamic,caso de estudio,"CreativeWork; BreadcrumbList"
 /blog,yes,https://www.kytcode.lat/blog,blog de desarrollo web y SEO,"Blog; BreadcrumbList"
@@ -20,3 +31,4 @@ URL,Indexable,Canonical,Primary intent,Structured data
 /cotizaciones/*,no,,propuestas privadas,noindex
 /sentry-example-page,no,,demostración técnica,noindex
 /whatsapp-clone,no,,demostración técnica,noindex
+

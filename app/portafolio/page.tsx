@@ -22,7 +22,8 @@ export const metadata: Metadata = {
     canonical: "https://www.kytcode.lat/portafolio",
     languages: {
       "es-CO": "https://www.kytcode.lat/portafolio",
-      "es": "https://www.kytcode.lat/portafolio",
+      es: "https://www.kytcode.lat/portafolio",
+      en: "https://www.kytcode.lat/en/portfolio",
       "x-default": "https://www.kytcode.lat/portafolio",
     },
   },

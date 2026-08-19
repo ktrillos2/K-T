@@ -36,19 +36,28 @@ export const metadata: Metadata = {
 
 const articleJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Desarrollo a Medida vs. Plantillas CMS Genéricas",
-    "description": "Por qué el desarrollo de software a medida en Next.js supera en rendimiento, seguridad y escalabilidad a los CMS tradicionales como WordPress.",
+    "@type": "BlogPosting",
+    "@id": "https://www.kytcode.lat/blog/desarrollo-web-medida-vs-plantillas#article",
+    "headline": "Desarrollo web a medida vs. Plantillas genéricas: Análisis técnico y comercial",
+    "description": "Comparativa técnica y comercial entre desarrollo de software a medida en Next.js y plantillas genéricas sobre CMS tradicionales.",
     "url": "https://www.kytcode.lat/blog/desarrollo-web-medida-vs-plantillas",
+    "mainEntityOfPage": "https://www.kytcode.lat/blog/desarrollo-web-medida-vs-plantillas",
     "datePublished": "2026-02-05",
     "dateModified": "2026-02-05",
+    "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.kytcode.lat/#website",
+        "name": "K&T Code"
+    },
     "author": {
         "@type": "Organization",
+        "@id": "https://www.kytcode.lat/#organization",
         "name": "K&T Code",
         "url": "https://www.kytcode.lat/"
     },
     "publisher": {
         "@type": "Organization",
+        "@id": "https://www.kytcode.lat/#organization",
         "name": "K&T Code",
         "url": "https://www.kytcode.lat/",
         "logo": {
@@ -58,12 +67,37 @@ const articleJsonLd = {
     }
 }
 
+const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://www.kytcode.lat/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://www.kytcode.lat/blog"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Desarrollo web a medida vs Plantillas genéricas",
+            "item": "https://www.kytcode.lat/blog/desarrollo-web-medida-vs-plantillas"
+        }
+    ]
+}
+
 export default function DesarrolloMedidaVsPlantillas() {
     return (
         <main className="min-h-screen bg-background pt-32 pb-24 px-4 sm:px-6">
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify([articleJsonLd, breadcrumbJsonLd]) }}
             />
             <div className="max-w-3xl mx-auto">
                 <Link
@@ -83,50 +117,65 @@ export default function DesarrolloMedidaVsPlantillas() {
                             <span>6 min de lectura</span>
                         </div>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                            Desarrollo web a la medida vs. Plantillas genéricas: ¿Qué necesita tu negocio?
+                            Desarrollo web a medida vs. Plantillas genéricas: Análisis técnico y comercial
                         </h1>
+
+                        <div className="flex items-center gap-3 py-4 border-t border-b border-white/10 my-6 font-mono text-xs text-neutral-400 not-prose">
+                            <div className="w-8 h-8 rounded-full bg-neutral-800 border border-white/20 flex items-center justify-center text-white font-bold text-xs shrink-0">
+                                KT
+                            </div>
+                            <div>
+                                <span>Escrito por </span>
+                                <Link href="/autores/keyner-trillos" className="text-white font-bold hover:underline">
+                                    Keyner Trillos
+                                </Link>
+                                <span className="text-neutral-400"> • Lead Software Engineer — K&T Code</span>
+                                <span className="block text-[11px] text-neutral-500 mt-0.5">Revisado el 19 de agosto de 2026</span>
+                            </div>
+                        </div>
+
                         <p className="text-xl text-neutral-300 leading-relaxed border-l-2 border-primary pl-6">
-                            Cuando buscas <strong>desarrollo web</strong>, la trampa más común del mercado es ofrecerte plantillas pre-fabricadas y cobrarte como si fuera ingeniería real. Aquí te explicamos arquitectónicamente por qué lo barato destruye tus ingresos digitales.
+                            Elegir entre un desarrollo basado en plantillas o una arquitectura a medida impacta directamente en la mantenibilidad, rendimiento y costos de evolución de tu plataforma digital.
                         </p>
                     </header>
 
-                    {/* H2 El Problema %} */}
+                    {/* H2 El Problema */}
                     <div className="mt-16">
                         <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
                             <AlertTriangle className="w-8 h-8 text-yellow-500" />
-                            La Ilusión Visual de los CMS Monolíticos
+                            Consideraciones Técnicas de los CMS Tradicionales con Plantillas
                         </h2>
                         <p>
-                            Al analizar las opciones del mercado y buscar cómo <strong>crear pagina web</strong>, las agencias amateur te venden <i>WordPress</i> u otros CMS genéricos junto con un constructor visual. Por fuera, se ve "bien", pero el costo real es el rendimiento subterráneo.
+                            Al evaluar opciones para <strong>crear una página web</strong>, los CMS monolíticos con constructores visuales permiten lanzar sitios rápidamente. Sin embargo, para proyectos que requieren personalizaciones profundas, esta aproximación puede acarrear desafíos técnicos:
                         </p>
                         <ul className="list-disc text-neutral-300 marker:text-primary pl-6 mb-8 space-y-2">
-                            <li><strong>Exceso de Redundancia:</strong> Para poder cargar tus botones sin que sepas de código, la plantilla debe cargar miles de scripts.</li>
-                            <li><strong>Vulnerabilidad Constante:</strong> Cuando tu sitio depende de 40 plugins de terceros, un solo plugin desactualizado abre la puerta a inyecciones SQL.</li>
-                            <li><strong>Bloqueo del Hilo Principal:</strong> Con tu servidor ahogado enviando scripts pesados de JQuery, los móviles de tus clientes abandonarán tu sitio en el segundo 4.</li>
+                            <li><strong>Sobrecarga de Scripts:</strong> Los temas comerciales suelen incluir librerías completas para soportar funciones que el sitio específico no utiliza, aumentando el peso de la transferencia.</li>
+                            <li><strong>Mantenimiento de Dependencias:</strong> Sitios que dependen de múltiples plugins de terceros requieren actualizaciones frecuentes para mitigar brechas de seguridad o incompatibilidades entre versiones.</li>
+                            <li><strong>Tiempo de Ejecución en el Navegador:</strong> Una estructura de DOM densa y librerías heredadas pueden retrasar la interacción del usuario en dispositivos móviles con procesadores modestos.</li>
                         </ul>
                     </div>
 
-                    {/* H2 La Solucion %} */}
+                    {/* H2 La Solucion */}
                     <h2 className="text-3xl font-bold text-white mt-16 mb-6 flex items-center gap-3">
                         <Blocks className="w-8 h-8 text-primary" />
-                        Desarrollo de Software como Solución B2B
+                        Desarrollo a Medida con Frameworks Modernos
                     </h2>
 
                     <p>
-                        El <strong>desarrollo web</strong> profesional en la agencia <strong>K&T</strong> rechaza el concepto de "plantillas pesadas". Construimos los proyectos basándonos en React (con Next.js). Esto significa que no hay plugins, no hay exceso de DOM, cada componente que el usuario renderiza fue programado explícitamente y transpila HTML, CSS y JS ultra purificados.
+                        El <strong>desarrollo web a medida</strong> con frameworks como Next.js y React permite construir exclusivamente los componentes e interfaces que el proyecto requiere. Esto facilita una estructura limpia, menor consumo de recursos y mayor control sobre cada línea de código desplegada.
                     </p>
 
                     <p>
-                        Al ejecutar una página web técnica real:
+                        Ventajas operativas de una arquitectura a medida:
                     </p>
                     <ul className="list-none space-y-4 mb-8">
                         <li className="flex items-start gap-3 bg-white/5 border border-white/10 p-4 rounded-xl">
                             <CheckCircle2 className="w-6 h-6 text-green-500 mt-1 shrink-0" />
-                            <span><strong>Puntuación 100/100 LCP:</strong> Las auditorías de Google te benefician en SEO frente a todas las agencias competencia, porque la red te clasifica como "Experiencia Instantánea".</span>
+                            <span><strong>Cumplimiento de Umbrales Core Web Vitals:</strong> Al optimizar la entrega de recursos y minimizar el bloqueo del hilo principal, se facilita alcanzar las métricas recomendadas por Google para LCP, CLS e INP.</span>
                         </li>
                         <li className="flex items-start gap-3 bg-white/5 border border-white/10 p-4 rounded-xl">
                             <CheckCircle2 className="w-6 h-6 text-green-500 mt-1 shrink-0" />
-                            <span><strong>Rápido por Defecto:</strong> El framework genera los HTML de manera estática y los inyecta en milisegundos a nivel mundial.</span>
+                            <span><strong>Escalabilidad e Integraciones Limpias:</strong> Conexión modular con APIs, pasarelas de pago y gestores de contenido (CMS Headless) sin fricción de plugins incompatibles.</span>
                         </li>
                     </ul>
 

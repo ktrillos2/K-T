@@ -22,7 +22,8 @@ export const metadata: Metadata = {
     canonical: "https://www.kytcode.lat/servicios",
     languages: {
       "es-CO": "https://www.kytcode.lat/servicios",
-      "es": "https://www.kytcode.lat/servicios",
+      es: "https://www.kytcode.lat/servicios",
+      en: "https://www.kytcode.lat/en/services",
       "x-default": "https://www.kytcode.lat/servicios",
     },
   },
@@ -80,7 +81,7 @@ export default function ServiciosPage() {
           </header>
         </div>
 
-        <ServicesSection />
+        <ServicesSection showHeader={false} />
         
         <div className="mt-20">
             <PricingCTA />

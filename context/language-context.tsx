@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
+import { usePathname } from "next/navigation"
 import { en } from "@/dictionaries/en"
 import { es } from "@/dictionaries/es"
 
@@ -36,12 +37,23 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>("es")
-  const [country, setCountry] = useState<Country>("Colombia")
+  const pathname = usePathname()
+  const isEnglishRoute = pathname?.startsWith("/en")
+
+  const [language, setLanguage] = useState<Language>(isEnglishRoute ? "en" : "es")
+  const [country, setCountry] = useState<Country>(isEnglishRoute ? "Estados Unidos" : "Colombia")
   const [exchangeRates, setExchangeRates] = useState<Record<string, number>>({})
   const [isAppReady, setIsAppReady] = useState(false)
 
-  const dictionary = language === "en" ? en : es
+  // Auto-sync language and country when route changes
+  useEffect(() => {
+    if (pathname?.startsWith("/en")) {
+      setLanguage("en")
+      setCountry((prev) => (prev === "Colombia" ? "Estados Unidos" : prev))
+    }
+  }, [pathname])
+
+  const dictionary = language === "en" || isEnglishRoute ? en : es
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === "en" ? "es" : "en"))

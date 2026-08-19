@@ -18,7 +18,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const lastScrolledRef = useRef<boolean>(false)
   const rafRef = useRef<number | null>(null)
-  const { dictionary, country, setCountry } = useLanguage()
+  const { dictionary, country, setCountry, language } = useLanguage()
   const { setCursorVariant } = useCursor()
   const [isCountryOpen, setIsCountryOpen] = useState(false)
 
@@ -88,18 +88,19 @@ export default function Header() {
           </motion.button>
 
           {/* Subtle Desktop Navigation Menu */}
-          <nav className="hidden lg:flex items-center gap-8 text-sm font-mono text-white/50">
+          <nav aria-label="Navegación principal" className="hidden lg:flex items-center gap-8 text-sm font-mono text-white/50">
             {[
-              { key: "home", href: "/#hero" },
-              { key: "about", href: "/nosotros" },
-              { key: "services", href: "/servicios" },
-              { key: "prices", href: "/precios" },
-              { key: "work", href: "/portafolio" },
+              { key: "home", href: language === "en" ? "/en" : "/#hero" },
+              { key: "about", href: language === "en" ? "/en/about" : "/nosotros" },
+              { key: "services", href: language === "en" ? "/en/services" : "/servicios" },
+              { key: "prices", href: language === "en" ? "/en/pricing" : "/precios" },
+              { key: "work", href: language === "en" ? "/en/portfolio" : "/portafolio" },
               { key: "blog", href: "/blog" },
-              { key: "contact", href: "/#contact" }
+              { key: "contact", href: language === "en" ? "/en/contact" : "/#contact" }
             ].map((item) => (
               <button
                 key={item.key}
+                aria-label={`Navegar a la sección ${dictionary.nav[item.key as keyof typeof dictionary.nav] || item.key}`}
                 onClick={() => {
                   if (item.href.startsWith("/#")) {
                     const hash = item.href.replace("/", "")

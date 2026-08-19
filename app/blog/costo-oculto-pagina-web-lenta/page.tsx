@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight, GaugeCircle, Server, Activity, ArrowDownRight, G
 
 export const metadata: Metadata = {
     title: "El Costo Oculto de un Sitio Web Lento y su Solución Técnica",
-    description: "Un sitio lento destruye tu ratio de conversión. Descubre cómo K&T soluciona el Core Web Vitals y LCP desde la raíz con arquitectura Serverless.",
+    description: "Conoce cómo la velocidad de carga y las métricas de Core Web Vitals influyen en la experiencia de usuario, retención y señales de calidad en Google.",
     keywords: ["web lenta", "core web vitals", "optimización LCP", "edge computing", "Next.js rendimiento"],
     alternates: {
         canonical: "https://www.kytcode.lat/blog/costo-oculto-pagina-web-lenta",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     },
     openGraph: {
         title: "El Costo Oculto de un Sitio Web Lento (Y cómo optimizarlo)",
-        description: "El costo oculto (y devastador) de un mal hosting. Soluciona métricas de LCP con nuestra infraestructura serverless alojada en Vercel.",
+        description: "El impacto de la latencia y la sobrecarga del servidor en la tasa de conversión y cómo optimizar Core Web Vitals con arquitecturas modernas.",
         type: "article",
         url: "https://www.kytcode.lat/blog/costo-oculto-pagina-web-lenta",
         siteName: "K&T Code",
@@ -36,19 +36,28 @@ export const metadata: Metadata = {
 
 const articleJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
+    "@id": "https://www.kytcode.lat/blog/costo-oculto-pagina-web-lenta#article",
     "headline": "El Costo Oculto de un Sitio Web Lento y su Solución Técnica",
-    "description": "Un sitio lento destruye tu ratio de conversión. Descubre cómo K&T soluciona el Core Web Vitals y LCP desde la raíz con arquitectura Serverless.",
+    "description": "Conoce cómo la velocidad de carga y las métricas de Core Web Vitals influyen en la experiencia de usuario, retención y señales de calidad en Google.",
     "url": "https://www.kytcode.lat/blog/costo-oculto-pagina-web-lenta",
+    "mainEntityOfPage": "https://www.kytcode.lat/blog/costo-oculto-pagina-web-lenta",
     "datePublished": "2026-02-10",
     "dateModified": "2026-02-10",
+    "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.kytcode.lat/#website",
+        "name": "K&T Code"
+    },
     "author": {
         "@type": "Organization",
+        "@id": "https://www.kytcode.lat/#organization",
         "name": "K&T Code",
         "url": "https://www.kytcode.lat/"
     },
     "publisher": {
         "@type": "Organization",
+        "@id": "https://www.kytcode.lat/#organization",
         "name": "K&T Code",
         "url": "https://www.kytcode.lat/",
         "logo": {
@@ -58,12 +67,37 @@ const articleJsonLd = {
     }
 }
 
+const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://www.kytcode.lat/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://www.kytcode.lat/blog"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "El costo de una página web lenta",
+            "item": "https://www.kytcode.lat/blog/costo-oculto-pagina-web-lenta"
+        }
+    ]
+}
+
 export default function CostoWebLenta() {
     return (
         <main className="min-h-screen bg-background pt-32 pb-24 px-4 sm:px-6">
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify([articleJsonLd, breadcrumbJsonLd]) }}
             />
             <div className="max-w-3xl mx-auto">
                 <Link
@@ -83,24 +117,39 @@ export default function CostoWebLenta() {
                             <span>5 min de lectura</span>
                         </div>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                            El costo oculto de una página web lenta (y cómo solucionarlo)
+                            El costo de una página web lenta y cómo optimizar su rendimiento
                         </h1>
+
+                        <div className="flex items-center gap-3 py-4 border-t border-b border-white/10 my-6 font-mono text-xs text-neutral-400 not-prose">
+                            <div className="w-8 h-8 rounded-full bg-neutral-800 border border-white/20 flex items-center justify-center text-white font-bold text-xs shrink-0">
+                                KT
+                            </div>
+                            <div>
+                                <span>Escrito por </span>
+                                <Link href="/autores/keyner-trillos" className="text-white font-bold hover:underline">
+                                    Keyner Trillos
+                                </Link>
+                                <span className="text-neutral-400"> • Lead Software Engineer — K&T Code</span>
+                                <span className="block text-[11px] text-neutral-500 mt-0.5">Revisado el 19 de agosto de 2026</span>
+                            </div>
+                        </div>
+
                         <p className="text-xl text-neutral-300 leading-relaxed border-l-2 border-primary pl-6">
-                            Tus clientes invierten menos de 3 segundos en decidir si comprarán en tu tienda o si irán a Google a buscar a tu competidor principal. <strong>¿Sabes qué velocidad entrega tu página actual?</strong>
+                            La velocidad de carga y la estabilidad visual influyen de forma directa en cómo los usuarios interactúan con tu sitio y en su disposición para completar una compra o formulario.
                         </p>
                     </header>
 
                     {/* H2 Introducción */}
                     <div className="mt-16">
                         <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-                            <Activity className="w-8 h-8 text-red-500" />
-                            La matemática del rebote
+                            <Activity className="w-8 h-8 text-amber-500" />
+                            Impacto del Retardo en la Retención y Conversión
                         </h2>
                         <p>
-                            Al estudiar el comportamiento corporativo frente al <strong>desarrollo web</strong>, las grandes consultoras han revelado una métrica cruda: por cada segundo extra que la pantalla de un usuario gasta "cargando la foto principal", <strong>el ratio de conversiones cae hasta un 20% de manera irreversible</strong>.
+                            Diversos estudios de usabilidad web coinciden en que los tiempos de respuesta lentos aumentan la tasa de abandono. Cuando una página tarda varios segundos en renderizar su elemento visual principal (LCP), la probabilidad de rebote se incrementa notablemente, afectando tanto el rendimiento comercial como las señales de satisfacción del usuario.
                         </p>
                         <p>
-                            El problema fundamental de quienes no saben <strong>cómo crear una pagina</strong> de manera escalable técnica es el paradigma antiguo de un "Hosting Compartido". Alojar el código de tu empresa en un servidor saturado por cientos de otras páginas en simultáneo es como prender un Ferrari en medio de un embotellamiento.
+                            Un factor recurrente es la sobrecarga en servidores compartidos tradicionales, donde los recursos de CPU y memoria se distribuyen entre múltiples sitios simultáneos, generando cuellos de botella en momentos de alta concurrencia.
                         </p>
                     </div>
 

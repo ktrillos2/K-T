@@ -40,7 +40,7 @@ export default function ProjectsSection({ initialProjects = [] }: { initialProje
   const projects = allProjects.filter((proj) => proj !== featuredProject);
 
   return (
-    <section id="work" className="relative py-16 lg:py-24 overflow-hidden cv-auto">
+    <section id="work" aria-label="Portafolio de proyectos y casos de estudio de desarrollo web" className="relative py-16 lg:py-24 overflow-hidden cv-auto">
       {/* Background grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px]" />
 

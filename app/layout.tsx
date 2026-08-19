@@ -26,6 +26,7 @@ import MicrosoftClarity from "@/components/analytics/microsoft-clarity"
 import GoogleTagManager from "@/components/analytics/google-tag-manager"
 import TikTokEventsTracker from "@/components/analytics/tiktok-events-tracker"
 import MetaPixel from "@/components/analytics/meta-pixel"
+import AnalyticsTracker from "@/components/analytics-tracker"
 
 
 const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-fira", display: "swap" })
@@ -149,13 +150,15 @@ const organizationJsonLd = {
   "url": "https://www.kytcode.lat/",
   "logo": "https://www.kytcode.lat/icon.png",
   "image": "https://www.kytcode.lat/icon.png",
-  "email": "contactktweb@gmail.com",
+  "email": "contactoktweb@gmail.com",
   "telephone": "+573116360057",
   "address": {
     "@type": "PostalAddress",
-    "addressCountry": "CO",
-    "addressRegion": "Cundinamarca",
-    "addressLocality": "Bogotá"
+    "streetAddress": "San José de Cúcuta",
+    "addressLocality": "Cúcuta",
+    "addressRegion": "Norte de Santander",
+    "postalCode": "540001",
+    "addressCountry": "CO"
   },
   "areaServed": [
     {
@@ -167,11 +170,11 @@ const organizationJsonLd = {
       "name": "Latin America"
     }
   ],
-  "description": "K&T Code es una empresa colombiana especializada en desarrollo web, tiendas virtuales y software a medida para empresas en Colombia y Latinoamérica.",
-  "slogan": "Desarrollo de Páginas Web y Software a Medida en Colombia",
+  "description": "K&T Code es una empresa colombiana de desarrollo web y software a medida especializada en páginas corporativas, e-commerce y plataformas escalables.",
+  "slogan": "Empresa de Desarrollo Web y Software en Colombia",
   "sameAs": [
-    "https://www.facebook.com/KTSolutionsWeb",
     "https://www.instagram.com/ktweb_/",
+    "https://www.facebook.com/KTSolutionsWeb",
     "https://www.tiktok.com/@kytweb"
   ],
   "hasOfferCatalog": {
@@ -260,6 +263,7 @@ export default function RootLayout({
 
         <GoogleAnalytics />
         <React.Suspense fallback={null}>
+          <AnalyticsTracker />
           <TiktokPixel />
           <MetaPixel />
         </React.Suspense>

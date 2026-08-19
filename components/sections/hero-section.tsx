@@ -126,7 +126,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" aria-label="Presentación y propuesta de valor de K&T Code" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <motion.div 
         className="absolute inset-0 z-0"
         initial={{ opacity: 0 }}
@@ -186,6 +186,7 @@ export default function HeroSection() {
         </motion.h1>
 
         <motion.div
+          className="mt-6"
           variants={{
             hidden: { opacity: 0, scale: 0.95, y: 20 },
             visible: { 
@@ -196,7 +197,7 @@ export default function HeroSection() {
             }
           }}
         >
-          <Link href="/portafolio">
+          <Link href="/portafolio" aria-label="Ver portafolio de proyectos y casos de estudio de K&T Code">
             <motion.span
               className="relative overflow-hidden inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-mono font-bold rounded-xl border-2 border-white shadow-[6px_6px_0_rgba(255,255,255,0.2)] hover:shadow-[2px_2px_0_rgba(255,255,255,0.2)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-300"
               onMouseEnter={() => setCursorVariant("hover")}

@@ -38,7 +38,8 @@ export const metadata: Metadata = {
     canonical: "https://www.kytcode.lat",
     languages: {
       "es-CO": "https://www.kytcode.lat",
-      "es": "https://www.kytcode.lat",
+      es: "https://www.kytcode.lat",
+      en: "https://www.kytcode.lat/en",
       "x-default": "https://www.kytcode.lat",
     },
   },

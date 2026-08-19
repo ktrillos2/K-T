@@ -18,6 +18,14 @@ export function buildOrganizationJsonLd() {
     description: siteConfig.description,
     email: siteConfig.email,
     telephone: siteConfig.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: siteConfig.address.streetAddress,
+      addressLocality: siteConfig.address.addressLocality,
+      addressRegion: siteConfig.address.addressRegion,
+      postalCode: siteConfig.address.postalCode,
+      addressCountry: siteConfig.address.addressCountry,
+    },
     areaServed: siteConfig.areaServed.map((name) => ({
       "@type": name === "Colombia" ? "Country" : "AdministrativeArea",
       name,
@@ -124,6 +132,9 @@ export function buildArticleJsonLd({
   datePublished,
   dateModified,
   image,
+  authorName = "Keyner Trillos",
+  authorSlug = "keyner-trillos",
+  authorRole = "Lead Software Engineer",
 }: {
   headline: string
   description: string
@@ -131,6 +142,9 @@ export function buildArticleJsonLd({
   datePublished: string
   dateModified?: string
   image?: string
+  authorName?: string
+  authorSlug?: string
+  authorRole?: string
 }) {
   return {
     "@context": "https://schema.org",
@@ -143,14 +157,34 @@ export function buildArticleJsonLd({
     image: absoluteUrl(image || siteConfig.ogImage),
     datePublished,
     dateModified: dateModified || datePublished,
-    inLanguage: "es-CO",
+    isPartOf: {
+      "@type": "WebSite",
+      "@id": `${siteConfig.url}/#website`,
+      "name": siteConfig.name,
+      "url": siteConfig.url,
+    },
     author: {
-      "@type": "Organization",
-      "@id": `${siteConfig.url}/#organization`,
-      name: siteConfig.organizationName,
+      "@type": "Person",
+      "@id": `${absoluteUrl(`/autores/${authorSlug}`)}#person`,
+      "name": authorName,
+      "jobTitle": authorRole,
+      "worksFor": {
+        "@type": "Organization",
+        "@id": `${siteConfig.url}/#organization`,
+        "name": siteConfig.name,
+        "url": siteConfig.url,
+      },
+      "url": absoluteUrl(`/autores/${authorSlug}`),
     },
     publisher: {
+      "@type": "Organization",
       "@id": `${siteConfig.url}/#organization`,
+      "name": siteConfig.name,
+      "url": siteConfig.url,
+      "logo": {
+        "@type": "ImageObject",
+        "url": absoluteUrl(siteConfig.logo),
+      },
     },
   }
 }

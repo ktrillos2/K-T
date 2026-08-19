@@ -24,6 +24,7 @@ import {
   Sparkles,
   BookOpen,
 } from "lucide-react"
+import Link from "next/link"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
 import { fadeUpVariant, staggerContainer, textRevealVariant, ANIMATION_EASING } from "@/lib/animations"
@@ -52,16 +53,16 @@ const techStack = [
   { name: "SEO Técnico" },
 ]
 
-// Real sectors covered from projects.ts
+// Real sectors covered from projects.ts with direct links to industry hubs
 const sectors = [
-  { key: "health", Icon: HeartPulse },
-  { key: "realestate", Icon: Home },
-  { key: "engineering", Icon: Cpu },
-  { key: "ecommerce", Icon: ShoppingBag },
-  { key: "tourism", Icon: Plane },
-  { key: "automotive", Icon: Car },
-  { key: "beauty", Icon: Sparkles },
-  { key: "publishing", Icon: BookOpen },
+  { key: "health", href: "/industrias/desarrollo-web-salud", Icon: HeartPulse },
+  { key: "realestate", href: "/industrias/desarrollo-web-inmobiliarias", Icon: Home },
+  { key: "engineering", href: "/industrias/desarrollo-web-ingenieria", Icon: Cpu },
+  { key: "ecommerce", href: "/industrias/ecommerce-b2b", Icon: ShoppingBag },
+  { key: "tourism", href: "/industrias/desarrollo-web-turismo", Icon: Plane },
+  { key: "automotive", href: "/industrias/desarrollo-web-automotriz", Icon: Car },
+  { key: "beauty", href: "/industrias/desarrollo-web-estetica", Icon: Sparkles },
+  { key: "publishing", href: "/industrias/desarrollo-web-editorial", Icon: BookOpen },
 ]
 
 // ─── ValueCard ────────────────────────────────────────────────────────────────
@@ -334,9 +335,9 @@ export default function AboutSection({ projectCount }: AboutSectionProps) {
   const { setCursorVariant } = useCursor()
 
   const dynamicStats = [
-    { value: `${projectCount}+`, labelKey: "projects" },
-    { value: "20+", labelKey: "clients" },
-    { value: "7+", labelKey: "countries" },
+    { value: `${projectCount && projectCount > 0 ? projectCount : 15}+`, labelKey: "projects" },
+    { value: "15+", labelKey: "clients" },
+    { value: "4+", labelKey: "countries" },
     { value: "100%", labelKey: "satisfaction" },
   ]
 
@@ -366,7 +367,7 @@ export default function AboutSection({ projectCount }: AboutSectionProps) {
   // Terminal lines for the right panel
   const terminalLines: Record<(typeof values)[number], Array<{ label: string; value: string; color: string }>> = {
     innovation: [
-      { label: "framework", value: '"Next.js 15 App Router"', color: "text-cyan-400" },
+      { label: "framework", value: '"Next.js App Router"', color: "text-cyan-400" },
       { label: "language", value: '"TypeScript 5"', color: "text-blue-400" },
       { label: "pattern", value: '"Headless Architecture"', color: "text-purple-400" },
       { label: "cms", value: '"Sanity v3"', color: "text-orange-400" },
@@ -672,10 +673,14 @@ export default function AboutSection({ projectCount }: AboutSectionProps) {
             renderItem={(sector) => {
               const Icon = sector.Icon;
               return (
-                <div className="flex items-center gap-1.5 md:gap-2 text-white/90 px-1">
-                  <Icon className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+                <Link
+                  href={sector.href}
+                  aria-label={`Ver soluciones web para ${(dictionary.about.sectors as any)[sector.key] || sector.key}`}
+                  className="flex items-center gap-1.5 md:gap-2 text-white/90 px-1 hover:text-emerald-400 transition-colors group"
+                >
+                  <Icon className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0 group-hover:scale-110 transition-transform" />
                   <span className="text-[10px] md:text-xs font-medium text-center leading-tight">{(dictionary.about.sectors as any)[sector.key]}</span>
-                </div>
+                </Link>
               )
             }}
             align="right"

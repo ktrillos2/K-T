@@ -82,8 +82,8 @@ export async function POST(req: Request) {
         });
 
         const mailOptions = {
-            from: '"K&T Code System" <info@kytcode.lat>',
-            to: "contactktweb@gmail.com",
+            from: '"K&T Code System" <contactoktweb@gmail.com>',
+            to: "contactoktweb@gmail.com",
             subject: `Nuevo Testimonio Recibido - ${project}`,
             html: `
                 <h2>Nuevo Testimonio para ${project}</h2>

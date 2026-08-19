@@ -36,19 +36,28 @@ export const metadata: Metadata = {
 
 const articleJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Cómo crear una página web en 2026: La guía definitiva",
+    "@type": "BlogPosting",
+    "@id": "https://www.kytcode.lat/blog/como-crear-pagina-web-2026#article",
+    "headline": "Cómo crear una página web en 2026: Guía de arquitectura y buenas prácticas",
     "description": "Conoce el estándar técnico de 2026 para el desarrollo web profesional. Rendimiento, accesibilidad y arquitecturas headless sobre Next.js.",
     "url": "https://www.kytcode.lat/blog/como-crear-pagina-web-2026",
+    "mainEntityOfPage": "https://www.kytcode.lat/blog/como-crear-pagina-web-2026",
     "datePublished": "2026-02-20",
     "dateModified": "2026-02-20",
+    "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.kytcode.lat/#website",
+        "name": "K&T Code"
+    },
     "author": {
         "@type": "Organization",
+        "@id": "https://www.kytcode.lat/#organization",
         "name": "K&T Code",
         "url": "https://www.kytcode.lat/"
     },
     "publisher": {
         "@type": "Organization",
+        "@id": "https://www.kytcode.lat/#organization",
         "name": "K&T Code",
         "url": "https://www.kytcode.lat/",
         "logo": {
@@ -58,12 +67,37 @@ const articleJsonLd = {
     }
 }
 
+const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://www.kytcode.lat/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://www.kytcode.lat/blog"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Cómo crear una página web en 2026",
+            "item": "https://www.kytcode.lat/blog/como-crear-pagina-web-2026"
+        }
+    ]
+}
+
 export default function ComoCrearPaginaWeb() {
     return (
         <main className="min-h-screen bg-background pt-32 pb-24 px-4 sm:px-6">
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify([articleJsonLd, breadcrumbJsonLd]) }}
             />
             <div className="max-w-3xl mx-auto">
                 <Link
@@ -83,10 +117,25 @@ export default function ComoCrearPaginaWeb() {
                             <span>8 min de lectura</span>
                         </div>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                            Cómo crear una página web en 2026: La guía definitiva
+                            Cómo crear una página web en 2026: Guía de arquitectura y buenas prácticas
                         </h1>
+
+                        <div className="flex items-center gap-3 py-4 border-t border-b border-white/10 my-6 font-mono text-xs text-neutral-400 not-prose">
+                            <div className="w-8 h-8 rounded-full bg-neutral-800 border border-white/20 flex items-center justify-center text-white font-bold text-xs shrink-0">
+                                KT
+                            </div>
+                            <div>
+                                <span>Escrito por </span>
+                                <Link href="/autores/keyner-trillos" className="text-white font-bold hover:underline">
+                                    Keyner Trillos
+                                </Link>
+                                <span className="text-neutral-400"> • Lead Software Engineer — K&T Code</span>
+                                <span className="block text-[11px] text-neutral-500 mt-0.5">Revisado el 19 de agosto de 2026</span>
+                            </div>
+                        </div>
+
                         <p className="text-xl text-neutral-300 leading-relaxed border-l-2 border-primary pl-6">
-                            Saber <strong>cómo crear una página web</strong> ha cambiado. Deslizar bloques en constructores visuales ya no es suficiente si quieres dominar a tu competencia en Google. Esta es la arquitectura real detrás de un ecosistema exitoso.
+                            Saber <strong>cómo crear una página web</strong> competitiva requiere entender las diferencias entre constructores visuales y arquitecturas basadas en código moderno para proyectos con altas exigencias de rendimiento y personalización.
                         </p>
                     </header>
 
@@ -94,27 +143,27 @@ export default function ComoCrearPaginaWeb() {
                     <div className="mt-16">
                         <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
                             <Zap className="w-8 h-8 text-primary" />
-                            El dilema inicial: ¿Constructor DIY o Ingeniería Real?
+                            Constructores No-Code vs. Desarrollo Basado en Código
                         </h2>
                         <p>
-                            Al investigar sobre <i>cómo crear una pagina</i>, te verás bombardeado por anuncios de plataformas que prometen resultados en "3 simples clics". Si bien estas herramientas son ideales para un blog personal o un pasatiempo, <strong>son un veneno para el SEO y el rendimiento corporativo (Core Web Vitals)</strong>.
+                            Al evaluar opciones para <i>cómo crear una página</i>, existen plataformas que permiten publicar sitios rápidamente mediante módulos preconfigurados. Estas herramientas pueden ser útiles para proyectos personales o validaciones iniciales, pero para plataformas corporativas pueden introducir capas de código no utilizado que aumentan el peso del DOM y ralentizan la interacción.
                         </p>
                         <p>
-                            La razón es simple: para ser "fáciles de usar", estas plataformas inyectan megabytes de código genérico no utilizado (DOM inflado), lo que destroza los tiempos de carga. En 2026, si tu web tarda más de 2.5 segundos en cargar (métrica LCP), Google te penaliza y tus clientes se van.
+                            Un tiempo de carga LCP deficiente puede deteriorar la retención del visitante y forma parte de las señales de experiencia de página que Google evalúa junto con múltiples factores de relevancia, arquitectura e indexación.
                         </p>
                     </div>
 
                     {/* H2 El Ecosistema */}
-                    <h2 className="text-3xl font-bold text-white mt-16 mb-6">La radiografía al crear pagina web profesional</h2>
+                    <h2 className="text-3xl font-bold text-white mt-16 mb-6">Fundamentos técnicos para una página web profesional</h2>
 
-                    <h3 className="text-2xl font-bold text-white mt-8 mb-4">1. Infraestructura y Hosting en el Borde</h3>
+                    <h3 className="text-2xl font-bold text-white mt-8 mb-4">1. Infraestructura y Redes de Entrega de Contenidos (Edge CDN)</h3>
                     <p>
-                        Ya no compramos "un servidor compartido" en el que tu página habita con otras tres mil. En su lugar, el mercado exige alojamiento serverless en el borde. En <strong className="text-white"><Link href="/nosotros" className="underline hover:text-neutral-300">K&T Code</Link></strong>, todas y cada una de las webs que desplegamos conviven en la red global de <strong>Vercel</strong>, garantizando que tu página responda en milisegundos sin importar si el cliente te visita desde Bogotá o Nueva York.
+                        Frente a los servidores compartidos tradicionales que centralizan todas las peticiones en una única máquina, las arquitecturas modernas distribuyen recursos a través de redes CDN globales (como Vercel o Cloudflare Edge), entregando contenido estático desde el nodo geográfico más cercano al usuario.
                     </p>
 
-                    <h3 className="text-2xl font-bold text-white mt-8 mb-4">2. Desarrollo Web Orientado a Tecnologías Headless</h3>
+                    <h3 className="text-2xl font-bold text-white mt-8 mb-4">2. Arquitecturas Headless y Renderizado Híbrido</h3>
                     <p>
-                        <strong>Crear una página web</strong> requiere separar el diseño visual de la base de datos. Usamos React y Next.js para renderizar la página a velocidades ultra rápidas, mientras que los datos son servidos a través de APIs eficientes. Conoce nuestro enfoque en <Link href="/servicios/desarrollo-web-a-medida" className="text-white underline">desarrollo web a medida</Link>.
+                        Separar la capa visual del almacenamiento de datos permite que el frontend (construido en Next.js o React) consuma información mediante APIs optimizadas, mejorando la modularidad y facilitando integraciones a medida. Conoce nuestro enfoque en <Link href="/servicios/desarrollo-web-a-medida" className="text-white underline">desarrollo web a medida</Link>.
                     </p>
 
                     <h3 className="text-2xl font-bold text-white mt-8 mb-4 flex items-center gap-2">

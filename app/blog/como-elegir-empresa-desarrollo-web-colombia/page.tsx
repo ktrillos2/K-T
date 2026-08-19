@@ -44,19 +44,28 @@ export const metadata: Metadata = {
 
 const articleJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
+    "@id": "https://www.kytcode.lat/blog/como-elegir-empresa-desarrollo-web-colombia#article",
     "headline": "Cómo Elegir una Empresa de Desarrollo Web en Colombia en 2026",
     "description": "Guía completa para contratar una empresa de desarrollo web en Colombia. Criterios clave: desarrollo a medida vs plantillas, precios, SEO técnico, portafolio y garantías.",
     "url": "https://www.kytcode.lat/blog/como-elegir-empresa-desarrollo-web-colombia",
+    "mainEntityOfPage": "https://www.kytcode.lat/blog/como-elegir-empresa-desarrollo-web-colombia",
     "datePublished": "2026-02-25",
     "dateModified": "2026-02-25",
+    "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.kytcode.lat/#website",
+        "name": "K&T Code"
+    },
     "author": {
         "@type": "Organization",
+        "@id": "https://www.kytcode.lat/#organization",
         "name": "K&T Code",
         "url": "https://www.kytcode.lat/"
     },
     "publisher": {
         "@type": "Organization",
+        "@id": "https://www.kytcode.lat/#organization",
         "name": "K&T Code",
         "url": "https://www.kytcode.lat/",
         "logo": {
@@ -66,12 +75,37 @@ const articleJsonLd = {
     }
 }
 
+const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://www.kytcode.lat/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://www.kytcode.lat/blog"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Cómo Elegir una Empresa de Desarrollo Web en Colombia",
+            "item": "https://www.kytcode.lat/blog/como-elegir-empresa-desarrollo-web-colombia"
+        }
+    ]
+}
+
 export default function ComoElegirEmpresaDesarrolloWeb() {
     return (
         <main className="min-h-screen bg-background pt-32 pb-24 px-4 sm:px-6">
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify([articleJsonLd, breadcrumbJsonLd]) }}
             />
             <div className="max-w-4xl mx-auto">
                 <Link
@@ -94,6 +128,21 @@ export default function ComoElegirEmpresaDesarrolloWeb() {
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
                             Cómo Elegir una Empresa de Desarrollo Web en Colombia en 2026
                         </h1>
+
+                        <div className="flex items-center gap-3 py-4 border-t border-b border-white/10 my-6 font-mono text-xs text-neutral-400 not-prose">
+                            <div className="w-8 h-8 rounded-full bg-neutral-800 border border-white/20 flex items-center justify-center text-white font-bold text-xs shrink-0">
+                                KT
+                            </div>
+                            <div>
+                                <span>Escrito por </span>
+                                <Link href="/autores/keyner-trillos" className="text-white font-bold hover:underline">
+                                    Keyner Trillos
+                                </Link>
+                                <span className="text-neutral-400"> • Lead Software Engineer — K&T Code</span>
+                                <span className="block text-[11px] text-neutral-500 mt-0.5">Revisado el 19 de agosto de 2026</span>
+                            </div>
+                        </div>
+
                         <p className="text-xl text-neutral-300 font-mono leading-relaxed border-l-2 border-white pl-6 py-2">
                             Contratar el proveedor tecnológico equivocado puede costarle a tu empresa meses de retraso, pérdidas comerciales y una plataforma lenta que no posiciona en Google. En esta guía te explicamos los criterios técnicos y comerciales indispensables para tomar la mejor decisión.
                         </p>

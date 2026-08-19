@@ -37,19 +37,28 @@ export const metadata: Metadata = {
 
 const articleJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Desarrollo Web Profesional: Guía Definitiva Empresarial",
+    "@type": "BlogPosting",
+    "@id": "https://www.kytcode.lat/blog/como-crear-pagina-web-profesional#article",
+    "headline": "Cómo Crear una Página Web Profesional: Arquitectura y Estrategia",
     "description": "Descubre cómo estructurar una plataforma web empresarial que convierta. Fundamentos de arquitectura, UX y por qué Next.js domina el mercado B2B.",
     "url": "https://www.kytcode.lat/blog/como-crear-pagina-web-profesional",
+    "mainEntityOfPage": "https://www.kytcode.lat/blog/como-crear-pagina-web-profesional",
     "datePublished": "2026-02-15",
     "dateModified": "2026-02-15",
+    "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.kytcode.lat/#website",
+        "name": "K&T Code"
+    },
     "author": {
         "@type": "Organization",
+        "@id": "https://www.kytcode.lat/#organization",
         "name": "K&T Code",
         "url": "https://www.kytcode.lat/"
     },
     "publisher": {
         "@type": "Organization",
+        "@id": "https://www.kytcode.lat/#organization",
         "name": "K&T Code",
         "url": "https://www.kytcode.lat/",
         "logo": {
@@ -59,12 +68,37 @@ const articleJsonLd = {
     }
 }
 
+const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Inicio",
+            "item": "https://www.kytcode.lat/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://www.kytcode.lat/blog"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Cómo Crear una Página Web Profesional",
+            "item": "https://www.kytcode.lat/blog/como-crear-pagina-web-profesional"
+        }
+    ]
+}
+
 export default function BlogPostPage() {
     return (
         <main className="min-h-screen bg-background pt-32 pb-24 px-4 sm:px-6">
             <script
                 type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+                dangerouslySetInnerHTML={{ __html: JSON.stringify([articleJsonLd, breadcrumbJsonLd]) }}
             />
             <div className="max-w-4xl mx-auto">
                 <Link
@@ -82,6 +116,21 @@ export default function BlogPostPage() {
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white font-title leading-tight mb-6">
                             Cómo Crear una Página Web Profesional: Arquitectura y Estrategia
                         </h1>
+
+                        <div className="flex items-center gap-3 py-4 border-t border-b border-white/10 my-6 font-mono text-xs text-neutral-400 not-prose">
+                            <div className="w-8 h-8 rounded-full bg-neutral-800 border border-white/20 flex items-center justify-center text-white font-bold text-xs shrink-0">
+                                KT
+                            </div>
+                            <div>
+                                <span>Escrito por </span>
+                                <Link href="/autores/keyner-trillos" className="text-white font-bold hover:underline">
+                                    Keyner Trillos
+                                </Link>
+                                <span className="text-neutral-400"> • Lead Software Engineer — K&T Code</span>
+                                <span className="block text-[11px] text-neutral-500 mt-0.5">Revisado el 19 de agosto de 2026</span>
+                            </div>
+                        </div>
+
                         <p className="text-xl text-neutral-400 leading-relaxed max-w-3xl">
                             ¿Estás buscando <strong>crear una página web</strong> para tu empresa o negocio digital? En esta guía eliminaremos el ruido de plataformas "fáciles" y abordaremos la ingeniería requerida para lanzar un ecosistema escalable, rápido y seguro.
                         </p>
@@ -93,32 +142,32 @@ export default function BlogPostPage() {
                         Las bases técnicas para crear una página web escalable
                     </h2>
                     <p className="text-neutral-300 mb-6">
-                        Para saber exactamente <strong>cómo crear una página web</strong> competitiva en la actualidad, necesitas dejar de pensar en "plantillas" y comenzar a pensar en "arquitectura web". El código subyacente y la elección de dónde se aloja tu plataforma son responsables directos de si lograrás posicionar en la página 1 de resultados y de si los usuarios esperarán lo suficiente como para ver tu contenido.
+                        Para saber exactamente <strong>cómo crear una página web</strong> con proyección de crecimiento, es fundamental evaluar la arquitectura del software: el modelo de renderizado, la gestión de dependencias y la infraestructura de alojamiento influyen directamente en la velocidad y la experiencia del usuario final.
                     </p>
                     <ul className="space-y-4 mb-12 list-none pl-0">
                         <li className="flex items-start gap-3">
                             <CheckCircle2 className="w-6 h-6 text-green-500 mt-1 shrink-0" />
-                            <span><strong>Dominio propio y DNS:</strong> La identidad. Debes alojarlos en registradores que soporten redes de entrega de contenidos (CDN).</span>
+                            <span><strong>Dominio propio y DNS en CDN:</strong> Configurar registros DNS en redes globales (como Cloudflare) optimiza la resolución y la seguridad inicial.</span>
                         </li>
                         <li className="flex items-start gap-3">
                             <CheckCircle2 className="w-6 h-6 text-green-500 mt-1 shrink-0" />
-                            <span><strong>Hosting de borde (Edge):</strong> Olvida el hosting compartido tradicional. Si quieres que cargue rápido globalmente, requieres plataformas serverless como Vercel o AWS.</span>
+                            <span><strong>Infraestructura Edge y Serverless:</strong> Alojar el frontend en plataformas de borde (como Vercel o AWS CloudFront) asegura tiempos de respuesta homogéneos y escalabilidad ante picos de tráfico.</span>
                         </li>
                         <li className="flex items-start gap-3">
                             <CheckCircle2 className="w-6 h-6 text-green-500 mt-1 shrink-0" />
-                            <span><strong>Código Moderno:</strong> React y su framework base (Next.js) se han convertido en la norma empresarial por sus capacidades de ISR y SSR automáticos.</span>
+                            <span><strong>Next.js y Renderizado Híbrido:</strong> Next.js puede ser una opción adecuada cuando el proyecto requiere renderizado flexible (SSR/SSG/ISR), integraciones con APIs, una arquitectura basada en React o control avanzado sobre el rendimiento del frontend.</span>
                         </li>
                     </ul>
 
                     <h2 className="text-3xl font-bold text-white font-title mt-16 mb-6 flex items-center gap-3">
                         <Code2 className="w-8 h-8 text-primary" />
-                        Paso 1: Elección del Stack Tecnológico (Por qué ignorar CMS tradicionales)
+                        Paso 1: Elección del Stack Tecnológico y Arquitectura
                     </h2>
                     <p className="text-neutral-300 mb-6">
-                        Al investigar sobre <i>crear pagina web</i>, lo primero que te recomiendan los tutoriales son gestores de contenido básicos con miles de plugins (como WordPress tradicional). El inconveniente de esta ruta técnica a nivel empresarial es la <strong>deuda técnica y la contaminación del DOM</strong>.
+                        Al planificar un proyecto digital, los CMS tradicionales son viables para blogs estándar o sitios con bajo requerimiento de personalización. Sin embargo, para aplicaciones con necesidades de escalabilidad o integración con sistemas externos, el acoplamiento de plugins puede incrementar el costo de mantenimiento.
                     </p>
                     <p className="text-neutral-300 mb-12">
-                        En su lugar, la arquitectura "Headless" separa la interfaz que ve tu cliente final de la base de datos o el gestor donde subes tu contenido (ej. Sanity.io). Esto garantiza que no haya código genérico inflado ralentizando el navegador e impidiendo que pases las auditorías técnicas (Core Web Vitals). Al construir plataformas para clientes, en <strong className="text-white"><Link href="/nosotros" className="underline hover:text-neutral-300">K&T Code</Link></strong> aseguramos esta capa técnica en todos nuestros servicios de <Link href="/servicios/desarrollo-web-a-medida" className="underline hover:text-neutral-300">desarrollo web a medida</Link>.
+                        La arquitectura desacoplada ("Headless") permite que la interfaz gráfica opere independientemente del gestor de contenidos (como Sanity o Supabase). Esto proporciona interfaces más ligeras, mayor seguridad al no exponer la base de datos directamente y flexibilidad para rediseñar el frontend sin alterar los datos del negocio.
                     </p>
 
                     <h2 className="text-3xl font-bold text-white font-title mt-16 mb-6 flex items-center gap-3">

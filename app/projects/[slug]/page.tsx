@@ -2,65 +2,99 @@ import { notFound } from "next/navigation"
 import { getAllProjects, getProjectBySlug } from "@/sanity/lib/queries"
 import ProjectClientView from "@/components/project-client-view"
 import { Metadata } from "next"
-import { Project } from "@/lib/projects"
+import { Project, projects as localProjects, getProject as getLocalProject } from "@/lib/projects"
 
-function mapSanityProjectToClientProject(sanityProject: any): Project {
-    return {
-        id: sanityProject._id || sanityProject.slug,
-        slug: sanityProject.slug,
-        title: sanityProject.title,
-        description: sanityProject.description || "",
-        shortDescription: sanityProject.shortDescription || "",
-        year: sanityProject.year || "",
-        month: sanityProject.month || "",
-        category: sanityProject.category || "",
-        tech: sanityProject.tech || [],
-        images: {
-            hero: sanityProject.hero || "",
-            mobile: sanityProject.mobile || sanityProject.hero || "",
-            gallery: []
-        },
-        liveUrl: sanityProject.liveUrl || "",
-        content: {
-            challenge: sanityProject.challenge || "",
-            solution: sanityProject.solution || "",
-            seoFocus: sanityProject.seoFocus || "",
+async function resolveProject(slug: string): Promise<Project | null> {
+    const local = getLocalProject(slug)
+    try {
+        const sanityProject = await getProjectBySlug(slug)
+        if (sanityProject) {
+            return {
+                id: sanityProject._id || sanityProject.slug,
+                slug: sanityProject.slug,
+                title: sanityProject.title,
+                client: local?.client || sanityProject.title,
+                industry: local?.industry || sanityProject.category || "Tecnología",
+                country: local?.country || "Colombia",
+                city: local?.city || "Bogotá",
+                projectType: local?.projectType || sanityProject.category || "Desarrollo Web",
+                date: local?.date || `${sanityProject.month || ""} ${sanityProject.year || ""}`.trim(),
+                year: sanityProject.year || local?.year || "2026",
+                month: sanityProject.month || local?.month || "Febrero",
+                duration: local?.duration || "4 semanas",
+                objective: local?.objective || sanityProject.shortDescription || "Desarrollo web corporativo",
+                category: sanityProject.category || local?.category || "Desarrollo Web",
+                tech: sanityProject.tech && sanityProject.tech.length > 0 ? sanityProject.tech : (local?.tech || ["Next.js", "React"]),
+                description: sanityProject.description || local?.description || "",
+                shortDescription: sanityProject.shortDescription || local?.shortDescription || "",
+                images: {
+                    hero: sanityProject.hero || local?.images.hero || "/images/projects/psicowork.webp",
+                    mobile: sanityProject.mobile || sanityProject.hero || local?.images.mobile || "/images/projects/psicowork-mobile.webp",
+                    gallery: local?.images.gallery || []
+                },
+                liveUrl: sanityProject.liveUrl || local?.liveUrl || "",
+                content: {
+                    challenge: sanityProject.challenge || local?.content.challenge || "",
+                    solution: sanityProject.solution || local?.content.solution || "",
+                    seoFocus: sanityProject.seoFocus || local?.content.seoFocus || "",
+                    results: local?.content.results || "",
+                },
+                metrics: local?.metrics || {
+                    lighthouseAfter: "98/100",
+                    lcp: "680 ms",
+                    pagesDeveloped: "6 páginas",
+                    integrations: "WhatsApp API + Formularios SSL",
+                    keyAchievements: [
+                        "Optimización de Core Web Vitals y LCP < 0.8s.",
+                        "Arquitectura moderna en Next.js y React.",
+                    ]
+                }
+            }
         }
+    } catch {
+        // Fallback to local
     }
+
+    return local || null
 }
 
 // Force static generation for these routes - Great for SEO and performance
 export async function generateStaticParams() {
-    const projects = await getAllProjects()
-    return projects.map((project: { slug: string }) => ({
-        slug: project.slug,
-    }))
+    const staticSlugs = localProjects.map((p) => ({ slug: p.slug }))
+    try {
+        const sanityProjects = await getAllProjects()
+        const sanitySlugs = sanityProjects.map((project: { slug: string }) => ({
+            slug: project.slug,
+        }))
+        const unique = Array.from(new Set([...staticSlugs.map(s => s.slug), ...sanitySlugs.map(s => s.slug)]))
+        return unique.map(slug => ({ slug }))
+    } catch {
+        return staticSlugs
+    }
 }
 
 // Generate dynamic metadata for each project
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params
-    const sanityProject = await getProjectBySlug(slug)
+    const project = await resolveProject(slug)
 
-    if (!sanityProject) {
+    if (!project) {
         return {
-            title: "Proyecto no encontrado",
-            description: "El proyecto que buscas no existe."
+            title: "Proyecto no encontrado | K&T Code",
+            description: "El caso de estudio que buscas no existe."
         }
     }
 
-    const project = mapSanityProjectToClientProject(sanityProject)
-
     return {
-        title: `${project.title} - Caso de Estudio`,
-        description: project.shortDescription,
+        title: `${project.title}: Caso de Estudio y Resultados | K&T Code`,
+        description: `${project.shortDescription} Descubre cómo K&T Code diseñó la solución para ${project.client || project.title} con ${project.tech.slice(0, 3).join(", ")}.`,
         keywords: [
             ...project.tech,
             project.category,
+            project.industry,
             "Desarrollo Web Colombia",
-            "Diseño UI UX",
-            "Casos de Exito Web",
-            "K&T Code Proyectos",
+            "Casos de Estudio Next.js",
+            "Portafolio K&T Code",
         ],
         alternates: {
             canonical: `https://www.kytcode.lat/projects/${slug}`,
@@ -82,7 +116,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             },
         },
         openGraph: {
-            title: `${project.title} | Portafolio K&T Code`,
+            title: `${project.title} - Caso de Estudio | K&T Code`,
             description: project.description || project.shortDescription,
             type: "article",
             url: `https://www.kytcode.lat/projects/${slug}`,
@@ -92,13 +126,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
                     url: project.images.hero,
                     width: 1200,
                     height: 630,
-                    alt: `Hero image for ${project.title}`,
+                    alt: `Captura del proyecto ${project.title}`,
                 }
             ]
         },
         twitter: {
             card: "summary_large_image",
-            title: `${project.title} | Portafolio K&T Code`,
+            title: `${project.title} | Caso de Estudio K&T Code`,
             description: project.shortDescription,
             images: [project.images.hero],
             creator: "@kytcode",
@@ -114,31 +148,29 @@ interface ProjectPageProps {
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
     const { slug } = await params
-    const sanityProject = await getProjectBySlug(slug)
+    const project = await resolveProject(slug)
 
-    if (!sanityProject) {
+    if (!project) {
         notFound()
     }
-
-    const mappedProject = mapSanityProjectToClientProject(sanityProject)
 
     const projectJsonLd = {
         "@context": "https://schema.org",
         "@type": "CreativeWork",
         "@id": `https://www.kytcode.lat/projects/${slug}#project`,
-        "name": mappedProject.title,
-        "headline": mappedProject.title,
-        "description": mappedProject.description || mappedProject.shortDescription,
+        "name": project.title,
+        "headline": `${project.title} - Caso de Estudio`,
+        "description": project.description || project.shortDescription,
         "url": `https://www.kytcode.lat/projects/${slug}`,
-        "image": mappedProject.images.hero,
-        "dateCreated": mappedProject.year,
+        "image": project.images.hero,
+        "dateCreated": project.year,
         "creator": {
             "@id": "https://www.kytcode.lat/#organization"
         },
         "provider": {
             "@id": "https://www.kytcode.lat/#organization"
         },
-        "keywords": mappedProject.tech.join(", ")
+        "keywords": project.tech.join(", ")
     }
 
     const breadcrumbJsonLd = {
@@ -160,7 +192,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {
                 "@type": "ListItem",
                 "position": 3,
-                "name": mappedProject.title,
+                "name": project.title,
                 "item": `https://www.kytcode.lat/projects/${slug}`
             }
         ]
@@ -176,7 +208,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
             />
-            <ProjectClientView project={mappedProject} />
+            <ProjectClientView project={project} />
         </>
     )
 }
