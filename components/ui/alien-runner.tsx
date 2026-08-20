@@ -256,6 +256,16 @@ const ACHIEVEMENTS: GameAchievement[] = [
     descEn: "Extreme speed (1000 pts)",
     badge: "⚡",
     scoreReq: 1000,
+    tier: "diamond",
+  },
+  {
+    id: "kt_legend",
+    titleEs: "Leyenda K&T",
+    titleEn: "K&T Legend",
+    descEs: "Dominio total (2000 pts)",
+    descEn: "Total mastery (2000 pts)",
+    badge: "👑",
+    scoreReq: 2000,
     tier: "master",
   },
 ]
@@ -791,13 +801,13 @@ export default function AlienRunner() {
       {/* Arcade Shell Frame */}
       <div className="relative rounded-2xl border border-white/15 bg-neutral-950 p-3 sm:p-5 shadow-2xl shadow-emerald-950/20 overflow-hidden">
         {/* Header HUD Bar */}
-        <div className="flex items-center justify-between px-2 pb-3 mb-2 border-b border-white/10 font-mono text-xs text-white/70">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-            <span className="font-bold text-white tracking-wider">// K&T CODE • DESERT RUNNER</span>
+        <div className="flex items-center justify-between px-1 sm:px-2 pb-3 mb-2 border-b border-white/10 font-mono text-[11px] sm:text-xs text-white/70">
+          <div className="flex items-center gap-1.5 sm:gap-2 truncate mr-2">
+            <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-400 animate-ping shrink-0" />
+            <span className="font-bold text-white tracking-wider truncate">// K&T CODE • DESERT RUNNER</span>
           </div>
 
-          <div className="flex items-center gap-4 text-xs">
+          <div className="flex items-center gap-2 sm:gap-4 text-[11px] sm:text-xs shrink-0">
             {highScore > 0 && (
               <div className="flex items-center gap-1 text-neutral-400">
                 <Trophy className="w-3.5 h-3.5 text-amber-400" />
@@ -805,17 +815,17 @@ export default function AlienRunner() {
               </div>
             )}
             <div className="font-bold tracking-widest text-white">
-              {score.toString().padStart(5, "0")} <span className="text-[10px] text-emerald-400">PTS</span>
+              {score.toString().padStart(5, "0")} <span className="text-[9px] sm:text-[10px] text-emerald-400">PTS</span>
             </div>
           </div>
         </div>
 
         {/* Live Unlock Banner (Real-time achievement pop-up) */}
         {activeUnlockBanner && (
-          <div className="mb-2 p-2.5 rounded-xl border border-emerald-500/40 bg-emerald-950/60 backdrop-blur-md flex items-center justify-between text-xs font-mono animate-bounce">
-            <div className="flex items-center gap-2 text-emerald-300">
-              <Sparkles className="w-4 h-4 text-amber-400 animate-spin" />
-              <span>
+          <div className="mb-2 p-2 sm:p-2.5 rounded-xl border border-emerald-500/40 bg-emerald-950/60 backdrop-blur-md flex items-center justify-between text-xs font-mono animate-bounce">
+            <div className="flex items-center gap-2 text-emerald-300 truncate mr-2">
+              <Sparkles className="w-4 h-4 text-amber-400 animate-spin shrink-0" />
+              <span className="truncate">
                 {isEn ? "Achievement Unlocked: " : "¡Logro Desbloqueado: "}
                 <strong className="text-white">
                   {activeUnlockBanner.badge} {isEn ? activeUnlockBanner.titleEn : activeUnlockBanner.titleEs}
@@ -823,7 +833,7 @@ export default function AlienRunner() {
                 ({activeUnlockBanner.scoreReq} pts)!
               </span>
             </div>
-            <span className="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">
+            <span className="text-[10px] text-emerald-400 font-bold uppercase tracking-wider shrink-0">
               {isEn ? "Saved" : "Guardado"}
             </span>
           </div>
@@ -832,14 +842,13 @@ export default function AlienRunner() {
         {/* Canvas Screen Container */}
         <div
           onClick={jump}
-          onTouchStart={(e) => {
-            e.preventDefault()
+          onTouchStart={() => {
             jump()
           }}
           role="button"
           tabIndex={0}
           aria-label={isEn ? "K&T Code Desert Runner Game. Press space or tap to jump." : "Juego Desert Runner de K&T Code. Presiona espacio o toca para saltar."}
-          className="relative w-full aspect-[800/180] rounded-xl overflow-hidden cursor-pointer border border-white/10 bg-black group select-none touch-none focus:outline-none focus:ring-1 focus:ring-emerald-400/50"
+          className="relative w-full aspect-[800/220] sm:aspect-[800/180] min-h-[125px] sm:min-h-[150px] rounded-xl overflow-hidden cursor-pointer border border-white/10 bg-black group select-none touch-manipulation focus:outline-none focus:ring-1 focus:ring-emerald-400/50"
         >
           <canvas
             ref={canvasRef}
@@ -850,14 +859,14 @@ export default function AlienRunner() {
 
           {/* Idle / Welcome Overlay */}
           {gameState === "IDLE" && (
-            <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] flex flex-col items-center justify-center text-center p-4">
-              <div className="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                <Play className="w-5 h-5 fill-emerald-400 ml-0.5" />
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex flex-col items-center justify-center text-center p-3 sm:p-4">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                <Play className="w-4 h-4 sm:w-5 sm:h-5 fill-emerald-400 ml-0.5" />
               </div>
-              <p className="font-title text-base sm:text-lg font-bold text-white mb-1">
+              <p className="font-title text-sm sm:text-lg font-bold text-white mb-1 px-2 leading-snug">
                 {isEn ? "Take a quick challenge before quoting your project?" : "¿Un reto antes de cotizar tu proyecto?"}
               </p>
-              <p className="font-mono text-xs text-emerald-400 font-bold tracking-wide">
+              <p className="font-mono text-[11px] sm:text-xs text-emerald-400 font-bold tracking-wide">
                 {isEn ? "[ PRESS SPACE ] or [ TAP HERE ] TO JUMP" : "[ PRESIONA ESPACIO ] o [ TOCA AQUÍ ] PARA SALTAR"}
               </p>
             </div>
@@ -892,8 +901,8 @@ export default function AlienRunner() {
         <div className="mt-4 pt-3 border-t border-white/10 space-y-3 font-mono">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
             <div className="flex items-center gap-2 text-white">
-              <Award className="w-4 h-4 text-amber-400" />
-              <span className="font-bold tracking-wide uppercase">
+              <Award className="w-4 h-4 text-amber-400 shrink-0" />
+              <span className="font-bold tracking-wide uppercase text-[11px] sm:text-xs">
                 {isEn ? "// Achievements & Progress" : "// Logros & Avances"}
               </span>
               <span className="text-[10px] text-neutral-400">
@@ -904,25 +913,25 @@ export default function AlienRunner() {
             {/* Next Milestone Progress Bar */}
             {nextAchievement && (
               <div className="flex items-center gap-2 text-[11px] text-neutral-400">
-                <span>
+                <span className="truncate">
                   {isEn ? "Next: " : "Próximo: "}
                   <strong className="text-emerald-400">
                     {nextAchievement.badge} {isEn ? nextAchievement.titleEn : nextAchievement.titleEs}
                   </strong>
                 </span>
-                <div className="w-20 sm:w-28 h-2 bg-neutral-800 rounded-full overflow-hidden border border-white/10">
+                <div className="w-16 sm:w-28 h-2 bg-neutral-800 rounded-full overflow-hidden border border-white/10 shrink-0">
                   <div
                     className="h-full bg-emerald-400 transition-all duration-300 rounded-full"
                     style={{ width: `${progressToNext}%` }}
                   />
                 </div>
-                <span className="text-[10px] text-white font-bold">{progressToNext}%</span>
+                <span className="text-[10px] text-white font-bold shrink-0">{progressToNext}%</span>
               </div>
             )}
           </div>
 
           {/* Badges Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
             {ACHIEVEMENTS.map((ach) => {
               const isUnlocked = unlockedAchievements.includes(ach.id)
               return (
@@ -945,7 +954,7 @@ export default function AlienRunner() {
                   <p className="text-[11px] font-bold text-white leading-tight truncate">
                     {isEn ? ach.titleEn : ach.titleEs}
                   </p>
-                  <p className="text-[9px] text-neutral-400 leading-tight mt-0.5">
+                  <p className="text-[9px] text-neutral-400 leading-tight mt-0.5 line-clamp-2">
                     {isEn ? ach.descEn : ach.descEs}
                   </p>
                 </div>
@@ -954,9 +963,15 @@ export default function AlienRunner() {
           </div>
 
           {/* Controls Bar */}
-          <div className="flex flex-wrap items-center justify-between pt-2 text-[10px] text-neutral-500 border-t border-white/5">
-            <span>{isEn ? "🎮 Controls: Spacebar / Up Arrow / Touch tap" : "🎮 Controles: Barra espaciadora / Flecha Arriba / Tap táctil"}</span>
-            <span>{isEn ? "⚡ Dodge: Cacti, Scorpions 🦂, Snakes 🐍, Pterodactyls 🦅 & Bats 🦇" : "⚡ Esquiva: Cactus, Escorpiones 🦂, Serpientes 🐍, Pterodáctilos 🦅 y Murciélagos 🦇"}</span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 pt-2 text-[10px] text-neutral-400 border-t border-white/5 font-mono">
+            <span className="flex items-center gap-1.5">
+              <span>🎮</span>
+              <span>{isEn ? "Controls: Spacebar / Up Arrow / Tap screen" : "Controles: Barra espaciadora / Flecha Arriba / Tocar pantalla"}</span>
+            </span>
+            <span className="flex items-center gap-1.5 text-neutral-500">
+              <span>⚡</span>
+              <span>{isEn ? "Dodge: Cacti, Scorpions 🦂, Snakes 🐍, Pterodactyls 🦅 & Bats 🦇" : "Esquiva: Cactus, Escorpiones 🦂, Serpientes 🐍, Pterodáctilos 🦅 y Murciélagos 🦇"}</span>
+            </span>
           </div>
         </div>
       </div>
