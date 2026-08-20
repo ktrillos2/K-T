@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "¿Cuánto Cuesta Desarrollar Software a Medida en Colombia en 2026? | K&T Code",
+  title: "¿Cuánto Cuesta Desarrollar Software a Medida en Colombia en 2026?",
   description:
     "Guía completa de precios para desarrollo de software a medida en Colombia en 2026: costos por horas, modelos de cotización, fases de ingeniería y retorno de inversión.",
   keywords: [

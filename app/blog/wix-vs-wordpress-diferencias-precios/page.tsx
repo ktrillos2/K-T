@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Wix vs. WordPress: Diferencias, Precios y Cuál Elegir en 2026 | K&T Code",
+  title: "Wix vs. WordPress: Diferencias, Precios y Cuál Elegir en 2026",
   description:
     "Comparativa objetiva entre Wix y WordPress: facilidad de uso, precios de planes y renovaciones, rendimiento de velocidad y flexibilidad técnica en 2026.",
   keywords: [

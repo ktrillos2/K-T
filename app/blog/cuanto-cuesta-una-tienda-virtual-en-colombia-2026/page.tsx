@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "¿Cuánto Cuesta una Tienda Virtual en Colombia en 2026? Guía de Costos | K&T Code",
+  title: "¿Cuánto Cuesta una Tienda Virtual en Colombia en 2026? Guía de Costos",
   description:
     "Precios reales para crear una tienda virtual en Colombia en 2026: costos de desarrollo, pasarelas de pago (Wompi, Bold, PayU), comisiones y gastos mensuales.",
   keywords: [

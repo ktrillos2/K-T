@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "¿Qué es un E-commerce Headless y Cuándo Conviene Utilizarlo? | K&T Code",
+  title: "¿Qué es un E-commerce Headless y Cuándo Conviene Utilizarlo?",
   description:
     "Descubre qué es el comercio electrónico desacoplado (Headless Commerce): arquitectura Next.js, backend Shopify/WooCommerce por API, ventajas de velocidad y conversión.",
   keywords: [

@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Qué es una API y Para Qué Sirve: Explicado Fácil con Ejemplos | K&T Code",
+  title: "Qué es una API y Para Qué Sirve: Explicado Fácil con Ejemplos",
   description:
     "Aprende qué es una API (Application Programming Interface), cómo conecta aplicaciones y por qué es el puente fundamental para pasarelas de pago y sistemas web modernos.",
   keywords: [

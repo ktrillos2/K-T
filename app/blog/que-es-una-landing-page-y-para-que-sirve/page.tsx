@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Qué es una Landing Page y Para Qué Sirve: Guía de Conversión | K&T Code",
+  title: "Qué es una Landing Page y Para Qué Sirve: Guía de Conversión",
   description:
     "Aprende qué es una landing page (página de aterrizaje), en qué se diferencia de un sitio web corporativo y cómo diseñar páginas que conviertan visitas en clientes en pauta digital.",
   keywords: [

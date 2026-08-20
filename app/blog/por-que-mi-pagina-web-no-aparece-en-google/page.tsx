@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "¿Por Qué mi Página Web no Aparece en Google? 12 Causas y Soluciones | K&T Code",
+  title: "¿Por Qué mi Página Web no Aparece en Google? 12 Causas y Soluciones",
   description:
     "Guía técnica para solucionar problemas de indexación y visibilidad en Google: robots.txt, noindex accidental, canibalización, Core Web Vitals y Search Console.",
   keywords: [

@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "¿Cuánto Cuesta el Mantenimiento de una Página Web en Colombia en 2026? | K&T Code",
+  title: "¿Cuánto Cuesta el Mantenimiento de una Página Web en Colombia en 2026?",
   description:
     "Precios reales de planes de mantenimiento web en Colombia: qué incluye el soporte técnico mensual, copias de seguridad, actualizaciones y prevención de caídas.",
   keywords: [

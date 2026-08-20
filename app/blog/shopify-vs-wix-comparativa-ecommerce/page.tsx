@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Shopify vs. Wix: ¿Cuál es Mejor para Vender Online en 2026? | K&T Code",
+  title: "Shopify vs. Wix: ¿Cuál es Mejor para Vender Online en 2026?",
   description:
     "Comparativa de plataformas de e-commerce: catálogo, pasarelas de pago, procesamiento de pedidos, comisiones y escalabilidad de ventas entre Shopify y Wix.",
   keywords: [

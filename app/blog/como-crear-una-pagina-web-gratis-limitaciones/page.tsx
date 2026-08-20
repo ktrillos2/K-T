@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Cómo Crear una Página Web Gratis: Opciones, Limitaciones y Alternativas | K&T Code",
+  title: "Cómo Crear una Página Web Gratis: Opciones, Limitaciones y Alternativas",
   description:
     "Análisis objetivo de las plataformas gratuitas para crear páginas web: publicidad obligatoria, subdominios, falta de SEO y cuándo invertir en una web profesional.",
   keywords: [

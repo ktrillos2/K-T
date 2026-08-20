@@ -4,7 +4,7 @@ import { BlogClient } from "./blog-client"
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Blog Técnico & Comparativas de Desarrollo Web | K&T Code",
+  title: "Blog Técnico & Comparativas de Desarrollo Web",
   description:
     "Comparativas técnicas objetivas (Next.js vs WordPress, Shopify vs WooCommerce, React vs Next.js), guías de precios reales en Colombia y arquitectura web de alto rendimiento.",
   keywords: [

@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Qué es el SEO y Cómo Funciona: Guía Definitiva para Principiantes | K&T Code",
+  title: "Qué es el SEO y Cómo Funciona: Guía Definitiva para Principiantes",
   description:
     "Aprende qué es el SEO (Search Engine Optimization) y cómo funciona el algoritmo de Google: SEO On-page, SEO técnico, palabras clave y autoridad.",
   keywords: [

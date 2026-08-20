@@ -7,7 +7,7 @@ import { absoluteUrl } from "@/lib/site-config"
 export const revalidate = 60
 
 export const metadata: Metadata = {
-  title: "Portfolio & Verified Case Studies | K&T Code",
+  title: "Portfolio & Verified Case Studies",
   description:
     "Explore our verified web development projects, custom software platforms, and headless e-commerce case studies across various industries.",
   keywords: [

@@ -6,7 +6,7 @@ import { ChevronRight } from "lucide-react"
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Contact Us & Project Quotation | K&T Code",
+  title: "Contact Us & Project Quotation",
   description:
     "Request a technical quote or schedule a consultation for your next corporate website, e-commerce, or custom software project with K&T Code.",
   keywords: [

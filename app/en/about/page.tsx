@@ -25,7 +25,7 @@ import {
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "About Us - Web Development & Software Engineering Agency | K&T Code",
+  title: "About Us - Web Development & Software Engineering Agency",
   description:
     "Learn about K&T Code: software engineering company founded in 2025 in San José de Cúcuta, Colombia. Leadership, methodology, and high-performance Next.js architectures.",
   keywords: [

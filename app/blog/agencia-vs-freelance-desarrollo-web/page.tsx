@@ -7,7 +7,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Agencia vs. Freelance para Desarrollo Web en Colombia | K&T Code",
+  title: "Agencia vs. Freelance para Desarrollo Web en Colombia",
   description:
     "Comparativa realista entre contratar una agencia o un programador freelance en Colombia: costos, tiempos, garantías, calidad técnica y cuál te conviene.",
   keywords: [

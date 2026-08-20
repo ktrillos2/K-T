@@ -56,11 +56,11 @@ export async function generateMetadata({ params }: AuthorPageProps): Promise<Met
 
   if (!author) {
     return {
-      title: "Autor no encontrado | K&T Code",
+      title: "Autor no encontrado",
     }
   }
 
-  const title = `${author.name} — ${author.role} | K&T Code`
+  const title = `${author.name} — ${author.role}`
   const description = author.shortBio
 
   return {

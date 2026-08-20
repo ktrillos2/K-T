@@ -42,7 +42,7 @@ const TikTok = ({ className }: { className?: string }) => (
 )
 
 export const metadata: Metadata = {
-  title: "Sobre Nosotros - Empresa de Desarrollo Web y Software en Colombia | K&T Code",
+  title: "Sobre Nosotros - Empresa de Desarrollo Web y Software en Colombia",
   description:
     "Conoce a K&T Code: empresa colombiana de desarrollo web y software fundada en 2025 en San José de Cúcuta. Equipo de ingeniería, liderazgo, metodología y tecnologías Next.js.",
   keywords: [

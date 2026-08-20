@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "WordPress vs. Shopify: ¿Cuál es Mejor para Crear una Web o Tienda Online? | K&T Code",
+  title: "WordPress vs. Shopify: ¿Cuál es Mejor para Crear una Web o Tienda Online?",
   description:
     "Comparativa detallada entre WordPress (WooCommerce) y Shopify en 2026: costos mensuales, comisiones por transacción, facilidad de uso y cuál elegir.",
   keywords: [

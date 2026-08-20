@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Wompi vs. Mercado Pago vs. PayU en Colombia (2026): Comisiones y Comparativa | K&T Code",
+  title: "Wompi vs. Mercado Pago vs. PayU en Colombia (2026): Comisiones y Comparativa",
   description:
     "Comparativa técnica y comercial de las principales pasarelas de pago en Colombia: comisiones de Wompi, Mercado Pago, PayU y Bold, tiempos de abono y facilidad de integración.",
   keywords: [

@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "SEO para ChatGPT: Cómo Optimizar tu Empresa para Búsquedas con IA | K&T Code",
+  title: "SEO para ChatGPT: Cómo Optimizar tu Empresa para Búsquedas con IA",
   description:
     "Estrategia integral de optimización de marca para ChatGPT Search, Gemini y Perplexity: autoridad de fuentes, citas contextuales y arquitectura semántica.",
   keywords: [

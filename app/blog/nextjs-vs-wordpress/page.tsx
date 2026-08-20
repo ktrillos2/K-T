@@ -7,7 +7,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Next.js vs. WordPress en 2026: Comparativa Técnica y Comercial | K&T Code",
+  title: "Next.js vs. WordPress en 2026: Comparativa Técnica y Comercial",
   description:
     "Comparativa objetiva entre Next.js y WordPress: costos, rendimiento Core Web Vitals, facilidad de gestión, seguridad y cuál elegir para tu proyecto web.",
   keywords: [

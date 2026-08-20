@@ -7,7 +7,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Next.js vs. React: Diferencias de Arquitectura y Cuándo Usar Cada Uno | K&T Code",
+  title: "Next.js vs. React: Diferencias de Arquitectura y Cuándo Usar Cada Uno",
   description:
     "Explicación técnica clara entre React (librería UI) y Next.js (framework fullstack): renderizado SSR vs CSR, SEO, velocidad y arquitectura recomendada.",
   keywords: [

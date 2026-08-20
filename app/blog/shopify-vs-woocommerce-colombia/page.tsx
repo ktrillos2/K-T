@@ -7,7 +7,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Shopify vs. WooCommerce en Colombia en 2026: Costos y Pasarelas | K&T Code",
+  title: "Shopify vs. WooCommerce en Colombia en 2026: Costos y Pasarelas",
   description:
     "Comparativa detallada entre Shopify y WooCommerce para tiendas virtuales en Colombia: costos mensuales en COP/USD, comisiones de pasarelas (Wompi, PayU, Bold) y cuál conviene.",
   keywords: [

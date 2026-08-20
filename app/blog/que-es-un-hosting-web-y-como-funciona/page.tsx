@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Qué es un Hosting Web y Cómo Funciona: Servidores, Tipos y Guía | K&T Code",
+  title: "Qué es un Hosting Web y Cómo Funciona: Servidores, Tipos y Guía",
   description:
     "Aprende qué es el alojamiento web (hosting), cómo funciona un servidor y las diferencias entre hosting compartido, VPS y arquitecturas Edge Serverless en 2026.",
   keywords: [

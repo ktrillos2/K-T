@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Cómo Crear una Tienda Online Desde Cero: Guía Completa de E-commerce | K&T Code",
+  title: "Cómo Crear una Tienda Online Desde Cero: Guía Completa de E-commerce",
   description:
     "Aprende paso a paso cómo montar una tienda virtual exitosa en Colombia: plataforma, catálogo, pasarelas de pago (Wompi, Bold, PayU), envíos y conversión.",
   keywords: [

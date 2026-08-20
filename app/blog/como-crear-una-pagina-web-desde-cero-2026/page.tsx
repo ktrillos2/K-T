@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Cómo Crear una Página Web Desde Cero en 2026: Guía Completa | K&T Code",
+  title: "Cómo Crear una Página Web Desde Cero en 2026: Guía Completa",
   description:
     "Aprende paso a paso cómo crear una página web profesional desde cero en 2026: elección de dominio, hosting, arquitectura moderna en Next.js, diseño UI/UX y SEO.",
   keywords: [

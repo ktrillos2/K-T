@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Cómo Aparecer en Google: Guía Paso a Paso para una Página Web | K&T Code",
+  title: "Cómo Aparecer en Google: Guía Paso a Paso para una Página Web",
   description:
     "Aprende cómo lograr que tu sitio web sea indexado y posicione en los primeros lugares de Google: Search Console, sitemaps, SEO on-page y autoridad.",
   keywords: [

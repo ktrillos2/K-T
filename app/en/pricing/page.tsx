@@ -10,7 +10,7 @@ import PricingCTA from "@/components/sections/precios/pricing-cta"
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Web Development Pricing & Custom Software Plans | K&T Code",
+  title: "Web Development Pricing & Custom Software Plans",
   description:
     "Transparent pricing for landing pages, corporate websites, headless e-commerce, and custom software. High performance guaranteed with Next.js.",
   keywords: [

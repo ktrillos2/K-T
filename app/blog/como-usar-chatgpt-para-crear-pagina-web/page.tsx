@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Cómo Usar ChatGPT para Crear una Página Web: Prompts, Código y Estrategia | K&T Code",
+  title: "Cómo Usar ChatGPT para Crear una Página Web: Prompts, Código y Estrategia",
   description:
     "Aprende a potenciar el desarrollo web con ChatGPT: generación de componentes React, redacción de textos persuasivos (copywriting) y optimización SEO.",
   keywords: [

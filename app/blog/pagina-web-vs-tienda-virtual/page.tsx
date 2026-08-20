@@ -7,7 +7,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Página Web vs. Tienda Virtual en Colombia: Diferencias y Precios | K&T Code",
+  title: "Página Web vs. Tienda Virtual en Colombia: Diferencias y Precios",
   description:
     "Descubre las diferencias clave entre una página web corporativa y una tienda virtual (e-commerce): objetivos, pasarelas de pago, costos en Colombia y cuál necesita tu empresa.",
   keywords: [

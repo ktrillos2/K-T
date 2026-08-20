@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Qué es un Dominio Web y Cómo Elegir el Mejor para tu Negocio | K&T Code",
+  title: "Qué es un Dominio Web y Cómo Elegir el Mejor para tu Negocio",
   description:
     "Guía práctica sobre dominios web: extensiones (.com, .co, .com.co), precios en Colombia, cómo elegir un nombre de marca y evitar errores comunes.",
   keywords: [

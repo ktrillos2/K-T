@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Cómo hacer que una página web aparezca en ChatGPT en 2026 | K&T Code",
+  title: "Cómo hacer que una página web aparezca en ChatGPT en 2026",
   description:
     "Guía técnica de GEO (Generative Engine Optimization): aprende a optimizar tu sitio web para ser citado e indexado por ChatGPT Search, GPTBot y motores de IA.",
   keywords: [

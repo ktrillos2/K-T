@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Las Mejores Herramientas de IA para Crear Páginas Web en 2026 | K&T Code",
+  title: "Las Mejores Herramientas de IA para Crear Páginas Web en 2026",
   description:
     "Revisión y comparativa de las mejores herramientas de inteligencia artificial para diseño, programación y optimización de páginas web en 2026.",
   keywords: [

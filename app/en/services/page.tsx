@@ -6,7 +6,7 @@ import { ChevronRight, ArrowRight } from "lucide-react"
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Web Development & Custom Software Services | K&T Code",
+  title: "Web Development & Custom Software Services",
   description:
     "Explore our full suite of web engineering services: custom corporate websites, headless e-commerce, custom web apps, and technical SEO optimization.",
   keywords: [

@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "GEO vs. SEO: Diferencias y Cómo Preparar una Web para Motores de IA | K&T Code",
+  title: "GEO vs. SEO: Diferencias y Cómo Preparar una Web para Motores de IA",
   description:
     "Comparativa exhaustiva entre SEO tradicional y GEO (Generative Engine Optimization). Qué cambia en los motores de búsqueda con IA y cómo adaptar tu arquitectura.",
   keywords: [

@@ -8,7 +8,7 @@ import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Software a Medida vs. SaaS: Costos, Ventajas y Cuándo Elegir Cada Uno | K&T Code",
+  title: "Software a Medida vs. SaaS: Costos, Ventajas y Cuándo Elegir Cada Uno",
   description:
     "Análisis comparativo entre pagar suscripciones SaaS comerciales vs. desarrollar software a medida propietario: retorno de inversión (ROI), escalabilidad y costos.",
   keywords: [
