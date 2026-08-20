@@ -502,7 +502,7 @@ export default function NosotrosPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-sm">
               {[
                 "Evaluación de Rendimiento y Core Web Vitals: Antes del lanzamiento auditamos Core Web Vitals, incluyendo LCP, CLS e INP, y optimizamos imágenes, scripts, renderizado y entrega de recursos con el objetivo de alcanzar métricas de rendimiento altamente competitivas.",
-                "Arquitectura Next.js & React 19: Programamos con Server Components y TypeScript estricto, eliminando bases de datos expuestas y vulnerabilidades de plugins de terceros.",
+                "Arquitectura Next.js & React 19: Reducimos dependencias innecesarias y aplicamos controles de acceso, validación de datos y buenas prácticas de seguridad en frontend, backend y base de datos.",
                 "SEO Técnico y Optimización para Motores de IA (GEO): Implementamos marcado Schema.org JSON-LD (Organization, Service, FAQPage), sitemaps dinámicos y jerarquía semántica HTML5 estricta.",
                 "Propiedad 100% del Código y Repositorio: Entregamos el código fuente completo en un repositorio privado de GitHub a nombre de la empresa cliente con total independencia.",
                 "Integraciones Transaccionales en Colombia: Conectamos pasarelas de pago (Wompi, Bold, PayU), pasarelas PSE/Nequi, WhatsApp Business API y facturación electrónica DIAN.",

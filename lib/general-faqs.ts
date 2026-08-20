@@ -24,7 +24,7 @@ export const generalFaqs: FaqItem[] = [
   {
     question: "¿Qué diferencia hay entre WordPress y Next.js?",
     answer:
-      "WordPress es un CMS monolítico tradicional basado en plantillas y plugins que suele sufrir de código inflado y tiempos de carga lentos. Next.js es un framework de ingeniería moderno basado en React que compila código limpio en el servidor (SSR/SSG), logrando velocidades de carga hasta 4 veces más rápidas, seguridad blindada sin vulnerabilidades de plugins y cumplimiento total de Core Web Vitals.",
+      "WordPress es un CMS monolítico tradicional basado en plantillas y plugins que suele sufrir de código inflado y tiempos de carga lentos. Next.js es un framework de ingeniería moderno basado en React que compila código limpio en el servidor (SSR/SSG), logrando velocidades de carga superiores, reducción sustancial de dependencias vulnerables y cumplimiento óptimo de Core Web Vitals.",
   },
   {
     question: "¿Qué es una página web headless?",

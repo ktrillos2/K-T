@@ -257,7 +257,7 @@ export default function ServiceDetailPage({ service }: { service: ServicePageDat
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="mt-0.5 h-5 w-5 shrink-0 text-emerald-400" />
-                      <span><strong>Seguridad Inquebrantable:</strong> 0 plugins de terceros vulnerables; páginas compiladas estáticamente y APIs cifradas.</span>
+                      <span><strong>Seguridad y Buenas Prácticas:</strong> Reducción de dependencias de terceros, controles de acceso y validación de datos en frontend y backend.</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="mt-0.5 h-5 w-5 shrink-0 text-emerald-400" />
