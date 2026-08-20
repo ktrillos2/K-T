@@ -128,6 +128,16 @@ const aboutJsonLd = {
         { "@type": "AdministrativeArea", "name": "Latin America" },
         { "@type": "Country", "name": "United States" }
       ],
+      "knowsLanguage": ["es", "en"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios de Ingeniería de Software",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Desarrollo Web Corporativo" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tiendas Virtuales & E-commerce" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Software a Medida & Plataformas SaaS" } }
+        ]
+      },
       "sameAs": [
         "https://www.instagram.com/ktweb_/",
         "https://www.facebook.com/KTSolutionsWeb",
@@ -575,6 +585,18 @@ export default function NosotrosPage() {
                       +57 311 636 0057
                     </a>
                   </dd>
+                </div>
+                <div>
+                  <dt className="text-white/50 text-xs uppercase tracking-wider">Servicios Principales</dt>
+                  <dd className="text-white font-bold mt-1">Desarrollo web corporativo, tiendas virtuales (E-commerce) y software a medida</dd>
+                </div>
+                <div>
+                  <dt className="text-white/50 text-xs uppercase tracking-wider">Modalidad de Trabajo</dt>
+                  <dd className="text-neutral-300 mt-1">Remota / Proyectos nacionales (Colombia) e internacionales (LATAM y EE. UU.)</dd>
+                </div>
+                <div>
+                  <dt className="text-white/50 text-xs uppercase tracking-wider">Idiomas de Atención</dt>
+                  <dd className="text-neutral-300 mt-1">Español e Inglés (Soporte y gestión bilingüe)</dd>
                 </div>
                 <div>
                   <dt className="text-white/50 text-xs uppercase tracking-wider">Stack Tecnológico</dt>

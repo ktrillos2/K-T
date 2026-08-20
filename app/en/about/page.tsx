@@ -68,9 +68,53 @@ export const metadata: Metadata = {
   },
 }
 
+const aboutEnJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.kytcode.lat/#organization",
+      "name": "K&T Code",
+      "legalName": "K&T Code",
+      "url": "https://www.kytcode.lat/",
+      "logo": "https://www.kytcode.lat/icon.png",
+      "foundingDate": "2025",
+      "email": "contactoktweb@gmail.com",
+      "telephone": "+573116360057",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "San José de Cúcuta",
+        "addressLocality": "Cúcuta",
+        "addressRegion": "Norte de Santander",
+        "postalCode": "540001",
+        "addressCountry": "CO"
+      },
+      "areaServed": [
+        { "@type": "Country", "name": "Colombia" },
+        { "@type": "AdministrativeArea", "name": "Latin America" },
+        { "@type": "Country", "name": "United States" }
+      ],
+      "knowsLanguage": ["es", "en"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Software Engineering Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Corporate Web Development" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Headless E-commerce Solutions" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom Software & SaaS Engineering" } }
+        ]
+      }
+    }
+  ]
+}
+
 export default function EnglishAboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutEnJsonLd) }}
+      />
       <main className="min-h-screen bg-black pt-32 pb-24 px-4 sm:px-6 text-white selection:bg-white selection:text-black">
         <div className="max-w-6xl mx-auto">
           {/* Breadcrumb */}
@@ -128,6 +172,22 @@ export default function EnglishAboutPage() {
               <div className="p-4 rounded-xl border border-white/10 bg-black/40">
                 <span className="text-neutral-500 block mb-1">Core Tech Stack</span>
                 <strong className="text-white text-sm">Next.js • React 19 • TS</strong>
+              </div>
+              <div className="p-4 rounded-xl border border-white/10 bg-black/40">
+                <span className="text-neutral-500 block mb-1">Primary Services</span>
+                <strong className="text-white text-sm">Web Development, E-commerce & Custom Software</strong>
+              </div>
+              <div className="p-4 rounded-xl border border-white/10 bg-black/40">
+                <span className="text-neutral-500 block mb-1">Work Modality</span>
+                <strong className="text-white text-sm">Remote / National (Colombia) & Global (USA/LATAM)</strong>
+              </div>
+              <div className="p-4 rounded-xl border border-white/10 bg-black/40">
+                <span className="text-neutral-500 block mb-1">Supported Languages</span>
+                <strong className="text-white text-sm">Spanish & English (Bilingual Support)</strong>
+              </div>
+              <div className="p-4 rounded-xl border border-white/10 bg-black/40">
+                <span className="text-neutral-500 block mb-1">Technical Lead</span>
+                <strong className="text-white text-sm">Keyner Trillos (Lead Engineer)</strong>
               </div>
             </div>
           </section>
