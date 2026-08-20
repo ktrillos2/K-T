@@ -216,7 +216,7 @@ export default function CuantoCuestaPaginaWebBlogPage() {
                 </span>
                 <ul className="mt-4 space-y-3 font-mono text-xs text-neutral-300">
                   <li>✔ Diseño exclusivo en Figma adaptado a la identidad de tu empresa.</li>
-                  <li>✔ Código frontend moderno en Next.js (Core Web Vitals 100/100).</li>
+                  <li>✔ Código frontend moderno en Next.js (optimización de Core Web Vitals y rendimiento Lighthouse).</li>
                   <li>✔ Estructura semántica SEO (H1-H6, metadatos y Schema.org).</li>
                   <li>✔ Integración directa con botón flotante y formularios a WhatsApp.</li>
                   <li>✔ Panel autogestionable (CMS) para modificar textos y fotos.</li>
@@ -309,7 +309,7 @@ export default function CuantoCuestaPaginaWebBlogPage() {
                 <strong>Plataformas No-Code (Wix, Shopify, Canva):</strong> Parecen baratas al inicio ($80.000 a $250.000 COP/mes), pero los costos en dólares se acumulan año tras año. Además, <strong>el código nunca es tuyo</strong>, no puedes migrarlo y su rendimiento en Core Web Vitals suele ser deficiente para competir en SEO.
               </li>
               <li>
-                <strong>Agencia de Ingeniería (K&T Code):</strong> Desarrollamos con Next.js y React, garantizando 100/100 en Google PageSpeed, código libre de vulnerabilidades, contratos con entregables claros y soporte técnico permanente.
+                <strong>Agencia de Ingeniería (K&T Code):</strong> Desarrollamos con Next.js y React, optimizando Core Web Vitals y rendimiento Lighthouse, aplicando buenas prácticas de seguridad, contratos con entregables claros y soporte técnico permanente.
               </li>
             </ul>
 

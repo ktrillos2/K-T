@@ -251,7 +251,7 @@ export const servicePages: Record<string, ServicePageData> = {
     shortTitle: "SEO técnico",
     metaTitle: "Servicios de SEO Técnico en Colombia | Core Web Vitals & Schema | K&T Code",
     metaDescription:
-      "Auditoría y optimización de SEO técnico en Colombia. Mejoramos rastreo, indexación, Core Web Vitals 100/100, datos estructurados JSON-LD y arquitectura para Next.js y React.",
+      "Auditoría y optimización de SEO técnico en Colombia. Mejoramos rastreo, indexación, optimización de Core Web Vitals y rendimiento Lighthouse, datos estructurados JSON-LD y arquitectura para Next.js y React.",
     eyebrow: "// Visibilidad Orgánica y Rendimiento en Buscadores",
     summary:
       "El SEO técnico es la base imprescindible para que Google comprenda, indexe y premie a tu sitio web en los primeros resultados. Auditamos y corregimos problemas de rastreo, jerarquía semántica, canonicidad, datos estructurados Schema.org y Core Web Vitals para sitios web modernos en Colombia.",
@@ -361,7 +361,7 @@ export const servicePages: Record<string, ServicePageData> = {
     shortTitle: "Desarrollo Next.js",
     metaTitle: "Desarrollo Next.js en Colombia | Expertos en React & Server Components | K&T Code",
     metaDescription:
-      "Desarrollo web especializado en Next.js, React 19 y TypeScript para empresas en Colombia. Core Web Vitals 100/100, arquitectura headless, SaaS y e-commerce.",
+      "Desarrollo web especializado en Next.js, React 19 y TypeScript para empresas en Colombia. Optimización de Core Web Vitals y rendimiento Lighthouse, arquitectura headless, SaaS y e-commerce.",
     eyebrow: "// Ingeniería Next.js & Server Components",
     summary:
       "K&T Code diseña sitios corporativos, plataformas web y e-commerce utilizando Next.js, React y TypeScript para empresas que necesitan rendimiento, escalabilidad e integraciones personalizadas.",

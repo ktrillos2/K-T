@@ -82,7 +82,7 @@ export const en = {
         "Exclusive Figma UI/UX design without templates",
         "Vercel Edge CDN hosting with free SSL",
         "Semantic technical SEO & Schema structured data",
-        "100/100 Core Web Vitals audit & optimization",
+        "Core Web Vitals optimization & Lighthouse performance",
         "Direct WhatsApp Business routing & forms",
       ],
       cta: "Get corporate web quote",

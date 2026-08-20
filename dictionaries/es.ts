@@ -82,7 +82,7 @@ export const es = {
         "Diseño UI/UX exclusivo en Figma sin plantillas",
         "Alojamiento en Vercel Edge CDN con SSL gratuito",
         "SEO técnico semántico y datos estructurados Schema",
-        "Auditoría y optimización de Core Web Vitals 100/100",
+        "Optimización de Core Web Vitals y rendimiento Lighthouse",
         "Botón y formularios conectados a WhatsApp Business",
       ],
       cta: "Cotizar sitio web corporativo",

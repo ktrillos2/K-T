@@ -171,7 +171,7 @@ export const pricingGuides: Record<string, PricingGuideData> = {
       {
         provider: "Agencia de Ingeniería y Desarrollo (K&T Code)",
         priceRange: "Desde $450.000 COP (Planes claros)",
-        pros: "Código propio en Next.js, Core Web Vitals 100/100, diseño exclusivo en Figma, SEO semántico, soporte técnico garantizado y propiedad total del código.",
+        pros: "Código propio en Next.js, optimización de Core Web Vitals y rendimiento Lighthouse, diseño exclusivo en Figma, SEO semántico, soporte técnico garantizado y propiedad total del código.",
         cons: "Requiere una definición clara de objetivos de negocio.",
         verdict: "La mejor relación calidad-precio-rendimiento para empresas en Colombia.",
       },

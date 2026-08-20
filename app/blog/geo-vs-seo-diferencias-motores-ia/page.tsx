@@ -160,7 +160,7 @@ export default function GeoVsSeoPage() {
             </p>
             <ul>
               <li><strong>Desacopla el contenido con arquitecturas Headless:</strong> Entregar contenido en JSON estructurado a través de APIs acelera la ingestión por agentes de búsqueda.</li>
-              <li><strong>Garantiza el 100/100 en Core Web Vitals:</strong> Los bots de IA tienen límites de cómputo y priorizan páginas con tiempos de respuesta instantáneos.</li>
+              <li><strong>Optimiza Core Web Vitals y métricas de rendimiento:</strong> Los bots de IA tienen límites de cómputo y priorizan páginas con tiempos de respuesta instantáneos.</li>
               <li><strong>Evita el contenido relleno o clickbait:</strong> Los LLMs descartan rápidamente textos con baja densidad de información útil.</li>
             </ul>
 
