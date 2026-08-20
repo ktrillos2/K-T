@@ -83,8 +83,15 @@ async function getTestimonials() {
 
 export default async function Home() {
   const testimonials = await getTestimonials()
-  const projects = await getAllProjects()
-  const projectCount = projects?.length ?? 0
+  const sanityProjects = await getAllProjects()
+  const { projects: hardcodedProjects } = await import("@/lib/projects")
+  
+  const allSlugSet = new Set(sanityProjects.map(p => p.slug))
+  const projects = [
+    ...sanityProjects,
+    ...hardcodedProjects.filter(p => !allSlugSet.has(p.slug))
+  ]
+  const projectCount = projects.length
 
   return (
     <>

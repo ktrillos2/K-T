@@ -21,8 +21,8 @@ export default function ProjectsSection({ initialProjects = [] }: { initialProje
     titleEs: p.title,
     descEn: p.shortDescription || p.description,
     descEs: p.shortDescription || p.description,
-    image: p.hero,
-    imageMobile: p.mobile,
+    image: p.hero || p.images?.hero || "/images/projects/telas-real.webp",
+    imageMobile: p.mobile || p.images?.mobile || "/images/projects/telas-real-mobile.webp",
     tech: p.tech || [],
     year: p.year,
     month: p.month,
@@ -31,13 +31,17 @@ export default function ProjectsSection({ initialProjects = [] }: { initialProje
     externalLink: p.liveUrl,
   }));
 
-  // Separate featured project (named "Cxellence") from the rest
-  const featuredProject = allProjects.find(
-    (proj) =>
-      proj.titleEn?.toLowerCase() === "cxellence" ||
-      proj.titleEs?.toLowerCase() === "cxellence"
-  );
-  const projects = allProjects.filter((proj) => proj !== featuredProject);
+  // Separate featured projects (Telas Real & Cxellence) from the rest
+  const isFeatured = (proj: any) =>
+    proj.slug === "telas-real" ||
+    proj.slug === "cxellence" ||
+    proj.titleEn?.toLowerCase().includes("telas real") ||
+    proj.titleEs?.toLowerCase().includes("telas real") ||
+    proj.titleEn?.toLowerCase().includes("cxellence") ||
+    proj.titleEs?.toLowerCase().includes("cxellence") ||
+    proj.externalLink?.includes("telasreal.com");
+
+  const projects = allProjects.filter((proj) => !isFeatured(proj));
 
   return (
     <section id="work" aria-label="Portafolio de proyectos y casos de estudio de desarrollo web" className="relative py-16 lg:py-24 overflow-hidden cv-auto">

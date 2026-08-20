@@ -7,6 +7,7 @@ import { getAllProjects } from "@/sanity/lib/queries"
 import { absoluteUrl } from "@/lib/site-config"
 
 const AboutSection = dynamic(() => import("@/components/sections/about-section"))
+const CxellenceSection = dynamic(() => import("@/components/sections/cxellence-section"))
 const ProjectsSection = dynamic(() => import("@/components/sections/projects-section"))
 const InternationalSection = dynamic(() => import("@/components/sections/international-section"))
 const ContactSection = dynamic(() => import("@/components/sections/contact-section"))
@@ -65,22 +66,26 @@ export const revalidate = 60
 export default async function EnglishHomePage() {
   let initialProjects: any[] = []
   try {
-    initialProjects = await getAllProjects()
+    const sanityProjects = await getAllProjects()
+    const { projects: hardcodedProjects } = await import("@/lib/projects")
+    const allSlugSet = new Set(sanityProjects.map(p => p.slug))
+    initialProjects = [
+      ...sanityProjects,
+      ...hardcodedProjects.filter(p => !allSlugSet.has(p.slug))
+    ]
   } catch (error) {
     console.error("Error fetching projects for English home page:", error)
+    const { projects: hardcodedProjects } = await import("@/lib/projects")
+    initialProjects = hardcodedProjects
   }
 
-  let initialProjectCount = 0
-  try {
-    initialProjectCount = await client.fetch<number>(`count(*[_type == "project"])`)
-  } catch (error) {
-    console.error("Error fetching project count:", error)
-  }
+  const initialProjectCount = initialProjects.length
 
   return (
     <div className="flex min-h-screen flex-col bg-black text-white selection:bg-white selection:text-black">
       <HeroSection />
       <AboutSection projectCount={initialProjectCount} />
+      <CxellenceSection initialProjects={initialProjects} />
       <ProjectsSection initialProjects={initialProjects} />
       <ServicesSection />
       <TestimonialsSection />
