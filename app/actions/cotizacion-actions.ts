@@ -22,7 +22,7 @@ export async function notifyQuotationViewed({ client }: { client: string }) {
       <div style="font-family: sans-serif; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
         <h2 style="color: #000;">👀 ¡Cotización Vista!</h2>
         <p>El cliente <strong>${client}</strong> acaba de acceder a su cotización usando la contraseña.</p>
-        <p style="color: #666; font-size: 12px; margin-top: 20px;">Este es un mensaje automático de K&T Agency.</p>
+        <p style="color: #666; font-size: 12px; margin-top: 20px;">Este es un mensaje automático de K&T Code.</p>
       </div>
     `;
 
@@ -49,7 +49,7 @@ export async function notifyQuotationAccepted({ client }: { client: string }) {
         <h2 style="color: #059669;">🎉 ¡Cotización Aceptada!</h2>
         <p>¡Excelentes noticias! El cliente <strong>${client}</strong> ha hecho clic en "Aceptar Cotización".</p>
         <p>Es el momento de contactar al cliente para el paso a paso del pago y el inicio del proyecto.</p>
-        <p style="color: #666; font-size: 12px; margin-top: 20px;">Este es un mensaje automático de K&T Agency.</p>
+        <p style="color: #666; font-size: 12px; margin-top: 20px;">Este es un mensaje automático de K&T Code.</p>
       </div>
     `;
 

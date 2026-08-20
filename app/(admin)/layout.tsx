@@ -5,7 +5,7 @@ import { getUserProfile } from '@/lib/services/auth'
 import { redirect } from 'next/navigation'
 
 export const metadata: Metadata = {
-    title: 'Panel | K&T Agency',
+    title: 'Panel | K&T Code',
     description: 'Panel Administrativo K&T',
     robots: {
         index: false,

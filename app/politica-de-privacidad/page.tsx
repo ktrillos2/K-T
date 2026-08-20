@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { AnimatedHeart } from '@/components/ui/animated-heart';
 
 export const metadata: Metadata = {
-    title: 'Política de Privacidad | K&T Agency',
+    title: 'Política de Privacidad',
     description: 'Conoce nuestra Política de Privacidad sobre la recopilación y uso de datos a través de nuestros canales de soporte, incluyendo la API de WhatsApp Business.',
 };
 
@@ -25,7 +25,7 @@ export default function PrivacyPolicyPage() {
                             1. Introducción
                         </h2>
                         <p className="leading-relaxed">
-                            En <strong>K&T Agency</strong>, respetamos tu privacidad y estamos comprometidos con la protección de tus datos personales. Esta Política de Privacidad explica cómo recopilamos, utilizamos y salvaguardamos tu información cuando interactúas con nosotros a través de nuestros canales de atención, específicamente mediante la API de WhatsApp Business.
+                            En <strong>K&T Code</strong>, respetamos tu privacidad y estamos comprometidos con la protección de tus datos personales. Esta Política de Privacidad explica cómo recopilamos, utilizamos y salvaguardamos tu información cuando interactúas con nosotros a través de nuestros canales de atención, específicamente mediante la API de WhatsApp Business.
                         </p>
                     </section>
 
@@ -48,7 +48,7 @@ export default function PrivacyPolicyPage() {
                             3. Uso de la Información
                         </h2>
                         <p className="leading-relaxed">
-                            Los datos proporcionados a K&T Agency a través de la API de WhatsApp Business son utilizados de manera <strong>exclusiva para fines de atención al cliente, soporte técnico y seguimiento comercial directo</strong>. Esto incluye:
+                            Los datos proporcionados a K&T Code a través de la API de WhatsApp Business son utilizados de manera <strong>exclusiva para fines de atención al cliente, soporte técnico y seguimiento comercial directo</strong>. Esto incluye:
                         </p>
                         <ul className="list-disc pl-6 space-y-2 mt-4">
                             <li>Responder a tus consultas, preguntas o solicitudes de presupuesto.</li>
@@ -62,7 +62,7 @@ export default function PrivacyPolicyPage() {
                             4. Compartición y Venta de Datos
                         </h2>
                         <p className="leading-relaxed font-semibold text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-                            K&T Agency garantiza de forma estricta que NO vendemos, alquilamos ni compartimos su número de teléfono, historial de chat ni ninguna otra información personal con terceros, plataformas de marketing, ni bases de datos externas bajo ninguna circunstancia.
+                            K&T Code garantiza de forma estricta que NO vendemos, alquilamos ni compartimos su número de teléfono, historial de chat ni ninguna otra información personal con terceros, plataformas de marketing, ni bases de datos externas bajo ninguna circunstancia.
                         </p>
                     </section>
 

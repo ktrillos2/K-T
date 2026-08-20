@@ -30,7 +30,7 @@ export type QuickReply = {
 const DEFAULT_QUICK_REPLIES: QuickReply[] = [
     { id: '1', command: '/landing', text: '¡Hola! Nuestra Landing Page incluye diseño personalizado, integración con tus redes, SEO básico y dominio gratis por 1 año. El costo es de $350 USD y tardamos 7 días hábiles. ¿Quieres ver nuestra UI o revisar opciones?' },
     { id: '2', command: '/ecommerce', text: 'Una tienda online completa (E-commerce) con pasarela de pago, inventario y hasta 50 productos cuesta desde $850 USD. Incluye capacitación. ¿Deseas agendar una llamada de asesoría gratuita?' },
-    { id: '3', command: '/saludo', text: '¡Hola! Gracias por comunicarte con K&T Agency. ¿En qué podemos ayudarte el día de hoy?' },
+    { id: '3', command: '/saludo', text: '¡Hola! Gracias por comunicarte con K&T Code. ¿En qué podemos ayudarte el día de hoy?' },
     { id: '4', command: '/precios', text: 'Puedes encontrar nuestro catálogo completo de servicios y planes de pago en nuestro sitio web: www.kytcode.lat/servicios' }
 ];
 
@@ -487,7 +487,7 @@ export default function WhatsAppWebClone() {
     return (
         <>
             <Head>
-                <title>Soporte WhatsApp | K&T Agency</title>
+                <title>Soporte WhatsApp | K&T Code</title>
                 <meta name="description" content="Panel de soporte y atención al cliente vía WhatsApp integrado." />
             </Head>
 
@@ -836,7 +836,7 @@ export default function WhatsAppWebClone() {
                         <h1 className="text-[32px] font-light text-[#41525d] dark:text-[#e9edef] mb-4">WhatsApp Web Clon</h1>
                         <p className="text-[#667781] dark:text-[#8696a0] text-sm max-w-[500px] leading-6">
                             Envía y recibe mensajes sin mantener tu teléfono conectado.<br />
-                            Usa este panel integrado con la API Oficial de Meta para K&T Agency.
+                            Usa este panel integrado con la API Oficial de Meta para K&T Code.
                         </p>
                         <div className="mt-10 flex items-center text-[#8696a0] text-sm gap-2">
                             <svg viewBox="0 0 10 12" width="10" height="12" className=""><path fill="currentColor" d="M5.008 1.456C2.981 1.456 1.34 3.067 1.34 5.06v2.105c-.328.026-.642.179-.861.411-.371.393-.418.995-.107 1.432l.066.082L.5 10.155a.8.8 0 0 0 1.258.98l.063-.082.904-1.424h4.551l.904 1.424-.063.082a.8.8 0 0 0 1.321-.898l-.063-.082-.062-1.065.066-.082c.311-.437.264-1.039-.107-1.432-.219-.232-.533-.385-.861-.411V5.06c0-1.993-1.642-3.604-3.668-3.604h-.735Zm-.735 1.6h.735c1.109 0 2.012.91 2.012 2.004v1.889H2.996V5.06c0-1.094.903-2.004 2.013-2.004Zm-2.22 4.673h5.908c.321 0 .584.269.584.6 0 .33-.263.6-.584.6H2.053c-.321 0-.584-.27-.584-.6 0-.331.263-.6.584-.6Z"></path></svg>
