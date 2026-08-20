@@ -375,7 +375,7 @@ export const servicePages: Record<string, ServicePageData> = {
       { title: "Portales y Paneles Administrativos", description: "Dashboards interactivos con gestión de roles, analítica en tiempo real y autenticación segura." },
     ],
     whenWeRecommend: [
-      "Cuando el posicionamiento orgánico en Google (SEO) y las puntuaciones de Core Web Vitals (LCP < 0.8s) son factores críticos para la rentabilidad de tu negocio.",
+      "Cuando el posicionamiento orgánico en Google (SEO) y la optimización rigurosa de Core Web Vitals son factores críticos para la rentabilidad de tu negocio.",
       "Empresas que esperan alto tráfico concurrente y requieren escalabilidad en la nube (Edge CDN) sin caídas de servidor.",
       "Plataformas interactivas que necesitan renderizado instantáneo, estados dinámicos e integraciones con APIs externas.",
       "Proyectos corporativos que exigen máxima seguridad, eliminando riesgos de inyecciones y hackeos por plugins de terceros.",
@@ -387,7 +387,7 @@ export const servicePages: Record<string, ServicePageData> = {
     estimatedTimeline: "Entre 2 a 4 semanas para sitios web corporativos; 4 a 8 semanas para plataformas SaaS o tiendas headless.",
     priceRangeCOP: "Planes transparentes por etapas desde $2.500.000 COP según alcance, vistas y módulos requeridos.",
     benefits: [
-      { title: "Velocidad Extrema (LCP < 0.8s)", description: "Server Components y optimización de recursos para alcanzar 95-100/100 en Google PageSpeed." },
+      { title: "Rendimiento y Velocidad Superior", description: "Server Components y optimización de recursos orientados a alcanzar puntuaciones líderes en Google PageSpeed." },
       { title: "SEO Semántico Nativo", description: "Renderizado en servidor que entrega HTML5 puro a los rastreadores de Google con metadatos dinámicos." },
       { title: "Seguridad Inquebrantable", description: "Código compilado estático sin bases de datos expuestas ni plugins vulnerables de terceros." },
       { title: "Escalabilidad Serverless", description: "Despliegues globales en Edge CDN (Vercel / Cloudflare) con alta disponibilidad y SSL." },

@@ -184,7 +184,7 @@ export default function EnglishAboutPage() {
                 { step: "02", title: "Figma UI/UX Prototyping", desc: "We design high-fidelity interactive wireframes focusing on conversion rate optimization and brand identity." },
                 { step: "03", title: "Headless Architecture", desc: "We set up Next.js App Router, Server Components, and database schema in Supabase/PostgreSQL." },
                 { step: "04", title: "Strict Typing & Engineering", desc: "100% TypeScript coverage with zero sloppy patterns or bloated unmaintained plugins." },
-                { step: "05", title: "Core Web Vitals & QA Audit", desc: "We guarantee LCP < 0.8s, Lighthouse scores above 95/100, and complete Schema.org JSON-LD structured data." },
+                { step: "05", title: "Core Web Vitals & QA Audit", desc: "We audit Core Web Vitals (LCP, CLS, and INP), optimize assets and scripts, and implement complete Schema.org JSON-LD structured data for high performance." },
                 { step: "06", title: "Edge CDN Deployment", desc: "Zero-downtime deployment on Vercel Global Edge Network with continuous monitoring." },
               ].map((m) => (
                 <div key={m.step} className="p-6 rounded-2xl border border-white/10 bg-white/[0.02]">

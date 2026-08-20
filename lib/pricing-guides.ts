@@ -179,8 +179,8 @@ export const pricingGuides: Record<string, PricingGuideData> = {
     techComparison: [
       {
         aspect: "Velocidad Core Web Vitals",
-        nextjs: "95-100/100 (LCP < 0.8s, carga instantánea)",
-        wordpress: "35-65/100 (LCP > 3.5s por plugins pesados)",
+        nextjs: "Sobresaliente (optimización de LCP, CLS e INP)",
+        wordpress: "35-65/100 (tiempos degradados por plugins pesados)",
         builders: "40-60/100 (código DOM inflado)",
       },
       {

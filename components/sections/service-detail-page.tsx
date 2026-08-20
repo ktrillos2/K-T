@@ -253,7 +253,7 @@ export default function ServiceDetailPage({ service }: { service: ServicePageDat
                   <ul className="mt-6 space-y-4 font-mono text-sm text-white/80">
                     <li className="flex items-start gap-3">
                       <Check className="mt-0.5 h-5 w-5 shrink-0 text-emerald-400" />
-                      <span><strong>Velocidad Core Web Vitals:</strong> 95-100/100 en Google PageSpeed. LCP inferior a 0.8s.</span>
+                      <span><strong>Velocidad y Core Web Vitals:</strong> Puntuaciones sobresalientes en Google PageSpeed y optimización rigurosa de LCP, CLS e INP.</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <Check className="mt-0.5 h-5 w-5 shrink-0 text-emerald-400" />

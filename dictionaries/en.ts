@@ -53,7 +53,7 @@ export const en = {
       },
       speed: {
         title: "Core Web Vitals Optimization",
-        description: "Prior to deployment we audit Core Web Vitals (LCP < 0.8s, CLS 0), WebP/AVIF image compression, third-party script minimization, and Vercel Edge CDN delivery.",
+        description: "Prior to deployment we audit Core Web Vitals (including LCP, CLS, and INP) and optimize images, scripts, and Edge delivery to achieve competitive performance metrics.",
       },
       collaboration: {
         title: "Integrations & Payment Gateways",
