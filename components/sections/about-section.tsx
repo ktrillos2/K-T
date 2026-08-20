@@ -306,7 +306,7 @@ const BrickWall = memo(function BrickWall({
     "items-center mx-auto";
 
   return (
-    <div className={`flex flex-col gap-2 w-fit ${alignClass}`}>
+    <div className={`hidden md:flex flex-col gap-2 w-fit ${alignClass}`}>
       {layout.map((row, rowIndex) => (
         <div key={rowIndex} className="flex gap-2 justify-center">
           {row.map((p, colIndex) => {
@@ -632,6 +632,24 @@ export default function AboutSection({ projectCount }: AboutSectionProps) {
               {/* @ts-ignore */}
               <p className="text-white/40 font-mono text-xs uppercase tracking-widest">{dictionary.about.techStack}</p>
             </div>
+            {/* Mobile Wrap View */}
+            <div className="flex md:hidden flex-wrap justify-center gap-2 w-full max-w-md px-1">
+              {techStack.map((tech, idx) => (
+                <motion.div
+                  key={tech.name}
+                  className="rounded-lg border border-white/15 bg-white/5 text-white px-3 py-2 text-xs font-mono font-medium flex items-center justify-center hover:border-white/40 transition-colors"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.03 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {tech.name}
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Desktop Brick Wall View */}
             <BrickWall 
               items={techStack}
               layout={[
@@ -661,6 +679,35 @@ export default function AboutSection({ projectCount }: AboutSectionProps) {
             {/* @ts-ignore */}
             <p className="text-white/40 font-mono text-xs uppercase tracking-widest">{dictionary.about.sectorsTitle}</p>
           </div>
+
+          {/* Mobile Wrap View */}
+          <div className="flex md:hidden flex-wrap justify-center gap-2 w-full max-w-md px-1">
+            {sectors.map((sector, idx) => {
+              const Icon = sector.Icon;
+              const label = (dictionary.about.sectors as any)[sector.key] || sector.key;
+              return (
+                <motion.div
+                  key={sector.key}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.03 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link
+                    href={sector.href}
+                    aria-label={`Ver soluciones web para ${label}`}
+                    className="rounded-lg border border-white/15 bg-white/5 text-white/90 px-3 py-2 text-xs font-mono font-medium flex items-center gap-2 hover:border-emerald-400/50 hover:text-emerald-400 transition-colors group"
+                  >
+                    <Icon className="w-3.5 h-3.5 text-emerald-400 shrink-0 group-hover:scale-110 transition-transform" />
+                    <span>{label}</span>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Desktop Brick Wall View */}
           <BrickWall 
             items={sectors}
             layout={[
