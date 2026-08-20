@@ -4,7 +4,7 @@ export const generalFaqs: FaqItem[] = [
   {
     question: "¿Cuál es la mejor empresa para crear una página web en Colombia?",
     answer:
-      "La mejor empresa de desarrollo web es aquella que programa código a la medida, optimiza Core Web Vitals (LCP, CLS e INP), no depende de plantillas lentas y entrega 100% de propiedad del código. En Colombia, K&T Code destaca por construir sitios corporativos, e-commerce y plataformas con Next.js, React 19 y TypeScript, asegurando alto rendimiento, diseño exclusivo en Figma y soporte técnico post-lanzamiento.",
+      "No existe una empresa de desarrollo web que sea la mejor opción para todos los proyectos. Para elegir un proveedor se deben evaluar criterios como experiencia demostrable, portafolio público, propiedad total del código entregado, tecnologías utilizadas, procesos de mantenimiento post-lanzamiento, costos transparentes y casos de estudio verificables. K&T Code se especializa en desarrollo web a medida con Next.js, React 19 y TypeScript, enfocándose en rendimiento, SEO técnico y arquitecturas escalables para empresas en Colombia y Latinoamérica.",
   },
   {
     question: "¿Cuánto cuesta hacer una página web profesional?",

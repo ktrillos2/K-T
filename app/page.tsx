@@ -18,9 +18,9 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Empresa de Desarrollo Web y Software en Colombia | K&T Code",
+    absolute: "Desarrollo Web y Software a Medida en Colombia | K&T Code",
   },
-  description: "K&T Code es una empresa colombiana de desarrollo web y software a medida. Creamos páginas web, tiendas virtuales y plataformas digitales para empresas en Colombia y Latinoamérica.",
+  description: "K&T Code desarrolla páginas web, tiendas virtuales y software a medida para empresas en Colombia y Latinoamérica, con enfoque en rendimiento, SEO y escalabilidad.",
   keywords: [
     "empresa de desarrollo web colombia",
     "desarrollo web y software a medida",
@@ -55,8 +55,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Empresa de Desarrollo Web y Software en Colombia | K&T Code",
-    description: "K&T Code es una empresa colombiana de desarrollo web y software a medida. Creamos páginas web, tiendas virtuales y plataformas digitales para empresas en Colombia y Latinoamérica.",
+    title: "Desarrollo Web y Software a Medida en Colombia | K&T Code",
+    description: "K&T Code desarrolla páginas web, tiendas virtuales y software a medida para empresas en Colombia y Latinoamérica, con enfoque en rendimiento, SEO y escalabilidad.",
     url: "https://www.kytcode.lat",
     siteName: "K&T Code",
     locale: "es_CO",

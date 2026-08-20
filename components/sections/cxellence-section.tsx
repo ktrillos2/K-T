@@ -56,11 +56,11 @@ export default function CxellenceSection({ initialProjects = [] }: { initialProj
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold font-title text-white">
             {language === "en"
               ? featuredProjects.length > 1
-                ? "Featured Projects"
-                : "Featured Project"
+                ? "Featured Web Development Projects"
+                : "Featured Web Development Project"
               : featuredProjects.length > 1
-              ? "Proyectos Destacados"
-              : "Proyecto Destacado"}
+              ? "Proyectos Destacados de Desarrollo Web"
+              : "Proyecto Destacado de Desarrollo Web"}
           </h2>
         </motion.div>
 

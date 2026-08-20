@@ -160,14 +160,14 @@ export default function CostoWebLenta() {
                     </h2>
 
                     <p>
-                        La frustración desaparece al adoptar arquitectura profesional. En la agencia de <strong>desarrollo web K&T</strong> construimos infraestructura, no plantillas, empleando estas reglas imperativas de Ingeniería y WPO:
+                        Adoptar una arquitectura orientada al rendimiento permite reducir significativamente los tiempos de carga y sus efectos negativos sobre la conversión. En <strong>K&T Code</strong> construimos sobre infraestructura moderna, no plantillas, aplicando prácticas de ingeniería y optimización de rendimiento web (WPO):
                     </p>
 
                     <div className="grid sm:grid-cols-2 gap-6 my-10">
                         <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
                             <GaugeCircle className="w-8 h-8 text-green-500 mb-4" />
                             <h3 className="text-xl font-bold text-white m-0 mb-2">Framework Estático</h3>
-                            <p className="text-sm text-neutral-400 m-0">Transpilamos el código a HTML/CSS puros de forma adelantada, el navegador jamás debe procesar scripts inútiles al cargar.</p>
+                            <p className="text-sm text-neutral-400 m-0">Compilamos el código a HTML/CSS estáticos de forma anticipada, reduciendo al mínimo los scripts que el navegador necesita procesar en tiempo de carga.</p>
                         </div>
                         <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
                             <Server className="w-8 h-8 text-blue-500 mb-4" />

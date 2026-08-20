@@ -120,14 +120,14 @@ export const es = {
     subtitle: "// Casos de Estudio y Plataformas en Producción",
   },
   international: {
-    title: "Alcance Nacional e Internacional",
+    title: "Desarrollo Web para Empresas en Colombia y Latinoamérica",
     subtitle: "// Base en Colombia, Clientes Globales",
     description: "K&T Code es una empresa de ingeniería web con sede en Colombia que desarrolla soluciones para empresas en Bogotá, Medellín, Cali, Barranquilla y clientes internacionales en Estados Unidos, México y Latinoamérica.",
     activeClients: "Clientes Activos",
     americas: "Región Américas"
   },
   contact: {
-    title: "Cotiza tu Proyecto Web",
+    title: "Cotiza tu Proyecto de Desarrollo Web",
     subtitle: "// ¿Listo para construir algo increíble?",
     email: "Correo",
     phone: "Teléfono",
@@ -149,7 +149,7 @@ export const es = {
     estimatedInvestment: "Inversión Estimada:",
   },
   testimonials: {
-    title: "Historias de Éxito y Confianza",
+    title: "Casos de Éxito de Nuestros Clientes",
     subtitle: "// Testimonios",
     leaveReview: "Dejar un Testimonio",
     modalTitle: "Comparte tu experiencia",
