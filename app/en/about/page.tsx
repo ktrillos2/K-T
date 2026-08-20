@@ -96,10 +96,13 @@ export default function EnglishAboutPage() {
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               Corporate Identity & Engineering Team
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-title tracking-tight text-white mb-6 leading-tight max-w-5xl">
-              Software Engineering Built on Rigor, Speed, and Measurable Results
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-title tracking-tight text-white mb-4 leading-tight max-w-5xl">
+              K&T Code: Custom Web & Software Development Agency in Colombia
             </h1>
-            <p className="font-mono text-lg sm:text-xl text-neutral-400 max-w-3xl leading-relaxed mx-auto">
+            <p className="text-lg sm:text-xl md:text-2xl font-mono text-emerald-400 font-medium mb-6 max-w-3xl">
+              Software engineering built on rigor, speed, and measurable results.
+            </p>
+            <p className="font-mono text-base sm:text-lg text-neutral-400 max-w-3xl leading-relaxed mx-auto">
               <strong>K&T Code</strong> is a web development and custom software company founded in 2025 in San José de Cúcuta, Colombia. We build modern digital infrastructure using <strong>Next.js, React 19, TypeScript, Supabase, and Headless CMS</strong> for enterprises across Colombia, Latin America, and the United States.
             </p>
           </header>

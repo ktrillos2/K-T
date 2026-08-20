@@ -208,10 +208,13 @@ export default function NosotrosPage() {
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               Identidad Corporativa & Equipo de Ingeniería
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-title tracking-tight text-white mb-6 leading-tight max-w-5xl">
-              Ingeniería de Software Basada en Rigor, Velocidad y Resultados
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-title tracking-tight text-white mb-4 leading-tight max-w-5xl">
+              K&T Code: Empresa de Desarrollo Web y Software a Medida en Colombia
             </h1>
-            <p className="font-mono text-lg sm:text-xl text-neutral-400 max-w-3xl leading-relaxed mx-auto">
+            <p className="text-lg sm:text-xl md:text-2xl font-mono text-emerald-400 font-medium mb-6 max-w-3xl">
+              Ingeniería de software basada en rigor, velocidad y resultados.
+            </p>
+            <p className="font-mono text-base sm:text-lg text-neutral-400 max-w-3xl leading-relaxed mx-auto">
               <strong className="text-white">K&T Code</strong> es una empresa colombiana de desarrollo web y software a medida fundada en 2025 en San José de Cúcuta. Construimos plataformas digitales de alto rendimiento con <strong className="text-white">Next.js, React 19, TypeScript, Supabase y CMS Headless</strong> para empresas en Colombia, Latinoamérica y Estados Unidos.
             </p>
           </header>
