@@ -22,34 +22,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
     }))
 
-    let blogSlugs: string[] = []
-    try {
-        const blogDir = path.join(process.cwd(), 'app', 'blog')
-        const entries = fs.readdirSync(blogDir, { withFileTypes: true })
-        blogSlugs = entries
-            .filter(entry => entry.isDirectory() && !entry.name.startsWith('['))
-            .map(entry => entry.name)
-    } catch (e) {
-        console.error("Error reading blog directories for sitemap", e)
-        blogSlugs = [
-            'nextjs-vs-wordpress',
-            'shopify-vs-woocommerce-colombia',
-            'agencia-vs-freelance-desarrollo-web',
-            'nextjs-vs-react',
-            'pagina-web-vs-tienda-virtual',
-            'cuanto-cuesta-una-pagina-web-en-colombia',
-            'como-elegir-empresa-desarrollo-web-colombia',
-            'como-crear-pagina-web-2026',
-            'como-crear-pagina-web-profesional',
-            'costo-oculto-pagina-web-lenta',
-            'desarrollo-web-medida-vs-plantillas',
-            'seo-desde-la-raiz-crear-pagina'
-        ]
-    }
-
-    const blogUrls = blogSlugs.map((slug) => ({
-        url: `${baseUrl}/blog/${slug}`,
-        lastModified: currentDate,
+    // Generar dinámicamente rutas para todos los artículos del blog
+    const { blogPosts } = await import('@/lib/blog-posts')
+    const blogUrls = blogPosts.map((p) => ({
+        url: `${baseUrl}/blog/${p.slug}`,
+        lastModified: new Date(p.modifiedAt || p.publishedAt || currentDate),
         changeFrequency: 'weekly' as const,
         priority: 0.8,
     }))
