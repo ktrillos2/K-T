@@ -74,7 +74,7 @@ export default function CustomCursor() {
   const isHover = cursorVariant === "hover"
 
   if (mounted && isMobile()) return null
-  if (pathname === '/whatsapp-clone' || cursorVariant === 'hidden') return null
+  if (cursorVariant === 'hidden') return null
 
   return (
     <>

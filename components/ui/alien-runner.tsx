@@ -848,13 +848,14 @@ export default function AlienRunner() {
           role="button"
           tabIndex={0}
           aria-label={isEn ? "K&T Code Desert Runner Game. Press space or tap to jump." : "Juego Desert Runner de K&T Code. Presiona espacio o toca para saltar."}
-          className="relative w-full aspect-[800/220] sm:aspect-[800/180] min-h-[125px] sm:min-h-[150px] rounded-xl overflow-hidden cursor-pointer border border-white/10 bg-black group select-none touch-manipulation focus:outline-none focus:ring-1 focus:ring-emerald-400/50"
+          className="relative w-full aspect-[800/200] sm:aspect-[800/180] min-h-[140px] sm:min-h-[150px] rounded-xl overflow-hidden cursor-pointer border border-white/10 bg-black group select-none touch-manipulation focus:outline-none focus:ring-1 focus:ring-emerald-400/50"
         >
           <canvas
             ref={canvasRef}
             width={CANVAS_WIDTH}
             height={CANVAS_HEIGHT}
-            className="w-full h-full object-cover block"
+            className="w-full h-full block"
+            style={{ imageRendering: "pixelated" }}
           />
 
           {/* Idle / Welcome Overlay */}

@@ -30,5 +30,4 @@ URL,Indexable,Canonical,Primary intent,Structured data
 /admin/*,no,,administración,noindex
 /cotizaciones/*,no,,propuestas privadas,noindex
 /sentry-example-page,no,,demostración técnica,noindex
-/whatsapp-clone,no,,demostración técnica,noindex
 
