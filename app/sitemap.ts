@@ -7,16 +7,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://www.kytcode.lat'
     const currentDate = new Date()
 
-    // Generar dinámicamente rutas para proyectos desde el CMS
+    // Generar dinámicamente rutas para proyectos (CMS + catálogo interno)
     let cmsProjects: { slug: string }[] = []
     try {
         cmsProjects = await getAllProjects()
     } catch {
         cmsProjects = []
     }
+    const { projects: hardcodedProjects } = await import('@/lib/projects')
+    const allProjectSlugs = Array.from(
+        new Set([
+            ...cmsProjects.map((p) => p.slug),
+            ...hardcodedProjects.map((p) => p.slug),
+        ])
+    ).filter(Boolean)
 
-    const projectUrls = cmsProjects.map((project) => ({
-        url: `${baseUrl}/projects/${project.slug}`,
+    const projectUrls = allProjectSlugs.map((slug) => ({
+        url: `${baseUrl}/projects/${slug}`,
         lastModified: currentDate,
         changeFrequency: 'monthly' as const,
         priority: 0.8,
@@ -73,6 +80,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         'desarrollo-web-editorial',
     ]
 
+    const citySlugs = [
+        'desarrollo-web-bogota',
+        'desarrollo-web-medellin',
+        'desarrollo-web-cucuta',
+        'desarrollo-web-cali',
+        'desarrollo-web-barranquilla',
+    ]
+
+    const cityUrls = citySlugs.map((slug) => ({
+        url: `${baseUrl}/${slug}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.9,
+    }))
+
     const industryUrls = industrySlugs.map((slug) => ({
         url: `${baseUrl}/industrias/${slug}`,
         lastModified: currentDate,
@@ -115,6 +137,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.9,
         },
         ...serviceUrls,
+        ...cityUrls,
         {
             url: `${baseUrl}/precios`,
             lastModified: currentDate,

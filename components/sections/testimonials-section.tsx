@@ -5,6 +5,7 @@ import { m as motion } from "framer-motion"
 import { MessageSquare } from "lucide-react"
 import { useLanguage } from "@/context/language-context"
 import dynamic from "next/dynamic"
+import { fallbackTestimonials } from "@/lib/testimonials-fallback"
 
 const TestimonialsCarousel = dynamic(() => import("./testimonials-carousel"), { ssr: false })
 const TestimonialModal = dynamic(() => import("@/components/modals/testimonial-modal"))
@@ -28,11 +29,42 @@ export default function TestimonialsSection({ initialTestimonials = [] }: Testim
     const { dictionary } = useLanguage()
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [hasOpened, setHasOpened] = useState(false)
-    // Use initialTestimonials if available
-    const testimonials = initialTestimonials.length > 0 ? initialTestimonials : []
+    // Use initialTestimonials if available, otherwise fall back to verified client testimonials
+    const testimonials = initialTestimonials.length > 0 ? initialTestimonials : fallbackTestimonials
+
+    const testimonialsSchema = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "K&T Code",
+        "url": "https://www.kytcode.lat",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": testimonials.length.toString(),
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "review": testimonials.map((t) => ({
+            "@type": "Review",
+            "author": {
+                "@type": "Person",
+                "name": t.name
+            },
+            "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": t.rating.toString(),
+                "bestRating": "5"
+            },
+            "reviewBody": t.content
+        }))
+    }
 
     return (
         <section id="testimonios" className="relative py-20 lg:py-32 overflow-hidden -scroll-mt-12 lg:-scroll-mt-[180px]">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(testimonialsSchema) }}
+            />
             {/* Background Elements */}
             <div className="absolute inset-0 bg-neutral-950" />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />

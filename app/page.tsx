@@ -20,20 +20,7 @@ export const metadata: Metadata = {
   title: {
     absolute: "Desarrollo Web y Software a Medida en Colombia | K&T Code",
   },
-  description: "K&T Code desarrolla páginas web, tiendas virtuales y software a medida para empresas en Colombia y Latinoamérica, con enfoque en rendimiento, SEO y escalabilidad.",
-  keywords: [
-    "empresa de desarrollo web colombia",
-    "desarrollo web y software a medida",
-    "diseño de paginas web bogota",
-    "desarrollo web medellin",
-    "desarrollo web a medida",
-    "tiendas virtuales colombia",
-    "software a medida para empresas",
-    "e-commerce headless",
-    "agencia digital colombia",
-    "programacion web next.js",
-    "K&T Code",
-  ],
+  description: "K&T Code desarrolla páginas web corporativas, tiendas virtuales headless y software a medida para empresas en Colombia y Latinoamérica, con enfoque en rendimiento, Core Web Vitals y escalabilidad.",
   alternates: {
     canonical: "https://www.kytcode.lat",
     languages: {
@@ -56,11 +43,25 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Desarrollo Web y Software a Medida en Colombia | K&T Code",
-    description: "K&T Code desarrolla páginas web, tiendas virtuales y software a medida para empresas en Colombia y Latinoamérica, con enfoque en rendimiento, SEO y escalabilidad.",
+    description: "K&T Code desarrolla páginas web corporativas, tiendas virtuales headless y software a medida para empresas en Colombia y Latinoamérica.",
     url: "https://www.kytcode.lat",
     siteName: "K&T Code",
     locale: "es_CO",
     type: "website",
+    images: [
+      {
+        url: "https://www.kytcode.lat/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "K&T Code — Desarrollo Web y Software a Medida en Colombia",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Desarrollo Web y Software a Medida en Colombia | K&T Code",
+    description: "K&T Code desarrolla páginas web corporativas, tiendas virtuales headless y software a medida para empresas en Colombia.",
+    images: ["https://www.kytcode.lat/opengraph-image.png"],
   },
 }
 

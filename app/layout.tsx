@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     default: "K&T Code | Agencia de Desarrollo Web y E-commerce en Colombia",
     template: "%s | K&T Code",
   },
-  description: "En K&T desarrollamos páginas web a medida, tiendas virtuales, software corporativo y ecosistemas digitales escalables de alto rendimiento para Colombia y Latinoamérica.",
+  description: "K&T Code desarrolla páginas web corporativas a medida, tiendas virtuales headless, software empresarial y arquitecturas digitales escalables de alto rendimiento en Next.js para Colombia y Latinoamérica.",
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -62,21 +62,6 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     title: "K&T Code",
   },
-  keywords: [
-    "agencia de desarrollo web",
-    "desarrollo web en colombia",
-    "desarrollo web profesional",
-    "diseño de paginas web bogota",
-    "desarrollo web medellin",
-    "creacion de tiendas virtuales",
-    "desarrollo e-commerce headless",
-    "software a medida para empresas",
-    "agencia react en colombia",
-    "next.js colombia",
-    "ecosistemas digitales",
-    "diseño web colombia",
-    "K&T Code",
-  ],
   authors: [{ name: "K&T Code", url: "https://www.kytcode.lat" }],
   creator: "K&T Code",
   publisher: "K&T Code",
@@ -92,12 +77,21 @@ export const metadata: Metadata = {
     siteName: "K&T Code",
     locale: "es_CO",
     type: "website",
+    images: [
+      {
+        url: "https://www.kytcode.lat/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "K&T Code | Empresa de Desarrollo Web y Software en Colombia",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "K&T Code | Agencia de Desarrollo Web y E-commerce",
     description: "Desarrollamos páginas web corporativas y aplicaciones escalables optimizadas para SEO Técnico. Tu infraestructura web de alto rendimiento.",
     creator: "@kytcode",
+    images: ["https://www.kytcode.lat/opengraph-image.png"],
   },
   robots: {
     index: true,
@@ -143,15 +137,16 @@ const websiteJsonLd = {
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
   "@id": "https://www.kytcode.lat/#organization",
   "name": "K&T Code",
-  "alternateName": ["kytcode", "KYT Code"],
+  "alternateName": ["kytcode", "KYT Code", "K&T Code Colombia"],
   "url": "https://www.kytcode.lat/",
   "logo": "https://www.kytcode.lat/icon.png",
-  "image": "https://www.kytcode.lat/icon.png",
-  "email": "contactoktweb@gmail.com",
+  "image": "https://www.kytcode.lat/opengraph-image.png",
+  "email": "contacto@kytcode.lat",
   "telephone": "+573116360057",
+  "priceRange": "$450.000 COP - $15.000.000+ COP",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "San José de Cúcuta",
@@ -160,18 +155,51 @@ const organizationJsonLd = {
     "postalCode": "540001",
     "addressCountry": "CO"
   },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 7.8939,
+    "longitude": -72.5078
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "08:00",
+      "closes": "19:00"
+    }
+  ],
   "areaServed": [
     {
       "@type": "Country",
       "name": "Colombia"
     },
     {
+      "@type": "City",
+      "name": "Bogotá"
+    },
+    {
+      "@type": "City",
+      "name": "Medellín"
+    },
+    {
+      "@type": "City",
+      "name": "Cali"
+    },
+    {
+      "@type": "City",
+      "name": "Barranquilla"
+    },
+    {
+      "@type": "City",
+      "name": "Cúcuta"
+    },
+    {
       "@type": "AdministrativeArea",
       "name": "Latin America"
     }
   ],
-  "description": "K&T Code es una empresa colombiana de desarrollo web y software a medida especializada en páginas corporativas, e-commerce y plataformas escalables.",
-  "slogan": "Empresa de Desarrollo Web y Software en Colombia",
+  "description": "K&T Code es una empresa colombiana de desarrollo web y software a medida especializada en páginas corporativas, e-commerce headless y plataformas escalables en Next.js.",
+  "slogan": "Ingeniería de Desarrollo Web y Software a Medida en Colombia",
   "sameAs": [
     "https://www.instagram.com/ktweb_/",
     "https://www.facebook.com/KTSolutionsWeb",
@@ -183,34 +211,44 @@ const organizationJsonLd = {
     "itemListElement": [
       {
         "@type": "Offer",
+        "name": "Landing Page de Conversión",
+        "price": "450000",
+        "priceCurrency": "COP",
         "itemOffered": {
           "@type": "Service",
-          "name": "Desarrollo de Páginas Web",
-          "description": "Diseño y desarrollo de páginas web a medida, optimizadas para velocidad y SEO técnico."
+          "name": "Landing Page de Conversión",
+          "description": "Diseño y desarrollo de páginas de aterrizaje de alta conversión en Next.js y React 19."
         }
       },
       {
         "@type": "Offer",
+        "name": "Sitio Web Corporativo",
+        "price": "2500000",
+        "priceCurrency": "COP",
         "itemOffered": {
           "@type": "Service",
-          "name": "Desarrollo de Tiendas Virtuales",
-          "description": "E-commerce headless de alto rendimiento y pasarelas de pago integradas."
+          "name": "Sitio Web Corporativo",
+          "description": "Desarrollo de portales web corporativos multi-página con CMS autogestionable y SEO semántico."
         }
       },
       {
         "@type": "Offer",
+        "name": "Tienda Virtual Headless",
+        "price": "1300000",
+        "priceCurrency": "COP",
         "itemOffered": {
           "@type": "Service",
-          "name": "Software a Medida",
-          "description": "Desarrollo de aplicaciones web personalizadas, dashboards y arquitecturas serverless."
+          "name": "Tienda Virtual Headless",
+          "description": "E-commerce headless de alto rendimiento con pasarelas de pago colombianas (Wompi, Bold, PayU, PSE)."
         }
       },
       {
         "@type": "Offer",
+        "name": "Software a Medida",
         "itemOffered": {
           "@type": "Service",
-          "name": "Mantenimiento y SEO Técnico",
-          "description": "Optimización continua de Core Web Vitals y posicionamiento web orgánico."
+          "name": "Software a Medida & SaaS",
+          "description": "Desarrollo de aplicaciones web personalizadas, CRMs internos, dashboards y arquitecturas serverless."
         }
       }
     ]

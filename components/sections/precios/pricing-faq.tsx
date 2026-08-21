@@ -67,8 +67,11 @@ export default function PricingFAQ() {
               className="border border-white/10 rounded-xl bg-neutral-950/50 backdrop-blur-sm overflow-hidden"
             >
               <button
+                id={`faq-question-${index}`}
                 onClick={() => toggleFAQ(index)}
-                className="w-full flex items-center justify-between p-6 text-left hover:bg-white/[0.02] transition-colors"
+                aria-expanded={isOpen}
+                aria-controls={`faq-answer-${index}`}
+                className="w-full flex items-center justify-between p-6 text-left hover:bg-white/[0.02] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
               >
                 <h3 className="font-bold font-mono text-white/90 pr-8">{faq.question}</h3>
                 <div className="shrink-0 text-white/50">
@@ -76,20 +79,20 @@ export default function PricingFAQ() {
                 </div>
               </button>
 
-              <AnimatePresence>
-                {isOpen && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  >
-                    <div className="px-6 pb-6 pt-0 text-white/60 font-mono text-sm leading-relaxed border-t border-white/5">
-                      <p className="pt-4">{faq.answer}</p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <div
+                id={`faq-answer-${index}`}
+                role="region"
+                aria-labelledby={`faq-question-${index}`}
+                className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+                  isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <div className="px-6 pb-6 pt-0 text-white/60 font-mono text-sm leading-relaxed border-t border-white/5">
+                    <p className="pt-4">{faq.answer}</p>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           )
         })}

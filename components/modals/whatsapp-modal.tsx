@@ -115,9 +115,10 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
         // Map service to pricing plan
         let plan: PlanType = "custom"
         if (service === "landing") plan = "landing"
+        else if (service === "corporate" || service === "web-dev") plan = "corporate"
         else if (service === "ecommerce") plan = "ecommerce"
         else if (service === "social") plan = "social"
-        else plan = "custom" // web-dev, other
+        else plan = "custom"
 
         calculated = getPrice(plan)
         setCalculatedPrice(calculated)
@@ -128,6 +129,7 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
         if (formData.service) {
             let plan: PlanType = "custom"
             if (formData.service === "landing") plan = "landing"
+            else if (formData.service === "corporate" || formData.service === "web-dev") plan = "corporate"
             else if (formData.service === "ecommerce") plan = "ecommerce"
             else if (formData.service === "social") plan = "social"
             else plan = "custom"
@@ -194,9 +196,11 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
 
     const getServiceName = (key: string) => {
         const services: Record<string, string> = {
-            'web-dev': 'Desarrollo Web a Medida',
-            'landing': 'Landing Page',
-            'ecommerce': 'Tienda Online / E-commerce',
+            'landing': 'Landing Page de Conversión',
+            'corporate': 'Sitio Web Corporativo',
+            'ecommerce': 'Tienda Virtual / E-commerce',
+            'web-dev': 'Software a Medida & SaaS',
+            'custom': 'Software a Medida & SaaS',
             'social': 'Gestión de Redes / Ads',
             'other': 'Otro / Asesoría'
         }
@@ -205,9 +209,11 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
 
     const getServiceDescription = (key: string) => {
         const descriptions: Record<string, string> = {
-            'web-dev': 'Sitios web corporativos, blogs o portafolios a la medida de tu marca.',
-            'landing': 'Una página única diseñada específicamente para convertir visitantes en clientes (Ventas/Leads).',
-            'ecommerce': 'Tienda virtual completa con carrito de compras y pasarela de pagos.',
+            'landing': 'Una página única de alto impacto diseñada para captar leads y ventas (7 a 12 días).',
+            'corporate': 'Sitio web integral multi-página con CMS autogestionable y arquitectura escalable (15 a 25 días).',
+            'ecommerce': 'Tienda virtual headless con catálogo, carrito y pasarelas de pago colombianas.',
+            'web-dev': 'Desarrollo de sistemas a la medida, paneles de control, CRMs o integraciones.',
+            'custom': 'Desarrollo de sistemas a la medida, paneles de control, CRMs o integraciones.',
             'social': 'Estrategia personalizada según tu objetivo: Ventas, Reconocimiento o Crecimiento de comunidad.',
             'other': 'Cualquier otro requerimiento o consultoría tecnológica.'
         }
@@ -316,9 +322,10 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
                                                 <SelectValue placeholder="Selecciona un servicio" />
                                             </SelectTrigger>
                                             <SelectContent className="z-[200]">
-                                                <SelectItem value="web-dev">Desarrollo Web A Medida</SelectItem>
-                                                <SelectItem value="landing">Landing Page</SelectItem>
-                                                <SelectItem value="ecommerce">Tienda Online</SelectItem>
+                                                <SelectItem value="landing">Landing Page de Conversión</SelectItem>
+                                                <SelectItem value="corporate">Sitio Web Corporativo</SelectItem>
+                                                <SelectItem value="ecommerce">Tienda Virtual / E-commerce</SelectItem>
+                                                <SelectItem value="web-dev">Software a Medida & SaaS</SelectItem>
                                                 <SelectItem value="social">Gestión de Redes / Ads</SelectItem>
                                                 <SelectItem value="other">Otro / Asesoría</SelectItem>
                                             </SelectContent>

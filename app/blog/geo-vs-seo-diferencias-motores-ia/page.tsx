@@ -6,6 +6,7 @@ import Footer from "@/components/layout/footer"
 import JsonLd from "@/components/seo/json-ld"
 import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib/seo"
 import { absoluteUrl } from "@/lib/site-config"
+import RelatedPosts from "@/components/blog/related-posts"
 
 export const metadata: Metadata = {
   title: "GEO vs. SEO: Diferencias y Cómo Preparar una Web para Motores de IA",
@@ -197,6 +198,8 @@ export default function GeoVsSeoPage() {
                 </div>
               ))}
             </div>
+
+            <RelatedPosts currentSlug="geo-vs-seo-diferencias-motores-ia" category="Ingeniería & SEO" />
           </article>
         </div>
       </main>

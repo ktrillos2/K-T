@@ -59,7 +59,7 @@ const AlienRunner = dynamic(() => import("@/components/ui/alien-runner"), {
 })
 
 const contactInfo = [
-  { icon: Mail, label: "email", value: "contactoktweb@gmail.com", href: "mailto:contactoktweb@gmail.com" },
+  { icon: Mail, label: "email", value: "contacto@kytcode.lat", href: "mailto:contacto@kytcode.lat" },
   { icon: Phone, label: "phone", value: "+57 311 636 0057", href: "tel:+573116360057" },
   { icon: MapPin, label: "location", value: "locationValue", href: null },
 ]

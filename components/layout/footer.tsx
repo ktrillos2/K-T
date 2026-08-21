@@ -110,12 +110,12 @@ export default function Footer() {
 
             <div className="space-y-2 pt-2 font-mono text-xs text-neutral-400">
               <a
-                href="mailto:contactoktweb@gmail.com"
+                href="mailto:contacto@kytcode.lat"
                 className="flex items-center gap-2 hover:text-white transition-colors"
-                aria-label="Enviar correo a contactoktweb@gmail.com"
+                aria-label="Enviar correo a contacto@kytcode.lat"
               >
                 <Mail className="w-3.5 h-3.5 text-neutral-500 shrink-0" />
-                <span>contactoktweb@gmail.com</span>
+                <span>contacto@kytcode.lat</span>
               </a>
               <a
                 href="tel:+573116360057"

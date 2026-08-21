@@ -7,17 +7,8 @@ export const revalidate = 60;
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Portafolio de Proyectos y Software",
-  description: "Explora nuestros casos de éxito y proyectos de desarrollo web a medida, tiendas virtuales y software para empresas en Colombia.",
-  keywords: [
-    "portafolio desarrollo web",
-    "casos de exito paginas web",
-    "proyectos desarrollo react next.js",
-    "ejemplos tiendas virtuales colombia",
-    "proyectos software a medida",
-    "portafolio sitios corporativos",
-    "K&T Code portafolio",
-  ],
+  title: "Portafolio de Proyectos y Casos de Éxito",
+  description: "Explora nuestros proyectos de desarrollo web a medida, tiendas virtuales headless y software corporativo para empresas en Colombia y Latinoamérica.",
   alternates: {
     canonical: "https://www.kytcode.lat/portafolio",
     languages: {
@@ -39,12 +30,26 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Portafolio y Casos de Estudio | K&T Code",
-    description: "Explora nuestros casos de éxito y proyectos de desarrollo web a medida, tiendas virtuales y software para empresas.",
+    title: "Portafolio de Proyectos y Casos de Éxito | K&T Code",
+    description: "Explora nuestros proyectos de desarrollo web a medida, tiendas virtuales headless y software corporativo para empresas en Colombia.",
     url: "https://www.kytcode.lat/portafolio",
     siteName: "K&T Code",
     locale: "es_CO",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Portafolio de Proyectos K&T Code",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Portafolio de Proyectos y Casos de Éxito | K&T Code",
+    description: "Explora nuestros proyectos de desarrollo web a medida, tiendas virtuales headless y software corporativo para empresas.",
+    images: ["/opengraph-image.png"],
   },
 }
 
