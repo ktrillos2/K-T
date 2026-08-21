@@ -144,7 +144,7 @@ const organizationJsonLd = {
   "url": "https://www.kytcode.lat/",
   "logo": "https://www.kytcode.lat/icon.png",
   "image": "https://www.kytcode.lat/opengraph-image.png",
-  "email": "contacto@kytcode.lat",
+  "email": "contactoktweb@gmail.com",
   "telephone": "+573116360057",
   "priceRange": "$450.000 COP - $15.000.000+ COP",
   "address": {

@@ -7,7 +7,7 @@ export const siteConfig = {
   language: "es",
   description:
     "Empresa colombiana de desarrollo web y software a medida especializada en páginas corporativas, tiendas virtuales y plataformas escalables para empresas en Colombia y Latinoamérica.",
-  email: "contacto@kytcode.lat",
+  email: "contactoktweb@gmail.com",
   phone: "+573116360057",
   phoneDisplay: "+57 311 636 0057",
   whatsapp: "https://wa.me/573116360057",
