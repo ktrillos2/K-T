@@ -76,11 +76,12 @@ export default function Header() {
             whileHover={{ scale: 1.05 }}
             aria-label="Ir a la página de inicio de K&T Code"
             onClick={() => {
-              if (pathname === '/') {
+              const homePath = language === "en" ? "/en" : "/"
+              if (pathname === homePath) {
                 window.scrollTo({ top: 0, behavior: "instant" })
                 smoothScrollTo(0, 1000)
               } else {
-                router.push('/')
+                router.push(homePath)
               }
             }}
           >

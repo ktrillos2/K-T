@@ -1,7 +1,7 @@
 "use client"
 
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
-import { usePathname } from "next/navigation"
+import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react"
+import { usePathname, useRouter } from "next/navigation"
 import { en } from "@/dictionaries/en"
 import { es } from "@/dictionaries/es"
 
@@ -34,10 +34,71 @@ interface LanguageContextType {
   setIsAppReady: (ready: boolean) => void
 }
 
+export function getTranslatedRoute(currentPathname: string, targetLanguage: "en" | "es"): string {
+  const cleanPath = currentPathname.replace(/\/$/, "") || "/"
+
+  // If target is English
+  if (targetLanguage === "en") {
+    if (cleanPath.startsWith("/en")) {
+      return cleanPath
+    }
+    if (cleanPath === "/") {
+      return "/en"
+    }
+    if (cleanPath === "/nosotros") {
+      return "/en/about"
+    }
+    if (cleanPath === "/servicios") {
+      return "/en/services"
+    }
+    if (cleanPath === "/precios" || cleanPath.startsWith("/precios/")) {
+      return "/en/pricing"
+    }
+    if (cleanPath === "/portafolio") {
+      return "/en/portfolio"
+    }
+    if (cleanPath === "/#contact" || cleanPath === "/contact") {
+      return "/en/contact"
+    }
+    // Default fallback for any other Spanish route
+    return "/en"
+  }
+
+  // If target is Spanish
+  if (targetLanguage === "es") {
+    if (!cleanPath.startsWith("/en")) {
+      return cleanPath
+    }
+    if (cleanPath === "/en") {
+      return "/"
+    }
+    if (cleanPath === "/en/about") {
+      return "/nosotros"
+    }
+    if (cleanPath === "/en/services") {
+      return "/servicios"
+    }
+    if (cleanPath === "/en/pricing") {
+      return "/precios"
+    }
+    if (cleanPath === "/en/portfolio") {
+      return "/portafolio"
+    }
+    if (cleanPath === "/en/contact") {
+      return "/#contact"
+    }
+    // Default fallback for any other English route
+    return "/"
+  }
+
+  return cleanPath
+}
+
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname()
+  const router = useRouter()
   const isEnglishRoute = pathname?.startsWith("/en")
 
   const [language, setLanguage] = useState<Language>(isEnglishRoute ? "en" : "es")
@@ -45,31 +106,92 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [exchangeRates, setExchangeRates] = useState<Record<string, number>>({})
   const [isAppReady, setIsAppReady] = useState(false)
 
-  // Auto-sync language and country when route changes
+  // Auto-sync language and country when route changes (e.g. direct navigation, back/forward)
   useEffect(() => {
-    if (pathname?.startsWith("/en")) {
+    if (!pathname) return
+
+    if (pathname.startsWith("/en")) {
       setLanguage("en")
       setCountry((prev) => (prev === "Colombia" ? "Estados Unidos" : prev))
+    } else {
+      setLanguage("es")
+      setCountry((prev) => {
+        if (prev === "Estados Unidos") {
+          const stored = typeof window !== "undefined" ? (localStorage.getItem("user_country") as Country | null) : null
+          const validCountries: Country[] = [
+            "Colombia", "Panamá", "Argentina", "México", "Ecuador",
+            "Perú", "Paraguay", "Uruguay", "Chile", "Puerto Rico"
+          ]
+          if (stored && validCountries.includes(stored)) {
+            return stored
+          }
+          return "Colombia"
+        }
+        return prev
+      })
     }
   }, [pathname])
 
-  const dictionary = language === "en" || isEnglishRoute ? en : es
+  const dictionary = language === "en" ? en : es
 
-  const toggleLanguage = () => {
-    setLanguage((prev) => (prev === "en" ? "es" : "en"))
-  }
+  const handleSetCountry = useCallback(
+    (newCountry: Country) => {
+      const targetLang: Language = newCountry === "Estados Unidos" ? "en" : "es"
 
-  const handleSetCountry = (newCountry: Country) => {
-    setCountry(newCountry)
-    if (typeof window !== "undefined") {
-      localStorage.setItem("user_country", newCountry)
-    }
-    if (newCountry === "Estados Unidos") {
-      setLanguage("en")
-    } else {
-      setLanguage("es")
-    }
-  }
+      setCountry(newCountry)
+      setLanguage(targetLang)
+
+      if (typeof window !== "undefined") {
+        localStorage.setItem("user_country", newCountry)
+      }
+
+      if (!pathname) return
+
+      // If switching to Spanish while currently on an English route
+      if (targetLang === "es" && pathname.startsWith("/en")) {
+        const targetRoute = getTranslatedRoute(pathname, "es")
+        router.push(targetRoute)
+      }
+      // If switching to English while currently on a Spanish route
+      else if (targetLang === "en" && !pathname.startsWith("/en")) {
+        const targetRoute = getTranslatedRoute(pathname, "en")
+        router.push(targetRoute)
+      }
+    },
+    [pathname, router]
+  )
+
+  const handleSetLanguage = useCallback(
+    (lang: Language) => {
+      setLanguage(lang)
+      if (lang === "en") {
+        setCountry("Estados Unidos")
+        if (typeof window !== "undefined") {
+          localStorage.setItem("user_country", "Estados Unidos")
+        }
+        if (pathname && !pathname.startsWith("/en")) {
+          router.push(getTranslatedRoute(pathname, "en"))
+        }
+      } else {
+        if (country === "Estados Unidos") {
+          const stored = typeof window !== "undefined" ? (localStorage.getItem("user_country") as Country | null) : null
+          const fallback = stored && stored !== "Estados Unidos" ? stored : "Colombia"
+          setCountry(fallback)
+          if (typeof window !== "undefined") {
+            localStorage.setItem("user_country", fallback)
+          }
+        }
+        if (pathname && pathname.startsWith("/en")) {
+          router.push(getTranslatedRoute(pathname, "es"))
+        }
+      }
+    },
+    [country, pathname, router]
+  )
+
+  const toggleLanguage = useCallback(() => {
+    handleSetLanguage(language === "en" ? "es" : "en")
+  }, [language, handleSetLanguage])
 
   // Country to Currency Code Map
   const currencyMap: Record<Country, string> = {
@@ -146,24 +268,18 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
     if (!rate) return "Loading..."
 
-    // No conversion needed for USD based countries if we want just the number, 
-    // but the requirement says "convert... except Colombia". 
-    // For Panama/Ecuador/USA it's 1:1 so it works naturally.
-
     if (code === "USD") {
       return `$${usdAmount.toLocaleString()} USD`
     }
 
-    // For others, calculate
     const localAmount = usdAmount * rate
-
-    // Rounding logic for cleaner numbers
-    // If simplistic, just format. For "pretty" numbers like 1,005,000 GS it might need custom rounding but let's stick to math first.
     return `${localAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })} ${code}`
   }
 
   // Detect user location on mount
   useEffect(() => {
+    const isEnPath = pathname?.startsWith("/en")
+
     // 1. Priority: Check LocalStorage
     if (typeof window !== "undefined") {
       const storedCountry = localStorage.getItem("user_country") as Country | null
@@ -173,68 +289,68 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       ]
 
       if (storedCountry && validCountries.includes(storedCountry)) {
-        handleSetCountry(storedCountry)
-        return // Stop detection if stored
+        if (isEnPath) {
+          setCountry(storedCountry === "Colombia" ? "Estados Unidos" : storedCountry)
+          setLanguage("en")
+        } else {
+          setCountry(storedCountry === "Estados Unidos" ? "Colombia" : storedCountry)
+          setLanguage("es")
+        }
+        return
       }
     }
 
     // 2. Fallback: Auto-detect
     const detectCountry = async () => {
       try {
-        // Prefer server-provided geo (no third-party rate limits, avoids PSI console errors)
+        let countryName: string | null = null
         try {
           const res = await fetch("/api/geo", { cache: "no-store" })
           if (res.ok) {
             const geo = (await res.json()) as { countryName?: string | null }
-            const countryName = geo?.countryName ?? null
-            if (countryName) {
-              const countryMap: Record<string, Country> = {
-                Colombia: "Colombia",
-                Panama: "Panamá",
-                Argentina: "Argentina",
-                Mexico: "México",
-                Ecuador: "Ecuador",
-                Peru: "Perú",
-                Paraguay: "Paraguay",
-                Uruguay: "Uruguay",
-                "United States": "Estados Unidos",
-                Chile: "Chile",
-                "Puerto Rico": "Puerto Rico",
-              }
-
-              const detectedCountry = countryMap[countryName]
-              if (detectedCountry) {
-                handleSetCountry(detectedCountry)
-                return
-              }
-            }
+            countryName = geo?.countryName ?? null
           }
         } catch {
           // Ignore and fall back
         }
 
-        // Fallback (may be rate-limited on free tier)
-        const response = await fetch("https://ipapi.co/json/")
-        if (!response.ok) return
-        const data = await response.json()
-        const countryName = data.country_name
-
-        const countryMap: Record<string, Country> = {
-          Colombia: "Colombia",
-          Panama: "Panamá",
-          Argentina: "Argentina",
-          Mexico: "México",
-          Ecuador: "Ecuador",
-          Peru: "Perú",
-          Paraguay: "Paraguay",
-          Uruguay: "Uruguay",
-          "United States": "Estados Unidos",
-          Chile: "Chile",
-          "Puerto Rico": "Puerto Rico",
+        if (!countryName) {
+          const response = await fetch("https://ipapi.co/json/")
+          if (response.ok) {
+            const data = await response.json()
+            countryName = data.country_name
+          }
         }
 
-        const detectedCountry = countryMap[countryName]
-        if (detectedCountry) handleSetCountry(detectedCountry)
+        if (countryName) {
+          const countryNameMap: Record<string, Country> = {
+            Colombia: "Colombia",
+            Panama: "Panamá",
+            Argentina: "Argentina",
+            Mexico: "México",
+            Ecuador: "Ecuador",
+            Peru: "Perú",
+            Paraguay: "Paraguay",
+            Uruguay: "Uruguay",
+            "United States": "Estados Unidos",
+            Chile: "Chile",
+            "Puerto Rico": "Puerto Rico",
+          }
+
+          const detectedCountry = countryNameMap[countryName]
+          if (detectedCountry) {
+            if (typeof window !== "undefined") {
+              localStorage.setItem("user_country", detectedCountry)
+            }
+            if (isEnPath) {
+              setCountry(detectedCountry === "Colombia" ? "Estados Unidos" : detectedCountry)
+              setLanguage("en")
+            } else {
+              setCountry(detectedCountry === "Estados Unidos" ? "Colombia" : detectedCountry)
+              setLanguage("es")
+            }
+          }
+        }
       } catch {
         // Ignore errors; keep defaults
       }
@@ -255,7 +371,17 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   return (
     <LanguageContext.Provider
-      value={{ language, dictionary, country, toggleLanguage, setLanguage, setCountry: handleSetCountry, convertPrice, isAppReady, setIsAppReady }}
+      value={{
+        language,
+        dictionary,
+        country,
+        toggleLanguage,
+        setLanguage: handleSetLanguage,
+        setCountry: handleSetCountry,
+        convertPrice,
+        isAppReady,
+        setIsAppReady,
+      }}
     >
       {children}
     </LanguageContext.Provider>
