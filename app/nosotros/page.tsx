@@ -113,7 +113,7 @@ const aboutJsonLd = {
       "logo": "https://www.kytcode.lat/icon.png",
       "image": "https://www.kytcode.lat/opengraph-image.png",
       "foundingDate": "2025",
-      "email": "contacto@kytcode.lat",
+      "email": "contactoktweb@gmail.com",
       "telephone": "+573116360057",
       "address": {
         "@type": "PostalAddress",
@@ -568,8 +568,8 @@ export default function NosotrosPage() {
                 <div>
                   <dt className="text-white/50 text-xs uppercase tracking-wider">Correo de Contacto Oficial</dt>
                   <dd className="text-white mt-1">
-                    <a href="mailto:contacto@kytcode.lat" className="underline hover:text-neutral-300">
-                      contacto@kytcode.lat
+                    <a href="mailto:contactoktweb@gmail.com" className="underline hover:text-neutral-300">
+                      contactoktweb@gmail.com
                     </a>
                   </dd>
                 </div>

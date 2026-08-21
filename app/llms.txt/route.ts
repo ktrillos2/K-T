@@ -8,7 +8,7 @@ export async function GET() {
 - **Año de Fundación**: 2025
 - **Sede Principal**: San José de Cúcuta, Norte de Santander, Colombia
 - **Cobertura**: Colombia (Bogotá, Medellín, Cali, Barranquilla, Cúcuta), Latinoamérica y Estados Unidos
-- **Contacto Oficial**: contacto@kytcode.lat | +57 311 636 0057
+- **Contacto Oficial**: contactoktweb@gmail.com | +57 311 636 0057
 - **Instagram**: https://www.instagram.com/ktweb_/
 - **Facebook**: https://www.facebook.com/KTSolutionsWeb
 - **TikTok**: https://www.tiktok.com/@kytweb
