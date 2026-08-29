@@ -32,7 +32,7 @@ export function createSmtpTransport() {
 }
 
 export const mailAddresses = {
-  contact: process.env.CONTACT_EMAIL || "contactoktweb@gmail.com",
-  admin: process.env.ADMIN_EMAIL || process.env.CONTACT_EMAIL || "contactoktweb@gmail.com",
-  from: process.env.MAIL_FROM || "K&T Code <contactoktweb@gmail.com>",
+  contact: process.env.CONTACT_EMAIL || "contacto@kytcode.lat",
+  admin: process.env.ADMIN_EMAIL || process.env.CONTACT_EMAIL || "contacto@kytcode.lat",
+  from: process.env.MAIL_FROM || "K&T Code <contacto@kytcode.lat>",
 }

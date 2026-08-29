@@ -1,6 +1,6 @@
 import React from "react"
 import type { Metadata } from "next"
-import { Fira_Code, VT323, Press_Start_2P } from "next/font/google"
+import { Inter, Fira_Code, VT323, Press_Start_2P } from "next/font/google"
 import localFont from "next/font/local"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -29,6 +29,7 @@ import MetaPixel from "@/components/analytics/meta-pixel"
 import AnalyticsTracker from "@/components/analytics-tracker"
 
 
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" })
 const firaCode = Fira_Code({ subsets: ["latin"], variable: "--font-fira", display: "swap" })
 const vt323 = VT323({ weight: "400", subsets: ["latin"], variable: "--font-vt323", display: "swap" })
 const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"], variable: "--font-press-start-2p", display: "swap" })
@@ -144,7 +145,7 @@ const organizationJsonLd = {
   "url": "https://www.kytcode.lat/",
   "logo": "https://www.kytcode.lat/icon.png",
   "image": "https://www.kytcode.lat/opengraph-image.png",
-  "email": "contactoktweb@gmail.com",
+  "email": "contacto@kytcode.lat",
   "telephone": "+573116360057",
   "priceRange": "$450.000 COP - $15.000.000+ COP",
   "address": {
@@ -265,7 +266,7 @@ export default function RootLayout({
       <link rel="dns-prefetch" href="https://api.exchangerate-api.com" />
       <link rel="dns-prefetch" href="https://ipapi.co" />
       <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-      <body className={`${firaCode.variable} ${vt323.variable} ${pressStart2P.variable} ${ariW9500.variable} font-mono antialiased`}>
+      <body className={`${inter.variable} ${firaCode.variable} ${vt323.variable} ${pressStart2P.variable} ${ariW9500.variable} font-sans antialiased`}>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-WZJSH8FV"

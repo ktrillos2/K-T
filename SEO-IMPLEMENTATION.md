@@ -59,7 +59,7 @@ El marcado describe contenido visible. No debe presentarse como garantía de res
 
 ## Decisiones que deben confirmarse
 
-- Verificar que `contactoktweb@gmail.com` recibe y envía correctamente.
+- Verificar que `contacto@kytcode.lat` recibe y envía correctamente.
 - Configurar SPF, DKIM y DMARC para el dominio.
 - Confirmar que las cifras y testimonios comerciales publicados son demostrables.
 - Definir condiciones del descuento: proyecto mínimo, vencimiento, exclusiones, acumulación y consumo único.

@@ -79,7 +79,7 @@ const aboutEnJsonLd = {
       "url": "https://www.kytcode.lat/",
       "logo": "https://www.kytcode.lat/icon.png",
       "foundingDate": "2025",
-      "email": "contactoktweb@gmail.com",
+      "email": "contacto@kytcode.lat",
       "telephone": "+573116360057",
       "address": {
         "@type": "PostalAddress",

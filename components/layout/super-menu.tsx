@@ -168,12 +168,12 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
                 <p>{dictionary.nav.agency}</p>
                 <div className="flex flex-col gap-2 mt-2">
                   <a
-                    href="mailto:contactoktweb@gmail.com"
+                    href="mailto:contacto@kytcode.lat"
                     className="text-white hover:text-white/80 transition-colors w-fit"
                     onMouseEnter={() => setCursorVariant("text")}
                     onMouseLeave={() => setCursorVariant("default")}
                   >
-                    contactoktweb@gmail.com
+                    contacto@kytcode.lat
                   </a>
                   <a
                     href="tel:+573116360057"

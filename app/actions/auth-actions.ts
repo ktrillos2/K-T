@@ -178,7 +178,7 @@ export async function verifyPasswordAndSendOTP(password: string) {
         `;
 
     const info = await transporter.sendMail({
-      from: '"K&T Security" <info@kytcode.lat>',
+      from: '"K&T Security" <contacto@kytcode.lat>',
       to: ADMIN_EMAIL,
       subject: '🔐 Código de Acceso - K&T CRM',
       html: htmlTemplate

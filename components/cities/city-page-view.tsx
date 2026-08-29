@@ -15,7 +15,7 @@ export default function CityPageView({ city }: CityPageViewProps) {
     "image": "https://www.kytcode.lat/opengraph-image.png",
     "url": `https://www.kytcode.lat/${city.slug}`,
     "telephone": "+573116360057",
-    "email": "contactoktweb@gmail.com",
+    "email": "contacto@kytcode.lat",
     "priceRange": "$450.000 COP - $15.000.000+ COP",
     "address": {
       "@type": "PostalAddress",

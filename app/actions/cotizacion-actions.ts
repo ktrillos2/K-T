@@ -27,7 +27,7 @@ export async function notifyQuotationViewed({ client }: { client: string }) {
     `;
 
     await transporter.sendMail({
-      from: '"K&T CRM" <info@kytcode.lat>',
+      from: '"K&T CRM" <contacto@kytcode.lat>',
       to: ADMIN_EMAIL,
       subject: `[K&T CRM] 👁️ ${client} está viendo la cotización`,
       html: htmlTemplate
@@ -54,7 +54,7 @@ export async function notifyQuotationAccepted({ client }: { client: string }) {
     `;
 
     await transporter.sendMail({
-      from: '"K&T CRM" <info@kytcode.lat>',
+      from: '"K&T CRM" <contacto@kytcode.lat>',
       to: ADMIN_EMAIL,
       subject: `[K&T CRM] 💰 ¡¡${client} ACEPTÓ LA COTIZACIÓN!!`,
       html: htmlTemplate

@@ -32,14 +32,14 @@ const customComponents = {
   // 1. Skip H1 in body to ensure single H1 per page for strict SEO
   h1: () => null,
 
-  // 2. Headings with anchor IDs and accessible hierarchy
+  // 2. Headings with anchor IDs, generous margins and modern typographic hierarchy
   h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
     const text = getTextContent(children)
     const id = slugify(text)
     return (
       <h2
         id={id}
-        className="font-title font-bold text-2xl md:text-3xl text-white mt-12 mb-4 tracking-tight scroll-mt-24 border-b border-white/10 pb-3"
+        className="font-title font-bold text-2xl md:text-3xl text-white mt-14 mb-6 tracking-tight scroll-mt-24 border-b border-white/10 pb-4"
         {...props}
       >
         {children}
@@ -53,24 +53,28 @@ const customComponents = {
     return (
       <h3
         id={id}
-        className="font-title font-bold text-xl md:text-2xl text-white mt-8 mb-3 tracking-tight scroll-mt-24"
+        className="font-title font-bold text-xl md:text-2xl text-zinc-100 mt-10 mb-4 tracking-tight scroll-mt-24 flex items-center gap-2"
         {...props}
       >
-        {children}
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0 inline-block" />
+        <span>{children}</span>
       </h3>
     )
   },
 
   h4: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h4 className="font-title font-bold text-lg text-white mt-6 mb-2" {...props}>
+    <h4
+      className="font-title font-semibold text-lg text-zinc-200 mt-8 mb-3"
+      {...props}
+    >
       {children}
     </h4>
   ),
 
-  // 3. Paragraphs
+  // 3. Paragraphs: Legible, proportional, comfortable line height and margins
   p: ({ children, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
-      className="font-mono text-base md:text-lg leading-relaxed text-neutral-300 mb-6"
+      className="font-sans text-base md:text-[17px] leading-[1.85] text-neutral-300 mb-6 tracking-normal"
       {...props}
     >
       {children}
@@ -111,7 +115,7 @@ const customComponents = {
     if (isInline) {
       return (
         <code
-          className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[0.88em] text-emerald-300 border border-white/5"
+          className="rounded-md bg-white/10 px-2 py-0.5 font-mono text-[0.88em] text-emerald-300 border border-white/10"
           {...props}
         >
           {children}
@@ -126,7 +130,7 @@ const customComponents = {
   },
 
   pre: ({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
-    <div className="not-prose my-6 rounded-2xl border border-white/10 bg-neutral-950 p-5 font-mono text-xs text-neutral-200 overflow-x-auto shadow-xl">
+    <div className="not-prose my-8 rounded-2xl border border-white/10 bg-neutral-950 p-6 font-mono text-xs md:text-sm text-neutral-200 overflow-x-auto shadow-2xl">
       <pre className="leading-relaxed" {...props}>
         {children}
       </pre>
@@ -135,8 +139,8 @@ const customComponents = {
 
   // 6. Tables (GFM)
   table: ({ children, ...props }: React.TableHTMLAttributes<HTMLTableElement>) => (
-    <div className="not-prose my-8 overflow-x-auto rounded-2xl border border-white/10 bg-white/[0.02] shadow-xl">
-      <table className="w-full text-left font-mono text-xs md:text-sm text-neutral-300" {...props}>
+    <div className="not-prose my-10 overflow-x-auto rounded-2xl border border-white/15 bg-white/[0.02] shadow-2xl">
+      <table className="w-full text-left font-sans text-xs md:text-sm text-neutral-300" {...props}>
         {children}
       </table>
     </div>
@@ -144,7 +148,7 @@ const customComponents = {
 
   thead: ({ children, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) => (
     <thead
-      className="bg-white/5 border-b border-white/10 text-white font-bold uppercase tracking-wider text-[11px]"
+      className="bg-white/10 border-b border-white/15 text-white font-bold uppercase tracking-wider text-xs"
       {...props}
     >
       {children}
@@ -152,25 +156,25 @@ const customComponents = {
   ),
 
   tbody: ({ children, ...props }: React.HTMLAttributes<HTMLTableSectionElement>) => (
-    <tbody className="divide-y divide-white/5" {...props}>
+    <tbody className="divide-y divide-white/10" {...props}>
       {children}
     </tbody>
   ),
 
   tr: ({ children, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
-    <tr className="hover:bg-white/[0.02] transition-colors" {...props}>
+    <tr className="hover:bg-white/[0.04] transition-colors" {...props}>
       {children}
     </tr>
   ),
 
   th: ({ children, ...props }: React.ThHTMLAttributes<HTMLTableCellElement>) => (
-    <th className="px-5 py-3.5" {...props}>
+    <th className="px-6 py-4" {...props}>
       {children}
     </th>
   ),
 
   td: ({ children, ...props }: React.TdHTMLAttributes<HTMLTableCellElement>) => (
-    <td className="px-5 py-3.5 align-top leading-relaxed" {...props}>
+    <td className="px-6 py-4 align-top leading-relaxed" {...props}>
       {children}
     </td>
   ),
@@ -178,7 +182,7 @@ const customComponents = {
   // 7. Blockquotes and Callouts
   blockquote: ({ children, ...props }: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
-      className="not-prose my-8 p-6 rounded-2xl border-l-4 border-emerald-400 bg-white/[0.03] border-t border-r border-b border-white/10 font-mono text-base md:text-lg leading-relaxed text-neutral-200"
+      className="not-prose my-10 p-6 md:p-8 rounded-2xl border-l-4 border-emerald-400 bg-emerald-950/20 border-t border-r border-b border-white/10 font-sans text-base md:text-lg leading-relaxed text-zinc-200 shadow-xl"
       {...props}
     >
       {children}
@@ -188,7 +192,7 @@ const customComponents = {
   // 8. Lists
   ul: ({ children, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul
-      className="my-6 space-y-2.5 font-mono text-sm md:text-base text-neutral-300 list-disc list-inside"
+      className="my-6 space-y-3.5 pl-6 font-sans text-base md:text-[17px] text-neutral-300 list-disc"
       {...props}
     >
       {children}
@@ -197,7 +201,7 @@ const customComponents = {
 
   ol: ({ children, ...props }: React.OlHTMLAttributes<HTMLOListElement>) => (
     <ol
-      className="my-6 space-y-2.5 font-mono text-sm md:text-base text-neutral-300 list-decimal list-inside"
+      className="my-6 space-y-3.5 pl-6 font-sans text-base md:text-[17px] text-neutral-300 list-decimal"
       {...props}
     >
       {children}
@@ -205,7 +209,7 @@ const customComponents = {
   ),
 
   li: ({ children, ...props }: React.LiHTMLAttributes<HTMLLIElement>) => (
-    <li className="leading-relaxed" {...props}>
+    <li className="leading-[1.8] pl-2 text-neutral-300" {...props}>
       {children}
     </li>
   ),
@@ -217,7 +221,7 @@ const customComponents = {
   ),
 
   em: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => (
-    <em className="italic text-neutral-200" {...props}>
+    <em className="italic text-zinc-200" {...props}>
       {children}
     </em>
   ),
