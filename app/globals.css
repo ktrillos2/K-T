@@ -233,18 +233,52 @@
     font-style: italic;
   }
 
-  .prose a {
-    color: #ffffff;
-    font-weight: 500;
+  /* Inline links inside prose paragraphs and lists */
+  .prose :not(.not-prose) p a,
+  .prose :not(.not-prose) li a,
+  .prose :not(.not-prose) > a {
+    color: #34d399;
+    font-weight: 600;
     text-decoration: underline;
     text-underline-offset: 4px;
-    text-decoration-color: rgba(52, 211, 153, 0.6);
+    text-decoration-color: rgba(52, 211, 153, 0.4);
     transition: color 0.2s, text-decoration-color 0.2s;
   }
 
-  .prose a:hover {
+  .prose :not(.not-prose) p a:hover,
+  .prose :not(.not-prose) li a:hover,
+  .prose :not(.not-prose) > a:hover {
     color: #6ee7b7;
     text-decoration-color: #34d399;
+  }
+
+  /* Reset all links inside .not-prose containers (CTAs, cards, buttons) */
+  .not-prose a,
+  .not-prose a:hover,
+  .prose .not-prose a,
+  .prose .not-prose a:hover {
+    text-decoration: none !important;
+    text-decoration-color: transparent !important;
+  }
+
+  /* Universal high-contrast CTA button styling */
+  .not-prose a[class*="bg-white"],
+  .prose .not-prose a[class*="bg-white"],
+  .not-prose button[class*="bg-white"],
+  .prose .not-prose button[class*="bg-white"] {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+  }
+
+  .not-prose a[class*="bg-white"]:hover,
+  .prose .not-prose a[class*="bg-white"]:hover,
+  .not-prose button[class*="bg-white"]:hover,
+  .prose .not-prose button[class*="bg-white"]:hover {
+    color: #000000 !important;
+    background-color: #e5e5e5 !important;
+    text-decoration: none !important;
   }
 
   .prose blockquote {

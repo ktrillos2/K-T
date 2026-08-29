@@ -210,9 +210,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </p>
               <Link
                 href={cta.href}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white !text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg !no-underline"
               >
-                {cta.label} <ArrowRight className="w-4 h-4" />
+                <span className="text-black font-bold">{cta.label}</span>
+                <ArrowRight className="w-4 h-4 text-black shrink-0" />
               </Link>
             </div>
 
