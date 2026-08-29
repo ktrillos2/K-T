@@ -1,5 +1,8 @@
-import { blogPosts } from "@/lib/blog-posts"
+import { getAllPublishedBlogPosts } from "@/lib/blog-mdx"
 import { siteConfig } from "@/lib/site-config"
+
+// Revalidate every hour so new posts automatically populate the RSS feed
+export const revalidate = 3600
 
 function escapeXml(value: string) {
   return value.replace(/[<>&'\"]/g, (character) => ({
@@ -12,14 +15,21 @@ function escapeXml(value: string) {
 }
 
 export function GET() {
-  const items = blogPosts.map((post) => `
+  // Only published posts (excluding drafts and future scheduled posts)
+  const publishedPosts = getAllPublishedBlogPosts()
+
+  const items = publishedPosts
+    .map(
+      (post) => `
     <item>
       <title>${escapeXml(post.title)}</title>
       <link>${siteConfig.url}/blog/${post.slug}</link>
       <guid isPermaLink="true">${siteConfig.url}/blog/${post.slug}</guid>
       <description>${escapeXml(post.excerpt)}</description>
       <pubDate>${new Date(post.publishedAt).toUTCString()}</pubDate>
-    </item>`).join("")
+    </item>`
+    )
+    .join("")
 
   const xml = `<?xml version="1.0" encoding="UTF-8" ?>
   <rss version="2.0">

@@ -36,7 +36,7 @@ const TikTok = ({ className }: { className?: string }) => (
 import Footer from "@/components/layout/footer"
 import JsonLd from "@/components/seo/json-ld"
 import { authors, getAuthor } from "@/lib/authors"
-import { blogPosts } from "@/lib/blog-posts"
+import { getAllPublishedBlogPosts } from "@/lib/blog-mdx"
 import { buildBreadcrumbJsonLd } from "@/lib/seo"
 import { absoluteUrl, siteConfig } from "@/lib/site-config"
 
@@ -264,20 +264,20 @@ export default async function AuthorDetailPage({ params }: AuthorPageProps) {
                 Artículos y Guías Técnicas Publicadas
               </h2>
               <span className="font-mono text-xs text-neutral-400">
-                {blogPosts.length} publicaciones
+                {getAllPublishedBlogPosts().length} publicaciones
               </span>
             </div>
 
             <div className="space-y-4">
-              {blogPosts.map((post) => (
+              {getAllPublishedBlogPosts().map((post) => (
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
                   className="group block rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition-all hover:border-white/30 hover:bg-white/[0.04]"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2 font-mono text-xs text-neutral-400">
-                    <span className="text-emerald-400">Ingeniería & Estrategia Web</span>
-                    <span>{post.publishedAt} • {post.readTime}</span>
+                    <span className="text-emerald-400">{post.category || "Ingeniería & Estrategia Web"}</span>
+                    <span>{post.publishedAt.split("T")[0]} • {post.readTime}</span>
                   </div>
                   <h3 className="text-lg md:text-xl font-bold font-title text-white group-hover:text-primary transition-colors flex items-center justify-between gap-4">
                     {post.title}

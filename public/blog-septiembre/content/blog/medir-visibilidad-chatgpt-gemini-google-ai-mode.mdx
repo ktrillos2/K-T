@@ -1,0 +1,288 @@
+---
+title: "Cómo Saber si tu Empresa Aparece en ChatGPT, Gemini y Google AI Mode"
+slug: "medir-visibilidad-chatgpt-gemini-google-ai-mode"
+description: "Metodología para medir la visibilidad de una marca en respuestas de IA: prompts, menciones, citas, Search Console, rastreo técnico y un tablero GEO práctico."
+excerpt: "Metodología para medir la visibilidad de una marca en respuestas de IA: prompts, menciones, citas, Search Console, rastreo técnico y un tablero GEO práctico."
+publishedAt: "2026-09-04T08:00:00-05:00"
+updatedAt: "2026-09-04T08:00:00-05:00"
+author: "Keyner Trillos"
+authorRole: "Co-Fundador & Lead Software Engineer"
+locale: "es-CO"
+draft: false
+category: "Ingeniería & SEO"
+primaryKeyword: "medir visibilidad en ChatGPT"
+secondaryKeywords:
+  - "AI search tracking"
+  - "visibilidad IA marca"
+  - "GEO medición"
+  - "Google AI Mode Search Console"
+searchIntent: "informational"
+geoTarget:
+  - "Colombia"
+  - "Latinoamérica"
+tags:
+  - "GEO"
+  - "SEO"
+  - "ChatGPT"
+  - "Google AI Mode"
+canonical: "https://www.kytcode.lat/blog/medir-visibilidad-chatgpt-gemini-google-ai-mode"
+ogImageAlt: "Cómo Saber si tu Empresa Aparece en ChatGPT, Gemini y Google AI Mode"
+imagePrompt: "Dashboard de analítica de visibilidad de marca en motores de IA, gráficas y tarjetas abstractas sin marcas ni texto legible, estilo SaaS premium."
+sources:
+  - {"title": "OpenAI — Publishers and Developers FAQ", "url": "https://help.openai.com/en/articles/12627856-publishers-and-developers-faq"}
+  - {"title": "Google Search Console — Generative AI performance reports", "url": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports"}
+  - {"title": "Google — AI features and your website", "url": "https://developers.google.com/search/docs/appearance/ai-features"}
+---
+
+# Cómo saber si tu empresa aparece en ChatGPT, Gemini y Google AI Mode
+
+**Respuesta rápida:** medir visibilidad en IA requiere combinar dos tipos de evidencia: **lo que los usuarios ven en respuestas generativas** y **lo que tus propias plataformas de analítica pueden atribuir**. No existe una posición única equivalente al ranking clásico de Google. Conviene medir menciones, citas, URLs utilizadas, competidores presentes y tráfico o impresiones cuando la plataforma las exponga.
+
+En 2026, Google empezó a desplegar informes dedicados de visibilidad en funciones generativas dentro de Search Console para un subconjunto de sitios. Al mismo tiempo, OpenAI mantiene directrices específicas para que los sitios públicos puedan ser descubiertos y citados por ChatGPT Search.
+
+## GEO no se mide como una keyword tradicional
+
+En SEO clásico puedes preguntar:
+
+> “¿En qué posición estoy para desarrollo web Colombia?”
+
+En un sistema generativo, la respuesta puede cambiar según:
+
+- el prompt;
+- el contexto;
+- la ubicación;
+- la fecha;
+- el modelo;
+- las fuentes disponibles;
+- la formulación de la pregunta.
+
+Por eso necesitas una **muestra de prompts representativa**, no una sola consulta.
+
+## Paso 1: crea un inventario de prompts
+
+Divide las consultas por intención.
+
+### Descubrimiento
+
+- ¿Qué empresas desarrollan software a medida en Colombia?
+- ¿Qué agencias trabajan con Next.js en Colombia?
+- ¿Qué empresas desarrollan e-commerce headless?
+
+### Comparación
+
+- ¿Qué alternativa conviene para una empresa: WordPress o Next.js?
+- ¿Qué empresa puede migrar una tienda lenta a una arquitectura headless?
+
+### Problema
+
+- Mi empresa depende de Excel, ¿qué tipo de software necesito?
+- ¿Cómo automatizo leads que llegan por WhatsApp?
+
+### Marca
+
+- ¿Qué es K&T Code?
+- ¿Qué servicios ofrece K&T Code?
+
+El último grupo sirve para auditar **exactitud de entidad**, mientras los primeros miden descubrimiento.
+
+## Paso 2: define métricas simples
+
+Crea una tabla:
+
+| Métrica | Qué significa |
+|---|---|
+| Mención | La marca aparece en la respuesta |
+| Cita | La respuesta enlaza una URL de tu dominio |
+| Share of voice | Tu presencia frente a competidores |
+| Posición de mención | Orden relativo dentro de una lista |
+| URL citada | Página que el sistema utiliza |
+| Exactitud | Si los datos de marca son correctos |
+| Intención | Tipo de consulta donde apareces |
+
+Repite el mismo conjunto de prompts de forma periódica y conserva la fecha.
+
+## Paso 3: separa “mención” de “clic”
+
+Una mención puede aportar reconocimiento sin generar visita.
+
+Por eso conviene diferenciar:
+
+```text
+Visibilidad de marca
+        ≠
+Tráfico referido
+        ≠
+Conversión
+```
+
+Las tres son útiles, pero responden preguntas diferentes.
+
+## Medir Google AI Overviews y AI Mode
+
+Google anunció en junio de 2026 nuevos informes de rendimiento de IA generativa en Search Console, con vistas dedicadas a impresiones dentro de experiencias como AI Overviews y AI Mode, inicialmente para un grupo limitado de sitios.
+
+Si tu propiedad ya tiene acceso:
+
+1. abre Search Console;
+2. revisa los informes de rendimiento;
+3. busca la sección de funciones generativas;
+4. compara páginas, consultas e impresiones;
+5. identifica qué contenidos ya aparecen;
+6. refuerza esas páginas antes de crear contenido duplicado.
+
+Si todavía no aparece esa vista en tu cuenta, utiliza el informe normal de Search y combina esos datos con auditorías manuales.
+
+## ¿Cómo medir ChatGPT Search?
+
+OpenAI indica que cualquier sitio público puede aparecer en ChatGPT Search. Para facilitar que el contenido sea descubierto, mostrado y citado, recomienda no bloquear **OAI-SearchBot**.
+
+Esto es importante porque OAI-SearchBot no debe confundirse con GPTBot: son controles de rastreo con propósitos diferentes.
+
+### Auditoría técnica mínima
+
+Revisa:
+
+- `robots.txt`;
+- etiquetas `noindex`;
+- respuestas HTTP;
+- canonical;
+- enlaces internos;
+- contenido disponible en HTML;
+- sitemap;
+- posibles bloqueos del CDN.
+
+Para una web pública que desea visibilidad en ChatGPT Search, verifica específicamente que OAI-SearchBot no esté bloqueado.
+
+## ¿Y Gemini?
+
+Para Gemini y otras experiencias conectadas a búsqueda, evita perseguir “trucos GEO” aislados. Una estrategia robusta es hacer que la entidad y el contenido sean claros en la web abierta:
+
+- datos consistentes de empresa;
+- páginas de servicio específicas;
+- autor identificable;
+- fuentes primarias;
+- información actualizada;
+- enlaces internos;
+- contenido que responda preguntas concretas.
+
+## Construye un “prompt set” mensual
+
+No cambies tus prompts cada semana. Mantén un núcleo estable para poder comparar.
+
+Ejemplo:
+
+```text
+20 prompts de descubrimiento
+10 prompts de comparación
+10 prompts de problema
+5 prompts de marca
+```
+
+Después puedes añadir preguntas emergentes, pero conserva una base.
+
+## Qué páginas merece la pena optimizar primero
+
+No empieces por todo el dominio.
+
+Prioriza páginas que ya tengan alguna señal:
+
+- impresiones en Search Console;
+- backlinks;
+- tráfico orgánico;
+- menciones de marca;
+- buena conversión;
+- citas en alguna respuesta de IA.
+
+En K&T Code, por ejemplo, una página de [software a medida](/servicios/software-a-medida) puede responder consultas sobre automatización, ERP personalizado, sistemas internos e integraciones. Una página de servicio bien estructurada puede ser más útil para una consulta comercial que diez artículos genéricos.
+
+## Qué hace una página más fácil de citar
+
+No existe un “formato garantizado”, pero sí prácticas que aumentan claridad:
+
+### Respuesta directa
+
+Abre cada sección con una respuesta corta.
+
+### Subtítulos en forma de pregunta
+
+Ayudan a mapear el contenido a consultas reales.
+
+### Datos verificables
+
+Acompaña cifras con fuente y fecha.
+
+### Tablas
+
+Son útiles para comparaciones y reducen ambigüedad.
+
+### Entidades claras
+
+Escribe nombres completos de tecnologías, empresas y conceptos antes de utilizar abreviaciones.
+
+### Actualización real
+
+No cambies la fecha por cambiarla. Actualiza hechos, ejemplos o recomendaciones.
+
+## Un dashboard GEO sencillo
+
+Puedes almacenar:
+
+```text
+fecha
+motor
+prompt
+intención
+marca_mencionada
+url_citada
+competidores
+respuesta_correcta
+notas
+```
+
+Con suficientes observaciones podrás detectar:
+
+- consultas donde ya eres visible;
+- competidores recurrentes;
+- páginas más citadas;
+- temas donde tu entidad no está clara;
+- contenido que necesita actualización.
+
+## Qué NO hacer
+
+### Buscar una sola vez
+
+Una respuesta no representa todo el sistema.
+
+### Contar menciones sin revisar exactitud
+
+Una mención incorrecta puede ser peor que no aparecer.
+
+### Crear 100 artículos para 100 prompts
+
+Eso puede generar contenido redundante y canibalización.
+
+### Confundir tráfico de bots con visibilidad
+
+Un crawler visitando una URL no significa que esa URL será recomendada.
+
+## Preguntas frecuentes
+
+### ¿Existe una “posición 1” en ChatGPT?
+
+No de la misma forma que en un SERP tradicional. Puedes medir el orden de una mención dentro de una respuesta, pero la salida es variable.
+
+### ¿Debo permitir GPTBot para aparecer en ChatGPT Search?
+
+OpenAI identifica OAI-SearchBot como el crawler relacionado con inclusión en búsqueda. La política sobre GPTBot puede gestionarse por separado.
+
+### ¿Schema garantiza aparecer en respuestas de IA?
+
+No. Google afirma que no se necesita un schema especial para sus funciones generativas. Los datos estructurados siguen siendo útiles cuando representan fielmente el contenido visible.
+
+### ¿Cada cuánto medir?
+
+Para una marca activa, semanal o quincenal es suficiente para detectar cambios sin sobrerreaccionar a una sola respuesta.
+
+## Conclusión
+
+GEO necesita un sistema de medición, no capturas aisladas. Define prompts, guarda resultados, contrasta con Search Console y analítica, revisa la rastreabilidad técnica y optimiza primero las páginas que ya muestran señales de autoridad.

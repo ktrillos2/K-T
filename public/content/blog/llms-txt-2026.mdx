@@ -1,0 +1,223 @@
+---
+title: "llms.txt en 2026: ¿Realmente Ayuda a Aparecer en ChatGPT y Google?"
+slug: "llms-txt-2026"
+description: "Análisis actualizado de llms.txt: qué propone, qué dice Google, qué muestran los datos de rastreo y qué priorizar realmente para visibilidad en IA."
+excerpt: "Análisis actualizado de llms.txt: qué propone, qué dice Google, qué muestran los datos de rastreo y qué priorizar realmente para visibilidad en IA."
+publishedAt: "2026-09-21T08:00:00-05:00"
+updatedAt: "2026-09-21T08:00:00-05:00"
+author: "Keyner Trillos"
+authorRole: "Co-Fundador & Lead Software Engineer"
+locale: "es-CO"
+draft: false
+category: "Ingeniería & SEO"
+primaryKeyword: "llms.txt"
+secondaryKeywords:
+  - "llms.txt SEO"
+  - "llms.txt ChatGPT"
+  - "llms txt GEO"
+  - "archivo IA web"
+searchIntent: "informational"
+geoTarget:
+  - "Colombia"
+  - "Latinoamérica"
+tags:
+  - "GEO"
+  - "llms.txt"
+  - "ChatGPT"
+  - "SEO"
+canonical: "https://www.kytcode.lat/blog/llms-txt-2026"
+ogImageAlt: "llms.txt en 2026: ¿Realmente Ayuda a Aparecer en ChatGPT y Google?"
+imagePrompt: "Archivo de texto conceptual llamado llms.txt representado como documento digital frente a bots y buscadores, estética técnica minimalista, sin logos."
+sources:
+  - {"title": "Ahrefs — 137K sites llms.txt study", "url": "https://ahrefs.com/es/blog/estudio-llmstxt/"}
+  - {"title": "Google — AI features and your website", "url": "https://developers.google.com/search/docs/appearance/ai-features"}
+  - {"title": "OpenAI — Publishers and Developers FAQ", "url": "https://help.openai.com/en/articles/12627856-publishers-and-developers-faq"}
+---
+
+# llms.txt en 2026: ¿realmente ayuda a aparecer en ChatGPT y Google?
+
+**Respuesta rápida:** no hay evidencia sólida de que publicar `llms.txt` mejore por sí solo la visibilidad en buscadores de IA. Google afirma que no necesita archivos especiales legibles por máquinas para sus funciones generativas. Un estudio de Ahrefs sobre 137.210 dominios encontró que el 97 % de los archivos `llms.txt` de su muestra no recibió solicitudes durante mayo de 2026. Puedes publicarlo como recurso complementario, pero no debería ser una prioridad frente a rastreo, contenido, enlaces internos y datos correctos.
+
+Este tema es un buen ejemplo de por qué GEO necesita pruebas, no rituales.
+
+## ¿Qué es llms.txt?
+
+Es una propuesta para publicar en la raíz del dominio un archivo Markdown que oriente a sistemas de IA hacia recursos importantes.
+
+Ejemplo:
+
+```text
+https://ejemplo.com/llms.txt
+```
+
+Puede listar:
+
+- documentación;
+- categorías;
+- guías;
+- recursos;
+- APIs;
+- políticas.
+
+La idea es atractiva: ofrecer un mapa textual del sitio.
+
+## Qué encontró Ahrefs
+
+Ahrefs analizó 137.210 dominios que utilizaban su Web Analytics y recibieron tráfico en mayo de 2026.
+
+Entre sus hallazgos:
+
+- 28 % publicaba `llms.txt`;
+- 97 % de esos archivos recibió cero solicitudes en el periodo;
+- la mayoría de solicitudes detectadas provenía de bots;
+- no observaron bots de IA “buscando” un archivo inexistente.
+
+El estudio tiene limitaciones —la muestra es más técnica que la web promedio—, pero aporta datos que faltaban en el debate.
+
+## Qué dice Google
+
+Google Search Central afirma que para AI Overviews y AI Mode **no necesitas crear nuevos archivos legibles por máquinas ni markup especial**.
+
+Eso no significa que un archivo `llms.txt` sea dañino.
+
+Significa que no debes confundir:
+
+```text
+fácil de implementar
+```
+
+con
+
+```text
+factor probado de visibilidad
+```
+
+## ¿Y ChatGPT?
+
+OpenAI sí publica directrices claras de rastreo.
+
+Para permitir que contenido público pueda incluirse en resúmenes y fragmentos de ChatGPT Search, indica que no se debe bloquear **OAI-SearchBot**.
+
+Ese control es mucho más concreto que añadir un archivo experimental.
+
+## Prioridades para ChatGPT Search
+
+Revisa:
+
+1. robots;
+2. `noindex`;
+3. respuestas 200;
+4. canonical;
+5. enlaces internos;
+6. sitemap;
+7. contenido accesible;
+8. OAI-SearchBot.
+
+No confundas OAI-SearchBot con GPTBot. OpenAI los trata como crawlers con propósitos distintos.
+
+## Entonces, ¿debo crear llms.txt?
+
+Puede tener sentido si:
+
+- ya tienes buena salud técnica;
+- tienes documentación extensa;
+- puedes generarlo automáticamente;
+- mantenerlo actualizado cuesta casi cero;
+- lo consideras experimental.
+
+No debería desplazar trabajo como:
+
+- corregir páginas huérfanas;
+- mejorar contenido;
+- consolidar canibalización;
+- crear fuentes originales;
+- actualizar datos.
+
+## Riesgo: un archivo obsoleto
+
+Un `llms.txt` manual puede convertirse en otro sitemap que nadie mantiene.
+
+Si lo implementas, genera su contenido a partir de la misma fuente de verdad del sitio.
+
+Por ejemplo:
+
+```text
+posts publicados
++ servicios
++ documentación
+→ llms.txt
+```
+
+No incluyas drafts ni URLs futuras.
+
+## ¿Markdown ayuda a agentes?
+
+El texto estructurado es cómodo para muchas herramientas, especialmente agentes de desarrollo. Pero una cosa es **facilitar consumo** y otra demostrar que aumenta recomendaciones en motores de búsqueda.
+
+Por eso conviene separar:
+
+- utilidad técnica;
+- rastreo real;
+- citación;
+- ranking;
+- tráfico.
+
+## Qué haría en una web Next.js
+
+Primero:
+
+```text
+robots.ts
+sitemap.ts
+metadata
+canonical
+Article JSON-LD
+BreadcrumbList
+enlaces internos
+OAI-SearchBot
+```
+
+Después, si quieres experimentar:
+
+```text
+app/llms.txt/route.ts
+```
+
+que genere una versión con URLs públicas.
+
+Mide si aparecen solicitudes en logs.
+
+## Experimento correcto
+
+Si deseas saber si tiene impacto:
+
+1. registra fecha de implementación;
+2. monitorea accesos a `/llms.txt`;
+3. identifica user agents;
+4. mide citaciones antes/después;
+5. controla otros cambios;
+6. documenta el resultado.
+
+Sin medición, no sabrás si ayudó.
+
+## Preguntas frecuentes
+
+### ¿Google usa llms.txt?
+
+Google indica que no necesitas archivos de IA especiales para sus experiencias generativas.
+
+### ¿ChatGPT exige llms.txt?
+
+OpenAI no lo presenta como requisito para ChatGPT Search. Su guía se centra, entre otras cosas, en acceso de OAI-SearchBot.
+
+### ¿Puedo tener robots.txt y llms.txt?
+
+Sí. Cumplen funciones distintas.
+
+### ¿Debo permitir GPTBot?
+
+La política de GPTBot es independiente de OAI-SearchBot. Decide según tus preferencias de uso del contenido; no lo trates como requisito de búsqueda.
+
+## Conclusión
+
+`llms.txt` es un experimento barato, no una estrategia GEO. Antes de implementarlo, asegura rastreo, contenido útil, entidad, enlaces y medición. Si después quieres probarlo, automatízalo y observa evidencia real.

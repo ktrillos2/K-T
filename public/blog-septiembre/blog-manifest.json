@@ -1,0 +1,91 @@
+{
+  "timezone": "America/Bogota",
+  "publicationTime": "08:00",
+  "totalPosts": 12,
+  "posts": [
+    {
+      "slug": "agentes-ia-empresas-colombia",
+      "title": "Agentes de IA para Empresas en Colombia: Qué Son, Cómo Funcionan y Cuándo Implementarlos",
+      "publishedAt": "2026-08-31T08:00:00-05:00",
+      "path": "content/blog/agentes-ia-empresas-colombia.mdx",
+      "primaryKeyword": "agentes de IA para empresas"
+    },
+    {
+      "slug": "automatizar-whatsapp-business-con-ia",
+      "title": "Cómo Automatizar WhatsApp Business con IA en 2026: Ventas, Soporte y Agendamiento",
+      "publishedAt": "2026-09-02T08:00:00-05:00",
+      "path": "content/blog/automatizar-whatsapp-business-con-ia.mdx",
+      "primaryKeyword": "automatizar WhatsApp con IA"
+    },
+    {
+      "slug": "medir-visibilidad-chatgpt-gemini-google-ai-mode",
+      "title": "Cómo Saber si tu Empresa Aparece en ChatGPT, Gemini y Google AI Mode",
+      "publishedAt": "2026-09-04T08:00:00-05:00",
+      "path": "content/blog/medir-visibilidad-chatgpt-gemini-google-ai-mode.mdx",
+      "primaryKeyword": "medir visibilidad en ChatGPT"
+    },
+    {
+      "slug": "cuanto-cuesta-automatizar-procesos-ia-colombia",
+      "title": "¿Cuánto Cuesta Automatizar Procesos con IA en Colombia en 2026?",
+      "publishedAt": "2026-09-07T08:00:00-05:00",
+      "path": "content/blog/cuanto-cuesta-automatizar-procesos-ia-colombia.mdx",
+      "primaryKeyword": "cuánto cuesta automatizar procesos con IA en Colombia"
+    },
+    {
+      "slug": "excel-vs-erp-vs-software-a-medida",
+      "title": "Excel vs ERP vs Software a Medida: ¿Qué Conviene a una Empresa en Colombia?",
+      "publishedAt": "2026-09-09T08:00:00-05:00",
+      "path": "content/blog/excel-vs-erp-vs-software-a-medida.mdx",
+      "primaryKeyword": "Excel vs ERP vs software a medida"
+    },
+    {
+      "slug": "google-ai-overviews-ai-mode-seo",
+      "title": "Google AI Overviews y AI Mode: Cómo Preparar tu Web para la Búsqueda con IA",
+      "publishedAt": "2026-09-11T08:00:00-05:00",
+      "path": "content/blog/google-ai-overviews-ai-mode-seo.mdx",
+      "primaryKeyword": "Google AI Overviews SEO"
+    },
+    {
+      "slug": "chatbot-vs-agente-ia",
+      "title": "Chatbot vs Agente de IA: Diferencias, Costos y Cuál Necesita tu Empresa",
+      "publishedAt": "2026-09-14T08:00:00-05:00",
+      "path": "content/blog/chatbot-vs-agente-ia.mdx",
+      "primaryKeyword": "chatbot vs agente de IA"
+    },
+    {
+      "slug": "integrar-whatsapp-crm-inventario-facturacion",
+      "title": "Cómo Integrar WhatsApp, CRM, Inventario y Facturación en un Solo Sistema",
+      "publishedAt": "2026-09-16T08:00:00-05:00",
+      "path": "content/blog/integrar-whatsapp-crm-inventario-facturacion.mdx",
+      "primaryKeyword": "integrar WhatsApp CRM inventario facturación"
+    },
+    {
+      "slug": "agentic-commerce-ecommerce-ia",
+      "title": "Agentic Commerce: Cómo Preparar una Tienda Online para Clientes y Agentes de IA",
+      "publishedAt": "2026-09-18T08:00:00-05:00",
+      "path": "content/blog/agentic-commerce-ecommerce-ia.mdx",
+      "primaryKeyword": "agentic commerce"
+    },
+    {
+      "slug": "llms-txt-2026",
+      "title": "llms.txt en 2026: ¿Realmente Ayuda a Aparecer en ChatGPT y Google?",
+      "publishedAt": "2026-09-21T08:00:00-05:00",
+      "path": "content/blog/llms-txt-2026.mdx",
+      "primaryKeyword": "llms.txt"
+    },
+    {
+      "slug": "seo-agentico-2026",
+      "title": "SEO Agéntico en 2026: Cómo Preparar tu Web para Agentes de Inteligencia Artificial",
+      "publishedAt": "2026-09-23T08:00:00-05:00",
+      "path": "content/blog/seo-agentico-2026.mdx",
+      "primaryKeyword": "SEO agéntico"
+    },
+    {
+      "slug": "calcular-roi-automatizacion-software-ia",
+      "title": "Cómo Calcular el ROI de Automatizar un Proceso con Software e IA",
+      "publishedAt": "2026-09-25T08:00:00-05:00",
+      "path": "content/blog/calcular-roi-automatizacion-software-ia.mdx",
+      "primaryKeyword": "ROI automatización"
+    }
+  ]
+}

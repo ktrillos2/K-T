@@ -10,16 +10,23 @@ export interface Post {
   slug: string
   title: string
   excerpt: string
-  category?: "Comparativas" | "Precios & Guías" | "Ingeniería & SEO" | string
+  category?: string
   date: string
   readTime: string
 }
 
-const categories = ["Todos", "Comparativas", "Precios & Guías", "Ingeniería & SEO"] as const
-
 export function BlogClient({ posts }: { posts: Post[] }) {
   const { setCursorVariant } = useCursor()
   const [selectedCategory, setSelectedCategory] = useState<string>("Todos")
+
+  // Dynamically extract categories present in current published posts while maintaining standard order
+  const standardOrder = ["Todos", "Ingeniería & IA", "Ingeniería & SEO", "Comparativas", "Precios & Guías"]
+  const existingCategories = Array.from(new Set(posts.map((p) => p.category || "Precios & Guías")))
+  const categories = [
+    "Todos",
+    ...standardOrder.filter((c) => c !== "Todos" && existingCategories.includes(c)),
+    ...existingCategories.filter((c) => !standardOrder.includes(c)),
+  ]
 
   const filteredPosts =
     selectedCategory === "Todos"
@@ -60,7 +67,7 @@ export function BlogClient({ posts }: { posts: Post[] }) {
             Blog Técnico & Comparativas
           </h1>
           <p className="text-lg md:text-xl text-white/60 max-w-3xl font-mono">
-            Arquitectura de software, comparativas objetivas de tecnologías, guías de costos reales en Colombia y optimización para motores de búsqueda y modelos de IA.
+            Arquitectura de software, comparativas objetivas de tecnologías, agentes de IA, guías de costos reales en Colombia y optimización para motores de búsqueda y modelos generativos.
           </p>
         </motion.div>
 
@@ -81,6 +88,7 @@ export function BlogClient({ posts }: { posts: Post[] }) {
                 }`}
               >
                 {cat === "Comparativas" && <span className="inline-block mr-1.5 text-emerald-400">⚡</span>}
+                {cat === "Ingeniería & IA" && <span className="inline-block mr-1.5 text-emerald-400">🤖</span>}
                 {cat}
               </button>
             )

@@ -29,11 +29,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.8,
     }))
 
-    // Generar dinámicamente rutas para todos los artículos del blog
-    const { blogPosts } = await import('@/lib/blog-posts')
-    const blogUrls = blogPosts.map((p) => ({
+    // Generar dinámicamente rutas únicamente para artículos publicados del blog (excluyendo futuros y borradores)
+    const { getAllPublishedBlogPosts } = await import('@/lib/blog-mdx')
+    const publishedBlogPosts = getAllPublishedBlogPosts()
+    const blogUrls = publishedBlogPosts.map((p) => ({
         url: `${baseUrl}/blog/${p.slug}`,
-        lastModified: new Date(p.modifiedAt || p.publishedAt || currentDate),
+        lastModified: new Date(p.updatedAt || p.modifiedAt || p.publishedAt || currentDate),
         changeFrequency: 'weekly' as const,
         priority: 0.8,
     }))

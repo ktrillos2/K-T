@@ -1,0 +1,231 @@
+---
+title: "Agentic Commerce: Cómo Preparar una Tienda Online para Clientes y Agentes de IA"
+slug: "agentic-commerce-ecommerce-ia"
+description: "Qué es agentic commerce y cómo preparar un e-commerce para compradores y agentes de IA: catálogo estructurado, disponibilidad, APIs, checkout, políticas y datos de producto."
+excerpt: "Qué es agentic commerce y cómo preparar un e-commerce para compradores y agentes de IA: catálogo estructurado, disponibilidad, APIs, checkout, políticas y datos de producto."
+publishedAt: "2026-09-18T08:00:00-05:00"
+updatedAt: "2026-09-18T08:00:00-05:00"
+author: "Keyner Trillos"
+authorRole: "Co-Fundador & Lead Software Engineer"
+locale: "es-CO"
+draft: false
+category: "Ingeniería & IA"
+primaryKeyword: "agentic commerce"
+secondaryKeywords:
+  - "ecommerce para agentes IA"
+  - "comercio agéntico"
+  - "AI shopping agents"
+  - "tienda online IA"
+searchIntent: "informational"
+geoTarget:
+  - "Colombia"
+  - "Latinoamérica"
+tags:
+  - "ecommerce"
+  - "IA"
+  - "agentic commerce"
+  - "headless"
+canonical: "https://www.kytcode.lat/blog/agentic-commerce-ecommerce-ia"
+ogImageAlt: "Agentic Commerce: Cómo Preparar una Tienda Online para Clientes y Agentes de IA"
+imagePrompt: "Tienda online futurista con catálogo, inventario y un agente digital comparando productos, estilo fotorealista y premium, sin texto ni marcas."
+sources:
+  - {"title": "CCCE — Informe público trimestral de comercio electrónico 2026", "url": "https://ccce.org.co/noticias/primer-informe-publico-trimestral-de-comercio-electronico-2026/"}
+  - {"title": "Google — AI features and your website", "url": "https://developers.google.com/search/docs/appearance/ai-features"}
+  - {"title": "K&T Code — WooCommerce Headless", "url": "https://www.kytcode.lat/servicios/woocommerce-headless"}
+---
+
+# Agentic Commerce: cómo preparar una tienda online para clientes y agentes de IA
+
+**Respuesta rápida:** agentic commerce describe experiencias en las que un agente de IA participa activamente en el proceso de compra: descubre opciones, compara, consulta disponibilidad y puede ejecutar pasos en nombre del usuario cuando existen permisos e integraciones. Para prepararse, una tienda necesita datos de producto claros, stock confiable, políticas accesibles, URLs estables y APIs o flujos transaccionales robustos.
+
+La mejor preparación para agentes también suele mejorar la tienda para personas.
+
+## De buscar productos a delegar tareas
+
+El comercio electrónico tradicional espera que el usuario:
+
+1. busque;
+2. abra categorías;
+3. compare;
+4. lea fichas;
+5. agregue;
+6. pague.
+
+Un agente puede recibir un objetivo:
+
+> “Encuentra una opción compatible, que llegue antes del viernes y cueste menos de X.”
+
+Para responder necesita entender datos de varios comercios.
+
+## Qué información debe estar clara
+
+Una ficha de producto debería comunicar:
+
+- nombre;
+- marca;
+- SKU;
+- descripción;
+- variantes;
+- precio;
+- moneda;
+- disponibilidad;
+- imágenes;
+- envío;
+- devoluciones;
+- compatibilidad;
+- condiciones.
+
+No escondas la información crítica únicamente detrás de componentes difíciles de rastrear.
+
+## Datos estructurados
+
+Product y Offer ayudan a expresar información comercial de forma estándar.
+
+Deben coincidir con la página visible.
+
+No utilices schema para publicar:
+
+- stock inexistente;
+- precios diferentes;
+- reseñas inventadas;
+- datos que el usuario no ve.
+
+## Inventario como fuente de verdad
+
+Si un agente consulta “¿hay 3 unidades?”, necesitas una respuesta consistente.
+
+La arquitectura puede separar:
+
+```text
+storefront
+  ↓
+API de catálogo
+  ↓
+sistema de inventario
+```
+
+Una tienda headless facilita este patrón cuando el backend comercial conserva productos y pedidos y el frontend consume APIs.
+
+K&T Code trabaja con este enfoque en [WooCommerce Headless con Next.js](/servicios/woocommerce-headless).
+
+## URLs estables
+
+Los agentes y buscadores necesitan recursos identificables.
+
+Evita:
+
+- productos solo accesibles por filtros JS;
+- URLs temporales;
+- parámetros innecesarios;
+- contenido diferente sin canonical adecuado.
+
+Cada producto importante debería tener una URL estable.
+
+## Políticas fáciles de encontrar
+
+Un agente puede necesitar responder:
+
+- ¿cuánto tarda el envío?
+- ¿puedo devolverlo?
+- ¿qué métodos de pago existen?
+- ¿aplica garantía?
+
+Crea páginas claras de:
+
+- envíos;
+- devoluciones;
+- garantía;
+- pagos;
+- contacto.
+
+Y enlázalas desde la ficha.
+
+## APIs y acciones
+
+Para que un agente haga más que leer, necesita operaciones.
+
+Ejemplo conceptual:
+
+```text
+searchProducts()
+getProduct()
+checkStock()
+calculateShipping()
+createCart()
+getCheckoutUrl()
+```
+
+Cada acción debe validar parámetros y permisos.
+
+## Checkout seguro
+
+No expongas credenciales ni información sensible al agente.
+
+El flujo ideal delega el pago a una interfaz o proveedor diseñado para transacciones.
+
+El agente puede preparar carrito y contexto; el usuario confirma cuando corresponde.
+
+## Rendimiento
+
+Los agentes no eliminan a los usuarios humanos.
+
+Tu tienda sigue necesitando:
+
+- carga rápida;
+- imágenes optimizadas;
+- navegación móvil;
+- accesibilidad;
+- estabilidad visual;
+- checkout claro.
+
+La Cámara Colombiana de Comercio Electrónico reportó crecimiento anual de hasta 22,2 % en el número de transacciones digitales durante el primer trimestre de 2026. La oportunidad sigue siendo grande, pero también aumenta la competencia por experiencia y confianza.
+
+## Headless y agentic commerce
+
+Una arquitectura headless no garantiza visibilidad agéntica, pero tiene ventajas:
+
+- APIs definidas;
+- frontend independiente;
+- catálogo reutilizable;
+- capacidad de integrar canales;
+- mejor control de rendimiento.
+
+Lo importante es que el backend mantenga una fuente de verdad y las APIs sean consistentes.
+
+## Checklist
+
+```text
+[ ] productos con URL estable
+[ ] Product/Offer coherentes con la página
+[ ] precio y stock actualizados
+[ ] variantes explícitas
+[ ] políticas enlazadas
+[ ] sitemap de productos
+[ ] canonical
+[ ] imágenes optimizadas
+[ ] APIs seguras
+[ ] checkout con confirmación
+[ ] eventos e idempotencia
+```
+
+## Preguntas frecuentes
+
+### ¿Agentic commerce reemplazará las tiendas online?
+
+No. Cambia algunos puntos de entrada, pero el comercio sigue necesitando catálogo, inventario, confianza y transacciones.
+
+### ¿Necesito headless?
+
+No obligatoriamente. Lo importante es la calidad de datos y la capacidad de integración. Headless puede facilitar una arquitectura multicanal.
+
+### ¿Un agente puede comprar sin el usuario?
+
+Depende de la plataforma, permisos y tipo de transacción. El comercio debe diseñar confirmaciones apropiadas.
+
+### ¿Schema Product es suficiente?
+
+No. Es una capa de datos. También necesitas contenido visible, stock real, políticas, rendimiento y procesos transaccionales.
+
+## Conclusión
+
+Preparar un e-commerce para agentes consiste en volverlo más legible, verificable y accionable. Catálogo estructurado, inventario fiable y APIs seguras son más importantes que perseguir un “hack” de IA.

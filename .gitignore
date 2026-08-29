@@ -24,6 +24,7 @@ yarn-error.log*
 
 # local env files
 .env*
+!.env.example
 .env
 .env.local
 .env*.local
@@ -37,6 +38,8 @@ next-env.d.ts
 
 # Scripts
 scripts/
+!scripts/build-mdx-data.mjs
+!scripts/test-blog-system.mjs
 *.gs
 *.config*.ts
 *.local
