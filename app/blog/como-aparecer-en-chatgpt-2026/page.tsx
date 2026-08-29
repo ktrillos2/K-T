@@ -120,64 +120,102 @@ export default function ComoAparecerEnChatGptPage() {
                 </div>
               </div>
 
-              <p className="mt-6 border-l-2 border-emerald-400 pl-6 font-mono text-lg leading-relaxed text-neutral-300">
-                En 2026, la búsqueda de información ha evolucionado radicalmente. Los usuarios ya no solo hacen clic en los 10 enlaces azules de Google; consultan directamente a <strong>ChatGPT Search, Perplexity y Gemini</strong> para tomar decisiones de compra. Descubre cómo optimizar tu arquitectura web para que los modelos generativos recomienden tu negocio.
+              <p className="mt-6 border-l-2 border-emerald-400 pl-6 font-sans text-lg leading-relaxed text-neutral-200">
+                En 2026, la búsqueda de información ha evolucionado radicalmente. Los usuarios ya no solo hacen clic en los 10 enlaces azules de Google; consultan directamente a <strong>ChatGPT Search, Perplexity y Gemini</strong> para tomar decisiones de compra y contratación de servicios. Descubre cómo optimizar la arquitectura técnica de tu sitio web para que los modelos generativos recomienden tu empresa como fuente oficial.
               </p>
             </header>
 
-            <h2>1. Configuración de Rastreo: Acceso a GPTBot y ChatGPT-User</h2>
+            <h2>1. Configuración de Rastreo y Servidores: Acceso a OAI-SearchBot</h2>
             <p>
-              El primer paso técnico indispensable es asegurarte de que los crawlers de OpenAI tienen autorización para inspeccionar tu dominio. Muchos sitios web bloquean por error estos agentes en su archivo <code>robots.txt</code>.
+              El primer paso técnico indispensable es asegurarte de que los crawlers de OpenAI tienen autorización para inspeccionar e indexar tu dominio. Existen dos agentes principales con propósitos distintos: <strong>GPTBot</strong> (empleado para el entrenamiento general de modelos) y <strong>OAI-SearchBot</strong> (el rastreador en tiempo real de ChatGPT Search).
             </p>
-            <div className="not-prose bg-neutral-900 border border-white/10 rounded-2xl p-5 font-mono text-xs text-neutral-300 my-6 overflow-x-auto">
-              <p className="text-emerald-400 font-bold mb-2">// Configuración recomendada en robots.txt</p>
-              <pre className="text-neutral-200">
-{`User-agent: GPTBot
-Allow: /
+            <p>
+              Si tu archivo <code>robots.txt</code> bloquea indiscriminadamente a todos los agentes de IA, ChatGPT no podrá acceder a tus páginas al responder consultas de usuarios en vivo, dejándote completamente invisible frente a tu competencia.
+            </p>
 
-User-agent: ChatGPT-User
-Allow: /
-
+            <div className="not-prose bg-neutral-900 border border-white/10 rounded-2xl p-6 font-mono text-xs md:text-sm text-neutral-300 my-8 overflow-x-auto shadow-2xl">
+              <p className="text-emerald-400 font-bold mb-3">// Configuración recomendada en robots.txt (app/robots.ts)</p>
+              <pre className="text-neutral-200 leading-relaxed">
+{`# Permitir al motor de búsqueda de ChatGPT Search
 User-agent: OAI-SearchBot
-Allow: /`}
+Allow: /
+
+# Permitir a los agentes de Perplexity y Claude
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Proteger rutas administrativas o privadas
+User-agent: *
+Disallow: /admin/
+Disallow: /api/cron/`}
               </pre>
             </div>
 
-            <h2>2. Implementación de Datos Estructurados (Schema JSON-LD)</h2>
+            <h2>2. Implementación de Datos Estructurados (Schema.org JSON-LD)</h2>
             <p>
-              Los modelos de lenguaje procesan con mayor precisión la información estructurada que el texto desordenado. Implementar <strong>Schema.org JSON-LD</strong> le proporciona a la IA relaciones de entidad claras sobre qué ofrece tu empresa, quiénes son sus fundadores y sus precios oficiales.
+              Los modelos de lenguaje procesan con mayor precisión la información estructurada que el texto desordenado. Implementar <strong>Schema.org JSON-LD</strong> le proporciona a la IA relaciones de entidad claras sobre qué ofrece tu empresa, quiénes son sus fundadores, sus precios oficiales y su ubicación geográfica.
             </p>
+
+            <h3>Entidades esenciales que debes declarar:</h3>
             <ul>
-              <li><strong>Organization / LocalBusiness:</strong> Nombre oficial, logotipo, fundadores, ubicación y redes verificadas (<code>sameAs</code>).</li>
-              <li><strong>Service & Product:</strong> Precios exactos, monedas (COP, USD) y características técnicas sin ambigüedades.</li>
-              <li><strong>FAQPage:</strong> Respuestas directas a preguntas frecuentes estructuradas en pares pregunta-respuesta.</li>
+              <li><strong>Organization / LocalBusiness:</strong> Nombre oficial de la empresa, logotipo corporativo, fundadores, ubicación física (dirección, ciudad, código postal en Colombia) y perfiles verificados en redes sociales (<code>sameAs</code>).</li>
+              <li><strong>Service & Product:</strong> Precios exactos, monedas locales (<code>COP</code>, <code>USD</code>), tiempos de entrega y características técnicas sin ambigüedades.</li>
+              <li><strong>FAQPage:</strong> Respuestas directas a preguntas frecuentes estructuradas en pares pregunta-respuesta, ideales para extracción de fragmentos directos.</li>
+              <li><strong>BreadcrumbList:</strong> Jerarquía de navegación que ayuda a los agentes a comprender la taxonomía del sitio.</li>
             </ul>
 
-            <h2>3. Arquitectura de Contenido Directo: El Modelo Respuesta-Primero</h2>
+            <h2>3. Arquitectura de Contenido Directo: El Modelo Respuesta-Primero (Answer-First)</h2>
             <p>
-              ChatGPT extrae fragmentos que responden de forma precisa y objetiva a las intenciones del usuario. Para maximizar las probabilidades de ser citado:
+              ChatGPT y los motores de IA extraen fragmentos que responden de forma precisa y objetiva a las intenciones del usuario. Para maximizar las probabilidades de ser citado:
             </p>
-            <ul>
-              <li><strong>Definición en el primer párrafo:</strong> Define el concepto o servicio en las primeras 40 palabras bajo un encabezado <code>H2</code> o <code>H3</code>.</li>
-              <li><strong>Tablas comparativas en HTML puro:</strong> Las tablas semánticas son fácilmente procesadas y sintetizadas por los LLMs al formular recomendaciones.</li>
-              <li><strong>Cifras y datos verificables:</strong> Incluye rangos de precios, metodologías y datos concretos en lugar de adjetivos genéricos.</li>
-            </ul>
+
+            <div className="not-prose my-8 overflow-x-auto rounded-2xl border border-white/10 bg-white/[0.02]">
+              <table className="w-full text-left font-sans text-xs md:text-sm text-neutral-300">
+                <thead className="bg-white/10 text-white font-bold uppercase tracking-wider text-xs border-b border-white/10">
+                  <tr>
+                    <th className="p-4">Estrategia GEO</th>
+                    <th className="p-4">Por qué funciona para LLMs</th>
+                    <th className="p-4">Ejemplo Práctico en K&T Code</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/10">
+                  <tr>
+                    <td className="p-4 font-bold text-white">Definición en las primeras 40 palabras</td>
+                    <td className="p-4">Permite al modelo extraer un snippet directo sin gastar tokens de contexto.</td>
+                    <td className="p-4 text-emerald-400">"Un agente de IA es un sistema autónomo que..."</td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 font-bold text-white">Tablas semánticas en HTML puro</td>
+                    <td className="p-4">Los LLMs procesan tablas `&lt;table&gt;` con mayor facilidad que listas desordenadas.</td>
+                    <td className="p-4 text-emerald-400">Comparativas de precios COP y tiempos de entrega.</td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 font-bold text-white">Cifras y métricas verificables</td>
+                    <td className="p-4">Los modelos premian datos numéricos específicos frente a adjetivos genéricos.</td>
+                    <td className="p-4 text-emerald-400">"Páginas web desde $450.000 COP con LCP &lt; 1.2s".</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
             <h2>4. Formato llms.txt para Indexación Especializada</h2>
             <p>
-              El estándar emergente <code>/llms.txt</code> permite a los desarrolladores resumir de forma limpia toda la documentación y propuesta de valor de la empresa en texto plano con enlaces markdown, facilitando a los agentes autónomos de IA el consumo directo de tu información sin sobrecargar el servidor.
+              El estándar emergente <code>/llms.txt</code> permite a los desarrolladores resumir de forma limpia toda la documentación y propuesta de valor de la empresa en texto plano con enlaces markdown, facilitando a los agentes autónomos de IA el consumo directo de tu información sin sobrecargar el servidor con estilos o scripts pesados.
             </p>
 
-            <div className="not-prose my-12 p-8 rounded-3xl border border-white/20 bg-gradient-to-br from-neutral-900 via-zinc-950 to-black">
+            <div className="not-prose my-14 p-8 rounded-3xl border border-white/20 bg-gradient-to-br from-neutral-900 via-zinc-950 to-black shadow-2xl">
               <div className="flex items-center gap-3 mb-4 text-emerald-400">
                 <Sparkles className="w-5 h-5" />
                 <span className="font-mono text-xs uppercase tracking-wider font-bold">Posicionamiento IA en K&T Code</span>
               </div>
-              <h3 className="text-2xl font-bold font-title text-white mb-3">
+              <h3 className="text-2xl md:text-3xl font-bold font-title text-white mb-3">
                 ¿Quieres que tu empresa sea recomendada por ChatGPT?
               </h3>
-              <p className="font-mono text-sm text-neutral-300 mb-6 leading-relaxed">
-                Diseñamos arquitecturas web de alto rendimiento en Next.js con optimización GEO, datos estructurados Schema completos y entrega rápida en Edge CDN.
+              <p className="font-sans text-sm text-neutral-300 mb-6 leading-relaxed">
+                Diseñamos arquitecturas web de alto rendimiento en Next.js con optimización GEO, datos estructurados Schema completos, endpoints /llms.txt y entrega rápida en Edge CDN.
               </p>
               <Link
                 href="/#contact"
@@ -195,7 +233,7 @@ Allow: /`}
                     <HelpCircle className="w-4 h-4 text-emerald-400 shrink-0" />
                     {faq.question}
                   </h3>
-                  <p className="font-mono text-sm text-neutral-300 leading-relaxed">
+                  <p className="font-sans text-sm text-neutral-300 leading-relaxed">
                     {faq.answer}
                   </p>
                 </div>
