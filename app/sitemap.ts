@@ -1,13 +1,11 @@
 import { MetadataRoute } from 'next'
 import { getAllProjects } from '@/sanity/lib/queries'
-import fs from 'fs'
-import path from 'path'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://www.kytcode.lat'
     const currentDate = new Date()
 
-    // Generar dinámicamente rutas para proyectos (CMS + catálogo interno)
+    // 1. Proyectos (CMS + catálogo interno)
     let cmsProjects: { slug: string }[] = []
     try {
         cmsProjects = await getAllProjects()
@@ -26,19 +24,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${baseUrl}/projects/${slug}`,
         lastModified: currentDate,
         changeFrequency: 'monthly' as const,
-        priority: 0.8,
+        priority: 0.85,
     }))
 
-    // Generar dinámicamente rutas únicamente para artículos publicados del blog (excluyendo futuros y borradores)
+    // 2. Artículos publicados del blog (únicamente publicados)
     const { getAllPublishedBlogPosts } = await import('@/lib/blog-mdx')
     const publishedBlogPosts = getAllPublishedBlogPosts()
     const blogUrls = publishedBlogPosts.map((p) => ({
         url: `${baseUrl}/blog/${p.slug}`,
         lastModified: new Date(p.updatedAt || p.modifiedAt || p.publishedAt || currentDate),
         changeFrequency: 'weekly' as const,
-        priority: 0.8,
+        priority: 0.85,
     }))
 
+    // 3. Servicios Especializados
     const serviceSlugs = [
         'desarrollo-web-a-medida',
         'diseno-web-corporativo',
@@ -57,6 +56,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.9,
     }))
 
+    // 4. Guías de Precios
     const pricingGuideSlugs = [
         'precio-pagina-web-colombia',
         'precio-tienda-virtual-colombia',
@@ -67,20 +67,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${baseUrl}/precios/${slug}`,
         lastModified: currentDate,
         changeFrequency: 'weekly' as const,
-        priority: 0.85,
+        priority: 0.9,
     }))
 
-    const industrySlugs = [
-        'desarrollo-web-inmobiliarias',
-        'desarrollo-web-salud',
-        'desarrollo-web-ingenieria',
-        'ecommerce-b2b',
-        'desarrollo-web-turismo',
-        'desarrollo-web-automotriz',
-        'desarrollo-web-estetica',
-        'desarrollo-web-editorial',
-    ]
-
+    // 5. Ciudades Colombia
     const citySlugs = [
         'desarrollo-web-bogota',
         'desarrollo-web-medellin',
@@ -96,6 +86,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.9,
     }))
 
+    // 6. Industrias
+    const industrySlugs = [
+        'desarrollo-web-inmobiliarias',
+        'desarrollo-web-salud',
+        'desarrollo-web-ingenieria',
+        'ecommerce-b2b',
+        'desarrollo-web-turismo',
+        'desarrollo-web-automotriz',
+        'desarrollo-web-estetica',
+        'desarrollo-web-editorial',
+    ]
+
     const industryUrls = industrySlugs.map((slug) => ({
         url: `${baseUrl}/industrias/${slug}`,
         lastModified: currentDate,
@@ -103,13 +105,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.85,
     }))
 
+    // 7. Rutas en Inglés con alternates
     const englishRoutes = [
-        { url: `${baseUrl}/en`, priority: 0.95 },
-        { url: `${baseUrl}/en/about`, priority: 0.85 },
-        { url: `${baseUrl}/en/services`, priority: 0.85 },
-        { url: `${baseUrl}/en/pricing`, priority: 0.85 },
-        { url: `${baseUrl}/en/portfolio`, priority: 0.85 },
-        { url: `${baseUrl}/en/contact`, priority: 0.85 },
+        { url: `${baseUrl}/en`, priority: 0.85 },
+        { url: `${baseUrl}/en/services`, priority: 0.8 },
+        { url: `${baseUrl}/en/portfolio`, priority: 0.8 },
+        { url: `${baseUrl}/en/pricing`, priority: 0.8 },
+        { url: `${baseUrl}/en/about`, priority: 0.8 },
+        { url: `${baseUrl}/en/contact`, priority: 0.8 },
     ].map((r) => ({
         url: r.url,
         lastModified: currentDate,
@@ -118,13 +121,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
 
     return [
+        // Páginas principales en Español (Prioridad Máxima de Indexación)
         {
             url: baseUrl,
             lastModified: currentDate,
             changeFrequency: 'weekly',
             priority: 1.0,
         },
-        ...englishRoutes,
+        {
+            url: `${baseUrl}/servicios`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: 0.95,
+        },
+        {
+            url: `${baseUrl}/portafolio`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: 0.95,
+        },
+        {
+            url: `${baseUrl}/precios`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: 0.95,
+        },
+        {
+            url: `${baseUrl}/blog`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: 0.95,
+        },
         {
             url: `${baseUrl}/nosotros`,
             lastModified: currentDate,
@@ -132,29 +159,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.9,
         },
         {
-            url: `${baseUrl}/servicios`,
-            lastModified: currentDate,
-            changeFrequency: 'weekly',
-            priority: 0.9,
-        },
-        ...serviceUrls,
-        ...cityUrls,
-        {
-            url: `${baseUrl}/precios`,
-            lastModified: currentDate,
-            changeFrequency: 'weekly',
-            priority: 0.9,
-        },
-        ...pricingUrls,
-        {
             url: `${baseUrl}/industrias`,
-            lastModified: currentDate,
-            changeFrequency: 'weekly',
-            priority: 0.9,
-        },
-        ...industryUrls,
-        {
-            url: `${baseUrl}/portafolio`,
             lastModified: currentDate,
             changeFrequency: 'weekly',
             priority: 0.9,
@@ -163,19 +168,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: `${baseUrl}/preguntas-frecuentes`,
             lastModified: currentDate,
             changeFrequency: 'weekly',
-            priority: 0.8,
+            priority: 0.85,
         },
-        {
-            url: `${baseUrl}/blog`,
-            lastModified: currentDate,
-            changeFrequency: 'weekly',
-            priority: 0.9,
-        },
+        // Grupos de contenido transaccional y hubs
+        ...serviceUrls,
+        ...cityUrls,
+        ...pricingUrls,
+        ...industryUrls,
+        ...projectUrls,
+        ...blogUrls,
+        // Rutas internacionales
+        ...englishRoutes,
+        // Páginas complementarias
         {
             url: `${baseUrl}/redes`,
             lastModified: currentDate,
             changeFrequency: 'monthly',
-            priority: 0.7,
+            priority: 0.6,
         },
         {
             url: `${baseUrl}/politica-de-privacidad`,
@@ -187,12 +196,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: `${baseUrl}/autores/keyner-trillos`,
             lastModified: currentDate,
             changeFrequency: 'monthly',
-            priority: 0.8,
+            priority: 0.7,
         },
-        ...projectUrls,
-        ...blogUrls,
     ]
 }
-
-
-

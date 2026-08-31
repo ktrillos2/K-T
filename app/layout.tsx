@@ -111,13 +111,56 @@ export const metadata: Metadata = {
     canonical: "https://www.kytcode.lat",
     languages: {
       "es-CO": "https://www.kytcode.lat",
-      "es": "https://www.kytcode.lat",
+      es: "https://www.kytcode.lat",
+      en: "https://www.kytcode.lat/en",
       "x-default": "https://www.kytcode.lat",
     },
   },
   verification: {
     google: "dqsrEf4u6-TWpy3i2r3S-BJbGb7LV6J7cWob35JSKD4",
   },
+}
+
+const navigationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    {
+      "@type": "SiteNavigationElement",
+      "position": 1,
+      "name": "Servicios de Desarrollo Web",
+      "description": "Desarrollo web a medida, tiendas virtuales headless, software empresarial y optimización SEO.",
+      "url": "https://www.kytcode.lat/servicios",
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "position": 2,
+      "name": "Portafolio de Proyectos",
+      "description": "Plataformas digitales y casos de éxito desarrollados por K&T Code.",
+      "url": "https://www.kytcode.lat/portafolio",
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "position": 3,
+      "name": "Precios y Cotizaciones",
+      "description": "Guía de precios y cotizaciones para páginas web, e-commerce y software en Colombia.",
+      "url": "https://www.kytcode.lat/precios",
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "position": 4,
+      "name": "Blog de Ingeniería & SEO",
+      "description": "Guías técnicas, arquitectura de software y optimización para motores de IA.",
+      "url": "https://www.kytcode.lat/blog",
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "position": 5,
+      "name": "Sobre Nosotros",
+      "description": "Equipo de ingenieros y fundadores de K&T Code en Colombia.",
+      "url": "https://www.kytcode.lat/nosotros",
+    },
+  ],
 }
 
 const websiteJsonLd = {
@@ -290,6 +333,10 @@ export default function RootLayout({
             </CursorProvider>
           </LanguageProvider>
         </LazyMotion>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(navigationJsonLd) }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
