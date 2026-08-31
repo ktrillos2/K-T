@@ -167,7 +167,7 @@ Disallow: /api/cron/`}
               <li><strong>BreadcrumbList:</strong> Jerarquía de navegación que ayuda a los agentes a comprender la taxonomía del sitio.</li>
             </ul>
 
-            <h2>3. Arquitectura de Contenido Directo: El Modelo Respuesta-Primero (Answer-First)</h2>
+            <h2>3. Arquitectura de Contenido Directo: Estructura Piramidal Invertida</h2>
             <p>
               ChatGPT y los motores de IA extraen fragmentos que responden de forma precisa y objetiva a las intenciones del usuario. Para maximizar las probabilidades de ser citado:
             </p>

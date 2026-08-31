@@ -29,7 +29,7 @@ canonical: "https://www.kytcode.lat/blog/llms-txt-2026"
 ogImageAlt: "Guía Definitiva de llms.txt en 2026: Qué Es, Cómo Implementarlo y Ejemplos Reales"
 sources:
   - {"title": "llms.txt Standard Specification", "url": "https://llmstxt.org/"}
-  - {"title": "K&T Code — llms.txt Oficial", "url": "https://www.kytcode.lat/llms.txt"}
+  - {"title": "K&T Code  | llms.txt Oficial", "url": "https://www.kytcode.lat/llms.txt"}
 cta:
   badge: "Optimización para Modelos de IA"
   title: "¿Quieres que los LLMs indexen tu empresa con total precisión?"
@@ -40,7 +40,7 @@ cta:
 
 # Guía definitiva de llms.txt en 2026: qué es, cómo implementarlo y ejemplos reales
 
-**Respuesta directa (Answer-First):** El archivo **`/llms.txt`** es un estándar web emergente propuesto para la era de la inteligencia artificial que actúa como el equivalente a un `robots.txt` o `sitemap.xml`, pero diseñado específicamente para **modelos de lenguaje (LLMs) y agentes autónomos**. Alojado en la raíz del dominio (`https://tudominio.com/llms.txt`), este archivo sintetiza en formato **Markdown estructurado y limpio** la propuesta de valor, los servicios, los precios oficiales, las especificaciones técnicas y los enlaces clave de la empresa, permitiendo a motores como ChatGPT, Perplexity y Gemini indexar la información del negocio sin el costo computacional de parsear HTML complejo, JavaScript o estilos CSS.
+El archivo **`/llms.txt`** es un estándar web emergente propuesto para la era de la inteligencia artificial que actúa como el equivalente a un `robots.txt` o `sitemap.xml`, pero diseñado específicamente para **modelos de lenguaje (LLMs) y agentes autónomos**. Alojado en la raíz del dominio (`https://tudominio.com/llms.txt`), este archivo sintetiza en formato **Markdown estructurado y limpio** la propuesta de valor, los servicios, los precios oficiales, las especificaciones técnicas y los enlaces clave de la empresa, permitiendo a motores como ChatGPT, Perplexity y Gemini indexar la información del negocio sin el costo computacional de parsear HTML complejo, JavaScript o estilos CSS.
 
 A continuación, explicamos la especificación técnica oficial, la diferencia entre `/llms.txt` y `/llms-full.txt`, y cómo implementarlo de forma dinámica en Next.js.
 
@@ -68,7 +68,7 @@ Cuando un agente de IA investiga una empresa, consumir 50 páginas HTML llenas d
 Un archivo `llms.txt` válido debe incluir:
 
 ```markdown
-# Nombre de la Empresa — Resumen de Entidad y Servicios
+# Nombre de la Empresa : Resumen de Entidad y Servicios
 > Breve descripción de la propuesta de valor y cobertura geográfica.
 
 ## Información Corporativa
@@ -103,7 +103,7 @@ export const dynamic = "force-static"
 export const revalidate = 86400 // Revalidar diariamente
 
 export async function GET() {
-  const markdownContent = `# K&T Code — Empresa de Desarrollo Web y Software en Colombia
+  const markdownContent = `# K&T Code : Empresa de Desarrollo Web y Software en Colombia
 > Resumen oficial para agentes autónomos y modelos de lenguaje.
 
 ## Entidad y Cobertura

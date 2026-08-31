@@ -2,6 +2,16 @@ import React from "react"
 import Link from "next/link"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import remarkGfm from "remark-gfm"
+import { isAsciiDiagram } from "@/lib/blog-diagram-parser"
+import { VisualDiagram } from "@/components/blog/diagrams/visual-diagram"
+import { CodeBlock } from "@/components/blog/diagrams/code-block"
+import { ArchitectureView } from "@/components/blog/diagrams/architecture-view"
+import { WorkflowPipelineView } from "@/components/blog/diagrams/workflow-pipeline-view"
+import { ComparisonView } from "@/components/blog/diagrams/comparison-view"
+import { DecisionTreeView } from "@/components/blog/diagrams/decision-tree-view"
+import { FeatureGridView } from "@/components/blog/diagrams/feature-grid-view"
+import { ScenarioChatView } from "@/components/blog/diagrams/scenario-chat-view"
+import { SequencePipelineView } from "@/components/blog/diagrams/sequence-pipeline-view"
 
 interface MdxContentProps {
   content: string
@@ -19,6 +29,7 @@ function slugify(text: string): string {
 
 function getTextContent(children: React.ReactNode): string {
   if (typeof children === "string") return children
+  if (typeof children === "number") return String(children)
   if (Array.isArray(children)) {
     return children.map(getTextContent).join("")
   }
@@ -26,6 +37,19 @@ function getTextContent(children: React.ReactNode): string {
     return getTextContent((children.props as any).children)
   }
   return ""
+}
+
+function extractCodeBlockProps(children: React.ReactNode): { text: string; language: string } {
+  if (React.isValidElement(children)) {
+    const props = children.props as any
+    const text = getTextContent(props?.children ?? "")
+    const className = props?.className || ""
+    const match = className.match(/language-([a-zA-Z0-9_-]+)/)
+    const language = match ? match[1] : ""
+    return { text, language }
+  }
+  const text = getTextContent(children)
+  return { text, language: "" }
 }
 
 const customComponents = {
@@ -129,13 +153,16 @@ const customComponents = {
     )
   },
 
-  pre: ({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
-    <div className="not-prose my-8 rounded-2xl border border-white/10 bg-neutral-950 p-6 font-mono text-xs md:text-sm text-neutral-200 overflow-x-auto shadow-2xl">
-      <pre className="leading-relaxed" {...props}>
-        {children}
-      </pre>
-    </div>
-  ),
+  // PRE element: Detects whether it's an ASCII diagram/schema or programming code
+  pre: ({ children }: React.HTMLAttributes<HTMLPreElement>) => {
+    const { text, language } = extractCodeBlockProps(children)
+
+    if (isAsciiDiagram(text, language)) {
+      return <VisualDiagram rawText={text} language={language} />
+    }
+
+    return <CodeBlock code={text} language={language} />
+  },
 
   // 6. Tables (GFM)
   table: ({ children, ...props }: React.TableHTMLAttributes<HTMLTableElement>) => (
@@ -225,6 +252,17 @@ const customComponents = {
       {children}
     </em>
   ),
+
+  // Custom Direct MDX Component tags
+  VisualDiagram,
+  ArchitectureView,
+  WorkflowPipelineView,
+  ComparisonView,
+  DecisionTreeView,
+  FeatureGridView,
+  ScenarioChatView,
+  SequencePipelineView,
+  CodeBlock,
 }
 
 export function MdxContent({ content }: MdxContentProps) {
