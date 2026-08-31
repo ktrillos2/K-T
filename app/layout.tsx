@@ -37,6 +37,7 @@ const pressStart2P = Press_Start_2P({ weight: "400", subsets: ["latin"], variabl
 const ariW9500 = localFont({
   src: "../public/fonts/ari-w9500-bold.ttf",
   variable: "--font-ari",
+  weight: "100 900",
   display: "swap",
 })
 
