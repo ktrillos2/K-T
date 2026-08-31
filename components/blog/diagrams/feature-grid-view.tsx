@@ -12,29 +12,29 @@ export function FeatureGridView({ data }: FeatureGridViewProps) {
   const getFeatureIcon = (iconStr: string | undefined, titleStr: string) => {
     const t = titleStr.toLowerCase()
     if (t.includes("velocidad") || t.includes("rendimiento") || iconStr === "🚀") {
-      return <Zap className="w-5 h-5 text-amber-400" />
+      return <Zap className="w-4 h-4 text-neutral-300" />
     }
     if (t.includes("usuario") || t.includes("ilimitados") || iconStr === "👥") {
-      return <Users className="w-5 h-5 text-cyan-400" />
+      return <Users className="w-4 h-4 text-neutral-300" />
     }
     if (t.includes("seguridad") || t.includes("rbac") || iconStr === "🔒") {
-      return <Lock className="w-5 h-5 text-emerald-400" />
+      return <Lock className="w-4 h-4 text-neutral-300" />
     }
     if (t.includes("responsive") || t.includes("móvil") || iconStr === "📱") {
-      return <Smartphone className="w-5 h-5 text-purple-400" />
+      return <Smartphone className="w-4 h-4 text-neutral-300" />
     }
     if (t.includes("ia") || t.includes("agente") || iconStr === "🤖") {
-      return <Bot className="w-5 h-5 text-pink-400" />
+      return <Bot className="w-4 h-4 text-neutral-300" />
     }
-    return <Sparkles className="w-5 h-5 text-emerald-400" />
+    return <Sparkles className="w-4 h-4 text-neutral-300" />
   }
 
   return (
-    <div className="w-full py-4 px-2 sm:px-4">
+    <div className="w-full py-2">
       {title && (
         <div className="text-center mb-6">
-          <span className="font-mono text-xs text-emerald-400 uppercase tracking-widest font-bold block mb-1">
-            VENTAJAS TÉCNICAS CLAVE
+          <span className="font-mono text-xs text-neutral-400 uppercase tracking-wider block mb-1">
+            Ventajas Técnicas
           </span>
           <h3 className="font-title text-xl md:text-2xl font-bold text-white tracking-tight">
             {title}
@@ -42,15 +42,15 @@ export function FeatureGridView({ data }: FeatureGridViewProps) {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 max-w-4xl mx-auto">
         {features.map((feature, idx) => (
           <div
             key={idx}
-            className="group relative rounded-2xl border border-white/10 hover:border-emerald-500/40 bg-neutral-950/80 p-5 backdrop-blur-xl transition-all duration-300 shadow-lg flex flex-col justify-between"
+            className="rounded-xl border border-white/10 bg-[#131313] p-4 hover:border-white/20 transition-colors flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 group-hover:border-emerald-500/30 group-hover:bg-emerald-500/10 transition-colors">
+              <div className="flex items-center gap-2.5 mb-2.5">
+                <div className="p-1.5 rounded-lg bg-white/5 border border-white/10">
                   {getFeatureIcon(feature.icon, feature.title)}
                 </div>
                 <h4 className="font-title text-sm md:text-base font-bold text-white tracking-tight">
@@ -60,11 +60,6 @@ export function FeatureGridView({ data }: FeatureGridViewProps) {
               <p className="font-sans text-xs md:text-sm text-neutral-300 leading-relaxed">
                 {feature.description}
               </p>
-            </div>
-
-            <div className="mt-4 pt-2 border-t border-white/5 flex items-center justify-between text-neutral-500 font-mono text-[10px]">
-              <span>K&T Engineering</span>
-              <span className="text-emerald-400 font-bold">✓ Incluido</span>
             </div>
           </div>
         ))}
