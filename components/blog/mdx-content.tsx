@@ -2,6 +2,7 @@ import React from "react"
 import Link from "next/link"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import remarkGfm from "remark-gfm"
+import { AlertCircle, AlertTriangle, Info, Lightbulb } from "lucide-react"
 import { isAsciiDiagram } from "@/lib/blog-diagram-parser"
 import { VisualDiagram } from "@/components/blog/diagrams/visual-diagram"
 import { CodeBlock } from "@/components/blog/diagrams/code-block"
@@ -37,6 +38,48 @@ function getTextContent(children: React.ReactNode): string {
     return getTextContent((children.props as any).children)
   }
   return ""
+}
+
+function extractAndCleanAlert(children: React.ReactNode): {
+  type: "important" | "warning" | "note" | "tip" | "caution" | "general"
+  cleanChildren: React.ReactNode
+} {
+  const fullText = getTextContent(children).trim()
+  const match = fullText.match(/^\[!(IMPORTANT|NOTE|WARNING|TIP|CAUTION)\]\s*/i)
+
+  if (!match) {
+    return { type: "general", cleanChildren: children }
+  }
+
+  const alertType = match[1].toLowerCase() as "important" | "warning" | "note" | "tip" | "caution"
+  const tagRegex = /^\s*\[!(IMPORTANT|NOTE|WARNING|TIP|CAUTION)\]\s*/i
+
+  let removed = false
+  function cleanNode(node: React.ReactNode): React.ReactNode {
+    if (removed) return node
+    if (typeof node === "string") {
+      if (tagRegex.test(node)) {
+        removed = true
+        return node.replace(tagRegex, "")
+      }
+      return node
+    }
+    if (Array.isArray(node)) {
+      return node.map((child) => cleanNode(child))
+    }
+    if (React.isValidElement(node)) {
+      const element = node as React.ReactElement<{ children?: React.ReactNode }>
+      if (element.props && element.props.children) {
+        return React.cloneElement(element, {
+          children: cleanNode(element.props.children),
+        })
+      }
+    }
+    return node
+  }
+
+  const cleanChildren = cleanNode(children)
+  return { type: alertType, cleanChildren }
 }
 
 function extractCodeBlockProps(children: React.ReactNode): { text: string; language: string } {
@@ -206,15 +249,68 @@ const customComponents = {
     </td>
   ),
 
-  // 7. Blockquotes and Callouts
-  blockquote: ({ children, ...props }: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
-    <blockquote
-      className="not-prose my-10 p-6 md:p-8 rounded-2xl border-l-4 border-emerald-400 bg-emerald-950/20 border-t border-r border-b border-white/10 font-sans text-base md:text-lg leading-relaxed text-zinc-200 shadow-xl"
-      {...props}
-    >
-      {children}
-    </blockquote>
-  ),
+  // 7. Blockquotes and Callouts: Cleanly parses and formats [!IMPORTANT], [!NOTE], etc. without raw tags
+  blockquote: ({ children, ...props }: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => {
+    const { type, cleanChildren } = extractAndCleanAlert(children)
+
+    if (type === "general") {
+      return (
+        <blockquote
+          className="not-prose my-8 p-5 md:p-6 rounded-xl border-l-2 border-emerald-400/80 bg-white/[0.02] border-t border-r border-b border-white/5 font-sans text-sm md:text-base leading-relaxed text-neutral-200"
+          {...props}
+        >
+          {cleanChildren}
+        </blockquote>
+      )
+    }
+
+    const alertConfig = {
+      important: {
+        title: "Punto Clave",
+        icon: <AlertCircle className="w-4 h-4 text-white" />,
+        border: "border-l-2 border-l-white/70 border-white/10",
+        bg: "bg-[#141414]",
+      },
+      warning: {
+        title: "Advertencia",
+        icon: <AlertTriangle className="w-4 h-4 text-amber-400" />,
+        border: "border-l-2 border-l-amber-400 border-white/10",
+        bg: "bg-[#141311]",
+      },
+      caution: {
+        title: "Precaución",
+        icon: <AlertTriangle className="w-4 h-4 text-rose-400" />,
+        border: "border-l-2 border-l-rose-400 border-white/10",
+        bg: "bg-[#141112]",
+      },
+      tip: {
+        title: "Consejo",
+        icon: <Lightbulb className="w-4 h-4 text-emerald-400" />,
+        border: "border-l-2 border-l-emerald-400 border-white/10",
+        bg: "bg-[#111412]",
+      },
+      note: {
+        title: "Nota",
+        icon: <Info className="w-4 h-4 text-neutral-300" />,
+        border: "border-l-2 border-l-white/40 border-white/10",
+        bg: "bg-[#131313]",
+      },
+    }[type]
+
+    return (
+      <div className={`not-prose my-8 p-5 rounded-xl border ${alertConfig.border} ${alertConfig.bg}`}>
+        <div className="flex items-center gap-2 mb-2">
+          {alertConfig.icon}
+          <span className="font-mono text-xs uppercase tracking-wider text-white font-bold">
+            {alertConfig.title}
+          </span>
+        </div>
+        <div className="font-sans text-sm md:text-base leading-relaxed text-neutral-300 [&>p]:mb-0">
+          {cleanChildren}
+        </div>
+      </div>
+    )
+  },
 
   // 8. Lists
   ul: ({ children, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
