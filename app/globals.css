@@ -263,21 +263,21 @@
     text-decoration-color: transparent !important;
   }
 
-  /* Universal high-contrast CTA button styling */
-  .not-prose a[class*="bg-white"],
-  .prose .not-prose a[class*="bg-white"],
-  .not-prose button[class*="bg-white"],
-  .prose .not-prose button[class*="bg-white"] {
+  /* Universal high-contrast solid white CTA button styling */
+  .not-prose a.bg-white,
+  .prose .not-prose a.bg-white,
+  .not-prose button.bg-white,
+  .prose .not-prose button.bg-white {
     color: #000000 !important;
     background-color: #ffffff !important;
     text-decoration: none !important;
     font-weight: 700 !important;
   }
 
-  .not-prose a[class*="bg-white"]:hover,
-  .prose .not-prose a[class*="bg-white"]:hover,
-  .not-prose button[class*="bg-white"]:hover,
-  .prose .not-prose button[class*="bg-white"]:hover {
+  .not-prose a.bg-white:hover,
+  .prose .not-prose a.bg-white:hover,
+  .not-prose button.bg-white:hover,
+  .prose .not-prose button.bg-white:hover {
     color: #000000 !important;
     background-color: #e5e5e5 !important;
     text-decoration: none !important;

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, Sparkles } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import { getRelatedBlogPosts, type UnifiedBlogPost } from "@/lib/blog-mdx"
 
 interface RelatedPostsProps {
@@ -33,34 +33,43 @@ export default function RelatedPosts({
       aria-label="Artículos relacionados"
       className="not-prose my-16 border-t border-white/10 pt-12"
     >
-      <div className="flex items-center gap-2.5 mb-6 text-emerald-400 font-mono text-xs uppercase tracking-wider font-bold">
-        <Sparkles className="w-4 h-4" />
+      {/* Minimalist Section Header */}
+      <div className="flex items-center gap-2 mb-6 text-neutral-300 font-mono text-xs uppercase tracking-wider font-semibold">
+        <span className="w-2 h-2 rounded-full bg-white/40" />
         <span>Artículos y Guías Relacionadas</span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {selectedPosts.map((post) => (
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="group flex flex-col justify-between p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.06] hover:border-emerald-500/40 transition-all duration-300"
+            className="group flex flex-col justify-between p-5 sm:p-6 rounded-xl border border-white/10 bg-[#131313] hover:bg-[#181818] hover:border-white/20 transition-all duration-200"
           >
             <div>
-              <div className="flex items-center justify-between text-xs font-mono text-neutral-400 mb-3">
-                <span className="text-emerald-400 font-bold">{post.category}</span>
-                <span>{post.readTime}</span>
+              {/* Category & Read time with proper spacing and contrast */}
+              <div className="flex items-center justify-between gap-2 text-xs font-mono mb-3">
+                <span className="text-emerald-400 font-semibold px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
+                  {post.category}
+                </span>
+                <span className="text-neutral-400">{post.readTime}</span>
               </div>
-              <h4 className="font-title font-bold text-white text-base group-hover:text-emerald-300 transition-colors line-clamp-2 mb-2">
+
+              {/* Title */}
+              <h4 className="font-title font-bold text-white text-base md:text-lg group-hover:text-white transition-colors line-clamp-2 mb-2 leading-snug">
                 {post.title}
               </h4>
-              <p className="font-mono text-xs text-neutral-400 line-clamp-3 leading-relaxed">
+
+              {/* Excerpt */}
+              <p className="font-sans text-xs md:text-sm text-neutral-400 line-clamp-3 leading-relaxed">
                 {post.excerpt}
               </p>
             </div>
 
-            <div className="mt-4 pt-4 border-t border-white/5 flex items-center gap-1.5 text-xs font-mono text-white group-hover:text-emerald-300 transition-colors">
+            {/* Bottom Link Action */}
+            <div className="mt-5 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono text-neutral-300 group-hover:text-white transition-colors">
               <span>Leer artículo</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-neutral-400 group-hover:text-white" />
             </div>
           </Link>
         ))}
