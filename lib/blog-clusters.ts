@@ -162,8 +162,8 @@ export const blogClusters: Record<string, BlogCluster> = {
       },
       {
         slug: "como-aparecer-en-chatgpt-2026",
-        title: "Cómo Aparecer en ChatGPT Search: Rastreo de GPTBot, Robots.txt y Citas IA",
-        shortRole: "Rastreo GPTBot",
+        title: "Cómo Aparecer en ChatGPT Search: OAI-SearchBot, Robots.txt y Citas IA",
+        shortRole: "OAI-SearchBot vs GPTBot",
       },
       {
         slug: "seo-para-chatgpt-optimizacion-ia",

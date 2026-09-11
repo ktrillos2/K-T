@@ -2,7 +2,7 @@
 title: "Cómo Medir y Auditar la Visibilidad de tu Empresa en ChatGPT, Gemini y Google AI Mode"
 slug: "medir-visibilidad-chatgpt-gemini-google-ai-mode"
 description: "Guía técnica para auditar la visibilidad de tu marca en motores de IA: métricas clave de GEO, prompts de prueba, herramientas de tracking, rastreo de bots y optimización de citas."
-excerpt: "Aprende a medir si ChatGPT, Gemini y Google AI Overviews recomiendan tu empresa: metodologías de auditoría, rastreo de GPTBot y estrategias para ganar citas directas."
+excerpt: "Aprende a medir si ChatGPT, Gemini y Google AI Overviews recomiendan tu empresa: metodologías de auditoría, rastreo de OAI-SearchBot y estrategias para ganar citas directas."
 publishedAt: "2026-09-04T08:00:00-05:00"
 updatedAt: "2026-09-04T08:00:00-05:00"
 author: "Keyner Trillos"
@@ -111,20 +111,28 @@ Para obtener una muestra estadística representativa, debes ejecutar 3 tipos de 
 
 Un error recurrente es confundir los bots de entrenamiento masivo de IA con los bots de búsqueda activa:
 
+- **`OAI-SearchBot`**: Rastreador oficial para **ChatGPT Search**. Es indispensable permitirlo (`Allow: /`) para que tus contenidos sean descubiertos, indexados y mostrados con enlaces citados en tiempo real. OpenAI indica explícitamente que no utiliza los datos de `OAI-SearchBot` para entrenar modelos fundacionales.
+- **`GPTBot`**: Crawler de recopilación masiva para entrenamiento de modelos de OpenAI. Permitirlo o bloquearlo es una decisión opcional según tu política de propiedad intelectual.
+
 ```text
 # Configuración recomendada en robots.txt (app/robots.ts)
 
-# 1. Permitir al buscador de ChatGPT (Crucial para aparecer en búsquedas)
+# 1. Permitir al buscador de ChatGPT Search (Crucial para aparecer en búsquedas y citas)
 User-agent: OAI-SearchBot
 Allow: /
 
-# 2. Permitir al rastreador de Perplexity
+# 2. Permitir opcionalmente al crawler de entrenamiento de modelos
+User-agent: GPTBot
+Allow: /
+
+# 3. Permitir al rastreador de Perplexity
 User-agent: PerplexityBot
 Allow: /
 
-# 3. Controlar el bot de entrenamiento si no deseas scraping indiscriminado
-User-agent: GPTBot
+# 4. Proteger rutas privadas o administrativas
+User-agent: *
 Disallow: /admin/
+Disallow: /api/
 ```
 
 ---

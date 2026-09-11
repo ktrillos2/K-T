@@ -12,9 +12,9 @@ export const blogPosts: BlogPostItem[] = [
   // ─── ARTÍCULOS RECIENTES (ÚLTIMO TRIMESTRE 2026) ─────────────
   {
     slug: "como-aparecer-en-chatgpt-2026",
-    title: "Cómo Aparecer en ChatGPT Search: Rastreo de GPTBot, Robots.txt y Citas IA",
+    title: "Cómo Aparecer en ChatGPT Search: OAI-SearchBot, Robots.txt y Citas IA",
     excerpt:
-      "Guía técnica para configurar robots.txt, permitir GPTBot y OAI-SearchBot, estructurar datos y lograr indexación directa en ChatGPT Search.",
+      "Aprende la diferencia técnica entre OAI-SearchBot (ChatGPT Search) y GPTBot (entrenamiento), cómo configurar tu robots.txt para ganar citas y optimizar para GEO.",
     category: "Ingeniería & SEO",
     publishedAt: "2026-08-19",
     modifiedAt: "2026-08-19",

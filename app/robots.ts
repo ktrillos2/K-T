@@ -9,15 +9,21 @@ export default function robots(): MetadataRoute.Robots {
                 disallow: ['/api/', '/admin/', '/login/'],
             },
             {
-                // OpenAI SearchBot: Rastreador oficial para ChatGPT Search (búsquedas y citas con enlaces directos)
+                // OAI-SearchBot: Rastreador oficial de OpenAI para ChatGPT Search (descubrimiento, indexación y citación directa con enlace)
                 userAgent: 'OAI-SearchBot',
                 allow: '/',
                 disallow: ['/api/', '/admin/', '/login/'],
             },
             {
-                // ChatGPT User: Navegación interactiva en tiempo real solicitada por el usuario en ChatGPT
+                // ChatGPT User: Navegación cuando un usuario solicita explorar un enlace en el chat
                 userAgent: 'ChatGPT-User',
                 allow: '/',
+            },
+            {
+                // GPTBot: Rastreador de OpenAI para recopilación de datos y entrenamiento de modelos fundacionales
+                userAgent: 'GPTBot',
+                allow: '/',
+                disallow: ['/api/', '/admin/', '/login/'],
             },
             {
                 // Perplexity AI: Motor de búsqueda generativo y citación
@@ -31,11 +37,6 @@ export default function robots(): MetadataRoute.Robots {
                 allow: '/',
                 disallow: ['/api/', '/admin/', '/login/'],
             },
-            {
-                // GPTBot: Rastreador de entrenamiento para modelos fundacionales (separado de ChatGPT Search)
-                userAgent: 'GPTBot',
-                disallow: '/',
-            }
         ],
         sitemap: 'https://www.kytcode.lat/sitemap.xml',
         host: 'https://www.kytcode.lat',
