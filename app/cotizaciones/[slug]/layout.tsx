@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   if (!data) {
     return {
-      title: 'Cotización no encontrada | K&T',
+      title: 'Cotización no encontrada',
     }
   }
 
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const seoDescription = `Propuesta comercial profesional de ${data.headerTitle?.toLowerCase()} para ${data.clientName}. ${data.scopeDescription?.slice(0, 100) || ''}`.trim()
 
   return {
-    title: `${data.headerTitle} | K&T`,
+    title: data.headerTitle,
     description: seoDescription,
     robots: {
       index: false,

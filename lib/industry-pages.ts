@@ -34,7 +34,7 @@ export const industryPages: Record<string, IndustryPageData> = {
     slug: "desarrollo-web-inmobiliarias",
     title: "Desarrollo de Páginas Web para Inmobiliarias y Empresas Proptech en Colombia",
     shortTitle: "Desarrollo web inmobiliarias",
-    metaTitle: "Páginas Web para Inmobiliarias en Colombia | Next.js & CRM | K&T Code",
+    metaTitle: "Páginas Web para Inmobiliarias en Colombia | Next.js & CRM",
     metaDescription:
       "Desarrollo de páginas web y portales para inmobiliarias en Colombia. Buscadores avanzados de inmuebles, mapas interactivos, integración con WhatsApp y CRM.",
     eyebrow: "// Soluciones Digitales para el Sector Inmobiliario",
@@ -91,7 +91,7 @@ export const industryPages: Record<string, IndustryPageData> = {
     slug: "desarrollo-web-salud",
     title: "Desarrollo Web para Clínicas, Médicos y Centros de Salud Mental en Colombia",
     shortTitle: "Desarrollo web salud y médicos",
-    metaTitle: "Páginas Web para Clínicas y Psicólogos en Colombia | K&T Code",
+    metaTitle: "Páginas Web para Clínicas y Psicólogos en Colombia",
     metaDescription:
       "Diseño y desarrollo web médico para consultorios, psicólogos y clínicas en Colombia. Agendamiento online, telemedicina, SEO médico local y cumplimiento de privacidad.",
     eyebrow: "// Presencia Digital para el Sector Salud",
@@ -145,7 +145,7 @@ export const industryPages: Record<string, IndustryPageData> = {
     slug: "desarrollo-web-ingenieria",
     title: "Desarrollo Web para Empresas de Ingeniería, Construcción y Arquitectura",
     shortTitle: "Desarrollo web ingeniería y construcción",
-    metaTitle: "Páginas Web para Empresas de Ingeniería y Construcción | K&T Code",
+    metaTitle: "Páginas Web para Empresas de Ingeniería y Construcción",
     metaDescription:
       "Páginas web corporativas para firmas de ingeniería, constructoras y arquitectura en Colombia. Fichas técnicas, portafolio de obras, licitaciones y velocidad Next.js.",
     eyebrow: "// Presencia Digital para Firmas de Ingeniería",
@@ -199,7 +199,7 @@ export const industryPages: Record<string, IndustryPageData> = {
     slug: "ecommerce-b2b",
     title: "Desarrollo de Plataformas E-commerce B2B y Portales Mayoristas en Colombia",
     shortTitle: "E-commerce B2B y mayoristas",
-    metaTitle: "E-commerce B2B y Portales Mayoristas en Colombia | Next.js | K&T Code",
+    metaTitle: "E-commerce B2B y Portales Mayoristas en Colombia | Next.js",
     metaDescription:
       "Desarrollo de tiendas virtuales B2B en Colombia. Precios por volumen, cotizadores automáticos, integración ERP y pasarelas de pago para empresas mayoristas.",
     eyebrow: "// Comercio Electrónico Mayorista y B2B",
@@ -261,7 +261,7 @@ export const industryPages: Record<string, IndustryPageData> = {
     slug: "desarrollo-web-turismo",
     title: "Desarrollo Web para Hoteles, Agencias de Turismo y Restaurantes en Colombia",
     shortTitle: "Desarrollo web turismo y hoteles",
-    metaTitle: "Páginas Web para Hoteles y Turismo en Colombia | K&T Code",
+    metaTitle: "Páginas Web para Hoteles y Turismo en Colombia",
     metaDescription:
       "Desarrollo de páginas web para hoteles, agencias de viajes y glampings en Colombia. Motores de reserva directa, cero comisiones de OTAs y velocidad Next.js.",
     eyebrow: "// Soluciones Digitales para Turismo y Hospitalidad",
@@ -323,7 +323,7 @@ export const industryPages: Record<string, IndustryPageData> = {
     slug: "desarrollo-web-automotriz",
     title: "Desarrollo Web para Concesionarios, Autopartes y Talleres en Colombia",
     shortTitle: "Desarrollo web automotriz",
-    metaTitle: "Páginas Web para Concesionarios y Autopartes en Colombia | K&T Code",
+    metaTitle: "Páginas Web para Concesionarios y Autopartes en Colombia",
     metaDescription:
       "Desarrollo de páginas web y catálogos de repuestos para el sector automotriz en Colombia. Buscador de repuestos por marca/modelo, cotizador y velocidad Next.js.",
     eyebrow: "// Presencia Digital para el Sector Automotriz",
@@ -384,7 +384,7 @@ export const industryPages: Record<string, IndustryPageData> = {
     slug: "desarrollo-web-estetica",
     title: "Desarrollo Web para Centros de Estética, Spas y Dermatología en Colombia",
     shortTitle: "Desarrollo web estética y spas",
-    metaTitle: "Páginas Web para Centros de Estética y Spas en Colombia | K&T Code",
+    metaTitle: "Páginas Web para Centros de Estética y Spas en Colombia",
     metaDescription:
       "Páginas web para centros de estética, clínicas dermatológicas y spas en Colombia. Galerías de resultados antes/después, agendamiento y venta de tratamientos.",
     eyebrow: "// Presencia Digital para Estética y Belleza",
@@ -445,7 +445,7 @@ export const industryPages: Record<string, IndustryPageData> = {
     slug: "desarrollo-web-editorial",
     title: "Desarrollo Web para Editoriales, Medios de Comunicación y Consultoras B2B",
     shortTitle: "Desarrollo web editorial y medios",
-    metaTitle: "Páginas Web para Editoriales y Medios en Colombia | K&T Code",
+    metaTitle: "Páginas Web para Editoriales y Medios en Colombia",
     metaDescription:
       "Desarrollo de portales editoriales, revistas digitales y medios de comunicación en Colombia. Carga instantánea de artículos, monetización y Next.js.",
     eyebrow: "// Plataformas Digitales para Contenido y Medios",

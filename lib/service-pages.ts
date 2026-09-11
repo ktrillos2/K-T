@@ -103,7 +103,7 @@ export const servicePages: Record<string, ServicePageData> = {
     slug: "desarrollo-web-a-medida",
     title: "Desarrollo Web con Next.js y React en Colombia",
     shortTitle: "Desarrollo web a medida",
-    metaTitle: "Desarrollo Web a Medida en Colombia | Next.js & React",
+    metaTitle: "Desarrollo Web a Medida en Colombia",
     metaDescription:
       "Desarrollo web a medida con Next.js y React en Colombia. Sitios de alto rendimiento, optimización de Core Web Vitals, arquitectura headless y SEO técnico estructurado.",
     eyebrow: "// Ingeniería Web y Arquitectura de Software",

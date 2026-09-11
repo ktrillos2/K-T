@@ -68,7 +68,7 @@ export const pricingGuides: Record<string, PricingGuideData> = {
     slug: "precio-pagina-web-colombia",
     title: "¿Cuánto Cuesta una Página Web en Colombia en 2026? Precios Reales y Guía de Cotización",
     shortTitle: "Cuánto cuesta una página web en Colombia",
-    metaTitle: "¿Cuánto Cuesta una Página Web en Colombia en 2026? | Precios y Tarifas | K&T Code",
+    metaTitle: "¿Cuánto Cuesta una Página Web en Colombia en 2026? | Precios y Tarifas",
     metaDescription:
       "Descubre cuánto cuesta una página web en Colombia en 2026. Tabla de precios reales desde $450.000 COP para landing pages, $2.500.000 COP para sitios corporativos y $1.300.000 COP para tiendas virtuales.",
     eyebrow: "// Tarifas Transparentes Colombia 2026",
@@ -299,7 +299,7 @@ export const pricingGuides: Record<string, PricingGuideData> = {
     slug: "precio-tienda-virtual-colombia",
     title: "¿Cuánto Cuesta una Tienda Virtual en Colombia en 2026? Guía de Precios E-commerce",
     shortTitle: "Precio de tiendas virtuales en Colombia",
-    metaTitle: "¿Cuánto Cuesta una Tienda Virtual en Colombia? (Precios 2026) | K&T Code",
+    metaTitle: "¿Cuánto Cuesta una Tienda Virtual en Colombia? (Precios 2026)",
     metaDescription:
       "Precios reales para crear una tienda virtual en Colombia en 2026. Costos de integración con pasarelas Wompi, PayU, Bold, envíos y desarrollo headless Next.js.",
     eyebrow: "// E-commerce & Pasarelas de Pago Colombia",
@@ -399,7 +399,7 @@ export const pricingGuides: Record<string, PricingGuideData> = {
     slug: "precio-software-a-medida",
     title: "¿Cuánto Cuesta un Software a Medida en Colombia en 2026? Guía de Cotización",
     shortTitle: "Precio de software a medida en Colombia",
-    metaTitle: "¿Cuánto Cuesta un Software a Medida en Colombia? (Precios 2026) | K&T Code",
+    metaTitle: "¿Cuánto Cuesta un Software a Medida en Colombia? (Precios 2026)",
     metaDescription:
       "Guía de precios y costos de desarrollo de software a medida en Colombia 2026. Tarifas para SaaS, paneles administrativos, portales web y bases de datos.",
     eyebrow: "// Desarrollo de Software & SaaS Corporativo",

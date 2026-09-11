@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Cotización Desarrollo Web y Marketing - Tours Amazonas | K&T',
+  title: 'Cotización Desarrollo Web y Marketing - Tours Amazonas',
   description: 'Propuesta comercial confidencial de desarrollo web escalonado y gestión publicitaria en Meta Ads para agencia de turismo en el Amazonas.',
   openGraph: {
     title: 'Cotización: Tours Amazonas | K&T Code',
