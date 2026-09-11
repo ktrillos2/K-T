@@ -61,17 +61,21 @@ export type PricingGuideData = {
   faqs: FaqItem[]
   relatedServiceSlug: string
   relatedServiceTitle: string
+  relatedBlogSlug?: string
+  relatedBlogTitle?: string
 }
 
 export const pricingGuides: Record<string, PricingGuideData> = {
   "precio-pagina-web-colombia": {
     slug: "precio-pagina-web-colombia",
-    title: "¿Cuánto Cuesta una Página Web en Colombia en 2026? Precios Reales y Guía de Cotización",
-    shortTitle: "Cuánto cuesta una página web en Colombia",
-    metaTitle: "¿Cuánto Cuesta una Página Web en Colombia en 2026? | Precios y Tarifas",
+    title: "Precios y Tarifas de Desarrollo Web en Colombia: Cotización 2026",
+    shortTitle: "Precios y Tarifas de Páginas Web",
+    metaTitle: "Precios y Tarifas de Páginas Web en Colombia (Cotización 2026)",
     metaDescription:
-      "Descubre cuánto cuesta una página web en Colombia en 2026. Tabla de precios reales desde $450.000 COP para landing pages, $2.500.000 COP para sitios corporativos y $1.300.000 COP para tiendas virtuales.",
+      "Consulta precios y tarifas oficiales de páginas web en Colombia en 2026. Cotiza landing pages desde $450.000 COP, sitios corporativos y tiendas virtuales con K&T Code.",
     eyebrow: "// Tarifas Transparentes Colombia 2026",
+    relatedBlogSlug: "cuanto-cuesta-una-pagina-web-en-colombia",
+    relatedBlogTitle: "¿Cuánto Cuesta una Página Web en Colombia? Factores y Costos Ocultos",
     summary:
       "En Colombia, el precio de una página web profesional oscila desde $450.000 COP para una landing page de alta conversión, desde $2.500.000 COP para un sitio web corporativo completo con CMS autogestionable, y desde $1.300.000 COP para tiendas virtuales con pasarelas de pago. En esta guía detallamos qué incluye cada proyecto, costos de hosting, dominio, mantenimiento y diferencias entre tecnologías.",
     averagePriceRange: "$450.000 - $4.500.000+ COP",
@@ -297,11 +301,11 @@ export const pricingGuides: Record<string, PricingGuideData> = {
 
   "precio-tienda-virtual-colombia": {
     slug: "precio-tienda-virtual-colombia",
-    title: "¿Cuánto Cuesta una Tienda Virtual en Colombia en 2026? Guía de Precios E-commerce",
-    shortTitle: "Precio de tiendas virtuales en Colombia",
-    metaTitle: "¿Cuánto Cuesta una Tienda Virtual en Colombia? (Precios 2026)",
+    title: "Precios y Tarifas de Tiendas Virtuales en Colombia: Planes E-commerce 2026",
+    shortTitle: "Precios y Tarifas de Tiendas Virtuales",
+    metaTitle: "Precios y Tarifas de Tiendas Virtuales en Colombia (E-commerce 2026)",
     metaDescription:
-      "Precios reales para crear una tienda virtual en Colombia en 2026. Costos de integración con pasarelas Wompi, PayU, Bold, envíos y desarrollo headless Next.js.",
+      "Precios y tarifas oficiales para crear una tienda virtual en Colombia en 2026. Planes desde $1.300.000 COP con Wompi, PSE, Bold y carrito de alta velocidad.",
     eyebrow: "// E-commerce & Pasarelas de Pago Colombia",
     summary:
       "El desarrollo de una tienda virtual profesional en Colombia oscila entre $2.800.000 COP para tiendas estándar hasta más de $7.000.000 COP para plataformas headless de alto rendimiento con miles de productos. En esta guía detallamos los costos de pasarelas, envíos y tecnología.",
@@ -394,15 +398,19 @@ export const pricingGuides: Record<string, PricingGuideData> = {
     ],
     relatedServiceSlug: "tiendas-virtuales",
     relatedServiceTitle: "Servicio de Desarrollo de Tiendas Virtuales",
+    relatedBlogSlug: "cuanto-cuesta-una-tienda-virtual-en-colombia-2026",
+    relatedBlogTitle: "¿Cuánto Cuesta una Tienda Virtual en Colombia? Comisiones y Gastos Ocultos",
   },
   "precio-software-a-medida": {
     slug: "precio-software-a-medida",
-    title: "¿Cuánto Cuesta un Software a Medida en Colombia en 2026? Guía de Cotización",
-    shortTitle: "Precio de software a medida en Colombia",
-    metaTitle: "¿Cuánto Cuesta un Software a Medida en Colombia? (Precios 2026)",
+    title: "Cotización y Precios de Software a Medida en Colombia: Tarifas 2026",
+    shortTitle: "Precios de Software a Medida",
+    metaTitle: "Precios y Cotización de Software a Medida en Colombia (Tarifas 2026)",
     metaDescription:
-      "Guía de precios y costos de desarrollo de software a medida en Colombia 2026. Tarifas para SaaS, paneles administrativos, portales web y bases de datos.",
+      "Tarifas y costos para cotizar software web a medida en Colombia en 2026. Presupuestos para MVPs, SaaS corporativos, paneles y bases de datos relacionales.",
     eyebrow: "// Desarrollo de Software & SaaS Corporativo",
+    relatedBlogSlug: "cuanto-cuesta-desarrollar-software-a-medida-colombia",
+    relatedBlogTitle: "¿Cuánto Cuesta Desarrollar Software a Medida? Modelos y Horas",
     summary:
       "El costo de un software web a medida en Colombia inicia desde $5.000.000 COP para MVPs o módulos funcionales básicos, y puede superar los $20.000.000 COP en plataformas empresariales complejas. Conoce cómo se presupuesta un software por fases y evita desviaciones de alcance.",
     averagePriceRange: "$5.000.000 - $25.000.000+ COP",

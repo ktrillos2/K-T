@@ -151,12 +151,20 @@ export default function QueEsUnaLandingPage() {
               <p className="font-mono text-sm text-neutral-300 mb-6 leading-relaxed">
                 Diseñamos landing pages ultra rápidas en Next.js optimizadas para tus campañas de Meta Ads y Google Ads con integración directa a WhatsApp.
               </p>
-              <Link
-                href="/#contact"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
-              >
-                Cotizar Landing Page <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/servicios/landing-pages"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
+                >
+                  Conocer el Servicio de Landing Pages <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/precios/precio-pagina-web-colombia"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/20 bg-white/5 text-white font-mono font-bold text-xs hover:bg-white/10 transition-all"
+                >
+                  Ver Precios de Landing Pages
+                </Link>
+              </div>
             </div>
 
             <h2>Preguntas Frecuentes</h2>

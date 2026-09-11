@@ -6,25 +6,27 @@ import Footer from "@/components/layout/footer"
 import JsonLd from "@/components/seo/json-ld"
 import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib/seo"
 import { absoluteUrl } from "@/lib/site-config"
+import BlogClusterNav from "@/components/blog/blog-cluster-nav"
 
 export const metadata: Metadata = {
-  title: "¿Cuánto Cuesta una Tienda Virtual en Colombia en 2026? Guía de Costos",
+  title: "¿Cuánto Cuesta una Tienda Virtual en Colombia? Comisiones, Pasarelas y Costos Ocultos (2026)",
   description:
-    "Precios reales para crear una tienda virtual en Colombia en 2026: costos de desarrollo, pasarelas de pago (Wompi, Bold, PayU), comisiones y gastos mensuales.",
+    "Análisis completo sobre cuánto cuesta crear una tienda online en Colombia en 2026: comisiones de Wompi, Bold y PayU, costos fijos de hosting y dominio, y comparativa frente a Shopify.",
   keywords: [
     "cuanto cuesta una tienda virtual en colombia",
     "precios ecommerce colombia 2026",
     "costo crear tienda online colombia",
     "pasarelas de pago colombia costos",
+    "comisiones wompi bold payu colombia",
     "tienda virtual headless precios",
   ],
   alternates: {
     canonical: absoluteUrl("/blog/cuanto-cuesta-una-tienda-virtual-en-colombia-2026"),
   },
   openGraph: {
-    title: "¿Cuánto Cuesta una Tienda Virtual en Colombia en 2026? Guía de Costos",
+    title: "¿Cuánto Cuesta una Tienda Virtual en Colombia? Comisiones, Pasarelas y Costos Ocultos (2026)",
     description:
-      "Desglose completo de precios en COP y USD para montar una tienda virtual profesional en Colombia.",
+      "Desglose técnico de costos en COP y USD para montar una tienda virtual profesional en Colombia.",
     type: "article",
     url: absoluteUrl("/blog/cuanto-cuesta-una-tienda-virtual-en-colombia-2026"),
     siteName: "K&T Code",
@@ -51,7 +53,7 @@ export default function CuantoCuestaTiendaVirtualPage() {
       <JsonLd
         data={[
           buildArticleJsonLd({
-            headline: "¿Cuánto Cuesta una Tienda Virtual en Colombia en 2026? Guía de Costos",
+            headline: "¿Cuánto Cuesta una Tienda Virtual en Colombia? Comisiones, Pasarelas y Costos Ocultos (2026)",
             description:
               "Tabla de precios reales, comisiones de pasarelas y costos de desarrollo para crear una tienda virtual en Colombia.",
             path: "/blog/cuanto-cuesta-una-tienda-virtual-en-colombia-2026",
@@ -89,7 +91,7 @@ export default function CuantoCuestaTiendaVirtualPage() {
               </div>
 
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-title text-white leading-tight mb-6">
-                ¿Cuánto Cuesta una Tienda Virtual en Colombia en 2026?
+                ¿Cuánto Cuesta una Tienda Virtual en Colombia? Comisiones, Pasarelas y Costos Ocultos
               </h1>
 
               {/* Author Byline */}
@@ -117,6 +119,27 @@ export default function CuantoCuestaTiendaVirtualPage() {
                 Crear una tienda virtual en Colombia implica considerar costos de desarrollo, comisiones bancarias de pasarelas locales (PSE, tarjetas, transferencias) e infraestructura. En esta guía detallamos todos los valores sin comisiones ocultas.
               </p>
             </header>
+
+            {/* Commercial Bridge Banner: Informational -> Commercial */}
+            <div className="my-10 rounded-2xl border border-emerald-500/40 bg-gradient-to-r from-emerald-950/40 via-neutral-950 to-neutral-900 p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 not-prose shadow-xl">
+              <div>
+                <span className="font-mono text-xs uppercase tracking-wider text-emerald-400 font-bold">
+                  // Tarifas y Cotización de E-commerce
+                </span>
+                <h3 className="text-xl md:text-2xl font-bold font-title text-white mt-1">
+                  ¿Buscas cotizar o conocer nuestros paquetes oficiales?
+                </h3>
+                <p className="font-mono text-xs text-neutral-300 mt-2 max-w-xl leading-relaxed">
+                  Si quieres ver nuestros precios y planes cerrados de e-commerce → consulta las tarifas y cotización de tiendas virtuales en Colombia de K&T Code.
+                </p>
+              </div>
+              <Link
+                href="/precios/precio-tienda-virtual-colombia"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-emerald-400 text-black font-mono font-bold text-xs hover:bg-emerald-300 transition-all shrink-0 shadow-lg"
+              >
+                Consultar Tarifas K&T Code <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
 
             <h2>Desglose de Costos de una Tienda Virtual</h2>
             <div className="not-prose overflow-x-auto my-8 border border-white/15 rounded-2xl">
@@ -171,12 +194,20 @@ export default function CuantoCuestaTiendaVirtualPage() {
               <p className="font-mono text-sm text-neutral-300 mb-6 leading-relaxed">
                 Construimos tiendas virtuales ultra rápidas con catálogo autogestionable, pasarelas de pago colombianas y optimización SEO para vender más.
               </p>
-              <Link
-                href="/#contact"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
-              >
-                Cotizar Mi Tienda Online <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/precios/precio-tienda-virtual-colombia"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
+                >
+                  Ver Tarifas y Planes E-commerce <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/servicios/tiendas-virtuales"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/20 bg-white/5 text-white font-mono font-bold text-xs hover:bg-white/10 transition-all"
+                >
+                  Conocer el Servicio de Tiendas Virtuales
+                </Link>
+              </div>
             </div>
 
             <h2>Preguntas Frecuentes</h2>
@@ -192,6 +223,11 @@ export default function CuantoCuestaTiendaVirtualPage() {
                   </p>
                 </div>
               ))}
+            </div>
+
+            {/* Semantic Topic Cluster Navigation */}
+            <div className="not-prose my-14">
+              <BlogClusterNav currentSlug="cuanto-cuesta-una-tienda-virtual-en-colombia-2026" />
             </div>
           </article>
         </div>

@@ -2,10 +2,12 @@ import { Metadata } from "next"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, Zap, Code2, ShieldCheck, CheckCircle2 } from "lucide-react"
 
+import BlogClusterNav from "@/components/blog/blog-cluster-nav"
+
 export const metadata: Metadata = {
-    title: "Cómo Crear una Página Web en 2026: Guía Definitiva",
-    description: "Conoce el estándar técnico de 2026 para el desarrollo web profesional. Rendimiento, accesibilidad y arquitecturas headless sobre Next.js.",
-    keywords: ["arquitectura web", "desarrollo web 2026", "tecnología headless", "rendimiento web", "K&T Code"],
+    title: "Cómo Crear una Página Web en 2026: Guía Completa de Arquitectura y Tecnologías",
+    description: "Conoce el estándar técnico de 2026 para el desarrollo web profesional. Rendimiento, accesibilidad, estándares de código y arquitecturas headless sobre Next.js.",
+    keywords: ["como crear una pagina web 2026", "arquitectura web", "desarrollo web 2026", "tecnología headless", "rendimiento web", "K&T Code"],
     alternates: {
         canonical: "https://www.kytcode.lat/blog/como-crear-pagina-web-2026",
         languages: {
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
         },
     },
     openGraph: {
-        title: "Cómo Crear una Página Web en 2026: Guía Definitiva",
+        title: "Cómo Crear una Página Web en 2026: Guía Completa de Arquitectura y Tecnologías",
         description: "El proceso técnico y arquitectónico completo para lanzar un proyecto web corporativo y de alto rendimiento.",
         type: "article",
         url: "https://www.kytcode.lat/blog/como-crear-pagina-web-2026",
@@ -174,6 +176,9 @@ export default function ComoCrearPaginaWeb() {
                         No construimos la casa asumiendo que "luego le ponemos la tubería". El SEO avanzado debe inyectarse en el código desde su concepción. Estructuración técnica de etiquetas H1, H2, JSON-LD estructurado, sitemaps dinámicos y metaetiquetas precisas.
                     </p>
 
+                    {/* Topic Cluster Navigation */}
+                    <BlogClusterNav currentSlug="como-crear-pagina-web-2026" />
+
                     {/* CTA a medida K&T */}
                     <div className="bg-gradient-to-br from-neutral-900 to-black border border-white/10 rounded-2xl p-8 lg:p-10 my-16">
                         <h3 className="text-2xl font-bold text-white font-title mb-4 flex items-center gap-3">
@@ -181,15 +186,15 @@ export default function ComoCrearPaginaWeb() {
                             Garantía Técnica de Alto Rendimiento K&T Code
                         </h3>
                         <p className="text-neutral-300 mb-8 font-mono text-sm leading-relaxed">
-                            Entender cómo crear una página web es complejo, implementarlo es ingeniería pura. En nuestras cotizaciones comerciales detallamos nuestra arquitectura basada en Vercel y Next.js junto con la estrategia de SEO avanzado. Consulta nuestros <Link href="/precios" className="text-white underline">planes y precios</Link> o solicita una cotización personalizada.
+                            Entender cómo crear una página web es complejo, implementarlo es ingeniería pura. En nuestras cotizaciones comerciales detallamos nuestra arquitectura basada en Vercel y Next.js junto con la estrategia de SEO avanzado. Consulta nuestras <Link href="/precios/precio-pagina-web-colombia" className="text-emerald-400 font-bold underline">tarifas y cotización oficial</Link> o solicita una cotización personalizada.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4">
                             <Link
-                                href="/precios"
+                                href="/precios/precio-pagina-web-colombia"
                                 className="inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-3 rounded-xl font-bold font-mono hover:bg-neutral-200 transition-colors w-full sm:w-auto"
                             >
                                 <Code2 className="w-4 h-4" />
-                                Cotizar mi página web
+                                Ver Tarifas de Páginas Web
                             </Link>
                             <a
                                 href="https://wa.me/573116360057?text=Hola%20K%26T%20Code,%20le%C3%AD%20el%20art%C3%ADculo%20sobre%20c%C3%B3mo%20crear%20una%20p%C3%A1gina%20web%20y%20quiero%20cotizar%20un%20proyecto."

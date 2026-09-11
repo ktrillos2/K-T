@@ -7,26 +7,27 @@ import JsonLd from "@/components/seo/json-ld"
 import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib/seo"
 import { absoluteUrl } from "@/lib/site-config"
 
+import BlogClusterNav from "@/components/blog/blog-cluster-nav"
+
 export const metadata: Metadata = {
-  title: "Cómo hacer que una página web aparezca en ChatGPT en 2026",
+  title: "Cómo Aparecer en ChatGPT Search: Rastreo de GPTBot, Robots.txt y Citas IA (2026)",
   description:
-    "Guía técnica de GEO (Generative Engine Optimization): aprende a optimizar tu sitio web para ser citado e indexado por ChatGPT Search, GPTBot y motores de IA.",
+    "Guía técnica de rastreo e indexación para OpenAI: aprende a configurar GPTBot en robots.txt, OAI-SearchBot, endpoints /llms.txt y estructurar tu web para ser citado por ChatGPT Search.",
   keywords: [
-    "como aparecer en chatgpt",
-    "geo generative engine optimization",
-    "seo para chatgpt 2026",
-    "gptbot indexacion",
-    "posicionamiento en inteligencia artificial",
-    "optimizacion para llms",
-    "como citar mi web en chatgpt",
+    "como aparecer en chatgpt search",
+    "gptbot indexacion robots txt",
+    "openai rastreador web",
+    "geo chatgpt search 2026",
+    "citar web en chatgpt",
+    "oai searchbot indexar",
   ],
   alternates: {
     canonical: absoluteUrl("/blog/como-aparecer-en-chatgpt-2026"),
   },
   openGraph: {
-    title: "Cómo hacer que una página web aparezca en ChatGPT en 2026",
+    title: "Cómo Aparecer en ChatGPT Search: Rastreo de GPTBot, Robots.txt y Citas IA (2026)",
     description:
-      "Aprende a posicionar tu marca en ChatGPT Search, Perplexity y motores de respuesta con IA mediante arquitectura semántica y optimización GEO.",
+      "Aprende a posicionar tu marca en ChatGPT Search y motores de respuesta con IA mediante indexación limpia y arquitectura semántica.",
     type: "article",
     url: absoluteUrl("/blog/como-aparecer-en-chatgpt-2026"),
     siteName: "K&T Code",
@@ -58,9 +59,9 @@ export default function ComoAparecerEnChatGptPage() {
       <JsonLd
         data={[
           buildArticleJsonLd({
-            headline: "Cómo hacer que una página web aparezca en ChatGPT en 2026",
+            headline: "Cómo Aparecer en ChatGPT Search: Rastreo de GPTBot, Robots.txt y Citas IA (2026)",
             description:
-              "Guía técnica de GEO: aprende a optimizar tu arquitectura web para que ChatGPT, Perplexity y los motores de IA citen y recomienden tu empresa.",
+              "Guía técnica de rastreo e indexación para motores de IA conversacional y ChatGPT Search.",
             path: "/blog/como-aparecer-en-chatgpt-2026",
             datePublished: "2026-08-19",
             dateModified: "2026-08-19",
@@ -96,7 +97,7 @@ export default function ComoAparecerEnChatGptPage() {
               </div>
 
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-title text-white leading-tight mb-6">
-                Cómo hacer que una página web aparezca en ChatGPT en 2026
+                Cómo Aparecer en ChatGPT Search: Rastreo de GPTBot, Robots.txt y Citas con IA
               </h1>
 
               {/* Author Byline */}
@@ -206,6 +207,9 @@ Disallow: /api/cron/`}
               El estándar emergente <code>/llms.txt</code> permite a los desarrolladores resumir de forma limpia toda la documentación y propuesta de valor de la empresa en texto plano con enlaces markdown, facilitando a los agentes autónomos de IA el consumo directo de tu información sin sobrecargar el servidor con estilos o scripts pesados.
             </p>
 
+            {/* Topic Cluster Navigation */}
+            <BlogClusterNav currentSlug="como-aparecer-en-chatgpt-2026" />
+
             <div className="not-prose my-14 p-8 rounded-3xl border border-white/20 bg-gradient-to-br from-neutral-900 via-zinc-950 to-black shadow-2xl">
               <div className="flex items-center gap-3 mb-4 text-emerald-400">
                 <Sparkles className="w-5 h-5" />
@@ -217,12 +221,20 @@ Disallow: /api/cron/`}
               <p className="font-sans text-sm text-neutral-300 mb-6 leading-relaxed">
                 Diseñamos arquitecturas web de alto rendimiento en Next.js con optimización GEO, datos estructurados Schema completos, endpoints /llms.txt y entrega rápida en Edge CDN.
               </p>
-              <Link
-                href="/#contact"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
-              >
-                Cotizar Arquitectura Web con SEO IA <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/servicios/seo-tecnico"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
+                >
+                  Conocer Nuestro Servicio de SEO Técnico <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/servicios/agentes-ia"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/20 bg-white/5 text-white font-mono font-bold text-xs hover:bg-white/10 transition-all"
+                >
+                  Ver Soluciones con Agentes IA
+                </Link>
+              </div>
             </div>
 
             <h2>Preguntas Frecuentes sobre Posicionamiento en ChatGPT</h2>

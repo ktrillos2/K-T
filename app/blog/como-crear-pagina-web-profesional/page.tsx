@@ -3,10 +3,12 @@ import Link from "next/link"
 import { ArrowLeft, CheckCircle2, Code2, Rocket, Server, Zap } from "lucide-react"
 import { CursorProvider } from "@/context/cursor-context"
 
+import BlogClusterNav from "@/components/blog/blog-cluster-nav"
+
 export const metadata: Metadata = {
-    title: "Desarrollo Web Profesional: Guía Definitiva Empresarial",
-    description: "Descubre cómo estructurar una plataforma web empresarial que convierta. Fundamentos de arquitectura, UX y por qué Next.js domina el mercado B2B.",
-    keywords: ["desarrollo web empresarial", "arquitectura next.js", "agencia desarrollo SSR", "ux diseño web", "K&T"],
+    title: "Página Web Corporativa Profesional: Estándares Técnicos y Requisitos B2B",
+    description: "Descubre los estándares técnicos, niveles de servicio y requisitos de ingeniería que distinguen a una página web corporativa profesional de una web amateur.",
+    keywords: ["pagina web corporativa profesional", "estandares web b2b", "requisitos pagina web profesional", "desarrollo web empresarial", "nextjs b2b"],
     alternates: {
         canonical: "https://www.kytcode.lat/blog/como-crear-pagina-web-profesional",
         languages: {
@@ -27,8 +29,8 @@ export const metadata: Metadata = {
         },
     },
     openGraph: {
-        title: "Desarrollo Web Profesional: Arquitectura y Estrategia Empresarial",
-        description: "Aprende el paso a paso desde código hasta Vercel. Una guía técnica para empresas y negocios digitales de alto nivel.",
+        title: "Página Web Corporativa Profesional: Estándares Técnicos y Requisitos B2B",
+        description: "Requisitos de ingeniería, Core Web Vitals y seguridad para plataformas web corporativas de alto nivel.",
         type: "article",
         url: "https://www.kytcode.lat/blog/como-crear-pagina-web-profesional",
         siteName: "K&T Code",
@@ -39,8 +41,8 @@ const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "@id": "https://www.kytcode.lat/blog/como-crear-pagina-web-profesional#article",
-    "headline": "Cómo Crear una Página Web Profesional: Arquitectura y Estrategia",
-    "description": "Descubre cómo estructurar una plataforma web empresarial que convierta. Fundamentos de arquitectura, UX y por qué Next.js domina el mercado B2B.",
+    "headline": "Página Web Corporativa Profesional: Estándares Técnicos y Requisitos B2B",
+    "description": "Descubre los estándares técnicos, niveles de servicio y requisitos de ingeniería que distinguen a una página web corporativa profesional de una web amateur.",
     "url": "https://www.kytcode.lat/blog/como-crear-pagina-web-profesional",
     "mainEntityOfPage": "https://www.kytcode.lat/blog/como-crear-pagina-web-profesional",
     "datePublished": "2026-02-15",
@@ -188,21 +190,32 @@ export default function BlogPostPage() {
                         </div>
                     </div>
 
+                    {/* Topic Cluster Navigation */}
+                    <BlogClusterNav currentSlug="como-crear-pagina-web-profesional" />
+
                     {/* Pitch de Venta (CTA Arquitectónico) */}
                     <div className="bg-gradient-to-r from-blue-900/40 to-black border border-blue-500/30 rounded-2xl p-8 lg:p-12 mb-16 text-center">
                         <Rocket className="w-12 h-12 text-blue-400 mx-auto mb-6" />
                         <h2 className="text-2xl md:text-3xl font-bold text-white font-title mb-4">
-                            Desarrolla tu plataforma web con ingeniería moderna
+                            Desarrolla tu plataforma web corporativa con ingeniería moderna
                         </h2>
                         <p className="text-lg text-neutral-300 max-w-2xl mx-auto mb-8 font-mono">
-                            En K&T Code no usamos plantillas lentas. Construimos sitios corporativos, tiendas virtuales y software a medida en Next.js y Vercel. Consulta nuestros <Link href="/precios" className="underline hover:text-white">planes y precios</Link> o revisa nuestro <Link href="/portafolio" className="underline hover:text-white">portafolio de proyectos</Link>.
+                            En K&T Code no usamos plantillas lentas. Construimos sitios corporativos, tiendas virtuales y software a medida en Next.js y Vercel. Consulta nuestras <Link href="/precios/precio-pagina-web-colombia" className="text-emerald-400 underline hover:text-emerald-300">tarifas oficiales de desarrollo web</Link> o conoce nuestro servicio corporativo.
                         </p>
-                        <Link
-                            href="/precios"
-                            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-mono font-bold rounded-xl hover:bg-gray-200 transition-colors"
-                        >
-                            Cotizar mi página web
-                        </Link>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <Link
+                                href="/precios/precio-pagina-web-colombia"
+                                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-mono font-bold rounded-xl hover:bg-gray-200 transition-colors shadow-lg"
+                            >
+                                Ver Tarifas y Cotización Web
+                            </Link>
+                            <Link
+                                href="/servicios/diseno-web-corporativo"
+                                className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/20 bg-white/5 text-white font-mono font-bold rounded-xl hover:bg-white/10 transition-colors"
+                            >
+                                Servicio Diseño Web Corporativo
+                            </Link>
+                        </div>
                     </div>
 
                 </article>

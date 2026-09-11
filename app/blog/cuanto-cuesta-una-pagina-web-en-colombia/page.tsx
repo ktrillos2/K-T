@@ -6,20 +6,20 @@ import Footer from "@/components/layout/footer"
 import JsonLd from "@/components/seo/json-ld"
 import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib/seo"
 import { absoluteUrl } from "@/lib/site-config"
+import BlogClusterNav from "@/components/blog/blog-cluster-nav"
 
 export const metadata: Metadata = {
-  title: "¿Cuánto Cuesta una Página Web en Colombia en 2026? Precios Reales y Guía",
+  title: "¿Cuánto Cuesta una Página Web en Colombia? Factores, Rangos y Costos Ocultos (2026)",
   description:
-    "Descubre cuánto cuesta una página web en Colombia en 2026. Tabla de precios reales en COP, costos de hosting, dominio, pasarelas de pago y diferencias entre freelance vs agencia.",
+    "¿Por qué una página web en Colombia puede costar $200.000 o $10.000.000? Descubre los factores clave que determinan el precio, costos de hosting/dominio, freelance vs agencia y costes de mantenimiento.",
   keywords: [
     "cuanto cuesta una pagina web en colombia",
-    "precio crear pagina web colombia",
-    "cuanto cobra una agencia por una pagina web en colombia",
-    "precios paginas web bogota medellin",
-    "costo tienda virtual colombia",
-    "cuanto vale una pagina web 2026",
-    "cotizacion pagina web colombia",
-    "K&T Code precios",
+    "factores precio pagina web colombia",
+    "costos desarrollo web colombia",
+    "freelance vs agencia desarrollo web",
+    "costos ocultos pagina web",
+    "cuanto cobra programador colombia",
+    "hosting y dominio colombia precios",
   ],
   alternates: {
     canonical: absoluteUrl("/blog/cuanto-cuesta-una-pagina-web-en-colombia"),
@@ -41,8 +41,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "¿Cuánto Cuesta una Página Web en Colombia en 2026? Precios Reales y Guía",
-    description: "Tabla de precios reales en COP, costos de hosting, dominio, pasarelas colombianas y comparativas de tecnologías.",
+    title: "¿Cuánto Cuesta una Página Web en Colombia? Factores, Rangos y Costos Ocultos (2026)",
+    description: "Análisis técnico de precios reales en COP, costos de hosting, dominio, pasarelas colombianas y comparativas de tecnologías.",
     type: "article",
     url: absoluteUrl("/blog/cuanto-cuesta-una-pagina-web-en-colombia"),
     siteName: "K&T Code",
@@ -79,8 +79,8 @@ export default function CuantoCuestaPaginaWebBlogPage() {
       <JsonLd
         data={[
           buildArticleJsonLd({
-            headline: "¿Cuánto Cuesta una Página Web en Colombia en 2026? Precios Reales y Guía",
-            description: "Guía completa de precios de desarrollo web en Colombia con tarifas reales, comparaciones y costos fijos.",
+            headline: "¿Cuánto Cuesta una Página Web en Colombia? Factores, Rangos y Costos Ocultos (2026)",
+            description: "Guía informativa completa sobre los factores que determinan el precio de una página web en Colombia, costos de hosting, dominio, plataformas y freelance vs agencia.",
             path: "/blog/cuanto-cuesta-una-pagina-web-en-colombia",
             datePublished: "2026-02-21",
             dateModified: "2026-08-19",
@@ -115,7 +115,7 @@ export default function CuantoCuestaPaginaWebBlogPage() {
                 <span className="text-emerald-400 font-semibold">Precios en COP</span>
               </div>
               <h1 className="font-title text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                ¿Cuánto Cuesta una Página Web en Colombia en 2026? Precios Reales y Guía Completa
+                ¿Cuánto Cuesta una Página Web en Colombia? Factores, Rangos y Costos Ocultos (2026)
               </h1>
 
               {/* Author byline */}
@@ -144,7 +144,7 @@ export default function CuantoCuestaPaginaWebBlogPage() {
                 // Respuesta Rápida para Cotizaciones 2026
               </span>
               <p className="mt-2 font-mono text-sm leading-relaxed text-neutral-200">
-                En 2026, el precio de una página web profesional en Colombia con <strong>K&T Code</strong> se clasifica en 4 categorías:
+                En 2026, el precio de una página web profesional en Colombia se clasifica en 4 categorías principales según alcance:
               </p>
               <ul className="mt-4 space-y-2 font-mono text-xs text-neutral-200">
                 <li>• <strong>Landing Page de Conversión:</strong> Desde $450.000 COP (Entrega: 7 a 12 días).</li>
@@ -154,12 +154,33 @@ export default function CuantoCuestaPaginaWebBlogPage() {
               </ul>
             </div>
 
-            {/* H2 Tabla de Precios K&T */}
+            {/* Bridge Banner Informacional -> Comercial */}
+            <div className="my-10 rounded-2xl border border-emerald-500/40 bg-gradient-to-r from-emerald-950/40 via-neutral-950 to-neutral-900 p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 not-prose shadow-xl">
+              <div>
+                <span className="font-mono text-xs uppercase tracking-wider text-emerald-400 font-bold">
+                  // Tarifas y Cotización Comercial
+                </span>
+                <h3 className="text-xl md:text-2xl font-bold font-title text-white mt-1">
+                  ¿Quieres ver nuestros precios y planes oficiales?
+                </h3>
+                <p className="font-mono text-xs text-neutral-300 mt-2 max-w-xl leading-relaxed">
+                  Si quieres ver nuestros precios → consulta las tarifas y cotización oficial de desarrollo web de K&T Code.
+                </p>
+              </div>
+              <Link
+                href="/precios/precio-pagina-web-colombia"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-emerald-400 text-black font-mono font-bold text-xs hover:bg-emerald-300 transition-all shrink-0 shadow-lg"
+              >
+                Consultar Tarifas K&T Code <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* H2 Rangos de Mercado */}
             <h2 className="text-3xl font-bold text-white mt-16 mb-6">
-              Tabla Comparativa de Precios de Páginas Web en Colombia (2026)
+              Rangos Promedio del Mercado Web en Colombia (2026)
             </h2>
             <p>
-              A diferencia de agencias que ocultan sus precios para inflar cotizaciones, en K&T Code creemos en la transparencia absoluta:
+              En el mercado colombiano existen diversos modelos de contratación (freelance, agencias tradicionales basadas en plantillas y agencias de ingeniería de software). Estos son los rangos habituales:
             </p>
 
             <div className="overflow-x-auto not-prose my-8">
@@ -167,38 +188,42 @@ export default function CuantoCuestaPaginaWebBlogPage() {
                 <thead>
                   <tr className="border-b border-neutral-800 bg-neutral-900 text-left text-neutral-400 uppercase">
                     <th className="p-4">Tipo de Proyecto</th>
-                    <th className="p-4 text-emerald-400">Precio K&T Desde</th>
+                    <th className="p-4 text-emerald-400">Rango Promedio Colombia</th>
                     <th className="p-4">Plazo Estimado</th>
                     <th className="p-4">Ideal Para</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-neutral-800 text-neutral-300">
                   <tr>
-                    <td className="p-4 font-bold text-white">Landing Page</td>
-                    <td className="p-4 text-emerald-400 font-bold">$450.000 COP</td>
-                    <td className="p-4">7 a 12 días</td>
+                    <td className="p-4 font-bold text-white">Landing Page de Campaña</td>
+                    <td className="p-4 text-emerald-400 font-bold">$350.000 - $900.000 COP</td>
+                    <td className="p-4">5 a 12 días</td>
                     <td className="p-4 text-neutral-400">Google Ads, Meta Ads, captación directa de leads por WhatsApp.</td>
                   </tr>
                   <tr>
-                    <td className="p-4 font-bold text-white">Sitio Web Corporativo</td>
-                    <td className="p-4 text-emerald-400 font-bold">$2.500.000 COP</td>
-                    <td className="p-4">15 a 25 días</td>
+                    <td className="p-4 font-bold text-white">Sitio Web Corporativo Pyme</td>
+                    <td className="p-4 text-emerald-400 font-bold">$1.800.000 - $5.000.000 COP</td>
+                    <td className="p-4">15 a 30 días</td>
                     <td className="p-4 text-neutral-400">Empresas, firmas de consultoría, ingeniería y marcas B2B.</td>
                   </tr>
                   <tr>
                     <td className="p-4 font-bold text-white">Tienda Virtual E-commerce</td>
-                    <td className="p-4 text-emerald-400 font-bold">$1.300.000 COP</td>
-                    <td className="p-4">25 a 40 días</td>
+                    <td className="p-4 text-emerald-400 font-bold">$1.300.000 - $7.500.000 COP</td>
+                    <td className="p-4">25 a 45 días</td>
                     <td className="p-4 text-neutral-400">Comercios que venden productos físicos con pagos PSE, tarjetas y envíos.</td>
                   </tr>
                   <tr>
                     <td className="p-4 font-bold text-white">Software a Medida / SaaS</td>
-                    <td className="p-4 text-emerald-400 font-bold">Cotización según alcance</td>
-                    <td className="p-4">4 a 12 semanas</td>
+                    <td className="p-4 text-emerald-400 font-bold">$5.000.000 - $25.000.000+ COP</td>
+                    <td className="p-4">4 a 16 semanas</td>
                     <td className="p-4 text-neutral-400">Portales privados, paneles de control, facturación DIAN e integraciones API.</td>
                   </tr>
                 </tbody>
               </table>
+            </div>
+
+            <div className="not-prose my-6 p-4 rounded-xl border border-white/10 bg-white/[0.02] font-mono text-xs text-neutral-300">
+              💡 <strong>¿Deseas contratar directamente y ver nuestros paquetes cerrados?</strong> Consulta nuestras <Link href="/precios/precio-pagina-web-colombia" className="text-emerald-400 font-bold underline hover:text-emerald-300">Tarifas y Precios de Páginas Web en K&T Code</Link> con código en Next.js, hosting global y soporte incluido.
             </div>
 
             {/* H2 Qué incluye y qué NO incluye */}
@@ -375,24 +400,29 @@ export default function CuantoCuestaPaginaWebBlogPage() {
                 ¿Listo para cotizar la página web de tu empresa?
               </h2>
               <p className="mt-4 font-mono text-sm text-neutral-300 max-w-2xl mx-auto">
-                Revisa nuestra <Link href="/precios/precio-pagina-web-colombia" className="underline text-white font-bold">guía interactiva de precios</Link> o escríbenos directamente a WhatsApp para recibir una propuesta a la medida en menos de 2 horas.
+                Consulta nuestras <Link href="/precios/precio-pagina-web-colombia" className="underline text-emerald-400 font-bold hover:text-emerald-300">tarifas oficiales y planes de páginas web</Link> o escríbenos directamente a WhatsApp para recibir una propuesta a la medida en menos de 2 horas.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/precios/precio-pagina-web-colombia"
+                  className="rounded-full bg-white text-black font-mono text-xs font-bold px-8 py-4 hover:bg-neutral-200 transition-colors shadow-lg"
+                >
+                  Consultar Tarifas K&T Code
+                </Link>
                 <a
                   href={`https://wa.me/573116360057?text=${encodeURIComponent("Hola K&T Code, leí su artículo sobre cuánto cuesta una página web en Colombia y deseo cotizar mi proyecto.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full bg-white text-black font-mono text-xs font-bold px-8 py-4 hover:bg-neutral-200 transition-colors"
+                  className="rounded-full border border-neutral-700 bg-neutral-800 text-white font-mono text-xs font-bold px-8 py-4 hover:bg-neutral-700 transition-colors"
                 >
                   Cotizar por WhatsApp
                 </a>
-                <Link
-                  href="/precios"
-                  className="rounded-full border border-neutral-700 bg-neutral-800 text-white font-mono text-xs font-bold px-8 py-4 hover:bg-neutral-700 transition-colors"
-                >
-                  Ver todos los planes
-                </Link>
               </div>
+            </div>
+
+            {/* Semantic Topic Cluster Navigation */}
+            <div className="not-prose my-14">
+              <BlogClusterNav currentSlug="cuanto-cuesta-una-pagina-web-en-colombia" />
             </div>
           </article>
         </div>

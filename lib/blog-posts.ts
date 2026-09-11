@@ -12,9 +12,9 @@ export const blogPosts: BlogPostItem[] = [
   // ─── ARTÍCULOS RECIENTES (ÚLTIMO TRIMESTRE 2026) ─────────────
   {
     slug: "como-aparecer-en-chatgpt-2026",
-    title: "Cómo hacer que una página web aparezca en ChatGPT en 2026",
+    title: "Cómo Aparecer en ChatGPT Search: Rastreo de GPTBot, Robots.txt y Citas IA",
     excerpt:
-      "Estrategias de GEO (Generative Engine Optimization), indexación para rastreadores de OpenAI (GPTBot), datos estructurados Schema y cómo estructurar contenido para ser citado por ChatGPT.",
+      "Guía técnica para configurar robots.txt, permitir GPTBot y OAI-SearchBot, estructurar datos y lograr indexación directa en ChatGPT Search.",
     category: "Ingeniería & SEO",
     publishedAt: "2026-08-19",
     modifiedAt: "2026-08-19",
@@ -22,9 +22,9 @@ export const blogPosts: BlogPostItem[] = [
   },
   {
     slug: "como-crear-una-pagina-web-desde-cero-2026",
-    title: "Cómo Crear una Página Web Desde Cero en 2026: Guía Completa Paso a Paso",
+    title: "Checklist y Hoja de Ruta: Cómo Crear una Web Desde Cero Paso a Paso",
     excerpt:
-      "Aprende paso a paso cómo planificar, diseñar y publicar una página web profesional desde cero en 2026: dominio, hosting, arquitectura moderna y SEO.",
+      "Hoja de ruta cronológica paso a paso para crear un sitio web desde cero: selección de dominio, configuración de hosting, prototipado y lanzamiento.",
     category: "Precios & Guías",
     publishedAt: "2026-08-18",
     modifiedAt: "2026-08-19",
@@ -32,9 +32,9 @@ export const blogPosts: BlogPostItem[] = [
   },
   {
     slug: "seo-para-chatgpt-optimizacion-ia",
-    title: "SEO para ChatGPT: Cómo Optimizar tu Empresa para Búsquedas con IA",
+    title: "Optimización GEO: Cómo Lograr que los Modelos de IA Citen tu Marca",
     excerpt:
-      "Aprende a posicionar tu marca en ChatGPT Search, Perplexity y motores generativos. Autoridad de marca, arquitectura semántica y optimización para LLMs.",
+      "Estrategia GEO (Generative Engine Optimization): optimiza tu marca para ChatGPT, Perplexity y Gemini mediante autoridad de entidad, co-ocurrencia semántica y Schema.",
     category: "Ingeniería & SEO",
     publishedAt: "2026-08-16",
     modifiedAt: "2026-08-19",
@@ -72,9 +72,9 @@ export const blogPosts: BlogPostItem[] = [
   },
   {
     slug: "por-que-mi-pagina-web-no-aparece-en-google",
-    title: "¿Por Qué mi Página Web no Aparece en Google? 12 Causas y Soluciones",
+    title: "Por Qué tu Web no Aparece en Google: Diagnóstico y Errores Técnicos",
     excerpt:
-      "Guía técnica para diagnosticar y solucionar problemas de indexación en Google: robots.txt, etiquetas noindex, canibalización, canonicals rotos, Core Web Vitals y Search Console.",
+      "Checklist técnico para diagnosticar y solucionar problemas de indexación: noindex accidental, canonicals rotos, bloqueo en robots.txt y desindexación en Search Console.",
     category: "Ingeniería & SEO",
     publishedAt: "2026-08-08",
     modifiedAt: "2026-08-19",
@@ -82,9 +82,9 @@ export const blogPosts: BlogPostItem[] = [
   },
   {
     slug: "como-aparecer-en-google-guia-paso-a-paso",
-    title: "Cómo Aparecer en Google: Guía Paso a Paso para una Página Web",
+    title: "Cómo Aparecer en Google: Indexación en Search Console y Sitemaps",
     excerpt:
-      "Aprende cómo lograr que Google rastree, indexe y posicione tu página web en los primeros resultados orgánicos desde el primer mes.",
+      "Aprende paso a paso cómo indexar tu sitio web en Google Search Console, enviar tu sitemap XML y conseguir tus primeros rankings orgánicos.",
     category: "Ingeniería & SEO",
     publishedAt: "2026-08-06",
     modifiedAt: "2026-08-19",
@@ -336,9 +336,9 @@ export const blogPosts: BlogPostItem[] = [
   },
   {
     slug: "como-crear-pagina-web-2026",
-    title: "Cómo Crear una Página Web en 2026: Guía de Arquitectura y Buenas Prácticas",
+    title: "Cómo Crear una Página Web en 2026: Guía Completa de Arquitectura y Tecnologías",
     excerpt:
-      "Conoce el estándar técnico de 2026 para el desarrollo web profesional: rendimiento, accesibilidad y arquitecturas headless sobre Next.js.",
+      "Guía pilar sobre la arquitectura web moderna en 2026: Server Components, Edge Computing, Core Web Vitals y comparación técnica entre Next.js y CMS tradicionales.",
     category: "Precios & Guías",
     publishedAt: "2026-02-20",
     modifiedAt: "2026-08-19",
@@ -346,9 +346,9 @@ export const blogPosts: BlogPostItem[] = [
   },
   {
     slug: "como-crear-pagina-web-profesional",
-    title: "Cómo Crear una Página Web Profesional: Arquitectura y Estrategia Empresarial",
+    title: "Página Web Corporativa Profesional: Estándares Técnicos y Requisitos B2B",
     excerpt:
-      "Cómo estructurar una plataforma web empresarial que convierta. Fundamentos de arquitectura, UX y por qué Next.js domina el mercado B2B.",
+      "Estándares de ingeniería indispensables para sitios corporativos y B2B: accesibilidad WCAG, seguridad SSL/HSTS, SLAs de disponibilidad y rendimiento Lighthouse 95+.",
     category: "Precios & Guías",
     publishedAt: "2026-02-19",
     modifiedAt: "2026-08-19",

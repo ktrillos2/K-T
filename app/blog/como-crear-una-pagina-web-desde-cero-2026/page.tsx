@@ -7,24 +7,26 @@ import JsonLd from "@/components/seo/json-ld"
 import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib/seo"
 import { absoluteUrl } from "@/lib/site-config"
 
+import BlogClusterNav from "@/components/blog/blog-cluster-nav"
+
 export const metadata: Metadata = {
-  title: "Cómo Crear una Página Web Desde Cero en 2026: Guía Completa",
+  title: "Checklist y Hoja de Ruta: Cómo Crear una Web Desde Cero Paso a Paso (2026)",
   description:
-    "Aprende paso a paso cómo crear una página web profesional desde cero en 2026: elección de dominio, hosting, arquitectura moderna en Next.js, diseño UI/UX y SEO.",
+    "Checklist cronológico y hoja de ruta para principiantes: etapas de planificación, compra de dominio, diseño UI/UX y despliegue para lanzar tu web sin omitir pasos.",
   keywords: [
-    "como crear una pagina web desde cero 2026",
-    "guia crear pagina web paso a paso",
-    "como hacer una pagina web profesional",
-    "pasos para crear pagina web colombia",
-    "arquitectura web moderna 2026",
+    "checklist crear pagina web",
+    "hoja de ruta desarrollo web",
+    "como crear una pagina web desde cero paso a paso",
+    "etapas crear sitio web",
+    "pasos crear pagina web colombia",
   ],
   alternates: {
     canonical: absoluteUrl("/blog/como-crear-una-pagina-web-desde-cero-2026"),
   },
   openGraph: {
-    title: "Cómo Crear una Página Web Desde Cero en 2026: Guía Completa Paso a Paso",
+    title: "Checklist y Hoja de Ruta: Cómo Crear una Web Desde Cero Paso a Paso (2026)",
     description:
-      "Guía práctica y técnica para lanzar un sitio web empresarial de alto impacto.",
+      "Guía práctica con el checklist cronológico paso a paso para lanzar un sitio web sin errores.",
     type: "article",
     url: absoluteUrl("/blog/como-crear-una-pagina-web-desde-cero-2026"),
     siteName: "K&T Code",
@@ -51,9 +53,9 @@ export default function ComoCrearPaginaDesdeCeroPage() {
       <JsonLd
         data={[
           buildArticleJsonLd({
-            headline: "Cómo Crear una Página Web Desde Cero en 2026: Guía Completa Paso a Paso",
+            headline: "Checklist y Hoja de Ruta: Cómo Crear una Web Desde Cero Paso a Paso (2026)",
             description:
-              "Guía paso a paso para planificar, diseñar y programar un sitio web profesional con estándares modernos.",
+              "Checklist cronológico y hoja de ruta para principiantes: etapas de planificación, diseño UI/UX y despliegue sin errores.",
             path: "/blog/como-crear-una-pagina-web-desde-cero-2026",
             datePublished: "2026-08-18",
             dateModified: "2026-08-19",
@@ -88,7 +90,7 @@ export default function ComoCrearPaginaDesdeCeroPage() {
               </div>
 
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-title text-white leading-tight mb-6">
-                Cómo Crear una Página Web Desde Cero en 2026: Guía Completa Paso a Paso
+                Checklist y Hoja de Ruta: Cómo Crear una Web Desde Cero Paso a Paso
               </h1>
 
               <div className="flex items-center gap-3 py-4 border-t border-b border-white/10 my-6 font-mono text-xs text-neutral-400">
@@ -106,11 +108,11 @@ export default function ComoCrearPaginaDesdeCeroPage() {
               </div>
 
               <p className="mt-6 border-l-2 border-emerald-400 pl-6 font-mono text-lg leading-relaxed text-neutral-300">
-                Crear una página web en 2026 requiere mucho más que instalar una plantilla genérica. Para destacar en Google y convertir visitas en clientes reales, es necesario seguir un proceso riguroso de arquitectura, diseño y desarrollo.
+                Lanzar una página web sin una hoja de ruta clara suele terminar en retrasos, costos imprevistos y sitios lentos. Este checklist reúne las etapas imprescindibles de planificación, diseño, desarrollo y SEO para completar tu proyecto con éxito. Si buscas profundizar en la arquitectura técnica, revisa también nuestra <Link href="/blog/como-crear-pagina-web-2026" className="text-white font-bold underline">Guía Completa de Arquitectura Web 2026</Link>.
               </p>
             </header>
 
-            <h2>Los 6 Pasos para Crear una Web Profesional</h2>
+            <h2>Los 6 Pasos del Checklist para Crear una Web</h2>
 
             <h3>Paso 1: Definición del Objetivo y Arquitectura de Contenidos</h3>
             <p>
@@ -142,6 +144,9 @@ export default function ComoCrearPaginaDesdeCeroPage() {
               Publica el sitio en una red de distribución global (Edge Network) con certificado SSL gratuito y monitoreo continuo de disponibilidad.
             </p>
 
+            {/* Topic Cluster Navigation */}
+            <BlogClusterNav currentSlug="como-crear-una-pagina-web-desde-cero-2026" />
+
             <div className="not-prose my-12 p-8 rounded-3xl border border-white/20 bg-gradient-to-br from-neutral-900 via-zinc-950 to-black">
               <div className="flex items-center gap-3 mb-4 text-emerald-400">
                 <Globe className="w-5 h-5" />
@@ -153,12 +158,20 @@ export default function ComoCrearPaginaDesdeCeroPage() {
               <p className="font-mono text-sm text-neutral-300 mb-6 leading-relaxed">
                 Diseñamos y programamos tu sitio web corporativo en Next.js desde cero, listo para posicionar en Google y captar clientes desde $450.000 COP.
               </p>
-              <Link
-                href="/#contact"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
-              >
-                Cotizar Mi Página Web <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/precios/precio-pagina-web-colombia"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
+                >
+                  Ver Tarifas y Planes K&T Code <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/servicios/desarrollo-web-a-medida"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/20 bg-white/5 text-white font-mono font-bold text-xs hover:bg-white/10 transition-all"
+                >
+                  Conocer Servicio de Desarrollo Web
+                </Link>
+              </div>
             </div>
 
             <h2>Preguntas Frecuentes</h2>

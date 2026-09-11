@@ -7,24 +7,26 @@ import JsonLd from "@/components/seo/json-ld"
 import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib/seo"
 import { absoluteUrl } from "@/lib/site-config"
 
+import BlogClusterNav from "@/components/blog/blog-cluster-nav"
+
 export const metadata: Metadata = {
-  title: "Cómo Aparecer en Google: Guía Paso a Paso para una Página Web",
+  title: "Cómo Aparecer en Google: Indexación en Search Console y Sitemaps (2026)",
   description:
-    "Aprende cómo lograr que tu sitio web sea indexado y posicione en los primeros lugares de Google: Search Console, sitemaps, SEO on-page y autoridad.",
+    "Guía paso a paso para indexar una web nueva en Google: verificación de propiedad en Search Console, envío de sitemap.xml, archivo robots.txt y primeros rastreos.",
   keywords: [
     "como aparecer en google paso a paso",
     "indexar pagina web en google",
-    "como salir en google con mi negocio",
-    "posicionar pagina web en google colombia",
-    "google search console guia",
+    "google search console sitemap",
+    "como indexar web nueva google",
+    "rastreo googlebot sitemaps",
   ],
   alternates: {
     canonical: absoluteUrl("/blog/como-aparecer-en-google-guia-paso-a-paso"),
   },
   openGraph: {
-    title: "Cómo Aparecer en Google: Guía Paso a Paso para una Página Web",
+    title: "Cómo Aparecer en Google: Indexación en Search Console y Sitemaps (2026)",
     description:
-      "Guía práctica para lograr que Google descubra, indexe y recomiende tu sitio web en los resultados de búsqueda.",
+      "Guía técnica para lograr que Google descubra e indexe tu sitio web sin retrasos.",
     type: "article",
     url: absoluteUrl("/blog/como-aparecer-en-google-guia-paso-a-paso"),
     siteName: "K&T Code",
@@ -51,7 +53,7 @@ export default function ComoAparecerEnGooglePage() {
       <JsonLd
         data={[
           buildArticleJsonLd({
-            headline: "Cómo Aparecer en Google: Guía Paso a Paso para una Página Web",
+            headline: "Cómo Aparecer en Google: Indexación en Search Console y Sitemaps (2026)",
             description:
               "Aprende a registrar e indexar tu página web en Google Search Console para aparecer en las búsquedas de tus clientes.",
             path: "/blog/como-aparecer-en-google-guia-paso-a-paso",
@@ -88,7 +90,7 @@ export default function ComoAparecerEnGooglePage() {
               </div>
 
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-title text-white leading-tight mb-6">
-                Cómo Aparecer en Google: Guía Paso a Paso para una Página Web
+                Cómo Aparecer en Google: Indexación en Search Console y Sitemaps
               </h1>
 
               <div className="flex items-center gap-3 py-4 border-t border-b border-white/10 my-6 font-mono text-xs text-neutral-400">
@@ -106,7 +108,7 @@ export default function ComoAparecerEnGooglePage() {
               </div>
 
               <p className="mt-6 border-l-2 border-emerald-400 pl-6 font-mono text-lg leading-relaxed text-neutral-300">
-                Publicar un sitio web no garantiza automáticamente que Google lo muestre a los usuarios. Descubre el proceso técnico paso a paso para indexar tu dominio y escalar posiciones en los resultados de búsqueda.
+                Publicar un sitio web no garantiza automáticamente que Google lo muestre a los usuarios. Descubre el proceso técnico paso a paso para indexar tu dominio y sitemaps. Si tu web ya tiene semanas pero sigue sin indexar, consulta también nuestra guía especializada: <Link href="/blog/por-que-mi-pagina-web-no-aparece-en-google" className="text-white font-bold underline">12 causas y diagnóstico de por qué una web no aparece en Google</Link>.
               </p>
             </header>
 
@@ -132,23 +134,34 @@ export default function ComoAparecerEnGooglePage() {
               Si atiendes clientes en una ciudad específica de Colombia (Bogotá, Medellín, Cúcuta, Cali), tu ficha de Google Maps verificada conectada a tu web multiplicará tus llamadas y prospectos.
             </p>
 
+            {/* Topic Cluster Navigation */}
+            <BlogClusterNav currentSlug="como-aparecer-en-google-guia-paso-a-paso" />
+
             <div className="not-prose my-12 p-8 rounded-3xl border border-white/20 bg-gradient-to-br from-neutral-900 via-zinc-950 to-black">
               <div className="flex items-center gap-3 mb-4 text-emerald-400">
                 <Search className="w-5 h-5" />
                 <span className="font-mono text-xs uppercase tracking-wider font-bold">Indexación Garantizada</span>
               </div>
               <h3 className="text-2xl font-bold font-title text-white mb-3">
-                Haz que tus clientes te encuentren primero
+                Haz que tus clientes te encuentren primero en Google
               </h3>
               <p className="font-mono text-sm text-neutral-300 mb-6 leading-relaxed">
                 Todas las páginas web desarrolladas por K&T Code se entregan con Search Console configurado, sitemap dinámico y datos estructurados Schema.
               </p>
-              <Link
-                href="/#contact"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
-              >
-                Crear Mi Página Optimizada <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/servicios/seo-tecnico"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
+                >
+                  Conocer Servicio de SEO Técnico <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/precios/precio-pagina-web-colombia"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/20 bg-white/5 text-white font-mono font-bold text-xs hover:bg-white/10 transition-all"
+                >
+                  Ver Tarifas de Páginas Web
+                </Link>
+              </div>
             </div>
 
             <h2>Preguntas Frecuentes</h2>

@@ -7,22 +7,24 @@ import JsonLd from "@/components/seo/json-ld"
 import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib/seo"
 import { absoluteUrl } from "@/lib/site-config"
 
+import BlogClusterNav from "@/components/blog/blog-cluster-nav"
+
 export const metadata: Metadata = {
-  title: "¿Por Qué mi Página Web no Aparece en Google? 12 Causas y Soluciones",
+  title: "Por Qué tu Web no Aparece en Google: Guía de Diagnóstico y Errores Técnicos",
   description:
-    "Guía técnica para solucionar problemas de indexación y visibilidad en Google: robots.txt, noindex accidental, canibalización, Core Web Vitals y Search Console.",
+    "Diagnostica por qué tu sitio web no indexa en Google: 12 causas técnicas comunes (robots.txt, etiquetas noindex, canibalización, Core Web Vitals) y cómo solucionarlas.",
   keywords: [
     "por que mi pagina web no aparece en google",
-    "problemas indexacion google",
+    "errores indexacion google",
+    "problemas indexacion google search console",
     "mi web no sale en google",
-    "solucionar indexacion google search console",
-    "errores seo tecnico colombia",
+    "solucionar indexacion google colombia",
   ],
   alternates: {
     canonical: absoluteUrl("/blog/por-que-mi-pagina-web-no-aparece-en-google"),
   },
   openGraph: {
-    title: "¿Por Qué mi Página Web no Aparece en Google? 12 Causas y Soluciones",
+    title: "Por Qué tu Web no Aparece en Google: Guía de Diagnóstico y Errores Técnicos",
     description:
       "Diagnóstico paso a paso de las 12 causas más comunes por las que un sitio web no se indexa en Google y cómo corregirlas.",
     type: "article",
@@ -51,9 +53,9 @@ export default function PorQueNoApareceEnGooglePage() {
       <JsonLd
         data={[
           buildArticleJsonLd({
-            headline: "¿Por Qué mi Página Web no Aparece en Google? 12 Causas y Soluciones",
+            headline: "Por Qué tu Web no Aparece en Google: Guía de Diagnóstico y Errores Técnicos",
             description:
-              "Guía técnica paso a paso para diagnosticar y solucionar problemas de visibilidad e indexación en Google Search Console.",
+              "Diagnóstico paso a paso de las causas técnicas de no indexación en Google y soluciones.",
             path: "/blog/por-que-mi-pagina-web-no-aparece-en-google",
             datePublished: "2026-08-08",
             dateModified: "2026-08-19",
@@ -89,7 +91,7 @@ export default function PorQueNoApareceEnGooglePage() {
               </div>
 
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-title text-white leading-tight mb-6">
-                ¿Por Qué mi Página Web no Aparece en Google? 12 Causas y Soluciones
+                Por Qué tu Web no Aparece en Google: Guía de Diagnóstico y Errores Técnicos
               </h1>
 
               {/* Author Byline */}
@@ -114,7 +116,7 @@ export default function PorQueNoApareceEnGooglePage() {
               </div>
 
               <p className="mt-6 border-l-2 border-amber-400 pl-6 font-mono text-lg leading-relaxed text-neutral-300">
-                Invertir en una página web y descubrir que no aparece en Google es una de las mayores frustraciones para dueños de negocios en Colombia. En la inmensa mayoría de los casos, la causa es un <strong>error técnico prevenible</strong>. Analizamos las 12 causas principales y cómo resolverlas.
+                Invertir en una página web y descubrir que no aparece en Google es una de las mayores frustraciones para dueños de negocios en Colombia. En la inmensa mayoría de los casos, la causa es un <strong>error técnico prevenible</strong>. Analizamos las 12 causas principales y cómo resolverlas. Si apenas estás configurando tu sitio por primera vez, lee también nuestra guía sobre <Link href="/blog/como-aparecer-en-google-guia-paso-a-paso" className="text-white font-bold underline">cómo aparecer en Google con Search Console</Link>.
               </p>
             </header>
 
@@ -150,6 +152,9 @@ export default function PorQueNoApareceEnGooglePage() {
               Una página sin jerarquía semántica clara confunde a los motores de búsqueda sobre la temática central del contenido.
             </p>
 
+            {/* Topic Cluster Navigation */}
+            <BlogClusterNav currentSlug="por-que-mi-pagina-web-no-aparece-en-google" />
+
             <div className="not-prose my-12 p-8 rounded-3xl border border-white/20 bg-gradient-to-br from-neutral-900 via-zinc-950 to-black">
               <div className="flex items-center gap-3 mb-4 text-emerald-400">
                 <Wrench className="w-5 h-5" />
@@ -161,12 +166,22 @@ export default function PorQueNoApareceEnGooglePage() {
               <p className="font-mono text-sm text-neutral-300 mb-6 leading-relaxed">
                 Realizamos una auditoría técnica completa de tu dominio, identificamos errores de indexación y reconstruimos tu plataforma con arquitectura Next.js optimizada.
               </p>
-              <Link
-                href="/#contact"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
-              >
-                Solicitar Auditoría de Indexación <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/servicios/seo-tecnico"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
+                >
+                  Solicitar Auditoría de Indexación <ArrowRight className="w-4 h-4" />
+                </Link>
+                <a
+                  href={`https://wa.me/573116360057?text=${encodeURIComponent("Hola K&T Code, leí su artículo sobre por qué mi página web no aparece en Google y requiero una auditoría técnica.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/20 bg-white/5 text-white font-mono font-bold text-xs hover:bg-white/10 transition-all"
+                >
+                  Consultar por WhatsApp
+                </a>
+              </div>
             </div>
 
             <h2>Preguntas Frecuentes</h2>

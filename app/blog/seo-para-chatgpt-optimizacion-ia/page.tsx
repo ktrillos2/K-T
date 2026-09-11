@@ -7,25 +7,27 @@ import JsonLd from "@/components/seo/json-ld"
 import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib/seo"
 import { absoluteUrl } from "@/lib/site-config"
 
+import BlogClusterNav from "@/components/blog/blog-cluster-nav"
+
 export const metadata: Metadata = {
-  title: "SEO para ChatGPT: Cómo Optimizar tu Empresa para Búsquedas con IA",
+  title: "Optimización GEO: Cómo Lograr que los Modelos de IA Citen tu Marca",
   description:
-    "Estrategia integral de optimización de marca para ChatGPT Search, Gemini y Perplexity: autoridad de fuentes, citas contextuales y arquitectura semántica.",
+    "Estrategia GEO (Generative Engine Optimization): optimiza tu marca para ChatGPT, Perplexity y Gemini mediante autoridad de entidad, co-ocurrencia semántica y Schema.",
   keywords: [
+    "optimizacion geo",
+    "generative engine optimization",
     "seo para chatgpt",
-    "optimizacion para busquedas con ia",
-    "chatgpt search seo",
-    "posicionamiento motores generativos",
-    "como posicionar marca en chatgpt",
-    "estrategia seo ia 2026",
+    "citas en modelos de ia",
+    "autoridad de entidad ia",
+    "geo vs seo colombia",
   ],
   alternates: {
     canonical: absoluteUrl("/blog/seo-para-chatgpt-optimizacion-ia"),
   },
   openGraph: {
-    title: "SEO para ChatGPT: Cómo Optimizar tu Empresa para Búsquedas con IA",
+    title: "Optimización GEO: Cómo Lograr que los Modelos de IA Citen tu Marca",
     description:
-      "Aprende a posicionar los servicios de tu empresa en los motores de búsqueda de IA conversacional.",
+      "Aprende a posicionar los servicios y autoridad de tu empresa en los motores de búsqueda de IA generativa.",
     type: "article",
     url: absoluteUrl("/blog/seo-para-chatgpt-optimizacion-ia"),
     siteName: "K&T Code",
@@ -57,7 +59,7 @@ export default function SeoParaChatGptPage() {
       <JsonLd
         data={[
           buildArticleJsonLd({
-            headline: "SEO para ChatGPT: Cómo Optimizar tu Empresa para Búsquedas con IA",
+            headline: "Optimización GEO: Cómo Lograr que los Modelos de IA Citen tu Marca",
             description:
               "Estrategias prácticas para que tu empresa sea la respuesta recomendada cuando usuarios buscan tus servicios en ChatGPT y motores de IA.",
             path: "/blog/seo-para-chatgpt-optimizacion-ia",
@@ -67,7 +69,7 @@ export default function SeoParaChatGptPage() {
           buildBreadcrumbJsonLd([
             { name: "Inicio", path: "/" },
             { name: "Blog", path: "/blog" },
-            { name: "SEO para ChatGPT", path: "/blog/seo-para-chatgpt-optimizacion-ia" },
+            { name: "Optimización GEO", path: "/blog/seo-para-chatgpt-optimizacion-ia" },
           ]),
           buildFaqJsonLd(faqs),
         ]}
@@ -87,7 +89,7 @@ export default function SeoParaChatGptPage() {
             {/* Header */}
             <header className="mb-14 not-prose">
               <div className="flex items-center gap-3 font-mono text-xs text-neutral-400 mb-4 uppercase tracking-wider">
-                <span className="text-emerald-400 font-bold">Ingeniería & SEO IA</span>
+                <span className="text-emerald-400 font-bold">Ingeniería & GEO IA</span>
                 <span className="w-1 h-1 rounded-full bg-neutral-600" />
                 <span>9 min de lectura</span>
                 <span className="w-1 h-1 rounded-full bg-neutral-600" />
@@ -95,7 +97,7 @@ export default function SeoParaChatGptPage() {
               </div>
 
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-title text-white leading-tight mb-6">
-                SEO para ChatGPT: Cómo Optimizar tu Empresa para Búsquedas con IA
+                Optimización GEO: Cómo Lograr que los Modelos de IA Citen tu Marca
               </h1>
 
               {/* Author Byline */}
@@ -157,12 +159,22 @@ export default function SeoParaChatGptPage() {
               <p className="font-mono text-sm text-neutral-300 mb-6 leading-relaxed">
                 Auditamos tu arquitectura web actual y la optimizamos para posicionar en Google, ChatGPT Search y Perplexity con código limpio y datos estructurados.
               </p>
-              <Link
-                href="/#contact"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
-              >
-                Hablar con un Ingeniero de K&T <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/servicios/seo-tecnico"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
+                >
+                  Conocer Servicio de SEO Técnico <ArrowRight className="w-4 h-4" />
+                </Link>
+                <a
+                  href={`https://wa.me/573116360057?text=${encodeURIComponent("Hola K&T Code, leí su artículo sobre SEO para ChatGPT y deseo auditar el posicionamiento de mi empresa.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/20 bg-white/5 text-white font-mono font-bold text-xs hover:bg-white/10 transition-all"
+                >
+                  Hablar con un Ingeniero
+                </a>
+              </div>
             </div>
 
             <h2>Preguntas Frecuentes</h2>
@@ -178,6 +190,11 @@ export default function SeoParaChatGptPage() {
                   </p>
                 </div>
               ))}
+            </div>
+
+            {/* Semantic Topic Cluster Navigation */}
+            <div className="not-prose my-14">
+              <BlogClusterNav currentSlug="seo-para-chatgpt-optimizacion-ia" />
             </div>
           </article>
         </div>

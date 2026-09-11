@@ -6,25 +6,27 @@ import Footer from "@/components/layout/footer"
 import JsonLd from "@/components/seo/json-ld"
 import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib/seo"
 import { absoluteUrl } from "@/lib/site-config"
+import BlogClusterNav from "@/components/blog/blog-cluster-nav"
 
 export const metadata: Metadata = {
-  title: "¿Cuánto Cuesta Desarrollar Software a Medida en Colombia en 2026?",
+  title: "¿Cuánto Cuesta Desarrollar Software a Medida? Modelos, Horas y Fases (2026)",
   description:
-    "Guía completa de precios para desarrollo de software a medida en Colombia en 2026: costos por horas, modelos de cotización, fases de ingeniería y retorno de inversión.",
+    "Guía técnica para estimar cuánto cuesta desarrollar software a medida en Colombia en 2026: precio por horas de desarrollo, modelos de cotización ágil y arquitectura en la nube.",
   keywords: [
     "cuanto cuesta desarrollar software a medida en colombia",
     "precios desarrollo de software colombia",
+    "estimacion costo desarrollo software",
+    "precio hora programador colombia",
+    "fases desarrollo software a medida",
     "cotizacion software a medida bogota",
-    "costo de desarrollo app web colombia",
-    "cuanto cobra programador senior colombia",
   ],
   alternates: {
     canonical: absoluteUrl("/blog/cuanto-cuesta-desarrollar-software-a-medida-colombia"),
   },
   openGraph: {
-    title: "¿Cuánto Cuesta Desarrollar Software a Medida en Colombia en 2026?",
+    title: "¿Cuánto Cuesta Desarrollar Software a Medida? Modelos, Horas y Fases (2026)",
     description:
-      "Tabla de costos reales en COP/USD, estimación de presupuestos y fases de desarrollo de software empresarial.",
+      "Desglose técnico para estimar presupuestos, horas de ingeniería y fases de desarrollo de software empresarial.",
     type: "article",
     url: absoluteUrl("/blog/cuanto-cuesta-desarrollar-software-a-medida-colombia"),
     siteName: "K&T Code",
@@ -51,9 +53,9 @@ export default function CuantoCuestaSoftwareMedidaPage() {
       <JsonLd
         data={[
           buildArticleJsonLd({
-            headline: "¿Cuánto Cuesta Desarrollar Software a Medida en Colombia en 2026?",
+            headline: "¿Cuánto Cuesta Desarrollar Software a Medida? Modelos, Horas y Fases (2026)",
             description:
-              "Guía de precios reales y desglose técnico para cotizar y contratar software a medida empresarial en Colombia.",
+              "Guía informativa y desglose técnico para estimar y contratar software a medida empresarial en Colombia.",
             path: "/blog/cuanto-cuesta-desarrollar-software-a-medida-colombia",
             datePublished: "2026-08-03",
             dateModified: "2026-08-19",
@@ -89,7 +91,7 @@ export default function CuantoCuestaSoftwareMedidaPage() {
               </div>
 
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-title text-white leading-tight mb-6">
-                ¿Cuánto Cuesta Desarrollar Software a Medida en Colombia en 2026?
+                ¿Cuánto Cuesta Desarrollar Software a Medida? Modelos, Horas y Fases
               </h1>
 
               {/* Author Byline */}
@@ -114,9 +116,30 @@ export default function CuantoCuestaSoftwareMedidaPage() {
               </div>
 
               <p className="mt-6 border-l-2 border-emerald-400 pl-6 font-mono text-lg leading-relaxed text-neutral-300">
-                Desarrollar software propio permite a las empresas automatizar operaciones críticas, reducir costos recurrentes de licencias SaaS y poseer la propiedad total de sus datos y código fuente. Desglosamos los costos reales en Colombia en 2026.
+                Desarrollar software propio permite a las empresas automatizar operaciones críticas, reducir costos recurrentes de licencias SaaS y poseer la propiedad total de sus datos y código fuente. Desglosamos cómo se calcula el presupuesto y los factores clave.
               </p>
             </header>
+
+            {/* Commercial Bridge Banner: Informational -> Commercial */}
+            <div className="my-10 rounded-2xl border border-emerald-500/40 bg-gradient-to-r from-emerald-950/40 via-neutral-950 to-neutral-900 p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 not-prose shadow-xl">
+              <div>
+                <span className="font-mono text-xs uppercase tracking-wider text-emerald-400 font-bold">
+                  // Tarifas y Cotización de Software
+                </span>
+                <h3 className="text-xl md:text-2xl font-bold font-title text-white mt-1">
+                  ¿Buscas cotizar un desarrollo de software a medida?
+                </h3>
+                <p className="font-mono text-xs text-neutral-300 mt-2 max-w-xl leading-relaxed">
+                  Si quieres ver nuestros precios y estimación de tarifas por sprint o proyecto cerrado → consulta la cotización y tarifas de software a medida de K&T Code.
+                </p>
+              </div>
+              <Link
+                href="/precios/precio-software-a-medida"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-emerald-400 text-black font-mono font-bold text-xs hover:bg-emerald-300 transition-all shrink-0 shadow-lg"
+              >
+                Consultar Tarifas K&T Code <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
 
             <h2>Tabla de Rangos de Precios según Tipo de Software</h2>
             <div className="not-prose overflow-x-auto my-8 border border-white/15 rounded-2xl">
@@ -171,12 +194,20 @@ export default function CuantoCuestaSoftwareMedidaPage() {
               <p className="font-mono text-sm text-neutral-300 mb-6 leading-relaxed">
                 Evaluamos los requerimientos de tu empresa y te entregamos una propuesta técnica detallada con alcance, arquitectura y cotización transparente.
               </p>
-              <Link
-                href="/#contact"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
-              >
-                Cotizar Software a Medida <ArrowRight className="w-4 h-4" />
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/precios/precio-software-a-medida"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-black font-mono font-bold text-xs hover:bg-neutral-200 transition-all shadow-lg"
+                >
+                  Ver Tarifas y Modelos de Software <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/servicios/software-a-medida"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/20 bg-white/5 text-white font-mono font-bold text-xs hover:bg-white/10 transition-all"
+                >
+                  Conocer el Servicio de Software
+                </Link>
+              </div>
             </div>
 
             <h2>Preguntas Frecuentes</h2>
@@ -192,6 +223,11 @@ export default function CuantoCuestaSoftwareMedidaPage() {
                   </p>
                 </div>
               ))}
+            </div>
+
+            {/* Semantic Topic Cluster Navigation */}
+            <div className="not-prose my-14">
+              <BlogClusterNav currentSlug="cuanto-cuesta-desarrollar-software-a-medida-colombia" />
             </div>
           </article>
         </div>

@@ -418,6 +418,27 @@ export default function PricingGuidePage({ guide }: { guide: PricingGuideData })
             </div>
           </section>
 
+          {/* Related In-Depth Educational Article */}
+          {guide.relatedBlogSlug && guide.relatedBlogTitle && (
+            <section className="mt-16 rounded-2xl border border-white/10 bg-white/[0.02] p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div>
+                <p className="font-mono text-xs uppercase tracking-wider text-emerald-400 font-bold">// Guía Educativa e Información Técnica</p>
+                <h3 className="mt-1 font-title text-xl font-bold text-white">
+                  ¿Quieres analizar a fondo los factores técnicos y comparativas?
+                </h3>
+                <p className="mt-2 font-mono text-xs text-white/70 max-w-2xl leading-relaxed">
+                  Lee nuestro artículo detallado en el blog sobre tecnologías, freelance vs agencia, pasarelas de pago y costos ocultos: <strong className="text-white">{guide.relatedBlogTitle}</strong>.
+                </p>
+              </div>
+              <Link
+                href={`/blog/${guide.relatedBlogSlug}`}
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 font-mono text-xs font-bold text-white transition-colors hover:bg-white/15 shrink-0"
+              >
+                Leer Guía en el Blog <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </section>
+          )}
+
           {/* Final CTA & Link to Service */}
           <section className="mt-28 rounded-3xl border border-white/10 bg-white/[0.035] p-8 md:p-12">
             <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">

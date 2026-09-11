@@ -6,6 +6,7 @@ import Footer from "@/components/layout/footer"
 import JsonLd from "@/components/seo/json-ld"
 import { buildArticleJsonLd, buildBreadcrumbJsonLd, buildFaqJsonLd } from "@/lib/seo"
 import { absoluteUrl } from "@/lib/site-config"
+import BlogClusterNav from "@/components/blog/blog-cluster-nav"
 
 export const metadata: Metadata = {
   title: "Cómo Crear una Tienda Online Desde Cero: Guía Completa de E-commerce",
@@ -151,6 +152,11 @@ export default function ComoCrearTiendaOnlinePage() {
                   </p>
                 </div>
               ))}
+            </div>
+
+            {/* Semantic Topic Cluster Navigation */}
+            <div className="not-prose my-14">
+              <BlogClusterNav currentSlug="como-crear-una-tienda-online-desde-cero" />
             </div>
           </article>
         </div>
