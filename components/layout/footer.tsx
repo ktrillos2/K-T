@@ -150,6 +150,32 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+
+            <div className="pt-2 border-t border-white/5 space-y-2.5">
+              <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-emerald-400/80">
+                {isEn ? "// Priority Services" : "// Servicios Clave"}
+              </p>
+              <ul className="space-y-2 font-mono text-xs">
+                <li>
+                  <Link
+                    href={isEn ? "/en/services/landing-pages" : "/servicios/landing-pages"}
+                    className="text-neutral-400 hover:text-white transition-colors inline-flex items-center gap-1 group"
+                  >
+                    <span>{isEn ? "Landing Pages" : "Landing Pages"}</span>
+                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-neutral-400" />
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={isEn ? "/en/services/ecommerce-development" : "/servicios/tiendas-virtuales"}
+                    className="text-neutral-400 hover:text-white transition-colors inline-flex items-center gap-1 group"
+                  >
+                    <span>{isEn ? "E-commerce Development" : "Tiendas Virtuales"}</span>
+                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-neutral-400" />
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </motion.div>
 
           {/* Column 3: Industries & Solutions */}

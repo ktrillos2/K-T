@@ -8,6 +8,7 @@ import { projects } from "@/lib/projects"
 import Image from "next/image"
 import { ArrowLeft, ArrowRight, Check, X, Phone, User, Globe, MessageSquare, Info } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useModal } from "@/context/modal-context"
 import { usePricing, type PlanType } from "@/hooks/use-pricing"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -22,6 +23,7 @@ import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
+import { trackWhatsAppClick, trackLeadSubmission } from "@/lib/analytics"
 
 interface WhatsAppModalProps {
     isOpen: boolean
@@ -33,6 +35,7 @@ type Step = "projects" | "form" | "pricing"
 export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
     const [step, setStep] = useState<Step>("form")
     const { dictionary, language, convertPrice, country } = useLanguage()
+    const { preselectedService } = useModal()
     const { getPrice } = usePricing()
     const router = useRouter()
 
@@ -44,6 +47,16 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
         service: "",
         contactPreference: "whatsapp"
     })
+
+    useEffect(() => {
+        if (preselectedService) {
+            let normalized = preselectedService
+            if (preselectedService === "landing-pages" || preselectedService === "landing") normalized = "landing"
+            if (preselectedService === "tiendas-virtuales" || preselectedService === "ecommerce") normalized = "ecommerce"
+            if (preselectedService === "software-a-medida" || preselectedService === "web-dev") normalized = "web-dev"
+            setFormData((prev) => ({ ...prev, service: normalized }))
+        }
+    }, [preselectedService])
 
     // Validation State
     const [phoneError, setPhoneError] = useState("")
@@ -164,15 +177,17 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
             // email: no email in this form
         })
 
-        // 2. Open WhatsApp IMMEDIATELY (to bypass popup blockers)
+        // 2. Track WhatsApp click separately from form lead conversion
+        trackWhatsAppClick("WhatsApp Modal Quote", {
+            service_type: formData.service,
+            country: country,
+            language: language,
+        })
 
-
-        // 2. Open WhatsApp IMMEDIATELY (to bypass popup blockers)
-        // Adding 'noopener,noreferrer' is good practice but _blank is standard.
-        // The user specifically asked for wa.me/, so we stick to it.
+        // Open WhatsApp
         window.open(whatsappUrl, "_blank", "noopener,noreferrer")
 
-        // 3. Send Email in Background
+        // 3. Send Email in Background and track generate_lead upon confirmed lead submission
         const emailPromise = sendLeadEmail({
             name: formData.name,
             phone: fullPhone,
@@ -180,6 +195,12 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
             service: formData.service,
             priceQuote: calculatedPrice,
             contactPreference: formData.contactPreference as "whatsapp" | "call"
+        }).then((res) => {
+            trackLeadSubmission(formData.service, calculatedPrice, {
+                country: country,
+                language: language,
+            })
+            return res
         })
 
         toast.promise(emailPromise, {
@@ -225,6 +246,7 @@ export default function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
     return (
         <AnimatePresence>
             <motion.div
+                key="whatsapp-modal-backdrop"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

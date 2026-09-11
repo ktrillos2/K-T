@@ -26,11 +26,84 @@ export type ServicePageData = {
 
 
 export const servicePages: Record<string, ServicePageData> = {
+  "landing-pages": {
+    slug: "landing-pages",
+    title: "Desarrollo de Landing Pages de Alta Conversión en Colombia",
+    shortTitle: "Landing pages",
+    metaTitle: "Diseño y Desarrollo de Landing Pages de Alta Conversión en Colombia",
+    metaDescription:
+      "Desarrollo de landing pages de alta conversión en Colombia con Next.js y React 19. Formularios inteligentes, carga en < 0.8s, integración con WhatsApp Business y medición de campañas.",
+    eyebrow: "// Páginas de Aterrizaje y Conversión Directa",
+    summary:
+      "Diseñamos y desarrollamos landing pages de alto rendimiento para empresas y campañas publicitarias en Colombia y clientes del exterior. Desarrolladas en Next.js y React 19, nuestras páginas garantizan cargas en menos de 0.8 segundos, formularios optimizados para captación de clientes y conexión directa a WhatsApp Business y analítica publicitaria.",
+    serviceType: "High-converting landing page development Next.js React Colombia",
+    showTechStack: true,
+    showPerformanceComparison: true,
+    whatWeDevelop: [
+      { title: "Landing Pages para Campañas de Pauta (Google Ads & Meta)", description: "Páginas hiperenfocadas en una sola oferta para maximizar el retorno de inversión publicitaria y reducir el costo por adquisición." },
+      { title: "Páginas de Captación de Prospectos (Lead Generation)", description: "Formularios con validación en tiempo real, campos condicionales y notificaciones automáticas inmediatas a tu correo o CRM." },
+      { title: "Landing Pages de Agendamiento y Asesoría", description: "Flujos rápidos diseñados para coordinar llamadas, citas o diagnósticos comerciales mediante WhatsApp Business." },
+      { title: "Páginas de Lanzamiento de Productos y Servicios", description: "Presentación visual de alto impacto con animaciones fluidas, pruebas de confianza, comparativas y llamados a la acción claros." },
+    ],
+    whenWeRecommend: [
+      "Empresas que invierten en publicidad en Google Ads, Meta Ads o TikTok y necesitan que el 100% de los clics carguen en menos de 1 segundo.",
+      "Lanzamiento de un servicio específico o promoción donde un sitio multipágina dispersaría la atención del usuario.",
+      "Negocios que buscan captar prospectos calificados con contacto directo a WhatsApp sin pasos innecesarios.",
+      "Proyectos que requieren tiempos de entrega ágiles (7 a 12 días hábiles) con diseño exclusivo y código propio.",
+    ],
+    whenWeDoNotRecommend: [
+      "Comercios que requieren un catálogo extenso con carrito transaccional y pasarela integrada (recomendamos Tienda Virtual Headless).",
+      "Empresas corporativas que necesitan un portal con múltiples áreas de negocio y decenas de páginas internas (recomendamos Sitio Web Corporativo).",
+    ],
+    estimatedTimeline: "7 a 12 días hábiles desde la definición de contenidos hasta el despliegue en producción con analítica activa.",
+    priceRangeCOP: "Planes transparentes desde $450.000 COP en Colombia / desde $200 USD para clientes internacionales según integraciones requeridas.",
+    benefits: [
+      { title: "Carga en Menos de 0.8 Segundos", description: "Arquitectura Next.js estática que evita que los usuarios abandonen la página antes de ver tu propuesta." },
+      { title: "WhatsApp Business Integrado", description: "Botón flotante y enlaces directos con mensajes predeterminados para iniciar conversaciones comerciales de inmediato." },
+      { title: "Medición de Conversiones (GA4 y Ads)", description: "Eventos configurados para rastrear llamadas, clics a WhatsApp y envíos de formulario sin perder datos." },
+      { title: "Diseño 100% Adaptado a Celulares", description: "Experiencia mobile-first fluida, pensando en que más del 80% del tráfico publicitario en Colombia proviene de teléfonos." },
+    ],
+    includes: [
+      "Diseño UI/UX exclusivo en Figma enfocado en retención y conversión",
+      "Desarrollo frontend en Next.js, React 19 y Tailwind CSS",
+      "Formulario de captación con validación inmediata y protección anti-spam",
+      "Integración directa con WhatsApp Business y notificaciones de prospectos",
+      "Configuración de analítica (Google Analytics 4, Meta Pixel y eventos clave)",
+      "Optimización rigurosa de Core Web Vitals (LCP < 0.8s, CLS 0, INP óptimo)",
+      "Alojamiento en Edge CDN con certificado de seguridad SSL incluido",
+      "Entrega del código fuente 100% propiedad de tu empresa sin ataduras",
+    ],
+    idealFor: [
+      "Empresas y profesionales que invierten en pauta y pierden ventas por páginas lentas de WordPress o Wix",
+      "Clínicas, consultoras, firmas legales, constructoras y empresas de servicios profesionales",
+      "Negocios que lanzan una oferta de temporada, curso, evento o servicio puntual",
+      "Startups y emprendedores que buscan validar una propuesta comercial rápidamente con clientes reales",
+    ],
+    process: [
+      { title: "Estrategia y Propuesta de Valor", description: "Definimos el gancho principal, los beneficios clave, la objeción a resolver y la llamada a la acción primordial." },
+      { title: "Diseño Visual en Figma", description: "Creamos la interfaz de usuario para escritorio y celular asegurando coherencia gráfica y jerarquía clara." },
+      { title: "Desarrollo en Next.js", description: "Programamos componentes modulares, rápidos y accesibles con animaciones sutiles y micro-interacciones." },
+      { title: "Integración de Analítica y Leads", description: "Conectamos los eventos de medición (GA4, Ads), el formulario y el canal de WhatsApp." },
+      { title: "Lanzamiento y Verificación", description: "Publicamos en CDN global, auditamos velocidad móvil en PageSpeed y entregamos el proyecto listo para pautar." },
+    ],
+    faqs: [
+      { question: "¿Cuánto cuesta desarrollar una landing page en K&T Code?", answer: "Nuestros planes inician desde $450.000 COP para empresas en Colombia o desde $200 USD para clientes en el exterior. El valor incluye diseño a medida, desarrollo en Next.js, adaptación móvil, conexión a WhatsApp y hosting seguro en CDN." },
+      { question: "¿Cuánto tiempo toma tener la landing page lista?", answer: "El tiempo habitual de entrega es de 7 a 12 días hábiles, trabajando de forma colaborativa con entregables verificables." },
+      { question: "¿La landing page incluye integración con WhatsApp y formularios?", answer: "Sí. Integramos formularios de captación validados y botones directos de WhatsApp con mensajes preconfigurados para que los prospectos lleguen organizados por campaña." },
+      { question: "¿Puedo medir los resultados de mis anuncios en Google Ads y Meta?", answer: "Totalmente. Configuramos eventos de analítica en Google Analytics 4, Google Ads y Meta Pixel para que puedas medir con exactitud cuántos prospectos genera tu inversión publicitaria." },
+      { question: "¿Por qué es mejor una landing page en Next.js que una en WordPress o Wix?", answer: "Las plantillas de WordPress y constructores como Elementor o Wix cargan decenas de scripts pesados que ralentizan la carga a más de 3 o 4 segundos. En Next.js tu página carga en menos de 0.8 segundos, evitando que los usuarios hagan clic en tu anuncio y abandonen antes de que la página abra." },
+    ],
+    relatedArticles: [
+      { title: "El costo oculto de una página web lenta", href: "/blog/costo-oculto-pagina-web-lenta" },
+      { title: "Desarrollo a medida vs. plantillas: cómo elegir en 2026", href: "/blog/desarrollo-web-medida-vs-plantillas" },
+      { title: "Por qué el SEO debe planearse desde el inicio", href: "/blog/seo-desde-la-raiz-crear-pagina" },
+    ],
+  },
   "desarrollo-web-a-medida": {
     slug: "desarrollo-web-a-medida",
     title: "Desarrollo Web con Next.js y React en Colombia",
     shortTitle: "Desarrollo web a medida",
-    metaTitle: "Desarrollo Web a Medida en Colombia | Next.js & React | K&T Code",
+    metaTitle: "Desarrollo Web a Medida en Colombia | Next.js & React",
     metaDescription:
       "Desarrollo web a medida con Next.js y React en Colombia. Sitios de alto rendimiento, optimización de Core Web Vitals, arquitectura headless y SEO técnico estructurado.",
     eyebrow: "// Ingeniería Web y Arquitectura de Software",
@@ -83,22 +156,40 @@ export const servicePages: Record<string, ServicePageData> = {
   },
   "tiendas-virtuales": {
     slug: "tiendas-virtuales",
-    title: "Desarrollo de Tiendas Virtuales & E-commerce Headless",
+    title: "Desarrollo de Tiendas Virtuales & E-commerce Headless en Colombia",
     shortTitle: "Tiendas virtuales",
-    metaTitle: "Agencia Desarrollo E-commerce Headless Colombia | WooCommerce & Shopify | K&T Code",
+    metaTitle: "Agencia Desarrollo E-commerce Headless Colombia | WooCommerce & Shopify",
     metaDescription:
-      "Desarrollo de tiendas virtuales headless en Colombia con Next.js, WooCommerce y Shopify. Catálogos ultra rápidos, pasarelas de pago Wompi, PayU, Bold y checkout optimizado.",
+      "Desarrollo de tiendas virtuales headless en Colombia con Next.js, WooCommerce y Shopify. Catálogo, administración de pedidos, pasarelas Wompi, Bold, PayU, PSE, envíos y capacitación.",
     eyebrow: "// Comercio Electrónico de Alto Rendimiento",
     summary:
-      "Construimos tiendas virtuales y plataformas de comercio electrónico headless en Colombia combinando la potencia de Next.js en el frontend con motores robustos como WooCommerce, Shopify o Medusa en el backend. Logramos compras sin fricción, navegación instantánea y compatibilidad total con pasarelas de pago colombianas.",
-    serviceType: "Headless E-commerce development Next.js WooCommerce Shopify",
+      "Construimos tiendas virtuales y plataformas de comercio electrónico headless en Colombia y el exterior, combinando la potencia de Next.js en el frontend con motores robustos como WooCommerce o Shopify en el backend. Entregamos catálogos autogestionables, panel administrativo para inventario y pedidos, pasarelas de pago colombianas, cálculo de envíos y capacitación completa a tu equipo.",
+    serviceType: "Headless E-commerce development Next.js WooCommerce Shopify Colombia",
     showTechStack: true,
     showPerformanceComparison: true,
+    whatWeDevelop: [
+      { title: "Tiendas Virtuales Headless en Next.js", description: "Frontend ultrarrápido conectado a WooCommerce o Shopify mediante APIs seguras para que las compras móviles ocurran sin esperas." },
+      { title: "Panel Administrativo y Gestión de Inventario", description: "Administración intuitiva para crear productos, controlar existencias de stock, variantes de tallas/colores y estados de pedidos." },
+      { title: "Integración de Pasarelas de Pago Colombianas", description: "Cobros en línea seguros con Wompi (Bancolombia), Bold, PayU Latam, PSE, tarjetas de crédito y transferencias Nequi/Daviplata." },
+      { title: "Cálculo Automatizado de Envíos Nacionales", description: "Configuración de tarifas de flete por departamentos y ciudades principales de Colombia, con integración a transportadoras." },
+    ],
+    whenWeRecommend: [
+      "Marcas y comercios en Colombia que venden productos físicos o digitales y buscan multiplicar su facturación por internet.",
+      "Tiendas existentes en WooCommerce o Shopify que sufren lentitud extrema y caídas de ventas por tiempos de carga superiores a 3 segundos.",
+      "Empresas que necesitan integrar su inventario online con software administrativo, facturación electrónica o locales físicos.",
+      "Negocios que valoran la experiencia de compra desde smartphones vía WhatsApp e Instagram con carritos dinámicos tipo Slide Cart.",
+    ],
+    whenWeDoNotRecommend: [
+      "Emprendimientos en etapa de idea con 1 o 2 productos sin validar mercado (recomendamos iniciar con una Landing Page comercial).",
+      "Proyectos que buscan únicamente plantillas prediseñadas monolíticas sin enfoque en velocidad ni SEO.",
+    ],
+    estimatedTimeline: "25 a 40 días hábiles desde la diagramación del catálogo hasta las pruebas reales de pasarela de pago y capacitación del equipo.",
+    priceRangeCOP: "Planes transparentes desde $1.300.000 COP en Colombia / desde $450 USD para tiendas internacionales según volumen de catálogo e integraciones.",
     benefits: [
       { title: "Checkout en Menos de 1 Segundo", description: "Eliminamos las esperas del carrito y checkout para maximizar la tasa de conversión y reducir carritos abandonados." },
-      { title: "Pasarelas de Pago Colombianas", description: "Integración nativa con Wompi (Bancolombia), Bold, PayU, ePayco, PSE, tarjetas de crédito y transferencias Nequi/Daviplata." },
-      { title: "Catálogo Escalable sin Caídas", description: "Soporta miles de visitas simultáneas durante campañas de Cyberlunes o Black Friday gracias a la infraestructura CDN." },
-      { title: "SEO para Productos y Categorías", description: "Datos estructurados Product, Offer y AggregateRating para mostrar precios, stock y estrellas en los resultados de Google." },
+      { title: "Pasarelas de Pago Colombianas", description: "Integración nativa con Wompi (Bancolombia), Bold, PayU, PSE, tarjetas de crédito y transferencias Nequi/Daviplata." },
+      { title: "Catálogo e Inventario Autogestionable", description: "Panel administrativo fácil de usar para actualizar productos, precios, fotos y stock en tiempo real sin tocar código." },
+      { title: "Capacitación y Acompañamiento", description: "Sesiones de capacitación en video y manuales operativos para que tu equipo gestione pedidos desde el primer día." },
     ],
     includes: [
       "Arquitectura headless (Frontend en Next.js + Backend WooCommerce/Shopify/Custom)",
@@ -109,9 +200,10 @@ export const servicePages: Record<string, ServicePageData> = {
       "Cálculo de envíos por ciudades de Colombia y tracking de pedidos",
       "Configuración de Google Analytics 4 (eventos de e-commerce) y Meta Pixel",
       "Optimización de imágenes WebP/AVIF y catálogo indexable en Google",
+      "Capacitación en video para la administración de productos y órdenes",
     ],
     idealFor: [
-      "Marcas y empresas en Colombia que venden productos físicos o digitales a nivel nacional",
+      "Marcas y empresas en Colombia que venden productos físicos o digitales a nivel nacional e internacional",
       "Tiendas en WooCommerce o Shopify tradicional que son lentas y pierden ventas por tiempo de carga",
       "Negocios que buscan unificar su inventario con sucursales físicas o software ERP",
       "Empresas que necesitan una experiencia de compra móvil fluida y moderna",
@@ -128,6 +220,7 @@ export const servicePages: Record<string, ServicePageData> = {
       { question: "¿Puedo mantener mi tienda WooCommerce existente y mejorar la velocidad con Headless?", answer: "Sí. Podemos conectar un frontend nuevo y ultra rápido en Next.js a tu backend actual de WooCommerce mediante la REST API, conservando tus productos, clientes e historial de pedidos intactos." },
       { question: "¿Qué pasarelas de pago colombianas pueden integrarse?", answer: "Integramos las principales pasarelas disponibles en Colombia: Wompi (Bancolombia), Bold, PayU Latam, ePayco, Mercado Pago, pagos PSE, tarjetas de crédito/débito y botones directos de WhatsApp para pedidos asistidos." },
       { question: "¿La tienda virtual incluye panel para gestionar pedidos y stock?", answer: "Sí. Tendrás un panel administrativo intuitivo para agregar nuevos productos, cambiar precios, gestionar el inventario, ver estados de pago y despachar pedidos fácilmente." },
+      { question: "¿Incluyen capacitación para usar la tienda?", answer: "Sí. Todo proyecto de tienda virtual incluye una sesión de capacitación práctica y guías en video para que tú o tu equipo aprendan a subir productos, gestionar existencias y despachar compras sin depender de terceros." },
       { question: "¿Cómo se posicionan los productos en Google?", answer: "Implementamos datos estructurados Schema.org para productos, URLs amigables, jerarquía semántica y optimización de velocidad para que tus productos aparezcan destacados en Google Shopping y búsquedas orgánicas." },
     ],
     relatedArticles: [
@@ -140,7 +233,7 @@ export const servicePages: Record<string, ServicePageData> = {
     slug: "software-a-medida",
     title: "Desarrollo de Software Web a Medida y Plataformas SaaS",
     shortTitle: "Software a medida",
-    metaTitle: "Desarrollo de Software a Medida en Colombia | Next.js & React | K&T Code",
+    metaTitle: "Desarrollo de Software a Medida en Colombia | Next.js & React",
     metaDescription:
       "Desarrollamos software web a medida, paneles administrativos, portales de clientes y SaaS con Next.js, React, Node.js y Supabase en Colombia.",
     eyebrow: "// Soluciones Digitales Corporativas",
@@ -194,7 +287,7 @@ export const servicePages: Record<string, ServicePageData> = {
     slug: "diseno-web-corporativo",
     title: "Diseño de Páginas Web Corporativas en Colombia",
     shortTitle: "Diseño web corporativo",
-    metaTitle: "Diseño de Páginas Web Corporativas en Colombia | K&T Code",
+    metaTitle: "Diseño de Páginas Web Corporativas en Colombia",
     metaDescription:
       "Diseñamos páginas web corporativas profesionales para empresas en Colombia. Diseño exclusivo, velocidad Next.js, enfoque en conversión B2B y posicionamiento SEO.",
     eyebrow: "// Presencia Digital y Autoridad de Marca",
@@ -249,7 +342,7 @@ export const servicePages: Record<string, ServicePageData> = {
     slug: "seo-tecnico",
     title: "Servicios de SEO Técnico & Optimización Web en Colombia",
     shortTitle: "SEO técnico",
-    metaTitle: "Servicios de SEO Técnico en Colombia | Core Web Vitals & Schema | K&T Code",
+    metaTitle: "Servicios de SEO Técnico en Colombia | Core Web Vitals & Schema",
     metaDescription:
       "Auditoría y optimización de SEO técnico en Colombia. Mejoramos rastreo, indexación, optimización de Core Web Vitals y rendimiento Lighthouse, datos estructurados JSON-LD y arquitectura para Next.js y React.",
     eyebrow: "// Visibilidad Orgánica y Rendimiento en Buscadores",
@@ -304,7 +397,7 @@ export const servicePages: Record<string, ServicePageData> = {
     slug: "mantenimiento-web",
     title: "Mantenimiento Web, Soporte y Optimización Continua",
     shortTitle: "Mantenimiento web",
-    metaTitle: "Mantenimiento de Páginas Web en Colombia | Soporte y Seguridad | K&T Code",
+    metaTitle: "Mantenimiento de Páginas Web en Colombia | Soporte y Seguridad",
     metaDescription:
       "Planes de mantenimiento web y soporte técnico para empresas en Colombia. Actualizaciones, monitoreo 24/7, copias de seguridad, velocidad y mejoras continuas.",
     eyebrow: "// Rendimiento, Estabilidad y Soporte Continuo",
@@ -359,7 +452,7 @@ export const servicePages: Record<string, ServicePageData> = {
     slug: "desarrollo-nextjs",
     title: "Desarrollo Next.js para Empresas en Colombia",
     shortTitle: "Desarrollo Next.js",
-    metaTitle: "Desarrollo Next.js en Colombia | Expertos en React & Server Components | K&T Code",
+    metaTitle: "Desarrollo Next.js en Colombia | Expertos en React & Server Components",
     metaDescription:
       "Desarrollo web especializado en Next.js, React 19 y TypeScript para empresas en Colombia. Optimización de Core Web Vitals y rendimiento Lighthouse, arquitectura headless, SaaS y e-commerce.",
     eyebrow: "// Ingeniería Next.js & Server Components",
@@ -432,7 +525,7 @@ export const servicePages: Record<string, ServicePageData> = {
     slug: "woocommerce-headless",
     title: "Desarrollo WooCommerce Headless con Next.js en Colombia",
     shortTitle: "WooCommerce Headless",
-    metaTitle: "Desarrollo WooCommerce Headless en Colombia | Next.js E-commerce | K&T Code",
+    metaTitle: "Desarrollo WooCommerce Headless en Colombia | Next.js E-commerce",
     metaDescription:
       "Agencia experta en WooCommerce Headless y Next.js en Colombia. Acelera tu tienda online con checkout en < 1s, pasarelas Wompi, PayU, Bold y SEO de productos.",
     eyebrow: "// E-commerce Desacoplado de Alto Rendimiento",

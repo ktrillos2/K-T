@@ -17,12 +17,14 @@ export const en = {
     viewProject: "View Project",
   },
   hero: {
-    greeting: "// K&T Code ",
-    slogan: "Custom Web Development & Software Engineering in Colombia",
+    greeting: "// K&T Code • Engineering from Colombia for Global Clients",
+    slogan: "High-Converting Landing Pages & Headless E-commerce",
     description:
-      "",
-    cta: "View real projects",
-    scroll: "Explore our architecture",
+      "We engineer high-performance landing pages, custom online stores, and software solutions with Next.js. Colombian software craftsmanship built for businesses in the US, Latin America, and globally.",
+    ctaLanding: "Quote landing page",
+    ctaStore: "Quote online store",
+    cta: "View portfolio",
+    scroll: "Explore our engineering",
   },
   about: {
     title: "Web Development & Custom Software Engineering in Colombia",

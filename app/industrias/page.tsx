@@ -9,7 +9,7 @@ import { industryPageList } from "@/lib/industry-pages"
 import { absoluteUrl } from "@/lib/site-config"
 
 export const metadata: Metadata = {
-  title: "Desarrollo Web por Industrias y Sectores en Colombia | K&T Code",
+  title: "Desarrollo Web por Industrias y Sectores en Colombia",
   description: "Soluciones de desarrollo web, software y e-commerce especializadas para inmobiliarias, salud, ingeniería, e-commerce B2B, turismo, automotriz, estética y medios en Colombia.",
   keywords: [
     "desarrollo web por industrias colombia",

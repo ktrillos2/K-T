@@ -2,9 +2,10 @@
 
 import { useState, useEffect, useRef } from "react"
 import { useRouter, usePathname } from "next/navigation"
+import Link from "next/link"
 import Image from "next/image"
 import { m as motion, AnimatePresence } from "framer-motion"
-import { useLanguage } from "@/context/language-context"
+import { useLanguage, getTranslatedRoute } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
 import { smoothScrollTo } from "@/lib/utils"
 import SuperMenu from "./super-menu"
@@ -57,6 +58,8 @@ export default function Header() {
     return null
   }
 
+  const homePath = language === "en" ? "/en" : "/"
+
   return (
     <>
       <motion.header
@@ -69,29 +72,27 @@ export default function Header() {
         animate="visible"
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <motion.button
-            className={`relative w-48 h-20 cursor-pointer transition-opacity duration-300 ${isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+          <Link
+            href={homePath}
+            className={`relative w-48 h-20 cursor-pointer transition-opacity duration-300 block ${isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
             onMouseEnter={() => setCursorVariant("hover")}
             onMouseLeave={() => setCursorVariant("default")}
-            whileHover={{ scale: 1.05 }}
             aria-label="Ir a la página de inicio de K&T Code"
-            onClick={() => {
-              const homePath = language === "en" ? "/en" : "/"
+            onClick={(e) => {
               if (pathname === homePath) {
+                e.preventDefault()
                 window.scrollTo({ top: 0, behavior: "instant" })
                 smoothScrollTo(0, 1000)
-              } else {
-                router.push(homePath)
               }
             }}
           >
             <Image src="/images/logo.webp" alt="Logo de K&T Code" fill sizes="(max-width: 768px) 150px, 200px" className="object-contain object-left" priority />
-          </motion.button>
+          </Link>
 
-          {/* Subtle Desktop Navigation Menu */}
+          {/* Subtle Desktop Navigation Menu with crawlable links */}
           <nav aria-label="Navegación principal" className="hidden lg:flex items-center gap-8 text-sm font-mono text-white/50">
             {[
-              { key: "home", href: language === "en" ? "/en" : "/#hero" },
+              { key: "home", href: language === "en" ? "/en" : "/" },
               { key: "about", href: language === "en" ? "/en/about" : "/nosotros" },
               { key: "services", href: language === "en" ? "/en/services" : "/servicios" },
               { key: "prices", href: language === "en" ? "/en/pricing" : "/precios" },
@@ -99,20 +100,18 @@ export default function Header() {
               { key: "blog", href: "/blog" },
               { key: "contact", href: language === "en" ? "/en/contact" : "/#contact" }
             ].map((item) => (
-              <button
+              <Link
                 key={item.key}
+                href={item.href}
                 aria-label={`Navegar a la sección ${dictionary.nav[item.key as keyof typeof dictionary.nav] || item.key}`}
-                onClick={() => {
+                onClick={(e) => {
                   if (item.href.startsWith("/#")) {
                     const hash = item.href.replace("/", "")
-                    if (pathname !== "/") {
-                      router.push(item.href)
-                    } else {
+                    if (pathname === "/") {
+                      e.preventDefault()
                       const el = document.querySelector(hash)
                       if (el) el.scrollIntoView({ behavior: "smooth" })
                     }
-                  } else {
-                    router.push(item.href)
                   }
                 }}
                 onMouseEnter={() => setCursorVariant("hover")}
@@ -122,7 +121,7 @@ export default function Header() {
                 {/* @ts-ignore */}
                 {dictionary.nav[item.key] || item.key}
                 <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full" />
-              </button>
+              </Link>
             ))}
           </nav>
 
@@ -159,27 +158,59 @@ export default function Header() {
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
                     className="absolute top-full right-0 mt-2 bg-zinc-900 border border-white/20 rounded-xl p-1 flex flex-col gap-1 min-w-[140px] z-50 overflow-hidden shadow-xl"
                   >
-                    {countryCodes.map((c) => (
-                      <button
-                        key={c.iso}
-                        onClick={() => {
-                          // @ts-ignore
-                          setCountry(c.name)
-                          setIsCountryOpen(false)
-                        }}
-                        className={`px-3 py-2 text-xs font-mono text-left rounded hover:bg-white/10 transition-colors flex items-center gap-2 ${country === c.name ? "text-white bg-white/10" : "text-white"
-                          }`}
-                      >
-                        <Image
-                          src={`https://flagcdn.com/w40/${c.iso}.webp`}
-                          alt={c.name}
-                          width={16}
-                          height={12}
-                          className="w-4 h-auto rounded-sm object-cover"
-                        />
-                        <span>{c.name}</span>
-                      </button>
-                    ))}
+                    {countryCodes.map((c) => {
+                      const isUS = c.name === "Estados Unidos"
+                      const targetHref = isUS
+                        ? getTranslatedRoute(pathname, "en")
+                        : (language === "en" ? getTranslatedRoute(pathname, "es") : undefined)
+
+                      if (targetHref) {
+                        return (
+                          <Link
+                            key={c.iso}
+                            href={targetHref}
+                            onClick={() => {
+                              // @ts-ignore
+                              setCountry(c.name)
+                              setIsCountryOpen(false)
+                            }}
+                            className={`px-3 py-2 text-xs font-mono text-left rounded hover:bg-white/10 transition-colors flex items-center gap-2 ${country === c.name ? "text-white bg-white/10" : "text-white"
+                              }`}
+                          >
+                            <Image
+                              src={`https://flagcdn.com/w40/${c.iso}.webp`}
+                              alt={c.name}
+                              width={16}
+                              height={12}
+                              className="w-4 h-auto rounded-sm object-cover"
+                            />
+                            <span>{c.name}</span>
+                          </Link>
+                        )
+                      }
+
+                      return (
+                        <button
+                          key={c.iso}
+                          onClick={() => {
+                            // @ts-ignore
+                            setCountry(c.name)
+                            setIsCountryOpen(false)
+                          }}
+                          className={`px-3 py-2 text-xs font-mono text-left rounded hover:bg-white/10 transition-colors flex items-center gap-2 ${country === c.name ? "text-white bg-white/10" : "text-white"
+                            }`}
+                        >
+                          <Image
+                            src={`https://flagcdn.com/w40/${c.iso}.webp`}
+                            alt={c.name}
+                            width={16}
+                            height={12}
+                            className="w-4 h-auto rounded-sm object-cover"
+                          />
+                          <span>{c.name}</span>
+                        </button>
+                      )
+                    })}
                   </motion.div>
                 )}
               </AnimatePresence>

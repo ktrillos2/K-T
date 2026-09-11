@@ -5,33 +5,53 @@ import { m as motion } from "framer-motion"
 import { ChevronDown } from "lucide-react"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
+import { useModal } from "@/context/modal-context"
+import { trackGAEvent } from "@/lib/analytics"
 import Link from "next/link"
 
 export default function HeroSection() {
-  const { dictionary } = useLanguage()
+  const { dictionary, language } = useLanguage()
+  const isEn = language === "en"
+  const { openModal } = useModal()
   const { setCursorVariant } = useCursor()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [displayedText, setDisplayedText] = useState("")
   const [isTypingComplete, setIsTypingComplete] = useState(false)
 
-  // Typewriter effect
+  // Typewriter effect - Fast terminal-style typing animation
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
     const text = dictionary.hero.slogan
-    let index = 0
+
+    if (prefersReducedMotion) {
+      setDisplayedText(text)
+      setIsTypingComplete(true)
+      return
+    }
+
     setDisplayedText("")
     setIsTypingComplete(false)
 
-    const interval = setInterval(() => {
-      if (index < text.length) {
-        setDisplayedText(text.slice(0, index + 1))
-        index++
-      } else {
-        setIsTypingComplete(true)
-        clearInterval(interval)
-      }
-    }, 80)
+    let index = 0
+    let interval: NodeJS.Timeout | null = null
 
-    return () => clearInterval(interval)
+    // Short initial delay so hero element entrance aligns with typing start
+    const timeout = setTimeout(() => {
+      interval = setInterval(() => {
+        index++
+        if (index <= text.length) {
+          setDisplayedText(text.slice(0, index))
+        } else {
+          setIsTypingComplete(true)
+          if (interval) clearInterval(interval)
+        }
+      }, 22) // Fast typing speed (~22ms per char)
+    }, 150)
+
+    return () => {
+      clearTimeout(timeout)
+      if (interval) clearInterval(interval)
+    }
   }, [dictionary.hero.slogan])
 
   useEffect(() => {
@@ -149,35 +169,39 @@ export default function HeroSection() {
         }}
       >
         <motion.p 
-          className="text-white font-mono text-sm md:text-base mb-6 min-h-[1.5em]"
+          className="text-emerald-400 font-mono text-xs md:text-sm tracking-wider uppercase mb-4 min-h-[1.5em] flex items-center justify-center gap-2"
           variants={{
             hidden: { opacity: 0, y: 10 },
             visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }
           }}
         >
+          <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           {dictionary.hero.greeting}
         </motion.p>
 
         <motion.h1 
-          className="relative text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-title leading-snug md:leading-tight max-w-4xl mx-auto mb-8 flex justify-center text-center"
+          className="relative text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold font-title leading-tight md:leading-[1.1] max-w-4xl mx-auto mb-6 flex items-center justify-center text-center text-white min-h-[3.3em]"
           variants={{
-            hidden: { clipPath: "inset(100% 0 0 0)", opacity: 0, y: 20 },
+            hidden: { opacity: 0, y: 10 },
             visible: { 
-              clipPath: "inset(0% 0 0 0)", 
               opacity: 1, 
-              y: 0,
-              transition: { duration: 0.8, ease: [0.85, 0, 0.15, 1] }
+              y: 0, 
+              transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } 
             }
           }}
         >
-          <span>
-            <span className="text-foreground">{dictionary.hero.slogan}</span>
+          {/* Accessible full title for SEO crawlers and screen readers */}
+          <span className="sr-only">{dictionary.hero.slogan}</span>
+
+          {/* Visual fast typewriter animation */}
+          <span aria-hidden="true" className="inline">
+            <span className="text-white">{displayedText}</span>
             <motion.span
-              className="inline-block w-[3px] h-[1em] bg-white ml-2 align-middle"
+              className="inline-block w-[3px] sm:w-[4px] md:w-[6px] h-[0.9em] bg-emerald-400 ml-1.5 md:ml-2 align-middle shadow-[0_0_8px_rgba(52,211,153,0.8)]"
               initial={{ opacity: 1 }}
               animate={{ opacity: [1, 0] }}
               transition={{
-                duration: 0.7,
+                duration: isTypingComplete ? 0.7 : 0.2,
                 repeat: Number.POSITIVE_INFINITY,
                 repeatType: "reverse",
               }}
@@ -185,8 +209,19 @@ export default function HeroSection() {
           </span>
         </motion.h1>
 
+        <motion.p
+          className="text-neutral-300 font-mono text-sm md:text-base max-w-2xl mx-auto mb-8 leading-relaxed"
+          variants={{
+            hidden: { opacity: 0, y: 10 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.2 } }
+          }}
+        >
+          {dictionary.hero.description}
+        </motion.p>
+
+        {/* Priority Commercial CTAs */}
         <motion.div
-          className="mt-6"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto mb-8"
           variants={{
             hidden: { opacity: 0, scale: 0.95, y: 20 },
             visible: { 
@@ -197,19 +232,76 @@ export default function HeroSection() {
             }
           }}
         >
-          <Link href="/portafolio" aria-label="Ver portafolio de proyectos y casos de estudio de K&T Code">
-            <motion.span
-              className="relative overflow-hidden inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-mono font-bold rounded-xl border-2 border-white shadow-[6px_6px_0_rgba(255,255,255,0.2)] hover:shadow-[2px_2px_0_rgba(255,255,255,0.2)] hover:translate-x-[4px] hover:translate-y-[4px] transition-all duration-300"
-              onMouseEnter={() => setCursorVariant("hover")}
-              onMouseLeave={() => setCursorVariant("default")}
-              whileTap={{ scale: 0.95 }}
-            >
-              <div className="absolute inset-0 pointer-events-none opacity-10 bg-[linear-gradient(transparent_50%,rgba(0,0,0,1)_50%)] bg-[length:100%_4px] z-0" />
-              <span className="relative z-10 flex items-center gap-2">
-                {dictionary.hero.cta}
-                <span className="text-lg">→</span>
-              </span>
-            </motion.span>
+          {/* Cotizar Landing Page */}
+          <button
+            onClick={() => {
+              openModal("landing")
+              trackGAEvent("begin_quote", {
+                service_type: "landing-pages",
+                click_location: "hero_primary_cta",
+              })
+            }}
+            aria-label={dictionary.hero.ctaLanding}
+            className="w-full sm:w-auto relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-black font-mono font-bold text-xs sm:text-sm rounded-xl border-2 border-white shadow-[4px_4px_0_rgba(255,255,255,0.2)] hover:shadow-[1px_1px_0_rgba(255,255,255,0.2)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 cursor-pointer group"
+            onMouseEnter={() => setCursorVariant("hover")}
+            onMouseLeave={() => setCursorVariant("default")}
+          >
+            <span className="relative z-10 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+              {dictionary.hero.ctaLanding}
+              <span className="text-base group-hover:translate-x-1 transition-transform">→</span>
+            </span>
+          </button>
+
+          {/* Cotizar Tienda Virtual */}
+          <button
+            onClick={() => {
+              openModal("ecommerce")
+              trackGAEvent("begin_quote", {
+                service_type: "tiendas-virtuales",
+                click_location: "hero_secondary_cta",
+              })
+            }}
+            aria-label={dictionary.hero.ctaStore}
+            className="w-full sm:w-auto relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-mono font-bold text-xs sm:text-sm rounded-xl border border-white/30 hover:border-white transition-all duration-200 cursor-pointer group"
+            onMouseEnter={() => setCursorVariant("hover")}
+            onMouseLeave={() => setCursorVariant("default")}
+          >
+            <span className="relative z-10 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0" />
+              {dictionary.hero.ctaStore}
+              <span className="text-base group-hover:translate-x-1 transition-transform">→</span>
+            </span>
+          </button>
+        </motion.div>
+
+        {/* Descriptive Crawlable Links to Priority Services */}
+        <motion.div
+          className="flex flex-wrap items-center justify-center gap-3 md:gap-6 font-mono text-xs text-neutral-400"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { delay: 0.4, duration: 0.6 } }
+          }}
+        >
+          <Link
+            href={isEn ? "/en/services/landing-pages" : "/servicios/landing-pages"}
+            className="hover:text-white transition-colors underline underline-offset-4 decoration-white/30 hover:decoration-white"
+          >
+            {isEn ? "Landing Pages: From $200 USD" : "Landing Pages: Desde $450.000 COP"}
+          </Link>
+          <span className="text-white/20">•</span>
+          <Link
+            href={isEn ? "/en/services/ecommerce-development" : "/servicios/tiendas-virtuales"}
+            className="hover:text-white transition-colors underline underline-offset-4 decoration-white/30 hover:decoration-white"
+          >
+            {isEn ? "E-commerce: From $450 USD" : "Tiendas Virtuales: Desde $1.300.000 COP"}
+          </Link>
+          <span className="text-white/20">•</span>
+          <Link
+            href={isEn ? "/en/portfolio" : "/portafolio"}
+            className="hover:text-white transition-colors"
+          >
+            {dictionary.hero.cta} →
           </Link>
         </motion.div>
       </motion.div>

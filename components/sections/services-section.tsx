@@ -3,11 +3,12 @@
 import type React from "react"
 
 import { memo, useRef } from "react"
+import Link from "next/link"
 import { m as motion, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { Check, ArrowRight, Sparkles, Zap, ShoppingCart, Code2 } from "lucide-react"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
-import { reportConversion } from "@/lib/gtag"
+import { trackWhatsAppClick } from "@/lib/analytics"
 import { usePricing } from "@/hooks/use-pricing"
 import { useModal } from "@/context/modal-context"
 import { notifyInteraction } from "@/app/actions/notify-click"
@@ -24,18 +25,22 @@ const planIcons = {
 const ServiceCard = memo(function ServiceCard({
   plan,
   planData,
+  detailUrl,
   isPopular,
   index,
   setCursorVariant,
   dictionary,
+  isEn,
   onSelect
 }: {
   plan: (typeof plans)[number]
   planData: { title: string; price: string; features: string[]; cta: string; whatsapp_message?: string }
+  detailUrl: string
   isPopular: boolean
   index: number
   setCursorVariant: (v: "default" | "text" | "hover") => void
   dictionary: any
+  isEn: boolean
   onSelect: () => void
 }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -175,13 +180,18 @@ const ServiceCard = memo(function ServiceCard({
         <motion.button
           onClick={(e) => {
             e.preventDefault()
-            reportConversion(`https://wa.me/573116360057?text=${encodeURIComponent(
+            const whatsappUrl = `https://wa.me/573116360057?text=${encodeURIComponent(
               planData.whatsapp_message || "Hola, me gustaría recibir más información."
-            )}`)
+            )}`
+            trackWhatsAppClick(`Service Section: ${planData.title}`, {
+              plan: plan,
+              price: planData.price,
+            })
             notifyInteraction(`Service Button: ${planData.cta}`, {
               plan: plan,
               price: planData.price
             })
+            window.open(whatsappUrl, "_blank", "noopener,noreferrer")
           }}
           className="w-full flex items-center justify-center gap-2 py-3.5 px-4 font-mono font-bold text-xs sm:text-sm bg-white text-black rounded-xl border-2 border-white hover:bg-neutral-200 transition-all duration-300 relative overflow-hidden group cursor-pointer shadow-lg"
           aria-label={`Solicitar cotización del plan ${planData.title} por ${planData.price}`}
@@ -202,16 +212,32 @@ const ServiceCard = memo(function ServiceCard({
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </span>
         </motion.button>
+
+        {/* Crawlable link to full service page */}
+        <Link
+          href={detailUrl}
+          className="mt-3 text-center text-xs font-mono text-neutral-400 hover:text-white transition-colors underline underline-offset-4 decoration-white/20 hover:decoration-white block py-1"
+          aria-label={`Ver información detallada de ${planData.title}`}
+        >
+          {isEn ? "View full service scope & features →" : "Ver alcance completo y detalles del servicio →"}
+        </Link>
       </div>
     </motion.div>
   )
 })
 
 export default function ServicesSection({ showHeader = true }: { showHeader?: boolean }) {
-  const { dictionary } = useLanguage()
+  const { dictionary, language } = useLanguage()
+  const isEn = language === "en"
   const { setCursorVariant } = useCursor()
   const { getPrice } = usePricing()
   const { openModal } = useModal()
+
+  const getServiceUrl = (plan: string) => {
+    if (plan === "landing") return isEn ? "/en/services/landing-pages" : "/servicios/landing-pages"
+    if (plan === "ecommerce") return isEn ? "/en/services/ecommerce-development" : "/servicios/tiendas-virtuales"
+    return isEn ? "/en/services" : "/servicios/software-a-medida"
+  }
 
   return (
     <section id="services" aria-label="Planes y servicios de desarrollo web y software" className="relative pt-0 pb-16 lg:pt-0 lg:pb-24 px-4 sm:px-6 lg:px-8 bg-black overflow-hidden cv-auto">
@@ -266,10 +292,12 @@ export default function ServicesSection({ showHeader = true }: { showHeader?: bo
                   ...planInfo,
                   price: price
                 }}
+                detailUrl={getServiceUrl(plan)}
                 isPopular={plan === "ecommerce"}
                 index={index}
                 setCursorVariant={setCursorVariant}
                 dictionary={dictionary}
+                isEn={isEn}
                 onSelect={() => openModal(plan)}
               />
             )

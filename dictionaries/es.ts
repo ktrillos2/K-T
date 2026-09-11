@@ -17,11 +17,13 @@ export const es = {
     viewProject: "Ver Proyecto",
   },
   hero: {
-    greeting: "// K&T Code ",
-    slogan: "Desarrollo de Páginas Web y Software a Medida en Colombia",
+    greeting: "// K&T Code • Desde Colombia para el Mundo",
+    slogan: "Landing Pages y Tiendas Virtuales de Alto Rendimiento",
     description:
-      "",
-    cta: "Ver proyectos",
+      "Desarrollamos páginas web de alta conversión y software a medida con Next.js y React. Ingeniería colombiana con estándares globales para empresas nacionales e internacionales.",
+    ctaLanding: "Cotizar landing page",
+    ctaStore: "Cotizar tienda virtual",
+    cta: "Ver portafolio",
     scroll: "Conoce nuestra ingeniería",
   },
   about: {

@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next'
 import { getAllProjects } from '@/sanity/lib/queries'
 
+export const revalidate = 3600
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://www.kytcode.lat'
     const currentDate = new Date()
@@ -27,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.85,
     }))
 
-    // 2. Artículos publicados del blog (únicamente publicados)
+    // 2. Artículos publicados del blog (incluyendo artículos de septiembre y fechas reales de modificación)
     const { getAllPublishedBlogPosts } = await import('@/lib/blog-mdx')
     const publishedBlogPosts = getAllPublishedBlogPosts()
     const blogUrls = publishedBlogPosts.map((p) => ({
@@ -37,13 +39,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.85,
     }))
 
-    // 3. Servicios Especializados
+    // 3. Servicios Especializados (prioritarios y complementarios)
     const serviceSlugs = [
+        'landing-pages',
+        'tiendas-virtuales',
         'desarrollo-web-a-medida',
+        'software-a-medida',
         'diseno-web-corporativo',
         'desarrollo-nextjs',
-        'software-a-medida',
-        'tiendas-virtuales',
         'woocommerce-headless',
         'seo-tecnico',
         'mantenimiento-web',
@@ -108,7 +111,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 7. Rutas en Inglés con alternates
     const englishRoutes = [
         { url: `${baseUrl}/en`, priority: 0.85 },
-        { url: `${baseUrl}/en/services`, priority: 0.8 },
+        { url: `${baseUrl}/en/services`, priority: 0.85 },
+        { url: `${baseUrl}/en/services/landing-pages`, priority: 0.9 },
+        { url: `${baseUrl}/en/services/ecommerce-development`, priority: 0.9 },
         { url: `${baseUrl}/en/portfolio`, priority: 0.8 },
         { url: `${baseUrl}/en/pricing`, priority: 0.8 },
         { url: `${baseUrl}/en/about`, priority: 0.8 },

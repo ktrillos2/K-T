@@ -80,13 +80,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
     if (!project) {
         return {
-            title: "Proyecto no encontrado | K&T Code",
+            title: "Proyecto no encontrado",
             description: "El caso de estudio que buscas no existe."
         }
     }
 
     return {
-        title: `${project.title}: Caso de Estudio y Resultados | K&T Code`,
+        title: `${project.title}: Caso de Estudio y Resultados`,
         description: `${project.shortDescription} Descubre cómo K&T Code diseñó la solución para ${project.client || project.title} con ${project.tech.slice(0, 3).join(", ")}.`,
         keywords: [
             ...project.tech,

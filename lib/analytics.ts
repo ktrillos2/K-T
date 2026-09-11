@@ -194,9 +194,27 @@ export function trackWhatsAppClick(location: string, extraData?: Record<string, 
 }
 
 /**
- * Tracks a completed lead submission with AI source attribution.
+ * Tracks the initiation of a quote request (e.g. opening modal, clicking quote CTA).
+ * Strictly avoids PII and includes service, language, and market when available.
  */
-export function trackLeadSubmission(service: string, quote?: string) {
+export function trackQuoteInitiation(service: string, location: string, extraData?: Record<string, any>) {
+  const attribution = getSessionAttribution()
+
+  trackGAEvent("begin_quote", {
+    service_type: service,
+    click_location: location,
+    traffic_source: attribution.source,
+    is_ai_search: attribution.isAiSearch,
+    ai_engine: attribution.aiEngine,
+    ...extraData,
+  })
+}
+
+/**
+ * Tracks a completed lead submission with AI source attribution.
+ * Strictly avoids sending personal information (names, emails, phones) to analytics.
+ */
+export function trackLeadSubmission(service: string, quote?: string, extraData?: Record<string, any>) {
   const attribution = getSessionAttribution()
 
   trackGAEvent("generate_lead", {
@@ -205,5 +223,7 @@ export function trackLeadSubmission(service: string, quote?: string) {
     traffic_source: attribution.source,
     is_ai_search: attribution.isAiSearch,
     ai_engine: attribution.aiEngine,
+    ...extraData,
   })
 }
+

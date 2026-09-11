@@ -5,7 +5,7 @@ import ServiceDetailPage from "@/components/sections/service-detail-page"
 import { servicePages } from "@/lib/service-pages"
 import { absoluteUrl } from "@/lib/site-config"
 
-const service = servicePages["tiendas-virtuales"]
+const service = servicePages["landing-pages"]
 
 export const metadata: Metadata = {
   title: service.metaTitle,
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     languages: {
       "es-CO": absoluteUrl(`/servicios/${service.slug}`),
       es: absoluteUrl(`/servicios/${service.slug}`),
-      en: absoluteUrl("/en/services/ecommerce-development"),
+      en: absoluteUrl("/en/services/landing-pages"),
       "x-default": absoluteUrl(`/servicios/${service.slug}`),
     },
   },
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function ServicePage() {
+export default function LandingPagesServicePage() {
   return (
     <>
       <ServiceDetailPage service={service} />

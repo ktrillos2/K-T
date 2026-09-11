@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
+import Link from "next/link"
 import { m as motion, AnimatePresence } from "framer-motion"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
@@ -77,25 +78,22 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
   const handleLinkClick = (href: string) => {
     onClose()
 
-    // Dar tiempo a que el modal comience a cerrarse para no asfixiar el cálculo del scroll
+    // Dar tiempo a que el modal comience a cerrarse para el scroll si es anchor
     setTimeout(() => {
-      if (href.startsWith("#")) {
-        if (pathname === "/") {
-          const element = document.querySelector(href)
+      if (href.startsWith("#") || href.includes("/#")) {
+        const hash = href.startsWith("#") ? href : href.slice(href.indexOf("#"))
+        if (pathname === "/" || pathname === "/en") {
+          const element = document.querySelector(hash)
           if (element) {
-            const headerOffset = 80;
-            const elementPosition = element.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            const headerOffset = 80
+            const elementPosition = element.getBoundingClientRect().top
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset
             window.scrollTo({
               top: offsetPosition,
               behavior: "smooth"
-            });
+            })
           }
-        } else {
-          router.push(`/${href}`)
         }
-      } else {
-        router.push(href)
       }
     }, 150)
   }
@@ -124,9 +122,10 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
 
                   return (
                     <motion.div key={item.key} custom={index} variants={itemVariants} initial="closed" animate="open">
-                      <motion.button
+                      <Link
+                        href={item.href}
                         onClick={() => handleLinkClick(item.href)}
-                        className="block text-left w-full"
+                        className="block text-left w-full group"
                         aria-label={`Ir a ${dictionary.nav[item.key as keyof typeof dictionary.nav]}`}
                         onMouseEnter={() => {
                           setHoveredItem(item.key)
@@ -136,23 +135,26 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
                           setHoveredItem(null)
                           setCursorVariant("default")
                         }}
-                        animate={{
-                          filter: isBlurred ? "blur(6px)" : "blur(0px)",
-                          opacity: isBlurred ? 0.4 : 1,
-                          scale: isHovered ? 1.05 : 1,
-                          x: isHovered ? 20 : 0,
-                        }}
-                        transition={{ duration: 0.3 }}
                       >
-                        <span className="text-white/40 text-sm font-mono">0{index + 1}.</span>
-                        <h2
-                          className={`text-5xl lg:text-7xl font-bold font-title transition-colors duration-300 ${isHovered ? "text-white" : "text-white/80"
-                            }`}
-                          style={{ textShadow: isHovered ? "0 0 30px rgba(255,255,255,0.5)" : "none" }}
+                        <motion.div
+                          animate={{
+                            filter: isBlurred ? "blur(6px)" : "blur(0px)",
+                            opacity: isBlurred ? 0.4 : 1,
+                            scale: isHovered ? 1.05 : 1,
+                            x: isHovered ? 20 : 0,
+                          }}
+                          transition={{ duration: 0.3 }}
                         >
-                          {dictionary.nav[item.key as keyof typeof dictionary.nav]}
-                        </h2>
-                      </motion.button>
+                          <span className="text-white/40 text-sm font-mono block">0{index + 1}.</span>
+                          <span
+                            className={`text-5xl lg:text-7xl font-bold font-title transition-colors duration-300 block ${isHovered ? "text-white" : "text-white/80"
+                              }`}
+                            style={{ textShadow: isHovered ? "0 0 30px rgba(255,255,255,0.5)" : "none" }}
+                          >
+                            {dictionary.nav[item.key as keyof typeof dictionary.nav]}
+                          </span>
+                        </motion.div>
+                      </Link>
                     </motion.div>
                   )
                 })}

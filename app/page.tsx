@@ -18,9 +18,9 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Desarrollo Web y Software a Medida en Colombia | K&T Code",
+    absolute: "Landing pages y tiendas virtuales | K&T Code",
   },
-  description: "K&T Code desarrolla páginas web corporativas, tiendas virtuales headless y software a medida para empresas en Colombia y Latinoamérica, con enfoque en rendimiento, Core Web Vitals y escalabilidad.",
+  description: "K&T Code desarrolla landing pages de alta conversión, tiendas virtuales y software a medida desde Colombia para clientes nacionales e internacionales, con enfoque en velocidad, SEO y resultados de negocio.",
   alternates: {
     canonical: "https://www.kytcode.lat",
     languages: {
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Desarrollo Web y Software a Medida en Colombia | K&T Code",
-    description: "K&T Code desarrolla páginas web corporativas, tiendas virtuales headless y software a medida para empresas en Colombia y Latinoamérica.",
+    title: "Landing pages y tiendas virtuales | K&T Code",
+    description: "K&T Code desarrolla landing pages de alta conversión, tiendas virtuales y software a medida desde Colombia para clientes nacionales e internacionales.",
     url: "https://www.kytcode.lat",
     siteName: "K&T Code",
     locale: "es_CO",
@@ -53,14 +53,14 @@ export const metadata: Metadata = {
         url: "https://www.kytcode.lat/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "K&T Code — Desarrollo Web y Software a Medida en Colombia",
+        alt: "K&T Code — Landing pages y tiendas virtuales en Colombia y el exterior",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Desarrollo Web y Software a Medida en Colombia | K&T Code",
-    description: "K&T Code desarrolla páginas web corporativas, tiendas virtuales headless y software a medida para empresas en Colombia.",
+    title: "Landing pages y tiendas virtuales | K&T Code",
+    description: "K&T Code desarrolla landing pages de alta conversión, tiendas virtuales y software a medida desde Colombia para clientes nacionales e internacionales.",
     images: ["https://www.kytcode.lat/opengraph-image.png"],
   },
 }

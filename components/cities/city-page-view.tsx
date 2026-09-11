@@ -8,28 +8,83 @@ interface CityPageViewProps {
 }
 
 export default function CityPageView({ city }: CityPageViewProps) {
-  const localBusinessSchema = {
-    "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "ProfessionalService"],
-    "name": `K&T Code — Desarrollo Web en ${city.cityName}`,
-    "image": "https://www.kytcode.lat/opengraph-image.png",
-    "url": `https://www.kytcode.lat/${city.slug}`,
-    "telephone": "+573116360057",
-    "email": "contacto@kytcode.lat",
-    "priceRange": "$450.000 COP - $15.000.000+ COP",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "San José de Cúcuta",
-      "addressLocality": city.cityName,
-      "addressRegion": city.region,
-      "addressCountry": "CO"
-    },
-    "areaServed": {
-      "@type": "City",
-      "name": city.cityName
-    },
-    "description": city.metaDescription
-  }
+  const isHeadquarters = city.slug === "desarrollo-web-cucuta"
+
+  const structuredData = isHeadquarters
+    ? {
+        "@context": "https://schema.org",
+        "@type": ["LocalBusiness", "ProfessionalService"],
+        "@id": "https://www.kytcode.lat/#organization",
+        "name": `K&T Code — Desarrollo Web en ${city.cityName}`,
+        "image": "https://www.kytcode.lat/opengraph-image.png",
+        "url": `https://www.kytcode.lat/${city.slug}`,
+        "telephone": "+573116360057",
+        "email": "contacto@kytcode.lat",
+        "priceRange": "$450.000 COP - $15.000.000+ COP",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "San José de Cúcuta",
+          "addressLocality": "San José de Cúcuta",
+          "addressRegion": "Norte de Santander",
+          "addressCountry": "CO"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": city.cityName
+        },
+        "description": city.metaDescription
+      }
+    : {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": `https://www.kytcode.lat/${city.slug}#service`,
+        "name": `Desarrollo Web en ${city.cityName}`,
+        "serviceType": "Desarrollo de Páginas Web y Software",
+        "description": city.metaDescription,
+        "url": `https://www.kytcode.lat/${city.slug}`,
+        "provider": {
+          "@type": "Organization",
+          "@id": "https://www.kytcode.lat/#organization",
+          "name": "K&T Code",
+          "url": "https://www.kytcode.lat",
+          "telephone": "+573116360057",
+          "email": "contacto@kytcode.lat",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "San José de Cúcuta",
+            "addressRegion": "Norte de Santander",
+            "addressCountry": "CO"
+          }
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": city.cityName,
+          "containedInPlace": {
+            "@type": "AdministrativeArea",
+            "name": city.region
+          }
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": `Planes de Desarrollo Web en ${city.cityName}`,
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "Landing Page de Alta Conversión",
+              "price": "450000",
+              "priceCurrency": "COP",
+              "url": "https://www.kytcode.lat/servicios/landing-pages"
+            },
+            {
+              "@type": "Offer",
+              "name": "Tienda Virtual / E-commerce",
+              "price": "1300000",
+              "priceCurrency": "COP",
+              "url": "https://www.kytcode.lat/servicios/tiendas-virtuales"
+            }
+          ]
+        }
+      }
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -67,7 +122,7 @@ export default function CityPageView({ city }: CityPageViewProps) {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <script
         type="application/ld+json"

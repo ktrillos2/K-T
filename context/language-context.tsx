@@ -48,7 +48,13 @@ export function getTranslatedRoute(currentPathname: string, targetLanguage: "en"
     if (cleanPath === "/nosotros") {
       return "/en/about"
     }
-    if (cleanPath === "/servicios") {
+    if (cleanPath === "/servicios/landing-pages") {
+      return "/en/services/landing-pages"
+    }
+    if (cleanPath === "/servicios/tiendas-virtuales") {
+      return "/en/services/ecommerce-development"
+    }
+    if (cleanPath === "/servicios" || cleanPath.startsWith("/servicios/")) {
       return "/en/services"
     }
     if (cleanPath === "/precios" || cleanPath.startsWith("/precios/")) {
@@ -74,6 +80,12 @@ export function getTranslatedRoute(currentPathname: string, targetLanguage: "en"
     }
     if (cleanPath === "/en/about") {
       return "/nosotros"
+    }
+    if (cleanPath === "/en/services/landing-pages") {
+      return "/servicios/landing-pages"
+    }
+    if (cleanPath === "/en/services/ecommerce-development") {
+      return "/servicios/tiendas-virtuales"
     }
     if (cleanPath === "/en/services") {
       return "/servicios"
