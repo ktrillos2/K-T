@@ -66,7 +66,7 @@ const contactInfo = [
 
 const socials = [
   { icon: TikTok, href: "https://www.tiktok.com/@kytweb", label: "TikTok" },
-  { icon: Instagram, href: "https://www.instagram.com/ktweb_/", label: "Instagram" },
+  { icon: Instagram, href: "https://www.instagram.com/kytcode/", label: "Instagram" },
   { icon: Facebook, href: "https://www.facebook.com/KTSolutionsWeb", label: "Facebook" },
 ]
 

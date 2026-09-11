@@ -49,8 +49,8 @@ export default function Footer() {
   const socialLinks = [
     {
       name: "Instagram",
-      handle: "@ktweb_",
-      href: "https://www.instagram.com/ktweb_/",
+      handle: "@kytcode",
+      href: "https://www.instagram.com/kytcode/",
       icon: Instagram,
       color: "text-pink-400 group-hover:text-pink-300",
       borderHover: "hover:border-pink-500/40",

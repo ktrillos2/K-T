@@ -43,8 +43,8 @@ export default function RedesPage() {
     const socialLinks = [
         {
             name: "Instagram",
-            desc: "@kytweb_co",
-            url: "https://www.instagram.com/kytweb_co/",
+            desc: "@kytcode",
+            url: "https://www.instagram.com/kytcode/",
             icon: Instagram,
             color: "from-pink-500 to-orange-400"
         },

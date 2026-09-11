@@ -139,7 +139,7 @@ const aboutJsonLd = {
         ]
       },
       "sameAs": [
-        "https://www.instagram.com/ktweb_/",
+        "https://www.instagram.com/kytcode/",
         "https://www.facebook.com/KTSolutionsWeb",
         "https://www.tiktok.com/@kytweb"
       ]
@@ -154,7 +154,7 @@ const aboutJsonLd = {
       },
       "url": "https://www.kytcode.lat/nosotros",
       "sameAs": [
-        "https://www.instagram.com/ktweb_/",
+        "https://www.instagram.com/kytcode/",
         "https://www.facebook.com/KTSolutionsWeb",
         "https://www.tiktok.com/@kytweb"
       ]
@@ -259,7 +259,7 @@ export default function NosotrosPage() {
                   
                   <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
                     <a
-                      href="https://www.instagram.com/ktweb_/"
+                      href="https://www.instagram.com/kytcode/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-xs font-mono px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors inline-flex items-center gap-1.5"

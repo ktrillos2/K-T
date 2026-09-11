@@ -26,7 +26,7 @@ export const authors: Record<string, Author> = {
     bio:
       "Keyner Trillos es Co-Fundador y Lead Software Engineer en K&T Code. Cuenta con amplia experiencia diseñando arquitecturas frontend y fullstack para empresas en Colombia, Latinoamérica y Estados Unidos. Su especialidad técnica abarca Server-Side Rendering (SSR), Server Components, tipado estricto con TypeScript, modelado de bases de datos relacionales en PostgreSQL / Supabase y optimización de Core Web Vitals para garantizar tiempos de carga inferiores a 1 segundo. Adicionalmente, cuenta con sólida trayectoria en la planificación y gestión de campañas publicitarias en Meta Ads (Facebook & Instagram Ads), estructurando estrategias de marketing digital y embudos de conversión a la medida de los objetivos comerciales y necesidades específicas de cada cliente.",
     avatar: "/perfil.png",
-    instagram: "https://www.instagram.com/ktweb_/",
+    instagram: "https://www.instagram.com/kytcode/",
     facebook: "https://www.facebook.com/KTSolutionsWeb",
     tiktok: "https://www.tiktok.com/@kytweb",
     articlesCount: 26,

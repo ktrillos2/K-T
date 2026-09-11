@@ -246,7 +246,7 @@ const organizationJsonLd = {
   "description": "K&T Code es una empresa colombiana de desarrollo web y software a medida especializada en páginas corporativas, e-commerce headless y plataformas escalables en Next.js.",
   "slogan": "Ingeniería de Desarrollo Web y Software a Medida en Colombia",
   "sameAs": [
-    "https://www.instagram.com/ktweb_/",
+    "https://www.instagram.com/kytcode/",
     "https://www.facebook.com/KTSolutionsWeb",
     "https://www.tiktok.com/@kytweb"
   ],

@@ -105,7 +105,7 @@ const aboutEnJsonLd = {
         ]
       },
       "sameAs": [
-        "https://www.instagram.com/ktweb_/",
+        "https://www.instagram.com/kytcode/",
         "https://www.facebook.com/KTSolutionsWeb",
         "https://www.tiktok.com/@kytweb"
       ]
