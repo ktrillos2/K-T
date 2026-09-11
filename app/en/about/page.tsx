@@ -194,6 +194,56 @@ export default function EnglishAboutPage() {
                 <span className="text-neutral-500 block mb-1">Technical Lead</span>
                 <strong className="text-white text-sm">Keyner Trillos (Lead Engineer)</strong>
               </div>
+              <div className="p-4 rounded-xl border border-white/10 bg-black/40">
+                <span className="text-neutral-500 block mb-1">Official Email</span>
+                <a href="mailto:contacto@kytcode.lat" className="text-emerald-400 text-sm font-bold hover:underline">
+                  contacto@kytcode.lat
+                </a>
+              </div>
+              <div className="p-4 rounded-xl border border-white/10 bg-black/40">
+                <span className="text-neutral-500 block mb-1">Phone / WhatsApp</span>
+                <a
+                  href="https://wa.me/573116360057"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-emerald-400 text-sm font-bold hover:underline"
+                >
+                  +57 311 636 0057
+                </a>
+              </div>
+            </div>
+
+            {/* Official Social Channels */}
+            <div className="mt-6 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+              <span className="text-neutral-400">Verified Corporate Profiles:</span>
+              <div className="flex items-center gap-4">
+                <a
+                  href="https://www.instagram.com/kytcode/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-pink-400 transition-colors"
+                >
+                  Instagram (@kytcode)
+                </a>
+                <span className="text-neutral-600">•</span>
+                <a
+                  href="https://www.facebook.com/KTSolutionsWeb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-blue-400 transition-colors"
+                >
+                  Facebook (KTSolutionsWeb)
+                </a>
+                <span className="text-neutral-600">•</span>
+                <a
+                  href="https://www.tiktok.com/@kytweb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-neutral-300 transition-colors"
+                >
+                  TikTok (@kytweb)
+                </a>
+              </div>
             </div>
           </section>
 
