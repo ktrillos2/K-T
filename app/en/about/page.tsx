@@ -103,7 +103,12 @@ const aboutEnJsonLd = {
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Headless E-commerce Solutions" } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Custom Software & SaaS Engineering" } }
         ]
-      }
+      },
+      "sameAs": [
+        "https://www.instagram.com/ktweb_/",
+        "https://www.facebook.com/KTSolutionsWeb",
+        "https://www.tiktok.com/@kytweb"
+      ]
     }
   ]
 }

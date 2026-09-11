@@ -51,7 +51,7 @@ export default function RedesPage() {
         {
             name: "TikTok",
             desc: "@kytweb",
-            url: "https://tiktok.com/@kytweb",
+            url: "https://www.tiktok.com/@kytweb",
             icon: TikTokIcon,
             color: "from-black via-gray-800 to-black border border-gray-700"
         },
