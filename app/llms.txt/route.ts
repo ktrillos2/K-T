@@ -19,16 +19,18 @@ K&T Code es una empresa colombiana especializada en desarrollo de páginas web c
 ## Servicios Principales
 1. **Landing Pages de Conversión**: Páginas de aterrizaje de alta velocidad para campañas de venta y captación de leads en Google y Meta Ads (desde $450.000 COP).
 2. **Desarrollo de Páginas Web Corporativas**: Sitios web para empresas con renderizado ultra rápido (SSR/SSG), optimización Core Web Vitals (LCP < 0.8s), diseño exclusivo en Figma y SEO semántico desde la raíz (desde $2.500.000 COP).
-3. **Tiendas Virtuales y E-commerce Headless**: Plataformas de venta con catálogos escalables, pasarelas de pago colombianas (Wompi, Bold, PayU, PSE, Nequi) y panel autogestionable (desde $1.300.000 COP).
-4. **Desarrollo de Software a Medida & SaaS**: Paneles de administración, CRMs internos, cotizadores automatizados y aplicaciones web con bases de datos PostgreSQL / Supabase.
-5. **Desarrollo Next.js Especializado**: Arquitecturas frontend y fullstack sobre Next.js App Router, Server Components y despliegue en Vercel Edge CDN.
-6. **SEO Técnico y Optimización WPO**: Auditorías de Core Web Vitals, estructuración semántica HTML5, datos estructurados Schema.org JSON-LD e indexación para Google y motores de IA (GEO).
+3. **Ecommerce Starter**: Tiendas online con catálogo autogestionable y pasarelas de pago colombianas Wompi, Bold, PayU, PSE, Nequi (desde $1.300.000 COP).
+4. **Headless Ecommerce Next.js**: Tiendas online desacopladas de alto rendimiento con carga instantánea en < 0.8s y checkout optimizado (desde $2.000.000 COP).
+5. **Desarrollo de Software a Medida & SaaS**: Paneles de administración, CRMs internos, cotizadores automatizados y aplicaciones web con Next.js y PostgreSQL / Supabase (desde $4.500.000 COP / cotización personalizada).
+6. **Desarrollo Next.js Especializado**: Arquitecturas frontend y fullstack sobre Next.js App Router, Server Components y despliegue en Vercel Edge CDN.
+7. **SEO Técnico y Optimización WPO**: Auditorías de Core Web Vitals, estructuración semántica HTML5, datos estructurados Schema.org JSON-LD e indexación para Google y motores de IA (GEO).
 
-## Tabla de Precios en Colombia (Tarifas 2026)
-- **Landing Page de Conversión**: Desde $450.000 COP (Plazo: 7 a 12 días hábiles)
-- **Sitio Web Corporativo Completo**: Desde $2.500.000 COP (Plazo: 15 a 25 días hábiles)
-- **Tienda Virtual E-commerce**: Desde $1.300.000 COP (Plazo: 25 a 40 días hábiles)
-- **Software a Medida / Plataformas**: Cotización personalizada según alcance (4 a 12 semanas)
+## Tabla de Precios en Colombia (Tarifas Oficiales 2026)
+- **Landing Page**: Desde $450.000 COP (Plazo: 7 a 12 días hábiles)
+- **Web Corporativa**: Desde $2.500.000 COP (Plazo: 15 a 25 días hábiles)
+- **Ecommerce Starter**: Desde $1.300.000 COP (Plazo: 15 a 25 días hábiles)
+- **Headless Ecommerce**: Desde $2.000.000 COP (Plazo: 25 a 40 días hábiles)
+- **Software a Medida**: Desde $4.500.000 COP / Cotización según alcance (Plazo: 4 a 12 semanas)
 
 ## Metodología de Trabajo
 1. Discovery & Viabilidad Técnica

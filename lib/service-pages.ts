@@ -551,7 +551,7 @@ export const servicePages: Record<string, ServicePageData> = {
       "Proyectos que dependen estrictamente de constructores visuales monolíticos dentro del administrador de WordPress.",
     ],
     estimatedTimeline: "3 a 5 semanas para arquitectura, migración y despliegue del frontend headless.",
-    priceRangeCOP: "Planes desde $3.800.000 COP según el tamaño del catálogo, variantes y pasarelas de pago requeridas.",
+    priceRangeCOP: "Planes transparentes desde $2.000.000 COP según el tamaño del catálogo, variantes y pasarelas de pago requeridas.",
     benefits: [
       { title: "Carga en Menos de 0.5s", description: "Navegación instantánea entre categorías y productos que reduce el rebote y multiplica ventas." },
       { title: "Panel WooCommerce Intacto", description: "Tu equipo sigue gestionando inventario, pedidos y promociones en el panel de WordPress que ya conoce." },
@@ -585,7 +585,7 @@ export const servicePages: Record<string, ServicePageData> = {
       { question: "¿Pierdo mis productos o pedidos actuales al migrar a WooCommerce Headless?", answer: "No. Tu base de datos de WooCommerce, historial de clientes, pedidos y configuración de productos se mantienen 100% intactos. Solo reemplazamos la capa visual por un frontend moderno en Next.js." },
       { question: "¿Cómo se procesan los pagos en una tienda Headless?", answer: "Integramos los SDKs y APIs seguras de pasarelas como Wompi, PayU o Bold para procesar transacciones directamente con confirmaciones webhook en tiempo real hacia tu WooCommerce." },
       { question: "¿Cuánto mejora la velocidad de la tienda?", answer: "Una tienda WooCommerce tradicional suele tardar entre 3.5 a 6 segundos en cargar; con arquitectura Headless en Next.js el tiempo se reduce a menos de 0.8 segundos, generando un aumento inmediato en la tasa de conversión." },
-      { question: "¿Qué costo tiene el desarrollo de WooCommerce Headless en Colombia?", answer: "Nuestros proyectos de e-commerce headless inician desde $3.800.000 COP, dependiendo de la cantidad de productos, variantes, cálculo de envíos y pasarelas de pago requeridas." },
+      { question: "¿Qué costo tiene el desarrollo de WooCommerce Headless en Colombia?", answer: "Nuestros proyectos de e-commerce headless inician desde $2.000.000 COP, dependiendo de la cantidad de productos, variantes, cálculo de envíos y pasarelas de pago requeridas." },
       { question: "¿Incluye optimización SEO para los productos?", answer: "Sí. Generamos metadatos dinámicos, marcado de datos estructurados Schema.org para productos (precio, disponibilidad, reseñas) y sitemaps automáticos para que tus productos aparezcan en Google Shopping y búsquedas orgánicas." },
     ],
     relatedArticles: [

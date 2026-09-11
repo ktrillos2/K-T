@@ -39,6 +39,7 @@ async function resolveProject(slug: string): Promise<Project | null> {
                     seoFocus: sanityProject.seoFocus || local?.content.seoFocus || "",
                     results: local?.content.results || "",
                 },
+                testimonial: local?.testimonial,
                 metrics: local?.metrics || {
                     lighthouseAfter: "98/100",
                     lcp: "680 ms",
@@ -170,6 +171,27 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         "provider": {
             "@id": "https://www.kytcode.lat/#organization"
         },
+        "about": {
+            "@type": "Organization",
+            "name": project.client || project.title,
+            ...(project.liveUrl ? { "sameAs": project.liveUrl, "url": project.liveUrl } : {})
+        },
+        ...(project.testimonial ? {
+            "review": {
+                "@type": "Review",
+                "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": "5",
+                    "bestRating": "5"
+                },
+                "author": {
+                    "@type": "Person",
+                    "name": project.testimonial.author,
+                    "jobTitle": project.testimonial.role
+                },
+                "reviewBody": project.testimonial.quote
+            }
+        } : {}),
         "keywords": project.tech.join(", ")
     }
 

@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, CheckCircle2, Globe, ShoppingCart, ArrowRight } from "lucide-react"
 import Footer from "@/components/layout/footer"
@@ -45,7 +46,7 @@ const faqs = [
   {
     question: "¿Cuál es la diferencia de precio entre ambas opciones?",
     answer:
-      "En K&T Code, una Página Web Corporativa completa inicia desde $2.500.000 COP (enfocada en captación de leads), mientras que una Tienda Virtual transaccional con pasarelas de pago e inventario inicia desde $1.300.000 COP (planes básicos) hasta $3.500.000+ COP para catálogos headless escalables.",
+      "En K&T Code, una Página Web Corporativa completa inicia desde $2.500.000 COP (enfocada en captación de leads y autoridad empresarial), mientras que una Tienda Virtual transaccional con pasarelas de pago colombianas e inventario inicia desde $1.300.000 COP para planes Ecommerce Starter y desde $2.000.000 COP para Headless Ecommerce en Next.js.",
   },
 ]
 
@@ -59,13 +60,13 @@ export default function PaginaWebVsTiendaVirtualPage() {
             description:
               "Comparativa clara entre un sitio web corporativo y una tienda virtual e-commerce: costos, objetivos comerciales y pasarelas de pago.",
             path: "/blog/pagina-web-vs-tienda-virtual",
-            datePublished: "2026-03-05",
-            dateModified: "2026-08-19",
+            datePublished: "2026-07-28",
+            dateModified: "2026-08-20",
           }),
           buildBreadcrumbJsonLd([
             { name: "Inicio", path: "/" },
             { name: "Blog", path: "/blog" },
-            { name: "Página Web vs. Tienda Virtual", path: "/blog/pagina-web-vs-tienda-virtual" },
+            { name: "Página Web vs Tienda Virtual", path: "/blog/pagina-web-vs-tienda-virtual" },
           ]),
           buildFaqJsonLd(faqs),
         ]}
@@ -85,56 +86,83 @@ export default function PaginaWebVsTiendaVirtualPage() {
             {/* Header */}
             <header className="mb-14 not-prose">
               <div className="flex items-center gap-3 font-mono text-xs text-neutral-400 mb-4 uppercase tracking-wider">
-                <span className="text-emerald-400 font-bold">Estrategia Digital</span>
+                <span className="text-emerald-400 font-bold">Guía Comparativa</span>
                 <span className="w-1 h-1 rounded-full bg-neutral-600" />
                 <span>8 min de lectura</span>
                 <span className="w-1 h-1 rounded-full bg-neutral-600" />
-                <span>Colombia 2026</span>
+                <span>28 de julio de 2026</span>
               </div>
 
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-title text-white leading-tight mb-6">
-                Página Web vs. Tienda Virtual en Colombia: Diferencias, Funcionalidades y Precios
+                Página Web vs. Tienda Virtual: ¿Cuál Necesita Realmente tu Negocio?
               </h1>
 
               {/* Author Byline */}
               <div className="flex items-center gap-3 py-4 border-t border-b border-white/10 my-6 font-mono text-xs text-neutral-400">
-                <div className="w-9 h-9 rounded-full bg-neutral-800 border border-white/20 flex items-center justify-center text-white font-bold text-xs shrink-0">
-                  KT
+                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/20 shrink-0 bg-neutral-800">
+                  <Image
+                    src="/perfil.png"
+                    alt="Keyner Trillos"
+                    fill
+                    sizes="40px"
+                    className="object-cover"
+                  />
                 </div>
                 <div>
                   <span>Escrito por </span>
                   <Link href="/autores/keyner-trillos" className="text-white font-bold hover:underline">
                     Keyner Trillos
                   </Link>
-                  <span className="text-neutral-400"> • Lead Software Engineer — K&T Code</span>
-                  <span className="block text-[11px] text-neutral-500 mt-0.5">Revisado el 19 de agosto de 2026</span>
+                  <span className="text-neutral-400"> • Co-Fundador & Lead Software Engineer</span>
+                  <span className="block text-[11px] text-neutral-500 mt-0.5">Publicado el 28 de julio de 2026</span>
                 </div>
               </div>
 
-              <p className="mt-6 border-l-2 border-white pl-6 font-mono text-lg leading-relaxed text-neutral-300">
-                Al digitalizar una empresa en Colombia surge una pregunta habitual: <strong>¿necesito una página web corporativa o una tienda virtual?</strong> Aunque ambas se alojan en internet, sus objetivos de negocio, infraestructura y costos de operación son sustancialmente diferentes.
+              <p className="mt-6 border-l-2 border-emerald-400 pl-6 font-mono text-lg leading-relaxed text-neutral-300">
+                Elegir entre una página web corporativa y una tienda virtual no es solo una cuestión de diseño, sino de modelo de negocio, presupuesto y cómo compran tus clientes en Colombia. Analizamos las diferencias clave para que tomes la mejor decisión técnica.
               </p>
             </header>
+
+            {/* Commercial Bridge Banner: Informational -> Commercial */}
+            <div className="my-10 rounded-2xl border border-emerald-500/40 bg-gradient-to-r from-emerald-950/40 via-neutral-950 to-neutral-900 p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 not-prose shadow-xl">
+              <div>
+                <span className="font-mono text-xs uppercase tracking-wider text-emerald-400 font-bold">
+                  // ¿Ya tienes claro qué tipo de web necesitas?
+                </span>
+                <h3 className="text-xl md:text-2xl font-bold font-title text-white mt-1">
+                  Revisa nuestros planes y cotizaciones oficiales
+                </h3>
+                <p className="font-mono text-xs text-neutral-300 mt-2 max-w-xl leading-relaxed">
+                  Si ya conoces tu modelo y quieres ver precios transparentes de landing pages, sitios corporativos o tiendas virtuales → consulta la guía de precios de páginas web en Colombia de K&T Code.
+                </p>
+              </div>
+              <Link
+                href="/precios/precio-pagina-web-colombia"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-emerald-400 text-black font-mono font-bold text-xs hover:bg-emerald-300 transition-all shrink-0 shadow-lg"
+              >
+                Ver Tarifas y Cotización <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
 
             {/* Quick Summary Table */}
             <section className="mb-14 not-prose overflow-x-auto">
               <h2 className="text-2xl font-bold font-title text-white mb-6">
-                Tabla Comparativa: Sitio Web Corporativo vs. Tienda Virtual E-commerce
+                Comparativa Rápida: Página Web vs. Tienda Virtual
               </h2>
               <div className="border border-white/15 rounded-2xl overflow-hidden bg-white/[0.02]">
-                <table className="w-full text-left font-mono text-xs md:text-sm">
-                  <thead className="bg-white/10 text-white border-b border-white/10">
+                <table className="w-full text-left font-mono text-xs sm:text-sm">
+                  <thead className="bg-neutral-900 border-b border-white/10 text-white">
                     <tr>
-                      <th className="p-4">Criterio</th>
-                      <th className="p-4">Página Web Corporativa</th>
-                      <th className="p-4">Tienda Virtual (E-commerce)</th>
+                      <th className="p-4">Característica</th>
+                      <th className="p-4 text-emerald-400">Página Web Corporativa</th>
+                      <th className="p-4 text-amber-400">Tienda Virtual (E-commerce)</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/10 text-neutral-300">
                     <tr>
                       <td className="p-4 font-bold text-white">Objetivo Principal</td>
-                      <td className="p-4">Captar leads, generar llamadas y cotizaciones B2B</td>
-                      <td className="p-4">Procesar pagos y compras automáticas 24/7</td>
+                      <td className="p-4">Generar credibilidad, captar leads B2B y agendar citas</td>
+                      <td className="p-4">Vender productos online 24/7 de forma transaccional</td>
                     </tr>
                     <tr>
                       <td className="p-4 font-bold text-white">Pasarelas de Pago</td>
@@ -148,8 +176,8 @@ export default function PaginaWebVsTiendaVirtualPage() {
                     </tr>
                     <tr>
                       <td className="p-4 font-bold text-white">Precio K&T Desde</td>
-                      <td className="p-4 text-emerald-400">$450.000 (Landing) / $2.500.000 COP</td>
-                      <td className="p-4">$1.300.000 - $3.500.000+ COP</td>
+                      <td className="p-4 text-emerald-400">$450.000 (Landing) / $2.500.000 COP (Corporativo)</td>
+                      <td className="p-4 text-amber-400">$1.300.000 (Starter) / $2.000.000 COP (Headless)</td>
                     </tr>
                     <tr>
                       <td className="p-4 font-bold text-white">Tiempo de Entrega</td>

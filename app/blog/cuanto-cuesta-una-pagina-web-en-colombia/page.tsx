@@ -196,26 +196,26 @@ export default function CuantoCuestaPaginaWebBlogPage() {
                 <tbody className="divide-y divide-neutral-800 text-neutral-300">
                   <tr>
                     <td className="p-4 font-bold text-white">Landing Page de Campaña</td>
-                    <td className="p-4 text-emerald-400 font-bold">$350.000 - $900.000 COP</td>
-                    <td className="p-4">5 a 12 días</td>
+                    <td className="p-4 text-emerald-400 font-bold">Desde $450.000 COP</td>
+                    <td className="p-4">7 a 12 días</td>
                     <td className="p-4 text-neutral-400">Google Ads, Meta Ads, captación directa de leads por WhatsApp.</td>
                   </tr>
                   <tr>
                     <td className="p-4 font-bold text-white">Sitio Web Corporativo Pyme</td>
-                    <td className="p-4 text-emerald-400 font-bold">$1.800.000 - $5.000.000 COP</td>
-                    <td className="p-4">15 a 30 días</td>
-                    <td className="p-4 text-neutral-400">Empresas, firmas de consultoría, ingeniería y marcas B2B.</td>
+                    <td className="p-4 text-emerald-400 font-bold">Desde $2.500.000 COP</td>
+                    <td className="p-4">15 a 25 días</td>
+                    <td className="p-4 text-neutral-400">Empresas, firmas de consultoría, ingeniería y marcas B2B con CMS autogestionable.</td>
                   </tr>
                   <tr>
                     <td className="p-4 font-bold text-white">Tienda Virtual E-commerce</td>
-                    <td className="p-4 text-emerald-400 font-bold">$1.300.000 - $7.500.000 COP</td>
-                    <td className="p-4">25 a 45 días</td>
-                    <td className="p-4 text-neutral-400">Comercios que venden productos físicos con pagos PSE, tarjetas y envíos.</td>
+                    <td className="p-4 text-emerald-400 font-bold">Desde $1.300.000 COP (Starter) / $2.000.000 COP (Headless)</td>
+                    <td className="p-4">20 a 35 días</td>
+                    <td className="p-4 text-neutral-400">Comercios que venden productos físicos con pagos PSE, tarjetas, Wompi, Bold y envíos.</td>
                   </tr>
                   <tr>
                     <td className="p-4 font-bold text-white">Software a Medida / SaaS</td>
-                    <td className="p-4 text-emerald-400 font-bold">$5.000.000 - $25.000.000+ COP</td>
-                    <td className="p-4">4 a 16 semanas</td>
+                    <td className="p-4 text-emerald-400 font-bold">Desde $4.500.000 COP / Cotización</td>
+                    <td className="p-4">4 a 12 semanas</td>
                     <td className="p-4 text-neutral-400">Portales privados, paneles de control, facturación DIAN e integraciones API.</td>
                   </tr>
                 </tbody>

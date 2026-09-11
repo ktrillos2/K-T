@@ -23,6 +23,14 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/proyectos/:slug',
+        destination: '/projects/:slug',
+      },
+    ]
+  },
   async redirects() {
     return [
       {

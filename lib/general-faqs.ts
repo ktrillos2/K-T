@@ -9,12 +9,12 @@ export const generalFaqs: FaqItem[] = [
   {
     question: "¿Cuánto cuesta hacer una página web profesional?",
     answer:
-      "En Colombia, una página web profesional cuesta entre $450.000 COP y $2.500.000 COP según su alcance y funcionalidades. En K&T Code, una Landing Page de conversión inicia desde $450.000 COP (entrega en 7-12 días) y un Sitio Web Corporativo integral con CMS autogestionable inicia desde $2.500.000 COP (entrega en 15-25 días). Los desarrollos de software avanzado se cotizan a la medida.",
+      "En Colombia, el desarrollo web profesional con K&T Code cuenta con tarifas oficiales y transparentes: Landing Page desde $450.000 COP (entrega en 7-12 días), Sitio Web Corporativo completo desde $2.500.000 COP (entrega en 15-25 días), Ecommerce Starter desde $1.300.000 COP, Headless Ecommerce desde $2.000.000 COP y Software a Medida desde $4.500.000 COP / cotización según alcance.",
   },
   {
     question: "¿Cuánto cuesta una tienda virtual?",
     answer:
-      "Una tienda virtual con pasarelas de pago colombianas e inventario cuesta desde $1.300.000 COP hasta $5.000.000+ COP para arquitecturas headless avanzadas. En K&T Code, los planes de e-commerce incluyen catálogo de productos, pasarelas locales (Wompi, PayU, Bold), pasarelas PSE/Nequi, carrito interactivo y panel administrativo autogestionable.",
+      "Una tienda virtual con pasarelas de pago colombianas e inventario en K&T Code inicia desde $1.300.000 COP para planes Ecommerce Starter y desde $2.000.000 COP para plataformas Headless Ecommerce en Next.js. Todos los planes incluyen catálogo autogestionable, pasarelas locales (Wompi, PayU, Bold, PSE, Nequi), cálculo de envíos y panel administrativo sin comisiones sobre ventas.",
   },
   {
     question: "¿Cuánto tarda hacer una web?",

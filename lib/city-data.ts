@@ -44,7 +44,7 @@ export const citiesData: Record<string, CityData> = {
     localFaqs: [
       {
         question: "¿Cuánto cuesta el desarrollo de una página web en Bogotá?",
-        answer: "En K&T Code, una Landing Page de conversión inicia desde $450.000 COP, un Sitio Web Corporativo completo inicia desde $2.500.000 COP, y una Tienda Virtual Headless inicia desde $1.300.000 COP. Los proyectos de software a medida se cotizan según requerimientos técnicos."
+        answer: "En K&T Code, una Landing Page de conversión inicia desde $450.000 COP, un Sitio Web Corporativo completo desde $2.500.000 COP, Ecommerce Starter desde $1.300.000 COP, Headless Ecommerce desde $2.000.000 COP y Software a Medida desde $4.500.000 COP / cotización según alcance."
       },
       {
         question: "¿Cuánto tarda la entrega de un proyecto web para empresas en Bogotá?",
@@ -82,7 +82,7 @@ export const citiesData: Record<string, CityData> = {
     localFaqs: [
       {
         question: "¿Cuánto cuesta una página web profesional en Medellín?",
-        answer: "Nuestros planes para empresas en Medellín inician desde $450.000 COP para landing pages, $2.500.000 COP para sitios web corporativos con CMS, y $1.300.000 COP para tiendas virtuales e-commerce."
+        answer: "Nuestros planes oficiales para empresas en Medellín inician desde $450.000 COP para landing pages, $2.500.000 COP para sitios web corporativos con CMS, $1.300.000 COP para Ecommerce Starter, $2.000.000 COP para Headless Ecommerce y desde $4.500.000 COP para software a medida."
       },
       {
         question: "¿Por qué elegir Next.js en lugar de WordPress en Medellín?",
@@ -124,7 +124,7 @@ export const citiesData: Record<string, CityData> = {
       },
       {
         question: "¿Cuáles son los precios para empresas de Cúcuta?",
-        answer: "Landing page desde $450.000 COP, Sitio corporativo desde $2.500.000 COP y Tienda virtual desde $1.300.000 COP, con facilidades de pago por etapas."
+        answer: "Landing page desde $450.000 COP, Sitio corporativo desde $2.500.000 COP, Ecommerce Starter desde $1.300.000 COP, Headless Ecommerce desde $2.000.000 COP y Software a medida desde $4.500.000 COP / cotización, con facilidades de pago por etapas."
       },
       {
         question: "¿Incluye asesoría para el manejo de la página?",
@@ -158,7 +158,7 @@ export const citiesData: Record<string, CityData> = {
     localFaqs: [
       {
         question: "¿Cuánto cuesta una página web para un negocio en Cali?",
-        answer: "Los planes inician en $450.000 COP para landing pages, $2.500.000 COP para sitios corporativos y $1.300.000 COP para tiendas virtuales con pasarelas de pago."
+        answer: "Los planes oficiales inician en $450.000 COP para landing pages, $2.500.000 COP para sitios corporativos, $1.300.000 COP para Ecommerce Starter, $2.000.000 COP para Headless Ecommerce y desde $4.500.000 COP para software a medida."
       },
       {
         question: "¿Qué tecnologías utilizan en K&T Code?",
@@ -196,7 +196,7 @@ export const citiesData: Record<string, CityData> = {
     localFaqs: [
       {
         question: "¿Cuánto vale crear una página web en Barranquilla?",
-        answer: "Nuestros desarrollos para empresas en Barranquilla van desde $450.000 COP (Landing Page) hasta $2.500.000 COP (Sitio Web Corporativo Completo) y $1.300.000 COP (Tienda Virtual)."
+        answer: "Nuestras tarifas para empresas en Barranquilla van desde $450.000 COP (Landing Page), $2.500.000 COP (Sitio Web Corporativo Completo), $1.300.000 COP (Ecommerce Starter), $2.000.000 COP (Headless Ecommerce) y desde $4.500.000 COP (Software a Medida)."
       },
       {
         question: "¿Qué incluye el servicio de desarrollo web?",

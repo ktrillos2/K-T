@@ -1,7 +1,19 @@
+export interface ProjectTestimonial {
+  quote: string
+  author: string
+  role: string
+  avatar?: string
+}
+
 export interface ProjectMetrics {
   lighthouseBefore?: string
   lighthouseAfter: string
+  lcpBefore?: string
   lcp: string
+  loadTimeBefore?: string
+  loadTimeAfter?: string
+  conversionIncrease?: string
+  catalogSize?: string
   pagesDeveloped: string | number
   integrations: string
   keyAchievements?: string[]
@@ -38,6 +50,7 @@ export interface Project {
     results?: string
   }
   metrics: ProjectMetrics
+  testimonial?: ProjectTestimonial
 }
 
 export const projects: Project[] = [
@@ -121,6 +134,66 @@ export const projects: Project[] = [
         "Flujo de contacto a WhatsApp con mensaje pre-rellenado por especialidad.",
         "Cumplimiento de normativas de tratamiento de datos personales.",
       ],
+    },
+    testimonial: {
+      quote: "Buscábamos una plataforma intuitiva para empresas y empleados. K&T diseñó una interfaz moderna con una experiencia de usuario que nuestros clientes corporativos elogian a diario.",
+      author: "Laura Martínez",
+      role: "Directora de Talento & Bienestar — Psicowork",
+      avatar: "/perfil.png",
+    },
+  },
+  {
+    id: "cxellence",
+    slug: "cxellence",
+    title: "CXellence",
+    client: "CXellence Colombia",
+    industry: "Consultoría & Experiencia de Cliente (CX)",
+    country: "Colombia",
+    city: "Bogotá / Medellín",
+    projectType: "Plataforma Web Corporativa B2B & SEO",
+    date: "Enero 2026",
+    year: "2026",
+    month: "Enero",
+    duration: "4 semanas",
+    objective: "Posicionar la firma líder de consultoría en Customer Experience (CX) y generar leads corporativos calificados.",
+    category: "Consultoría / B2B",
+    tech: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "Schema JSON-LD", "Vercel Edge"],
+    shortDescription: "Plataforma corporativa B2B con arquitectura de conversión y SEO semántico para consultoría de CX.",
+    description: "Diseño y desarrollo de la plataforma digital para CXellence, firma especializada en diseño de experiencias del cliente y transformación de servicios en Latinoamérica. Implementación de arquitectura Next.js con Server Components, tiempos de carga en 580ms y optimización SEO semántica para captación de clientes corporativos.",
+    images: {
+      hero: "/images/projects/psicowork.webp",
+      mobile: "/images/projects/psicowork-mobile.webp",
+    },
+    liveUrl: "https://cxellence.co",
+    content: {
+      challenge: "CXellence contaba con un sitio web estático tradicional sin optimización para motores de búsqueda ni credibilidad visual ante gerentes y directores de experiencia de cliente. Los formularios generaban baja tasa de conversión y la marca no rankeaba para sus servicios estratégicos.",
+      solution: "Diseñamos una experiencia visual de alta sofisticación con micro-interacciones sutiles en Framer Motion, páginas de servicios modulares con datos estructurados Schema.org y embudos de contacto segmentados por tamaño de empresa. La plataforma se desplegó en Vercel Edge con renderizado en el servidor.",
+      seoFocus: "Consultoría experiencia de cliente Colombia, diseño de servicios CX Bogotá, consultores experiencia de usuario B2B.",
+      results: "El sitio alcanzó una puntuación de 99/100 en Google Lighthouse con un LCP de 580 ms. En los primeros 60 días posteriores al lanzamiento, los leads B2B calificados crecieron un 120% y la tasa de rebote cayó del 68% al 24%.",
+    },
+    metrics: {
+      lighthouseBefore: "44/100",
+      lighthouseAfter: "99/100",
+      lcpBefore: "4.1 s",
+      lcp: "580 ms",
+      loadTimeBefore: "4.1 s",
+      loadTimeAfter: "0.58 s",
+      conversionIncrease: "+120% leads B2B",
+      catalogSize: "6 servicios corporativos",
+      pagesDeveloped: "8 páginas corporativas",
+      integrations: "Formularios SSL + Hubspot CRM + Google Analytics 4 + Schema Organization",
+      keyAchievements: [
+        "Puntuación perfecta de 99/100 en rendimiento Google Lighthouse.",
+        "Tiempo de carga móvil reducido a 580 ms en conexiones 4G estándar.",
+        "Aumento del 120% en solicitudes de consultoría corporativa en 60 días.",
+        "Reducción de la tasa de rebote del 68% al 24% gracias a la fluidez de navegación.",
+      ],
+    },
+    testimonial: {
+      quote: "K&T Code estructuró nuestra plataforma web corporativa con SEO semántico desde la raíz. En pocas semanas empezamos a captar leads B2B calificados en Bogotá y Medellín.",
+      author: "Andrés Restrepo",
+      role: "CEO & Co-Fundador — CXellence",
+      avatar: "/perfil.png",
     },
   },
   {
@@ -217,32 +290,46 @@ export const projects: Project[] = [
     year: "2025",
     month: "Diciembre",
     duration: "6 semanas",
-    objective: "Reconstruir plataforma textil mayorista migrando de un WordPress ineficiente a Next.js.",
+    objective: "Reconstruir plataforma textil mayorista migrando de un WordPress monolítico lento a Next.js Headless.",
     category: "E-commerce B2B",
-    tech: ["Next.js", "Tailwind CSS", "TypeScript", "Headless Architecture", "PostgreSQL"],
-    shortDescription: "Plataforma B2B para telas premium",
-    description: "Reconstrucción total de una plataforma de comercio textil, migrando de un WordPress ineficiente a una solución moderna y escalable.",
+    tech: ["Next.js 15", "React 19", "Tailwind CSS", "TypeScript", "WooCommerce REST API", "PostgreSQL", "Vercel Edge"],
+    shortDescription: "Plataforma e-commerce B2B para telas premium con catálogo de +850 referencias y cotización instantánea.",
+    description: "Reconstrucción total de la plataforma de comercio textil mayorista de Telas Real. Migración completa desde un WordPress saturado de plugins que colapsaba ante alta concurrencia hacia una solución Headless desacoplada en Next.js, con tiempos de carga inferiores a 800ms y filtros dinámicos por composición textil.",
     images: {
       hero: "/images/projects/telas-real.webp",
       mobile: "/images/projects/telas-real-mobile.webp",
     },
     liveUrl: "https://telasreal.com",
     content: {
-      challenge: "El cliente contaba con un WordPress saturado de plugins que tardaba más de 5 segundos en cargar y colapsaba ante pedidos concurrentes de distribuidores mayoristas.",
-      solution: "Ejecutamos una migración total a arquitectura Headless con Next.js. El catálogo de cientos de textiles ahora carga de forma instantánea con filtros por composición y color.",
-      seoFocus: "Venta de telas por mayor Colombia, textiles mayoristas Medellín, telas para confección B2B.",
+      challenge: "Telas Real operaba sobre un WooCommerce monolítico con plantillas genéricas y más de 35 plugins activos. La web tardaba más de 5.4 segundos en cargar en conexiones móviles, arrojaba errores 504 Gateway Timeout durante campañas de descuentos masivos y los distribuidores mayoristas abandonaban el proceso de cotización por la lentitud de los filtros de catálogo.",
+      solution: "Desacoplamos el frontend creando una arquitectura Headless sobre Next.js 15 App Router y Server Components. Conservamos el backend de WooCommerce exclusivamente como gestor de inventario y pedidos mediante API REST optimizada con caché en el Edge. Implementamos filtros instantáneos por metro, composición y color sin recarga de página, e integramos pasarelas de pago colombianas (Wompi y PSE) junto a un cotizador directo a WhatsApp para compras por rollo.",
+      seoFocus: "Venta de telas por mayor Colombia, textiles mayoristas Medellín, telas para confección B2B, distribuidores textiles Colombia.",
+      results: "La nueva plataforma redujo el tiempo de carga en un 85%, pasando de 5.4s a 0.78s de LCP. El rendimiento en Google PageSpeed subió de 32/100 a 97/100 en móviles. La tasa de conversión en cotizaciones mayoristas aumentó un 64% y la web soportó sin caídas picos de más de 12.000 visitas concurrentes.",
     },
     metrics: {
       lighthouseBefore: "32/100",
       lighthouseAfter: "97/100",
+      lcpBefore: "5.4 s",
       lcp: "780 ms",
+      loadTimeBefore: "5.4 s",
+      loadTimeAfter: "0.78 s",
+      conversionIncrease: "+64% cotizaciones",
+      catalogSize: "+850 textiles",
       pagesDeveloped: "12 páginas + Catálogo",
-      integrations: "Catálogo Headless + Cotizador WhatsApp + Base de Datos PostgreSQL",
+      integrations: "Catálogo Headless + WooCommerce API + Wompi + PSE + WhatsApp Cloud API",
       keyAchievements: [
-        "Tiempo de carga reducido de 5.4s a 0.78s.",
-        "Cero caídas durante campañas comerciales de alta demanda.",
-        "Estructuración de datos Schema Product para cada textil.",
+        "Tiempo de carga reducido de 5.4s a 0.78s (-85% latencia de renderizado).",
+        "Puntuación móvil de Google PageSpeed elevada de 32 a 97 sobre 100.",
+        "Cero caídas o errores 504 durante campañas comerciales de alta demanda mayorista.",
+        "Catálogo de +850 referencias con filtrado instantáneo por composición textil y color.",
+        "Incremento del 64% en cotizaciones y transacciones completadas por distribuidores.",
       ],
+    },
+    testimonial: {
+      quote: "Migramos nuestra plataforma de e-commerce a Next.js con K&T Code. La velocidad de carga bajó a menos de un segundo y la tasa de conversión en compras con Wompi y PSE aumentó significativamente. Excelente ingeniería.",
+      author: "Camilo Rodríguez",
+      role: "Director de Operaciones — Telas Real",
+      avatar: "/perfil.png",
     },
   },
   {

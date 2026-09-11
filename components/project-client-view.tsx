@@ -19,6 +19,10 @@ import {
   FileCode2,
   Sparkles,
   ArrowRight,
+  Star,
+  Quote,
+  TrendingUp,
+  ShoppingBag,
 } from "lucide-react"
 import { useCursor } from "@/context/cursor-context"
 import { Project } from "@/lib/projects"
@@ -188,7 +192,49 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
             </div>
 
             {/* Main Narrative & Results */}
-            <div className="lg:col-span-8 space-y-12">
+            <div className="lg:col-span-8 space-y-10">
+              {/* Production Live Status Badge */}
+              {project.liveUrl && (
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                >
+                  <div className="flex items-center gap-3.5">
+                    <div className="relative flex h-3.5 w-3.5 shrink-0">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-xs font-mono uppercase text-emerald-400 font-bold tracking-wider">
+                          Proyecto en Producción Activa
+                        </span>
+                        <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded font-mono">
+                          Entidad Validada
+                        </span>
+                      </div>
+                      <p className="text-sm text-neutral-300 mt-0.5">
+                        Desarrollado por <strong className="text-white">K&T Code</strong> para <strong className="text-white">{project.client || project.title}</strong>
+                      </p>
+                    </div>
+                  </div>
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 text-xs font-mono font-bold bg-emerald-400 text-black px-5 py-2.5 rounded-xl hover:bg-emerald-300 transition-all shrink-0 shadow-lg shadow-emerald-500/10"
+                    onMouseEnter={() => setCursorVariant("hover")}
+                    onMouseLeave={() => setCursorVariant("default")}
+                  >
+                    <span>Visitar {project.client || "Sitio Web"}</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </motion.div>
+              )}
+
               {/* Problem / Challenge */}
               <motion.section
                 initial={{ opacity: 0, y: 20 }}
@@ -202,7 +248,7 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
                     <Target className="w-4 h-4" />
                   </div>
                   <h2 className="text-2xl md:text-3xl font-bold text-white font-title">
-                    El Desafío
+                    El Problema y Desafío
                   </h2>
                 </div>
                 <p className="text-neutral-300 text-base md:text-lg leading-relaxed">
@@ -245,53 +291,128 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
                     <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
                       <Gauge className="w-4 h-4" />
                     </div>
-                    <h2 className="text-2xl md:text-3xl font-bold text-white font-title">
-                      Resultados y Métricas de Rendimiento
-                    </h2>
+                    <div>
+                      <h2 className="text-2xl md:text-3xl font-bold text-white font-title">
+                        Resultados Cuantificables: Antes vs. Después
+                      </h2>
+                      <p className="text-neutral-400 text-xs font-mono mt-1">
+                        Auditoría real de Core Web Vitals e impacto directo en métricas de conversión
+                      </p>
+                    </div>
                   </div>
 
-                  {/* Metrics KPI Grid */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 not-prose mb-8 font-mono">
-                    <div className="bg-white/5 border border-white/10 p-4 rounded-xl text-center">
-                      <span className="text-neutral-400 text-[11px] block uppercase">Lighthouse</span>
-                      <strong className="text-emerald-400 text-2xl font-bold mt-1 block">
-                        {project.metrics.lighthouseAfter}
-                      </strong>
-                      {project.metrics.lighthouseBefore && (
-                        <span className="text-neutral-500 text-[10px]">Antes: {project.metrics.lighthouseBefore}</span>
+                  {/* Core Web Vitals Before vs After Cards */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 not-prose mb-6 font-mono">
+                    {/* PageSpeed */}
+                    <div className="bg-white/5 border border-white/10 p-5 rounded-xl flex flex-col justify-between">
+                      <span className="text-neutral-400 text-[11px] uppercase tracking-wider block">PageSpeed Score</span>
+                      <div className="my-3 flex items-baseline gap-2">
+                        {project.metrics.lighthouseBefore && (
+                          <span className="text-rose-400/80 text-lg line-through font-semibold">
+                            {project.metrics.lighthouseBefore}
+                          </span>
+                        )}
+                        {project.metrics.lighthouseBefore && (
+                          <span className="text-neutral-500 text-sm">→</span>
+                        )}
+                        <strong className="text-emerald-400 text-3xl font-bold">
+                          {project.metrics.lighthouseAfter}
+                        </strong>
+                      </div>
+                      <span className="text-[11px] text-emerald-400/90 bg-emerald-500/10 px-2 py-0.5 rounded inline-block w-fit">
+                        Score óptimo
+                      </span>
+                    </div>
+
+                    {/* LCP Speed */}
+                    <div className="bg-white/5 border border-white/10 p-5 rounded-xl flex flex-col justify-between">
+                      <span className="text-neutral-400 text-[11px] uppercase tracking-wider block">Velocidad LCP</span>
+                      <div className="my-3 flex items-baseline gap-2">
+                        {project.metrics.lcpBefore && (
+                          <span className="text-rose-400/80 text-lg line-through font-semibold">
+                            {project.metrics.lcpBefore}
+                          </span>
+                        )}
+                        {project.metrics.lcpBefore && (
+                          <span className="text-neutral-500 text-sm">→</span>
+                        )}
+                        <strong className="text-emerald-400 text-3xl font-bold">
+                          {project.metrics.lcp}
+                        </strong>
+                      </div>
+                      <span className="text-[11px] text-emerald-400/90 bg-emerald-500/10 px-2 py-0.5 rounded inline-block w-fit">
+                        Core Web Vital superado
+                      </span>
+                    </div>
+
+                    {/* Total Load Time */}
+                    <div className="bg-white/5 border border-white/10 p-5 rounded-xl flex flex-col justify-between">
+                      <span className="text-neutral-400 text-[11px] uppercase tracking-wider block">Tiempo de Carga</span>
+                      <div className="my-3 flex items-baseline gap-2">
+                        {project.metrics.loadTimeBefore && (
+                          <span className="text-rose-400/80 text-lg line-through font-semibold">
+                            {project.metrics.loadTimeBefore}
+                          </span>
+                        )}
+                        {project.metrics.loadTimeBefore && (
+                          <span className="text-neutral-500 text-sm">→</span>
+                        )}
+                        <strong className="text-emerald-400 text-3xl font-bold">
+                          {project.metrics.loadTimeAfter || project.metrics.lcp}
+                        </strong>
+                      </div>
+                      <span className="text-[11px] text-emerald-400/90 bg-emerald-500/10 px-2 py-0.5 rounded inline-block w-fit">
+                        Ultra respuesta
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Business Impact Row */}
+                  {(project.metrics.conversionIncrease || project.metrics.catalogSize || project.metrics.pagesDeveloped) && (
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 font-mono">
+                      {project.metrics.conversionIncrease && (
+                        <div className="bg-emerald-500/5 border border-emerald-500/20 p-4 rounded-xl flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 shrink-0">
+                            <TrendingUp className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <span className="text-neutral-400 text-[10px] block uppercase">Conversiones / Leads</span>
+                            <span className="text-white text-sm font-bold">{project.metrics.conversionIncrease}</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {project.metrics.catalogSize && (
+                        <div className="bg-blue-500/5 border border-blue-500/20 p-4 rounded-xl flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 shrink-0">
+                            <ShoppingBag className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <span className="text-neutral-400 text-[10px] block uppercase">Catálogo Administrado</span>
+                            <span className="text-white text-sm font-bold">{project.metrics.catalogSize}</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {project.metrics.pagesDeveloped && (
+                        <div className="bg-purple-500/5 border border-purple-500/20 p-4 rounded-xl flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400 shrink-0">
+                            <Layers className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <span className="text-neutral-400 text-[10px] block uppercase">Alcance del Proyecto</span>
+                            <span className="text-white text-sm font-bold">{project.metrics.pagesDeveloped}</span>
+                          </div>
+                        </div>
                       )}
                     </div>
-
-                    <div className="bg-white/5 border border-white/10 p-4 rounded-xl text-center">
-                      <span className="text-neutral-400 text-[11px] block uppercase">Velocidad LCP</span>
-                      <strong className="text-white text-2xl font-bold mt-1 block">
-                        {project.metrics.lcp}
-                      </strong>
-                      <span className="text-emerald-400 text-[10px]">Carga rápida</span>
-                    </div>
-
-                    <div className="bg-white/5 border border-white/10 p-4 rounded-xl text-center">
-                      <span className="text-neutral-400 text-[11px] block uppercase">Alcance</span>
-                      <strong className="text-white text-2xl font-bold mt-1 block">
-                        {project.metrics.pagesDeveloped}
-                      </strong>
-                      <span className="text-neutral-400 text-[10px]">Interfaces web</span>
-                    </div>
-
-                    <div className="bg-white/5 border border-white/10 p-4 rounded-xl text-center">
-                      <span className="text-neutral-400 text-[11px] block uppercase">Arquitectura</span>
-                      <strong className="text-emerald-400 text-2xl font-bold mt-1 block">
-                        100%
-                      </strong>
-                      <span className="text-neutral-400 text-[10px]">Next.js nativo</span>
-                    </div>
-                  </div>
+                  )}
 
                   {/* Key Achievements List */}
                   {project.metrics.keyAchievements && project.metrics.keyAchievements.length > 0 && (
-                    <div className="space-y-3 pt-4 border-t border-white/10">
-                      <h4 className="text-sm font-mono uppercase tracking-wider text-neutral-400 mb-2">
-                        Evidencias y Logros Técnicos:
+                    <div className="space-y-3 pt-6 border-t border-white/10">
+                      <h4 className="text-xs font-mono uppercase tracking-wider text-neutral-400 mb-3">
+                        Evidencias y Logros Técnicos Verificados:
                       </h4>
                       {project.metrics.keyAchievements.map((achievement, idx) => (
                         <div key={idx} className="flex items-start gap-3 text-sm text-neutral-300 font-mono">
@@ -301,6 +422,49 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
                       ))}
                     </div>
                   )}
+                </motion.section>
+              )}
+
+              {/* Real Client Testimonial */}
+              {project.testimonial && (
+                <motion.section
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="relative bg-gradient-to-br from-neutral-900/90 via-neutral-950 to-black border border-amber-500/25 rounded-2xl p-8 overflow-hidden"
+                >
+                  <div className="absolute -right-8 -bottom-8 w-36 h-36 bg-amber-500/5 rounded-full blur-2xl pointer-events-none" />
+                  
+                  <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+                    <div className="flex items-center gap-1 text-amber-400">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-mono rounded-full">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                      Testimonio Real Verificado
+                    </span>
+                  </div>
+
+                  <blockquote className="text-neutral-200 text-base md:text-lg font-light italic leading-relaxed mb-6 relative z-10">
+                    &ldquo;{project.testimonial.quote}&rdquo;
+                  </blockquote>
+
+                  <div className="flex items-center gap-4 pt-6 border-t border-white/10">
+                    <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 flex items-center justify-center font-bold text-black text-base shrink-0 shadow-md shadow-amber-500/20">
+                      {project.testimonial.author.charAt(0)}
+                    </div>
+                    <div>
+                      <div className="text-white font-bold font-title text-base">
+                        {project.testimonial.author}
+                      </div>
+                      <div className="text-neutral-400 text-xs font-mono">
+                        {project.testimonial.role} &bull; <span className="text-neutral-300 font-semibold">{project.testimonial.company}</span>
+                      </div>
+                    </div>
+                  </div>
                 </motion.section>
               )}
 

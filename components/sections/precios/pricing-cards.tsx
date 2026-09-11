@@ -53,7 +53,7 @@ const plans = [
     title: "Tienda Virtual",
     copPrice: "Desde $1.300.000 COP",
     usdPrice: 450,
-    description: "Para negocios que quieren vender productos o servicios en línea con una experiencia moderna y confiable.",
+    description: "Ecommerce Starter desde $1.300.000 COP y Headless Next.js desde $2.000.000 COP para venta online con pasarelas colombianas.",
     features: [
       "Diseño personalizado",
       "Catálogo de productos",
@@ -73,9 +73,9 @@ const plans = [
   },
   {
     title: "Software a Medida",
-    copPrice: "Cotización personalizada",
+    copPrice: "Desde $4.500.000 COP / Cotización",
     usdPrice: null,
-    description: "Para plataformas, sistemas internos, aplicaciones web, automatizaciones, paneles administrativos y soluciones con funcionalidades especiales.",
+    description: "Para plataformas, sistemas internos, SaaS, automatizaciones, paneles administrativos y soluciones con funcionalidades especiales.",
     features: [
       "Análisis de requerimientos",
       "Arquitectura personalizada",

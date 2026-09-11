@@ -98,15 +98,15 @@ export const pricingGuides: Record<string, PricingGuideData> = {
       },
       {
         type: "Tienda Virtual / E-commerce",
-        priceStarting: "Desde $1.300.000 COP",
-        timeline: "25 a 40 días hábiles",
+        priceStarting: "Desde $1.300.000 COP (Starter) / Desde $2.000.000 COP (Headless)",
+        timeline: "20 a 35 días hábiles",
         includes: "Catálogo autogestionable de productos, carrito de compras, pasarelas de pago colombianas (Wompi, PayU, Bold, PSE, Nequi), cálculo de envíos, panel de pedidos.",
         notIncludes: "Reglas mayoristas complejas con cupos de crédito B2B o integración ERP avanzada.",
         bestFor: "Marcas y comercios que venden productos físicos o digitales a nivel nacional.",
       },
       {
         type: "Software Web a Medida",
-        priceStarting: "Cotización según alcance",
+        priceStarting: "Desde $4.500.000 COP / Cotización",
         timeline: "4 a 12 semanas (por sprints)",
         includes: "Arquitectura a medida en Next.js y Supabase, base de datos PostgreSQL, roles de usuario, APIs, automatizaciones, facturación DIAN.",
         notIncludes: "Módulos o requerimientos no contemplados en la fase de descubrimiento inicial.",
@@ -144,8 +144,8 @@ export const pricingGuides: Record<string, PricingGuideData> = {
       },
       {
         name: "Tienda Virtual",
-        priceRange: "Desde $1.300.000 COP",
-        timeline: "25 a 40 días hábiles",
+        priceRange: "Desde $1.300.000 COP (Starter) / $2.000.000 COP (Headless)",
+        timeline: "20 a 35 días hábiles",
         features: [
           "Catálogo de productos con categorías y variantes",
           "Carrito de compras interactivo y checkout simplificado",
@@ -308,12 +308,12 @@ export const pricingGuides: Record<string, PricingGuideData> = {
       "Precios y tarifas oficiales para crear una tienda virtual en Colombia en 2026. Planes desde $1.300.000 COP con Wompi, PSE, Bold y carrito de alta velocidad.",
     eyebrow: "// E-commerce & Pasarelas de Pago Colombia",
     summary:
-      "El desarrollo de una tienda virtual profesional en Colombia oscila entre $2.800.000 COP para tiendas estándar hasta más de $7.000.000 COP para plataformas headless de alto rendimiento con miles de productos. En esta guía detallamos los costos de pasarelas, envíos y tecnología.",
-    averagePriceRange: "$2.800.000 - $6.500.000 COP",
+      "El desarrollo de una tienda virtual profesional en Colombia con K&T Code inicia desde $1.300.000 COP para tiendas virtuales Starter con catálogo y pasarelas, y desde $2.000.000 COP para plataformas Headless E-commerce de alto rendimiento en Next.js. En esta guía detallamos los costos de pasarelas, envíos y tecnología.",
+    averagePriceRange: "$1.300.000 - $4.500.000+ COP",
     priceTiers: [
       {
-        name: "Tienda Virtual Starter (Hasta 50 productos)",
-        priceRange: "$2.800.000 - $3.800.000 COP",
+        name: "Ecommerce Starter (Hasta 50 productos)",
+        priceRange: "Desde $1.300.000 COP",
         timeline: "2 a 3 semanas",
         features: [
           "Catálogo autogestionable de productos con variantes",
@@ -325,9 +325,9 @@ export const pricingGuides: Record<string, PricingGuideData> = {
         bestFor: "Marcas y emprendimientos que comienzan a vender productos físicos a nivel nacional.",
       },
       {
-        name: "E-commerce Headless Next.js (Alto Rendimiento)",
-        priceRange: "$4.500.000 - $7.000.000 COP",
-        timeline: "3 a 6 semanas",
+        name: "Headless Ecommerce Next.js (Alto Rendimiento)",
+        priceRange: "Desde $2.000.000 COP",
+        timeline: "3 a 5 semanas",
         features: [
           "Frontend desacoplado en Next.js con carga en < 0.8s",
           "Backend en WooCommerce o Shopify con panel administrativo completo",
@@ -339,7 +339,7 @@ export const pricingGuides: Record<string, PricingGuideData> = {
       },
       {
         name: "Plataforma E-commerce a Medida / B2B",
-        priceRange: "$8.000.000+ COP",
+        priceRange: "Desde $4.500.000 COP / Cotización personalizada",
         timeline: "6 a 10 semanas",
         features: [
           "Catálogo mayorista con listas de precios personalizadas por cliente",
@@ -412,12 +412,12 @@ export const pricingGuides: Record<string, PricingGuideData> = {
     relatedBlogSlug: "cuanto-cuesta-desarrollar-software-a-medida-colombia",
     relatedBlogTitle: "¿Cuánto Cuesta Desarrollar Software a Medida? Modelos y Horas",
     summary:
-      "El costo de un software web a medida en Colombia inicia desde $5.000.000 COP para MVPs o módulos funcionales básicos, y puede superar los $20.000.000 COP en plataformas empresariales complejas. Conoce cómo se presupuesta un software por fases y evita desviaciones de alcance.",
-    averagePriceRange: "$5.000.000 - $25.000.000+ COP",
+      "El costo de un software web a medida en Colombia con K&T Code inicia desde $4.500.000 COP para MVPs o módulos funcionales iniciales, y se cotiza según alcance para plataformas empresariales complejas. Conoce cómo se presupuesta un software por fases y evita desviaciones de alcance.",
+    averagePriceRange: "Desde $4.500.000 COP / Cotización personalizada",
     priceTiers: [
       {
         name: "MVP Funcional / Módulo Específico",
-        priceRange: "$5.000.000 - $9.000.000 COP",
+        priceRange: "Desde $4.500.000 COP",
         timeline: "4 a 6 semanas",
         features: [
           "Levantamiento de procesos y modelado de base de datos relacional",
