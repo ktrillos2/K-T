@@ -277,7 +277,7 @@ export default function CuantoCuestaPaginaWebBlogPage() {
                 <strong>1. Nombre de Dominio (.com, .co, .com.co):</strong> Es la dirección web de tu empresa (ej: <code>miempresa.com.co</code>). Cuesta entre <strong>$60.000 y $160.000 COP al año</strong> y se renueva anualmente en registradores oficiales como Mi.com.co, GoDaddy o Cloudflare Registrar.
               </li>
               <li>
-                <strong>2. Alojamiento Web (Hosting / Servidores):</strong> Los hostings compartidos baratos de cPanel ($50.000 COP/año) colapsan cuando reciben más de 10 visitas simultáneas y vuelven lenta tu página. En K&T implementamos arquitecturas serverless en la red CDN global de Vercel y Cloudflare Edge, logrando <strong>$0 a $90.000 COP/mes con disponibilidad del 99.99% y carga en menos de 0.8 segundos</strong>.
+                <strong>2. Alojamiento Web (Hosting / Servidores):</strong> Los hostings compartidos baratos de cPanel ($50.000 COP/año) suelen ralentizarse ante picos de visitas. En K&T implementamos arquitecturas serverless en la red CDN global de Vercel y Cloudflare Edge, logrando <strong>$0 a $90.000 COP/mes con alta disponibilidad (99.9%) y tiempos de carga optimizados</strong>.
               </li>
               <li>
                 <strong>3. Mantenimiento y Soporte Continuo:</strong> Oscila entre <strong>$250.000 y $600.000 COP al mes</strong>. Incluye monitoreo contra caídas, respaldos automáticos de base de datos, actualización de parches de seguridad y bolsa de horas para crear nuevas secciones o cambiar promociones.
@@ -358,13 +358,13 @@ export default function CuantoCuestaPaginaWebBlogPage() {
                 <tbody className="divide-y divide-neutral-800 text-neutral-300">
                   <tr>
                     <td className="p-4 font-bold text-white">Velocidad de Carga</td>
-                    <td className="p-4 text-emerald-300">Ultra rápida (&lt; 0.8s)</td>
-                    <td className="p-4 text-neutral-400">Lenta (3.5s - 6.0s)</td>
+                    <td className="p-4 text-emerald-300">Optimizada para Core Web Vitals (típicamente sub-segundo)</td>
+                    <td className="p-4 text-neutral-400">Variable (3.0s - 5.5s según plugins)</td>
                   </tr>
                   <tr>
                     <td className="p-4 font-bold text-white">Seguridad</td>
-                    <td className="p-4 text-emerald-300">Sin base de datos expuesta, 0 hackeos por plugins</td>
-                    <td className="p-4 text-neutral-400">Alta vulnerabilidad a inyecciones SQL y malware</td>
+                    <td className="p-4 text-emerald-300">Menor superficie de ataque (sin dependencias de plugins de terceros)</td>
+                    <td className="p-4 text-neutral-400">Requiere mantenimiento constante de temas y parches de seguridad</td>
                   </tr>
                   <tr>
                     <td className="p-4 font-bold text-white">Indexación en Google</td>

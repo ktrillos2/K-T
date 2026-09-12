@@ -228,7 +228,7 @@ export default function CityPageView({ city }: CityPageViewProps) {
                 <ul className="space-y-2 font-mono text-xs text-neutral-300">
                   <li className="flex items-center gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Diseño UI/UX exclusivo</li>
                   <li className="flex items-center gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> WhatsApp integrado</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Carga rápida &lt; 0.8s</li>
+                  <li className="flex items-center gap-2"><CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Carga rápida y optimizada (Core Web Vitals)</li>
                 </ul>
               </div>
 

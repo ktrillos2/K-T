@@ -50,12 +50,12 @@ const faqs = [
   {
     question: "¿Qué es GEO (Generative Engine Optimization)?",
     answer:
-      "GEO es el conjunto de prácticas de ingeniería web, arquitectura semántica y datos estructurados diseñadas para que los motores de IA (ChatGPT Search, Perplexity, Gemini) reconozcan tu empresa como entidad de máxima autoridad y la recomienden como fuente oficial.",
+      "GEO es el conjunto de prácticas de ingeniería web, arquitectura semántica y datos estructurados diseñadas para que los motores de IA (ChatGPT Search, Perplexity, Gemini) reconozcan la identidad de tu empresa y la citen como fuente confiable y verificable.",
   },
   {
     question: "¿Los datos estructurados Schema.org ayudan a ser citado por la IA?",
     answer:
-      "Sí, de forma determinante. Los formatos JSON-LD (Organization, Service, Product, FAQPage) proporcionan entidades inequívocas y relaciones de confianza que los modelos procesan con máxima prioridad al sintetizar respuestas para los usuarios.",
+      "Sí, de manera fundamental. Los formatos JSON-LD (Organization, Service, Product, FAQPage) proporcionan relaciones de entidad explícitas y libres de ambigüedad que los motores de búsqueda generativa procesan con mayor precisión al contrastar respuestas para los usuarios.",
   },
 ]
 

@@ -188,16 +188,16 @@ export const pricingGuides: Record<string, PricingGuideData> = {
         builders: "40-60/100 (código DOM inflado)",
       },
       {
-        aspect: "Seguridad y Vulnerabilidades",
-        nextjs: "Inquebrantable (código estático, 0 plugins vulnerables)",
-        wordpress: "Vulnerable a hackeos frecuentes por plugins desactualizados",
-        builders: "Cerrada pero dependiente de la plataforma",
+        aspect: "Seguridad y Superficie de Exposición",
+        nextjs: "Menor superficie de ataque al reducir dependencias de plugins de terceros",
+        wordpress: "Requiere monitoreo continuo y parches frecuentes por librerías de terceros",
+        builders: "Gestionada por el proveedor pero dependiente del ecosistema de la plataforma",
       },
       {
         aspect: "Posicionamiento SEO en Google",
-        nextjs: "HTML5 puro renderizado en servidor (SSR/SSG) con Schema nativo",
+        nextjs: "HTML5 semántico renderizado en servidor (SSR/SSG) con Schema nativo",
         wordpress: "Requiere plugins de SEO que recargan el sitio",
-        builders: "Control SEO limitado y estructuras rígidas",
+        builders: "Estructuras predefinidas con menor flexibilidad en optimización técnica profunda",
       },
       {
         aspect: "Propiedad del Código",

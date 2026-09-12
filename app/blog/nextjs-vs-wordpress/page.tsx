@@ -36,7 +36,7 @@ const faqs = [
   {
     question: "¿Es Next.js mejor que WordPress para una página web?",
     answer:
-      "Next.js es superior en velocidad de carga (LCP < 0.8s), seguridad al no depender de plugins vulnerables y flexibilidad de diseño. Sin embargo, WordPress sigue siendo una excelente alternativa para blogs personales o sitios informativos simples donde se prioriza una curva de aprendizaje mínima y un costo inicial reducido.",
+      "Next.js destaca en métricas de Core Web Vitals (con LCP típicamente sub-segundo), menor superficie de ataque al no depender de plugins de terceros y mayor flexibilidad arquitectónica. Por su parte, WordPress sigue siendo una alternativa práctica para blogs personales o sitios informativos convencionales donde se prioriza una curva de aprendizaje mínima y un costo inicial reducido.",
   },
   {
     question: "¿Se puede usar WordPress como backend y Next.js como frontend?",
@@ -155,17 +155,17 @@ export default function NextjsVsWordpressPage() {
                     <tr>
                       <td className="p-4 font-bold text-white">Velocidad (Core Web Vitals)</td>
                       <td className="p-4 text-amber-400">Moderada (LCP 2.0s - 4.5s)</td>
-                      <td className="p-4 text-emerald-400">Ultra Rápida (LCP &lt; 0.8s, SSR/SSG)</td>
+                      <td className="p-4 text-emerald-400">Optimizada (LCP típicamente sub-segundo, SSR/SSG)</td>
                     </tr>
                     <tr>
                       <td className="p-4 font-bold text-white">Seguridad & Vulnerabilidades</td>
                       <td className="p-4 text-amber-400">Requiere parches constantes</td>
-                      <td className="p-4 text-emerald-400">Blindada (Serverless, sin plugins PHP)</td>
+                      <td className="p-4 text-emerald-400">Alta (menor superficie de ataque, sin plugins de terceros)</td>
                     </tr>
                     <tr>
                       <td className="p-4 font-bold text-white">Escalabilidad de Tráfico</td>
                       <td className="p-4">Limitada por servidor y base de datos</td>
-                      <td className="p-4 text-emerald-400">Infinita (Vercel / Cloudflare Edge CDN)</td>
+                      <td className="p-4 text-emerald-400">Alta escalabilidad elástica (Edge CDN)</td>
                     </tr>
                     <tr>
                       <td className="p-4 font-bold text-white">Ideal Para</td>

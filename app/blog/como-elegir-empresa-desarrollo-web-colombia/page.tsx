@@ -158,10 +158,10 @@ export default function ComoElegirEmpresaDesarrolloWeb() {
                         </p>
                         <ul className="space-y-3 font-mono text-sm text-neutral-300 mb-6 list-disc pl-6">
                             <li>
-                                <strong>Desarrollo con plantillas genéricas (WordPress, constructores visuales):</strong> Aunque parecen económicas inicialmente, suelen cargar decenas de plugins pesados, vulnerabilidades de seguridad y tiempos de carga lentos que perjudican las conversiones y el SEO.
+                                <strong>Desarrollo con plantillas genéricas (WordPress, constructores visuales):</strong> Aunque parecen económicas inicialmente, suelen acumular plugins de terceros que requieren mantenimiento continuo de parches de seguridad y pueden ralentizar la carga móvil afectando conversiones y SEO.
                             </li>
                             <li>
-                                <strong>Desarrollo a medida moderno (<Link href="/servicios/desarrollo-web-a-medida">Next.js, React, TypeScript</Link>):</strong> El código se diseña específicamente para tu negocio. Se compila estáticamente con renderizado en el servidor (SSR/SSG), garantizando velocidad milimétrica y seguridad blindada.
+                                <strong>Desarrollo a medida moderno (<Link href="/servicios/desarrollo-web-a-medida">Next.js, React, TypeScript</Link>):</strong> El código se diseña específicamente para tu negocio. Se compila con renderizado en el servidor (SSR/SSG), favoreciendo una alta velocidad de respuesta y una menor superficie de ataque al no depender de plugins externos.
                             </li>
                         </ul>
                         <p className="text-neutral-300 leading-relaxed">

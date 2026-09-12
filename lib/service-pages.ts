@@ -32,10 +32,10 @@ export const servicePages: Record<string, ServicePageData> = {
     shortTitle: "Landing pages",
     metaTitle: "Diseño y Desarrollo de Landing Pages de Alta Conversión en Colombia",
     metaDescription:
-      "Desarrollo de landing pages de alta conversión en Colombia con Next.js y React 19. Formularios inteligentes, carga en < 0.8s, integración con WhatsApp Business y medición de campañas.",
+      "Desarrollo de landing pages de alta conversión en Colombia con Next.js y React 19. Formularios inteligentes, carga veloz optimizada para Core Web Vitals, integración con WhatsApp Business y medición de campañas.",
     eyebrow: "// Páginas de Aterrizaje y Conversión Directa",
     summary:
-      "Diseñamos y desarrollamos landing pages de alto rendimiento para empresas y campañas publicitarias en Colombia y clientes del exterior. Desarrolladas en Next.js y React 19, nuestras páginas garantizan cargas en menos de 0.8 segundos, formularios optimizados para captación de clientes y conexión directa a WhatsApp Business y analítica publicitaria.",
+      "Diseñamos y desarrollamos landing pages de alto rendimiento para empresas y campañas publicitarias en Colombia y clientes del exterior. Desarrolladas en Next.js y React 19, nuestras páginas destacan por su óptima velocidad de carga, formularios optimizados para captación de clientes y conexión directa a WhatsApp Business y analítica publicitaria.",
     serviceType: "High-converting landing page development Next.js React Colombia",
     showTechStack: true,
     showPerformanceComparison: true,
@@ -58,7 +58,7 @@ export const servicePages: Record<string, ServicePageData> = {
     estimatedTimeline: "7 a 12 días hábiles desde la definición de contenidos hasta el despliegue en producción con analítica activa.",
     priceRangeCOP: "Planes transparentes desde $450.000 COP en Colombia / desde $200 USD para clientes internacionales según integraciones requeridas.",
     benefits: [
-      { title: "Carga en Menos de 0.8 Segundos", description: "Arquitectura Next.js estática que evita que los usuarios abandonen la página antes de ver tu propuesta." },
+      { title: "Carga de Alta Velocidad", description: "Arquitectura Next.js estática diseñada para minimizar los tiempos de espera y reducir el rebote de visitantes." },
       { title: "WhatsApp Business Integrado", description: "Botón flotante y enlaces directos con mensajes predeterminados para iniciar conversaciones comerciales de inmediato." },
       { title: "Medición de Conversiones (GA4 y Ads)", description: "Eventos configurados para rastrear llamadas, clics a WhatsApp y envíos de formulario sin perder datos." },
       { title: "Diseño 100% Adaptado a Celulares", description: "Experiencia mobile-first fluida, pensando en que más del 80% del tráfico publicitario en Colombia proviene de teléfonos." },
@@ -69,7 +69,7 @@ export const servicePages: Record<string, ServicePageData> = {
       "Formulario de captación con validación inmediata y protección anti-spam",
       "Integración directa con WhatsApp Business y notificaciones de prospectos",
       "Configuración de analítica (Google Analytics 4, Meta Pixel y eventos clave)",
-      "Optimización rigurosa de Core Web Vitals (LCP < 0.8s, CLS 0, INP óptimo)",
+      "Optimización rigurosa de Core Web Vitals (LCP veloz, CLS 0, INP óptimo)",
       "Alojamiento en Edge CDN con certificado de seguridad SSL incluido",
       "Entrega del código fuente 100% propiedad de tu empresa sin ataduras",
     ],
@@ -91,7 +91,7 @@ export const servicePages: Record<string, ServicePageData> = {
       { question: "¿Cuánto tiempo toma tener la landing page lista?", answer: "El tiempo habitual de entrega es de 7 a 12 días hábiles, trabajando de forma colaborativa con entregables verificables." },
       { question: "¿La landing page incluye integración con WhatsApp y formularios?", answer: "Sí. Integramos formularios de captación validados y botones directos de WhatsApp con mensajes preconfigurados para que los prospectos lleguen organizados por campaña." },
       { question: "¿Puedo medir los resultados de mis anuncios en Google Ads y Meta?", answer: "Totalmente. Configuramos eventos de analítica en Google Analytics 4, Google Ads y Meta Pixel para que puedas medir con exactitud cuántos prospectos genera tu inversión publicitaria." },
-      { question: "¿Por qué es mejor una landing page en Next.js que una en WordPress o Wix?", answer: "Las plantillas de WordPress y constructores como Elementor o Wix cargan decenas de scripts pesados que ralentizan la carga a más de 3 o 4 segundos. En Next.js tu página carga en menos de 0.8 segundos, evitando que los usuarios hagan clic en tu anuncio y abandonen antes de que la página abra." },
+      { question: "¿Por qué es mejor una landing page en Next.js que una en WordPress o Wix?", answer: "Los constructores visuales convencionales suelen acumular scripts y dependencias que pueden elevar el tiempo de carga a más de 3 o 4 segundos en redes móviles. En Next.js la página se compila de forma ligera y estática, ofreciendo una experiencia inmediata que retiene a los usuarios que llegan desde tus anuncios." },
     ],
     relatedArticles: [
       { title: "El costo oculto de una página web lenta", href: "/blog/costo-oculto-pagina-web-lenta" },
@@ -142,7 +142,7 @@ export const servicePages: Record<string, ServicePageData> = {
       { title: "Lanzamiento y Monitoreo", description: "Configuramos DNS, Google Search Console, sitemap XML y analítica de eventos para medir resultados." },
     ],
     faqs: [
-      { question: "¿Por qué elegir desarrollo en Next.js sobre WordPress o plantillas?", answer: "Next.js permite generar páginas con Server-Side Rendering (SSR) y Static Site Generation (SSG), lo que reduce el tiempo de carga a menos de 1 segundo, elimina el riesgo de hackeos por plugins vulnerables y proporciona el código HTML más limpio posible para que Google indexe tu contenido con máxima prioridad." },
+      { question: "¿Por qué elegir desarrollo en Next.js sobre WordPress o plantillas tradicionales?", answer: "Next.js permite pre-renderizar páginas con Server-Side Rendering (SSR) y Static Site Generation (SSG), lo que optimiza los tiempos de carga, reduce la superficie de ataque al no depender de plugins de terceros y entrega un código HTML semántico limpio que favorece una indexación técnica sólida por parte de los motores de búsqueda." },
       { question: "¿Cuánto cuesta desarrollar una página web a medida en Colombia?", answer: "El costo depende del número de vistas, diseño personalizado, integraciones y funcionalidades interactivas. En K&T ofrecemos propuestas transparentes por etapas con entregables verificables. Puedes consultar nuestras tarifas base en la sección de precios." },
       { question: "¿La página web desarrollada en Next.js será administrable?", answer: "Sí. Integramos paneles CMS Headless modernos (como Sanity, Supabase o paneles a medida) para que tu equipo pueda actualizar textos, blogs, imágenes y productos sin tocar una sola línea de código." },
       { question: "¿Incluye optimización para posicionamiento SEO en Colombia?", answer: "Totalmente. Entregamos la web con arquitectura semántica H1-H6, sitemap dinámico, robots.txt optimizado, etiquetas Open Graph y datos estructurados Schema.org (Organization, WebSite, Service, BreadcrumbList y FAQPage)." },
@@ -509,7 +509,7 @@ export const servicePages: Record<string, ServicePageData> = {
       { title: "Despliegue y Analítica", description: "Publicamos en CDN global, conectamos Google Search Console y configuramos medición de eventos." },
     ],
     faqs: [
-      { question: "¿Por qué Next.js es superior a WordPress para empresas en Colombia?", answer: "Next.js renderiza el código desde el servidor y genera páginas estáticas optimizadas, logrando que tu web cargue en menos de 0.8 segundos. Esto mejora drásticamente el posicionamiento en Google, reduce el abandono de usuarios y elimina por completo los problemas de seguridad derivados de plugins vulnerables." },
+      { question: "¿Qué ventajas técnicas ofrece Next.js frente a arquitecturas monolíticas como WordPress?", answer: "Next.js renderiza el código desde el servidor y genera páginas estáticas pre-optimizadas, logrando tiempos de carga notablemente ágiles que favorecen la experiencia móvil y los Core Web Vitals. Además, reduce la superficie de ataque al desacoplar el frontend y minimizar la dependencia de plugins de terceros." },
       { question: "¿Qué empresas utilizan Next.js a nivel mundial y en Colombia?", answer: "Empresas líderes como TikTok, Twitch, Hulu, Nike, Target y las startups más exitosas de Latinoamérica utilizan Next.js por su rendimiento incomparable y escalabilidad." },
       { question: "¿Puedo editar los textos e imágenes de mi web en Next.js sin saber programar?", answer: "Sí. Integramos paneles CMS Headless modernos (como Sanity, Supabase o paneles a medida) para que cualquier persona del equipo pueda editar contenidos, crear artículos y subir imágenes de forma intuitiva." },
       { question: "¿Cuánto cuesta un proyecto de desarrollo en Next.js en Colombia?", answer: "Nuestros proyectos en Next.js inician desde $2.500.000 COP para sitios corporativos de alto rendimiento, escalando según la complejidad de integraciones, base de datos y módulos interactivos." },
@@ -584,7 +584,7 @@ export const servicePages: Record<string, ServicePageData> = {
     faqs: [
       { question: "¿Pierdo mis productos o pedidos actuales al migrar a WooCommerce Headless?", answer: "No. Tu base de datos de WooCommerce, historial de clientes, pedidos y configuración de productos se mantienen 100% intactos. Solo reemplazamos la capa visual por un frontend moderno en Next.js." },
       { question: "¿Cómo se procesan los pagos en una tienda Headless?", answer: "Integramos los SDKs y APIs seguras de pasarelas como Wompi, PayU o Bold para procesar transacciones directamente con confirmaciones webhook en tiempo real hacia tu WooCommerce." },
-      { question: "¿Cuánto mejora la velocidad de la tienda?", answer: "Una tienda WooCommerce tradicional suele tardar entre 3.5 a 6 segundos en cargar; con arquitectura Headless en Next.js el tiempo se reduce a menos de 0.8 segundos, generando un aumento inmediato en la tasa de conversión." },
+      { question: "¿Cuánto mejora la velocidad de la tienda al desacoplar el frontend?", answer: "Una tienda WooCommerce monolítica con múltiples plugins suele experimentar tiempos de carga de 3 a 5 segundos; con arquitectura Headless en Next.js el renderizado se optimiza en el servidor y CDN, reduciendo la latencia de forma notable y mejorando la retención de compradores móviles." },
       { question: "¿Qué costo tiene el desarrollo de WooCommerce Headless en Colombia?", answer: "Nuestros proyectos de e-commerce headless inician desde $2.000.000 COP, dependiendo de la cantidad de productos, variantes, cálculo de envíos y pasarelas de pago requeridas." },
       { question: "¿Incluye optimización SEO para los productos?", answer: "Sí. Generamos metadatos dinámicos, marcado de datos estructurados Schema.org para productos (precio, disponibilidad, reseñas) y sitemaps automáticos para que tus productos aparezcan en Google Shopping y búsquedas orgánicas." },
     ],

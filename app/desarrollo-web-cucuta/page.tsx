@@ -158,7 +158,7 @@ export default function CucutaPage() {
         "name": "¿Por qué elegir Next.js en lugar de WordPress para una empresa en Cúcuta?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Next.js elimina la lentitud, las constantes caídas de servidores y las vulnerabilidades de seguridad que sufren los sitios hechos en plantillas de WordPress. Tu página cargará en menos de 0.8 segundos tanto en móviles como en computadores, mejorando drásticamente tu posicionamiento en Google y la tasa de ventas."
+          "text": "Next.js permite pre-renderizar contenido y desacoplar el frontend, reduciendo significativamente la superficie de ataque al no depender de plugins de terceros. Tu página obtiene tiempos de respuesta ágiles tanto en móviles como en computadores, mejorando la retención de usuarios y la evaluación técnica de Core Web Vitals en Google."
         }
       },
       {
@@ -274,8 +274,8 @@ export default function CucutaPage() {
                 <div className="text-xs font-mono text-neutral-400 uppercase tracking-wider mt-1">San José de Cúcuta</div>
               </div>
               <div>
-                <div className="text-2xl sm:text-3xl font-bold text-white font-title">&lt; 0.8s</div>
-                <div className="text-xs font-mono text-neutral-400 uppercase tracking-wider mt-1">Velocidad en Móviles</div>
+                <div className="text-2xl sm:text-3xl font-bold text-white font-title">Core Web Vitals</div>
+                <div className="text-xs font-mono text-neutral-400 uppercase tracking-wider mt-1">LCP Rápido & Estable</div>
               </div>
               <div>
                 <div className="text-2xl sm:text-3xl font-bold text-white font-title">100%</div>
@@ -455,7 +455,7 @@ export default function CucutaPage() {
                   <ul className="space-y-2 font-mono text-xs text-neutral-300 mb-6">
                     <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400" /> Diseño exclusivo en Next.js</li>
                     <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400" /> Botón directo a WhatsApp</li>
-                    <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400" /> Carga rápida &lt; 0.8s</li>
+                    <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400" /> Carga rápida y optimizada (Core Web Vitals)</li>
                     <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400" /> Entrega en 7 a 12 días</li>
                   </ul>
                 </div>

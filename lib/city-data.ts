@@ -26,7 +26,7 @@ export const citiesData: Record<string, CityData> = {
     metaDescription: "Empresa de desarrollo web y software a medida en Bogotá. Páginas web corporativas en Next.js, tiendas virtuales e-commerce y SEO técnico para empresas.",
     heroH1: "Desarrollo de Páginas Web y Software a Medida en Bogotá",
     heroSubtitle: "// Ingeniería Web de Alto Rendimiento para Empresas y Startups en la Capital",
-    introText: "En el ecosistema empresarial de Bogotá, la velocidad de carga, la indexación en Google y la conversión digital son factores determinantes. Desarrollamos sitios web y plataformas sobre Next.js y React 19 que superan el rendimiento de plantillas convencionales de WordPress o Wix, entregando cargas instantáneas en menos de 0.8 segundos.",
+    introText: "En el ecosistema empresarial de Bogotá, la velocidad de carga, la indexación técnica en Google y la conversión digital son factores determinantes. Desarrollamos sitios web y plataformas sobre Next.js y React 19 optimizados para ofrecer alta velocidad de respuesta, navegación fluida y arquitectura limpia sin la sobrecarga de plantillas tradicionales.",
     marketHighlights: [
       {
         title: "Posicionamiento B2B en Bogotá",
@@ -86,7 +86,7 @@ export const citiesData: Record<string, CityData> = {
       },
       {
         question: "¿Por qué elegir Next.js en lugar de WordPress en Medellín?",
-        answer: "Next.js elimina la lentitud, las brechas de seguridad y las caídas constantes causadas por plugins desactualizados de WordPress. Tu página cargará en menos de 0.8s con puntajes de 95+ en Google Lighthouse."
+        answer: "Next.js ofrece una arquitectura moderna que reduce significativamente la dependencia de plugins de terceros y sus riesgos de mantenimiento. Al compilar código estático y renderizar desde el servidor, la web logra puntajes destacados en Google Lighthouse y una experiencia de usuario rápida y estable."
       },
       {
         question: "¿Qué garantía ofrecen en el desarrollo web?",
