@@ -31,16 +31,13 @@ export default function ProjectsSection({ initialProjects = [] }: { initialProje
     externalLink: p.liveUrl,
   }));
 
-  // Separate featured projects (Telas Real, Cxellence & GMX Gaming) from the rest
+  // Separate featured projects (Telas Real & GMX Gaming) from the rest
   const isFeatured = (proj: any) =>
     proj.slug === "telas-real" ||
-    proj.slug === "cxellence" ||
     proj.slug === "gmx-gaming" ||
     proj.slug === "gmxgaming" ||
     proj.titleEn?.toLowerCase().includes("telas real") ||
     proj.titleEs?.toLowerCase().includes("telas real") ||
-    proj.titleEn?.toLowerCase().includes("cxellence") ||
-    proj.titleEs?.toLowerCase().includes("cxellence") ||
     proj.titleEn?.toLowerCase().includes("gmx gaming") ||
     proj.titleEs?.toLowerCase().includes("gmx gaming") ||
     proj.externalLink?.includes("telasreal.com") ||

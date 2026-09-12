@@ -503,36 +503,36 @@ export default function NearshoreColombiaPage() {
                 </Link>
               </div>
 
-              {/* CXellence */}
+              {/* GMX Gaming */}
               <div className="p-8 rounded-2xl border border-white/10 bg-white/[0.02] flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs font-mono px-3 py-1 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20">
-                      B2B Corporate & Lead Gen
+                      Gaming & Esports Platform
                     </span>
-                    <span className="text-xs font-mono text-neutral-500">Jan 2026</span>
+                    <span className="text-xs font-mono text-neutral-500">Mar 2026</span>
                   </div>
-                  <h3 className="text-2xl font-bold font-title text-white mb-2">CXellence Consulting</h3>
+                  <h3 className="text-2xl font-bold font-title text-white mb-2">GMX Gaming Platform</h3>
                   <p className="font-mono text-sm text-neutral-400 mb-6">
-                    Engineered high-converting corporate website with semantic SEO schema architecture. Achieved 99/100 Lighthouse score and generated +120% qualified B2B inquiries in 60 days.
+                    Full custom esports tournament platform with automated brackets and registration engine, migrating away from legacy WordPress limitations.
                   </p>
                   <div className="grid grid-cols-3 gap-3 p-4 rounded-xl bg-black/60 border border-white/5 font-mono mb-6 text-center">
                     <div>
                       <div className="text-xs text-neutral-500">Lighthouse</div>
-                      <div className="text-emerald-400 font-bold text-base">99 / 100</div>
+                      <div className="text-emerald-400 font-bold text-base">98 / 100</div>
                     </div>
                     <div>
                       <div className="text-xs text-neutral-500">LCP Speed</div>
-                      <div className="text-white font-bold text-base">580 ms</div>
+                      <div className="text-white font-bold text-base">590 ms</div>
                     </div>
                     <div>
-                      <div className="text-xs text-neutral-500">B2B Leads</div>
-                      <div className="text-purple-400 font-bold text-base">+120%</div>
+                      <div className="text-xs text-neutral-500">Automation</div>
+                      <div className="text-purple-400 font-bold text-base">+85%</div>
                     </div>
                   </div>
                 </div>
                 <Link 
-                  href="/projects/cxellence" 
+                  href="/projects/gmx-gaming" 
                   className="inline-flex items-center gap-2 text-sm font-mono text-white hover:text-purple-400 transition-colors"
                 >
                   Read Full Case Study <ArrowRight className="w-4 h-4" />
