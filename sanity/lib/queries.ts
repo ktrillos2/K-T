@@ -5,6 +5,13 @@ export interface SanityProject {
   _id: string
   title: string
   slug: string
+  client?: string
+  country?: string
+  city?: string
+  industry?: string
+  projectType?: string
+  duration?: string
+  objective?: string
   shortDescription?: string
   description?: string
   year?: string
@@ -17,6 +24,10 @@ export interface SanityProject {
   challenge?: string
   solution?: string
   seoFocus?: string
+  results?: string
+  testimonialQuote?: string
+  testimonialAuthor?: string
+  testimonialRole?: string
   isFeatured?: boolean
 }
 
@@ -92,6 +103,13 @@ export async function getAllProjects(): Promise<SanityProject[]> {
       _id,
       title,
       "slug": slug.current,
+      client,
+      country,
+      city,
+      industry,
+      projectType,
+      duration,
+      objective,
       shortDescription,
       description,
       year,
@@ -104,6 +122,10 @@ export async function getAllProjects(): Promise<SanityProject[]> {
       challenge,
       solution,
       seoFocus,
+      results,
+      testimonialQuote,
+      testimonialAuthor,
+      testimonialRole,
       isFeatured
     }`,
     {},
@@ -130,6 +152,13 @@ export async function getProjectBySlug(slug: string): Promise<SanityProject | nu
       _id,
       title,
       "slug": slug.current,
+      client,
+      country,
+      city,
+      industry,
+      projectType,
+      duration,
+      objective,
       shortDescription,
       description,
       year,
@@ -142,6 +171,10 @@ export async function getProjectBySlug(slug: string): Promise<SanityProject | nu
       challenge,
       solution,
       seoFocus,
+      results,
+      testimonialQuote,
+      testimonialAuthor,
+      testimonialRole,
       isFeatured
     }`,
     { slug },

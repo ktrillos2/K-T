@@ -87,18 +87,24 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="flex flex-wrap gap-3 mb-6">
-              <span className="px-3.5 py-1 border border-white/20 rounded-full text-emerald-400 text-xs font-mono uppercase tracking-wider bg-black/50 backdrop-blur-md flex items-center gap-1.5">
-                <Building2 className="w-3.5 h-3.5" />
-                {project.industry}
-              </span>
-              <span className="px-3.5 py-1 border border-white/20 rounded-full text-neutral-300 text-xs font-mono uppercase tracking-wider bg-black/50 backdrop-blur-md flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5" />
-                {project.date || `${project.month} ${project.year}`}
-              </span>
-              <span className="px-3.5 py-1 border border-white/20 rounded-full text-blue-400 text-xs font-mono uppercase tracking-wider bg-black/50 backdrop-blur-md flex items-center gap-1.5">
-                <Globe className="w-3.5 h-3.5" />
-                {project.country} {project.city ? `• ${project.city}` : ""}
-              </span>
+              {project.industry && (
+                <span className="px-3.5 py-1 border border-white/20 rounded-full text-emerald-400 text-xs font-mono uppercase tracking-wider bg-black/50 backdrop-blur-md flex items-center gap-1.5">
+                  <Building2 className="w-3.5 h-3.5" />
+                  {project.industry}
+                </span>
+              )}
+              {(project.date || project.year) && (
+                <span className="px-3.5 py-1 border border-white/20 rounded-full text-neutral-300 text-xs font-mono uppercase tracking-wider bg-black/50 backdrop-blur-md flex items-center gap-1.5">
+                  <Calendar className="w-3.5 h-3.5" />
+                  {project.date || `${project.month || ""} ${project.year || ""}`.trim()}
+                </span>
+              )}
+              {project.country && (
+                <span className="px-3.5 py-1 border border-white/20 rounded-full text-blue-400 text-xs font-mono uppercase tracking-wider bg-black/50 backdrop-blur-md flex items-center gap-1.5">
+                  <Globe className="w-3.5 h-3.5" />
+                  {project.country} {project.city ? `• ${project.city}` : ""}
+                </span>
+              )}
             </div>
 
             <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white font-title mb-6 leading-tight">
@@ -130,29 +136,39 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
                     <span className="text-neutral-500 block uppercase tracking-wider text-[10px]">Cliente</span>
                     <strong className="text-neutral-200">{project.client || project.title}</strong>
                   </div>
-                  <div>
-                    <span className="text-neutral-500 block uppercase tracking-wider text-[10px]">Industria / Sector</span>
-                    <span className="text-neutral-200">{project.industry}</span>
-                  </div>
-                  <div>
-                    <span className="text-neutral-500 block uppercase tracking-wider text-[10px]">Ubicación</span>
-                    <span className="text-neutral-200">{project.country} {project.city ? `(${project.city})` : ""}</span>
-                  </div>
-                  <div>
-                    <span className="text-neutral-500 block uppercase tracking-wider text-[10px]">Tipo de Proyecto</span>
-                    <span className="text-neutral-200">{project.projectType || project.category}</span>
-                  </div>
-                  <div>
-                    <span className="text-neutral-500 block uppercase tracking-wider text-[10px]">Duración del Desarrollo</span>
-                    <span className="text-neutral-200 flex items-center gap-1.5 mt-0.5">
-                      <Clock className="w-3.5 h-3.5 text-neutral-400" />
-                      {project.duration || "4 semanas"}
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-neutral-500 block uppercase tracking-wider text-[10px]">Objetivo Principal</span>
-                    <p className="text-neutral-300 text-xs mt-0.5">{project.objective}</p>
-                  </div>
+                  {project.industry && (
+                    <div>
+                      <span className="text-neutral-500 block uppercase tracking-wider text-[10px]">Industria / Sector</span>
+                      <span className="text-neutral-200">{project.industry}</span>
+                    </div>
+                  )}
+                  {project.country && (
+                    <div>
+                      <span className="text-neutral-500 block uppercase tracking-wider text-[10px]">Ubicación</span>
+                      <span className="text-neutral-200">{project.country} {project.city ? `(${project.city})` : ""}</span>
+                    </div>
+                  )}
+                  {(project.projectType || project.category) && (
+                    <div>
+                      <span className="text-neutral-500 block uppercase tracking-wider text-[10px]">Tipo de Proyecto</span>
+                      <span className="text-neutral-200">{project.projectType || project.category}</span>
+                    </div>
+                  )}
+                  {project.duration && (
+                    <div>
+                      <span className="text-neutral-500 block uppercase tracking-wider text-[10px]">Duración del Desarrollo</span>
+                      <span className="text-neutral-200 flex items-center gap-1.5 mt-0.5">
+                        <Clock className="w-3.5 h-3.5 text-neutral-400" />
+                        {project.duration}
+                      </span>
+                    </div>
+                  )}
+                  {project.objective && (
+                    <div>
+                      <span className="text-neutral-500 block uppercase tracking-wider text-[10px]">Objetivo Principal</span>
+                      <p className="text-neutral-300 text-xs mt-0.5">{project.objective}</p>
+                    </div>
+                  )}
                 </div>
 
                 {project.liveUrl && (

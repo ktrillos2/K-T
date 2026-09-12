@@ -25,6 +25,8 @@ export default function CxellenceSection({ initialProjects = [] }: { initialProj
     tech: p.tech || [],
     year: p.year,
     month: p.month,
+    country: p.country,
+    city: p.city,
     slug: p.slug,
     link: `/projects/${p.slug}`,
     liveUrl: p.liveUrl,
@@ -208,6 +210,11 @@ export default function CxellenceSection({ initialProjects = [] }: { initialProj
                           <span className="text-white/50 font-mono text-xs uppercase">
                             {featuredProject.month} {featuredProject.year}
                           </span>
+                          {featuredProject.country && (
+                            <span className="text-blue-400 font-mono text-xs px-2.5 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20">
+                              {featuredProject.country} {featuredProject.city ? `• ${featuredProject.city}` : ""}
+                            </span>
+                          )}
                           {featuredProject.liveUrl && (
                             <span className="text-emerald-400 font-mono text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">
                               {featuredProject.liveUrl.replace("https://", "").replace(/\/$/, "")}

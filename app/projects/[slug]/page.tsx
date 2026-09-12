@@ -9,20 +9,25 @@ async function resolveProject(slug: string): Promise<Project | null> {
     try {
         const sanityProject = await getProjectBySlug(slug)
         if (sanityProject) {
+            const country = sanityProject.country || local?.country || "Colombia"
+            const city = sanityProject.city !== undefined && sanityProject.city !== null
+                ? sanityProject.city
+                : (sanityProject.country && sanityProject.country !== local?.country ? "" : (local?.city || "Bogotá"))
+
             return {
                 id: sanityProject._id || sanityProject.slug,
                 slug: sanityProject.slug,
                 title: sanityProject.title,
-                client: local?.client || sanityProject.title,
-                industry: local?.industry || sanityProject.category || "Tecnología",
-                country: local?.country || "Colombia",
-                city: local?.city || "Bogotá",
-                projectType: local?.projectType || sanityProject.category || "Desarrollo Web",
+                client: sanityProject.client || local?.client || sanityProject.title,
+                industry: sanityProject.industry || local?.industry || sanityProject.category || "Tecnología",
+                country,
+                city,
+                projectType: sanityProject.projectType || local?.projectType || sanityProject.category || "Desarrollo Web",
                 date: local?.date || `${sanityProject.month || ""} ${sanityProject.year || ""}`.trim(),
                 year: sanityProject.year || local?.year || "2026",
                 month: sanityProject.month || local?.month || "Febrero",
-                duration: local?.duration || "4 semanas",
-                objective: local?.objective || sanityProject.shortDescription || "Desarrollo web corporativo",
+                duration: sanityProject.duration || local?.duration || "4 semanas",
+                objective: sanityProject.objective || local?.objective || sanityProject.shortDescription || "Desarrollo web corporativo",
                 category: sanityProject.category || local?.category || "Desarrollo Web",
                 tech: sanityProject.tech && sanityProject.tech.length > 0 ? sanityProject.tech : (local?.tech || ["Next.js", "React"]),
                 description: sanityProject.description || local?.description || "",
@@ -37,9 +42,14 @@ async function resolveProject(slug: string): Promise<Project | null> {
                     challenge: sanityProject.challenge || local?.content.challenge || "",
                     solution: sanityProject.solution || local?.content.solution || "",
                     seoFocus: sanityProject.seoFocus || local?.content.seoFocus || "",
-                    results: local?.content.results || "",
+                    results: sanityProject.results || local?.content.results || "",
                 },
-                testimonial: local?.testimonial,
+                testimonial: sanityProject.testimonialQuote ? {
+                    quote: sanityProject.testimonialQuote,
+                    author: sanityProject.testimonialAuthor || "Cliente",
+                    role: sanityProject.testimonialRole || sanityProject.client || "Cliente",
+                    avatar: local?.testimonial?.avatar || "/perfil.png"
+                } : local?.testimonial,
                 metrics: local?.metrics || {
                     lighthouseAfter: "98/100",
                     lcp: "680 ms",
@@ -93,7 +103,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             ...project.tech,
             project.category,
             project.industry,
-            "Desarrollo Web Colombia",
+            `Desarrollo Web ${project.country || "Colombia"}`,
             "Casos de Estudio Next.js",
             "Portafolio K&T Code",
         ],
