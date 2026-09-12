@@ -30,20 +30,22 @@ export default function CxellenceSection({ initialProjects = [] }: { initialProj
     liveUrl: p.liveUrl,
   }))
 
-  // Filtrar solo proyectos destacados (GMX Gaming & Telas Real) y excluir duplicados
+  // Proyectos destacados en el carrusel: GMX Gaming, CXellence Group & Telas Real
   const isFeatured = (proj: any) =>
-    (proj.slug === "gmx-gaming" ||
-      proj.slug === "gmxgaming" ||
-      proj.slug === "telas-real" ||
-      proj.titleEn?.toLowerCase().includes("gmx gaming") ||
-      proj.titleEs?.toLowerCase().includes("gmx gaming") ||
-      proj.titleEn?.toLowerCase().includes("telas real") ||
-      proj.titleEs?.toLowerCase().includes("telas real") ||
-      proj.liveUrl?.includes("gmxgaming.com") ||
-      proj.liveUrl?.includes("telasreal.com")) &&
-    proj.slug !== "cxellence" &&
-    !proj.titleEn?.toLowerCase().includes("cxellence") &&
-    !proj.titleEs?.toLowerCase().includes("cxellence")
+    proj.slug === "gmx-gaming" ||
+    proj.slug === "gmxgaming" ||
+    proj.slug === "cxellence-group" ||
+    proj.slug === "cxellence" ||
+    proj.slug === "telas-real" ||
+    proj.titleEn?.toLowerCase().includes("gmx gaming") ||
+    proj.titleEs?.toLowerCase().includes("gmx gaming") ||
+    proj.titleEn?.toLowerCase().includes("cxellence") ||
+    proj.titleEs?.toLowerCase().includes("cxellence") ||
+    proj.titleEn?.toLowerCase().includes("telas real") ||
+    proj.titleEs?.toLowerCase().includes("telas real") ||
+    proj.liveUrl?.includes("gmxgaming.com") ||
+    proj.liveUrl?.includes("cxellence.co") ||
+    proj.liveUrl?.includes("telasreal.com")
 
   const featuredProjects = allProjects.filter(isFeatured)
 

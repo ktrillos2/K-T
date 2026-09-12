@@ -38,6 +38,15 @@ export const fallbackTestimonials: TestimonialItem[] = [
     projectUrl: "https://sanroquesalud.com"
   },
   {
+    _id: "test-cxellence",
+    name: "Andrés Restrepo",
+    role: "CEO & Co-Fundador — CXellence Group",
+    content: "K&T Code estructuró nuestra plataforma web corporativa con SEO semántico desde la raíz. En pocas semanas empezamos a captar leads B2B calificados en Bogotá y Medellín.",
+    rating: 5,
+    project: "CXellence Group",
+    projectUrl: "https://cxellence.co"
+  },
+  {
     _id: "test-noskygroup",
     name: "Santiago Silva",
     role: "Director de Tecnología — Noskygroup",

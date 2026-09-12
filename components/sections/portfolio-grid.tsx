@@ -59,6 +59,11 @@ const projectTranslationsEn: Record<string, { title?: string; desc: string; cate
     desc: "Clinical psychology and corporate wellness platform with automated booking workflows and warm UI.",
     category: "Healthcare & Wellness",
   },
+  "cxellence": {
+    title: "CXellence Group",
+    desc: "B2B corporate platform engineered with Next.js, sub-second latency and semantic SEO for CX leadership.",
+    category: "Consulting & B2B",
+  },
   "brambila-inmobiliaria": {
     title: "Brambila's Real Estate",
     desc: "Dynamic proptech web platform with instant property sheets, search filters and social sharing automation.",
