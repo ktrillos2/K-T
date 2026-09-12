@@ -167,7 +167,12 @@ export default function PaginaWebVsTiendaVirtualPage() {
                     <tr>
                       <td className="p-4 font-bold text-white">Pasarelas de Pago</td>
                       <td className="p-4 text-emerald-400">No requeridas (Formularios y WhatsApp)</td>
-                      <td className="p-4 text-amber-400">Obligatorias (Wompi, Bold, PayU, PSE)</td>
+                      <td className="p-4 text-amber-400">
+                        <div>Obligatorias (Wompi, Bold, PayU, PSE)</div>
+                        <span className="text-[11px] text-neutral-400">
+                          Fuentes oficiales: <a href="https://wompi.co/tarifas" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white">Wompi ↗</a> y <a href="https://bold.co/tarifas" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white">Bold ↗</a>
+                        </span>
+                      </td>
                     </tr>
                     <tr>
                       <td className="p-4 font-bold text-white">Gestión de Inventario</td>
@@ -192,6 +197,9 @@ export default function PaginaWebVsTiendaVirtualPage() {
                   </tbody>
                 </table>
               </div>
+              <p className="font-mono text-xs text-neutral-400 mt-4">
+                <em>Según el informe económico de la <a href="https://www.cce.org.co/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white">Cámara Colombiana de Comercio Electrónico (CCCE)</a>, el 58% de las transacciones de comercio digital en Colombia utilizan PSE, requiriendo conexión directa con entidades financieras para autorizar los pagos.</em>
+              </p>
             </section>
 
             {/* When to choose Corporate Web */}

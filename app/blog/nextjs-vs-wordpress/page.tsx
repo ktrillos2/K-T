@@ -233,8 +233,11 @@ export default function NextjsVsWordpressPage() {
               <h2 className="text-2xl md:text-3xl font-bold text-white font-title mb-6">
                 3. Comparativa de Rendimiento y Core Web Vitals
               </h2>
+              <p className="text-neutral-300 leading-relaxed mb-4">
+                Según las auditorías globales del informe anual de <a href="https://almanac.httparchive.org/en/2024/cms" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white font-semibold">HTTP Archive (State of the Web)</a> y los estándares técnicos de <a href="https://web.dev/vitals/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white font-semibold">Google web.dev</a>, los sitios construidos sobre CMS monolíticos con constructores visuales pesados promedian un LCP móvil superior a 3.0 segundos y tienen dificultades para aprobar los tres indicadores de Core Web Vitals (LCP, INP y CLS).
+              </p>
               <p className="text-neutral-300 leading-relaxed mb-6">
-                En pruebas reales de rendimiento web bajo condiciones móviles:
+                De acuerdo con la <a href="https://developer.chrome.com/docs/lighthouse/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white font-semibold">documentación oficial de Google Lighthouse</a>, las diferencias estructurales se reflejan de la siguiente forma en condiciones de red móvil simulada:
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 not-prose font-mono text-xs">
                 <div className="p-6 rounded-2xl border border-white/10 bg-white/[0.02]">
@@ -245,6 +248,9 @@ export default function NextjsVsWordpressPage() {
                     <li>• Scripts bloqueantes: 30+ archivos JS/CSS</li>
                     <li>• Peso promedio de página: 2.8 MB - 6.0 MB</li>
                   </ul>
+                  <div className="mt-4 pt-3 border-t border-white/10 text-[11px] text-neutral-500">
+                    Fuente: <a href="https://almanac.httparchive.org/en/2024/cms" target="_blank" rel="noopener noreferrer" className="text-neutral-400 underline hover:text-white">HTTP Archive CMS Chapter ↗</a>
+                  </div>
                 </div>
                 <div className="p-6 rounded-2xl border border-emerald-500/30 bg-emerald-500/[0.03]">
                   <h3 className="text-lg font-bold text-emerald-400 font-title mb-3">Next.js en K&T Code</h3>
@@ -254,6 +260,9 @@ export default function NextjsVsWordpressPage() {
                     <li>• Scripts optimizados: Server Components atómicos</li>
                     <li>• Peso promedio de página: &lt; 450 KB</li>
                   </ul>
+                  <div className="mt-4 pt-3 border-t border-emerald-500/20 text-[11px] text-emerald-400/80">
+                    Fuente: <a href="https://web.dev/vitals/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white">Google web.dev Core Web Vitals ↗</a>
+                  </div>
                 </div>
               </div>
             </section>

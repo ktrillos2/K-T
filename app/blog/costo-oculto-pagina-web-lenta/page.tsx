@@ -146,10 +146,13 @@ export default function CostoWebLenta() {
                             Impacto del Retardo en la Retención y Conversión
                         </h2>
                         <p>
-                            Diversos estudios de usabilidad web coinciden en que los tiempos de respuesta lentos aumentan la tasa de abandono. Cuando una página tarda varios segundos en renderizar su elemento visual principal (LCP), la probabilidad de rebote se incrementa notablemente, afectando tanto el rendimiento comercial como las señales de satisfacción del usuario.
+                            Diversos estudios de usabilidad y rendimiento web demuestran el impacto directo de la velocidad en el comportamiento del usuario. Según investigaciones publicadas por <a href="https://web.dev/why-speed-matters/" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-white">Google y el equipo de web.dev</a>, a medida que el tiempo de carga de una página en dispositivos móviles pasa de 1 a 3 segundos, la probabilidad de rebote aumenta en un <strong>32%</strong>, y si se extiende a 5 segundos, el abandono de usuarios se incrementa en un <strong>90%</strong>.
                         </p>
                         <p>
-                            Un factor recurrente es la sobrecarga en servidores compartidos tradicionales, donde los recursos de CPU y memoria se distribuyen entre múltiples sitios simultáneos, generando cuellos de botella en momentos de alta concurrencia.
+                            Asimismo, un estudio exhaustivo realizado por <a href="https://www.deloitte.com/ie/en/services/consulting/perspectives/milliseconds-make-millions.html" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-white">Deloitte Digital (&quot;Milliseconds Make Millions&quot;)</a> concluyó que una mejora de apenas 100 milisegundos en el tiempo de respuesta móvil incrementa las tasas de conversión hasta en un <strong>8% en sitios de comercio electrónico</strong> y en un <strong>10% en páginas de generación de prospectos corporativos</strong>.
+                        </p>
+                        <p>
+                            Un factor recurrente de lentitud en Colombia y Latinoamérica es la sobrecarga en servidores compartidos tradicionales (cPanel estándar), donde los recursos de CPU y memoria se distribuyen entre decenas de sitios simultáneos, generando cuellos de botella críticos en momentos de pauta publicitaria o campañas de alta demanda.
                         </p>
                     </div>
 

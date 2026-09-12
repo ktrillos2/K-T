@@ -139,8 +139,14 @@ export default function ShopifyVsWoocommercePage() {
                     </tr>
                     <tr>
                       <td className="p-4 font-bold text-white">Comisión Extra por Venta</td>
-                      <td className="p-4 text-amber-400">0.5% a 2.0% adicional por pasarela externa</td>
-                      <td className="p-4 text-emerald-400">0% comisión de plataforma</td>
+                      <td className="p-4 text-amber-400">
+                        <div>0.5% a 2.0% adicional por pasarela externa</div>
+                        <a href="https://www.shopify.com/pricing" target="_blank" rel="noopener noreferrer" className="text-[11px] text-emerald-400 underline hover:text-white">Fuente: Tarifas oficiales de Shopify ↗</a>
+                      </td>
+                      <td className="p-4 text-emerald-400">
+                        <div>0% comisión de plataforma</div>
+                        <a href="https://woocommerce.com/" target="_blank" rel="noopener noreferrer" className="text-[11px] text-emerald-400 underline hover:text-white">Fuente: Documentación WooCommerce ↗</a>
+                      </td>
                     </tr>
                     <tr>
                       <td className="p-4 font-bold text-white">Pasarelas en Colombia</td>
@@ -170,6 +176,9 @@ export default function ShopifyVsWoocommercePage() {
                   </tbody>
                 </table>
               </div>
+              <p className="font-mono text-xs text-neutral-400 mt-4">
+                <em>Según la <a href="https://www.cce.org.co/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white">Cámara Colombiana de Comercio Electrónico (CCCE)</a>, más del 58% de las compras digitales en Colombia se realizan mediante PSE. Dado que Shopify Payments no procesa moneda local directamente en bancos colombianos, los comerciantes en Shopify pagan tanto la comisión de su pasarela local como el recargo por procesador externo fijado por Shopify.</em>
+              </p>
             </section>
 
             {/* When to use Shopify */}

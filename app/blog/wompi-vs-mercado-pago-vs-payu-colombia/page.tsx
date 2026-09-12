@@ -114,9 +114,17 @@ export default function WompiVsMercadoPagoVsPayuPage() {
               </div>
 
               <p className="mt-6 border-l-2 border-emerald-400 pl-6 font-mono text-lg leading-relaxed text-neutral-300">
-                Elegir la pasarela de pagos adecuada para tu comercio electrónico en Colombia repercute directamente en tu tasa de conversión y margen neto de ganancia. Comparamos las tres opciones líderes del mercado nacional.
+                Elegir la pasarela de pagos adecuada para tu comercio electrónico en Colombia repercute directamente en tu tasa de conversión y margen neto de ganancia. Comparamos las tres opciones líderes del mercado nacional con datos de fuentes oficiales.
               </p>
             </header>
+
+            <h2>El Ecosistema de Pagos Digitales en Colombia</h2>
+            <p>
+              Según los informes trimestrales de la <a href="https://www.cce.org.co/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white font-semibold">Cámara Colombiana de Comercio Electrónico (CCCE)</a> y las estadísticas del <a href="https://www.banrep.gov.co/es/estadisticas/sistemas-pago" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white font-semibold">Banco de la República sobre Sistemas de Pago</a>, más del <strong>58% de las transacciones de compra en línea en Colombia</strong> se procesan a través de débito bancario vía <strong>PSE</strong> y transferencias móviles (Nequi y Daviplata), superando ampliamente a las tarjetas de crédito tradicionales.
+            </p>
+            <p>
+              Esto significa que la pasarela elegida no solo debe ofrecer comisiones atractivas, sino una integración técnica confiable con el botón PSE y verificación automática de depósitos para evitar ventas caídas.
+            </p>
 
             <h2>Tabla Comparativa de Comisiones y Métodos</h2>
             <div className="not-prose overflow-x-auto my-8 border border-white/15 rounded-2xl">
@@ -131,19 +139,28 @@ export default function WompiVsMercadoPagoVsPayuPage() {
                 </thead>
                 <tbody className="divide-y divide-white/10 text-neutral-300">
                   <tr>
-                    <td className="p-4 font-bold text-white">Wompi (Bancolombia)</td>
+                    <td className="p-4 font-bold text-white">
+                      <div>Wompi (Bancolombia)</div>
+                      <a href="https://wompi.co/tarifas" target="_blank" rel="noopener noreferrer" className="text-[11px] text-emerald-400 underline hover:text-white">Fuente: Wompi oficial ↗</a>
+                    </td>
                     <td className="p-4 text-emerald-400">2.65% + $700 COP</td>
                     <td className="p-4">Botón Bancolombia, Nequi, PSE, Tarjetas</td>
                     <td className="p-4">Automática diaria a Bancolombia (Gratis)</td>
                   </tr>
                   <tr>
-                    <td className="p-4 font-bold text-white">Mercado Pago</td>
+                    <td className="p-4 font-bold text-white">
+                      <div>Mercado Pago</div>
+                      <a href="https://www.mercadopago.com.co/ayuda/costo-cobrar-online_328" target="_blank" rel="noopener noreferrer" className="text-[11px] text-emerald-400 underline hover:text-white">Fuente: Mercado Pago oficial ↗</a>
+                    </td>
                     <td className="p-4 text-emerald-400">2.99% + $900 COP</td>
                     <td className="p-4">Saldo en cuenta, Tarjetas, PSE, Efecty</td>
                     <td className="p-4">Inmediata en cuenta MP / 24-48h a bancos</td>
                   </tr>
                   <tr>
-                    <td className="p-4 font-bold text-white">PayU Latam</td>
+                    <td className="p-4 font-bold text-white">
+                      <div>PayU Latam</div>
+                      <a href="https://colombia.payu.com/tarifas/" target="_blank" rel="noopener noreferrer" className="text-[11px] text-emerald-400 underline hover:text-white">Fuente: PayU oficial ↗</a>
+                    </td>
                     <td className="p-4 text-emerald-400">3.49% + $900 COP</td>
                     <td className="p-4">Tarjetas internacionales, PSE, Efectivo</td>
                     <td className="p-4">Solicitud manual de retiro (primeros 3 gratis)</td>
@@ -152,9 +169,13 @@ export default function WompiVsMercadoPagoVsPayuPage() {
               </table>
             </div>
 
+            <p className="font-mono text-xs text-neutral-400">
+              <em>* Nota tributaria: Conforme a la normativa de la <a href="https://www.dian.gov.co/" target="_blank" rel="noopener noreferrer" className="text-neutral-300 underline hover:text-white">DIAN (Dirección de Impuestos y Aduanas Nacionales)</a>, las pasarelas de pago aplican retenciones en la fuente de ReteFuente (1.5%), ReteICA y ReteIVA sobre los valores brutos facturados a personas jurídicas y responsables de IVA.</em>
+            </p>
+
             <h2>Recomendación Técnica de K&T Code</h2>
             <ul>
-              <li><strong>Para comercio electrónico 100% colombiano:</strong> Wompi ofrece la mejor tasa de aprobación y menor fricción para usuarios con cuentas Bancolombia y Nequi.</li>
+              <li><strong>Para comercio electrónico 100% colombiano:</strong> Wompi ofrece la mejor tasa de aprobación y menor fricción para usuarios con cuentas Bancolombia y Nequi, con dispersión automática sin costo adicional.</li>
               <li><strong>Para ventas internacionales y omnicanal:</strong> Bold o Stripe son excelentes complementos para procesar cobros en dólares y tarjetas del exterior sin bloqueos antifraude erróneos.</li>
             </ul>
 

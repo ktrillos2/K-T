@@ -289,30 +289,42 @@ export default function CuantoCuestaPaginaWebBlogPage() {
               Pasarelas de Pago en Colombia y sus Comisiones Reales
             </h2>
             <p>
-              Si tu objetivo es vender online, debes considerar la comisión que cobra la entidad bancaria por cada venta:
+              Según datos de la <a href="https://www.cce.org.co/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white font-semibold">Cámara Colombiana de Comercio Electrónico (CCCE)</a>, más del 58% de las compras en línea en Colombia se liquidan por medio de transferencias PSE. Si tu objetivo es vender online, debes considerar la comisión que cobra cada entidad según sus tarifarios públicos oficiales:
             </p>
 
             <div className="grid gap-4 sm:grid-cols-2 not-prose my-8 font-mono text-xs">
               <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-5">
-                <h3 className="font-title text-base font-bold text-white">Wompi (Bancolombia)</h3>
+                <div className="flex items-center justify-between">
+                  <h3 className="font-title text-base font-bold text-white">Wompi (Bancolombia)</h3>
+                  <a href="https://wompi.co/tarifas" target="_blank" rel="noopener noreferrer" className="text-[11px] text-emerald-400 underline hover:text-white">Fuente: Wompi ↗</a>
+                </div>
                 <p className="mt-2 text-emerald-400 font-bold">2.65% + $700 COP por transacción</p>
                 <p className="mt-2 text-neutral-400">Soporta PSE, tarjetas de crédito/débito, transferencias directas Bancolombia y Nequi. Desembolsos automáticos al siguiente día hábil.</p>
               </div>
 
               <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-5">
-                <h3 className="font-title text-base font-bold text-white">Bold</h3>
+                <div className="flex items-center justify-between">
+                  <h3 className="font-title text-base font-bold text-white">Bold</h3>
+                  <a href="https://bold.co/tarifas" target="_blank" rel="noopener noreferrer" className="text-[11px] text-emerald-400 underline hover:text-white">Fuente: Bold ↗</a>
+                </div>
                 <p className="mt-2 text-emerald-400 font-bold">2.99% + $900 COP + IVA</p>
                 <p className="mt-2 text-neutral-400">Ideal para link de pagos rápidos, datáfonos y PSE con interfaz intuitiva y transferencias bancarias ágiles.</p>
               </div>
 
               <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-5">
-                <h3 className="font-title text-base font-bold text-white">PayU Latam</h3>
+                <div className="flex items-center justify-between">
+                  <h3 className="font-title text-base font-bold text-white">PayU Latam</h3>
+                  <a href="https://colombia.payu.com/tarifas/" target="_blank" rel="noopener noreferrer" className="text-[11px] text-emerald-400 underline hover:text-white">Fuente: PayU ↗</a>
+                </div>
                 <p className="mt-2 text-emerald-400 font-bold">3.29% + $900 COP + IVA</p>
                 <p className="mt-2 text-neutral-400">Permite pagos internacionales en múltiples monedas y pagos en efectivo por Efecty y SuRed.</p>
               </div>
 
               <div className="rounded-xl border border-neutral-800 bg-neutral-950 p-5">
-                <h3 className="font-title text-base font-bold text-white">ePayco (Davivienda)</h3>
+                <div className="flex items-center justify-between">
+                  <h3 className="font-title text-base font-bold text-white">ePayco (Davivienda)</h3>
+                  <a href="https://epayco.com/tarifas/" target="_blank" rel="noopener noreferrer" className="text-[11px] text-emerald-400 underline hover:text-white">Fuente: ePayco ↗</a>
+                </div>
                 <p className="mt-2 text-emerald-400 font-bold">2.68% + $900 COP (PSE)</p>
                 <p className="mt-2 text-neutral-400">Excelente integración con cuentas Davivienda, Daviplata y compras a cuotas.</p>
               </div>

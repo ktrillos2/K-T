@@ -123,18 +123,24 @@ export default function WordPressVsShopifyPage() {
                 <tbody className="divide-y divide-white/10 text-neutral-300">
                   <tr>
                     <td className="p-4 font-bold text-white">Costo Fijo Mensual</td>
-                    <td className="p-4 text-emerald-400">$0 (solo hosting propio)</td>
-                    <td className="p-4 text-rose-400">Desde $39 USD/mes</td>
+                    <td className="p-4 text-emerald-400">
+                      <div>$0 (solo hosting propio)</div>
+                      <a href="https://woocommerce.com/" target="_blank" rel="noopener noreferrer" className="text-[11px] text-emerald-400 underline hover:text-white">Fuente: WooCommerce ↗</a>
+                    </td>
+                    <td className="p-4 text-rose-400">
+                      <div>Desde $39 USD/mes</div>
+                      <a href="https://www.shopify.com/pricing" target="_blank" rel="noopener noreferrer" className="text-[11px] text-rose-400 underline hover:text-white">Fuente: Planes Shopify ↗</a>
+                    </td>
                   </tr>
                   <tr>
                     <td className="p-4 font-bold text-white">Comisión por Venta</td>
-                    <td className="p-4 text-emerald-400">0% adicional</td>
-                    <td className="p-4 text-rose-400">0.5% a 2% extra</td>
+                    <td className="p-4 text-emerald-400">0% adicional de plataforma</td>
+                    <td className="p-4 text-rose-400">0.5% a 2% extra por pasarela externa</td>
                   </tr>
                   <tr>
                     <td className="p-4 font-bold text-white">Propiedad de Datos</td>
-                    <td className="p-4 text-emerald-400">100% tuyo en tu base de datos</td>
-                    <td className="p-4">Propiedad de la plataforma Shopify</td>
+                    <td className="p-4 text-emerald-400">100% en tu base de datos</td>
+                    <td className="p-4">Alojada en servidores de Shopify</td>
                   </tr>
                   <tr>
                     <td className="p-4 font-bold text-white">Pasarelas en Colombia</td>
@@ -144,6 +150,10 @@ export default function WordPressVsShopifyPage() {
                 </tbody>
               </table>
             </div>
+
+            <p className="font-mono text-xs text-neutral-400">
+              <em>Según cifras de la <a href="https://www.cce.org.co/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white">Cámara Colombiana de Comercio Electrónico (CCCE)</a>, más del 58% de las compras virtuales en Colombia se pagan con transferencias PSE. Asimismo, la normativa de la <a href="https://www.dian.gov.co/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white">DIAN</a> exige facturación electrónica en operaciones de e-commerce sobre topes comerciales regulados.</em>
+            </p>
 
             <div className="not-prose my-12 p-8 rounded-3xl border border-white/20 bg-gradient-to-br from-neutral-900 via-zinc-950 to-black">
               <div className="flex items-center gap-3 mb-4 text-emerald-400">

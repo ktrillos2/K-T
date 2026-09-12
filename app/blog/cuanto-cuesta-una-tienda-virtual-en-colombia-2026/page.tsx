@@ -116,9 +116,14 @@ export default function CuantoCuestaTiendaVirtualPage() {
               </div>
 
               <p className="mt-6 border-l-2 border-emerald-400 pl-6 font-mono text-lg leading-relaxed text-neutral-300">
-                Crear una tienda virtual en Colombia implica considerar costos de desarrollo, comisiones bancarias de pasarelas locales (PSE, tarjetas, transferencias) e infraestructura. En esta guía detallamos todos los valores sin comisiones ocultas.
+                Crear una tienda virtual en Colombia implica considerar costos de desarrollo, comisiones bancarias de pasarelas locales (PSE, tarjetas, transferencias) e infraestructura. En esta guía detallamos todos los valores con datos de fuentes oficiales del sector.
               </p>
             </header>
+
+            <h2>Contexto y Crecimiento del Comercio Electrónico en Colombia</h2>
+            <p>
+              Según el informe de coyuntura publicado por la <a href="https://www.cce.org.co/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white font-semibold">Cámara Colombiana de Comercio Electrónico (CCCE)</a>, el volumen de ventas por canales digitales en Colombia superó los 62 billones de pesos anuales. El reporte destaca que más del <strong>74% del tráfico hacia tiendas virtuales proviene de teléfonos inteligentes</strong> y que el mecanismo de pago favorito de los consumidores nacionales sigue siendo <strong>PSE</strong> (Pagos Seguros en Línea) junto con billeteras electrónicas.
+            </p>
 
             {/* Commercial Bridge Banner: Informational -> Commercial */}
             <div className="my-10 rounded-2xl border border-emerald-500/40 bg-gradient-to-r from-emerald-950/40 via-neutral-950 to-neutral-900 p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 not-prose shadow-xl">
@@ -168,18 +173,28 @@ export default function CuantoCuestaTiendaVirtualPage() {
                     <td className="p-4">Pago único</td>
                   </tr>
                   <tr>
-                    <td className="p-4 font-bold text-white">Comisión por Transacción Bancaria</td>
-                    <td className="p-4 text-amber-400">2.6% a 2.99% + $900 COP</td>
+                    <td className="p-4 font-bold text-white">
+                      <div>Comisión por Transacción Bancaria</div>
+                      <span className="text-[11px] text-neutral-400">
+                        (Fuentes oficiales: <a href="https://wompi.co/tarifas" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white">Wompi</a> y <a href="https://bold.co/tarifas" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white">Bold</a>)
+                      </span>
+                    </td>
+                    <td className="p-4 text-amber-400">2.65% a 2.99% + $700-$900 COP</td>
                     <td className="p-4">Por venta realizada</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
+            <h2>Requisitos Legales y Facturación Electrónica DIAN</h2>
+            <p>
+              En Colombia, comercializar bienes y servicios por internet exige cumplir con el Estatuto del Consumidor (Ley 1480 de 2011) y con las directrices de la <a href="https://www.dian.gov.co/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white font-semibold">DIAN (Dirección de Impuestos y Aduanas Nacionales)</a> en materia de Facturación Electrónica obligatoria. Una tienda virtual profesional debe estar preparada para conectarse con proveedores tecnológicos de facturación electrónica autorizados (como Siigo, Alegra o Factus) mediante API.
+            </p>
+
             <h2>Ventajas de una Tienda Headless frente a Plataformas Tradicionales</h2>
             <ul>
-              <li><strong>0% de comisión por venta de la plataforma:</strong> A diferencia de Shopify que cobra un porcentaje extra si no usas su pasarela propia.</li>
-              <li><strong>Carga instantánea en menos de 0.8s:</strong> Reduce drásticamente la tasa de carritos abandonados.</li>
+              <li><strong>0% de comisión de plataforma:</strong> Según la <a href="https://www.shopify.com/pricing" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-white">tabla oficial de tarifas de Shopify</a>, los comercios que usan pasarelas de pago externas en Colombia deben abonar un recargo de entre 0.5% y 2.0% adicional por transacción. En cambio, una tienda headless sobre Next.js no impone ninguna comisión de plataforma.</li>
+              <li><strong>Rendimiento sub-segundo:</strong> Optimiza las métricas de Core Web Vitals y reduce el rebote móvil de carritos de compra.</li>
               <li><strong>Integración directa con WhatsApp:</strong> Permite cerrar ventas tanto por pasarela automática como por chat asistido.</li>
             </ul>
 
