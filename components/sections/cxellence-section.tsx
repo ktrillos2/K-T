@@ -28,10 +28,12 @@ export default function CxellenceSection({ initialProjects = [] }: { initialProj
     slug: p.slug,
     link: `/projects/${p.slug}`,
     liveUrl: p.liveUrl,
+    isFeatured: p.isFeatured,
   }))
 
-  // Proyectos destacados en el carrusel: GMX Gaming, CXellence Group & Telas Real
+  // Sincronizado dinámicamente con Sanity (campo isFeatured) + fallback a destacados principales
   const isFeatured = (proj: any) =>
+    proj.isFeatured === true ||
     proj.slug === "gmx-gaming" ||
     proj.slug === "gmxgaming" ||
     proj.slug === "cxellence-group" ||

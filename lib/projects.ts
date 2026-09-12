@@ -56,6 +56,7 @@ export interface Project {
   }
   metrics: ProjectMetrics
   testimonial?: ProjectTestimonial
+  isFeatured?: boolean
 }
 
 export const projects: Project[] = [

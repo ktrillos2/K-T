@@ -29,10 +29,12 @@ export default function ProjectsSection({ initialProjects = [] }: { initialProje
     slug: p.slug,
     link: `/projects/${p.slug}`,
     externalLink: p.liveUrl,
+    isFeatured: p.isFeatured,
   }));
 
-  // Separate featured projects (GMX Gaming, CXellence Group & Telas Real) from the rest
+  // Separate featured projects from the rest (synchronized with Sanity isFeatured toggle)
   const isFeatured = (proj: any) =>
+    proj.isFeatured === true ||
     proj.slug === "telas-real" ||
     proj.slug === "cxellence-group" ||
     proj.slug === "cxellence" ||

@@ -40,6 +40,13 @@ export default defineType({
         initialValue: 99
     }),
     defineField({
+      name: 'isFeatured',
+      title: '¿Proyecto Destacado?',
+      type: 'boolean',
+      description: 'Activa este interruptor para que el proyecto aparezca en el carrusel de Proyectos Destacados de la página principal.',
+      initialValue: false,
+    }),
+    defineField({
       name: 'year',
       title: 'Año',
       type: 'string',

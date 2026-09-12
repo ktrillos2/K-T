@@ -17,6 +17,7 @@ export interface SanityProject {
   challenge?: string
   solution?: string
   seoFocus?: string
+  isFeatured?: boolean
 }
 
 /** Obtener una cotización por su slug */
@@ -102,7 +103,8 @@ export async function getAllProjects(): Promise<SanityProject[]> {
       liveUrl,
       challenge,
       solution,
-      seoFocus
+      seoFocus,
+      isFeatured
     }`,
     {},
     { next: { revalidate: 60 } }
@@ -139,7 +141,8 @@ export async function getProjectBySlug(slug: string): Promise<SanityProject | nu
       liveUrl,
       challenge,
       solution,
-      seoFocus
+      seoFocus,
+      isFeatured
     }`,
     { slug },
     { next: { revalidate: 60 } }
