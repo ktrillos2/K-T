@@ -1,6 +1,7 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState } from "react"
+import dynamic from "next/dynamic"
 import Image from "next/image"
 import Link from "next/link"
 import { m as motion, useScroll, useTransform } from "framer-motion"
@@ -23,9 +24,12 @@ import {
   Quote,
   TrendingUp,
   ShoppingBag,
+  MessageSquarePlus,
 } from "lucide-react"
 import { useCursor } from "@/context/cursor-context"
 import { Project } from "@/lib/projects"
+
+const TestimonialModal = dynamic(() => import("@/components/modals/testimonial-modal"), { ssr: false })
 
 interface ProjectClientViewProps {
   project: Project
@@ -34,6 +38,7 @@ interface ProjectClientViewProps {
 export default function ProjectClientView({ project }: ProjectClientViewProps) {
   const { setCursorVariant } = useCursor()
   const containerRef = useRef<HTMLDivElement>(null)
+  const [isTestimonialModalOpen, setIsTestimonialModalOpen] = useState(false)
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -441,8 +446,8 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
                 </motion.section>
               )}
 
-              {/* Real Client Testimonial */}
-              {project.testimonial && (
+              {/* Real Client Testimonial (Only if left on web / approved in Sanity) */}
+              {project.testimonial ? (
                 <motion.section
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -454,7 +459,7 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
                   
                   <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
                     <div className="flex items-center gap-1 text-amber-400">
-                      {[...Array(5)].map((_, i) => (
+                      {[...Array(project.testimonial.rating || 5)].map((_, i) => (
                         <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                       ))}
                     </div>
@@ -468,22 +473,78 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
                     &ldquo;{project.testimonial.quote}&rdquo;
                   </blockquote>
 
-                  <div className="flex items-center gap-4 pt-6 border-t border-white/10">
-                    <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 flex items-center justify-center font-bold text-black text-base shrink-0 shadow-md shadow-amber-500/20">
-                      {project.testimonial.author.charAt(0)}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6 border-t border-white/10">
+                    <div className="flex items-center gap-4">
+                      {project.testimonial.avatar ? (
+                        <div className="relative w-11 h-11 rounded-full overflow-hidden shrink-0 border border-amber-500/30">
+                          <Image
+                            src={project.testimonial.avatar}
+                            alt={project.testimonial.author}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 flex items-center justify-center font-bold text-black text-base shrink-0 shadow-md shadow-amber-500/20">
+                          {project.testimonial.author.charAt(0)}
+                        </div>
+                      )}
+                      <div>
+                        <div className="text-white font-bold font-title text-base">
+                          {project.testimonial.author}
+                        </div>
+                        <div className="text-neutral-400 text-xs font-mono">
+                          {project.testimonial.role}
+                          {project.testimonial.company && (
+                            <> &bull; <span className="text-neutral-300 font-semibold">{project.testimonial.company}</span></>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setIsTestimonialModalOpen(true)}
+                      className="text-xs font-mono text-neutral-400 hover:text-amber-400 transition-colors flex items-center gap-1.5 self-start sm:self-center"
+                      onMouseEnter={() => setCursorVariant("hover")}
+                      onMouseLeave={() => setCursorVariant("default")}
+                    >
+                      <MessageSquarePlus className="w-3.5 h-3.5" />
+                      <span>¿Dejar otro testimonio?</span>
+                    </button>
+                  </div>
+                </motion.section>
+              ) : (
+                <motion.section
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="relative border border-dashed border-white/15 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 bg-white/[0.01]"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 shrink-0">
+                      <MessageSquarePlus className="w-6 h-6" />
                     </div>
                     <div>
-                      <div className="text-white font-bold font-title text-base">
-                        {project.testimonial.author}
-                      </div>
-                      <div className="text-neutral-400 text-xs font-mono">
-                        {project.testimonial.role}
-                        {project.testimonial.company && (
-                          <> &bull; <span className="text-neutral-300 font-semibold">{project.testimonial.company}</span></>
-                        )}
-                      </div>
+                      <h3 className="text-white font-title text-base sm:text-lg font-bold">
+                        ¿Fuiste cliente o parte de este proyecto?
+                      </h3>
+                      <p className="text-neutral-400 text-xs sm:text-sm font-mono mt-0.5">
+                        Déjanos tu testimonio sobre {project.title} para que aparezca verificado aquí.
+                      </p>
                     </div>
                   </div>
+                  <button
+                    type="button"
+                    onClick={() => setIsTestimonialModalOpen(true)}
+                    className="px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-mono font-bold text-xs shrink-0 transition-all shadow-lg shadow-amber-400/10 flex items-center gap-2"
+                    onMouseEnter={() => setCursorVariant("hover")}
+                    onMouseLeave={() => setCursorVariant("default")}
+                  >
+                    <span>Dejar Testimonio</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
                 </motion.section>
               )}
 
@@ -539,6 +600,15 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
           Explorar todos los casos de estudio en el portafolio
         </Link>
       </section>
+
+      {/* Modal para dejar testimonio desde el proyecto */}
+      {isTestimonialModalOpen && (
+        <TestimonialModal
+          isOpen={isTestimonialModalOpen}
+          onClose={() => setIsTestimonialModalOpen(false)}
+          defaultProject={project.title}
+        />
+      )}
     </main>
   )
 }

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { getAllProjects, getProjectBySlug } from "@/sanity/lib/queries"
+import { getAllProjects, getProjectBySlug, getApprovedTestimonialForProject } from "@/sanity/lib/queries"
 import ProjectClientView from "@/components/project-client-view"
 import { Metadata } from "next"
 import { Project, projects as localProjects, getProject as getLocalProject } from "@/lib/projects"
@@ -13,6 +13,12 @@ async function resolveProject(slug: string): Promise<Project | null> {
             const city = sanityProject.city !== undefined && sanityProject.city !== null
                 ? sanityProject.city
                 : (sanityProject.country && sanityProject.country !== local?.country ? "" : (local?.city || "Bogotá"))
+
+            // El testimonio debe venir si se dejó un testimonio en la web (aprobado en Sanity)
+            const realTestimonial = await getApprovedTestimonialForProject(
+                sanityProject.title,
+                sanityProject.slug
+            )
 
             return {
                 id: sanityProject._id || sanityProject.slug,
@@ -44,12 +50,7 @@ async function resolveProject(slug: string): Promise<Project | null> {
                     seoFocus: sanityProject.seoFocus || local?.content.seoFocus || "",
                     results: sanityProject.results || local?.content.results || "",
                 },
-                testimonial: sanityProject.testimonialQuote ? {
-                    quote: sanityProject.testimonialQuote,
-                    author: sanityProject.testimonialAuthor || "Cliente",
-                    role: sanityProject.testimonialRole || sanityProject.client || "Cliente",
-                    avatar: local?.testimonial?.avatar || "/perfil.png"
-                } : local?.testimonial,
+                testimonial: realTestimonial || undefined,
                 metrics: local?.metrics || {
                     lighthouseAfter: "98/100",
                     lcp: "680 ms",
@@ -66,7 +67,18 @@ async function resolveProject(slug: string): Promise<Project | null> {
         // Fallback to local
     }
 
-    return local || null
+    if (local) {
+        const realTestimonial = await getApprovedTestimonialForProject(
+            local.title,
+            local.slug
+        )
+        return {
+            ...local,
+            testimonial: realTestimonial || undefined
+        }
+    }
+
+    return null
 }
 
 // Force static generation for these routes - Great for SEO and performance

@@ -167,25 +167,6 @@ export default defineType({
       rows: 3,
       description: 'Impacto y logros obtenidos (ej: reducción de latencia, aumento de conversiones).',
     }),
-    defineField({
-      name: 'testimonialQuote',
-      title: 'Testimonio del Cliente - Cita',
-      type: 'text',
-      rows: 3,
-      description: 'Cita del cliente para este proyecto (opcional).',
-    }),
-    defineField({
-      name: 'testimonialAuthor',
-      title: 'Testimonio del Cliente - Autor',
-      type: 'string',
-      description: 'Nombre de la persona o directivo que brinda el testimonio.',
-    }),
-    defineField({
-      name: 'testimonialRole',
-      title: 'Testimonio del Cliente - Cargo',
-      type: 'string',
-      description: 'Cargo o rol (ej: "Dirección Operativa — GMX Gaming").',
-    }),
   ],
   preview: {
     select: {

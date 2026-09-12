@@ -25,10 +25,16 @@ export interface SanityProject {
   solution?: string
   seoFocus?: string
   results?: string
-  testimonialQuote?: string
-  testimonialAuthor?: string
-  testimonialRole?: string
   isFeatured?: boolean
+}
+
+export interface ProjectTestimonial {
+  quote: string
+  author: string
+  role: string
+  avatar?: string
+  company?: string
+  rating?: number
 }
 
 /** Obtener una cotización por su slug */
@@ -123,9 +129,6 @@ export async function getAllProjects(): Promise<SanityProject[]> {
       solution,
       seoFocus,
       results,
-      testimonialQuote,
-      testimonialAuthor,
-      testimonialRole,
       isFeatured
     }`,
     {},
@@ -172,9 +175,6 @@ export async function getProjectBySlug(slug: string): Promise<SanityProject | nu
       solution,
       seoFocus,
       results,
-      testimonialQuote,
-      testimonialAuthor,
-      testimonialRole,
       isFeatured
     }`,
     { slug },
@@ -191,5 +191,54 @@ export async function getProjectBySlug(slug: string): Promise<SanityProject | nu
       : project.hero
       ? getOptimizedMobileHeroUrl(project.hero)
       : project.mobile,
+  }
+}
+
+/** Obtener el testimonio real y verificado dejado en la web para este proyecto */
+export async function getApprovedTestimonialForProject(
+  projectTitle: string,
+  slug: string
+): Promise<ProjectTestimonial | null> {
+  try {
+    const cleanSlug = slug.replace(/-/g, ' ')
+    const query = `*[_type == "testimonial" && status == "approved" && (
+      lower(project) == lower($projectTitle) ||
+      lower(project) == lower($slug) ||
+      lower(project) == lower($cleanSlug)
+    )] | order(_createdAt desc)[0]{
+      "quote": content,
+      "author": name,
+      role,
+      rating,
+      "avatar": image.asset->url,
+      "company": project
+    }`
+
+    const item = await client.fetch<{
+      quote: string
+      author: string
+      role?: string
+      rating?: number
+      avatar?: string
+      company?: string
+    } | null>(
+      query,
+      { projectTitle, slug, cleanSlug },
+      { next: { revalidate: 60 } }
+    )
+
+    if (!item || !item.quote) return null
+
+    return {
+      quote: item.quote,
+      author: item.author || 'Cliente Verificado',
+      role: item.role || projectTitle,
+      avatar: item.avatar,
+      company: item.company || projectTitle,
+      rating: item.rating || 5,
+    }
+  } catch (error) {
+    console.error('Error fetching approved testimonial for project:', error)
+    return null
   }
 }

@@ -16,9 +16,10 @@ interface CmsProject {
 interface TestimonialModalProps {
     isOpen: boolean
     onClose: () => void
+    defaultProject?: string
 }
 
-export default function TestimonialModal({ isOpen, onClose }: TestimonialModalProps) {
+export default function TestimonialModal({ isOpen, onClose, defaultProject }: TestimonialModalProps) {
     const { dictionary, language } = useLanguage()
     const [step, setStep] = useState(1) // 1: Form, 2: Success
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -27,7 +28,7 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
     const [cmsProjects, setCmsProjects] = useState<CmsProject[]>([])
 
     // Form State
-    const [selectedProject, setSelectedProject] = useState("")
+    const [selectedProject, setSelectedProject] = useState(defaultProject || "")
     const [isProjectDropdownOpen, setIsProjectDropdownOpen] = useState(false)
     const [rating, setRating] = useState(0)
     const [message, setMessage] = useState("")
@@ -36,6 +37,12 @@ export default function TestimonialModal({ isOpen, onClose }: TestimonialModalPr
     const [image, setImage] = useState<File | null>(null)
     const [imagePreview, setImagePreview] = useState<string | null>(null)
     const [projectSearch, setProjectSearch] = useState("")
+
+    useEffect(() => {
+        if (defaultProject) {
+            setSelectedProject(defaultProject)
+        }
+    }, [defaultProject, isOpen])
 
     // Fetch projects from CMS when modal opens
     useEffect(() => {

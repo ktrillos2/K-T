@@ -4,6 +4,7 @@ export interface ProjectTestimonial {
   role: string
   avatar?: string
   company?: string
+  rating?: number
 }
 
 export interface ProjectMetrics {
@@ -111,12 +112,6 @@ export const projects: Project[] = [
         "Diseño gamer de alto impacto con micro-interacciones fluidas.",
       ],
     },
-    testimonial: {
-      quote: "Veníamos de un WordPress que se colgaba, no nos permitía automatizar nada y la experiencia de los jugadores era deficiente. Con K&T creamos una plataforma a nuestra medida: rápida, con diseño gamer brutal y con la administración de torneos 100% automatizada.",
-      author: "Equipo Directivo",
-      role: "Dirección Operativa — GMX Gaming",
-      avatar: "/perfil.png",
-    },
   },
   {
     id: "qvareli",
@@ -198,12 +193,6 @@ export const projects: Project[] = [
         "Flujo de contacto a WhatsApp con mensaje pre-rellenado por especialidad.",
         "Cumplimiento de normativas de tratamiento de datos personales.",
       ],
-    },
-    testimonial: {
-      quote: "Buscábamos una plataforma intuitiva para empresas y empleados. K&T diseñó una interfaz moderna con una experiencia de usuario que nuestros clientes corporativos elogian a diario.",
-      author: "Laura Martínez",
-      role: "Directora de Talento & Bienestar — Psicowork",
-      avatar: "/perfil.png",
     },
   },
   {
@@ -334,12 +323,6 @@ export const projects: Project[] = [
         "Catálogo de +850 referencias con filtrado instantáneo por composición textil y color.",
         "Incremento del 64% en cotizaciones y transacciones completadas por distribuidores.",
       ],
-    },
-    testimonial: {
-      quote: "Migramos nuestra plataforma de e-commerce a Next.js con K&T Code. La velocidad de carga bajó a menos de un segundo y la tasa de conversión en compras con Wompi y PSE aumentó significativamente. Excelente ingeniería.",
-      author: "Camilo Rodríguez",
-      role: "Director de Operaciones — Telas Real",
-      avatar: "/perfil.png",
     },
   },
   {
