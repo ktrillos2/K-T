@@ -10,7 +10,8 @@ const World = dynamic(() => import("../ui/globe").then((m) => m.World), {
 });
 
 export default function InternationalSection() {
-    const { dictionary } = useLanguage();
+    const { dictionary, language } = useLanguage();
+    const isEn = language === "en";
 
     const globeConfig = {
         pointSize: 4,
@@ -444,12 +445,20 @@ export default function InternationalSection() {
                         </motion.p>
 
                         <div className="grid grid-cols-2 gap-4 text-left">
-                            {[
-                                { title: "Horario Global", desc: "Soporte flexible para tu zona", borderColor: "border-white" },
-                                { title: "Pagos Multi-divisa", desc: "USD, COP recibidos", borderColor: "border-white" },
-                                { title: "Stack de Alto Rendimiento", desc: "Next.js, Tailwind, Vercel & Sanity", borderColor: "border-white" },
-                                { title: "Calidad Remota", desc: "Flujos de trabajo asíncronos", borderColor: "border-white" }
-                            ].map((item, idx) => (
+                            {(isEn
+                                ? [
+                                    { title: "Global Schedule", desc: "Flexible support for your time zone", borderColor: "border-white" },
+                                    { title: "Multi-Currency Billing", desc: "USD, EUR & international payments", borderColor: "border-white" },
+                                    { title: "High-Performance Stack", desc: "Next.js, Tailwind, Vercel & Supabase", borderColor: "border-white" },
+                                    { title: "Remote Excellence", desc: "Asynchronous workflows & sprint reviews", borderColor: "border-white" }
+                                  ]
+                                : [
+                                    { title: "Horario Global", desc: "Soporte flexible para tu zona", borderColor: "border-white" },
+                                    { title: "Pagos Multi-divisa", desc: "USD, COP recibidos", borderColor: "border-white" },
+                                    { title: "Stack de Alto Rendimiento", desc: "Next.js, Tailwind, Vercel & Supabase", borderColor: "border-white" },
+                                    { title: "Calidad Remota", desc: "Flujos de trabajo asíncronos", borderColor: "border-white" }
+                                  ]
+                            ).map((item, idx) => (
                                 <motion.div
                                     key={idx}
                                     variants={fadeUpVariant}

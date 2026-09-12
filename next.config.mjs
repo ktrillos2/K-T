@@ -38,6 +38,11 @@ const nextConfig = {
         destination: '/politica-de-privacidad',
         permanent: true,
       },
+      {
+        source: '/en/web-development-company-colombia',
+        destination: '/en/nearshore-web-development-colombia',
+        permanent: true,
+      },
     ]
   },
 }

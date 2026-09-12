@@ -40,9 +40,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: absoluteUrl("/en/about"),
     languages: {
-      "en-US": absoluteUrl("/en/about"),
-      en: absoluteUrl("/en/about"),
+      "es-CO": absoluteUrl("/nosotros"),
       es: absoluteUrl("/nosotros"),
+      en: absoluteUrl("/en/about"),
+      "en-US": absoluteUrl("/en/about"),
       "x-default": absoluteUrl("/nosotros"),
     },
   },

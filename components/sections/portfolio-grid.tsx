@@ -5,6 +5,7 @@ import { m as motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight, Code2 } from "lucide-react"
+import { useLanguage } from "@/context/language-context"
 
 interface PortfolioGridProps {
   projects: any[]
@@ -12,22 +13,104 @@ interface PortfolioGridProps {
   setCursorVariant: (variant: "default" | "text" | "hover") => void
 }
 
+const categoryTranslationsEn: Record<string, string> = {
+  "Todos": "All Projects",
+  "Consultoría / Tecnología": "Consulting & Tech",
+  "Consultoría / B2B": "Consulting & B2B",
+  "Salud Mental y Bienestar": "Healthcare & Wellness",
+  "Inmobiliaria / Real Estate": "Real Estate / PropTech",
+  "Ingeniería / Construcción": "Engineering & Construction",
+  "E-commerce B2B": "B2B E-commerce",
+  "Sitio Corporativo": "Corporate Website",
+  "Catálogo Digital": "Digital Catalog",
+  "Comercio Electrónico": "E-Commerce",
+  "Fintech / SaaS": "Fintech & SaaS",
+}
+
+const monthTranslationsEn: Record<string, string> = {
+  "Enero": "Jan",
+  "Febrero": "Feb",
+  "Marzo": "Mar",
+  "Abril": "Apr",
+  "Mayo": "May",
+  "Junio": "Jun",
+  "Julio": "Jul",
+  "Agosto": "Aug",
+  "Septiembre": "Sep",
+  "Octubre": "Oct",
+  "Noviembre": "Nov",
+  "Diciembre": "Dec",
+}
+
+const projectTranslationsEn: Record<string, { title?: string; desc: string; category?: string }> = {
+  "qvareli": {
+    title: "Qvareli",
+    desc: "B2B corporate web platform engineered for high conversion, authoritative positioning and instant load speeds.",
+    category: "Consulting & Tech",
+  },
+  "psicowork": {
+    title: "Psicowork",
+    desc: "Clinical psychology and corporate wellness platform with automated booking workflows and warm UI.",
+    category: "Healthcare & Wellness",
+  },
+  "cxellence": {
+    title: "CXellence",
+    desc: "B2B corporate platform engineered with Next.js, sub-second latency and semantic SEO for CX leadership.",
+    category: "Consulting & B2B",
+  },
+  "brambila-inmobiliaria": {
+    title: "Brambila's Real Estate",
+    desc: "Dynamic proptech web platform with instant property sheets, search filters and social sharing automation.",
+    category: "Real Estate / PropTech",
+  },
+  "nosky-group": {
+    title: "Nosky Group",
+    desc: "Precision engineering, aerial photogrammetry, and LiDAR scanning corporate platform.",
+    category: "Engineering & Construction",
+  },
+  "telas-real": {
+    title: "Telas Real",
+    desc: "Enterprise B2B headless e-commerce for premium textiles with +850 products catalog and sub-second load times.",
+    category: "B2B E-commerce",
+  },
+  "san-roqueros": {
+    title: "San Roque",
+    desc: "High-impact brand platform and online booking engine for premium pet care and veterinary grooming.",
+    category: "Corporate Website",
+  },
+  "eklipse-home-textil": {
+    title: "Eklipse Home Textil",
+    desc: "Interactive digital showcase for luxury window coverings and motorized home decor with direct consultation.",
+    category: "Digital Catalog",
+  },
+}
+
 export default function PortfolioGrid({ projects, dictionary, setCursorVariant }: PortfolioGridProps) {
+  const { language } = useLanguage()
+  const isEn = language === "en"
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+
+  const allKey = "__all__"
+  const allLabel = isEn ? "All Projects" : "Todos los Proyectos"
   
-  // Extraer todas las categorías únicas
-  const categories = ["Todos", ...Array.from(new Set(projects.map(p => p.category).filter(Boolean)))]
-  const [activeCategory, setActiveCategory] = useState("Todos")
+  // Extraer todas las categorías únicas originales
+  const rawCategories = Array.from(new Set(projects.map(p => p.category).filter(Boolean)))
+  const [activeCategory, setActiveCategory] = useState(allKey)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
-  const filteredProjects = activeCategory === "Todos" 
+  const getCategoryDisplay = (cat: string) => {
+    if (cat === allKey) return allLabel
+    return isEn ? (categoryTranslationsEn[cat] || cat) : cat
+  }
+
+  const filteredProjects = activeCategory === allKey 
     ? projects 
     : projects.filter(p => p.category === activeCategory)
 
   return (
     <div className="w-full">
       {/* Category Dropdown Filter */}
-      {categories.length > 1 && (
+      {rawCategories.length > 1 && (
         <div className="flex justify-center mb-12 lg:mb-16 relative z-30">
           <div className="relative w-full max-w-xs md:max-w-md">
             <button
@@ -37,7 +120,7 @@ export default function PortfolioGrid({ projects, dictionary, setCursorVariant }
               className="w-full relative overflow-hidden flex items-center justify-between px-6 py-4 bg-zinc-950 text-white font-mono font-bold text-sm md:text-base rounded-xl border-2 border-white/20 hover:border-white/50 hover:bg-zinc-900 transition-all duration-300 uppercase tracking-wider group shadow-2xl"
             >
               <div className="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(transparent_50%,rgba(0,0,0,1)_50%)] bg-[length:100%_4px] z-0" />
-              <span className="relative z-10 truncate pr-4">{activeCategory}</span>
+              <span className="relative z-10 truncate pr-4">{getCategoryDisplay(activeCategory)}</span>
               <motion.div animate={{ rotate: isDropdownOpen ? 180 : 0 }} className="relative z-10 shrink-0">
                 <svg className="w-5 h-5 text-white/70 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
@@ -56,7 +139,7 @@ export default function PortfolioGrid({ projects, dictionary, setCursorVariant }
                 >
                   <div className="absolute inset-0 pointer-events-none opacity-10 bg-[linear-gradient(transparent_50%,rgba(0,0,0,1)_50%)] bg-[length:100%_4px] z-0" />
                   <div className="max-h-[60vh] overflow-y-auto relative z-10">
-                    {categories.map((category) => (
+                    {[allKey, ...rawCategories].map((category) => (
                       <button
                         key={category}
                         onClick={() => {
@@ -71,7 +154,7 @@ export default function PortfolioGrid({ projects, dictionary, setCursorVariant }
                             : "text-white/60 hover:bg-white/10 hover:text-white hover:pl-8"
                         }`}
                       >
-                        {category}
+                        {getCategoryDisplay(category)}
                       </button>
                     ))}
                   </div>
@@ -90,6 +173,19 @@ export default function PortfolioGrid({ projects, dictionary, setCursorVariant }
         <AnimatePresence mode="popLayout">
           {filteredProjects.map((project, index) => {
             const isHovered = hoveredIndex === index
+            const enData = isEn ? projectTranslationsEn[project.slug] : null
+            const displayTitle = isEn
+              ? (enData?.title || project.titleEn || project.title)
+              : (project.titleEs || project.title)
+            const displayDesc = isEn
+              ? (enData?.desc || project.descEn || project.shortDescription || project.description)
+              : (project.descEs || project.shortDescription || project.description)
+            const displayCategory = isEn
+              ? (enData?.category || (project.category ? categoryTranslationsEn[project.category] || project.category : null))
+              : project.category
+            const displayMonth = isEn && project.month
+              ? (monthTranslationsEn[project.month] || project.month)
+              : project.month
             
             return (
               <motion.div
@@ -114,7 +210,7 @@ export default function PortfolioGrid({ projects, dictionary, setCursorVariant }
                   {project.image ? (
                     <Image
                       src={project.image}
-                      alt={project.titleEs || project.title || "Project"}
+                      alt={displayTitle || "Project"}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className={`object-contain object-top transition-all duration-700 ease-out ${
@@ -131,10 +227,10 @@ export default function PortfolioGrid({ projects, dictionary, setCursorVariant }
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-80" />
                   
                   {/* Category Badge */}
-                  {project.category && (
+                  {displayCategory && (
                     <div className="absolute top-4 left-4 z-20">
                       <span className="px-3 py-1 bg-black/60 backdrop-blur-md text-white/80 text-[10px] uppercase tracking-wider font-mono rounded border border-white/10">
-                        {project.category}
+                        {displayCategory}
                       </span>
                     </div>
                   )}
@@ -155,17 +251,17 @@ export default function PortfolioGrid({ projects, dictionary, setCursorVariant }
                 <div className="flex flex-col flex-grow p-6 z-10">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-2xl font-bold font-title text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/50 transition-all">
-                      {project.titleEs || project.title}
+                      {displayTitle}
                     </h3>
-                    {(project.year || project.month) && (
+                    {(project.year || displayMonth) && (
                       <span className="text-white/40 font-mono text-sm shrink-0">
-                        {project.month} {project.year}
+                        {displayMonth} {project.year}
                       </span>
                     )}
                   </div>
                   
                   <p className="text-white/60 text-sm line-clamp-2 flex-grow mb-6">
-                    {project.descEs || project.shortDescription || project.description}
+                    {displayDesc}
                   </p>
                   
                   {/* Tech Stack */}

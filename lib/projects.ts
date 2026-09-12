@@ -23,6 +23,8 @@ export interface Project {
   id: string
   slug: string
   title: string
+  titleEn?: string
+  titleEs?: string
   client: string
   industry: string
   country: string
@@ -37,6 +39,8 @@ export interface Project {
   tech: string[]
   shortDescription: string
   description: string
+  descEn?: string
+  descEs?: string
   images: {
     hero: string
     mobile: string

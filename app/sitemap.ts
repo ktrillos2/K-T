@@ -111,6 +111,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 7. Rutas en Inglés con alternates
     const englishRoutes = [
         { url: `${baseUrl}/en`, priority: 0.85 },
+        { url: `${baseUrl}/en/nearshore-web-development-colombia`, priority: 0.95 },
         { url: `${baseUrl}/en/services`, priority: 0.85 },
         { url: `${baseUrl}/en/services/landing-pages`, priority: 0.9 },
         { url: `${baseUrl}/en/services/ecommerce-development`, priority: 0.9 },
