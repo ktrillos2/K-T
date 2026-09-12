@@ -14,6 +14,7 @@ export interface SanityProject {
   objective?: string
   shortDescription?: string
   description?: string
+  date?: string
   year?: string
   month?: string
   category?: string
@@ -118,6 +119,7 @@ export async function getAllProjects(): Promise<SanityProject[]> {
       objective,
       shortDescription,
       description,
+      date,
       year,
       month,
       category,
@@ -164,6 +166,7 @@ export async function getProjectBySlug(slug: string): Promise<SanityProject | nu
       objective,
       shortDescription,
       description,
+      date,
       year,
       month,
       category,

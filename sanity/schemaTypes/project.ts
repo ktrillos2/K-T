@@ -92,14 +92,22 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'date',
+      title: 'Fecha de Lanzamiento / Entrega (Badge)',
+      type: 'string',
+      description: 'Texto exacto para la fecha (ej: "Septiembre 2026", "Marzo 2026"). Si se deja vacío, se genera uniendo automáticamente el Mes y Año.',
+    }),
+    defineField({
       name: 'year',
       title: 'Año',
       type: 'string',
+      description: 'Año de entrega (ej: "2026").',
     }),
     defineField({
       name: 'month',
       title: 'Mes',
       type: 'string',
+      description: 'Mes de entrega (ej: "Septiembre").',
     }),
     defineField({
       name: 'category',

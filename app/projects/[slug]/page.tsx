@@ -20,6 +20,11 @@ async function resolveProject(slug: string): Promise<Project | null> {
                 sanityProject.slug
             )
 
+            const sanityDate = sanityProject.date || [sanityProject.month, sanityProject.year].filter(Boolean).join(" ").trim()
+            const date = sanityDate || local?.date || ""
+            const year = sanityProject.year || local?.year || "2026"
+            const month = sanityProject.month || local?.month || ""
+
             return {
                 id: sanityProject._id || sanityProject.slug,
                 slug: sanityProject.slug,
@@ -29,9 +34,9 @@ async function resolveProject(slug: string): Promise<Project | null> {
                 country,
                 city,
                 projectType: sanityProject.projectType || local?.projectType || sanityProject.category || "Desarrollo Web",
-                date: local?.date || `${sanityProject.month || ""} ${sanityProject.year || ""}`.trim(),
-                year: sanityProject.year || local?.year || "2026",
-                month: sanityProject.month || local?.month || "Febrero",
+                date,
+                year,
+                month,
                 duration: sanityProject.duration || local?.duration || "4 semanas",
                 objective: sanityProject.objective || local?.objective || sanityProject.shortDescription || "Desarrollo web corporativo",
                 category: sanityProject.category || local?.category || "Desarrollo Web",

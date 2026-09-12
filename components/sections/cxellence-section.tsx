@@ -23,6 +23,7 @@ export default function CxellenceSection({ initialProjects = [] }: { initialProj
     image: p.hero || p.images?.hero || "/images/projects/gmx-gaming.webp",
     imageMobile: p.mobile || p.images?.mobile || "/images/projects/gmx-gaming-mobile.webp",
     tech: p.tech || [],
+    date: p.date || [p.month, p.year].filter(Boolean).join(" ").trim(),
     year: p.year,
     month: p.month,
     country: p.country,
@@ -208,7 +209,7 @@ export default function CxellenceSection({ initialProjects = [] }: { initialProj
                         {/* Header Badges */}
                         <div className="flex flex-wrap items-center gap-3 mb-4">
                           <span className="text-white/50 font-mono text-xs uppercase">
-                            {featuredProject.month} {featuredProject.year}
+                            {featuredProject.date || `${featuredProject.month || ""} ${featuredProject.year || ""}`.trim()}
                           </span>
                           {featuredProject.country && (
                             <span className="text-blue-400 font-mono text-xs px-2.5 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20">
