@@ -2,75 +2,53 @@
 
 import { usePathname, useSearchParams } from "next/navigation"
 import Script from "next/script"
-import { useEffect, useState } from "react"
+import { useEffect, useRef } from "react"
+
+const TIKTOK_PIXEL_ID = "D5PGFD3C77UAU1QU4SH0"
 
 export default function TiktokPixel() {
     const pathname = usePathname()
     const searchParams = useSearchParams()
-    const [isLoaded, setIsLoaded] = useState(false)
-    const [shouldLoad, setShouldLoad] = useState(false)
+    const isFirstRender = useRef(true)
+
+    const isAdmin = pathname?.startsWith('/admin') || 
+                    pathname?.startsWith('/crm') || 
+                    pathname?.startsWith('/proyectos') || 
+                    pathname?.startsWith('/finanzas') ||
+                    pathname?.startsWith('/studio') ||
+                    pathname?.startsWith('/usuarios')
 
     useEffect(() => {
-        if (process.env.NODE_ENV !== "production") return
-        const isAdmin = pathname.startsWith('/admin') || 
-                        pathname.startsWith('/crm') || 
-                        pathname.startsWith('/proyectos') || 
-                        pathname.startsWith('/finanzas')
         if (isAdmin) return
 
-        const enable = () => {
-            setShouldLoad(true)
+        // Skip the initial page view since ttq.page() runs when the script initializes
+        if (isFirstRender.current) {
+            isFirstRender.current = false
+            return
         }
 
-        window.addEventListener("pointerdown", enable, { passive: true, once: true })
-        window.addEventListener("keydown", enable, { passive: true, once: true })
-        window.addEventListener("scroll", enable, { passive: true, once: true })
-        window.addEventListener("touchstart", enable, { passive: true, once: true })
-
-        return () => {
-            window.removeEventListener("pointerdown", enable)
-            window.removeEventListener("keydown", enable)
-            window.removeEventListener("scroll", enable)
-            window.removeEventListener("touchstart", enable)
-        }
-    }, [pathname])
-
-    useEffect(() => {
-        // Este efecto gestiona TANTO la carga inicial como la navegación
-        // Se activa cuando el script termina de cargar (isLoaded) o cuando cambia la ruta
-        // @ts-ignore
-        if (shouldLoad && isLoaded && window.ttq) {
-            // @ts-ignore
+        if (typeof window !== "undefined" && window.ttq) {
             window.ttq.page()
         }
-    }, [pathname, searchParams, isLoaded, shouldLoad])
+    }, [pathname, searchParams, isAdmin])
 
-    const isAdmin = pathname.startsWith('/admin') || 
-                    pathname.startsWith('/crm') || 
-                    pathname.startsWith('/proyectos') || 
-                    pathname.startsWith('/finanzas')
-    if (process.env.NODE_ENV !== 'production' || isAdmin) return null
-    if (!shouldLoad) return null
+    if (isAdmin) return null
 
     return (
         <Script
             id="tiktok-pixel"
             strategy="afterInteractive"
-            onLoad={() => {
-                // Solo avisamos que cargó. El useEffect de arriba hará el disparo.
-                setIsLoaded(true)
-            }}
             dangerouslySetInnerHTML={{
                 __html: `
-          !function (w, d, t) {
-            w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-            var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-            ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-          
-            ttq.load('D5PGFD3C77UAU1QU4SH0');
-            // MANTENER COMENTADO: ttq.page(); 
-          }(window, document, 'ttq');
-        `,
+!function (w, d, t) {
+  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+  ttq.load('${TIKTOK_PIXEL_ID}');
+  ttq.page();
+}(window, document, 'ttq');
+`,
             }}
         />
     )

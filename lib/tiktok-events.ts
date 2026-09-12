@@ -1,7 +1,7 @@
 import { createHash } from "crypto"
 
 const TIKTOK_ACCESS_TOKEN = process.env.TIKTOK_ACCESS_TOKEN
-const TIKTOK_PIXEL_ID = process.env.TIKTOK_PIXEL_ID
+const TIKTOK_PIXEL_ID = process.env.TIKTOK_PIXEL_ID || "D5PGFD3C77UAU1QU4SH0"
 
 // Standard events supported by TikTok
 export type TikTokEventName =
