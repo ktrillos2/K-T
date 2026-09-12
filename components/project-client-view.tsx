@@ -461,7 +461,10 @@ export default function ProjectClientView({ project }: ProjectClientViewProps) {
                         {project.testimonial.author}
                       </div>
                       <div className="text-neutral-400 text-xs font-mono">
-                        {project.testimonial.role} &bull; <span className="text-neutral-300 font-semibold">{project.testimonial.company}</span>
+                        {project.testimonial.role}
+                        {project.testimonial.company && (
+                          <> &bull; <span className="text-neutral-300 font-semibold">{project.testimonial.company}</span></>
+                        )}
                       </div>
                     </div>
                   </div>

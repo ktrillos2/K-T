@@ -30,11 +30,16 @@ export default function CxellenceSection({ initialProjects = [] }: { initialProj
   const isFeatured = (proj: any) =>
     proj.slug === "telas-real" ||
     proj.slug === "cxellence" ||
+    proj.slug === "gmx-gaming" ||
+    proj.slug === "gmxgaming" ||
     proj.titleEn?.toLowerCase().includes("telas real") ||
     proj.titleEs?.toLowerCase().includes("telas real") ||
     proj.titleEn?.toLowerCase().includes("cxellence") ||
     proj.titleEs?.toLowerCase().includes("cxellence") ||
-    proj.liveUrl?.includes("telasreal.com");
+    proj.titleEn?.toLowerCase().includes("gmx gaming") ||
+    proj.titleEs?.toLowerCase().includes("gmx gaming") ||
+    proj.liveUrl?.includes("telasreal.com") ||
+    proj.liveUrl?.includes("gmxgaming.com");
 
   const featuredProjects = allProjects.filter(isFeatured);
 

@@ -58,10 +58,11 @@ export default async function PortafolioPage() {
   
   // Combine Sanity projects with hardcoded projects from lib/projects.ts
   const { projects: hardcodedProjects } = await import("@/lib/projects")
-  
-  // If sanity has projects, we prioritize them, otherwise we show hardcoded, or we can just merge them if needed.
-  // For now, let's use hardcoded if Sanity is empty, or merge them.
-  const projects = sanityProjects.length > 0 ? sanityProjects : hardcodedProjects
+  const allSlugSet = new Set(sanityProjects.map((p) => p.slug))
+  const projects = [
+    ...sanityProjects,
+    ...hardcodedProjects.filter((p) => !allSlugSet.has(p.slug)),
+  ]
 
   return (
     <>

@@ -25,6 +25,7 @@ const categoryTranslationsEn: Record<string, string> = {
   "Catálogo Digital": "Digital Catalog",
   "Comercio Electrónico": "E-Commerce",
   "Fintech / SaaS": "Fintech & SaaS",
+  "Gaming / Esports": "Gaming & Esports",
 }
 
 const monthTranslationsEn: Record<string, string> = {
@@ -43,6 +44,11 @@ const monthTranslationsEn: Record<string, string> = {
 }
 
 const projectTranslationsEn: Record<string, { title?: string; desc: string; category?: string }> = {
+  "gmx-gaming": {
+    title: "GMX Gaming",
+    desc: "Custom esports and tournament web platform with automated operations, brackets, and tailored high-speed gaming UI.",
+    category: "Gaming & Esports",
+  },
   "qvareli": {
     title: "Qvareli",
     desc: "B2B corporate web platform engineered for high conversion, authoritative positioning and instant load speeds.",

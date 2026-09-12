@@ -11,6 +11,15 @@ export interface TestimonialItem {
 
 export const fallbackTestimonials: TestimonialItem[] = [
   {
+    _id: "test-gmx-gaming",
+    name: "Equipo Directivo",
+    role: "Dirección Operativa — GMX Gaming",
+    content: "Veníamos de un WordPress limitado que ralentizaba la experiencia y nos obligaba a gestionar torneos manualmente. Con K&T creamos una plataforma a la medida: ultrarrápida, con diseño inmersivo y procesos de inscripción 100% automatizados.",
+    rating: 5,
+    project: "GMX Gaming",
+    projectUrl: "https://gmxgaming.com"
+  },
+  {
     _id: "test-telas-real",
     name: "Camilo Rodríguez",
     role: "Director de Operaciones — Telas Real",

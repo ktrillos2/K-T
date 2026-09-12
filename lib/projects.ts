@@ -3,6 +3,7 @@ export interface ProjectTestimonial {
   author: string
   role: string
   avatar?: string
+  company?: string
 }
 
 export interface ProjectMetrics {
@@ -58,6 +59,64 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    id: "gmx-gaming",
+    slug: "gmx-gaming",
+    title: "GMX Gaming",
+    titleEn: "GMX Gaming",
+    titleEs: "GMX Gaming",
+    client: "GMX Gaming",
+    industry: "Esports & Torneos Gaming",
+    country: "Colombia",
+    city: "Bogotá",
+    projectType: "Plataforma Web de Torneos y Automatización Gaming",
+    date: "Marzo 2026",
+    year: "2026",
+    month: "Marzo",
+    duration: "4 semanas",
+    objective: "Migrar de un WordPress limitante a una plataforma a medida en Next.js con diseño gamer inmersivo y automatización de torneos.",
+    category: "Gaming / Esports",
+    tech: ["Next.js 15", "React 19", "Tailwind CSS", "TypeScript", "Node.js", "Vercel Edge"],
+    shortDescription: "Plataforma a medida para torneos de videojuegos con automatización de inscripciones y gestión operativa.",
+    description: "Diseño y desarrollo de plataforma web de alto rendimiento para GMX Gaming, empresa de torneos de videojuegos. Migración desde una arquitectura rígida y lenta en WordPress hacia una solución a medida en Next.js con diseño exclusivo gamer, automatización integral de inscripciones y administración ágil de competencias.",
+    descEn: "Custom web platform for gaming and esports tournaments with automated registrations, brackets and high-speed UI, replacing legacy WordPress limitations.",
+    descEs: "Plataforma a medida para torneos de videojuegos con automatización de inscripciones y administración operativa, superando las limitaciones de WordPress.",
+    images: {
+      hero: "/images/projects/gmx-gaming.webp",
+      mobile: "/images/projects/gmx-gaming-mobile.webp",
+    },
+    liveUrl: "https://gmxgaming.com",
+    content: {
+      challenge: "GMX Gaming gestionaba sus torneos sobre un WordPress con plantillas genéricas y múltiples plugins que sobrecargaban el servidor y no brindaban una buena experiencia a los jugadores. La gestión de inscripciones, control de llaves (brackets) y verificación de participantes requería procesos manuales lentos, con caídas de rendimiento durante los picos de visitas de las competencias en vivo.",
+      solution: "Construimos una plataforma web 100% personalizada con arquitectura Next.js y Server Components, con una identidad visual moderna orientada a la comunidad gamer. Desarrollamos un panel administrativo a la medida para gestionar competencias en tiempo real, automatizar las inscripciones de jugadores y equipos, y garantizar tiempos de carga instantáneos sin caídas del servidor.",
+      seoFocus: "Plataforma de torneos de videojuegos, torneos esports Colombia, organización de torneos gaming, inscripciones torneos esports.",
+      results: "La plataforma redujo la latencia de carga en un 88% (LCP de 590 ms) y eliminó la fricción operativa al automatizar el 100% del flujo de inscripción y control de torneos. El equipo administrativo ahora gestiona eventos en minutos en lugar de horas, ofreciendo una experiencia profesional y personalizada a miles de gamers.",
+    },
+    metrics: {
+      lighthouseBefore: "38/100",
+      lighthouseAfter: "98/100",
+      lcpBefore: "4.9 s",
+      lcp: "590 ms",
+      loadTimeBefore: "4.9 s",
+      loadTimeAfter: "0.59 s",
+      conversionIncrease: "+85% inscripciones automáticas",
+      catalogSize: "Módulos de Torneo & Brackets",
+      pagesDeveloped: "8 páginas + Panel Administrativo",
+      integrations: "Automatización de Inscripciones + Panel Torneos + WhatsApp API",
+      keyAchievements: [
+        "Migración completa desde WordPress monolítico hacia Next.js a medida.",
+        "Automatización total del flujo de inscripciones y administración de torneos.",
+        "Tiempo de carga móvil (LCP) reducido de 4.9s a 590 ms.",
+        "Diseño gamer de alto impacto con micro-interacciones fluidas.",
+      ],
+    },
+    testimonial: {
+      quote: "Veníamos de un WordPress que se colgaba, no nos permitía automatizar nada y la experiencia de los jugadores era deficiente. Con K&T creamos una plataforma a nuestra medida: rápida, con diseño gamer brutal y con la administración de torneos 100% automatizada.",
+      author: "Equipo Directivo",
+      role: "Dirección Operativa — GMX Gaming",
+      avatar: "/perfil.png",
+    },
+  },
   {
     id: "qvareli",
     slug: "qvareli",
