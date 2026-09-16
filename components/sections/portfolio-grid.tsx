@@ -26,6 +26,7 @@ const categoryTranslationsEn: Record<string, string> = {
   "Comercio Electrónico": "E-Commerce",
   "Fintech / SaaS": "Fintech & SaaS",
   "Gaming / Esports": "Gaming & Esports",
+  "Automotriz": "Automotive",
 }
 
 const monthTranslationsEn: Record<string, string> = {
@@ -44,6 +45,11 @@ const monthTranslationsEn: Record<string, string> = {
 }
 
 const projectTranslationsEn: Record<string, { title?: string; desc: string; category?: string }> = {
+  "repuestos-germana": {
+    title: "Repuestos Germana",
+    desc: "Custom web platform and active digital marketing for high-end auto repair workshop and national parts distributor in Bogotá.",
+    category: "Automotive",
+  },
   "gmx-gaming": {
     title: "GMX Gaming",
     desc: "Custom esports and tournament web platform with automated operations, brackets, and tailored high-speed gaming UI.",
