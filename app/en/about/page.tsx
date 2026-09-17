@@ -257,11 +257,12 @@ export default function EnglishAboutPage() {
               <div className="flex flex-col md:flex-row items-start gap-8">
                 <div className="relative w-24 h-24 rounded-2xl overflow-hidden border-2 border-white/20 shrink-0 bg-neutral-800">
                   <Image
-                    src="/perfil.png"
-                    alt="Keyner Trillos - Co-Founder & Lead Software Engineer"
+                    src="/perfil.webp"
+                    alt="Keyner Trillos - Co-Founder & Lead Software Engineer at K&T Code"
                     fill
                     sizes="96px"
-                    className="object-cover"
+                    className="object-cover object-top"
+                    quality={90}
                   />
                 </div>
                 <div className="space-y-4">

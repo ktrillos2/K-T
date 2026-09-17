@@ -246,11 +246,12 @@ export default function NosotrosPage() {
                 <div className="md:col-span-4 text-center md:text-left">
                   <div className="relative w-28 h-28 rounded-2xl overflow-hidden border border-white/20 mx-auto md:mx-0 mb-4 shadow-xl bg-neutral-900">
                     <Image
-                      src="/perfil.png"
-                      alt="Keyner Trillos - Co-Fundador & Lead Software Engineer"
+                      src="/perfil.webp"
+                      alt="Keyner Trillos - Co-Fundador & Lead Software Engineer en K&T Code"
                       fill
                       sizes="112px"
-                      className="object-cover"
+                      className="object-cover object-top"
+                      quality={90}
                     />
                   </div>
                   <h3 className="text-2xl font-bold text-white font-title">Keyner Trillos</h3>
