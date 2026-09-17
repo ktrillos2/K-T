@@ -1,197 +1,103 @@
-import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
-import { sendTikTokEvent } from '@/lib/tiktok-events';
-
+import { NextResponse } from "next/server"
+import { sendTikTokEvent } from "@/lib/tiktok-events"
+import { buildBrandedEmailHtml, escapeHtml, mailAddresses, sendEmail } from "@/lib/email"
 
 export async function POST(req: Request) {
   try {
-    const { name, phone, message, service } = await req.json();
+    const { name, phone, message, service } = await req.json()
 
-    const transporter = nodemailer.createTransport({
-      host: "smtp-relay.sendinblue.com",
-      port: 587,
-      secure: false, // true for 465, false for other ports
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+    if (!name || !phone) {
+      return NextResponse.json(
+        { success: false, error: "Nombre y teléfono son obligatorios" },
+        { status: 400 }
+      )
+    }
 
-    const mailOptions = {
-      from: '"K&T Code" <contacto@kytcode.lat>', // Sender address
-      to: "contacto@kytcode.lat", // List of receivers
-      subject: `Nueva Solicitud de Servicio - ${service || 'General'}`, // Subject line
-      html: `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <style>
-            * { margin: 0; padding: 0; box-sizing: border-box; }
-            body { 
-              font-family: 'Courier New', Courier, monospace; 
-              background-color: #000000; 
-              color: #ffffff; 
-              padding: 40px 20px;
-              line-height: 1.6;
-            }
-            .email-container { 
-              max-width: 600px; 
-              margin: 0 auto; 
-              background-color: #0a0a0a;
-              border: 2px solid #ffffff;
-              border-radius: 8px;
-              overflow: hidden;
-            }
-            .header { 
-              background-color: #000000;
-              padding: 40px 30px;
-              text-align: center;
-              border-bottom: 2px solid #ffffff;
-            }
-            .brand-name { 
-              color: #ffffff; 
-              font-size: 32px; 
-              font-weight: 700;
-              margin-bottom: 10px;
-              letter-spacing: 4px;
-            }
-            .header h1 { 
-              color: #ffffff; 
-              font-size: 18px; 
-              font-weight: 400;
-              margin: 0;
-              letter-spacing: 1px;
-            }
-            .content { 
-              padding: 40px 30px;
-              background-color: #0a0a0a;
-            }
-            .field-group { 
-              margin-bottom: 30px;
-              padding-bottom: 20px;
-              border-bottom: 1px solid #333333;
-            }
-            .field-group:last-child {
-              border-bottom: none;
-            }
-            .field-label { 
-              color: #ffffff; 
-              font-size: 11px; 
-              text-transform: uppercase;
-              letter-spacing: 2px;
-              margin-bottom: 10px;
-              display: block;
-              font-weight: 700;
-            }
-            .field-value { 
-              color: #ffffff;
-              font-size: 16px; 
-              font-weight: 400;
-              word-wrap: break-word;
-            }
-            .service-value {
-              color: #ffffff;
-              font-size: 18px;
-              font-weight: 700;
-              text-transform: uppercase;
-            }
-            .message-value {
-              white-space: pre-wrap;
-              color: #ffffff;
-              font-size: 15px;
-              line-height: 1.8;
-            }
-            .footer { 
-              background-color: #000000;
-              padding: 30px;
-              text-align: center;
-              border-top: 2px solid #ffffff;
-            }
-            .footer p { 
-              color: #ffffff; 
-              font-size: 11px;
-              margin: 5px 0;
-              letter-spacing: 1px;
-            }
-            @media only screen and (max-width: 600px) {
-              .content { padding: 30px 20px; }
-              .header { padding: 30px 20px; }
-              .brand-name { font-size: 28px; }
-              .header h1 { font-size: 16px; }
-            }
-          </style>
-        </head>
-        <body>
-          <div class="email-container">
-            <div class="header">
-              <div class="brand-name">K&T</div>
-              <h1>Nuevo Mensaje de Contacto</h1>
-            </div>
-            
-            <div class="content">
-              <div class="field-group">
-                <span class="field-label">Cliente</span>
-                <div class="field-value">${name}</div>
-              </div>
+    const serviceName = service || "General / No especificado"
 
-              <div class="field-group">
-                <span class="field-label">Celular / WhatsApp</span>
-                <div class="field-value">${phone}</div>
-              </div>
+    const contentHtml = `
+      <div class="field-card">
+        <span class="field-label">Cliente / Solicitante</span>
+        <div class="field-value">${escapeHtml(name)}</div>
+      </div>
 
-              <div class="field-group">
-                <span class="field-label">Servicio de Interés</span>
-                <div class="service-value">${service || 'No especificado'}</div>
-              </div>
+      <div class="field-card">
+        <span class="field-label">Celular / WhatsApp</span>
+        <div class="field-value">
+          <a href="https://wa.me/${String(phone).replace(/\D/g, "")}" style="color:#34d399;text-decoration:none;font-weight:700;">
+            ${escapeHtml(phone)} ↗
+          </a>
+        </div>
+      </div>
 
-              <div class="field-group">
-                <span class="field-label">Mensaje</span>
-                <div class="message-value">${message}</div>
-              </div>
-            </div>
+      <div class="field-card">
+        <span class="field-label">Servicio de Interés</span>
+        <div class="field-value" style="font-weight:700;color:#ffffff;">${escapeHtml(serviceName)}</div>
+      </div>
 
-            <div class="footer">
-              <p>K&T © ${new Date().getFullYear()}</p>
-              <p style="margin-top: 5px;">kytcode.lat</p>
-            </div>
-          </div>
-        </body>
-        </html>
-      `,
-    };
+      <div class="field-card">
+        <span class="field-label">Mensaje o Requerimiento</span>
+        <div class="message-box">${escapeHtml(message || "Sin mensaje adicional.")}</div>
+      </div>
+    `
 
-    await transporter.sendMail(mailOptions);
+    const html = buildBrandedEmailHtml({
+      badge: "Nueva Solicitud Web",
+      title: "Nuevo Mensaje de Contacto",
+      subtitle: "// Formulario de la plataforma K&T Code",
+      contentHtml,
+      footerNote: "Notificación de lead entrante • Responde al cliente a la brevedad.",
+    })
+
+    const emailResult = await sendEmail({
+      from: "K&T Code <no-reply@kytcode.lat>",
+      to: mailAddresses.contact,
+      subject: `Nueva Solicitud de Servicio - ${serviceName}`,
+      html,
+    })
+
+    if (!emailResult.success) {
+      console.error("Failed to send contact email:", emailResult.error)
+      return NextResponse.json(
+        { success: false, error: emailResult.error || "Error al enviar el correo" },
+        { status: 500 }
+      )
+    }
 
     // Track TikTok Event
-    // Get IP and User Agent from request if possible
-    const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || "";
-    const userAgent = req.headers.get("user-agent") || "";
-    const referer = req.headers.get("referer") || "";
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || ""
+    const userAgent = req.headers.get("user-agent") || ""
+    const referer = req.headers.get("referer") || ""
 
-    // Contact form has name, phone, message, service. 
-    // We can use phone for matching.
     await sendTikTokEvent({
       event_name: "Contact",
       user: {
-        phone: phone, // variable from scope
+        phone: phone,
         ip,
-        user_agent: userAgent
+        user_agent: userAgent,
       },
       page: {
         url: referer,
-        referrer: referer
+        referrer: referer,
       },
       properties: {
-        content_name: service || "General Contact",
-      }
-    });
+        content_name: serviceName,
+      },
+    })
 
-    return NextResponse.json({ success: true, message: 'Email passed to delivery provider' });
-
-  } catch (error) {
-    console.error('Error sending email:', error);
-    return NextResponse.json({ success: false, error: error instanceof Error ? error.message : 'Unknown error', details: error }, { status: 500 });
+    return NextResponse.json({
+      success: true,
+      message: "Mensaje recibido y notificado con éxito",
+      emailId: emailResult.id,
+    })
+  } catch (error: any) {
+    console.error("Error sending contact email:", error)
+    return NextResponse.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Error desconocido",
+      },
+      { status: 500 }
+    )
   }
 }

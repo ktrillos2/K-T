@@ -1,39 +1,39 @@
 'use server';
 
-import nodemailer from 'nodemailer';
-
-// Email configurations
-const ADMIN_EMAIL = 'keteruse@gmail.com';
-const TRANSPOTER_OPTIONS = {
-  host: "smtp-relay.sendinblue.com",
-  port: 587,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: "9e752d001@smtp-brevo.com",
-    pass: "6rRVAHNgq9aXBhPs",
-  },
-};
+import { buildBrandedEmailHtml, escapeHtml, mailAddresses, sendEmail } from '@/lib/email';
 
 export async function notifyQuotationViewed({ client }: { client: string }) {
   try {
-    const transporter = nodemailer.createTransport(TRANSPOTER_OPTIONS);
+    const contentHtml = `
+      <div class="field-card">
+        <span class="field-label">Cliente Activo</span>
+        <div class="field-value" style="font-weight:700;color:#ffffff;font-size:17px;">${escapeHtml(client)}</div>
+      </div>
 
-    const htmlTemplate = `
-      <div style="font-family: sans-serif; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 8px;">
-        <h2 style="color: #000;">👀 ¡Cotización Vista!</h2>
-        <p>El cliente <strong>${client}</strong> acaba de acceder a su cotización usando la contraseña.</p>
-        <p style="color: #666; font-size: 12px; margin-top: 20px;">Este es un mensaje automático de K&T Code.</p>
+      <div class="field-card">
+        <span class="field-label">Detalle de la Actividad</span>
+        <div class="field-value">
+          El cliente acaba de ingresar la contraseña de seguridad y está explorando la propuesta comercial interactiva en tiempo real.
+        </div>
       </div>
     `;
 
-    await transporter.sendMail({
-      from: '"K&T CRM" <contacto@kytcode.lat>',
-      to: ADMIN_EMAIL,
-      subject: `[K&T CRM] 👁️ ${client} está viendo la cotización`,
-      html: htmlTemplate
+    const html = buildBrandedEmailHtml({
+      badge: "Actividad CRM",
+      title: "Cotización Abierta y en Lectura",
+      subtitle: `// Cliente: ${client}`,
+      contentHtml,
+      footerNote: "Notificación de seguimiento comercial de K&T CRM.",
     });
 
-    return { success: true };
+    const result = await sendEmail({
+      from: "K&T Code <no-reply@kytcode.lat>",
+      to: mailAddresses.admin,
+      subject: `[K&T CRM] 👁️ ${client} está viendo la cotización`,
+      html,
+    });
+
+    return { success: result.success };
   } catch (error) {
     console.error('Error sending quote viewed email:', error);
     return { success: false, error: 'Error enviando notificación' };
@@ -42,25 +42,43 @@ export async function notifyQuotationViewed({ client }: { client: string }) {
 
 export async function notifyQuotationAccepted({ client }: { client: string }) {
   try {
-    const transporter = nodemailer.createTransport(TRANSPOTER_OPTIONS);
+    const contentHtml = `
+      <div class="field-card" style="border:1px solid rgba(52, 211, 153, 0.4);background:rgba(52, 211, 153, 0.05);">
+        <span class="field-label" style="color:#34d399;">Estado de la Negociación</span>
+        <div class="field-value" style="font-weight:800;color:#34d399;font-size:18px;">
+          🎉 PROPUESTA ACEPTADA FORMALMENTE
+        </div>
+      </div>
 
-    const htmlTemplate = `
-      <div style="font-family: sans-serif; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; border: 2px solid #10b981; border-radius: 8px; background-color: #f0fdf4;">
-        <h2 style="color: #059669;">🎉 ¡Cotización Aceptada!</h2>
-        <p>¡Excelentes noticias! El cliente <strong>${client}</strong> ha hecho clic en "Aceptar Cotización".</p>
-        <p>Es el momento de contactar al cliente para el paso a paso del pago y el inicio del proyecto.</p>
-        <p style="color: #666; font-size: 12px; margin-top: 20px;">Este es un mensaje automático de K&T Code.</p>
+      <div class="field-card">
+        <span class="field-label">Cliente Comercial</span>
+        <div class="field-value" style="font-weight:700;color:#ffffff;font-size:17px;">${escapeHtml(client)}</div>
+      </div>
+
+      <div class="field-card">
+        <span class="field-label">Siguiente Paso Requerido</span>
+        <div class="message-box">
+          El cliente ha presionado el botón oficial de "Aceptar Cotización". Es momento de contactarlo para la coordinación del anticipo, facturación e inicio del sprint de desarrollo.
+        </div>
       </div>
     `;
 
-    await transporter.sendMail({
-      from: '"K&T CRM" <contacto@kytcode.lat>',
-      to: ADMIN_EMAIL,
-      subject: `[K&T CRM] 💰 ¡¡${client} ACEPTÓ LA COTIZACIÓN!!`,
-      html: htmlTemplate
+    const html = buildBrandedEmailHtml({
+      badge: "¡Victoria Comercial!",
+      title: `¡${client} Aceptó la Cotización!`,
+      subtitle: "// Cierre comercial confirmado",
+      contentHtml,
+      footerNote: "K&T Code System • Gestión Comercial y Cotizaciones.",
     });
 
-    return { success: true };
+    const result = await sendEmail({
+      from: "K&T Code <no-reply@kytcode.lat>",
+      to: mailAddresses.admin,
+      subject: `[K&T CRM] 💰 ¡¡${client} ACEPTÓ LA COTIZACIÓN!!`,
+      html,
+    });
+
+    return { success: result.success };
   } catch (error) {
     console.error('Error sending quote accepted email:', error);
     return { success: false, error: 'Error enviando notificación' };

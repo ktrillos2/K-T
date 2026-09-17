@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from 'next-sanity';
 import { apiVersion, dataset, projectId } from '@/sanity/env';
-import nodemailer from 'nodemailer';
+import { sendEmail, buildBrandedEmailHtml, escapeHtml, mailAddresses } from '@/lib/email';
 
 export async function POST(req: Request) {
     try {
@@ -71,41 +71,51 @@ export async function POST(req: Request) {
         await writeClient.create(doc);
 
         // 3. Send Email Notification
-        const transporter = nodemailer.createTransport({
-            host: "smtp-relay.sendinblue.com",
-            port: 587,
-            secure: false,
-            auth: {
-                user: "9e752d001@smtp-brevo.com",
-                pass: "6rRVAHNgq9aXBhPs",
-            },
+        const senderName = (formData.get('name') as string) || 'Cliente Verificado';
+        const starsText = "★".repeat(Math.max(1, Math.min(5, rating))) + "☆".repeat(Math.max(0, 5 - rating));
+
+        const contentHtml = `
+          <div class="field-card">
+            <span class="field-label">Proyecto Asociado</span>
+            <div class="field-value" style="font-weight:700;color:#ffffff;">${escapeHtml(project)}</div>
+          </div>
+
+          <div class="field-card">
+            <span class="field-label">Cliente / Autor</span>
+            <div class="field-value">${escapeHtml(senderName)} <span style="color:#a1a1aa;font-size:13px;">(${escapeHtml(role || 'Sin cargo')})</span></div>
+          </div>
+
+          <div class="field-card">
+            <span class="field-label">Calificación</span>
+            <div class="field-value" style="color:#fbbf24;font-size:18px;letter-spacing:2px;">
+              ${starsText} <span style="color:#a1a1aa;font-size:13px;margin-left:8px;">(${rating} / 5)</span>
+            </div>
+          </div>
+
+          <div class="field-card">
+            <span class="field-label">Mensaje del Testimonio</span>
+            <div class="message-box">${escapeHtml(message)}</div>
+          </div>
+        `;
+
+        const html = buildBrandedEmailHtml({
+          badge: "Nuevo Testimonio",
+          title: `Testimonio Recibido — ${project}`,
+          subtitle: `Enviado por ${senderName}`,
+          contentHtml,
+          footerNote: "El testimonio queda en estado Pendiente. Ingresa a Sanity Studio para aprobarlo y publicarlo.",
         });
 
-        const mailOptions = {
-            from: '"K&T Code System" <contacto@kytcode.lat>',
-            to: "contacto@kytcode.lat",
-            subject: `Nuevo Testimonio Recibido - ${project}`,
-            html: `
-                <h2>Nuevo Testimonio para ${project}</h2>
-                <p><strong>De:</strong> ${formData.get('name') as string}</p>
-                <p><strong>Calificación:</strong> ${rating} / 5</p>
-                <p><strong>Cargo:</strong> ${role}</p>
-                <p><strong>Mensaje:</strong></p>
-                <blockquote style="background: #f9f9f9; padding: 10px; border-left: 4px solid #333;">
-                    ${message}
-                </blockquote>
-                <p style="margin-top: 20px;">
-                    Este testimonio está en estado <strong>Pendiente</strong>. 
-                    Ingresa a Sanity Studio para aprobarlo o rechazarlo.
-                </p>
-            `,
-        };
-
-        // Don't block response on email sending error, but try to send
+        // Don't block response on email sending error, but send notification
         try {
-            await transporter.sendMail(mailOptions);
+          await sendEmail({
+            from: "K&T Code <no-reply@kytcode.lat>",
+            to: mailAddresses.contact,
+            subject: `⭐ Nuevo Testimonio Recibido - ${project} (${rating}/5)`,
+            html,
+          });
         } catch (emailError) {
-            console.error('Error sending notification email:', emailError);
+          console.error('Error sending notification email:', emailError);
         }
 
         return NextResponse.json({ success: true, message: 'Testimonial submitted successfully' });
