@@ -90,13 +90,14 @@ export default function Header() {
           </Link>
 
           {/* Subtle Desktop Navigation Menu with crawlable links */}
-          <nav aria-label="Navegación principal" className="hidden lg:flex items-center gap-8 text-sm font-mono text-white/50">
+          <nav aria-label="Navegación principal" className="hidden lg:flex items-center gap-4 xl:gap-6 2xl:gap-8 text-sm font-mono text-white/50">
             {[
               { key: "home", href: language === "en" ? "/en" : "/" },
               { key: "about", href: language === "en" ? "/en/about" : "/nosotros" },
               { key: "services", href: language === "en" ? "/en/services" : "/servicios" },
               { key: "prices", href: language === "en" ? "/en/pricing" : "/precios" },
               { key: "work", href: language === "en" ? "/en/portfolio" : "/portafolio" },
+              { key: "testimonials", href: "/testimonios" },
               { key: "blog", href: "/blog" },
               { key: "contact", href: language === "en" ? "/en/contact" : "/#contact" }
             ].map((item) => (
@@ -116,11 +117,11 @@ export default function Header() {
                 }}
                 onMouseEnter={() => setCursorVariant("hover")}
                 onMouseLeave={() => setCursorVariant("default")}
-                className="hover:text-white transition-colors relative group"
+                className={`hover:text-white transition-colors relative group whitespace-nowrap ${pathname === item.href ? "text-white" : ""}`}
               >
                 {/* @ts-ignore */}
                 {dictionary.nav[item.key] || item.key}
-                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full" />
+                <span className={`absolute -bottom-1 left-0 h-[1px] bg-white transition-all duration-300 ${pathname === item.href ? "w-full" : "w-0 group-hover:w-full"}`} />
               </Link>
             ))}
           </nav>
