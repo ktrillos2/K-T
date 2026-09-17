@@ -8,6 +8,7 @@ import { useCursor } from "@/context/cursor-context"
 import { useModal } from "@/context/modal-context"
 import { usePricing } from "@/hooks/use-pricing"
 import { trackGAEvent } from "@/lib/analytics"
+import { trackTikTokEvent } from "@/app/actions/tiktok"
 import Link from "next/link"
 
 export default function HeroSection() {
@@ -221,9 +222,9 @@ export default function HeroSection() {
           {dictionary.hero.description}
         </motion.p>
 
-        {/* Priority Commercial CTAs */}
+        {/* Priority Commercial CTA */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-xl mx-auto mb-6 sm:mb-8 w-full px-2 sm:px-0"
+          className="flex items-center justify-center max-w-md mx-auto mb-6 sm:mb-8 w-full px-4 sm:px-0"
           variants={{
             hidden: { opacity: 0, scale: 0.95, y: 20 },
             visible: { 
@@ -234,45 +235,28 @@ export default function HeroSection() {
             }
           }}
         >
-          {/* Cotizar Landing Page */}
           <button
             onClick={() => {
-              openModal("landing")
+              openModal()
               trackGAEvent("begin_quote", {
-                service_type: "landing-pages",
+                service_type: "general",
                 click_location: "hero_primary_cta",
               })
-            }}
-            aria-label={dictionary.hero.ctaLanding}
-            className="w-full sm:w-auto relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-black font-mono font-bold text-xs sm:text-sm rounded-xl border-2 border-white shadow-[4px_4px_0_rgba(255,255,255,0.2)] hover:shadow-[1px_1px_0_rgba(255,255,255,0.2)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 cursor-pointer group"
-            onMouseEnter={() => setCursorVariant("hover")}
-            onMouseLeave={() => setCursorVariant("default")}
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
-              {dictionary.hero.ctaLanding}
-              <span className="text-base group-hover:translate-x-1 transition-transform">→</span>
-            </span>
-          </button>
-
-          {/* Cotizar Tienda Virtual */}
-          <button
-            onClick={() => {
-              openModal("ecommerce")
-              trackGAEvent("begin_quote", {
-                service_type: "tiendas-virtuales",
-                click_location: "hero_secondary_cta",
+              trackTikTokEvent("ClickButton", {
+                content_name: "Hero Quote Project",
+                content_type: "button",
               })
             }}
-            aria-label={dictionary.hero.ctaStore}
-            className="w-full sm:w-auto relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-black hover:bg-neutral-900 text-white font-mono font-bold text-xs sm:text-sm rounded-xl border-2 border-white/80 hover:border-white shadow-[4px_4px_0_rgba(255,255,255,0.2)] hover:shadow-[1px_1px_0_rgba(255,255,255,0.3)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 cursor-pointer group"
+            aria-label={isEn ? "Quote your project" : "Cotizar tu proyecto"}
+            className="w-full sm:w-auto relative overflow-hidden inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3.5 sm:py-4 bg-white text-black font-title font-bold text-xs sm:text-sm tracking-wider uppercase rounded-xl border-2 border-white shadow-[4px_4px_0_rgba(255,255,255,0.2)] hover:shadow-[1px_1px_0_rgba(255,255,255,0.2)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 cursor-pointer group"
             onMouseEnter={() => setCursorVariant("hover")}
             onMouseLeave={() => setCursorVariant("default")}
           >
-            <span className="relative z-10 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0 animate-pulse" />
-              {dictionary.hero.ctaStore}
-              <span className="text-base group-hover:translate-x-1 transition-transform">→</span>
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.06)_50%,transparent_100%)] w-[200%] -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none" />
+            <span className="relative z-10 flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0 animate-pulse" />
+              <span>{isEn ? "Quote your project" : "Cotizar tu proyecto"}</span>
+              <span className="text-base group-hover:translate-x-1 transition-transform duration-200">→</span>
             </span>
           </button>
         </motion.div>
