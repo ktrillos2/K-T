@@ -36,10 +36,8 @@ export default function FloatingButtons() {
 
     useEffect(() => {
         let mounted = true;
-        let hasInteracted = false;
-        let timePassed = false;
-        let buttonShown = false;
         let audio: HTMLAudioElement | null = null;
+        let soundPlayed = false;
 
         const initAudio = () => {
             if (audio) return;
@@ -84,61 +82,65 @@ export default function FloatingButtons() {
             }
         };
 
-        const showButton = () => {
-            if (buttonShown || !mounted) return;
-            buttonShown = true;
-            setShowQuote(true);
-            playNotificationSound();
-        };
-
-        const checkAndShow = () => {
-            // No mostrar el boton de cotizar ni sonar notificacion si es cotizacion
-            if (hasInteracted && timePassed && !buttonShown && !isQuotationUrl) {
-                showButton();
-            }
-        };
-
-        const onInteract = () => {
-            if (!hasInteracted) {
-                hasInteracted = true;
-                initAudio(); // Inicializamos el audio EXACTAMENTE cuando el usuario toca la web
-                checkAndShow();
-
-                // Limpiamos los listeners para no sobrecargar
-                window.removeEventListener('click', onInteract);
-                window.removeEventListener('scroll', onInteract);
-                window.removeEventListener('mousemove', onInteract);
-                window.removeEventListener('touchstart', onInteract);
-                window.removeEventListener('keydown', onInteract);
-            }
-        };
-
         // Escuchar la primera interacción del usuario para destrabar el Audio de HTML5
-        window.addEventListener('click', onInteract);
-        window.addEventListener('scroll', onInteract);
-        window.addEventListener('mousemove', onInteract);
-        window.addEventListener('touchstart', onInteract);
-        window.addEventListener('keydown', onInteract);
+        const onFirstInteract = () => {
+            initAudio();
+            window.removeEventListener('click', onFirstInteract);
+            window.removeEventListener('scroll', onFirstInteract);
+            window.removeEventListener('touchstart', onFirstInteract);
+            window.removeEventListener('keydown', onFirstInteract);
+        };
 
-        const timer = setTimeout(() => {
-            timePassed = true;
-            checkAndShow();
-        }, 3000);
+        window.addEventListener('click', onFirstInteract, { passive: true });
+        window.addEventListener('scroll', onFirstInteract, { passive: true });
+        window.addEventListener('touchstart', onFirstInteract, { passive: true });
+        window.addEventListener('keydown', onFirstInteract, { passive: true });
+
+        let ticking = false;
+        const handleScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    if (!mounted) return;
+                    const docHeight = document.documentElement.scrollHeight;
+                    const winHeight = window.innerHeight;
+                    const maxScrollable = Math.max(0, docHeight - winHeight);
+
+                    // Activar luego de scrollear ~2 secciones (~1.35x el alto del viewport)
+                    const threshold = Math.min(winHeight * 1.35, maxScrollable > 400 ? maxScrollable * 0.6 : 300);
+                    const isPast = window.scrollY > threshold;
+
+                    setShowQuote(isPast);
+
+                    if (isPast && !soundPlayed && !isQuotationUrl) {
+                        soundPlayed = true;
+                        playNotificationSound();
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+
+        // Verificación inicial de posición de scroll
+        handleScroll();
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', handleScroll, { passive: true });
 
         return () => {
             mounted = false;
-            clearTimeout(timer);
-            window.removeEventListener('click', onInteract);
-            window.removeEventListener('scroll', onInteract);
-            window.removeEventListener('mousemove', onInteract);
-            window.removeEventListener('touchstart', onInteract);
-            window.removeEventListener('keydown', onInteract);
+            window.removeEventListener('click', onFirstInteract);
+            window.removeEventListener('scroll', onFirstInteract);
+            window.removeEventListener('touchstart', onFirstInteract);
+            window.removeEventListener('keydown', onFirstInteract);
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleScroll);
             if (audio) {
                 audio.pause();
                 audio = null;
             }
         };
-    }, [isQuotationUrl])
+    }, [isQuotationUrl, pathname])
 
     // Don't show any floating UI on admin, studio, or dashboard routes
     const isDashboardRoute = pathname?.startsWith('/admin') || 
@@ -208,29 +210,31 @@ export default function FloatingButtons() {
                     >
                         <motion.button
                             onClick={handleQuoteClick}
-                            className="pointer-events-auto relative overflow-hidden group flex items-center gap-3 bg-white text-black px-6 md:px-8 py-3 md:py-4 rounded-full border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] transition-all duration-500"
+                            aria-label={pathname?.startsWith('/en') ? "Quote your project" : "Cotizar tu proyecto"}
+                            className="pointer-events-auto relative overflow-hidden group flex items-center gap-2.5 bg-white text-black px-5 md:px-7 py-3 md:py-3.5 rounded-full border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.25)] hover:shadow-[0_0_40px_rgba(255,255,255,0.45)] transition-all duration-300 font-title"
                             whileHover={{ scale: 1.05, y: -2 }}
                             whileTap={{ scale: 0.95 }}
                             onMouseEnter={() => setCursorVariant("hover")}
                             onMouseLeave={() => setCursorVariant("default")}
                         >
                             <motion.div 
-                                className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.05)_50%,transparent_100%)] w-[200%] z-0"
+                                className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.06)_50%,transparent_100%)] w-[200%] z-0"
                                 initial={{ x: "-100%" }}
                                 whileHover={{ x: "100%" }}
                                 transition={{ duration: 0.8, ease: "easeInOut" }}
                             />
                             
                             <motion.div
-                                className="font-bold text-sm tracking-wide uppercase relative z-10"
+                                className="font-title font-bold text-xs sm:text-sm tracking-wider uppercase relative z-10 flex items-center gap-2 text-black"
                                 initial={{ clipPath: "inset(0 100% 0 0)", opacity: 0 }}
                                 animate={{ clipPath: "inset(0 0% 0 0)", opacity: 1 }}
                                 transition={{ 
-                                    clipPath: { duration: 1.2, ease: "linear", delay: 0.4 },
-                                    opacity: { duration: 0.1, delay: 0.4 }
+                                    clipPath: { duration: 1, ease: "linear", delay: 0.2 },
+                                    opacity: { duration: 0.1, delay: 0.2 }
                                 }}
                             >
-                                Cotizar tu proyecto
+                                <Sparkles className="w-3.5 h-3.5 text-black shrink-0 animate-pulse" />
+                                <span>{pathname?.startsWith('/en') ? "Quote your project" : "Cotizar tu proyecto"}</span>
                             </motion.div>
                         </motion.button>
                     </motion.div>
