@@ -240,16 +240,6 @@ export const blogPosts: BlogPostItem[] = [
     modifiedAt: "2026-08-19",
     readTime: "7 min de lectura",
   },
-  {
-    slug: "que-es-una-landing-page-y-para-que-sirve",
-    title: "Qué es una Landing Page y Para Qué Sirve: Guía de Conversión",
-    excerpt:
-      "Diferencias entre una landing page y un sitio web tradicional: estructura persuasiva, llamadas a la acción (CTA) y cómo maximizar la captación de leads en pauta publicitaria.",
-    category: "Precios & Guías",
-    publishedAt: "2026-06-16",
-    modifiedAt: "2026-08-19",
-    readTime: "8 min de lectura",
-  },
 
   // ─── COMPARATIVAS TÉCNICAS Y COMERCIALES ───────────────────────
   {

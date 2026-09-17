@@ -43,6 +43,11 @@ const nextConfig = {
         destination: '/en/nearshore-web-development-colombia',
         permanent: true,
       },
+      {
+        source: '/blog/que-es-una-landing-page',
+        destination: '/blog/que-es-una-landing-page-y-para-que-sirve',
+        permanent: true,
+      },
     ]
   },
 }
