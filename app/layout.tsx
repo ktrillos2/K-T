@@ -248,7 +248,7 @@ const organizationJsonLd = {
   "sameAs": [
     "https://www.instagram.com/kytcode/",
     "https://www.facebook.com/KTSolutionsWeb",
-    "https://www.tiktok.com/@kytweb"
+    "https://www.tiktok.com/@kytcode"
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",

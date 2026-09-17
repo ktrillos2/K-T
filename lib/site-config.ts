@@ -24,7 +24,7 @@ export const siteConfig = {
   socials: [
     "https://www.instagram.com/kytcode/",
     "https://www.facebook.com/KTSolutionsWeb",
-    "https://www.tiktok.com/@kytweb",
+    "https://www.tiktok.com/@kytcode",
   ],
   areaServed: ["Colombia", "Latinoamérica", "Estados Unidos"],
 } as const

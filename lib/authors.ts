@@ -28,7 +28,7 @@ export const authors: Record<string, Author> = {
     avatar: "/perfil.webp",
     instagram: "https://www.instagram.com/kytcode/",
     facebook: "https://www.facebook.com/KTSolutionsWeb",
-    tiktok: "https://www.tiktok.com/@kytweb",
+    tiktok: "https://www.tiktok.com/@kytcode",
     articlesCount: 26,
     skills: [
       "Next.js App Router",

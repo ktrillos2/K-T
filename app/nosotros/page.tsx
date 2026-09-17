@@ -141,7 +141,7 @@ const aboutJsonLd = {
       "sameAs": [
         "https://www.instagram.com/kytcode/",
         "https://www.facebook.com/KTSolutionsWeb",
-        "https://www.tiktok.com/@kytweb"
+        "https://www.tiktok.com/@kytcode"
       ]
     },
     {
@@ -156,7 +156,7 @@ const aboutJsonLd = {
       "sameAs": [
         "https://www.instagram.com/kytcode/",
         "https://www.facebook.com/KTSolutionsWeb",
-        "https://www.tiktok.com/@kytweb"
+        "https://www.tiktok.com/@kytcode"
       ]
     }
   ]
@@ -280,7 +280,7 @@ export default function NosotrosPage() {
                       <ExternalLink className="w-3 h-3" />
                     </a>
                     <a
-                      href="https://www.tiktok.com/@kytweb"
+                      href="https://www.tiktok.com/@kytcode"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-xs font-mono px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-colors inline-flex items-center gap-1.5"

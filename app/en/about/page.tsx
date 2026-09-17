@@ -108,7 +108,7 @@ const aboutEnJsonLd = {
       "sameAs": [
         "https://www.instagram.com/kytcode/",
         "https://www.facebook.com/KTSolutionsWeb",
-        "https://www.tiktok.com/@kytweb"
+        "https://www.tiktok.com/@kytcode"
       ]
     }
   ]
@@ -237,12 +237,12 @@ export default function EnglishAboutPage() {
                 </a>
                 <span className="text-neutral-600">•</span>
                 <a
-                  href="https://www.tiktok.com/@kytweb"
+                  href="https://www.tiktok.com/@kytcode"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white hover:text-neutral-300 transition-colors"
                 >
-                  TikTok (@kytweb)
+                  TikTok (@kytcode)
                 </a>
               </div>
             </div>

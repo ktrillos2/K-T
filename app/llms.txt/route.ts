@@ -11,7 +11,7 @@ export async function GET() {
 - **Contacto Oficial**: contacto@kytcode.lat | +57 311 636 0057
 - **Instagram**: https://www.instagram.com/kytcode/
 - **Facebook**: https://www.facebook.com/KTSolutionsWeb
-- **TikTok**: https://www.tiktok.com/@kytweb
+- **TikTok**: https://www.tiktok.com/@kytcode
 
 ## Qué Hace K&T Code
 K&T Code es una empresa colombiana especializada en desarrollo de páginas web corporativas, tiendas virtuales (e-commerce) y software a la medida. Todos los desarrollos se programan con ingeniería moderna en Next.js, React 19, TypeScript y Tailwind CSS, eliminando el uso de plantillas sobrecargadas o plugins de terceros lentos.

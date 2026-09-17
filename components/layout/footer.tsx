@@ -66,8 +66,8 @@ export default function Footer() {
     },
     {
       name: "TikTok",
-      handle: "@kytweb",
-      href: "https://www.tiktok.com/@kytweb",
+      handle: "@kytcode",
+      href: "https://www.tiktok.com/@kytcode",
       icon: TikTok,
       color: "text-neutral-200 group-hover:text-white",
       borderHover: "hover:border-white/40",
