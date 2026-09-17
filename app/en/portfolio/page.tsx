@@ -53,16 +53,17 @@ export default async function EnglishPortfolioPage() {
   let projects: any[] = []
   try {
     const sanityProjects = await getAllProjects()
-    const { projects: hardcodedProjects } = await import("@/lib/projects")
+    const { projects: hardcodedProjects, sortProjectsByDateDesc } = await import("@/lib/projects")
     const allSlugSet = new Set(sanityProjects.map((p) => p.slug))
-    projects = [
+    const rawProjects = [
       ...sanityProjects,
       ...hardcodedProjects.filter((p) => !allSlugSet.has(p.slug)),
     ]
+    projects = sortProjectsByDateDesc(rawProjects)
   } catch (error) {
     console.error("Error fetching projects for English portfolio:", error)
-    const { projects: hardcodedProjects } = await import("@/lib/projects")
-    projects = hardcodedProjects
+    const { projects: hardcodedProjects, sortProjectsByDateDesc } = await import("@/lib/projects")
+    projects = sortProjectsByDateDesc(hardcodedProjects)
   }
 
   return (

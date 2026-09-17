@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getAllProjects } from '@/sanity/lib/queries'
-import { projects as hardcodedProjects } from '@/lib/projects'
+import { projects as hardcodedProjects, sortProjectsByDateDesc } from '@/lib/projects'
 
 export const revalidate = 60
 
@@ -12,9 +12,9 @@ export async function GET() {
             ...sanityProjects,
             ...hardcodedProjects.filter(p => !allSlugSet.has(p.slug))
         ]
-        return NextResponse.json(combined)
+        return NextResponse.json(sortProjectsByDateDesc(combined))
     } catch (error) {
         console.error('Error fetching projects:', error)
-        return NextResponse.json(hardcodedProjects)
+        return NextResponse.json(sortProjectsByDateDesc(hardcodedProjects))
     }
 }

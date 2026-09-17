@@ -662,3 +662,68 @@ export const projects: Project[] = [
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug)
 }
+
+const MONTH_MAP: Record<string, number> = {
+  enero: 1,
+  febrero: 2,
+  marzo: 3,
+  abril: 4,
+  mayo: 5,
+  junio: 6,
+  julio: 7,
+  agosto: 8,
+  septiembre: 9,
+  octubre: 10,
+  noviembre: 11,
+  diciembre: 12,
+  jan: 1,
+  feb: 2,
+  mar: 3,
+  apr: 4,
+  may: 5,
+  jun: 6,
+  jul: 7,
+  aug: 8,
+  sep: 9,
+  oct: 10,
+  nov: 11,
+  dec: 12,
+  january: 1,
+  february: 2,
+  march: 3,
+  april: 4,
+  june: 6,
+  july: 7,
+  august: 8,
+  september: 9,
+  october: 10,
+  november: 11,
+  december: 12,
+}
+
+export function getProjectTimestamp(p: { year?: string | number; month?: string; date?: string }): number {
+  const year = parseInt(String(p.year || "2025"), 10) || 2025
+  let month = 1
+
+  if (p.month) {
+    const cleanMonth = p.month.toLowerCase().trim()
+    month = MONTH_MAP[cleanMonth] || 1
+  } else if (p.date) {
+    const cleanDate = p.date.toLowerCase().trim()
+    for (const [mName, mNum] of Object.entries(MONTH_MAP)) {
+      if (cleanDate.includes(mName)) {
+        month = mNum
+        break
+      }
+    }
+  }
+
+  return year * 100 + month
+}
+
+export function sortProjectsByDateDesc<T extends { year?: string | number; month?: string; date?: string }>(
+  items: T[]
+): T[] {
+  return [...items].sort((a, b) => getProjectTimestamp(b) - getProjectTimestamp(a))
+}
+

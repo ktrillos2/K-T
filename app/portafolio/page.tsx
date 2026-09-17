@@ -57,12 +57,13 @@ export default async function PortafolioPage() {
   const sanityProjects = await getAllProjects()
   
   // Combine Sanity projects with hardcoded projects from lib/projects.ts
-  const { projects: hardcodedProjects } = await import("@/lib/projects")
+  const { projects: hardcodedProjects, sortProjectsByDateDesc } = await import("@/lib/projects")
   const allSlugSet = new Set(sanityProjects.map((p) => p.slug))
-  const projects = [
+  const rawProjects = [
     ...sanityProjects,
     ...hardcodedProjects.filter((p) => !allSlugSet.has(p.slug)),
   ]
+  const projects = sortProjectsByDateDesc(rawProjects)
 
   return (
     <>
