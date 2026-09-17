@@ -219,7 +219,7 @@ export default function Header() {
 
             <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="px-4 py-2 text-sm font-mono border border-white/30 rounded hover:border-white hover:bg-white hover:text-black transition-all duration-300"
+              className="lg:hidden px-4 py-2 text-sm font-mono border border-white/30 rounded hover:border-white hover:bg-white hover:text-black transition-all duration-300"
               onMouseEnter={() => setCursorVariant("hover")}
               onMouseLeave={() => setCursorVariant("default")}
               aria-label={isMenuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
