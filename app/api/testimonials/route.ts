@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from 'next-sanity';
 import { apiVersion, dataset, projectId } from '@/sanity/env';
-import { sendEmail, buildBrandedEmailHtml, escapeHtml, mailAddresses } from '@/lib/email';
+import { sendEmail, buildBrandedEmailHtml, escapeHtml, getNotificationRecipients } from '@/lib/email';
 
 export async function POST(req: Request) {
     try {
@@ -110,7 +110,7 @@ export async function POST(req: Request) {
         try {
           await sendEmail({
             from: "K&T Code <no-reply@kytcode.lat>",
-            to: mailAddresses.contact,
+            to: getNotificationRecipients(),
             subject: `⭐ Nuevo Testimonio Recibido - ${project} (${rating}/5)`,
             html,
           });

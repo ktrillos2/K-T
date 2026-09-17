@@ -102,6 +102,7 @@ ${formData.message}
         body: JSON.stringify({
           name: formData.name,
           phone: formData.whatsapp,
+          email: formData.email,
           message: combinedMessage,
           service: formData.projectType
         }),

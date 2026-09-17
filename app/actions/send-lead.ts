@@ -1,10 +1,7 @@
 "use server"
 
-import { Resend } from "resend"
+import { sendEmail, buildBrandedEmailHtml, escapeHtml, getNotificationRecipients } from "@/lib/email"
 import { sendTikTokEvent } from "@/lib/tiktok-events"
-
-
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 interface LeadData {
   name: string
@@ -32,38 +29,62 @@ export async function sendLeadEmail(data: LeadData) {
     const { name, phone, country, service, priceQuote, contactPreference } = data
 
     const serviceName = getServiceName(service)
-    const emailSubject = `🔥 Interesado en ${serviceName}: ${name}`
+    const emailSubject = `🔥 Lead WhatsApp: ${name} (${serviceName})`
 
-    // Construct the WhatsApp reply message for the agency to send BACK to the client
     const agencyReplyMessage = `Hola ${name}, recibimos tu solicitud sobre ${serviceName} (Presupuesto visto: ${priceQuote}). ¿Cómo podemos ayudarte?`
-    const agencyWhatsappUrl = `https://wa.me/${phone.replace('+', '')}?text=${encodeURIComponent(agencyReplyMessage)}`
+    const agencyWhatsappUrl = `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(agencyReplyMessage)}`
 
-    await resend.emails.send({
-      from: "K&T Code <onboarding@resend.dev>",
-      to: ["contacto@kytcode.lat"],
-      subject: emailSubject,
-      html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 8px;">
-          <h2 style="color: #000; border-bottom: 2px solid #25D366; padding-bottom: 10px;">${serviceName}</h2>
-          
-          <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-top: 20px;">
-            <p><strong>👤 Nombre:</strong> ${name}</p>
-            <p><strong>📞 Teléfono:</strong> <a href="${agencyWhatsappUrl}" style="color: #25D366; text-decoration: none; font-weight: bold;">${phone}</a> (${country})</p>
-            <p><strong>💬 Preferencia:</strong> <span style="background-color: ${contactPreference === 'whatsapp' ? '#dcf8c6' : '#e3f2fd'}; padding: 2px 6px; border-radius: 4px;">${contactPreference === 'call' ? 'Llamada' : 'WhatsApp'}</span></p>
-          </div>
+    const contentHtml = `
+      <div class="field-card">
+        <span class="field-label">Cliente / Prospecto</span>
+        <div class="field-value">${escapeHtml(name)}</div>
+      </div>
 
-          <div style="margin-top: 20px;">
-            <p><strong>💰 Cotización vista:</strong> ${priceQuote}</p>
-          </div>
-
-          <hr style="margin-top: 30px; border: 0; border-top: 1px solid #eee;" />
-          <p style="font-size: 12px; color: #777;">Lead desde kytcode.lat</p>
-          
-          <div style="text-align: center; margin-top: 30px;">
-             <a href="${agencyWhatsappUrl}" style="background-color: #25D366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">Contactar (Incluye precio en msg)</a>
-          </div>
+      <div class="field-card">
+        <span class="field-label">Celular / WhatsApp</span>
+        <div class="field-value">
+          <a href="${agencyWhatsappUrl}" style="color:#34d399;text-decoration:none;font-weight:700;">
+            ${escapeHtml(phone)} ↗
+          </a>
+          <span style="color:#a1a1aa;font-size:12px;margin-left:6px;">(${escapeHtml(country)})</span>
         </div>
-      `,
+      </div>
+
+      <div class="field-card">
+        <span class="field-label">Servicio de Interés</span>
+        <div class="field-value" style="font-weight:700;color:#ffffff;">${escapeHtml(serviceName)}</div>
+      </div>
+
+      <div class="field-card">
+        <span class="field-label">Cotización / Tarifa Vista</span>
+        <div class="field-value" style="color:#38bdf8;font-weight:700;">${escapeHtml(priceQuote)}</div>
+      </div>
+
+      <div class="field-card">
+        <span class="field-label">Preferencia de Contacto</span>
+        <div class="field-value">${contactPreference === 'call' ? '📞 Llamada directa' : '💬 Mensaje por WhatsApp'}</div>
+      </div>
+
+      <div style="margin-top:24px;text-align:center;">
+        <a href="${agencyWhatsappUrl}" class="button" style="background:#25D366;color:#000000;font-weight:700;">
+          Responder de inmediato por WhatsApp ↗
+        </a>
+      </div>
+    `
+
+    const html = buildBrandedEmailHtml({
+      badge: "Lead WhatsApp",
+      title: `Nuevo Lead — ${serviceName}`,
+      subtitle: `Solicitud iniciada por ${name}`,
+      contentHtml,
+      footerNote: "Lead capturado a través del modal de cotización rápida de K&T Code.",
+    })
+
+    await sendEmail({
+      from: "K&T Code <no-reply@kytcode.lat>",
+      to: getNotificationRecipients(),
+      subject: emailSubject,
+      html,
     })
 
     await sendTikTokEvent({

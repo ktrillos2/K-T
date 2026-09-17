@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server"
 import { sendTikTokEvent } from "@/lib/tiktok-events"
-import { buildBrandedEmailHtml, escapeHtml, mailAddresses, sendEmail } from "@/lib/email"
+import { buildBrandedEmailHtml, escapeHtml, getNotificationRecipients, sendEmail } from "@/lib/email"
 
 export async function POST(req: Request) {
   try {
-    const { name, phone, message, service } = await req.json()
+    const { name, phone, email, message, service } = await req.json()
 
     if (!name || !phone) {
       return NextResponse.json(
@@ -30,6 +30,16 @@ export async function POST(req: Request) {
         </div>
       </div>
 
+      ${email ? `
+      <div class="field-card">
+        <span class="field-label">Correo Electrónico</span>
+        <div class="field-value">
+          <a href="mailto:${escapeHtml(email)}" style="color:#38bdf8;text-decoration:none;font-weight:600;">
+            ${escapeHtml(email)} ↗
+          </a>
+        </div>
+      </div>` : ''}
+
       <div class="field-card">
         <span class="field-label">Servicio de Interés</span>
         <div class="field-value" style="font-weight:700;color:#ffffff;">${escapeHtml(serviceName)}</div>
@@ -44,15 +54,16 @@ export async function POST(req: Request) {
     const html = buildBrandedEmailHtml({
       badge: "Nueva Solicitud Web",
       title: "Nuevo Mensaje de Contacto",
-      subtitle: "// Formulario de la plataforma K&T Code",
+      subtitle: `// Solicitado por ${name}`,
       contentHtml,
       footerNote: "Notificación de lead entrante • Responde al cliente a la brevedad.",
     })
 
     const emailResult = await sendEmail({
       from: "K&T Code <no-reply@kytcode.lat>",
-      to: mailAddresses.contact,
-      subject: `Nueva Solicitud de Servicio - ${serviceName}`,
+      to: getNotificationRecipients(),
+      replyTo: email || undefined,
+      subject: `🔥 Nueva Solicitud de Contacto - ${name} (${serviceName})`,
       html,
     })
 

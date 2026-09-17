@@ -20,6 +20,18 @@ export const mailAddresses = {
   admin: process.env.ADMIN_EMAIL || "keteruse@gmail.com",
 }
 
+export function getNotificationRecipients(): string[] {
+  const envRecipients = process.env.NOTIFICATION_EMAIL;
+  if (envRecipients) {
+    const list = envRecipients.split(",").map((e) => e.trim()).filter(Boolean);
+    if (list.length > 0) return list;
+  }
+  const recipients = new Set<string>();
+  if (mailAddresses.contact) recipients.add(mailAddresses.contact);
+  if (mailAddresses.admin) recipients.add(mailAddresses.admin);
+  return Array.from(recipients);
+}
+
 /**
  * Plantilla HTML de correo premium corporativo con logo desde Sanity,
  * estética dark mode cuidada, borde sutil y firma oficial de K&T.
