@@ -621,7 +621,7 @@ export default function ContactSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-6 md:gap-8 w-full max-w-4xl mx-auto px-2 sm:px-0">
             {contactInfo.map((item) => {
               const Icon = item.icon
               const displayValue = item.label === "location" ? dictionary.contact.locationValue : item.value
@@ -635,19 +635,19 @@ export default function ContactSection() {
                 <Wrapper
                   key={item.label}
                   {...wrapperProps}
-                  className="flex items-center gap-4 group transition-colors"
+                  className="flex items-center gap-3 sm:gap-4 p-3 sm:p-0 rounded-xl bg-white/[0.03] sm:bg-transparent border border-white/10 sm:border-none group transition-colors justify-start"
                   variants={fadeUpVariant}
                   onMouseEnter={() => item.href && setCursorVariant("hover")}
                   onMouseLeave={() => setCursorVariant("default")}
                 >
-                  <div className="flex items-center justify-center w-12 h-12">
-                    <Icon className="w-7 h-7 text-white group-hover:scale-110 transition-transform duration-300" />
+                  <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/5 sm:bg-transparent shrink-0">
+                    <Icon className="w-5 h-5 sm:w-7 sm:h-7 text-white group-hover:scale-110 transition-transform duration-300" />
                   </div>
-                  <div className="text-left">
-                    <p className="text-xs text-white/60 font-mono uppercase leading-tight mb-1">
+                  <div className="text-left min-w-0">
+                    <p className="text-[11px] sm:text-xs text-white/60 font-mono uppercase leading-tight mb-0.5 sm:mb-1">
                       {dictionary.contact[item.label as keyof typeof dictionary.contact] || item.label}
                     </p>
-                    <p className="text-white font-mono text-sm md:text-base font-medium group-hover:text-white/80 transition-colors">
+                    <p className="text-white font-mono text-xs sm:text-sm md:text-base font-medium group-hover:text-white/80 transition-colors truncate">
                       {displayValue}
                     </p>
                   </div>

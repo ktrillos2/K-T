@@ -78,7 +78,7 @@ export default function Footer() {
     <footer
       role="contentinfo"
       aria-label="Pie de página corporativo de K&T Code"
-      className="relative bg-black text-white border-t border-white/10 pt-16 pb-24 md:pb-16 px-4 sm:px-6 overflow-hidden cv-auto"
+      className="relative bg-black text-white border-t border-white/10 pt-16 pb-32 sm:pb-24 md:pb-16 px-4 sm:px-6 overflow-hidden cv-auto"
     >
       {/* Background Subtle Gradient */}
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.1),rgba(255,255,255,0))]" />

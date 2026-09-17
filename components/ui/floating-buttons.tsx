@@ -199,17 +199,17 @@ export default function FloatingButtons() {
 
     return (
         <motion.div
-            className="fixed inset-x-6 bottom-6 z-50 pointer-events-none"
+            className="fixed inset-x-4 sm:inset-x-6 bottom-4 sm:bottom-6 z-50 pointer-events-none"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
         >
             <AnimatePresence>
-                {/* Quote Button (Bottom Left) */}
+                {/* Quote Button (Stacked above WhatsApp on mobile, bottom-left on desktop) */}
                 {showQuote && !isQuotationUrl && (
                     <motion.div
                         key="floating-quote-button"
-                        className="absolute bottom-0 left-0"
+                        className="absolute bottom-[68px] sm:bottom-0 right-0 sm:left-0 sm:right-auto"
                         variants={itemVariants}
                         initial="hidden"
                         animate="visible"
@@ -218,7 +218,7 @@ export default function FloatingButtons() {
                         <motion.button
                             onClick={handleQuoteClick}
                             aria-label={pathname?.startsWith('/en') ? "Quote your project" : "Cotizar tu proyecto"}
-                            className="pointer-events-auto relative overflow-hidden group flex items-center gap-2.5 bg-white text-black px-5 md:px-7 py-3 md:py-3.5 rounded-full border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.25)] hover:shadow-[0_0_40px_rgba(255,255,255,0.45)] transition-all duration-300 font-title"
+                            className="pointer-events-auto relative overflow-hidden group flex items-center gap-2 sm:gap-2.5 bg-white text-black px-4 sm:px-7 py-2.5 sm:py-3.5 rounded-full border border-white/20 shadow-[0_4px_25px_rgba(0,0,0,0.45)] sm:shadow-[0_0_20px_rgba(255,255,255,0.25)] hover:shadow-[0_0_40px_rgba(255,255,255,0.45)] transition-all duration-300 font-title"
                             whileHover={{ scale: 1.05, y: -2 }}
                             whileTap={{ scale: 0.95 }}
                             onMouseEnter={() => setCursorVariant("hover")}
@@ -232,12 +232,12 @@ export default function FloatingButtons() {
                             />
                             
                             <motion.div
-                                className="font-title font-bold text-xs sm:text-sm tracking-wider uppercase relative z-10 flex items-center gap-2 text-black"
+                                className="font-title font-bold text-[11px] sm:text-xs md:text-sm tracking-wider uppercase relative z-10 flex items-center gap-2 text-black"
                                 initial={{ clipPath: "inset(0 100% 0 0)", opacity: 0 }}
                                 animate={{ clipPath: "inset(0 0% 0 0)", opacity: 1 }}
                                 transition={{ 
-                                    clipPath: { duration: 1, ease: "linear", delay: 0.2 },
-                                    opacity: { duration: 0.1, delay: 0.2 }
+                                    clipPath: { duration: 0.6, ease: "linear", delay: 0.1 },
+                                    opacity: { duration: 0.1, delay: 0.1 }
                                 }}
                             >
                                 <Sparkles className="w-3.5 h-3.5 text-black shrink-0 animate-pulse" />
@@ -258,7 +258,7 @@ export default function FloatingButtons() {
                 >
                     <motion.button
                         onClick={handleWhatsAppClick}
-                        className="pointer-events-auto group relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-lg hover:shadow-[0_0_20px_rgba(37,211,102,0.5)] transition-shadow duration-300"
+                        className="pointer-events-auto group relative flex items-center justify-center w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-[#25D366] text-white shadow-lg hover:shadow-[0_0_20px_rgba(37,211,102,0.5)] transition-shadow duration-300"
                         whileHover={{ scale: 1.1, rotate: 10 }}
                         whileTap={{ scale: 0.9 }}
                         onMouseEnter={() => setCursorVariant("hover")}
