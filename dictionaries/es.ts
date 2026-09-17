@@ -7,6 +7,7 @@ export const es = {
     contact: "Contacto",
     blog: "Blog",
     prices: "Precios",
+    testimonials: "Testimonios",
     menu: "MENÚ",
     close: "CERRAR",
     hoverHint: "// Pasa el cursor para ver",

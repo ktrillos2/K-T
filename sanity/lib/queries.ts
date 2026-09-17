@@ -245,3 +245,26 @@ export async function getApprovedTestimonialForProject(
     return null
   }
 }
+
+/** Obtener todos los testimonios aprobados en Sanity */
+export async function getApprovedTestimonials() {
+  try {
+    return await client.fetch(
+      `*[_type == "testimonial" && status == "approved"] | order(_createdAt desc){
+        _id,
+        name,
+        role,
+        content,
+        rating,
+        project,
+        "image": image.asset->url
+      }`,
+      {},
+      { next: { revalidate: 60 } }
+    )
+  } catch (error) {
+    console.error('Error fetching all approved testimonials:', error)
+    return []
+  }
+}
+

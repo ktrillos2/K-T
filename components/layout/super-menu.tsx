@@ -48,6 +48,7 @@ export default function SuperMenu({ isOpen, onClose }: SuperMenuProps) {
     { key: "services", href: isEn ? "/en/services" : "/servicios", image: "/images/services-preview.webp" },
     { key: "prices", href: isEn ? "/en/pricing" : "/precios", image: "/images/services-preview.webp" },
     { key: "work", href: isEn ? "/en/portfolio" : "/portafolio", image: "/images/work-preview.webp" },
+    { key: "testimonials", href: "/testimonios", image: "/images/work-preview.webp" },
     { key: "blog", href: "/blog", image: "/images/work-preview.webp" },
     { key: "contact", href: isEn ? "/en/contact" : "/#contact", image: "/images/contact-preview.webp" },
   ]

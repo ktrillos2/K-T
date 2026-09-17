@@ -7,6 +7,7 @@ export const en = {
     contact: "Contact",
     prices: "Pricing",
     blog: "Blog",
+    testimonials: "Testimonials",
     menu: "MENU",
     close: "CLOSE",
     hoverHint: "// Hover a link to preview",

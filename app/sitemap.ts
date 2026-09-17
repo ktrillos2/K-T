@@ -176,6 +176,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: 'weekly',
             priority: 0.85,
         },
+        {
+            url: `${baseUrl}/testimonios`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
         // Grupos de contenido transaccional y hubs
         ...serviceUrls,
         ...cityUrls,

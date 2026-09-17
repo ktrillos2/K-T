@@ -34,6 +34,7 @@ export default function Footer() {
     { label: dictionary.nav.services, href: isEn ? "/en/services" : "/servicios" },
     { label: dictionary.nav.prices, href: isEn ? "/en/pricing" : "/precios" },
     { label: dictionary.nav.work, href: isEn ? "/en/portfolio" : "/portafolio" },
+    { label: (dictionary.nav as any).testimonials || "Testimonios", href: "/testimonios" },
     { label: dictionary.nav.blog, href: "/blog" },
   ]
 
