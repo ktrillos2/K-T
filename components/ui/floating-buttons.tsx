@@ -105,9 +105,10 @@ export default function FloatingButtons() {
                     const winHeight = window.innerHeight;
                     const maxScrollable = Math.max(0, docHeight - winHeight);
 
-                    // Activar luego de scrollear ~2 secciones (~1.35x el alto del viewport)
-                    const threshold = Math.min(winHeight * 1.35, maxScrollable > 400 ? maxScrollable * 0.6 : 300);
-                    const isPast = window.scrollY > threshold;
+                    // Salir de nuevo solamente cuando se baja casi hasta la mitad de la página (~45% del scroll total)
+                    // y quitarse inmediatamente al subir hacia la parte superior.
+                    const threshold = Math.max(maxScrollable * 0.45, 800);
+                    const isPast = window.scrollY >= threshold;
 
                     setShowQuote(isPast);
 
@@ -181,12 +182,18 @@ export default function FloatingButtons() {
     }
 
     const itemVariants = {
-        hidden: { opacity: 0, y: 20, scale: 0.8 },
+        hidden: { opacity: 0, y: 20, scale: 0.85, transition: { duration: 0.2, ease: "easeOut" } },
         visible: {
             opacity: 1,
             y: 0,
             scale: 1,
-            transition: { type: "spring", stiffness: 300, damping: 20 } as any
+            transition: { type: "spring", stiffness: 300, damping: 22 } as any
+        },
+        exit: {
+            opacity: 0,
+            y: 20,
+            scale: 0.85,
+            transition: { duration: 0.2, ease: "easeInOut" }
         }
     }
 
@@ -206,7 +213,7 @@ export default function FloatingButtons() {
                         variants={itemVariants}
                         initial="hidden"
                         animate="visible"
-                        exit="hidden"
+                        exit="exit"
                     >
                         <motion.button
                             onClick={handleQuoteClick}
