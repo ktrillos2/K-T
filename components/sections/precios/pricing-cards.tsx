@@ -5,12 +5,20 @@ import { Check, Info, ArrowRight } from "lucide-react"
 import { useCursor } from "@/context/cursor-context"
 
 import { useLanguage } from "@/context/language-context"
+import { usePricing, type PlanType } from "@/hooks/use-pricing"
 
-const plans = [
+const plans: {
+  key: PlanType
+  title: string
+  description: string
+  features: string[]
+  buttonText: string
+  recommended: boolean
+  whatsappMessage: string
+}[] = [
   {
+    key: "landing",
     title: "Landing Page",
-    copPrice: "Desde $450.000 COP",
-    usdPrice: 200,
     description: "Ideal para campañas publicitarias, presentación de servicios, captación de clientes y lanzamientos.",
     features: [
       "Diseño personalizado",
@@ -28,9 +36,8 @@ const plans = [
     whatsappMessage: "Hola,%20me%20gustar%C3%ADa%20solicitar%20el%20plan%20Landing%20Page."
   },
   {
+    key: "corporate",
     title: "Sitio Web Corporativo",
-    copPrice: "Desde $2.500.000 COP",
-    usdPrice: 600,
     description: "Pensado para empresas que necesitan una presencia digital profesional, completa y preparada para crecer.",
     features: [
       "Diseño personalizado",
@@ -50,10 +57,9 @@ const plans = [
     whatsappMessage: "Hola,%20me%20gustar%C3%ADa%20solicitar%20el%20plan%20Sitio%20Web%20Corporativo."
   },
   {
+    key: "ecommerce",
     title: "Tienda Virtual",
-    copPrice: "Desde $1.300.000 COP",
-    usdPrice: 450,
-    description: "Ecommerce Starter desde $1.300.000 COP y Headless Next.js desde $2.000.000 COP para venta online con pasarelas colombianas.",
+    description: "Soluciones de comercio electrónico optimizadas para venta online con catálogo, carrito y pasarelas de pago.",
     features: [
       "Diseño personalizado",
       "Catálogo de productos",
@@ -72,9 +78,8 @@ const plans = [
     whatsappMessage: "Hola,%20me%20gustar%C3%ADa%20solicitar%20el%20plan%20Tienda%20Virtual."
   },
   {
+    key: "custom",
     title: "Software a Medida",
-    copPrice: "Desde $4.500.000 COP / Cotización",
-    usdPrice: null,
     description: "Para plataformas, sistemas internos, SaaS, automatizaciones, paneles administrativos y soluciones con funcionalidades especiales.",
     features: [
       "Análisis de requerimientos",
@@ -96,7 +101,8 @@ const plans = [
 
 export default function PricingCards() {
   const { setCursorVariant } = useCursor()
-  const { country, convertPrice } = useLanguage()
+  const { country } = useLanguage()
+  const { getPrice } = usePricing()
 
   const handleSelectPlan = (planTitle: string, whatsappMessage: string) => {
     if (typeof window !== "undefined" && window.gtag) {
@@ -109,15 +115,16 @@ export default function PricingCards() {
   }
 
   const displayPrice = (plan: typeof plans[0]) => {
-    if (plan.title === "Software a Medida" || !plan.usdPrice) return plan.copPrice;
-    
-    if (country === "Colombia") {
-      return plan.copPrice;
+    return getPrice(plan.key)
+  }
+
+  const getPlanDescription = (plan: typeof plans[0]) => {
+    if (plan.key === "ecommerce") {
+      return country === "Colombia"
+        ? "Ecommerce Starter desde $1.300.000 COP y Headless Next.js desde $2.000.000 COP para venta online con pasarelas de pago."
+        : "Soluciones de comercio electrónico optimizadas para venta online con catálogo, carrito y pasarelas de pago integradas."
     }
-    
-    const converted = convertPrice(plan.usdPrice);
-    if (converted === "Loading...") return "Calculando...";
-    return `Desde ${converted}`;
+    return plan.description
   }
 
   return (
@@ -151,7 +158,7 @@ export default function PricingCards() {
                 {displayPrice(plan)}
               </div>
               <p className="text-white/50 text-sm font-mono leading-relaxed min-h-[5rem]">
-                {plan.description}
+                {getPlanDescription(plan)}
               </p>
             </div>
 

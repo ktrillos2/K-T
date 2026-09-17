@@ -5,9 +5,12 @@ import { useCursor } from "@/context/cursor-context"
 import { smoothScrollTo } from "@/lib/utils"
 import { ArrowRight, ChevronDown } from "lucide-react"
 import { useEffect } from "react"
+import { useLanguage } from "@/context/language-context"
 
 export default function PricingHero() {
   const { setCursorVariant } = useCursor()
+  const { country, language } = useLanguage()
+  const isEn = language === "en" || country === "Estados Unidos"
 
   useEffect(() => {
     // Send event on mount
@@ -56,11 +59,19 @@ export default function PricingHero() {
         </div>
 
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-title leading-tight tracking-tight py-2 mt-2">
-          Precios de Páginas Web y Desarrollo Web en Colombia
+          {isEn
+            ? "Web Development & Custom Software Pricing"
+            : (country === "Colombia"
+              ? "Precios de Páginas Web y Desarrollo Web en Colombia"
+              : `Precios de Páginas Web y Desarrollo Web en ${country}`)}
         </h1>
 
         <p className="text-lg md:text-xl text-white/60 font-mono max-w-3xl mx-auto leading-relaxed">
-          En K&T Code ofrecemos planes transparentes para páginas web profesionales, tiendas virtuales y software a medida en Colombia. Arquitectura moderna sobre Next.js, SEO técnico y alto rendimiento.
+          {isEn
+            ? "Transparent pricing for landing pages, corporate websites, headless e-commerce, and custom software. High performance guaranteed with Next.js."
+            : (country === "Colombia"
+              ? "En K&T Code ofrecemos planes transparentes para páginas web profesionales, tiendas virtuales y software a medida en Colombia. Arquitectura moderna sobre Next.js, SEO técnico y alto rendimiento."
+              : `En K&T Code ofrecemos tarifas transparentes sincronizadas para ${country} en páginas web profesionales, tiendas virtuales y software a medida. Arquitectura moderna sobre Next.js, SEO técnico y alto rendimiento.`)}
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">

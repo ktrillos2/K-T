@@ -11,15 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { useCursor } from "@/context/cursor-context"
-
-const budgetOptions = [
-  "Menos de $1.000.000 COP",
-  "Entre $1.000.000 y $2.500.000 COP",
-  "Entre $2.500.000 y $5.000.000 COP",
-  "Entre $5.000.000 y $10.000.000 COP",
-  "Más de $10.000.000 COP",
-  "Necesito orientación"
-]
+import { useLanguage } from "@/context/language-context"
 
 const projectTypes = [
   "Landing page",
@@ -33,6 +25,37 @@ const projectTypes = [
 
 export default function PricingCTA() {
   const { setCursorVariant } = useCursor()
+  const { country, language } = useLanguage()
+
+  const isColombia = country === "Colombia"
+  const isEn = language === "en" || country === "Estados Unidos"
+
+  const budgetOptions = isColombia
+    ? [
+        "Menos de $1.000.000 COP",
+        "Entre $1.000.000 y $2.500.000 COP",
+        "Entre $2.500.000 y $5.000.000 COP",
+        "Entre $5.000.000 y $10.000.000 COP",
+        "Más de $10.000.000 COP",
+        "Necesito orientación"
+      ]
+    : isEn
+    ? [
+        "Under $300 USD",
+        "Between $300 and $700 USD",
+        "Between $700 and $1,500 USD",
+        "Between $1,500 and $3,000 USD",
+        "More than $3,000 USD",
+        "I need guidance"
+      ]
+    : [
+        "Menos de $300 USD (o equivalente)",
+        "Entre $300 y $700 USD",
+        "Entre $700 y $1.500 USD",
+        "Entre $1.500 y $3.000 USD",
+        "Más de $3.000 USD",
+        "Necesito orientación"
+      ]
   
   const [formData, setFormData] = useState({
     name: "",

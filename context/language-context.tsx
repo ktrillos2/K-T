@@ -272,20 +272,36 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     return () => clearTimeout(t)
   }, [country])
 
+  const DEFAULT_EXCHANGE_RATES: Record<string, number> = {
+    USD: 1,
+    COP: 4200,
+    MXN: 18.2,
+    ARS: 1250,
+    PEN: 3.75,
+    CLP: 940,
+    UYU: 41,
+    PYG: 7850,
+  }
+
   const convertPrice = (usdAmount: number) => {
-    if (country === "Colombia") return "" // Handled specifically for fixed pricing
+    if (country === "Colombia") {
+      if (usdAmount === 200 || usdAmount === 150) return "$450.000 COP"
+      if (usdAmount === 600 || usdAmount === 500) return "$2.500.000 COP"
+      if (usdAmount === 450 || usdAmount === 350) return "$1.300.000 COP"
+      if (usdAmount === 1200 || usdAmount === 950) return "$4.500.000 COP"
+      const copAmount = Math.round((usdAmount * (exchangeRates.COP || DEFAULT_EXCHANGE_RATES.COP || 4200)) / 10000) * 10000
+      return `$${copAmount.toLocaleString("es-CO")} COP`
+    }
 
-    const code = currencyMap[country]
-    const rate = exchangeRates[code]
-
-    if (!rate) return "Loading..."
+    const code = currencyMap[country] || "USD"
+    const rate = exchangeRates[code] || DEFAULT_EXCHANGE_RATES[code] || 1
 
     if (code === "USD") {
       return `$${usdAmount.toLocaleString()} USD`
     }
 
-    const localAmount = usdAmount * rate
-    return `${localAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })} ${code}`
+    const localAmount = Math.round(usdAmount * rate)
+    return `${localAmount.toLocaleString()} ${code}`
   }
 
   // Detect user location on mount

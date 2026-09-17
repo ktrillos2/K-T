@@ -6,12 +6,14 @@ import { ChevronDown } from "lucide-react"
 import { useLanguage } from "@/context/language-context"
 import { useCursor } from "@/context/cursor-context"
 import { useModal } from "@/context/modal-context"
+import { usePricing } from "@/hooks/use-pricing"
 import { trackGAEvent } from "@/lib/analytics"
 import Link from "next/link"
 
 export default function HeroSection() {
   const { dictionary, language } = useLanguage()
   const isEn = language === "en"
+  const { getPrice } = usePricing()
   const { openModal } = useModal()
   const { setCursorVariant } = useCursor()
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -287,14 +289,14 @@ export default function HeroSection() {
             href={isEn ? "/en/services/landing-pages" : "/servicios/landing-pages"}
             className="hover:text-white transition-colors underline underline-offset-4 decoration-white/30 hover:decoration-white"
           >
-            {isEn ? "Landing Pages: From $200 USD" : "Landing Pages: Desde $450.000 COP"}
+            {isEn ? `Landing Pages: ${getPrice("landing")}` : `Landing Pages: ${getPrice("landing")}`}
           </Link>
           <span className="text-white/20">•</span>
           <Link
             href={isEn ? "/en/services/ecommerce-development" : "/servicios/tiendas-virtuales"}
             className="hover:text-white transition-colors underline underline-offset-4 decoration-white/30 hover:decoration-white"
           >
-            {isEn ? "E-commerce: From $450 USD" : "Tiendas Virtuales: Desde $1.300.000 COP"}
+            {isEn ? `E-commerce: ${getPrice("ecommerce")}` : `Tiendas Virtuales: ${getPrice("ecommerce")}`}
           </Link>
           <span className="text-white/20">•</span>
           <Link
