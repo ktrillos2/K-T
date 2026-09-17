@@ -148,7 +148,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section id="hero" aria-label="Presentación y propuesta de valor de K&T Code" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" aria-label="Presentación y propuesta de valor de K&T Code" className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-16 md:pt-24 md:pb-16">
       <motion.div 
         className="absolute inset-0 z-0"
         initial={{ opacity: 0 }}
@@ -159,7 +159,7 @@ export default function HeroSection() {
       </motion.div>
 
       <motion.div 
-        className="relative z-10 text-center px-6 max-w-5xl mx-auto"
+        className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto w-full flex flex-col items-center justify-center"
         initial="hidden"
         animate="visible"
         variants={{
@@ -171,7 +171,7 @@ export default function HeroSection() {
         }}
       >
         <motion.p 
-          className="text-emerald-400 font-mono text-xs md:text-sm tracking-wider uppercase mb-4 min-h-[1.5em] flex items-center justify-center gap-2"
+          className="text-emerald-400 font-mono text-[11px] sm:text-xs md:text-sm tracking-wider uppercase mb-3 sm:mb-4 min-h-[1.5em] flex items-center justify-center gap-2"
           variants={{
             hidden: { opacity: 0, y: 10 },
             visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }
@@ -182,7 +182,7 @@ export default function HeroSection() {
         </motion.p>
 
         <motion.h1 
-          className="relative text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold font-title leading-tight md:leading-[1.1] max-w-4xl mx-auto mb-6 flex items-center justify-center text-center text-white min-h-[3.3em]"
+          className="relative text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold font-title leading-tight md:leading-[1.1] max-w-4xl mx-auto mb-4 sm:mb-6 flex items-center justify-center text-center text-white min-h-[3.4em] sm:min-h-[3.3em]"
           variants={{
             hidden: { opacity: 0, y: 10 },
             visible: { 
@@ -212,7 +212,7 @@ export default function HeroSection() {
         </motion.h1>
 
         <motion.p
-          className="text-neutral-300 font-mono text-sm md:text-base max-w-2xl mx-auto mb-8 leading-relaxed"
+          className="text-neutral-300 font-mono text-xs sm:text-sm md:text-base max-w-2xl mx-auto mb-6 sm:mb-8 leading-relaxed px-2 sm:px-0"
           variants={{
             hidden: { opacity: 0, y: 10 },
             visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.2 } }
@@ -223,7 +223,7 @@ export default function HeroSection() {
 
         {/* Priority Commercial CTAs */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-xl mx-auto mb-8"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 max-w-xl mx-auto mb-6 sm:mb-8 w-full px-2 sm:px-0"
           variants={{
             hidden: { opacity: 0, scale: 0.95, y: 20 },
             visible: { 
@@ -265,12 +265,12 @@ export default function HeroSection() {
               })
             }}
             aria-label={dictionary.hero.ctaStore}
-            className="w-full sm:w-auto relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-mono font-bold text-xs sm:text-sm rounded-xl border border-white/30 hover:border-white transition-all duration-200 cursor-pointer group"
+            className="w-full sm:w-auto relative overflow-hidden inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-black hover:bg-neutral-900 text-white font-mono font-bold text-xs sm:text-sm rounded-xl border-2 border-white/80 hover:border-white shadow-[4px_4px_0_rgba(255,255,255,0.2)] hover:shadow-[1px_1px_0_rgba(255,255,255,0.3)] hover:translate-x-[3px] hover:translate-y-[3px] transition-all duration-200 cursor-pointer group"
             onMouseEnter={() => setCursorVariant("hover")}
             onMouseLeave={() => setCursorVariant("default")}
           >
             <span className="relative z-10 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 shrink-0" />
+              <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0 animate-pulse" />
               {dictionary.hero.ctaStore}
               <span className="text-base group-hover:translate-x-1 transition-transform">→</span>
             </span>
@@ -279,7 +279,7 @@ export default function HeroSection() {
 
         {/* Descriptive Crawlable Links to Priority Services */}
         <motion.div
-          className="flex flex-wrap items-center justify-center gap-3 md:gap-6 font-mono text-xs text-neutral-400"
+          className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-6 font-mono text-[11px] sm:text-xs text-neutral-400 max-w-2xl mx-auto px-2"
           variants={{
             hidden: { opacity: 0 },
             visible: { opacity: 1, transition: { delay: 0.4, duration: 0.6 } }
@@ -298,10 +298,10 @@ export default function HeroSection() {
           >
             {isEn ? `E-commerce: ${getPrice("ecommerce")}` : `Tiendas Virtuales: ${getPrice("ecommerce")}`}
           </Link>
-          <span className="text-white/20">•</span>
+          <span className="text-white/20 hidden sm:inline">•</span>
           <Link
             href={isEn ? "/en/portfolio" : "/portafolio"}
-            className="hover:text-white transition-colors"
+            className="hover:text-white transition-colors inline-flex items-center gap-1"
           >
             {dictionary.hero.cta} →
           </Link>
@@ -309,7 +309,7 @@ export default function HeroSection() {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.8 }}

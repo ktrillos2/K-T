@@ -63,7 +63,7 @@ export default function Header() {
   return (
     <>
       <motion.header
-        className={`fixed top-0 left-0 right-0 z-[60] px-6 py-4 transition-all duration-300 ${isScrolled && !isMenuOpen
+        className={`fixed top-0 left-0 right-0 z-[60] px-4 py-2.5 sm:px-6 sm:py-3.5 md:py-4 transition-all duration-300 ${isScrolled && !isMenuOpen
           ? "backdrop-blur-md bg-black/80 border-b border-white/10"
           : "bg-transparent border-b border-transparent"
           }`}
@@ -74,7 +74,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link
             href={homePath}
-            className={`relative w-48 h-20 cursor-pointer transition-opacity duration-300 block ${isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+            className={`relative w-28 h-9 sm:w-36 sm:h-12 md:w-44 md:h-16 lg:w-48 lg:h-20 cursor-pointer transition-opacity duration-300 block ${isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
             onMouseEnter={() => setCursorVariant("hover")}
             onMouseLeave={() => setCursorVariant("default")}
             aria-label="Ir a la página de inicio de K&T Code"
@@ -126,11 +126,11 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <div className="relative">
               <motion.button
                 onClick={() => setIsCountryOpen(!isCountryOpen)}
-                className="px-3 py-2 text-sm font-mono rounded hover:bg-white/10 hover:text-white transition-all duration-300 flex items-center justify-center border border-white/10 gap-2"
+                className="px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm font-mono rounded hover:bg-white/10 hover:text-white transition-all duration-300 flex items-center justify-center border border-white/10 gap-1.5 sm:gap-2"
                 onMouseEnter={() => setCursorVariant("hover")}
                 onMouseLeave={() => setCursorVariant("default")}
                 aria-haspopup="listbox"
@@ -219,7 +219,7 @@ export default function Header() {
 
             <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden px-4 py-2 text-sm font-mono border border-white/30 rounded hover:border-white hover:bg-white hover:text-black transition-all duration-300"
+              className="lg:hidden px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-mono border border-white/30 rounded hover:border-white hover:bg-white hover:text-black transition-all duration-300"
               onMouseEnter={() => setCursorVariant("hover")}
               onMouseLeave={() => setCursorVariant("default")}
               aria-label={isMenuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
