@@ -74,7 +74,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link
             href={homePath}
-            className={`relative w-28 h-9 sm:w-36 sm:h-12 md:w-44 md:h-16 lg:w-48 lg:h-20 cursor-pointer transition-opacity duration-300 block ${isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+            className={`relative w-36 h-11 sm:w-40 sm:h-12 md:w-44 md:h-16 lg:w-48 lg:h-20 cursor-pointer transition-opacity duration-300 block ${isMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}
             onMouseEnter={() => setCursorVariant("hover")}
             onMouseLeave={() => setCursorVariant("default")}
             aria-label="Ir a la página de inicio de K&T Code"
@@ -86,7 +86,7 @@ export default function Header() {
               }
             }}
           >
-            <Image src="/images/logo.webp" alt="Logo de K&T Code" fill sizes="(max-width: 768px) 150px, 200px" className="object-contain object-left" priority />
+            <Image src="/images/logo.webp" alt="Logo de K&T Code" fill sizes="(max-width: 768px) 180px, 200px" className="object-contain object-left" priority />
           </Link>
 
           {/* Subtle Desktop Navigation Menu with crawlable links */}
