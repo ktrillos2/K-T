@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     default: "K&T Code | Agencia de Desarrollo Web y E-commerce en Colombia",
     template: "%s | K&T Code",
   },
-  description: "K&T Code desarrolla páginas web corporativas a medida, tiendas virtuales headless, software empresarial y arquitecturas digitales escalables de alto rendimiento en Next.js para Colombia y Latinoamérica.",
+  description: "K&T Code desarrolla páginas web corporativas a medida, tiendas virtuales headless, software empresarial y arquitecturas digitales escalables de alto rendimiento para Colombia y Latinoamérica.",
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "K&T Code | Empresa de Desarrollo Web y Software en Colombia",
-    description: "Desarrollamos ecosistemas digitales escalables, tiendas virtuales y páginas web de alto rendimiento impulsadas por Next.js y Vercel.",
+    description: "Desarrollamos ecosistemas digitales escalables, tiendas virtuales y páginas web de alto rendimiento con arquitectura Edge y CDN global.",
     url: "https://www.kytcode.lat",
     siteName: "K&T Code",
     locale: "es_CO",
@@ -243,7 +243,7 @@ const organizationJsonLd = {
       "name": "Latin America"
     }
   ],
-  "description": "K&T Code es una empresa colombiana de desarrollo web y software a medida especializada en páginas corporativas, e-commerce headless y plataformas escalables en Next.js.",
+  "description": "K&T Code es una empresa colombiana de desarrollo web y software a medida especializada en páginas corporativas, e-commerce headless y plataformas digitales escalables de alto rendimiento.",
   "slogan": "Ingeniería de Desarrollo Web y Software a Medida en Colombia",
   "sameAs": [
     "https://www.instagram.com/kytcode/",
@@ -262,7 +262,7 @@ const organizationJsonLd = {
         "itemOffered": {
           "@type": "Service",
           "name": "Landing Page de Conversión",
-          "description": "Diseño y desarrollo de páginas de aterrizaje de alta conversión en Next.js y React 19."
+          "description": "Diseño y desarrollo de páginas de aterrizaje de alta conversión y carga ultra rápida."
         }
       },
       {

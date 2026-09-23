@@ -21,7 +21,7 @@ export const es = {
     greeting: "// K&T Code • Desde Colombia para el Mundo",
     slogan: "Landing Pages y Tiendas Virtuales de Alto Rendimiento",
     description:
-      "Desarrollamos páginas web de alta conversión y software a medida con Next.js y React. Ingeniería colombiana con estándares globales para empresas nacionales e internacionales.",
+      "Desarrollamos páginas web de alta conversión y software a medida. Ingeniería colombiana con estándares globales para empresas nacionales e internacionales.",
     ctaLanding: "Cotizar landing page",
     ctaStore: "Cotizar tienda virtual",
     cta: "Ver portafolio",
@@ -29,9 +29,9 @@ export const es = {
   },
   about: {
     title: "Empresa de Desarrollo Web y Software a Medida en Colombia",
-    subtitle: "// Next.js, TypeScript y Arquitectura Headless",
+    subtitle: "// Arquitectura Headless y Alto Rendimiento",
     description:
-      "K&T Code es una empresa colombiana de desarrollo web e ingeniería de software especializada en páginas corporativas, e-commerce headless y software a medida. Construimos plataformas rápidas y escalables con Next.js, React 19, TypeScript, Tailwind CSS, Supabase y CMS Headless para empresas en Colombia, Latinoamérica y Estados Unidos.",
+      "K&T Code es una empresa colombiana de desarrollo web e ingeniería de software especializada en páginas corporativas, e-commerce headless y software a medida. Construimos plataformas rápidas y escalables con arquitectura moderna, Supabase y CMS Headless para empresas en Colombia, Latinoamérica y Estados Unidos.",
     teamAuthority: "Desarrollo de software estructurado por ingenieros de software con entrega de código limpio.",
     techStack: "Stack Tecnológico Principal",
     sectorsTitle: "Sectores e Industrias Desarrolladas",
@@ -48,7 +48,7 @@ export const es = {
     values: {
       innovation: {
         title: "Arquitectura Server Components",
-        description: "Implementamos Next.js App Router, TypeScript y Server Actions con bases de datos PostgreSQL en Supabase, reduciendo el bundle de JavaScript en el cliente.",
+        description: "Implementamos arquitectura App Router y Server Actions con bases de datos PostgreSQL en Supabase, reduciendo el bundle de JavaScript en el cliente.",
       },
       quality: {
         title: "SEO Técnico y Datos Estructurados",
@@ -81,7 +81,7 @@ export const es = {
       title: "Landing Page de Conversión",
       price: "Desde $450.000 COP",
       features: [
-        "Desarrollo frontend en Next.js y React 19",
+        "Desarrollo frontend de alto rendimiento",
         "Diseño UI/UX exclusivo en Figma enfocado en conversión",
         "Alojamiento en Vercel Edge CDN con SSL gratuito",
         "SEO técnico semántico y velocidad de carga < 0.8s",
@@ -89,13 +89,13 @@ export const es = {
         "Entrega ágil en 7 a 12 días hábiles",
       ],
       cta: "Cotizar landing page",
-      whatsapp_message: "Hola K&T Code, me gustaría cotizar una Landing Page en Next.js.",
+      whatsapp_message: "Hola K&T Code, me gustaría cotizar una Landing Page de alto rendimiento.",
     },
     ecommerce: {
       title: "Tienda Virtual Headless (WooCommerce / Custom)",
       price: "Desde $1.300.000 COP",
       features: [
-        "Storefront desacoplado en Next.js con carga en < 0.8s",
+        "Storefront headless desacoplado con carga en < 0.8s",
         "Integración de pasarelas colombianas: Wompi, Bold y PayU",
         "Soporte de pagos por PSE, tarjetas y transferencias Nequi",
         "Slide Cart interactivo y catálogo autogestionable",
@@ -109,7 +109,7 @@ export const es = {
       title: "Desarrollo de Software a Medida & SaaS",
       price: "Cotización según alcance",
       features: [
-        "Arquitectura fullstack con Next.js, Node.js y TypeScript",
+        "Arquitectura fullstack moderna con Node.js y bases de datos relacionales",
         "Base de datos relacional PostgreSQL / Supabase",
         "Autenticación segura de usuarios y roles administrativos",
         "Conexión con APIs de terceros y facturación DIAN",

@@ -97,8 +97,8 @@ const serviceOptions: ServiceOption[] = [
     id: "custom",
     icon: Code2,
     labelKey: "custom",
-    descriptionEs: "Páginas corporativas en Next.js, portales B2B, APIs y software a medida.",
-    descriptionEn: "Corporate platforms in Next.js, B2B portals, custom APIs, and tailored software.",
+    descriptionEs: "Páginas corporativas headless, portales B2B, APIs y software a medida.",
+    descriptionEn: "Corporate headless platforms, B2B portals, custom APIs, and tailored software.",
   },
   {
     id: "social",

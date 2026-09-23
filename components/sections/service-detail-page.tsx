@@ -27,9 +27,9 @@ import {
 const benefitIcons = [Layers3, Gauge, Search, ShieldCheck]
 
 const techStackList = [
-  { name: "Next.js", desc: "App Router, SSR, SSG y Server Components", tag: "Frontend & Core" },
-  { name: "React 19", desc: "Componentes reactivos ultra eficientes", tag: "UI Library" },
-  { name: "TypeScript", desc: "Tipado estricto y código libre de errores", tag: "Type Safety" },
+  { name: "Arquitectura Headless", desc: "App Router, SSR, SSG y Server Components", tag: "Frontend & Core" },
+  { name: "Componentes Reactivos", desc: "Componentes reactivos ultra eficientes", tag: "UI Library" },
+  { name: "Tipado Estricto", desc: "Tipado estricto y código libre de errores", tag: "Type Safety" },
   { name: "Tailwind CSS", desc: "Estilos atómicos de alto rendimiento", tag: "Styling" },
   { name: "Supabase / PostgreSQL", desc: "Bases de datos seguras y escalables", tag: "Database" },
   { name: "Vercel / Cloudflare CDN", desc: "Despliegue global en el Edge con SSL", tag: "Infrastructure" },
@@ -229,24 +229,24 @@ export default function ServiceDetailPage({ service }: { service: ServicePageDat
             </section>
           )}
 
-          {/* Performance Comparison: Next.js vs WordPress / Traditional CMS */}
+          {/* Performance Comparison: Modern Architecture vs WordPress / Traditional CMS */}
           {service.showPerformanceComparison && (
             <section className="mt-28">
               <div className="mx-auto max-w-3xl text-center">
                 <p className="font-mono text-sm uppercase tracking-wider text-white/60">// Comparativa Técnica</p>
                 <h2 className="mt-3 font-title text-3xl font-bold md:text-4xl lg:text-5xl">
-                  Next.js frente a CMS Tradicionales y Plantillas
+                  K&T Code frente a CMS Tradicionales y Plantillas
                 </h2>
                 <p className="mt-4 font-mono text-sm text-white/65 md:text-base">
-                  Por qué las empresas líderes en Colombia eligen arquitectura Headless con Next.js en lugar de WordPress, Elementor o Wix.
+                  Por qué las empresas líderes en Colombia eligen arquitectura Headless en lugar de WordPress, Elementor o Wix.
                 </p>
               </div>
 
               <div className="mt-12 grid gap-6 md:grid-cols-2">
-                {/* Next.js (K&T Code) */}
+                {/* K&T Code (Headless Architecture) */}
                 <div className="relative rounded-3xl border border-white/30 bg-gradient-to-b from-white/[0.08] to-white/[0.02] p-8 backdrop-blur-sm">
                   <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 font-mono text-xs text-white">
-                    <Zap className="h-4 w-4 text-emerald-400" /> K&T Code (Next.js & Headless)
+                    <Zap className="h-4 w-4 text-emerald-400" /> K&T Code (Headless Architecture)
                   </div>
                   <h3 className="mt-5 font-title text-2xl font-bold">Máximo Rendimiento y Conversión</h3>
 

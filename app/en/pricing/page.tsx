@@ -12,12 +12,11 @@ import { absoluteUrl } from "@/lib/site-config"
 export const metadata: Metadata = {
   title: "Web Development Pricing & Custom Software Plans",
   description:
-    "Transparent pricing for landing pages, corporate websites, headless e-commerce, and custom software. High performance guaranteed with Next.js.",
+    "Transparent pricing for landing pages, corporate websites, headless e-commerce, and custom software. High performance guaranteed.",
   keywords: [
     "web development pricing",
     "how much does a website cost",
     "ecommerce development pricing",
-    "next.js development cost",
     "custom software development plans",
     "K&T Code pricing",
   ],

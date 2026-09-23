@@ -13,10 +13,10 @@ export const metadata: Metadata = {
   keywords: [
     "agencia desarrollo ecommerce headless colombia woocommerce",
     "woocommerce headless colombia",
-    "tiendas virtuales headless next.js",
-    "desarrollo e-commerce next.js colombia",
+    "tiendas virtuales headless alto rendimiento",
+    "desarrollo e-commerce headless colombia",
     "pasarelas de pago colombia wompi payu bold",
-    "migrar woocommerce a next.js",
+    "migrar woocommerce a headless",
     "desarrollo tiendas online alto rendimiento",
     "K&T Code WooCommerce Headless",
   ],

@@ -121,7 +121,7 @@ export default function PricingCards() {
   const getPlanDescription = (plan: typeof plans[0]) => {
     if (plan.key === "ecommerce") {
       return country === "Colombia"
-        ? "Ecommerce Starter desde $1.300.000 COP y Headless Next.js desde $2.000.000 COP para venta online con pasarelas de pago."
+        ? "Ecommerce Starter desde $1.300.000 COP y Tienda Headless desde $2.000.000 COP para venta online con pasarelas de pago."
         : "Soluciones de comercio electrónico optimizadas para venta online con catálogo, carrito y pasarelas de pago integradas."
     }
     return plan.description

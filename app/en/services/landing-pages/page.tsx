@@ -23,11 +23,10 @@ import { absoluteUrl } from "@/lib/site-config"
 export const metadata: Metadata = {
   title: "High-Converting Landing Pages",
   description:
-    "Custom landing page design and development engineered with Next.js and React. Fast loading, mobile-first, WhatsApp & CRM integrations for businesses in the US, Latin America, and globally.",
+    "Custom landing page design and development engineered for maximum speed. Fast loading, mobile-first, WhatsApp & CRM integrations for businesses in the US, Latin America, and globally.",
   keywords: [
     "landing page development",
     "high conversion landing page",
-    "next.js landing page agency",
     "fast landing page colombia",
     "custom landing page design",
     "whatsapp lead generation page",
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "High-Converting Landing Pages | K&T Code",
     description:
-      "Engineered with Next.js for sub-second speeds, mobile responsiveness, and high conversion rates. Serving national and international clients.",
+      "Engineered for sub-second speeds, mobile responsiveness, and high conversion rates. Serving national and international clients.",
     url: absoluteUrl("/en/services/landing-pages"),
     siteName: "K&T Code",
     locale: "en_US",
@@ -55,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "High-Converting Landing Pages | K&T Code",
     description:
-      "Engineered with Next.js for sub-second speeds, mobile responsiveness, and high conversion rates.",
+      "Engineered for sub-second speeds, mobile responsiveness, and high conversion rates.",
   },
 }
 
@@ -125,7 +124,7 @@ export default function EnglishLandingPagesPage() {
                 High-Converting Landing Pages Engineered for Maximum ROI
               </h1>
               <p className="mt-6 max-w-2xl font-mono text-base leading-relaxed text-neutral-300 md:text-lg">
-                We develop ultra-fast, mobile-optimized landing pages with Next.js. Designed specifically for Google Ads, Meta Ads, and direct lead generation from Colombia to clients worldwide.
+                We develop ultra-fast, mobile-optimized landing pages with Edge CDN architecture. Designed specifically for Google Ads, Meta Ads, and direct lead generation from Colombia to clients worldwide.
               </p>
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -163,7 +162,7 @@ export default function EnglishLandingPagesPage() {
                 <Zap className="h-6 w-6 text-emerald-400 mb-4" />
                 <h2 className="font-title text-lg font-bold">Sub-Second Speed</h2>
                 <p className="mt-2 font-mono text-xs text-neutral-400 leading-relaxed">
-                  Engineered with Next.js SSG for immediate load times, lowering ad bounce rates and improving Quality Scores.
+                  Built with Static Site Generation for immediate load times, lowering ad bounce rates and improving Quality Scores.
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">

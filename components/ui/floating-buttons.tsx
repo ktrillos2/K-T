@@ -181,13 +181,13 @@ export default function FloatingButtons() {
         }
     }
 
-    const itemVariants = {
+    const itemVariants: any = {
         hidden: { opacity: 0, y: 20, scale: 0.85, transition: { duration: 0.2, ease: "easeOut" } },
         visible: {
             opacity: 1,
             y: 0,
             scale: 1,
-            transition: { type: "spring", stiffness: 300, damping: 22 } as any
+            transition: { type: "spring", stiffness: 300, damping: 22 }
         },
         exit: {
             opacity: 0,

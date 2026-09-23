@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   keywords: [
     "contact web development agency",
     "request web quote",
-    "hire next.js developers",
+    "hire software developers colombia",
     "custom software development quote",
     "K&T Code contact",
   ],

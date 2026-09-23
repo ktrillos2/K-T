@@ -41,9 +41,7 @@ const iconMap = {
 
 // Real tech stack used across all projects
 const techStack = [
-  { name: "Next.js" },
-  { name: "TypeScript" },
-  { name: "React" },
+  { name: "Arquitectura Headless" },
   { name: "Tailwind CSS" },
   { name: "Framer Motion" },
   { name: "Headless CMS" },
@@ -367,8 +365,8 @@ export default function AboutSection({ projectCount }: AboutSectionProps) {
   // Terminal lines for the right panel
   const terminalLines: Record<(typeof values)[number], Array<{ label: string; value: string; color: string }>> = {
     innovation: [
-      { label: "framework", value: '"Next.js App Router"', color: "text-cyan-400" },
-      { label: "language", value: '"TypeScript 5"', color: "text-blue-400" },
+      { label: "architecture", value: '"Headless App Router"', color: "text-cyan-400" },
+      { label: "database", value: '"Supabase + PostgreSQL"', color: "text-blue-400" },
       { label: "pattern", value: '"Headless Architecture"', color: "text-purple-400" },
       { label: "cms", value: '"Sanity v3"', color: "text-orange-400" },
     ],

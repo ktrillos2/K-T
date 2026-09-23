@@ -22,12 +22,11 @@ import { absoluteUrl } from "@/lib/site-config"
 export const metadata: Metadata = {
   title: "Nearshore Web Development Colombia for US Companies | K&T Code",
   description:
-    "Hire senior Next.js, React & TypeScript web developers in Colombia. 100% US time zone overlap, bilingual engineers, and 50-70% cost savings for US businesses.",
+    "Hire senior web developers in Colombia. 100% US time zone overlap, bilingual engineers, and 50-70% cost savings for US businesses.",
   keywords: [
     "nearshore web development colombia",
     "web development company Colombia",
     "nearshore software developers Colombia",
-    "Next.js development company Colombia",
     "Colombian web development agency",
     "hire web developers Colombia",
     "Colombian engineering team for US companies",
@@ -57,7 +56,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Nearshore Web Development Colombia for US Companies | K&T Code",
     description:
-      "Elite Colombian engineering team for US companies. Next.js 15, React 19, TypeScript & Headless E-commerce built in your time zone with 50-70% cost efficiency.",
+      "Elite Colombian engineering team for US companies. Headless E-commerce & high-performance web apps built in your time zone with 50-70% cost efficiency.",
     url: absoluteUrl("/en/nearshore-web-development-colombia"),
     siteName: "K&T Code",
     locale: "en_US",
@@ -75,7 +74,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Nearshore Web Development Colombia for US Companies | K&T Code",
     description:
-      "Hire top Colombian software developers for your US company. EST/CST time zone alignment, Next.js architecture, and direct USD billing.",
+      "Hire top Colombian software developers for your US company. EST/CST time zone alignment, headless architecture, and direct USD billing.",
     images: ["https://www.kytcode.lat/opengraph-image.png"],
   },
 }
@@ -115,7 +114,7 @@ export default function NearshoreColombiaPage() {
         "name": "Colombia"
       }
     ],
-    "description": "Premier Colombian nearshore software engineering company delivering high-performance Next.js web applications, headless commerce, and dedicated engineering squads for US tech companies."
+    "description": "Premier Colombian nearshore software engineering company delivering high-performance web applications, headless commerce, and dedicated engineering squads for US tech companies."
   }
 
   const faqSchema = {
@@ -127,7 +126,7 @@ export default function NearshoreColombiaPage() {
         "name": "Why hire a nearshore web development company in Colombia instead of domestic US agencies?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Colombia offers world-class engineering talent operating in the exact same time zone as the US (EST/CST) at 50% to 70% lower cost than domestic US software agencies. You get full workday collaboration, bilingual senior engineers, and clean, enterprise-grade Next.js and React code without the prohibitive $180-$250/hr overhead of American consultancies."
+          "text": "Colombia offers world-class engineering talent operating in the exact same time zone as the US (EST/CST) at 50% to 70% lower cost than domestic US software agencies. You get full workday collaboration, bilingual senior engineers, and clean, enterprise-grade code without the prohibitive $180-$250/hr overhead of American consultancies."
         }
       },
       {
@@ -143,7 +142,7 @@ export default function NearshoreColombiaPage() {
         "name": "What tech stack does K&T Code specialize in for US clients?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We specialize in modern, high-performance web stacks: Next.js 15 (App Router, Server Components), React 19, TypeScript, Tailwind CSS, Node.js, PostgreSQL, Supabase, and Vercel Edge infrastructure. We also build headless e-commerce integrations using Shopify Storefront API and WooCommerce REST."
+          "text": "We specialize in modern, high-performance web stacks: App Router, Server Components, Tailwind CSS, Node.js, PostgreSQL, Supabase, and Vercel Edge infrastructure. We also build headless e-commerce integrations using Shopify Storefront API and WooCommerce REST."
         }
       },
       {
@@ -232,7 +231,7 @@ export default function NearshoreColombiaPage() {
             </h1>
 
             <p className="font-mono text-base sm:text-lg text-neutral-300 max-w-3xl leading-relaxed mb-8">
-              Scale your development velocity with senior Colombian software engineers. Full workday overlap with New York, Miami, Austin, and San Francisco, enterprise-grade Next.js architectures, and 50% to 70% cost savings compared to domestic US agencies.
+              Scale your development velocity with senior Colombian software engineers. Full workday overlap with New York, Miami, Austin, and San Francisco, enterprise-grade headless architectures, and 50% to 70% cost savings compared to domestic US agencies.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 justify-center lg:justify-start mb-12">
@@ -312,10 +311,10 @@ export default function NearshoreColombiaPage() {
                   <Code2 className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold font-title text-white mb-3">
-                  Modern Stack Specialists: Next.js 15, React 19 & TypeScript
+                  Modern Stack Specialists: High-Performance Architecture & Edge Delivery
                 </h3>
                 <p className="font-mono text-sm text-neutral-400 leading-relaxed">
-                  We don't build generic WordPress or dated spaghetti code. Our team builds strictly with Next.js App Router, Server Components, TypeScript, Tailwind CSS, Supabase, and Vercel Edge. We engineer lightning-fast digital assets scoring 95+ on Google Lighthouse with clean architectural documentation.
+                  We don't build generic WordPress or dated spaghetti code. Our team builds strictly with App Router, Server Components, Tailwind CSS, Supabase, and Vercel Edge. We engineer lightning-fast digital assets scoring 95+ on Google Lighthouse with clean architectural documentation.
                 </p>
               </div>
 
@@ -367,7 +366,7 @@ export default function NearshoreColombiaPage() {
                   </tr>
                   <tr>
                     <td className="p-4 sm:p-5 text-white font-bold">Tech Stack Currency</td>
-                    <td className="p-4 sm:p-5 text-white font-bold bg-blue-500/5">Next.js 15, React 19, TypeScript</td>
+                    <td className="p-4 sm:p-5 text-white font-bold bg-blue-500/5">Modern Headless Stack (Edge CDN)</td>
                     <td className="p-4 sm:p-5 text-neutral-300">High (varies by firm)</td>
                     <td className="p-4 sm:p-5 text-neutral-400">Mixed / Legacy codebases</td>
                   </tr>
@@ -409,10 +408,10 @@ export default function NearshoreColombiaPage() {
                   01
                 </div>
                 <h3 className="text-lg font-bold font-title text-white mb-2">
-                  Next.js & React Full-Stack Platforms
+                  High-Performance Full-Stack Web Platforms
                 </h3>
                 <p className="font-mono text-xs text-neutral-400 leading-relaxed mb-4 flex-grow">
-                  Engineered with Server Components, TypeScript, and edge rendering for lightning-fast speeds and high organic conversion.
+                  Engineered with Server Components and edge rendering for lightning-fast speeds and high organic conversion.
                 </p>
                 <ul className="space-y-1.5 font-mono text-xs text-neutral-300 pt-4 border-t border-white/5">
                   <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-blue-400 shrink-0" /> App Router Architecture</li>
@@ -429,7 +428,7 @@ export default function NearshoreColombiaPage() {
                   Headless E-Commerce & Migrations
                 </h3>
                 <p className="font-mono text-xs text-neutral-400 leading-relaxed mb-4 flex-grow">
-                  Decouple slow Shopify or WordPress backends into custom Next.js frontends to slash page load times and boost checkout conversions.
+                  Decouple slow Shopify or WordPress backends into custom headless frontends to slash page load times and boost checkout conversions.
                 </p>
                 <ul className="space-y-1.5 font-mono text-xs text-neutral-300 pt-4 border-t border-white/5">
                   <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" /> Shopify Storefront API</li>
@@ -478,7 +477,7 @@ export default function NearshoreColombiaPage() {
                   </div>
                   <h3 className="text-2xl font-bold font-title text-white mb-2">Telas Real</h3>
                   <p className="font-mono text-sm text-neutral-400 mb-6">
-                    Migrated a legacy monolithic store with +850 products to Next.js 15 App Router. Slashed loading times by 85% and increased wholesale quotations by 64%.
+                    Migrated a legacy monolithic store with +850 products to headless App Router architecture. Slashed loading times by 85% and increased wholesale quotations by 64%.
                   </p>
                   <div className="grid grid-cols-3 gap-3 p-4 rounded-xl bg-black/60 border border-white/5 font-mono mb-6 text-center">
                     <div>
@@ -594,7 +593,7 @@ export default function NearshoreColombiaPage() {
                 </div>
                 <ul className="space-y-2 font-mono text-xs text-neutral-300">
                   <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-blue-400" /> LCP, CLS & INP audit & fixes</li>
-                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-blue-400" /> Next.js & bundle optimization</li>
+                  <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-blue-400" /> Bundle & performance optimization</li>
                   <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-blue-400" /> Before/After Lighthouse proof</li>
                 </ul>
               </div>

@@ -19,13 +19,12 @@ export const metadata: Metadata = {
     absolute: "Web Development & Custom Software Agency | K&T Code",
   },
   description:
-    "K&T Code is a web development and software engineering agency. We build fast corporate websites, headless e-commerce, and custom digital platforms with Next.js, React 19, and TypeScript.",
+    "K&T Code is a web development and software engineering agency. We build fast corporate websites, headless e-commerce, and custom digital platforms with high-performance architecture.",
   keywords: [
     "web development agency",
     "custom software development",
-    "next.js developers",
     "headless ecommerce agency",
-    "react development services",
+    "colombian software engineers",
     "hire software engineers colombia",
     "web design agency us latam",
     "K&T Code",
@@ -54,7 +53,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Web Development & Custom Software Agency | K&T Code",
     description:
-      "High-performance corporate websites, headless e-commerce, and custom software engineered with Next.js, React 19, and TypeScript.",
+      "High-performance corporate websites, headless e-commerce, and custom software engineered with modern architecture and edge delivery.",
     url: absoluteUrl("/en"),
     siteName: "K&T Code",
     locale: "en_US",

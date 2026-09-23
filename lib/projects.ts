@@ -78,7 +78,7 @@ export const projects: Project[] = [
     duration: "4 semanas",
     objective: "Rediseñar un sitio web previo con diseño deficiente y carga lenta, optimizando su velocidad de respuesta y conectando la venta nacional de repuestos y mantenimiento con estrategias continuas de marketing digital.",
     category: "Automotriz",
-    tech: ["Next.js", "React 19", "Tailwind CSS", "TypeScript", "Vercel Edge", "WhatsApp Business API"],
+    tech: ["Arquitectura Headless", "Tailwind CSS", "Vercel Edge", "WhatsApp Business API"],
     shortDescription: "Taller especializado y venta nacional de repuestos para vehículos de alta gama en Bogotá, con plataforma web rápida y estrategia activa de marketing.",
     description: "Desarrollo y modernización del portal web para Repuestos Germana, taller especializado en mantenimiento y distribución de repuestos para vehículos de alta gama ubicado en Bogotá con cobertura y despachos a nivel nacional. Superamos una versión anterior con carga difícil y mal diseño mediante una arquitectura ágil, rápida y orientada a la conversión comercial, manteniendo un trabajo activo y constante en marketing digital.",
     descEn: "Custom web platform and digital marketing strategy for Repuestos Germana, high-end auto repair workshop and national parts supplier based in Bogotá.",
@@ -128,11 +128,11 @@ export const projects: Project[] = [
     year: "2026",
     month: "Septiembre",
     duration: "4 semanas",
-    objective: "Migrar de un WordPress limitante a una plataforma a medida en Next.js con diseño gamer inmersivo y automatización de torneos.",
+    objective: "Migrar de un WordPress limitante a una plataforma a medida con diseño gamer inmersivo y automatización de torneos.",
     category: "Gaming / Esports",
-    tech: ["Next.js 15", "React 19", "Tailwind CSS", "TypeScript", "Node.js", "Vercel Edge"],
+    tech: ["Arquitectura Headless", "Tailwind CSS", "Node.js", "Vercel Edge"],
     shortDescription: "Plataforma a medida para torneos de videojuegos con automatización de inscripciones y gestión operativa.",
-    description: "Diseño y desarrollo de plataforma web de alto rendimiento para GMX Gaming, empresa de torneos de videojuegos. Migración desde una arquitectura rígida y lenta en WordPress hacia una solución a medida en Next.js con diseño exclusivo gamer, automatización integral de inscripciones y administración ágil de competencias.",
+    description: "Diseño y desarrollo de plataforma web de alto rendimiento para GMX Gaming, empresa de torneos de videojuegos. Migración desde una arquitectura rígida y lenta en WordPress hacia una solución a medida de alto rendimiento con diseño exclusivo gamer, automatización integral de inscripciones y administración ágil de competencias.",
     descEn: "Custom web platform for gaming and esports tournaments with automated registrations, brackets and high-speed UI, replacing legacy WordPress limitations.",
     descEs: "Plataforma a medida para torneos de videojuegos con automatización de inscripciones y administración operativa, superando las limitaciones de WordPress.",
     images: {
@@ -142,7 +142,7 @@ export const projects: Project[] = [
     liveUrl: "https://gmxgaming.com",
     content: {
       challenge: "GMX Gaming gestionaba sus torneos sobre un WordPress con plantillas genéricas y múltiples plugins que sobrecargaban el servidor y no brindaban una buena experiencia a los jugadores. La gestión de inscripciones, control de llaves (brackets) y verificación de participantes requería procesos manuales lentos, con caídas de rendimiento durante los picos de visitas de las competencias en vivo.",
-      solution: "Construimos una plataforma web 100% personalizada con arquitectura Next.js y Server Components, con una identidad visual moderna orientada a la comunidad gamer. Desarrollamos un panel administrativo a la medida para gestionar competencias en tiempo real, automatizar las inscripciones de jugadores y equipos, y garantizar tiempos de carga instantáneos sin caídas del servidor.",
+      solution: "Construimos una plataforma web 100% personalizada con arquitectura headless y Server Components, con una identidad visual moderna orientada a la comunidad gamer. Desarrollamos un panel administrativo a la medida para gestionar competencias en tiempo real, automatizar las inscripciones de jugadores y equipos, y garantizar tiempos de carga instantáneos sin caídas del servidor.",
       seoFocus: "Plataforma de torneos de videojuegos, torneos esports Colombia, organización de torneos gaming, inscripciones torneos esports.",
       results: "La plataforma redujo la latencia de carga en un 88% (LCP de 590 ms) y eliminó la fricción operativa al automatizar el 100% del flujo de inscripción y control de torneos. El equipo administrativo ahora gestiona eventos en minutos en lugar de horas, ofreciendo una experiencia profesional y personalizada a miles de gamers.",
     },
@@ -158,7 +158,7 @@ export const projects: Project[] = [
       pagesDeveloped: "8 páginas + Panel Administrativo",
       integrations: "Automatización de Inscripciones + Panel Torneos + WhatsApp API",
       keyAchievements: [
-        "Migración completa desde WordPress monolítico hacia Next.js a medida.",
+        "Migración completa desde WordPress monolítico hacia arquitectura a medida.",
         "Automatización total del flujo de inscripciones y administración de torneos.",
         "Tiempo de carga móvil (LCP) reducido de 4.9s a 590 ms.",
         "Diseño gamer de alto impacto con micro-interacciones fluidas.",
@@ -180,9 +180,9 @@ export const projects: Project[] = [
     duration: "4 semanas",
     objective: "Captar leads corporativos B2B y posicionar servicios de consultoría tecnológica.",
     category: "Consultoría / Tecnología",
-    tech: ["Next.js", "React 19", "Framer Motion", "Tailwind CSS", "TypeScript"],
+    tech: ["Arquitectura Headless", "Framer Motion", "Tailwind CSS"],
     shortDescription: "Plataforma web corporativa de alta conversión y captación B2B.",
-    description: "Diseño y desarrollo de plataforma corporativa de alta credibilidad para firma de consultoría tecnológica, con arquitectura Next.js y tiempos de carga instantáneos.",
+    description: "Diseño y desarrollo de plataforma corporativa de alta credibilidad para firma de consultoría tecnológica, con arquitectura moderna y tiempos de carga instantáneos.",
     images: {
       hero: "/images/projects/psicowork.webp", // uses valid existing project hero
       mobile: "/images/projects/psicowork-mobile.webp",
@@ -190,7 +190,7 @@ export const projects: Project[] = [
     liveUrl: "https://www.kytcode.lat/servicios/desarrollo-web-a-medida",
     content: {
       challenge: "Qvareli requería una presencia digital con estética sobria y moderna que comunicara autoridad técnica ante comités de compras corporativos, sustituyendo un sitio desactualizado con baja tasa de contacto.",
-      solution: "Construimos una arquitectura en Next.js con Server Components, diseño exclusivo en Figma y micro-interacciones sutiles con Framer Motion. Integramos formularios segmentados por tipo de consultoría y conexión directa a asesores.",
+      solution: "Construimos una arquitectura de alto rendimiento con Server Components, diseño exclusivo en Figma y micro-interacciones sutiles con Framer Motion. Integramos formularios segmentados por tipo de consultoría y conexión directa a asesores.",
       seoFocus: "Consultoría tecnológica Colombia, transformación digital B2B, arquitectura de software empresarial.",
     },
     metrics: {
@@ -221,7 +221,7 @@ export const projects: Project[] = [
     duration: "3 semanas",
     objective: "Conectar servicios de psicología clínica con empresas y facilitar agendamiento directo de citas.",
     category: "Salud Mental y Bienestar",
-    tech: ["Next.js", "React", "Tailwind CSS", "WhatsApp Business API", "Vercel Edge"],
+    tech: ["Arquitectura Headless", "Tailwind CSS", "WhatsApp Business API", "Vercel Edge"],
     shortDescription: "Bienestar Integral para Personas & Empresas.",
     description: "Psicología Clínica, Organizacional y Gestión del Talento Humano. Transformamos vidas y potenciamos entornos laborales.",
     images: {
@@ -262,7 +262,7 @@ export const projects: Project[] = [
     duration: "4 semanas",
     objective: "Gestión, visualización y generación dinámica de fichas técnicas para compartir inmuebles.",
     category: "Inmobiliaria / Real Estate",
-    tech: ["Next.js", "React 19", "Tailwind CSS", "Supabase", "Dynamic OpenGraph"],
+    tech: ["Arquitectura Headless", "Tailwind CSS", "Supabase", "Dynamic OpenGraph"],
     shortDescription: "Plataforma inmobiliaria personalizada",
     description: "Desarrollo personalizado para facilitar la gestión, visualización y compartición dinámica de propiedades inmobiliarias.",
     images: {
@@ -303,7 +303,7 @@ export const projects: Project[] = [
     duration: "3 semanas",
     objective: "Proyectar autoridad técnica en topografía digital y escaneo LiDAR para licitaciones.",
     category: "Ingeniería / Construcción",
-    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Cloudflare CDN"],
+    tech: ["Arquitectura Headless", "Tailwind CSS", "Cloudflare CDN"],
     shortDescription: "Captura, Digitalización y Documentación Aérea y Terrestre",
     description: "Transformamos espacios físicos en datos precisos mediante escaneo LiDAR, fotogrametría aérea y topografía de alta precisión.",
     images: {
@@ -341,11 +341,11 @@ export const projects: Project[] = [
     year: "2025",
     month: "Diciembre",
     duration: "6 semanas",
-    objective: "Reconstruir plataforma textil mayorista migrando de un WordPress monolítico lento a Next.js Headless.",
+    objective: "Reconstruir plataforma textil mayorista migrando de un WordPress monolítico lento a arquitectura Headless.",
     category: "E-commerce B2B",
-    tech: ["Next.js 15", "React 19", "Tailwind CSS", "TypeScript", "WooCommerce REST API", "PostgreSQL", "Vercel Edge"],
+    tech: ["Arquitectura Headless", "Tailwind CSS", "WooCommerce REST API", "PostgreSQL", "Vercel Edge"],
     shortDescription: "Plataforma e-commerce B2B para telas premium con catálogo de +850 referencias y cotización instantánea.",
-    description: "Reconstrucción total de la plataforma de comercio textil mayorista de Telas Real. Migración completa desde un WordPress saturado de plugins que colapsaba ante alta concurrencia hacia una solución Headless desacoplada en Next.js, con tiempos de carga inferiores a 800ms y filtros dinámicos por composición textil.",
+    description: "Reconstrucción total de la plataforma de comercio textil mayorista de Telas Real. Migración completa desde un WordPress saturado de plugins que colapsaba ante alta concurrencia hacia una solución Headless desacoplada, con tiempos de carga inferiores a 800ms y filtros dinámicos por composición textil.",
     images: {
       hero: "/images/projects/telas-real.webp",
       mobile: "/images/projects/telas-real-mobile.webp",
@@ -353,7 +353,7 @@ export const projects: Project[] = [
     liveUrl: "https://telasreal.com",
     content: {
       challenge: "Telas Real operaba sobre un WooCommerce monolítico con plantillas genéricas y más de 35 plugins activos. La web tardaba más de 5.4 segundos en cargar en conexiones móviles, arrojaba errores 504 Gateway Timeout durante campañas de descuentos masivos y los distribuidores mayoristas abandonaban el proceso de cotización por la lentitud de los filtros de catálogo.",
-      solution: "Desacoplamos el frontend creando una arquitectura Headless sobre Next.js 15 App Router y Server Components. Conservamos el backend de WooCommerce exclusivamente como gestor de inventario y pedidos mediante API REST optimizada con caché en el Edge. Implementamos filtros instantáneos por metro, composición y color sin recarga de página, e integramos pasarelas de pago colombianas (Wompi y PSE) junto a un cotizador directo a WhatsApp para compras por rollo.",
+      solution: "Desacoplamos el frontend creando una arquitectura Headless con Server Components. Conservamos el backend de WooCommerce exclusivamente como gestor de inventario y pedidos mediante API REST optimizada con caché en el Edge. Implementamos filtros instantáneos por metro, composición y color sin recarga de página, e integramos pasarelas de pago colombianas (Wompi y PSE) junto a un cotizador directo a WhatsApp para compras por rollo.",
       seoFocus: "Venta de telas por mayor Colombia, textiles mayoristas Medellín, telas para confección B2B, distribuidores textiles Colombia.",
       results: "La nueva plataforma redujo el tiempo de carga en un 85%, pasando de 5.4s a 0.78s de LCP. El rendimiento en Google PageSpeed subió de 32/100 a 97/100 en móviles. La tasa de conversión en cotizaciones mayoristas aumentó un 64% y la web soportó sin caídas picos de más de 12.000 visitas concurrentes.",
     },
@@ -392,7 +392,7 @@ export const projects: Project[] = [
     duration: "3 semanas",
     objective: "Posicionar la marca a nivel nacional y automatizar agendamiento de servicios.",
     category: "Sitio Corporativo",
-    tech: ["Next.js", "Framer Motion", "Tailwind CSS", "WhatsApp Booking"],
+    tech: ["Arquitectura Headless", "Framer Motion", "Tailwind CSS", "WhatsApp Booking"],
     shortDescription: "Spa canino reconocido a nivel nacional",
     description: "Sitio web corporativo de alto impacto para un spa canino líder en el mercado nacional.",
     images: {
@@ -432,7 +432,7 @@ export const projects: Project[] = [
     duration: "3 semanas",
     objective: "Exhibición de colecciones de cortinas con asesoría personalizada vía WhatsApp.",
     category: "Catálogo Digital",
-    tech: ["Next.js", "React", "Tailwind CSS", "WhatsApp Business API"],
+    tech: ["Arquitectura Headless", "Tailwind CSS", "WhatsApp Business API"],
     shortDescription: "Catálogo digital de cortinas y decoración",
     description: "Showcase digital elegante para la exhibición de cortinas y productos de hogar con conversión directa a WhatsApp.",
     images: {
@@ -472,7 +472,7 @@ export const projects: Project[] = [
     duration: "4 semanas",
     objective: "Indexación masiva de referencias técnicas y cotizaciones ágiles para repuestos Volvo.",
     category: "Industrial / E-commerce",
-    tech: ["Next.js", "Server Side Rendering", "Schema Product", "Tailwind CSS"],
+    tech: ["Arquitectura Headless", "Server Side Rendering", "Schema Product", "Tailwind CSS"],
     shortDescription: "Repuestos para maquinaria amarilla Volvo",
     description: "Solución especializada para la venta y distribución de partes de maquinaria pesada.",
     images: {
@@ -512,7 +512,7 @@ export const projects: Project[] = [
     duration: "3 semanas",
     objective: "Compraventa de vehículos con deuda mediante filtros en tiempo real.",
     category: "Automotriz",
-    tech: ["Next.js", "Real-time filters", "WhatsApp Integration", "Tailwind CSS"],
+    tech: ["Arquitectura Headless", "Real-time filters", "WhatsApp Integration", "Tailwind CSS"],
     shortDescription: "Compraventa de vehículos en Perú",
     description: "Plataforma dinámica para la compra y venta de autos con deuda.",
     images: {
@@ -552,7 +552,7 @@ export const projects: Project[] = [
     duration: "3 semanas",
     objective: "Sumergir al lector en el universo de la obra literaria y canalizar ventas del libro.",
     category: "Marca Personal / Libro",
-    tech: ["Next.js", "Framer Motion", "Diseño Inmersivo", "Tailwind CSS"],
+    tech: ["Arquitectura Headless", "Framer Motion", "Diseño Inmersivo", "Tailwind CSS"],
     shortDescription: "Plataforma personal para escritor",
     description: "Sitio web inmersivo y personalizado para la marca personal de un escritor y su obra maestra.",
     images: {
@@ -592,7 +592,7 @@ export const projects: Project[] = [
     duration: "4 semanas",
     objective: "Centralizar presencia digital, agendamiento de citas y control operativo del salón.",
     category: "Gestión / Belleza",
-    tech: ["Next.js", "Sistema de Agendamiento", "Tailwind CSS", "Supabase"],
+    tech: ["Arquitectura Headless", "Sistema de Agendamiento", "Tailwind CSS", "Supabase"],
     shortDescription: "Sistema de gestión para salón de belleza",
     description: "Plataforma integral para salón con más de 20 años de experiencia.",
     images: {
@@ -632,7 +632,7 @@ export const projects: Project[] = [
     duration: "3 semanas",
     objective: "Renovación de imagen corporativa y captación de contratos de alquiler de buses turísticos.",
     category: "Turismo / Transporte",
-    tech: ["Next.js", "Tailwind CSS", "SEO Optimization", "Vercel"],
+    tech: ["Arquitectura Headless", "Tailwind CSS", "SEO Optimization", "Vercel"],
     shortDescription: "Servicios de transporte turístico",
     description: "Remodelación integral para empresa de transporte turístico.",
     images: {

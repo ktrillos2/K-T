@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "desarrollo web inmobiliarias colombia",
     "paginas web para inmobiliarias bogota medellin",
     "software inmobiliario portales web",
-    "crear portal inmobiliario next.js",
+    "crear portal inmobiliario alta velocidad",
     "K&T Code inmobiliarias",
   ],
   alternates: {

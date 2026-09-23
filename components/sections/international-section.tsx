@@ -449,13 +449,13 @@ export default function InternationalSection() {
                                 ? [
                                     { title: "Global Schedule", desc: "Flexible support for your time zone", borderColor: "border-white" },
                                     { title: "Multi-Currency Billing", desc: "USD, EUR & international payments", borderColor: "border-white" },
-                                    { title: "High-Performance Stack", desc: "Next.js, Tailwind, Vercel & Supabase", borderColor: "border-white" },
+                                    { title: "High-Performance Stack", desc: "Headless, Vercel Edge & Supabase", borderColor: "border-white" },
                                     { title: "Remote Excellence", desc: "Asynchronous workflows & sprint reviews", borderColor: "border-white" }
                                   ]
                                 : [
                                     { title: "Horario Global", desc: "Soporte flexible para tu zona", borderColor: "border-white" },
                                     { title: "Pagos Multi-divisa", desc: "USD, COP recibidos", borderColor: "border-white" },
-                                    { title: "Stack de Alto Rendimiento", desc: "Next.js, Tailwind, Vercel & Supabase", borderColor: "border-white" },
+                                    { title: "Stack de Alto Rendimiento", desc: "Headless, Vercel Edge & Supabase", borderColor: "border-white" },
                                     { title: "Calidad Remota", desc: "Flujos de trabajo asíncronos", borderColor: "border-white" }
                                   ]
                             ).map((item, idx) => (

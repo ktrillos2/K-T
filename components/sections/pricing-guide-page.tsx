@@ -188,13 +188,13 @@ export default function PricingGuidePage({ guide }: { guide: PricingGuideData })
             </section>
           )}
 
-          {/* Tech Comparison: Next.js vs WordPress vs Builders */}
+          {/* Tech Comparison: Native Code vs WordPress vs Builders */}
           {guide.techComparison && guide.techComparison.length > 0 && (
             <section className="mt-28">
               <div className="mx-auto max-w-3xl text-center">
                 <p className="font-mono text-sm uppercase tracking-wider text-white/60">// Comparativa Tecnológica</p>
                 <h2 className="mt-3 font-title text-3xl font-bold md:text-4xl">
-                  Next.js frente a WordPress y Creadores Visuales
+                  K&T Code frente a WordPress y Creadores Visuales
                 </h2>
               </div>
 
@@ -203,7 +203,7 @@ export default function PricingGuidePage({ guide }: { guide: PricingGuideData })
                   <thead>
                     <tr className="border-b border-white/10 bg-white/5 text-left text-xs uppercase text-white/50">
                       <th className="p-5">Criterio de Evaluación</th>
-                      <th className="p-5 text-emerald-400">Next.js (K&T Code)</th>
+                      <th className="p-5 text-emerald-400">K&T Code</th>
                       <th className="p-5 text-amber-400">WordPress / Elementor</th>
                       <th className="p-5 text-white/50">Wix / Shopify DIY</th>
                     </tr>

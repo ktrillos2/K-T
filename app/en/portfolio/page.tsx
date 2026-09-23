@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     "Explore our verified web development projects, custom software platforms, and headless e-commerce case studies across various industries.",
   keywords: [
     "web development portfolio",
-    "next.js case studies",
+    "web development case studies colombia",
     "software development agency projects",
     "ecommerce website examples",
     "K&T Code portfolio",

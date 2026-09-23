@@ -25,7 +25,7 @@ import { absoluteUrl } from "@/lib/site-config"
 export const metadata: Metadata = {
   title: "Desarrollo de Páginas Web en Cúcuta | Sede Principal K&T Code",
   description:
-    "Empresa de desarrollo web y software a medida en San José de Cúcuta, Norte de Santander. Sitios web en Next.js, tiendas virtuales B2B y soporte presencial.",
+    "Empresa de desarrollo web y software a medida en San José de Cúcuta, Norte de Santander. Sitios web de alto rendimiento, tiendas virtuales B2B y soporte presencial.",
   keywords: [
     "desarrollo web cucuta",
     "paginas web cucuta",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Desarrollo de Páginas Web en Cúcuta | Sede Principal K&T Code",
     description:
-      "Diseño y desarrollo web profesional en San José de Cúcuta. Next.js, tiendas online y soporte local con ingeniería de primer nivel.",
+      "Diseño y desarrollo web profesional en San José de Cúcuta. Tiendas online y soporte local con ingeniería de primer nivel.",
     images: ["https://www.kytcode.lat/opengraph-image.png"],
   },
 }
@@ -130,7 +130,7 @@ export default function CucutaPage() {
         "name": "Colombia"
       }
     ],
-    "description": "Sede principal de K&T Code en San José de Cúcuta. Empresa de desarrollo de páginas web a medida, tiendas virtuales con pasarelas de pago y software empresarial sobre arquitectura Next.js."
+    "description": "Sede principal de K&T Code en San José de Cúcuta. Empresa de desarrollo de páginas web a medida, tiendas virtuales con pasarelas de pago y software empresarial de alto rendimiento."
   }
 
   const faqSchema = {
@@ -155,10 +155,10 @@ export default function CucutaPage() {
       },
       {
         "@type": "Question",
-        "name": "¿Por qué elegir Next.js en lugar de WordPress para una empresa en Cúcuta?",
+        "name": "¿Por qué elegir arquitectura headless en lugar de WordPress para una empresa en Cúcuta?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Next.js permite pre-renderizar contenido y desacoplar el frontend, reduciendo significativamente la superficie de ataque al no depender de plugins de terceros. Tu página obtiene tiempos de respuesta ágiles tanto en móviles como en computadores, mejorando la retención de usuarios y la evaluación técnica de Core Web Vitals en Google."
+          "text": "La arquitectura headless permite pre-renderizar contenido y desacoplar el frontend, reduciendo significativamente la superficie de ataque al no depender de plugins de terceros. Tu página obtiene tiempos de respuesta ágiles tanto en móviles como en computadores, mejorando la retención de usuarios y la evaluación técnica de Core Web Vitals en Google."
         }
       },
       {
@@ -247,7 +247,7 @@ export default function CucutaPage() {
             </h1>
 
             <p className="font-mono text-base sm:text-lg text-neutral-300 max-w-3xl leading-relaxed mb-8">
-              K&T Code nació y opera desde San José de Cúcuta. Diseñamos páginas web corporativas de alto impacto, tiendas virtuales con pasarelas de pago colombianas y software a medida sobre Next.js 15, brindando atención cercana y soporte técnico directo a los empresarios de Norte de Santander.
+              K&T Code nació y opera desde San José de Cúcuta. Diseñamos páginas web corporativas de alto impacto, tiendas virtuales con pasarelas de pago colombianas y software a medida con arquitectura de primer nivel, brindando atención cercana y soporte técnico directo a los empresarios de Norte de Santander.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 justify-center lg:justify-start mb-12">
@@ -453,7 +453,7 @@ export default function CucutaPage() {
                     Página de una sola sección enfocada en captar clientes desde Google Ads o Meta.
                   </p>
                   <ul className="space-y-2 font-mono text-xs text-neutral-300 mb-6">
-                    <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400" /> Diseño exclusivo en Next.js</li>
+                    <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400" /> Diseño exclusivo de alto rendimiento</li>
                     <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400" /> Botón directo a WhatsApp</li>
                     <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400" /> Carga rápida y optimizada (Core Web Vitals)</li>
                     <li className="flex items-center gap-2"><Check className="w-3.5 h-3.5 text-emerald-400" /> Entrega en 7 a 12 días</li>

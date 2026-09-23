@@ -27,7 +27,7 @@ import { absoluteUrl } from "@/lib/site-config"
 export const metadata: Metadata = {
   title: "About Us - Web Development & Software Engineering Agency",
   description:
-    "Learn about K&T Code: software engineering company founded in 2025 in San José de Cúcuta, Colombia. Leadership, methodology, and high-performance Next.js architectures.",
+    "Learn about K&T Code: software engineering company founded in 2025 in San José de Cúcuta, Colombia. Leadership, methodology, and high-performance digital architectures.",
   keywords: [
     "about K&T Code",
     "web development company",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About K&T Code | Web Development & Software Engineering Agency",
     description:
-      "Specialized in corporate websites, headless e-commerce, and custom software powered by Next.js, React 19, and TypeScript.",
+      "Specialized in corporate websites, headless e-commerce, and custom software powered by modern digital architecture and edge delivery.",
     url: absoluteUrl("/en/about"),
     siteName: "K&T Code",
     locale: "en_US",
@@ -153,7 +153,7 @@ export default function EnglishAboutPage() {
               Software engineering built on rigor, speed, and measurable results.
             </p>
             <p className="font-mono text-base sm:text-lg text-neutral-400 max-w-3xl leading-relaxed mx-auto">
-              <strong>K&T Code</strong> is a web development and custom software company founded in 2025 in San José de Cúcuta, Colombia. We build modern digital infrastructure using <strong>Next.js, React 19, TypeScript, Supabase, and Headless CMS</strong> for enterprises across Colombia, Latin America, and the United States.
+              <strong>K&T Code</strong> is a web development and custom software company founded in 2025 in San José de Cúcuta, Colombia. We build modern digital infrastructure using <strong>advanced headless architecture, Supabase, and Headless CMS</strong> for enterprises across Colombia, Latin America, and the United States.
             </p>
           </header>
 
@@ -177,7 +177,7 @@ export default function EnglishAboutPage() {
               </div>
               <div className="p-4 rounded-xl border border-white/10 bg-black/40">
                 <span className="text-neutral-500 block mb-1">Core Tech Stack</span>
-                <strong className="text-white text-sm">Next.js • React 19 • TS</strong>
+                <strong className="text-white text-sm">Headless • Edge CDN • Supabase</strong>
               </div>
               <div className="p-4 rounded-xl border border-white/10 bg-black/40">
                 <span className="text-neutral-500 block mb-1">Primary Services</span>
@@ -299,8 +299,8 @@ export default function EnglishAboutPage() {
               {[
                 { step: "01", title: "Discovery & Requirements", desc: "We analyze business goals, competitive landscape, and user flows before writing a single line of code." },
                 { step: "02", title: "Figma UI/UX Prototyping", desc: "We design high-fidelity interactive wireframes focusing on conversion rate optimization and brand identity." },
-                { step: "03", title: "Headless Architecture", desc: "We set up Next.js App Router, Server Components, and database schema in Supabase/PostgreSQL." },
-                { step: "04", title: "Strict Typing & Engineering", desc: "100% TypeScript coverage with zero sloppy patterns or bloated unmaintained plugins." },
+                { step: "03", title: "Headless Architecture", desc: "We set up App Router, Server Components, and database schema in Supabase/PostgreSQL." },
+                { step: "04", title: "Strict Engineering & QA", desc: "100% strict typing coverage with zero sloppy patterns or bloated unmaintained plugins." },
                 { step: "05", title: "Core Web Vitals & QA Audit", desc: "We audit Core Web Vitals (LCP, CLS, and INP), optimize assets and scripts, and implement complete Schema.org JSON-LD structured data for high performance." },
                 { step: "06", title: "Edge CDN Deployment", desc: "Zero-downtime deployment on Vercel Global Edge Network with continuous monitoring." },
               ].map((m) => (

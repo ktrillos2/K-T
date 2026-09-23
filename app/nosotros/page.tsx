@@ -44,7 +44,7 @@ const TikTok = ({ className }: { className?: string }) => (
 export const metadata: Metadata = {
   title: "Sobre Nosotros - Empresa de Desarrollo Web y Software en Colombia",
   description:
-    "Conoce a K&T Code: empresa colombiana de desarrollo web y software fundada en 2025 en San José de Cúcuta. Equipo de ingeniería, liderazgo, metodología y tecnologías Next.js.",
+    "Conoce a K&T Code: empresa colombiana de desarrollo web y software fundada en 2025 en San José de Cúcuta. Equipo de ingeniería, liderazgo, metodología y arquitectura digital de alto rendimiento.",
   keywords: [
     "sobre K&T Code",
     "empresa desarrollo web colombia",
@@ -225,7 +225,7 @@ export default function NosotrosPage() {
               Ingeniería de software basada en rigor, velocidad y resultados.
             </p>
             <p className="font-mono text-base sm:text-lg text-neutral-400 max-w-3xl leading-relaxed mx-auto">
-              <strong className="text-white">K&T Code</strong> es una empresa colombiana de desarrollo web y software a medida fundada en 2025 en San José de Cúcuta. Construimos plataformas digitales de alto rendimiento con <strong className="text-white">Next.js, React 19, TypeScript, Supabase y CMS Headless</strong> para empresas en Colombia, Latinoamérica y Estados Unidos.
+              <strong className="text-white">K&T Code</strong> es una empresa colombiana de desarrollo web y software a medida fundada en 2025 en San José de Cúcuta. Construimos plataformas digitales de alto rendimiento con <strong className="text-white">arquitectura moderna, Supabase y CMS Headless</strong> para empresas en Colombia, Latinoamérica y Estados Unidos.
             </p>
           </header>
 
@@ -295,7 +295,7 @@ export default function NosotrosPage() {
                 {/* Bio & Track Record */}
                 <div className="md:col-span-8 space-y-4 font-mono text-sm leading-relaxed text-neutral-300">
                   <p>
-                    Keyner Trillos lidera la dirección técnica, arquitectura de software y estrategias de adquisición en <strong className="text-white">K&T Code</strong>. Especializado en el ecosistema React, Next.js y TypeScript, cuenta con amplia experiencia en la estructuración de plataformas digitales orientadas a alto rendimiento (Core Web Vitals), escalabilidad y SEO técnico avanzado.
+                    Keyner Trillos lidera la dirección técnica, arquitectura de software y estrategias de adquisición en <strong className="text-white">K&T Code</strong>. Especializado en desarrollo web de alto rendimiento y arquitecturas headless, cuenta con amplia experiencia en la estructuración de plataformas digitales orientadas a rendimiento (Core Web Vitals), escalabilidad y SEO técnico avanzado.
                   </p>
                   <p>
                     Además de la ingeniería web, cuenta con sólida trayectoria en la <strong className="text-white">gestión estratégica de Meta Ads (Facebook e Instagram Ads)</strong>, diseñando campañas publicitarias y embudos de conversión adaptados a las necesidades y metas comerciales de cada empresa para maximizar el retorno de inversión (ROAS).
@@ -303,7 +303,7 @@ export default function NosotrosPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-white/10 text-xs">
                     <div>
                       <span className="text-neutral-500 block uppercase tracking-wider text-[10px]">Especialidad</span>
-                      <strong className="text-neutral-200">Next.js & Gestión Estratégica de Meta Ads</strong>
+                      <strong className="text-neutral-200">Desarrollo Web & Gestión Estratégica de Meta Ads</strong>
                     </div>
                     <div>
                       <span className="text-neutral-500 block uppercase tracking-wider text-[10px]">Supervisión</span>
@@ -328,7 +328,7 @@ export default function NosotrosPage() {
                 </div>
                 <h3 className="text-base font-bold text-white font-title mb-2">Ingeniería Frontend</h3>
                 <p className="text-neutral-400 text-xs leading-relaxed">
-                  Desarrollo de interfaces modulares y accesibles con Next.js, React 19, Server Components y estilos en Tailwind CSS.
+                   Desarrollo de interfaces modulares y accesibles con arquitectura headless, Server Components y estilos en Tailwind CSS.
                 </p>
               </div>
 
@@ -375,12 +375,12 @@ export default function NosotrosPage() {
                 {
                   step: "03",
                   title: "Arquitectura de Software & Modelado",
-                  desc: "Estructuramos el proyecto en Next.js con App Router, Server Components y configuramos bases de datos relacionales en Supabase / PostgreSQL.",
+                  desc: "Estructuramos el proyecto con App Router, Server Components y configuramos bases de datos relacionales en Supabase / PostgreSQL.",
                 },
                 {
                   step: "04",
                   title: "Desarrollo con Tipado Estricto",
-                  desc: "Programamos en TypeScript sin plantillas recicladas ni plugins lentos, integrando APIs, pasarelas de pago colombianas y WhatsApp Business.",
+                  desc: "Programamos sin plantillas recicladas ni plugins lentos, integrando APIs, pasarelas de pago colombianas y WhatsApp Business.",
                 },
                 {
                   step: "05",
@@ -437,7 +437,7 @@ export default function NosotrosPage() {
                   title: "Telas Real",
                   sector: "E-commerce B2B Textil",
                   slug: "telas-real",
-                  desc: "Migración de WordPress lento a catálogo mayorista Headless en Next.js.",
+                  desc: "Migración de WordPress lento a catálogo mayorista Headless de alta velocidad.",
                 },
                 {
                   title: "Qvareli",
@@ -487,9 +487,9 @@ export default function NosotrosPage() {
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 font-mono text-xs">
               {[
-                { name: "Next.js App Router", category: "Framework SSR / SSG" },
-                { name: "React 19", category: "Librería UI" },
-                { name: "TypeScript 5", category: "Tipado Estricto" },
+                { name: "Arquitectura App Router (SSR/SSG)", category: "Framework de Alto Rendimiento" },
+                { name: "Interfaz Reactiva Moderna", category: "Librería UI" },
+                { name: "Tipado Estricto", category: "Calidad de Código" },
                 { name: "Tailwind CSS", category: "Diseño & UI" },
                 { name: "Vercel Edge Network", category: "Infraestructura Global CDN" },
                 { name: "Supabase / PostgreSQL", category: "Base de Datos Relacional" },
@@ -513,7 +513,7 @@ export default function NosotrosPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-sm">
               {[
                 "Evaluación de Rendimiento y Core Web Vitals: Antes del lanzamiento auditamos Core Web Vitals, incluyendo LCP, CLS e INP, y optimizamos imágenes, scripts, renderizado y entrega de recursos con el objetivo de alcanzar métricas de rendimiento altamente competitivas.",
-                "Arquitectura Next.js & React 19: Reducimos dependencias innecesarias y aplicamos controles de acceso, validación de datos y buenas prácticas de seguridad en frontend, backend y base de datos.",
+                "Arquitectura Headless y Buenas Prácticas: Reducimos dependencias innecesarias y aplicamos controles de acceso, validación de datos y buenas prácticas de seguridad en frontend, backend y base de datos.",
                 "SEO Técnico y Optimización para Motores de IA (GEO): Implementamos marcado Schema.org JSON-LD (Organization, Service, FAQPage), sitemaps dinámicos y jerarquía semántica HTML5 estricta.",
                 "Propiedad 100% del Código y Repositorio: Entregamos el código fuente completo en un repositorio privado de GitHub a nombre de la empresa cliente con total independencia.",
                 "Integraciones Transaccionales en Colombia: Conectamos pasarelas de pago (Wompi, Bold, PayU), pasarelas PSE/Nequi, WhatsApp Business API y facturación electrónica DIAN.",
@@ -601,7 +601,7 @@ export default function NosotrosPage() {
                 </div>
                 <div>
                   <dt className="text-white/50 text-xs uppercase tracking-wider">Stack Tecnológico</dt>
-                  <dd className="text-neutral-300 mt-1">Next.js, React 19, TypeScript, Supabase, PostgreSQL</dd>
+                  <dd className="text-neutral-300 mt-1">Arquitectura Headless, Supabase, PostgreSQL, Edge CDN</dd>
                 </div>
               </dl>
             </div>

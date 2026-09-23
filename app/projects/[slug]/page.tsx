@@ -40,7 +40,7 @@ async function resolveProject(slug: string): Promise<Project | null> {
                 duration: sanityProject.duration || local?.duration || "4 semanas",
                 objective: sanityProject.objective || local?.objective || sanityProject.shortDescription || "Desarrollo web corporativo",
                 category: sanityProject.category || local?.category || "Desarrollo Web",
-                tech: sanityProject.tech && sanityProject.tech.length > 0 ? sanityProject.tech : (local?.tech || ["Next.js", "React"]),
+                tech: sanityProject.tech && sanityProject.tech.length > 0 ? sanityProject.tech : (local?.tech || ["Headless Architecture", "Edge CDN"]),
                 description: sanityProject.description || local?.description || "",
                 shortDescription: sanityProject.shortDescription || local?.shortDescription || "",
                 images: {
@@ -63,7 +63,7 @@ async function resolveProject(slug: string): Promise<Project | null> {
                     integrations: "WhatsApp API + Formularios SSL",
                     keyAchievements: [
                         "Optimización de Core Web Vitals y LCP < 0.8s.",
-                        "Arquitectura moderna en Next.js y React.",
+                        "Arquitectura headless moderna de alto rendimiento.",
                     ]
                 }
             }
@@ -121,7 +121,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             project.category,
             project.industry,
             `Desarrollo Web ${project.country || "Colombia"}`,
-            "Casos de Estudio Next.js",
+            "Casos de Estudio Desarrollo Web",
             "Portafolio K&T Code",
         ],
         alternates: {

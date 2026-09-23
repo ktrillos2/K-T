@@ -76,7 +76,7 @@ export default function ServiciosPage() {
               Servicios de Desarrollo Web y Software en Colombia
             </h1>
             <p className="text-neutral-400 font-mono text-sm md:text-base max-w-2xl mx-auto">
-              Diseño, desarrollo y mantenimiento de páginas web, tiendas virtuales y aplicaciones a medida con arquitectura moderna en Next.js.
+              Diseño, desarrollo y mantenimiento de páginas web, tiendas virtuales y aplicaciones a medida con arquitectura headless de alto rendimiento.
             </p>
           </header>
         </div>

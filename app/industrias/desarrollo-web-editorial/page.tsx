@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   keywords: [
     "desarrollo web medios de comunicacion colombia",
     "paginas web editoriales revistas digitales",
-    "portales de noticias next.js isr",
+    "portales de noticias alta velocidad isr",
     "headless cms medios digitales colombia",
     "K&T Code editorial y consultoria",
   ],

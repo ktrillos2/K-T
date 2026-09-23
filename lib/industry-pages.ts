@@ -34,12 +34,12 @@ export const industryPages: Record<string, IndustryPageData> = {
     slug: "desarrollo-web-inmobiliarias",
     title: "Desarrollo de Páginas Web para Inmobiliarias y Empresas Proptech en Colombia",
     shortTitle: "Desarrollo web inmobiliarias",
-    metaTitle: "Páginas Web para Inmobiliarias en Colombia | Next.js & CRM",
+    metaTitle: "Páginas Web para Inmobiliarias en Colombia | Portales & CRM",
     metaDescription:
       "Desarrollo de páginas web y portales para inmobiliarias en Colombia. Buscadores avanzados de inmuebles, mapas interactivos, integración con WhatsApp y CRM.",
     eyebrow: "// Soluciones Digitales para el Sector Inmobiliario",
     summary:
-      "Diseñamos y desarrollamos portales inmobiliarios de alto rendimiento en Colombia con Next.js. Filtros inteligentes por ciudad, estrato, precio y tipo de inmueble, galerías multimedia ultra rápidas y conexión directa a WhatsApp para captar compradores y arrendatarios calificados.",
+      "Diseñamos y desarrollamos portales inmobiliarios de alto rendimiento en Colombia con arquitectura moderna. Filtros inteligentes por ciudad, estrato, precio y tipo de inmueble, galerías multimedia ultra rápidas y conexión directa a WhatsApp para captar compradores y arrendatarios calificados.",
     industryName: "Inmobiliario y Proptech",
     industryChallenges: [
       { title: "Carga lenta de galerías de fotos", description: "Los portales tradicionales tardan más de 5 segundos en cargar fotos pesadas, espantando a compradores potenciales." },
@@ -55,7 +55,7 @@ export const industryPages: Record<string, IndustryPageData> = {
       { title: "SEO Local para Proyectos Inmobiliarios", description: "Páginas dedicadas para proyectos sobre planos con marcado Schema para posicionar en búsquedas locales." },
     ],
     techStack: [
-      { name: "Next.js (App Router)", tag: "Frontend & SSR" },
+      { name: "Arquitectura Headless (SSR)", tag: "Frontend & Carga Rápida" },
       { name: "PostgreSQL / Supabase", tag: "Base de Datos Inmuebles" },
       { name: "Mapbox GL / Google Maps API", tag: "Geolocalización" },
       { name: "AWS S3 / Cloudflare R2", tag: "Almacenamiento Multimedia" },
@@ -74,13 +74,13 @@ export const industryPages: Record<string, IndustryPageData> = {
         role: "Portal Inmobiliario & Gestión de Propiedades",
         metrics: "Lighthouse 98/100 • LCP 580 ms • Catálogo de Inmuebles Dinámico",
         description: "Plataforma de bienes raíces con catálogo de inmuebles en venta y arriendo, fichas interactivas y contacto instantáneo con asesores.",
-        tech: ["Next.js", "React", "Tailwind CSS", "WhatsApp API"],
+        tech: ["Arquitectura Headless", "Tailwind CSS", "WhatsApp API"],
       },
     ],
     faqs: [
       { question: "¿La inmobiliaria puede subir y actualizar inmuebles fácilmente?", answer: "Sí. Diseñamos un panel intuitivo donde tu equipo puede subir fotos, cambiar precios, marcar propiedades como vendidas o destacadas y gestionar agentes en minutos." },
       { question: "¿Se puede integrar con plataformas como Wasi o Tokko?", answer: "Sí. Podemos conectar la web con tu software inmobiliario actual mediante APIs para que el inventario se actualice automáticamente." },
-      { question: "¿Cómo ayuda Next.js a posicionar las propiedades en Google?", answer: "Next.js genera páginas estáticas optimizadas para cada inmueble, permitiendo que Google indexe fichas completas con precios, fotos y ubicación en las primeras posiciones." },
+      { question: "¿Cómo ayuda la arquitectura moderna a posicionar las propiedades en Google?", answer: "Nuestra arquitectura genera páginas estáticas optimizadas para cada inmueble, permitiendo que Google indexe fichas completas con precios, fotos y ubicación en las primeras posiciones." },
     ],
     relatedServiceSlug: "desarrollo-web-a-medida",
     relatedServiceTitle: "Desarrollo Web a Medida",
@@ -111,7 +111,7 @@ export const industryPages: Record<string, IndustryPageData> = {
       { title: "SEO Médico Local y Schema MedicalBusiness", description: "Marcado semántico estructurado para destacar en Google Maps y búsquedas especializadas." },
     ],
     techStack: [
-      { name: "Next.js", tag: "Frontend & SSR" },
+      { name: "Arquitectura Headless", tag: "Frontend & Carga Rápida" },
       { name: "Tailwind CSS", tag: "Diseño & Accesibilidad" },
       { name: "WhatsApp Business API", tag: "Atención al Paciente" },
       { name: "Vercel Edge", tag: "Velocidad Global" },
@@ -129,7 +129,7 @@ export const industryPages: Record<string, IndustryPageData> = {
         role: "Portal Institucional y Salud Mental",
         metrics: "Lighthouse 99/100 • LCP 620 ms • Agendamiento de Citas",
         description: "Plataforma de psicología clínica y bienestar corporativo con agendamiento directo y segmentación de servicios para personas y empresas.",
-        tech: ["Next.js", "React", "Tailwind CSS", "WhatsApp API"],
+        tech: ["Arquitectura Headless", "Tailwind CSS", "WhatsApp API"],
       },
     ],
     faqs: [
@@ -147,7 +147,7 @@ export const industryPages: Record<string, IndustryPageData> = {
     shortTitle: "Desarrollo web ingeniería y construcción",
     metaTitle: "Páginas Web para Empresas de Ingeniería y Construcción",
     metaDescription:
-      "Páginas web corporativas para firmas de ingeniería, constructoras y arquitectura en Colombia. Fichas técnicas, portafolio de obras, licitaciones y velocidad Next.js.",
+      "Páginas web corporativas para firmas de ingeniería, constructoras y arquitectura en Colombia. Fichas técnicas, portafolio de obras, licitaciones y alta velocidad.",
     eyebrow: "// Presencia Digital para Firmas de Ingeniería",
     summary:
       "Construimos sitios web corporativos de alta credibilidad para firmas de ingeniería civil, eléctrica, ambiental y constructoras en Colombia. Presenta portafolios de mega-obras, fichas técnicas descargables y credenciales corporativas para ganar licitaciones y clientes B2B.",
@@ -165,7 +165,7 @@ export const industryPages: Record<string, IndustryPageData> = {
       { title: "Diseño Corporativo sobrio y elegante", description: "Estética visual de alto nivel que transmite rigor técnico, solidez financiera y experiencia." },
     ],
     techStack: [
-      { name: "Next.js", tag: "Frontend Corporativo" },
+      { name: "Arquitectura Headless", tag: "Frontend Corporativo" },
       { name: "Tailwind CSS", tag: "Diseño & UI" },
       { name: "Sanity CMS", tag: "Gestión de Portafolio de Obras" },
       { name: "Cloudflare Edge", tag: "Seguridad & CDN" },
@@ -173,7 +173,7 @@ export const industryPages: Record<string, IndustryPageData> = {
     process: [
       { title: "Levantamiento de Obras y Servicios", description: "Categorizamos las áreas de especialidad técnica y seleccionamos los proyectos más representativos." },
       { title: "Diseño Visual de Autoridad B2B", description: "Estructuramos la jerarquía visual para destacar cifras clave (m² construidos, años de experiencia, clientes)." },
-      { title: "Desarrollo en Next.js", description: "Programamos un sitio ultra rápido y seguro, sin vulnerabilidades de plugins." },
+      { title: "Desarrollo Frontend", description: "Programamos un sitio ultra rápido y seguro, sin vulnerabilidades de plugins." },
       { title: "Publicación de Documentación y SEO", description: "Optimizamos metadatos para posicionar la firma en licitaciones y contrataciones privadas." },
     ],
     featuredProjects: [
@@ -183,7 +183,7 @@ export const industryPages: Record<string, IndustryPageData> = {
         role: "Portal Corporativo & Proyectos de Ingeniería",
         metrics: "Lighthouse 98/100 • LCP 610 ms • Presentación de Obras",
         description: "Plataforma empresarial para firma de ingeniería y construcción con catálogo de proyectos de infraestructura y captación B2B.",
-        tech: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+        tech: ["Arquitectura Headless", "Tailwind CSS", "Vercel"],
       },
     ],
     faqs: [
@@ -199,12 +199,12 @@ export const industryPages: Record<string, IndustryPageData> = {
     slug: "ecommerce-b2b",
     title: "Desarrollo de Plataformas E-commerce B2B y Portales Mayoristas en Colombia",
     shortTitle: "E-commerce B2B y mayoristas",
-    metaTitle: "E-commerce B2B y Portales Mayoristas en Colombia | Next.js",
+    metaTitle: "E-commerce B2B y Portales Mayoristas en Colombia | Portales Web",
     metaDescription:
       "Desarrollo de tiendas virtuales B2B en Colombia. Precios por volumen, cotizadores automáticos, integración ERP y pasarelas de pago para empresas mayoristas.",
     eyebrow: "// Comercio Electrónico Mayorista y B2B",
     summary:
-      "Desarrollamos tiendas virtuales y portales B2B para mayoristas, fabricantes y distribuidores en Colombia. Habilita listas de precios personalizadas por cliente, pedidos por volumen, facturación electrónica y pasarelas de pago corporativas con arquitectura Next.js.",
+      "Desarrollamos tiendas virtuales y portales B2B para mayoristas, fabricantes y distribuidores en Colombia. Habilita listas de precios personalizadas por cliente, pedidos por volumen, facturación electrónica y pasarelas de pago corporativas con arquitectura moderna.",
     industryName: "Comercio Mayorista, Fabricantes y B2B",
     industryChallenges: [
       { title: "Gestión manual de pedidos por WhatsApp y PDF", description: "Procesar órdenes por chat genera errores en despachos, pérdida de cotizaciones y sobrecarga del equipo comercial." },
@@ -219,7 +219,7 @@ export const industryPages: Record<string, IndustryPageData> = {
       { title: "Pasarelas de Pago B2B (PSE, Transferencia y Wompi)", description: "Cobros instantáneos con conciliación bancaria automática." },
     ],
     techStack: [
-      { name: "Next.js (Headless E-commerce)", tag: "Frontend" },
+      { name: "Arquitectura Headless (Storefront)", tag: "Frontend" },
       { name: "PostgreSQL / Medusa / Shopify API", tag: "Motor B2B" },
       { name: "Wompi / Bold / PSE", tag: "Pasarelas Colombia" },
       { name: "Vercel Serverless", tag: "Escalabilidad" },
@@ -237,7 +237,7 @@ export const industryPages: Record<string, IndustryPageData> = {
         role: "Catálogo E-commerce Textil B2B",
         metrics: "Lighthouse 98/100 • LCP 590 ms • Catálogo Mayorista",
         description: "Catálogo digital de textiles y telas al por mayor con cálculo de metraje y cotizador directo para talleres y diseñadores.",
-        tech: ["Next.js", "React", "Tailwind CSS", "WhatsApp API"],
+        tech: ["Arquitectura Headless", "Tailwind CSS", "WhatsApp API"],
       },
       {
         client: "Eklipse Home Textil",
@@ -245,7 +245,7 @@ export const industryPages: Record<string, IndustryPageData> = {
         role: "Tienda Virtual & Catálogo de Blancos",
         metrics: "Lighthouse 97/100 • LCP 640 ms • Alta Conversión",
         description: "E-commerce de productos textiles para el hogar y hotelería con filtrado por medidas y variantes.",
-        tech: ["Next.js", "Tailwind CSS", "E-commerce"],
+        tech: ["Arquitectura Headless", "Tailwind CSS", "E-commerce"],
       },
     ],
     faqs: [
@@ -263,7 +263,7 @@ export const industryPages: Record<string, IndustryPageData> = {
     shortTitle: "Desarrollo web turismo y hoteles",
     metaTitle: "Páginas Web para Hoteles y Turismo en Colombia",
     metaDescription:
-      "Desarrollo de páginas web para hoteles, agencias de viajes y glampings en Colombia. Motores de reserva directa, cero comisiones de OTAs y velocidad Next.js.",
+      "Desarrollo de páginas web para hoteles, agencias de viajes y glampings en Colombia. Motores de reserva directa, cero comisiones de OTAs y alta velocidad.",
     eyebrow: "// Soluciones Digitales para Turismo y Hospitalidad",
     summary:
       "Construimos plataformas web para hoteles, glampings, agencias de turismo y restaurantes en Colombia. Reduce comisiones de plataformas intermediarias (Booking, Airbnb) con un motor de reservas directas, galerías inmersivas y pasarelas de pago locales.",
@@ -281,7 +281,7 @@ export const industryPages: Record<string, IndustryPageData> = {
       { title: "SEO Turístico y Guías de Destino", description: "Artículos y páginas optimizadas para captar viajeros que buscan qué hacer en tu región." },
     ],
     techStack: [
-      { name: "Next.js", tag: "Frontend Visual" },
+      { name: "Arquitectura Headless", tag: "Frontend Visual" },
       { name: "Wompi / Bold / Stripe", tag: "Pagos Multimoneda" },
       { name: "Cloudflare CDN", tag: "Entrega Global" },
       { name: "Framer Motion", tag: "Micro-animaciones" },
@@ -299,7 +299,7 @@ export const industryPages: Record<string, IndustryPageData> = {
         role: "Portal Hotelero & Reservas de Hospedaje",
         metrics: "Lighthouse 98/100 • LCP 540 ms • Motor de Reservas",
         description: "Plataforma web para hotel y hospedaje con presentación de habitaciones, tarifas y contacto directo.",
-        tech: ["Next.js", "Tailwind CSS", "Vercel Edge"],
+        tech: ["Arquitectura Headless", "Tailwind CSS", "Vercel Edge"],
       },
       {
         client: "San Roqueros",
@@ -307,7 +307,7 @@ export const industryPages: Record<string, IndustryPageData> = {
         role: "Portal Gastronómico y Experiencias",
         metrics: "Lighthouse 99/100 • LCP 520 ms • Menú Digital",
         description: "Sitio web para establecimiento gastronómico y eventos con menú interactivo y geolocalización.",
-        tech: ["Next.js", "React", "Framer Motion"],
+        tech: ["Arquitectura Headless", "Framer Motion"],
       },
     ],
     faqs: [
@@ -325,7 +325,7 @@ export const industryPages: Record<string, IndustryPageData> = {
     shortTitle: "Desarrollo web automotriz",
     metaTitle: "Páginas Web para Concesionarios y Autopartes en Colombia",
     metaDescription:
-      "Desarrollo de páginas web y catálogos de repuestos para el sector automotriz en Colombia. Buscador de repuestos por marca/modelo, cotizador y velocidad Next.js.",
+      "Desarrollo de páginas web y catálogos de repuestos para el sector automotriz en Colombia. Buscador de repuestos por marca/modelo, cotizador y alta velocidad.",
     eyebrow: "// Presencia Digital para el Sector Automotriz",
     summary:
       "Desarrollamos sitios web y catálogos interactivos para concesionarios de vehículos, distribuidores de repuestos y talleres especializados en Colombia. Búsqueda ágil por marca, modelo y año, fichas técnicas y conexión directa con asesores de venta.",
@@ -342,7 +342,7 @@ export const industryPages: Record<string, IndustryPageData> = {
       { title: "Módulo de Agendamiento de Citas de Taller", description: "Reservas online para mantenimiento preventivo, cambio de aceite o peritajes." },
     ],
     techStack: [
-      { name: "Next.js", tag: "Frontend Ultra Rápido" },
+      { name: "Arquitectura Headless", tag: "Frontend Ultra Rápido" },
       { name: "PostgreSQL / Supabase", tag: "Base de Datos de Repuestos" },
       { name: "Tailwind CSS", tag: "Diseño & UI" },
       { name: "WhatsApp Business API", tag: "Asesoría Inmediata" },
@@ -350,7 +350,7 @@ export const industryPages: Record<string, IndustryPageData> = {
     process: [
       { title: "Estructuración de Marcas y Modelos", description: "Jerarquizamos las líneas de repuestos o inventario de vehículos disponibles." },
       { title: "Diseño de Showroom y Fichas Técnicas", description: "Diseñamos interfaces de alta conversión orientadas a generar cotizaciones." },
-      { title: "Programación del Buscador", description: "Desarrollamos el motor de filtrado instantáneo en Next.js." },
+      { title: "Programación del Buscador", description: "Desarrollamos el motor de filtrado instantáneo con tecnología moderna." },
       { title: "Lanzamiento y SEO Automotriz", description: "Optimizamos fichas para posicionar repuestos y marcas en Google." },
     ],
     featuredProjects: [
@@ -360,7 +360,7 @@ export const industryPages: Record<string, IndustryPageData> = {
         role: "Catálogo Digital de Autopartes & Repuestos",
         metrics: "Lighthouse 98/100 • LCP 560 ms • Catálogo por Marca",
         description: "Plataforma de autopartes y repuestos industriales con buscador de piezas y cotización directa para talleres mecánicos.",
-        tech: ["Next.js", "React", "Tailwind CSS", "WhatsApp API"],
+        tech: ["Arquitectura Headless", "Tailwind CSS", "WhatsApp API"],
       },
       {
         client: "Autos Saldo",
@@ -368,7 +368,7 @@ export const industryPages: Record<string, IndustryPageData> = {
         role: "Portal Comercial de Vehículos",
         metrics: "Lighthouse 99/100 • LCP 510 ms • Showroom Digital",
         description: "Catálogo de vehículos con fichas técnicas completas, cálculo de financiamiento y contacto directo por asesor.",
-        tech: ["Next.js", "React 19", "Vercel"],
+        tech: ["Arquitectura Headless", "Vercel"],
       },
     ],
     faqs: [
@@ -403,7 +403,7 @@ export const industryPages: Record<string, IndustryPageData> = {
       { title: "Diseño Elegante con Tipografías Premium", description: "Estética refinada que inspira confianza, higiene y bienestar absoluto." },
     ],
     techStack: [
-      { name: "Next.js", tag: "Frontend Visual" },
+      { name: "Arquitectura Headless", tag: "Frontend Visual" },
       { name: "Framer Motion", tag: "Animaciones Sutiles" },
       { name: "Wompi / Bold", tag: "Pasarelas Locales" },
       { name: "Vercel Edge", tag: "Velocidad Global" },
@@ -421,7 +421,7 @@ export const industryPages: Record<string, IndustryPageData> = {
         role: "Portal de Terapias & Bienestar Integral",
         metrics: "Lighthouse 98/100 • LCP 540 ms • Agendamiento Directo",
         description: "Plataforma de bienestar y terapias con diseño armónico y agendamiento personalizado.",
-        tech: ["Next.js", "React", "Tailwind CSS"],
+        tech: ["Arquitectura Headless", "Tailwind CSS"],
       },
       {
         client: "Estrella de David",
@@ -429,7 +429,7 @@ export const industryPages: Record<string, IndustryPageData> = {
         role: "Web Institucional & Servicios de Cuidado",
         metrics: "Lighthouse 99/100 • LCP 520 ms • Experiencia Móvil",
         description: "Sitio web para centro de atención con enfoque en calidez humana y presentación de servicios.",
-        tech: ["Next.js", "Tailwind CSS", "Vercel"],
+        tech: ["Arquitectura Headless", "Tailwind CSS", "Vercel"],
       },
     ],
     faqs: [
@@ -447,7 +447,7 @@ export const industryPages: Record<string, IndustryPageData> = {
     shortTitle: "Desarrollo web editorial y medios",
     metaTitle: "Páginas Web para Editoriales y Medios en Colombia",
     metaDescription:
-      "Desarrollo de portales editoriales, revistas digitales y medios de comunicación en Colombia. Carga instantánea de artículos, monetización y Next.js.",
+      "Desarrollo de portales editoriales, revistas digitales y medios de comunicación en Colombia. Carga instantánea de artículos, monetización y alta velocidad.",
     eyebrow: "// Plataformas Digitales para Contenido y Medios",
     summary:
       "Construimos portales de noticias, revistas digitales, editoriales y plataformas de contenidos para consultoras en Colombia. Tiempos de carga ultra rápidos para millones de lectores, optimización para Google News y monetización por suscripciones o pauta.",
@@ -464,7 +464,7 @@ export const industryPages: Record<string, IndustryPageData> = {
       { title: "Muro de Pago (Paywall) y Suscripciones", description: "Monetización de artículos exclusivos con cobro recurrente vía Wompi/Bold." },
     ],
     techStack: [
-      { name: "Next.js (ISR)", tag: "Frontend Editorial" },
+      { name: "Arquitectura Headless (ISR)", tag: "Frontend Editorial" },
       { name: "Sanity / Strapi CMS", tag: "Gestión de Redacción" },
       { name: "Vercel Edge Network", tag: "Caché Global" },
       { name: "Algolia / Meilisearch", tag: "Buscador de Artículos" },
@@ -472,7 +472,7 @@ export const industryPages: Record<string, IndustryPageData> = {
     process: [
       { title: "Diseño de la Jerarquía Editorial", description: "Definimos secciones, columnas de opinión, categorías y perfiles de autores." },
       { title: "Diseño Tipográfico de Lectura Cómoda", description: "Optimizamos contraste, interlineado y tiempos de lectura en móviles." },
-      { title: "Desarrollo del Frontend en Next.js", description: "Configuramos Incremental Static Regeneration (ISR) para entrega instantánea." },
+      { title: "Desarrollo del Frontend", description: "Configuramos Incremental Static Regeneration (ISR) para entrega instantánea." },
       { title: "Lanzamiento y Conexión con Google News", description: "Validamos sitemaps de noticias y structured data de artículos." },
     ],
     featuredProjects: [
@@ -482,7 +482,7 @@ export const industryPages: Record<string, IndustryPageData> = {
         role: "Portal de Consultoría & Contenido B2B",
         metrics: "Lighthouse 98/100 • LCP 680 ms • Captación Corporativa",
         description: "Plataforma de consultoría estratégica y publicaciones corporativas con arquitectura de alto rendimiento y captación de leads.",
-        tech: ["Next.js", "React 19", "Framer Motion", "Tailwind CSS"],
+        tech: ["Arquitectura Headless", "Framer Motion", "Tailwind CSS"],
       },
       {
         client: "Brahneyker",
@@ -490,11 +490,11 @@ export const industryPages: Record<string, IndustryPageData> = {
         role: "Web de Marca Personal & Publicaciones",
         metrics: "Lighthouse 99/100 • LCP 530 ms • Portafolio de Contenidos",
         description: "Plataforma de divulgación profesional con diseño minimalista y optimización para lectura.",
-        tech: ["Next.js", "React", "Tailwind CSS"],
+        tech: ["Arquitectura Headless", "Tailwind CSS"],
       },
     ],
     faqs: [
-      { question: "¿Cómo soporta Next.js millones de visitas en noticias virales?", answer: "Mediante la tecnología Incremental Static Regeneration (ISR), cada artículo se pre-renderiza como un archivo HTML estático en la red CDN de borde de Vercel, sirviendo contenido en milisegundos sin sobrecargar la base de datos." },
+      { question: "¿Cómo soporta esta arquitectura millones de visitas en noticias virales?", answer: "Mediante la tecnología Incremental Static Regeneration (ISR), cada artículo se pre-renderiza como un archivo HTML estático en la red CDN de borde de Vercel, sirviendo contenido en milisegundos sin sobrecargar la base de datos." },
       { question: "¿Puedo tener múltiples redactores con permisos diferentes?", answer: "Sí. Configuramos roles específicos (Redactor, Editor, Administrador) para que cada miembro del equipo trabaje de forma segura." },
     ],
     relatedServiceSlug: "desarrollo-web-a-medida",

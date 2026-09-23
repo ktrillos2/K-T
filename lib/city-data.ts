@@ -23,10 +23,10 @@ export const citiesData: Record<string, CityData> = {
     cityName: "Bogotá",
     region: "Cundinamarca",
     title: "Desarrollo de Páginas Web en Bogotá",
-    metaDescription: "Empresa de desarrollo web y software a medida en Bogotá. Páginas web corporativas en Next.js, tiendas virtuales e-commerce y SEO técnico para empresas.",
+    metaDescription: "Empresa de desarrollo web y software a medida en Bogotá. Páginas web corporativas de alto rendimiento, tiendas virtuales e-commerce y SEO técnico para empresas.",
     heroH1: "Desarrollo de Páginas Web y Software a Medida en Bogotá",
     heroSubtitle: "// Ingeniería Web de Alto Rendimiento para Empresas y Startups en la Capital",
-    introText: "En el ecosistema empresarial de Bogotá, la velocidad de carga, la indexación técnica en Google y la conversión digital son factores determinantes. Desarrollamos sitios web y plataformas sobre Next.js y React 19 optimizados para ofrecer alta velocidad de respuesta, navegación fluida y arquitectura limpia sin la sobrecarga de plantillas tradicionales.",
+    introText: "En el ecosistema empresarial de Bogotá, la velocidad de carga, la indexación técnica en Google y la conversión digital son factores determinantes. Desarrollamos sitios web y plataformas optimizados para ofrecer alta velocidad de respuesta, navegación fluida y arquitectura limpia sin la sobrecarga de plantillas tradicionales.",
     marketHighlights: [
       {
         title: "Posicionamiento B2B en Bogotá",
@@ -61,10 +61,10 @@ export const citiesData: Record<string, CityData> = {
     cityName: "Medellín",
     region: "Antioquia",
     title: "Desarrollo de Páginas Web en Medellín",
-    metaDescription: "Agencia de desarrollo web y software en Medellín. Creamos páginas web en Next.js, tiendas online headless y aplicaciones escalables para empresas en Antioquia.",
+    metaDescription: "Agencia de desarrollo web y software en Medellín. Creamos páginas web de alto rendimiento, tiendas online headless y aplicaciones escalables para empresas en Antioquia.",
     heroH1: "Desarrollo de Páginas Web y Software a Medida en Medellín",
     heroSubtitle: "// Plataformas Digitales Rápidas y Escalables para Empresas en Antioquia",
-    introText: "Medellín lidera la innovación tecnológica y empresarial en Colombia. En K&T Code construimos infraestructura web moderna en Next.js y Vercel Edge para marcas y empresas antioqueñas que buscan destacar frente a su competencia con velocidad extrema y diseño UI/UX de clase mundial.",
+    introText: "Medellín lidera la innovación tecnológica y empresarial en Colombia. En K&T Code construimos infraestructura web moderna en arquitectura headless y Vercel Edge para marcas y empresas antioqueñas que buscan destacar frente a su competencia con velocidad extrema y diseño UI/UX de clase mundial.",
     marketHighlights: [
       {
         title: "E-commerce Headless para Marcas Paisas",
@@ -85,8 +85,8 @@ export const citiesData: Record<string, CityData> = {
         answer: "Nuestros planes oficiales para empresas en Medellín inician desde $450.000 COP para landing pages, $2.500.000 COP para sitios web corporativos con CMS, $1.300.000 COP para Ecommerce Starter, $2.000.000 COP para Headless Ecommerce y desde $4.500.000 COP para software a medida."
       },
       {
-        question: "¿Por qué elegir Next.js en lugar de WordPress en Medellín?",
-        answer: "Next.js ofrece una arquitectura moderna que reduce significativamente la dependencia de plugins de terceros y sus riesgos de mantenimiento. Al compilar código estático y renderizar desde el servidor, la web logra puntajes destacados en Google Lighthouse y una experiencia de usuario rápida y estable."
+        question: "¿Por qué elegir desarrollo web moderno en lugar de WordPress en Medellín?",
+        answer: "Nuestra arquitectura moderna reduce significativamente la dependencia de plugins de terceros y sus riesgos de mantenimiento. Al compilar código estático y renderizar desde el servidor, la web logra puntajes destacados en Google Lighthouse y una experiencia de usuario rápida y estable."
       },
       {
         question: "¿Qué garantía ofrecen en el desarrollo web?",
@@ -137,7 +137,7 @@ export const citiesData: Record<string, CityData> = {
     cityName: "Cali",
     region: "Valle del Cauca",
     title: "Desarrollo de Páginas Web en Cali",
-    metaDescription: "Desarrollo de páginas web y aplicaciones en Cali, Valle del Cauca. Soluciones de alto impacto en Next.js, e-commerce y software empresarial.",
+    metaDescription: "Desarrollo de páginas web y aplicaciones en Cali, Valle del Cauca. Soluciones de alto impacto, e-commerce y software empresarial.",
     heroH1: "Desarrollo de Páginas Web y Software a Medida en Cali",
     heroSubtitle: "// Tecnología Web de Alto Impacto para Empresas en el Valle del Cauca",
     introText: "Ayudamos a empresas, clínicas, consultoras y comercios en Cali a construir su presencia digital con tecnologías de alto rendimiento. Creamos plataformas diseñadas para vender, captar prospectos y automatizar procesos comerciales.",
@@ -162,7 +162,7 @@ export const citiesData: Record<string, CityData> = {
       },
       {
         question: "¿Qué tecnologías utilizan en K&T Code?",
-        answer: "Utilizamos Next.js, React 19, TypeScript, Tailwind CSS, bases de datos PostgreSQL y despliegue en la red Edge de Vercel con SSL incluido."
+        answer: "Utilizamos una arquitectura moderna y modular, Tailwind CSS, bases de datos PostgreSQL y despliegue en la red Edge de Vercel con SSL incluido."
       },
       {
         question: "¿Puedo recibir pagos en línea desde mi web en Cali?",
@@ -175,7 +175,7 @@ export const citiesData: Record<string, CityData> = {
     cityName: "Barranquilla",
     region: "Atlántico",
     title: "Desarrollo de Páginas Web en Barranquilla",
-    metaDescription: "Empresa de desarrollo web y software en Barranquilla y la Costa Caribe. Portales corporativos, e-commerce y sistemas a medida en Next.js.",
+    metaDescription: "Empresa de desarrollo web y software en Barranquilla y la Costa Caribe. Portales corporativos, e-commerce y sistemas a medida.",
     heroH1: "Desarrollo de Páginas Web y Software a Medida en Barranquilla",
     heroSubtitle: "// Impulsando la Transformación Digital de la Costa Caribe Colombiana",
     introText: "Barranquilla es el nodo comercial y logístico clave del Caribe colombiano. En K&T Code desarrollamos plataformas web corporativas y tiendas online preparadas para escalar operaciones comerciales tanto en la región Caribe como en mercados internacionales.",
@@ -200,7 +200,7 @@ export const citiesData: Record<string, CityData> = {
       },
       {
         question: "¿Qué incluye el servicio de desarrollo web?",
-        answer: "Incluye diseño exclusivo en Figma, programación en Next.js, optimización SEO semántica, conexión a WhatsApp, configuración de dominio y alojamiento en Edge CDN."
+        answer: "Incluye diseño exclusivo en Figma, programación en código nativo de alto rendimiento, optimización SEO semántica, conexión a WhatsApp, configuración de dominio y alojamiento en Edge CDN."
       },
       {
         question: "¿Cómo solicito una cotización para mi empresa en Barranquilla?",

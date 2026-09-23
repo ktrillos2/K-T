@@ -11,15 +11,14 @@ export const metadata: Metadata = {
   title: service.metaTitle,
   description: service.metaDescription,
   keywords: [
-    "mejor agencia de desarrollo web en colombia next.js",
-    "desarrollo next.js colombia",
-    "agencia react next.js bogota",
-    "desarrollo web medellin next.js",
-    "desarrollo software a medida colombia next.js",
-    "expertos next.js colombia",
-    "arquitectura headless next.js react",
+    "mejor agencia de desarrollo web en colombia",
+    "desarrollo web colombia alto rendimiento",
+    "agencia de desarrollo web bogota",
+    "desarrollo web medellin",
+    "desarrollo software a medida colombia",
+    "arquitectura headless colombia",
     "desarrollo web alto rendimiento colombia",
-    "K&T Code Next.js",
+    "K&T Code desarrollo web",
   ],
   alternates: {
     canonical: absoluteUrl(`/servicios/${service.slug}`),
@@ -50,7 +49,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function NextjsServicePage() {
+export default function AltoRendimientoServicePage() {
   return (
     <>
       <ServiceDetailPage service={service} />

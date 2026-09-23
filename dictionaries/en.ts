@@ -21,7 +21,7 @@ export const en = {
     greeting: "// K&T Code • Engineering from Colombia for Global Clients",
     slogan: "High-Converting Landing Pages & Headless E-commerce",
     description:
-      "We engineer high-performance landing pages, custom online stores, and software solutions with Next.js. Colombian software craftsmanship built for businesses in the US, Latin America, and globally.",
+      "We engineer high-performance landing pages, custom online stores, and software solutions. Colombian software craftsmanship built for businesses in the US, Latin America, and globally.",
     ctaLanding: "Quote landing page",
     ctaStore: "Quote online store",
     cta: "View portfolio",
@@ -29,9 +29,9 @@ export const en = {
   },
   about: {
     title: "Web Development & Custom Software Engineering in Colombia",
-    subtitle: "// Next.js, TypeScript & Headless Architecture",
+    subtitle: "// Headless Architecture & High Performance",
     description:
-      "K&T Code is a Colombian web development and software engineering company specializing in corporate websites, headless e-commerce, and custom platforms. We engineer fast, scalable digital platforms using Next.js, React 19, TypeScript, Tailwind CSS, Supabase, and Headless CMS for businesses in Colombia, Latin America, and the United States.",
+      "K&T Code is a Colombian web development and software engineering company specializing in corporate websites, headless e-commerce, and custom platforms. We engineer fast, scalable digital platforms using modern architecture, Supabase, and Headless CMS for businesses in Colombia, Latin America, and the United States.",
     teamAuthority: "Structured software development led by qualified software engineers with clean code delivery.",
     techStack: "Core Technology Stack",
     sectorsTitle: "Industries & Sectors Developed",
@@ -48,7 +48,7 @@ export const en = {
     values: {
       innovation: {
         title: "Server Components Architecture",
-        description: "We deploy Next.js App Router, TypeScript, and Server Actions with PostgreSQL databases in Supabase, drastically reducing client-side JavaScript bundles.",
+        description: "We deploy App Router architecture and Server Actions with PostgreSQL databases in Supabase, drastically reducing client-side JavaScript bundles.",
       },
       quality: {
         title: "Technical SEO & Structured Data",
@@ -81,7 +81,7 @@ export const en = {
       title: "Conversion Landing Page",
       price: "From $200 USD",
       features: [
-        "Frontend engineering in Next.js & React 19",
+        "High-performance frontend engineering",
         "Exclusive Figma UI/UX design optimized for conversion",
         "Vercel Edge CDN hosting with free SSL",
         "Semantic technical SEO & load speed < 0.8s",
@@ -89,13 +89,13 @@ export const en = {
         "Fast delivery in 7 to 12 business days",
       ],
       cta: "Get landing page quote",
-      whatsapp_message: "Hi K&T Code, I'd like to get a quote for a Next.js Landing Page.",
+      whatsapp_message: "Hi K&T Code, I'd like to get a quote for a high-performance Landing Page.",
     },
     ecommerce: {
       title: "Headless E-commerce (WooCommerce / Custom)",
       price: "From $500 USD",
       features: [
-        "Decoupled Next.js storefront with < 0.8s load time",
+        "Decoupled headless storefront with < 0.8s load time",
         "Integration with payment gateways: Wompi, Bold, PayU & Stripe",
         "PSE, credit card, and digital wallet checkout",
         "Interactive Slide Cart & self-managed product catalog",
@@ -109,7 +109,7 @@ export const en = {
       title: "Custom Software Development & SaaS",
       price: "Custom Quote by Scope",
       features: [
-        "Fullstack architecture with Next.js, Node.js & TypeScript",
+        "Modern fullstack architecture with Node.js & relational databases",
         "Relational database design in PostgreSQL / Supabase",
         "Secure user authentication & role-based access control (RBAC)",
         "Third-party API integrations & ERP connectivity",

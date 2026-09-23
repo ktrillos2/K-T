@@ -105,8 +105,8 @@ export default function Footer() {
 
             <p className="font-mono text-xs text-neutral-400 leading-relaxed max-w-xs">
               {isEn
-                ? "Colombian web development and software engineering company specialized in Next.js, React 19, and cloud architectures."
-                : "Empresa colombiana de desarrollo web y software a medida especializada en Next.js, React 19 y arquitecturas cloud."}
+                ? "Colombian web development and software engineering company specialized in high-performance digital architectures and cloud solutions."
+                : "Empresa colombiana de desarrollo web y software a medida especializada en arquitecturas digitales de alto rendimiento y soluciones cloud."}
             </p>
 
             <div className="space-y-2 pt-2 font-mono text-xs text-neutral-400">

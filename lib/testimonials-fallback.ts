@@ -23,7 +23,7 @@ export const fallbackTestimonials: TestimonialItem[] = [
     _id: "test-telas-real",
     name: "Camilo Rodríguez",
     role: "Director de Operaciones — Telas Real",
-    content: "Migramos nuestra plataforma de e-commerce a Next.js con K&T Code. La velocidad de carga bajó a menos de un segundo y la tasa de conversión en compras con Wompi y PSE aumentó significativamente. Excelente ingeniería.",
+    content: "Migramos nuestra plataforma de e-commerce a una arquitectura headless de alto rendimiento con K&T Code. La velocidad de carga bajó a menos de un segundo y la tasa de conversión en compras con Wompi y PSE aumentó significativamente. Excelente ingeniería.",
     rating: 5,
     project: "Telas Real",
     projectUrl: "https://telasreal.com"
@@ -50,7 +50,7 @@ export const fallbackTestimonials: TestimonialItem[] = [
     _id: "test-noskygroup",
     name: "Santiago Silva",
     role: "Director de Tecnología — Noskygroup",
-    content: "La entrega del código fue puntual, con tipado estricto en TypeScript y repositorio privado 100% nuestro. Sin duda la mejor agencia técnica con la que hemos trabajado en Colombia.",
+    content: "La entrega del código fue puntual, con estándares de arquitectura rigurosos y repositorio privado 100% nuestro. Sin duda la mejor agencia técnica con la que hemos trabajado en Colombia.",
     rating: 5,
     project: "Noskygroup",
     projectUrl: "https://noskygroup.com"

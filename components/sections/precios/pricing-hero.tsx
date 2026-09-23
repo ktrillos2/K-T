@@ -68,10 +68,10 @@ export default function PricingHero() {
 
         <p className="text-lg md:text-xl text-white/60 font-mono max-w-3xl mx-auto leading-relaxed">
           {isEn
-            ? "Transparent pricing for landing pages, corporate websites, headless e-commerce, and custom software. High performance guaranteed with Next.js."
+            ? "Transparent pricing for landing pages, corporate websites, headless e-commerce, and custom software. High performance guaranteed."
             : (country === "Colombia"
-              ? "En K&T Code ofrecemos planes transparentes para páginas web profesionales, tiendas virtuales y software a medida en Colombia. Arquitectura moderna sobre Next.js, SEO técnico y alto rendimiento."
-              : `En K&T Code ofrecemos tarifas transparentes sincronizadas para ${country} en páginas web profesionales, tiendas virtuales y software a medida. Arquitectura moderna sobre Next.js, SEO técnico y alto rendimiento.`)}
+              ? "En K&T Code ofrecemos planes transparentes para páginas web profesionales, tiendas virtuales y software a medida en Colombia. Arquitectura moderna, SEO técnico y alto rendimiento."
+              : `En K&T Code ofrecemos tarifas transparentes sincronizadas para ${country} en páginas web profesionales, tiendas virtuales y software a medida. Arquitectura moderna, SEO técnico y alto rendimiento.`)}
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8">

@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   keywords: [
     "web development services",
     "custom software development",
-    "next.js agency services",
     "headless ecommerce development",
     "technical seo services",
     "K&T Code services",
@@ -41,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Web Development & Custom Software Services | K&T Code",
     description:
-      "Engineered with Next.js, React 19, and TypeScript for high conversion and blazing fast speeds.",
+      "High-performance corporate websites, headless e-commerce, and custom software engineered for blazing fast speeds.",
     url: absoluteUrl("/en/services"),
     siteName: "K&T Code",
     locale: "en_US",
@@ -77,7 +76,7 @@ export default function EnglishServicesPage() {
               Web Development & Custom Software Services
             </h1>
             <p className="text-neutral-400 font-mono text-sm md:text-base max-w-2xl mx-auto">
-              High-performance corporate websites, headless e-commerce, and custom software engineered with Next.js, React 19, and TypeScript.
+              High-performance corporate websites, headless e-commerce, and custom software engineered for maximum speed and conversion.
             </p>
           </header>
         </div>

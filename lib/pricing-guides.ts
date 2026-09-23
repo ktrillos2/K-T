@@ -84,7 +84,7 @@ export const pricingGuides: Record<string, PricingGuideData> = {
         type: "Landing Page de Conversión",
         priceStarting: "Desde $450.000 COP",
         timeline: "7 a 12 días hábiles",
-        includes: "Diseño personalizado, hasta 5 secciones, desarrollo frontend ultra rápido en Next.js, formulario WhatsApp, SEO inicial, SSL.",
+        includes: "Diseño personalizado, hasta 5 secciones, desarrollo frontend ultra rápido, formulario WhatsApp, SEO inicial, SSL.",
         notIncludes: "Múltiples páginas internas, carrito de compras ni pasarelas de pago.",
         bestFor: "Campañas de Google Ads, Meta Ads, captación de leads y lanzamientos de productos.",
       },
@@ -108,7 +108,7 @@ export const pricingGuides: Record<string, PricingGuideData> = {
         type: "Software Web a Medida",
         priceStarting: "Desde $4.500.000 COP / Cotización",
         timeline: "4 a 12 semanas (por sprints)",
-        includes: "Arquitectura a medida en Next.js y Supabase, base de datos PostgreSQL, roles de usuario, APIs, automatizaciones, facturación DIAN.",
+        includes: "Arquitectura fullstack a medida, base de datos PostgreSQL, roles de usuario, APIs, automatizaciones, facturación DIAN.",
         notIncludes: "Módulos o requerimientos no contemplados en la fase de descubrimiento inicial.",
         bestFor: "Startups, plataformas SaaS, portales privados para clientes y empresas con procesos internos únicos.",
       },
@@ -120,7 +120,7 @@ export const pricingGuides: Record<string, PricingGuideData> = {
         timeline: "7 a 12 días hábiles",
         features: [
           "Diseño visual adaptado a tu marca",
-          "Desarrollo frontend en Next.js (carga ultra rápida)",
+          "Desarrollo frontend modular (carga ultra rápida)",
           "Hasta 5 secciones optimizadas para conversión",
           "Formulario conectado a WhatsApp y correo corporativo",
           "Optimización SEO semántica inicial",
@@ -175,7 +175,7 @@ export const pricingGuides: Record<string, PricingGuideData> = {
       {
         provider: "Agencia de Ingeniería y Desarrollo (K&T Code)",
         priceRange: "Desde $450.000 COP (Planes claros)",
-        pros: "Código propio en Next.js, optimización de Core Web Vitals y rendimiento Lighthouse, diseño exclusivo en Figma, SEO semántico, soporte técnico garantizado y propiedad total del código.",
+        pros: "Código propio y limpio, optimización de Core Web Vitals y rendimiento Lighthouse, diseño exclusivo en Figma, SEO semántico, soporte técnico garantizado y propiedad total del código.",
         cons: "Requiere una definición clara de objetivos de negocio.",
         verdict: "La mejor relación calidad-precio-rendimiento para empresas en Colombia.",
       },
@@ -234,8 +234,8 @@ export const pricingGuides: Record<string, PricingGuideData> = {
     ],
     costFactors: [
       {
-        title: "Tecnología de Desarrollo (Next.js vs. WordPress)",
-        description: "El desarrollo en código puro con Next.js y React requiere ingeniería especializada pero entrega sitios 10 veces más rápidos, seguros y sin costos de renovación de plugins frente a constructores visuales lentos.",
+        title: "Tecnología de Desarrollo (Código Nativo vs. WordPress)",
+        description: "El desarrollo en código propio a medida requiere ingeniería especializada pero entrega sitios 10 veces más rápidos, seguros y sin costos de renovación de plugins frente a constructores visuales lentos.",
         impact: "Alto",
       },
       {
@@ -245,7 +245,7 @@ export const pricingGuides: Record<string, PricingGuideData> = {
       },
       {
         title: "Número de Páginas e Intenciones de Búsqueda",
-        description: "Un sitio con páginas dedicadas por cada servicio (/servicios/desarrollo-nextjs, /servicios/tiendas-virtuales) requiere mayor trabajo de redacción y arquitectura, pero domina múltiples palabras clave en Google.",
+        description: "Un sitio con páginas dedicadas por cada servicio (/servicios/desarrollo-web-a-medida, /servicios/tiendas-virtuales) requiere mayor trabajo de redacción y arquitectura, pero domina múltiples palabras clave en Google.",
         impact: "Alto",
       },
       {
@@ -296,7 +296,7 @@ export const pricingGuides: Record<string, PricingGuideData> = {
       { question: "¿Puedo actualizar los contenidos de la página después del lanzamiento?", answer: "Sí. Entregamos la web con un gestor de contenido (CMS Headless) intuitivo para que puedas editar textos, agregar fotos, publicar artículos de blog y cambiar precios sin depender de nadie." },
     ],
     relatedServiceSlug: "desarrollo-web-a-medida",
-    relatedServiceTitle: "Desarrollo Web a Medida en Next.js",
+    relatedServiceTitle: "Desarrollo Web a Medida",
   },
 
   "precio-tienda-virtual-colombia": {
@@ -308,7 +308,7 @@ export const pricingGuides: Record<string, PricingGuideData> = {
       "Precios y tarifas oficiales para crear una tienda virtual en Colombia en 2026. Planes desde $1.300.000 COP con Wompi, PSE, Bold y carrito de alta velocidad.",
     eyebrow: "// E-commerce & Pasarelas de Pago Colombia",
     summary:
-      "El desarrollo de una tienda virtual profesional en Colombia con K&T Code inicia desde $1.300.000 COP para tiendas virtuales Starter con catálogo y pasarelas, y desde $2.000.000 COP para plataformas Headless E-commerce de alto rendimiento en Next.js. En esta guía detallamos los costos de pasarelas, envíos y tecnología.",
+      "El desarrollo de una tienda virtual profesional en Colombia con K&T Code inicia desde $1.300.000 COP para tiendas virtuales Starter con catálogo y pasarelas, y desde $2.000.000 COP para plataformas Headless E-commerce de alto rendimiento. En esta guía detallamos los costos de pasarelas, envíos y tecnología.",
     averagePriceRange: "$1.300.000 - $4.500.000+ COP",
     priceTiers: [
       {
@@ -325,11 +325,11 @@ export const pricingGuides: Record<string, PricingGuideData> = {
         bestFor: "Marcas y emprendimientos que comienzan a vender productos físicos a nivel nacional.",
       },
       {
-        name: "Headless Ecommerce Next.js (Alto Rendimiento)",
+        name: "Headless Ecommerce (Alto Rendimiento)",
         priceRange: "Desde $2.000.000 COP",
         timeline: "3 a 5 semanas",
         features: [
-          "Frontend desacoplado en Next.js con carga en < 0.8s",
+          "Frontend desacoplado con carga en < 0.8s",
           "Backend en WooCommerce o Shopify con panel administrativo completo",
           "Slide Cart interactivo y checkout sin fricción",
           "Integración múltiple de pasarelas (Wompi, PSE, tarjetas, Nequi)",
@@ -394,7 +394,7 @@ export const pricingGuides: Record<string, PricingGuideData> = {
     faqs: [
       { question: "¿Cuánto cobra Wompi o Bold por recibir pagos en Colombia?", answer: "Wompi cobra alrededor de 2.65% + $700 COP por pagos con PSE o tarjetas de crédito Bancolombia. Bold y PayU manejan tarifas similares entre 2.8% a 3.19% + IVA." },
       { question: "¿Puedo subir los productos yo mismo?", answer: "Sí. Te entregamos la tienda con capacitación completa para que puedas crear productos, modificar precios, agregar fotos y despachar pedidos." },
-      { question: "¿Es mejor una tienda en Shopify o con Next.js + WooCommerce?", answer: "Shopify es excelente para iniciar pero cobra mensualidades en dólares y comisiones adicionales. Next.js + WooCommerce ofrece propiedad total, sin mensualidades obligatorias y velocidad superior." },
+      { question: "¿Es mejor una tienda en Shopify o con WooCommerce Headless?", answer: "Shopify es excelente para iniciar pero cobra mensualidades en dólares y comisiones adicionales. WooCommerce Headless ofrece propiedad total, sin mensualidades obligatorias y velocidad superior." },
     ],
     relatedServiceSlug: "tiendas-virtuales",
     relatedServiceTitle: "Servicio de Desarrollo de Tiendas Virtuales",
@@ -423,7 +423,7 @@ export const pricingGuides: Record<string, PricingGuideData> = {
           "Levantamiento de procesos y modelado de base de datos relacional",
           "Autenticación segura de usuarios y roles básicos",
           "Panel administrativo con CRUD de información clave",
-          "Desarrollo fullstack con Next.js, TypeScript y Supabase",
+          "Desarrollo fullstack moderno con Supabase y PostgreSQL",
           "Despliegue en servidores cloud escalables",
         ],
         bestFor: "Startups que necesitan validar un producto con clientes reales o empresas que buscan automatizar un proceso manual crítico.",
@@ -492,7 +492,7 @@ export const pricingGuides: Record<string, PricingGuideData> = {
       },
       {
         title: "Exige tecnologías modernas y libres de licencias atadas",
-        description: "Trabajar con Next.js, React, TypeScript y PostgreSQL garantiza que puedas contratar nuevos desarrolladores en el futuro sin quedar atrapado.",
+        description: "Trabajar con estándares web abiertos, bases de datos PostgreSQL y código limpio garantiza que puedas contratar nuevos desarrolladores en el futuro sin quedar atrapado.",
       },
     ],
     faqs: [

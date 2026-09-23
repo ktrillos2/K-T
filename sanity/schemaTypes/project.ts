@@ -120,7 +120,7 @@ export default defineType({
       title: 'Tecnologías Utilizadas',
       type: 'array',
       of: [{ type: 'string' }],
-      description: 'Ej: ["Next.js", "Tailwind CSS", "TypeScript"]',
+      description: 'Ej: ["Arquitectura Headless", "Tailwind CSS", "PostgreSQL"]',
     }),
     defineField({
       name: 'heroImage',

@@ -23,12 +23,12 @@ import { absoluteUrl } from "@/lib/site-config"
 export const metadata: Metadata = {
   title: "Headless E-commerce & Online Store Development",
   description:
-    "Custom virtual stores and headless e-commerce engineered with Next.js, Stripe, PayPal, Wompi, and automated logistics. Fast, secure, and built for scaling businesses in Colombia, the US, and worldwide.",
+    "Custom virtual stores and headless e-commerce engineered for high performance, Stripe, PayPal, Wompi, and automated logistics. Fast, secure, and built for scaling businesses in Colombia, the US, and worldwide.",
   keywords: [
     "ecommerce development agency",
-    "headless ecommerce next.js",
+    "headless ecommerce development",
     "online store development",
-    "custom shopify nextjs",
+    "custom virtual store",
     "virtual store colombia",
     "wompi stripe integration",
   ],
@@ -125,7 +125,7 @@ export default function EnglishEcommercePage() {
                 Custom E-commerce Stores Engineered for High Volume & Speed
               </h1>
               <p className="mt-6 max-w-2xl font-mono text-base leading-relaxed text-neutral-300 md:text-lg">
-                Move beyond slow, bloated template stores. We engineer headless online stores with Next.js that load in milliseconds, handle high traffic surges, and convert visitors into loyal customers.
+                Move beyond slow, bloated template stores. We engineer headless online stores that load in milliseconds, handle high traffic surges, and convert visitors into loyal customers.
               </p>
 
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">

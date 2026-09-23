@@ -67,7 +67,7 @@ const projectTranslationsEn: Record<string, { title?: string; desc: string; cate
   },
   "cxellence": {
     title: "CXellence Group",
-    desc: "B2B corporate platform engineered with Next.js, sub-second latency and semantic SEO for CX leadership.",
+    desc: "B2B corporate platform engineered with headless architecture, sub-second latency and semantic SEO for CX leadership.",
     category: "Consulting & B2B",
   },
   "brambila-inmobiliaria": {
