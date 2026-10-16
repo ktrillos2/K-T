@@ -1,4 +1,6 @@
 .hero {
+  position: relative;
+  z-index: 25;
   padding-top: calc(var(--nav-h) + clamp(32px, 6vw, 88px) + env(safe-area-inset-top, 0px));
   padding-bottom: clamp(40px, 6vw, 80px);
 }
@@ -9,6 +11,8 @@
   align-items: center;
 }
 .copy {
+  position: relative;
+  z-index: 28;
   display: grid;
   gap: 26px;
   min-width: 0;
@@ -34,6 +38,8 @@
   }
 }
 .locale {
+  position: relative;
+  z-index: 30;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

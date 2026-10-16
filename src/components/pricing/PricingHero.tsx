@@ -25,7 +25,7 @@ export function PricingHero() {
             <p className="lead">{h.lead}</p>
           </Reveal>
           <Reveal mode="enter" delay={0.55} className={styles.locale}>
-            <LocaleSelector />
+            <LocaleSelector align="left" />
           </Reveal>
         </div>
         <Stage3D formation="pricing" className={styles.stage} label={h.stageLabel} />

@@ -12,8 +12,15 @@ import styles from "./LocaleSelector.module.css";
 
 const flag = (code: string) => `https://flagcdn.com/w40/${code.toLowerCase()}.png`;
 
-/** Selector de país (moneda) e idioma, como en kytcode.lat. */
-export function LocaleSelector({ compact = false, up = false }: { compact?: boolean; up?: boolean }) {
+export function LocaleSelector({
+  compact = false,
+  up = false,
+  align = "right",
+}: {
+  compact?: boolean;
+  up?: boolean;
+  align?: "left" | "right";
+}) {
   const { t, lang, country, setCountry } = useI18n();
   const navigate = useNavigate();
   const pathname = usePathname();
@@ -57,7 +64,7 @@ export function LocaleSelector({ compact = false, up = false }: { compact?: bool
   // 1 unidad de la moneda elegida en COP (con el recargo), como referencia.
 
   return (
-    <div ref={root} className={styles.root} data-up={up}>
+    <div ref={root} className={styles.root} data-up={up} data-align={align}>
       <button
         type="button"
         className={cx(styles.trigger, compact && styles.compact)}
@@ -92,6 +99,7 @@ export function LocaleSelector({ compact = false, up = false }: { compact?: bool
                 className={styles.country}
                 onClick={() => {
                   setCountry(c.code);
+                  setOpen(false);
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}

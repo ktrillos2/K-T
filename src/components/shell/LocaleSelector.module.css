@@ -36,11 +36,15 @@
 .compact .code {
   display: none;
 }
+.root {
+  position: relative;
+  z-index: 50;
+}
 .panel {
   position: absolute;
   right: 0;
   top: calc(100% + 10px);
-  z-index: 90;
+  z-index: 999;
   width: min(330px, calc(100vw - 32px));
   display: none;
   gap: 10px;
@@ -51,6 +55,11 @@
   box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.7);
   visibility: hidden;
   transform-origin: top right;
+}
+.root[data-align="left"] .panel {
+  right: auto;
+  left: 0;
+  transform-origin: top left;
 }
 .head {
   font-size: 11.5px;
@@ -133,6 +142,7 @@
 @media (max-width: 640px) {
   .panel {
     position: fixed;
+    z-index: 999;
     left: max(12px, env(safe-area-inset-left, 0px));
     right: max(12px, env(safe-area-inset-right, 0px));
     top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 4px);
