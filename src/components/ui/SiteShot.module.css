@@ -1,0 +1,57 @@
+.box {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+  aspect-ratio: 16 / 10;
+}
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: translateY(0);
+  transition: transform 1.1s var(--ease-out);
+  will-change: transform;
+}
+.hoverable:hover .img,
+.active .img {
+  transform: translateY(var(--travel, 0px));
+  transition: transform var(--dur, 4s) cubic-bezier(0.45, 0, 0.55, 1);
+}
+/* Portada del portafolio: SIN recortes.
+   - natural: la tarjeta toma la proporción real de la imagen (--ratio);
+   - contain: dentro de un marco fijo (navegador/celular), la imagen completa y centrada. */
+.box[data-fit="natural"] {
+  aspect-ratio: var(--ratio, 16 / 10);
+}
+.img[data-fit="natural"] {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: none;
+  transition: transform 1.2s var(--ease-out);
+}
+.box[data-fit="contain"] {
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--surface-2);
+}
+.img[data-fit="contain"] {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: none;
+}
+.hoverable:hover .img[data-fit="natural"],
+.active .img[data-fit="natural"] {
+  transform: scale(1.03);
+  transition: transform 1.6s var(--ease-out);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hoverable:hover .img,
+  .active .img {
+    transform: none;
+  }
+}

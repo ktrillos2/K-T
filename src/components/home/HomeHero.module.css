@@ -1,0 +1,169 @@
+.hero {
+  position: relative;
+  padding-top: calc(var(--nav-h) + clamp(32px, 6vw, 88px) + env(safe-area-inset-top, 0px));
+  padding-bottom: clamp(48px, 7vw, 96px);
+}
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+}
+.copy {
+  display: grid;
+  gap: 26px;
+  min-width: 0;
+  position: relative;
+  z-index: 2;
+}
+.eyebrow {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.slash {
+  color: var(--green-ink);
+}
+.leadWrap {
+  max-width: 58ch;
+}
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.stage {
+  aspect-ratio: 1.15;
+  width: 100%;
+  max-width: 100%;
+}
+.stats {
+  margin-top: clamp(36px, 5vw, 72px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
+}
+.cmd {
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.cmd span {
+  color: var(--green-ink);
+}
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.stat {
+  display: grid;
+  gap: 8px;
+  padding: 22px 18px 24px;
+  border-right: 1px solid var(--line);
+}
+.stat:last-child {
+  border-right: 0;
+}
+.statLabel {
+  order: 2;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.statValue {
+  margin: 0;
+  font-size: clamp(44px, 6vw, 88px);
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+.hint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.hint i {
+  position: relative;
+  width: 2px;
+  height: 34px;
+  background: var(--line);
+  overflow: hidden;
+}
+.hint i::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -40%;
+  width: 100%;
+  height: 40%;
+  background: var(--fg);
+  animation: drip 1.6s var(--ease) infinite;
+}
+@keyframes drip {
+  to {
+    top: 100%;
+  }
+}
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .stage {
+    order: -1;
+    aspect-ratio: 1.6;
+    margin-bottom: -8px;
+  }
+}
+@media (max-width: 720px) {
+  .statGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .stat:nth-child(2) {
+    border-right: 0;
+  }
+  .stat:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--line);
+  }
+}
+.hintRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.fieldHint {
+  font-size: 11.5px;
+  color: var(--muted);
+  padding: 6px 10px;
+  border: 1px dashed var(--line-2);
+  border-radius: 8px;
+  animation: nudge 3.2s var(--ease) infinite;
+}
+@keyframes nudge {
+  0%,
+  70%,
+  100% {
+    transform: none;
+  }
+  80% {
+    transform: translateY(-3px);
+  }
+  90% {
+    transform: translateY(0);
+  }
+}
+.hero[data-field="field"] {
+  min-height: 100svh;
+}
+.hero[data-field="field"] .lead {
+  color: color-mix(in srgb, var(--fg) 72%, var(--bg));
+}
+@media (hover: none) {
+  .fieldHint {
+    display: none;
+  }
+}

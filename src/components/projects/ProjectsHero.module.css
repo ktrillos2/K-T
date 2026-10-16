@@ -1,0 +1,23 @@
+.hero {
+  position: relative;
+  padding-top: calc(var(--nav-h) + clamp(32px, 6vw, 88px) + env(safe-area-inset-top, 0px));
+  padding-bottom: clamp(24px, 4vw, 48px);
+}
+.hero :global(.wrap) {
+  display: grid;
+  gap: 26px;
+}
+.eyebrow {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.slash {
+  color: var(--yellow-ink);
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+}

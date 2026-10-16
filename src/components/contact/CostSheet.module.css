@@ -1,0 +1,128 @@
+.sheet {
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  background: var(--bg);
+  overflow: hidden;
+  animation: unfold 0.7s var(--ease-out) both;
+}
+@keyframes unfold {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+.head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+  font-size: 12.5px;
+}
+.file {
+  color: var(--muted);
+  font-size: 11.5px;
+}
+.cur {
+  margin-left: auto;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--green);
+  color: #0b0b0c;
+  font-size: 11px;
+}
+.grid {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+}
+.sheet[data-one="false"] .grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.card {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-top: 3px solid var(--c);
+  animation: card 0.6s var(--ease-out) both;
+  animation-delay: calc(0.2s + var(--i) * 0.08s);
+}
+@keyframes card {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+.name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 22px;
+}
+.name i {
+  width: 9px;
+  height: 9px;
+  background: var(--c);
+}
+.pitch {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.priceLabel {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.price {
+  font-size: clamp(24px, 3vw, 34px);
+  color: var(--fg);
+}
+.delivery {
+  font-size: 12px;
+  color: var(--muted);
+}
+.delivery b {
+  color: var(--fg);
+  font-weight: 500;
+}
+.features {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+}
+.features li {
+  position: relative;
+  padding-left: 20px;
+  animation: card 0.5s var(--ease-out) both;
+  animation-delay: calc(0.4s + var(--k) * 0.06s);
+}
+.features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--green-ink);
+}
+.note {
+  padding: 0 14px 12px;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.note a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (max-width: 560px) {
+  .sheet[data-one="false"] .grid {
+    grid-template-columns: 1fr;
+  }
+}

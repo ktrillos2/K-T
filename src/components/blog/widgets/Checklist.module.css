@@ -1,0 +1,65 @@
+.meter {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line);
+  overflow: hidden;
+}
+.meter i {
+  display: block;
+  height: 100%;
+  background: var(--green);
+  transition: width 0.5s var(--ease-out);
+}
+.list {
+  display: grid;
+  gap: 4px;
+}
+.item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.item:hover {
+  background: color-mix(in srgb, var(--fg) 4%, transparent);
+}
+.item input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.box {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1.5px solid var(--line-2);
+  font-size: 12px;
+  color: #0b0b0c;
+  transition: background-color 0.2s, border-color 0.2s, transform 0.3s var(--ease-out);
+}
+.item[data-done="true"] .box {
+  background: var(--green);
+  border-color: var(--green);
+  transform: scale(1.08);
+}
+.item[data-done="true"] > span:last-child {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--line-2);
+}
+.item:has(input:focus-visible) {
+  outline: 2px solid var(--fg);
+}
+.reset {
+  justify-self: start;
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: underline;
+}

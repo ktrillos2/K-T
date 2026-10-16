@@ -1,0 +1,68 @@
+.body {
+  padding: 18px 22px 24px;
+  font-size: 13.5px;
+  line-height: 1.8;
+}
+.cmd span {
+  color: var(--green-ink);
+}
+.suite {
+  margin: 10px 0 12px;
+}
+.badge {
+  display: inline-block;
+  padding: 0 8px;
+  margin-right: 8px;
+  background: var(--green);
+  color: #0b0b0c;
+  font-weight: 600;
+}
+.list {
+  display: grid;
+  gap: 4px;
+  padding-left: 18px;
+}
+.row {
+  display: grid;
+  grid-template-columns: 18px minmax(0, auto) minmax(0, 1fr) auto;
+  gap: 4px 12px;
+  align-items: baseline;
+}
+.icon::before {
+  content: "✓";
+  color: var(--green-ink);
+}
+.row[data-state="run"] .icon::before {
+  content: "○";
+  color: var(--yellow-ink);
+}
+.name {
+  color: var(--fg);
+}
+.detail {
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ms {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.summary {
+  margin-top: 14px;
+  color: var(--muted);
+}
+.summary b {
+  color: var(--green-ink);
+  font-weight: 600;
+}
+@media (max-width: 720px) {
+  .row {
+    grid-template-columns: 18px minmax(0, 1fr) auto;
+  }
+  .detail {
+    grid-column: 2 / -1;
+    white-space: normal;
+  }
+}

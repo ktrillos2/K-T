@@ -1,0 +1,82 @@
+.hero {
+  position: relative;
+  padding-top: calc(var(--nav-h) + clamp(32px, 6vw, 88px));
+  padding-bottom: clamp(40px, 6vw, 72px);
+}
+.hero :global(.wrap) {
+  display: grid;
+  gap: 22px;
+}
+.eyebrow {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.eyebrow span {
+  color: var(--green-ink);
+}
+.body {
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  padding: clamp(32px, 5vw, 64px) 0 clamp(60px, 8vw, 120px);
+}
+.body :global(.wrap) {
+  max-width: 1000px;
+}
+.search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 16px;
+  border-radius: 14px;
+  border: 1px solid var(--line-2);
+  background: var(--surface);
+  font-size: 18px;
+}
+.search input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: none;
+  background: none;
+  color: var(--fg);
+  font: inherit;
+  font-size: 15px;
+}
+.group {
+  margin-top: clamp(32px, 5vw, 56px);
+}
+.h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(26px, 3vw, 42px);
+  margin-bottom: 16px;
+  -webkit-font-smoothing: none;
+}
+.list {
+  display: grid;
+  gap: 8px;
+}
+.list details {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.list summary {
+  padding: 16px 18px;
+  cursor: pointer;
+  font-size: 15.5px;
+}
+.list p {
+  padding: 0 18px 18px;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 14.5px;
+}
+.empty {
+  margin-top: 32px;
+  color: var(--muted);
+}

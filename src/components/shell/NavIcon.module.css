@@ -1,0 +1,170 @@
+.icon {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  overflow: visible;
+}
+.icon * {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.body {
+  transition: transform 0.4s var(--ease-out);
+}
+
+/* Disparador: hover/foco del enlace (en reposo, cada capa queda en su primer cuadro) */
+:global([data-icon-hover]):is(:hover, :focus-visible) .icon,
+.icon[data-play="true"] {
+  --run: running;
+}
+.icon[data-active="true"] .body {
+  transform: scale(1.12);
+}
+.icon :is(path, g) {
+  animation-play-state: var(--run, paused) !important;
+}
+:global([data-icon-hover]):is(:hover, :focus-visible) .body {
+  transform: translateY(-1px) scale(1.12);
+}
+
+/* ---------- Inicio ---------- */
+.icon[data-icon="home"] [data-l="S"] {
+  animation: smoke 1.4s steps(4) infinite;
+  opacity: 0;
+}
+@keyframes smoke {
+  0% {
+    opacity: 0;
+    transform: translate(0, 2px);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(1px, -3px);
+  }
+}
+.icon[data-icon="home"] [data-l="D"] {
+  animation: door 1.4s steps(2) infinite;
+}
+@keyframes door {
+  50% {
+    fill: #f2f2ee;
+  }
+}
+
+/* ---------- Nosotros ---------- */
+.icon[data-icon="about"] [data-l="E"] {
+  animation: blink 1.6s steps(1) infinite;
+}
+@keyframes blink {
+  0%,
+  40%,
+  60%,
+  100% {
+    transform: none;
+  }
+  45%,
+  55% {
+    transform: scaleY(0.2);
+  }
+}
+.icon[data-icon="about"] [data-l="M"] {
+  animation: smile 1.6s steps(2) infinite;
+}
+@keyframes smile {
+  50% {
+    transform: translateY(1px) scaleX(1.15);
+  }
+}
+
+/* ---------- Servicios ---------- */
+.icon[data-icon="services"] [data-l="G"] {
+  animation: spin 1.2s steps(4) infinite;
+  transform-origin: 50% 50%;
+}
+@keyframes spin {
+  to {
+    transform: rotate(90deg);
+  }
+}
+
+/* ---------- Proyectos ---------- */
+.icon[data-icon="projects"] [data-l="P"] {
+  animation: paper 1.4s steps(3) infinite;
+}
+@keyframes paper {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+.icon[data-icon="projects"] [data-l="F"] {
+  transform-origin: 50% 100%;
+  animation: lid 1.4s steps(3) infinite;
+}
+@keyframes lid {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: scaleY(0.78) skewX(-12deg);
+  }
+}
+
+/* ---------- Precios ---------- */
+.icon[data-icon="pricing"] .body {
+  animation: flip 1.2s steps(6) infinite;
+}
+@keyframes flip {
+  0% {
+    transform: scaleX(1);
+  }
+  25% {
+    transform: scaleX(0.15);
+  }
+  50% {
+    transform: scaleX(-1);
+  }
+  75% {
+    transform: scaleX(0.15);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------- Blog ---------- */
+.icon[data-icon="blog"] :is([data-l="L"], [data-l="M"], [data-l="N"]) {
+  transform-origin: 0 50%;
+  animation: type 1.8s steps(4) infinite;
+}
+.icon[data-icon="blog"] [data-l="M"] {
+  animation-delay: 0.3s;
+}
+.icon[data-icon="blog"] [data-l="N"] {
+  animation-delay: 0.6s;
+}
+@keyframes type {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  10% {
+    transform: scaleX(0);
+  }
+  60% {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon :is(path, g) {
+    animation: none !important;
+  }
+}

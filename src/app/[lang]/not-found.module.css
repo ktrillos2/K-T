@@ -1,0 +1,22 @@
+.wrap {
+  padding-top: calc(var(--nav-h) + 32px + env(safe-area-inset-top, 0px));
+  padding-bottom: 120px;
+}
+.wrap :global(.wrap) {
+  display: grid;
+  gap: 22px;
+  justify-items: start;
+}
+.stage {
+  width: min(720px, 100%);
+  aspect-ratio: 2.2;
+}
+.err {
+  font-size: 13px;
+  color: var(--red-ink);
+}
+.actions {
+  display: grid;
+  gap: 20px;
+  justify-items: start;
+}

@@ -1,0 +1,83 @@
+.term {
+  border: 1px solid var(--line-2);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.bar {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 11px 14px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--muted);
+}
+.body {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+.col {
+  display: grid;
+}
+.col:first-child {
+  border-right: 1px solid var(--line);
+}
+.item {
+  border-bottom: 1px solid var(--line);
+}
+.col .item:last-child {
+  border-bottom: 0;
+}
+.q {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 18px 20px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.q::-webkit-details-marker {
+  display: none;
+}
+.q:hover {
+  background: color-mix(in srgb, var(--fg) 4%, transparent);
+}
+.ps {
+  color: var(--green-ink);
+}
+.toggle {
+  margin-left: auto;
+  color: var(--muted);
+}
+.a {
+  padding: 0 20px 20px 38px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+  min-height: 3.4em;
+}
+.a::after {
+  content: "▋";
+  margin-left: 2px;
+  color: var(--green-ink);
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+@media (max-width: 760px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+  .col:first-child {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}

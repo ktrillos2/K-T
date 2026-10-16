@@ -1,0 +1,35 @@
+.hero {
+  padding-top: calc(var(--nav-h) + clamp(32px, 6vw, 88px) + env(safe-area-inset-top, 0px));
+  padding-bottom: clamp(56px, 8vw, 110px);
+}
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+}
+.copy {
+  display: grid;
+  gap: 26px;
+  min-width: 0;
+}
+.eyebrow {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.slash {
+  color: var(--red-ink);
+}
+.stage {
+  width: 100%;
+  aspect-ratio: 1.3;
+}
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .stage {
+    order: -1;
+    aspect-ratio: 1.8;
+  }
+}

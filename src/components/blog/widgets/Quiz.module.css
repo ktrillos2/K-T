@@ -1,0 +1,80 @@
+.progress {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+}
+.progress i {
+  width: 16px;
+  height: 4px;
+  background: var(--line-2);
+}
+.progress i[data-on="true"] {
+  background: var(--green);
+}
+.q {
+  font-size: 16px;
+  line-height: 1.5;
+}
+.q span {
+  color: var(--muted);
+  font-size: 12px;
+}
+.options {
+  display: grid;
+  gap: 8px;
+}
+.opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--line-2);
+  text-align: left;
+  font-size: 14px;
+  transition: border-color 0.25s, background-color 0.25s;
+}
+.opt:hover:not(:disabled) {
+  border-color: var(--fg);
+}
+.opt[data-state="pick"] {
+  border-color: var(--fg);
+  background: color-mix(in srgb, var(--fg) 6%, transparent);
+}
+.opt[data-state="ok"] {
+  border-color: var(--green);
+  background: color-mix(in srgb, var(--green) 16%, transparent);
+}
+.opt[data-state="bad"] {
+  border-color: var(--red);
+  background: color-mix(in srgb, var(--red) 14%, transparent);
+}
+.opt:disabled {
+  cursor: default;
+}
+.letter {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  font-size: 12px;
+}
+.why {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  font-size: 13.5px;
+}
+.why[data-ok="true"] b {
+  color: var(--green-ink);
+}
+.why[data-ok="false"] b {
+  color: var(--red-ink);
+}
+.done {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+}

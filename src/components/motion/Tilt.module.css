@@ -1,0 +1,21 @@
+.root {
+  perspective: 1100px;
+  min-width: 0;
+}
+.inner {
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+  isolation: isolate;
+}
+.glare {
+  position: absolute;
+  inset: -50%;
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.16), transparent 42%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: 5;
+  mix-blend-mode: overlay;
+}

@@ -1,0 +1,37 @@
+.page {
+  position: relative;
+  z-index: 2;
+  padding-top: calc(var(--nav-h) + clamp(40px, 7vw, 96px));
+  padding-bottom: clamp(60px, 8vw, 120px);
+}
+.inner {
+  max-width: 860px;
+  display: grid;
+  gap: 28px;
+}
+.updated {
+  font-size: 12px;
+  color: var(--muted);
+}
+.sections {
+  display: grid;
+  gap: 32px;
+  margin-top: 12px;
+}
+.sections h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(24px, 2.6vw, 34px);
+  margin-bottom: 10px;
+  -webkit-font-smoothing: none;
+}
+.sections h2 span {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--green-ink);
+  vertical-align: middle;
+}
+.sections p {
+  color: color-mix(in srgb, var(--fg) 80%, var(--bg));
+  line-height: 1.8;
+}

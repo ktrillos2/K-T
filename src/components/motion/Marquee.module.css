@@ -1,0 +1,53 @@
+.root {
+  overflow: clip;
+  border-bottom: 1px solid var(--line);
+  user-select: none;
+}
+.track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+.item {
+  transform: skewX(var(--skew, 0deg));
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.lg {
+  padding-block: 26px;
+}
+.lg .item {
+  gap: 34px;
+  padding-right: 34px;
+  font-family: var(--display);
+  font-size: clamp(33px, 5.6vw, 88px);
+  line-height: 1;
+  -webkit-font-smoothing: none;
+}
+.sm {
+  padding-block: 14px;
+}
+.sm .item {
+  gap: 20px;
+  padding-right: 20px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.sep {
+  display: block;
+  width: 0.26em;
+  height: 0.26em;
+  border-radius: 50%;
+  background: var(--red);
+}
+.sm .sep {
+  width: 6px;
+  height: 6px;
+}
+.sep[data-c="1"] {
+  background: var(--yellow);
+}
+.sep[data-c="2"] {
+  background: var(--green);
+}
