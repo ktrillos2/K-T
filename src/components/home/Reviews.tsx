@@ -38,7 +38,7 @@ type Item = {
   sector: string;
   href?: string;
   color: ProjectView["color"];
-  testimonial: { quote: string; author: string; role: string };
+  testimonial: { quote: string; author: string; role: string; avatar?: string; rating?: number };
 };
 
 const CYCLE: ProjectView["color"][] = ["red", "yellow", "green"];
@@ -53,7 +53,7 @@ export function reviewItems(reviews: Testimonial[], projects: ProjectView[]): It
       sector: p?.sector ?? "",
       href: p?.href,
       color: p?.color ?? CYCLE[i % 3],
-      testimonial: { quote: r.message, author: r.name, role: r.role ?? "" },
+      testimonial: { quote: r.message, author: r.name, role: r.role ?? "", avatar: r.avatar, rating: r.rating },
     };
   });
 }
@@ -274,14 +274,26 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
                           <path d="M0 0h3v3h-1v2h-2zM4 0h3v3h-1v2h-2z" />
                         </svg>
                         <span className={styles.cardStars} aria-hidden="true">
-                          ★★★★★
+                          {"★".repeat(tm.rating || 5)}
                         </span>
                       </span>
                       <blockquote className={styles.quote}>
                         <p>{tm.quote}</p>
                       </blockquote>
                       <figcaption className={styles.who}>
-                        <span className={styles.avatar}>{initialsOf(tm.author)}</span>
+                        <span className={styles.avatar}>
+                          {tm.avatar ? (
+                            <img
+                              src={tm.avatar}
+                              alt={tm.author}
+                              width={36}
+                              height={36}
+                              style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover" }}
+                            />
+                          ) : (
+                            initialsOf(tm.author)
+                          )}
+                        </span>
                         <span className={styles.whoText}>
                           <strong>{tm.author}</strong>
                           <span>{!tm.role ? p.name : tm.role.includes(p.name) ? tm.role : `${tm.role} · ${p.name}`}</span>

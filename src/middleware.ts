@@ -8,6 +8,11 @@ import { NextResponse, type NextRequest } from "next/server";
 export function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
 
+  // Ruta administrativa (/admin) directa sin redirecciones de idioma
+  if (pathname === "/admin" || pathname.startsWith("/admin/")) {
+    return NextResponse.next();
+  }
+
   // /es/... es la versión por defecto: redirige a la URL sin prefijo.
   if (pathname === "/es" || pathname.startsWith("/es/")) {
     const url = req.nextUrl.clone();
@@ -33,6 +38,6 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  // Todo menos archivos estáticos, API y rutas de metadatos.
-  matcher: ["/((?!api|_next|.*\\..*).*)"],
+  // Todo menos archivos estáticos, API, admin y rutas de metadatos.
+  matcher: ["/((?!api|admin|_next|.*\\..*).*)"],
 };

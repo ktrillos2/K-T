@@ -47,14 +47,26 @@ export function Testimonials({ reviews = TESTIMONIALS }: { reviews?: Testimonial
             {items.map((p) => (
               <li key={p.slug} className={styles.item} style={vars({ "--c": COLOR_VAR[p.color] })}>
                 <figure>
-                  <div className={styles.stars} aria-label="5/5">
-                    ★★★★★
+                  <div className={styles.stars} aria-label={`${p.testimonial!.rating || 5}/5`}>
+                    {"★".repeat(p.testimonial!.rating || 5)}
                   </div>
                   <blockquote>
                     <p>“{p.testimonial!.quote}”</p>
                   </blockquote>
                   <figcaption>
-                    <span className={styles.avatar}>{initialsOf(p.testimonial!.author)}</span>
+                    <span className={styles.avatar}>
+                      {p.testimonial!.avatar ? (
+                        <img
+                          src={p.testimonial!.avatar}
+                          alt={p.testimonial!.author}
+                          width={36}
+                          height={36}
+                          style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover" }}
+                        />
+                      ) : (
+                        initialsOf(p.testimonial!.author)
+                      )}
+                    </span>
                     <span>
                       <strong>{p.testimonial!.author}</strong>
                       <span>{p.testimonial!.role}</span>

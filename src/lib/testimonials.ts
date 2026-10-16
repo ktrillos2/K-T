@@ -33,10 +33,21 @@ export function projectSlugFor(name: string): string {
   return loose?.slug ?? "";
 }
 
-type SanityDoc = { _id: string; _createdAt: string; name?: string; role?: string; project?: string; content?: string };
+type SanityDoc = {
+  _id: string;
+  _createdAt: string;
+  name?: string;
+  role?: string;
+  project?: string;
+  content?: string;
+  rating?: number;
+  avatar?: string;
+};
 
 async function approvedFromSanity(): Promise<Testimonial[]> {
-  const query = encodeURIComponent('*[_type == "testimonial" && status == "approved"] | order(_createdAt desc){_id,_createdAt,name,role,project,content}');
+  const query = encodeURIComponent(
+    '*[_type == "testimonial" && status == "approved"] | order(_createdAt desc){_id,_createdAt,name,role,project,content,rating,"avatar": avatar.asset->url}'
+  );
   try {
     const res = await fetch(`${SANITY_API}/query/${SANITY_DATASET}?query=${query}`, {
       next: { revalidate: 3600, tags: ["testimonials"] },
@@ -54,6 +65,8 @@ async function approvedFromSanity(): Promise<Testimonial[]> {
         role: d.role?.trim() || undefined,
         message: d.content!.trim(),
         date: d._createdAt?.slice(0, 10),
+        rating: typeof d.rating === "number" ? d.rating : 5,
+        avatar: d.avatar ? `${d.avatar.split("?")[0]}?auto=format&fit=crop&w=160&h=160&q=82` : undefined,
         source: "sanity" as const,
       }));
   } catch {

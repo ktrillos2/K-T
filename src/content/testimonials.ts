@@ -18,6 +18,10 @@ export type Testimonial = {
   message: string;
   /** Fecha de publicación (ISO), si se conoce. */
   date?: string;
+  /** Calificación en estrellas (1 a 5). */
+  rating?: number;
+  /** URL de la foto o avatar optimizada por Sanity CDN. */
+  avatar?: string;
   source: "web" | "sanity";
 };
 
