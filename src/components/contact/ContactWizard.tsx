@@ -6,6 +6,7 @@ import { useI18n } from "@/i18n/I18nProvider";
 import { PLANS } from "@/lib/pricing";
 import { wa } from "@/lib/site";
 import { cx } from "@/lib/utils";
+import { DIAL_COUNTRIES, dialCountryByCode, type DialCountry } from "@/lib/countries-dial";
 import { CostSheet } from "./CostSheet";
 import styles from "./ContactWizard.module.css";
 
@@ -28,11 +29,18 @@ export function ContactWizard() {
   const [planIndex, setPlanIndex] = useState(-1);
   const [typing, setTyping] = useState(false);
   const [draft, setDraft] = useState("");
+  const [selectedDialCountry, setSelectedDialCountry] = useState<DialCountry>(() => dialCountryByCode(country?.code));
   const [error, setError] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [trap, setTrap] = useState("");
   const log = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (country?.code) {
+      setSelectedDialCountry(dialCountryByCode(country.code));
+    }
+  }, [country?.code]);
 
   const questions = [c.q1, c.q2, c.q3, c.q4, c.q5, c.q6];
   const options: (string[] | null)[] = [c.q1opts, null, c.q3opts, null, null, null];
@@ -85,8 +93,12 @@ export function ContactWizard() {
   };
 
   const answer = (value: string, optIndex?: number) => {
-    const v = value.trim();
+    let v = value.trim();
     const key = KEYS[step];
+    if (key === "phone") {
+      const rawDigits = v.replace(/\D/g, "");
+      v = rawDigits ? `${selectedDialCountry.flag} ${selectedDialCountry.dial} ${rawDigits}` : "";
+    }
     if (key === "email" && !EMAIL.test(v)) {
       setError(c.invalidEmail);
       return;
@@ -103,7 +115,20 @@ export function ContactWizard() {
 
   const edit = (i: number) => {
     if (status === "sending" || status === "sent") return;
-    setDraft(answers[KEYS[i]]);
+    const currentVal = answers[KEYS[i]];
+    if (KEYS[i] === "phone") {
+      let localDigits = currentVal.replace(/\D/g, "");
+      for (const dc of DIAL_COUNTRIES) {
+        if (currentVal.includes(dc.dial)) {
+          setSelectedDialCountry(dc);
+          localDigits = currentVal.replace(dc.dial, "").replace(/\D/g, "");
+          break;
+        }
+      }
+      setDraft(localDigits);
+    } else {
+      setDraft(currentVal);
+    }
     setStatus("idle");
     setStep(i);
   };
@@ -234,21 +259,72 @@ export function ContactWizard() {
             <label htmlFor={`wizard-${step}`} className="sr-only">
               {questions[step]}
             </label>
+
+            {KEYS[step] === "phone" && (
+              <div className={styles.countrySelectWrap}>
+                <select
+                  className={styles.countrySelect}
+                  value={selectedDialCountry.code}
+                  onChange={(e) => setSelectedDialCountry(dialCountryByCode(e.target.value))}
+                  aria-label="Código de país para WhatsApp"
+                >
+                  {DIAL_COUNTRIES.map((dc) => (
+                    <option key={dc.code} value={dc.code}>
+                      {dc.flag} {dc.dial} ({dc.name})
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
             <input
               ref={inputRef}
               id={`wizard-${step}`}
               name={KEYS[step]}
               className={styles.field}
               type={types[step]}
-              inputMode={types[step] === "email" ? "email" : types[step] === "tel" ? "tel" : undefined}
+              inputMode={
+                types[step] === "email"
+                  ? "email"
+                  : KEYS[step] === "phone"
+                  ? "numeric"
+                  : undefined
+              }
               value={draft}
+              onKeyDown={(e) => {
+                if (KEYS[step] === "phone") {
+                  // Permitir teclas de navegación y comandos
+                  if (
+                    [
+                      "Backspace",
+                      "Delete",
+                      "Tab",
+                      "Escape",
+                      "Enter",
+                      "ArrowLeft",
+                      "ArrowRight",
+                      "ArrowUp",
+                      "ArrowDown",
+                    ].includes(e.key) ||
+                    e.ctrlKey ||
+                    e.metaKey
+                  ) {
+                    return;
+                  }
+                  // Permitir solo números 0-9
+                  if (!/^\d$/.test(e.key)) {
+                    e.preventDefault();
+                  }
+                }
+              }}
               onChange={(e) => {
-                setDraft(e.target.value);
+                const val = KEYS[step] === "phone" ? e.target.value.replace(/\D/g, "") : e.target.value;
+                setDraft(val);
                 if (error) setError("");
               }}
-              placeholder={placeholders[step]}
+              placeholder={KEYS[step] === "phone" ? selectedDialCountry.placeholder : placeholders[step]}
               autoComplete={autos[step]}
-              maxLength={120}
+              maxLength={KEYS[step] === "phone" ? 15 : 120}
               aria-invalid={!!error}
               aria-describedby={error ? "wizard-error" : undefined}
             />

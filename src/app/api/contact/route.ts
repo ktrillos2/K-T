@@ -23,9 +23,9 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
  */
 export async function POST(req: Request) {
   const key = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL;
-  const from = process.env.CONTACT_FROM_EMAIL;
-  if (!key || !to || !from) return NextResponse.json({ ok: false, error: "not_configured" }, { status: 503 });
+  const to = process.env.CONTACT_TO_EMAIL || "contacto@kytcode.lat";
+  const from = process.env.CONTACT_FROM_EMAIL || "K&T Code <hola@kytcode.lat>";
+  if (!key) return NextResponse.json({ ok: false, error: "not_configured" }, { status: 503 });
 
   const ip = (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "local";
   if (limited(ip)) return NextResponse.json({ ok: false, error: "rate_limited" }, { status: 429 });
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
     when: clean(data.when, 60),
     name: clean(data.name, 80),
     email: clean(data.email, 120).toLowerCase(),
-    phone: clean(data.phone, 30) || undefined,
+    phone: clean(data.phone, 40) || undefined,
     country: clean(data.country, 40),
     currency: clean(data.currency, 3),
     localPrice: clean(data.localPrice, 40) || undefined,
@@ -58,19 +58,44 @@ export async function POST(req: Request) {
 
   const team = teamEmail(lead);
   const client = clientEmail(lead);
-  const res = await fetch("https://api.resend.com/emails/batch", {
+
+  // 1. Notificación prioritaria al equipo (contacto@kytcode.lat)
+  const teamRes = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-    body: JSON.stringify([
-      { from, to: to.split(",").map((s) => s.trim()), reply_to: lead.email, subject: team.subject, html: team.html },
-      { from, to: [lead.email], reply_to: to.split(",")[0].trim(), subject: client.subject, html: client.html },
-    ]),
+    body: JSON.stringify({
+      from,
+      to: to.split(",").map((s) => s.trim()),
+      reply_to: lead.email,
+      subject: team.subject,
+      html: team.html,
+    }),
   }).catch(() => null);
 
-  if (!res || !res.ok) {
-    const detail = res ? await res.text().catch(() => "") : "network";
-    console.error("[contact] Resend error", res?.status, detail);
+  const teamOk = !!teamRes?.ok;
+  if (!teamOk) {
+    const errText = teamRes ? await teamRes.text().catch(() => "") : "network";
+    console.error("[contact] Error enviando correo al equipo:", teamRes?.status, errText);
+  }
+
+  // 2. Confirmación con ficha de costos al cliente
+  fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      from,
+      to: [lead.email],
+      reply_to: to.split(",")[0].trim(),
+      subject: client.subject,
+      html: client.html,
+    }),
+  }).catch((err) => {
+    console.warn("[contact] Aviso al cliente no enviado:", err);
+  });
+
+  if (!teamOk) {
     return NextResponse.json({ ok: false, error: "send_failed" }, { status: 502 });
   }
+
   return NextResponse.json({ ok: true });
 }
