@@ -50,7 +50,10 @@ export function TitleArt({ title, slug, category, color, size = "md", className 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => (el.dataset.on = String(e.isIntersecting)), { rootMargin: "80px" });
+    const io = new IntersectionObserver(([e]) => (el.dataset.on = String(e.isIntersecting)), {
+      rootMargin: "0px",
+      threshold: 0,
+    });
     io.observe(el);
     return () => io.disconnect();
   }, []);

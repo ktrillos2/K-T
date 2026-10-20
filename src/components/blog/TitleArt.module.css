@@ -23,12 +23,54 @@
 .sm {
   border-radius: 10px;
 }
+.art,
 .art * {
   animation-play-state: paused !important;
 }
-.art[data-on="true"] * {
-  animation-play-state: running !important;
+
+/* En escritorio (dispositivos con cursor/hover y pantalla >= 769px):
+   Las animaciones de cada card se desactivan por defecto y se activan SOLAMENTE al hacer hover o foco */
+@media (hover: hover) and (pointer: fine) and (min-width: 769px) {
+  .art,
+  .art *,
+  .art[data-on="true"],
+  .art[data-on="true"] * {
+    animation-play-state: paused !important;
+  }
+
+  :global(a:hover) .art,
+  :global(a:hover) .art *,
+  :global(a:hover) .art[data-on],
+  :global(a:hover) .art[data-on] *,
+  :global(a:focus-visible) .art,
+  :global(a:focus-visible) .art *,
+  :global(a:focus-visible) .art[data-on],
+  :global(a:focus-visible) .art[data-on] *,
+  .art:hover,
+  .art:hover *,
+  .art[data-on]:hover,
+  .art[data-on]:hover * {
+    animation-play-state: running !important;
+  }
 }
+
+/* En móvil / pantallas táctiles (< 769px o dispositivos sin hover):
+   Solamente las cards que se están mostrando (en el viewport con data-on="true")
+   tienen animación activa; las que no están visibles permanecen pausadas para mejorar el rendimiento */
+@media (hover: none), (pointer: coarse), (max-width: 768px) {
+  .art,
+  .art *,
+  .art[data-on="false"],
+  .art[data-on="false"] * {
+    animation-play-state: paused !important;
+  }
+
+  .art[data-on="true"],
+  .art[data-on="true"] * {
+    animation-play-state: running !important;
+  }
+}
+
 .grid {
   position: absolute;
   inset: 0;
