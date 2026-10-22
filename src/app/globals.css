@@ -288,66 +288,13 @@ html.js.intro-failsafe [data-intro] {
   visibility: visible;
 }
 
-/* ---------- Legibilidad de los hero ----------
-   La escena 3D (polvo, túnel, logo) vive detrás del texto. Cada hero lleva data-hero y
-   recibe un velo radial del color del fondo solo donde está el texto, más un halo suave
-   en las letras. La animación sigue viéndose alrededor, pero ya no "ensucia" la lectura.
-   data-hero="split": el 3D está a la derecha, así que el velo se limita a la columna izquierda. */
+/* ---------- Heroes ---------- */
 [data-hero] {
   position: relative;
   isolation: isolate;
 }
-[data-hero]::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: calc(-1 * var(--nav-h) - 40px) -6vw -14% -6vw;
-  pointer-events: none;
-  background: radial-gradient(
-    72% 78% at 24% 52%,
-    color-mix(in srgb, var(--bg) 90%, transparent) 0%,
-    color-mix(in srgb, var(--bg) 74%, transparent) 40%,
-    color-mix(in srgb, var(--bg) 0%, transparent) 80%
-  );
-}
-[data-hero="split"]::before {
-  background: radial-gradient(
-    46% 70% at 20% 50%,
-    color-mix(in srgb, var(--bg) 86%, transparent) 0%,
-    color-mix(in srgb, var(--bg) 62%, transparent) 46%,
-    color-mix(in srgb, var(--bg) 0%, transparent) 82%
-  );
-}
 [data-hero] .lead {
   color: color-mix(in srgb, var(--fg) 80%, var(--bg));
-}
-[data-hero] :is(p, li, dt, dd, small, time) {
-  text-shadow: 0 0 3px var(--bg), 0 0 18px var(--bg);
-}
-[data-hero] :is(h1, .h-hero, .h-sec) {
-  text-shadow: 0 0 28px color-mix(in srgb, var(--bg) 85%, transparent);
-}
-@media (max-width: 960px) {
-  [data-hero]::before {
-    inset: calc(-1 * var(--nav-h)) -20px -10% -20px;
-    background: linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--bg) 70%, transparent) 0%,
-      color-mix(in srgb, var(--bg) 84%, transparent) 55%,
-      color-mix(in srgb, var(--bg) 0%, transparent) 100%
-    );
-  }
-  /* En móvil el 3D de los hero "split" queda arriba: el velo empieza debajo de él. */
-  [data-hero="split"]::before {
-    background: linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--bg) 0%, transparent) 0%,
-      color-mix(in srgb, var(--bg) 0%, transparent) 34%,
-      color-mix(in srgb, var(--bg) 80%, transparent) 52%,
-      color-mix(in srgb, var(--bg) 80%, transparent) 86%,
-      color-mix(in srgb, var(--bg) 0%, transparent) 100%
-    );
-  }
 }
 
 /* Split text (gsap SplitText) */

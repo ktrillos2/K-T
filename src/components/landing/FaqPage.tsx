@@ -2,11 +2,9 @@
 
 import { useMemo, useRef, useState } from "react";
 import { useI18n } from "@/i18n/I18nProvider";
-import { useSceneDim } from "@/hooks/useSceneDim";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { Reveal } from "@/components/motion/Reveal";
 import { Scramble } from "@/components/motion/Scramble";
-import { Stage3D } from "@/components/three/Stage3D";
 import styles from "./FaqPage.module.css";
 
 export type FaqGroup = { id: string; title: string; items: { q: string; a: string }[] };
@@ -19,7 +17,6 @@ export function FaqPage({ groups }: { groups: FaqGroup[] }) {
   const c = t.landing.faqPage;
   const [q, setQ] = useState("");
   const body = useRef<HTMLDivElement>(null);
-  useSceneDim(body, 0.92);
   const shown = useMemo(() => {
     const s = norm(q.trim());
     if (!s) return groups;
@@ -29,7 +26,6 @@ export function FaqPage({ groups }: { groups: FaqGroup[] }) {
   return (
     <>
       <header className={styles.hero} data-hero="">
-        <Stage3D formation="about" anchored={false} />
         <div className="wrap">
           <p className={styles.eyebrow}>
             <span>{"//"}</span> <Scramble trigger="enter" text={c.eyebrow} />

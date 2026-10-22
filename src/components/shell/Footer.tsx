@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { ROUTES } from "@/lib/routes";
 import { SITE, wa } from "@/lib/site";
 import { useI18n } from "@/i18n/I18nProvider";
-import { useSceneDim } from "@/hooks/useSceneDim";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
@@ -26,7 +25,6 @@ export function Footer() {
   };
   const f = t.footer;
   const root = useRef<HTMLElement>(null);
-  useSceneDim(root, 0.9);
 
   return (
     <footer ref={root} className={styles.footer}>

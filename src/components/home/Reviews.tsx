@@ -24,11 +24,10 @@ const snippet = (q: string) => {
 const AUTO_MS = 6500;
 
 /**
- * Reseñas en un carrusel 3D (anillo):
- * - Las tarjetas giran alrededor de un eje; se arrastran con el mouse o el dedo (con inercia)
- *   y se acomodan en la más cercana. Clic en una tarjeta lateral la trae al frente.
+ * Reseñas en un slider horizontal 2D:
+ * - Las tarjetas se deslizan en fila; se arrastran con el mouse o el dedo (con inercia)
+ *   y se acomodan en la más cercana. Clic en una tarjeta lateral la trae al centro.
  * - Avanza sola cada pocos segundos mientras nadie interactúa y la sección está en pantalla.
- * - El conjunto se inclina con el puntero; la tarjeta del frente muestra el enlace al proyecto.
  * - Abajo, clientes como botones de color y dos cintas con fragmentos de todas las reseñas.
  * Todo el movimiento va por transform/opacity en un solo ticker (sin re-renders por frame).
  */
@@ -63,7 +62,6 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
   const r = t.home.reviews;
   const items = useMemo(() => reviewItems(reviews, projectsFor(lang)), [reviews, lang]);
   const n = items.length;
-  const step = 360 / Math.max(1, n);
   const [active, setActive] = useState(0);
   const root = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
@@ -77,28 +75,29 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
     if (!st || !rg || !sec || !n) return;
     const cards: HTMLElement[] = Array.from(rg.querySelectorAll<HTMLElement>("[data-card]"));
     const reduced = prefersReducedMotion();
-    const state = { rot: 0, vel: 0, dragging: false, x0: 0, rot0: 0, lastX: 0, lastT: 0, moved: 0, idle: 0, visible: false, hover: false };
+    // pos = índice "continuo" de la tarjeta centrada (0 = primera)
+    const state = { pos: 0, vel: 0, dragging: false, x0: 0, pos0: 0, lastX: 0, lastT: 0, moved: 0, idle: 0, visible: false, hover: false };
     let last = -1;
     let snapTween: ReturnType<typeof gsap.to> | null = null;
 
-    const radius = () => {
-      const w = cards[0]?.offsetWidth || 360;
-      return Math.round(w / 2 / Math.tan(Math.PI / n)) + 24;
+    const pitch = () => {
+      const c = cards[0];
+      if (!c) return 380;
+      const gap = parseFloat(getComputedStyle(rg).columnGap) || 20;
+      return c.offsetWidth + gap;
     };
-    let R = radius();
+    let P = pitch();
 
     const render = () => {
-      rg.style.transform = `translateZ(${-R}px) rotateY(${state.rot.toFixed(3)}deg)`;
+      const center = (st.clientWidth - (cards[0]?.offsetWidth || 0)) / 2;
+      rg.style.transform = `translateX(${(center - state.pos * P).toFixed(2)}px)`;
       cards.forEach((c, i) => {
-        // Qué tan de frente está cada tarjeta (1 = al frente, 0 = detrás)
-        let a = (((i * step + state.rot) % 360) + 360) % 360;
-        if (a > 180) a -= 360;
-        const f = Math.max(0, 1 - Math.abs(a) / 110);
-        c.style.transform = `rotateY(${i * step}deg) translateZ(${R}px)`;
-        c.style.opacity = (0.08 + f * 0.92).toFixed(3);
+        const f = Math.max(0, 1 - Math.abs(i - state.pos));
+        c.style.opacity = (0.35 + f * 0.65).toFixed(3);
+        c.style.scale = (0.92 + f * 0.08).toFixed(3);
         c.style.setProperty("--f", f.toFixed(3));
       });
-      const idx = ((Math.round(-state.rot / step) % n) + n) % n;
+      const idx = Math.max(0, Math.min(n - 1, Math.round(state.pos)));
       if (idx !== last) {
         last = idx;
         setActive(idx);
@@ -107,42 +106,37 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
 
     const snap = (target?: number) => {
       snapTween?.kill();
-      const to = target ?? Math.round(state.rot / step) * step;
+      const to = Math.max(0, Math.min(n - 1, target ?? Math.round(state.pos)));
       state.vel = 0;
-      snapTween = gsap.to(state, { rot: to, duration: reduced ? 0 : 0.9, ease: "expo.out", onUpdate: render });
+      snapTween = gsap.to(state, { pos: to, duration: reduced ? 0 : 0.8, ease: "expo.out", onUpdate: render });
     };
 
     const goTo = (i: number) => {
-      // Camino más corto hacia la tarjeta i
-      const cur = Math.round(-state.rot / step);
-      let d = ((((i - cur) % n) + n) % n);
-      if (d > n / 2) d -= n;
       state.idle = 0;
-      snap(-(cur + d) * step);
+      snap(((i % n) + n) % n);
     };
     api.current = { goTo };
 
     // Inercia + avance automático en un único ticker
     const tick = (_t: number, dtMs: number) => {
       if (state.dragging || snapTween?.isActive()) return;
-      if (Math.abs(state.vel) > 0.02) {
-        state.rot += state.vel * (dtMs / 16);
-        state.vel *= 0.92;
+      if (Math.abs(state.vel) > 0.002) {
+        state.pos += state.vel * (dtMs / 16);
+        state.vel *= 0.9;
+        if (state.pos < 0 || state.pos > n - 1) state.vel *= 0.5;
         render();
-        if (Math.abs(state.vel) <= 0.02) snap();
+        if (Math.abs(state.vel) <= 0.002) snap();
         return;
       }
       if (!reduced && state.visible && !state.hover && !document.hidden) {
         state.idle += dtMs;
         if (state.idle > AUTO_MS) {
           state.idle = 0;
-          goTo(Math.round(-state.rot / step) + 1);
+          goTo(Math.round(state.pos) + 1);
         }
       }
     };
     gsap.ticker.add(tick);
-
-    const degPerPx = () => (step * 1.4) / Math.max(200, cards[0]?.offsetWidth || 360);
 
     // Arrastre
     const down = (e: PointerEvent) => {
@@ -150,7 +144,7 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
       snapTween?.kill();
       state.dragging = true;
       state.x0 = state.lastX = e.clientX;
-      state.rot0 = state.rot;
+      state.pos0 = state.pos;
       state.lastT = performance.now();
       state.vel = 0;
       state.moved = 0;
@@ -158,18 +152,11 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
       st.dataset.drag = "true";
     };
     const move = (e: PointerEvent) => {
-      // Inclinación del conjunto según el puntero (solo mouse)
-      if (e.pointerType === "mouse") {
-        const b = st.getBoundingClientRect();
-        st.style.setProperty("--tx", (((e.clientX - b.left) / b.width) * 2 - 1).toFixed(3));
-        st.style.setProperty("--ty", (((e.clientY - b.top) / b.height) * 2 - 1).toFixed(3));
-      }
       if (!state.dragging) return;
-      const k = degPerPx();
-      state.rot = state.rot0 + (e.clientX - state.x0) * k;
+      state.pos = state.pos0 - (e.clientX - state.x0) / P;
       const now = performance.now();
       const dt = Math.max(1, now - state.lastT);
-      state.vel = ((e.clientX - state.lastX) * k * 16) / dt;
+      state.vel = (-(e.clientX - state.lastX) / P) * (16 / dt);
       state.moved += Math.abs(e.clientX - state.lastX);
       state.lastX = e.clientX;
       state.lastT = now;
@@ -180,9 +167,9 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
       state.dragging = false;
       st.dataset.drag = "false";
       state.idle = 0;
-      if (Math.abs(state.vel) < 0.3) snap();
+      if (Math.abs(state.vel) < 0.03) snap();
     };
-    // Clic en una tarjeta lateral: traerla al frente (si no fue un arrastre)
+    // Clic en una tarjeta lateral: traerla al centro (si no fue un arrastre)
     const click = (e: MouseEvent) => {
       if (state.moved > 6) return;
       const target = e.target as HTMLElement;
@@ -195,8 +182,6 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
     };
     const leave = () => {
       state.hover = false;
-      st.style.setProperty("--tx", "0");
-      st.style.setProperty("--ty", "0");
     };
     st.addEventListener("pointerdown", down);
     st.addEventListener("pointermove", move);
@@ -216,7 +201,7 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
     io.observe(sec);
 
     const ro = new ResizeObserver(() => {
-      R = radius();
+      P = pitch();
       render();
     });
     ro.observe(st);
@@ -236,7 +221,7 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
       st.removeEventListener("pointerleave", leave);
       api.current = null;
     };
-  }, [n, step]);
+  }, [n]);
 
   const go = (i: number) => api.current?.goTo(i);
   const cur = items[active];
@@ -259,10 +244,9 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
             <span className={styles.scoreMeta}>{r.count(n)}</span>
           </div>
 
-          {/* Anillo 3D */}
+          {/* Fila deslizable */}
           <div ref={stage} className={styles.stage} data-cursor={t.cursor.drag} data-drag="false">
-            <span className={styles.floor} aria-hidden="true" />
-            <div className={styles.tilt}>
+            <div>
               <div ref={ring} className={styles.ring}>
                 {items.map((p, k) => {
                   const tm = p.testimonial!;

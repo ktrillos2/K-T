@@ -6,12 +6,10 @@ import { cx } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
 import { CATEGORY_LABELS, formatDate, postsFor } from "@/content/blog/meta";
 import type { BlogCategory } from "@/content/blog/types";
-import { useSceneDim } from "@/hooks/useSceneDim";
 import { useNavigate } from "@/components/transition/TransitionProvider";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { Reveal } from "@/components/motion/Reveal";
 import { Scramble } from "@/components/motion/Scramble";
-import { Stage3D } from "@/components/three/Stage3D";
 import { TLink } from "@/components/transition/TLink";
 import { TitleArt } from "./TitleArt";
 import styles from "./BlogIndex.module.css";
@@ -37,7 +35,6 @@ export function BlogIndex() {
   const list = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const flip = useRef<ReturnType<typeof Flip.getState> | null>(null);
-  useSceneDim(list, 0.9);
 
   const cats = useMemo(() => Array.from(new Set(posts.map((p) => p.category))), [posts]);
   const featured = posts.find((p) => p.featured) ?? posts[0];
@@ -85,7 +82,6 @@ export function BlogIndex() {
 
   return (
     <section ref={root} className={styles.page} aria-labelledby="h-blog">
-      <Stage3D formation="projects" anchored={false} />
       <header className={cx("wrap", styles.head)} data-hero="">
         <p className={styles.eyebrow}>
           <span>{"//"}</span> <Scramble trigger="enter" text={b.path} />

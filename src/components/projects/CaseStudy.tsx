@@ -8,11 +8,9 @@ import { wa } from "@/lib/site";
 import { vars } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
 import { monthLabel, projectsFor } from "@/i18n";
-import { useSceneDim } from "@/hooks/useSceneDim";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { Reveal } from "@/components/motion/Reveal";
 import { Scramble } from "@/components/motion/Scramble";
-import { Stage3D } from "@/components/three/Stage3D";
 import { BrowserPreview } from "@/components/ui/BrowserPreview";
 import { SiteShot } from "@/components/ui/SiteShot";
 import { TLink } from "@/components/transition/TLink";
@@ -46,7 +44,6 @@ export function CaseStudy({ slug }: { slug: string }) {
   const next = all[(idx + 1) % all.length];
   const root = useRef<HTMLDivElement>(null);
   const body = useRef<HTMLDivElement>(null);
-  useSceneDim(body, 0.92);
 
   const category = t.projects.category[p.category];
   const weeks = p.weeks ?? 3;
@@ -82,7 +79,6 @@ export function CaseStudy({ slug }: { slug: string }) {
   return (
     <div ref={root} style={vars({ "--c": COLOR_VAR[p.color] })}>
       <header className={styles.hero} data-hero="">
-        <Stage3D formation="projects" anchored={false} />
         <div className="wrap">
           <nav className={styles.crumbs} aria-label="breadcrumb">
             <TLink href="/">{t.nav.home}</TLink> <span aria-hidden="true">/</span> <TLink href="/proyectos">{d.breadcrumb}</TLink>{" "}

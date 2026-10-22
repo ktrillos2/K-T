@@ -37,13 +37,6 @@ export const CONTENT_UPDATED = "2026-10-16";
 export const wa = (text = "Hola K&T Code, quiero cotizar un proyecto.") =>
   `https://wa.me/${SITE.phoneRaw}?text=${encodeURIComponent(text)}`;
 
-/**
- * Fondo del hero de inicio.
- * - "field": campo de píxeles interactivo detrás del logo 3D (nuevo).
- * - "voxels": solo el logo de vóxeles, como en la primera versión.
- */
-export const HERO_BG: "field" | "voxels" = "field";
-
 export const INDUSTRIES = [
   "Salud y clínicas",
   "Inmobiliaria",

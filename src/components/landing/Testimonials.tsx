@@ -6,11 +6,9 @@ import { initialsOf } from "@/lib/projects";
 import { vars } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
 import { projectsFor } from "@/i18n";
-import { useSceneDim } from "@/hooks/useSceneDim";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { Reveal } from "@/components/motion/Reveal";
 import { Scramble } from "@/components/motion/Scramble";
-import { Stage3D } from "@/components/three/Stage3D";
 import { TLink } from "@/components/transition/TLink";
 import { Reviews, reviewItems } from "@/components/home/Reviews";
 import { ReviewForm } from "./ReviewForm";
@@ -23,11 +21,9 @@ export function Testimonials({ reviews = TESTIMONIALS }: { reviews?: Testimonial
   const c = t.landing.testimonials;
   const items = useMemo(() => reviewItems(reviews, projectsFor(lang)), [reviews, lang]);
   const wall = useRef<HTMLDivElement>(null);
-  useSceneDim(wall, 0.92);
   return (
     <>
       <header className={styles.hero} data-hero="">
-        <Stage3D formation="about" anchored={false} />
         <div className="wrap">
           <p className={styles.eyebrow}>
             <span>{"//"}</span> <Scramble trigger="enter" text={c.eyebrow} />

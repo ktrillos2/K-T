@@ -1,0 +1,87 @@
+.section {
+  padding-block: clamp(72px, 10vw, 140px);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: clamp(28px, 4vw, 48px);
+}
+.card {
+  display: grid;
+  gap: 12px;
+  height: 100%;
+  padding: 18px 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition:
+    transform 0.5s var(--ease),
+    border-color 0.3s,
+    box-shadow 0.5s var(--ease);
+}
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-8px);
+  border-color: var(--c);
+  box-shadow: 0 24px 50px -28px color-mix(in srgb, var(--c) 60%, transparent);
+}
+.art {
+  display: block;
+  color: var(--c);
+}
+.name {
+  font-size: clamp(22px, 2vw, 28px);
+  line-height: 1.05;
+}
+.pitch {
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+.foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.from {
+  display: grid;
+  font-size: 12px;
+  color: var(--muted);
+}
+.price {
+  font-size: 16px;
+  color: var(--fg);
+}
+.arrow {
+  font-size: 20px;
+  transition: transform 0.4s var(--ease);
+}
+.card:hover .arrow {
+  transform: translateX(6px);
+}
+.more {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+@media (max-width: 1080px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .arrow {
+    transition: none;
+  }
+}

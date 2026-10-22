@@ -2,20 +2,16 @@
 
 import { useRef } from "react";
 import { useI18n } from "@/i18n/I18nProvider";
-import { useSceneDim } from "@/hooks/useSceneDim";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { Reveal } from "@/components/motion/Reveal";
-import { Stage3D } from "@/components/three/Stage3D";
 import styles from "./LegalPage.module.css";
 
 export function LegalPage() {
   const { t } = useI18n();
   const p = t.privacy;
   const root = useRef<HTMLElement>(null);
-  useSceneDim(root, 0.95);
   return (
     <article ref={root} className={styles.page} aria-labelledby="h-legal">
-      <Stage3D formation="projects" anchored={false} />
       <div className={`wrap ${styles.inner}`}>
         <p className={styles.updated}>{p.updated}</p>
         <SplitTitle as="h1" id="h-legal" mode="enter" className="h-sec" tabIndex={-1}>

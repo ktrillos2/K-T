@@ -7,12 +7,10 @@ import { FEATURED } from "@/lib/projects";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Marquee } from "@/components/motion/Marquee";
 import { HomeHero } from "@/components/home/HomeHero";
-import { UniqueCompare } from "@/components/home/UniqueCompare";
-import { ServicesBuilder } from "@/components/home/ServicesBuilder";
+import { HomeServices } from "@/components/home/HomeServices";
 import { FeaturedStack } from "@/components/home/FeaturedStack";
 import { Reviews } from "@/components/home/Reviews";
 import { QuickFacts } from "@/components/home/QuickFacts";
-import { Explore } from "@/components/home/Explore";
 import { getTestimonials } from "@/lib/testimonials";
 
 export async function generateMetadata({ params }: LangParams): Promise<Metadata> {
@@ -29,13 +27,10 @@ export default async function HomePage({ params }: LangParams) {
     <>
       <HomeHero />
       <Marquee items={t.home.values} label={t.home.valuesLabel} speed={1} />
-      <UniqueCompare />
-      <ServicesBuilder />
-      <Marquee items={t.home.industries} label={t.home.industriesLabel} speed={-0.7} size="sm" />
+      <HomeServices />
       <FeaturedStack />
       <Reviews reviews={reviews} />
       <QuickFacts />
-      <Explore />
       <JsonLd data={graph(faqPage(t.home.facts.items), itemList(lang, FEATURED))} />
     </>
   );

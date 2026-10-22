@@ -52,7 +52,7 @@ export function LiveModal({ project, device, onDevice, onClose }: Props) {
     const r = root.current;
     if (!r || prefersReducedMotion()) return;
     gsap.fromTo(r, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 });
-    gsap.fromTo(r.querySelector("[data-frame]"), { y: 40, scale: 0.94, rotateX: 8 }, { y: 0, scale: 1, rotateX: 0, duration: 0.7, ease: "expo.out" });
+    gsap.fromTo(r.querySelector("[data-frame]"), { y: 40, scale: 0.94 }, { y: 0, scale: 1, duration: 0.7, ease: "expo.out" });
   }, [mounted]);
 
   // Escala el iframe para que el dispositivo quepa completo en la ventana.

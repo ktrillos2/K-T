@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
-import { store } from "@/lib/store";
 import { lerp } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
 import styles from "./Cursor.module.css";
@@ -12,7 +11,7 @@ import styles from "./Cursor.module.css";
  * - el anillo sigue al puntero con inercia y se estira en la dirección del movimiento
  *   (squash & stretch según la velocidad);
  * - sobre [data-stick] se pega al elemento y toma su forma;
- * - sobre [data-cursor="Texto"] o un objeto 3D muestra una etiqueta.
+ * - sobre [data-cursor="Texto"] muestra una etiqueta.
  */
 export function Cursor() {
   const ring = useRef<HTMLDivElement>(null);
@@ -90,16 +89,6 @@ export function Cursor() {
       else mode = "none";
     };
 
-    const unsub = store.subscribe(() => {
-      const l = store.get().cursorLabel;
-      if (l) {
-        mode = "label";
-        labelText = l;
-      } else if (mode === "label" && !document.querySelector("[data-cursor]:hover")) {
-        mode = "none";
-      }
-    });
-
     // Radio de cada botón "pegajoso" (getComputedStyle en cada frame forzaba un recálculo de estilos).
     const radii = new WeakMap<HTMLElement, number>();
     // Últimos valores escritos: solo se toca el DOM cuando algo cambia.
@@ -113,10 +102,9 @@ export function Cursor() {
 
     const tick = () => {
       if (!visible) return;
-      const s3d = store.get().cursorLabel;
       const off = document.documentElement.classList.contains("cursor-off");
-      const m = off ? "hidden" : s3d ? "label" : mode;
-      const txt = s3d ?? labelText;
+      const m = off ? "hidden" : mode;
+      const txt = labelText;
 
       let tx = mx;
       let ty = my;
@@ -203,7 +191,6 @@ export function Cursor() {
       window.removeEventListener("pointerdown", onDown);
       window.removeEventListener("pointerup", onUp);
       gsap.ticker.remove(tick);
-      unsub();
     };
   }, []);
 

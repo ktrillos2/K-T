@@ -26,7 +26,6 @@
   position: absolute;
   top: 16px;
   left: 16px;
-  transform: translateZ(40px);
   pointer-events: none;
 }
 .tag {
@@ -39,7 +38,6 @@
   color: #f2f2ee;
   font-size: 11.5px;
   pointer-events: none;
-  transform: translateZ(30px);
 }
 .caption {
   display: grid;

@@ -3,7 +3,6 @@
 import { useI18n } from "@/i18n/I18nProvider";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { Reveal } from "@/components/motion/Reveal";
-import { Stage3D } from "@/components/three/Stage3D";
 import { TLink } from "@/components/transition/TLink";
 import styles from "./not-found.module.css";
 
@@ -12,7 +11,6 @@ export default function NotFound() {
   return (
     <section className={styles.wrap} aria-labelledby="h-404" data-hero="split">
       <div className="wrap">
-        <Stage3D formation="notfound" className={styles.stage} label="404" />
         <p className={styles.err}>{t.notFound.err}</p>
         <SplitTitle as="h1" id="h-404" mode="enter" className="h-sec" tabIndex={-1}>
           {t.notFound.title}

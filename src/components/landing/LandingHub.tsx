@@ -5,11 +5,9 @@ import { PLANS, type PlanId } from "@/lib/pricing";
 import { COLOR_VAR } from "@/lib/routes";
 import { vars } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
-import { useSceneDim } from "@/hooks/useSceneDim";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { Reveal } from "@/components/motion/Reveal";
 import { Scramble } from "@/components/motion/Scramble";
-import { Stage3D } from "@/components/three/Stage3D";
 import { TLink } from "@/components/transition/TLink";
 import { Price } from "@/components/ui/Price";
 import styles from "./LandingHub.module.css";
@@ -28,11 +26,9 @@ type Props = {
 export function LandingHub({ eyebrow, h1, lead, items, extra = [] }: Props) {
   const { t } = useI18n();
   const body = useRef<HTMLDivElement>(null);
-  useSceneDim(body, 0.92);
   return (
     <>
       <header className={styles.hero} data-hero="">
-        <Stage3D formation="about" anchored={false} />
         <div className="wrap">
           <p className={styles.eyebrow}>
             <span>{"//"}</span> <Scramble trigger="enter" text={eyebrow} />

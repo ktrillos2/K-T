@@ -16,12 +16,31 @@
   position: relative;
   z-index: 2;
 }
+.copy .title {
+  font-size: clamp(40px, 5.4vw, 92px);
+  line-height: 0.98;
+}
 .eyebrow {
   font-size: 12.5px;
   color: var(--muted);
 }
-.slash {
-  color: var(--green-ink);
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--green) 60%, transparent);
+  animation: ping 2.2s ease-out infinite;
+}
+@keyframes ping {
+  to {
+    box-shadow: 0 0 0 10px transparent;
+  }
 }
 .leadWrap {
   max-width: 58ch;
@@ -32,8 +51,6 @@
   gap: 12px;
 }
 .stage {
-  aspect-ratio: 1.15;
-  width: 100%;
   max-width: 100%;
 }
 .stats {
@@ -44,15 +61,6 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   overflow: hidden;
-}
-.cmd {
-  padding: 12px 18px;
-  border-bottom: 1px solid var(--line);
-  font-size: 12.5px;
-  color: var(--muted);
-}
-.cmd span {
-  color: var(--green-ink);
 }
 .statGrid {
   display: grid;
@@ -78,43 +86,12 @@
   line-height: 0.9;
   font-variant-numeric: tabular-nums;
 }
-.hint {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 28px;
-  font-size: 11.5px;
-  color: var(--muted);
-}
-.hint i {
-  position: relative;
-  width: 2px;
-  height: 34px;
-  background: var(--line);
-  overflow: hidden;
-}
-.hint i::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: -40%;
-  width: 100%;
-  height: 40%;
-  background: var(--fg);
-  animation: drip 1.6s var(--ease) infinite;
-}
-@keyframes drip {
-  to {
-    top: 100%;
-  }
-}
 @media (max-width: 960px) {
   .grid {
     grid-template-columns: 1fr;
   }
   .stage {
     order: -1;
-    aspect-ratio: 1.6;
     margin-bottom: -8px;
   }
 }
@@ -127,43 +104,5 @@
   }
   .stat:nth-child(-n + 2) {
     border-bottom: 1px solid var(--line);
-  }
-}
-.hintRow {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-}
-.fieldHint {
-  font-size: 11.5px;
-  color: var(--muted);
-  padding: 6px 10px;
-  border: 1px dashed var(--line-2);
-  border-radius: 8px;
-  animation: nudge 3.2s var(--ease) infinite;
-}
-@keyframes nudge {
-  0%,
-  70%,
-  100% {
-    transform: none;
-  }
-  80% {
-    transform: translateY(-3px);
-  }
-  90% {
-    transform: translateY(0);
-  }
-}
-.hero[data-field="field"] {
-  min-height: 100svh;
-}
-.hero[data-field="field"] .lead {
-  color: color-mix(in srgb, var(--fg) 72%, var(--bg));
-}
-@media (hover: none) {
-  .fieldHint {
-    display: none;
   }
 }

@@ -7,10 +7,8 @@ import { cx, vars } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
 import { CATEGORY_LABELS, formatDate, postsFor } from "@/content/blog/meta";
 import type { PostBody, PostCard } from "@/content/blog/types";
-import { useSceneDim } from "@/hooks/useSceneDim";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { Reveal } from "@/components/motion/Reveal";
-import { Stage3D } from "@/components/three/Stage3D";
 import { TLink } from "@/components/transition/TLink";
 import { ArticleBody } from "./ArticleBody";
 import { TitleArt } from "./TitleArt";
@@ -31,7 +29,6 @@ export function ArticleView({ post, words, plain }: Props) {
   const [speaking, setSpeaking] = useState(false);
   const [copied, setCopied] = useState(false);
   const [vote, setVote] = useState<"yes" | "no" | null>(null);
-  useSceneDim(root, 0.95);
 
   const toc = useMemo(() => post.body.blocks.filter((b): b is Extract<typeof b, { type: "h2" }> => b.type === "h2"), [post.body.blocks]);
   const related = useMemo(() => {
@@ -148,7 +145,6 @@ export function ArticleView({ post, words, plain }: Props) {
   return (
     <article ref={root} className={styles.article} style={vars({ "--fs": `${SIZES[size]}px` })} aria-labelledby="h-post">
       <span ref={bar} className={styles.progress} aria-hidden="true" />
-      <Stage3D formation="projects" anchored={false} />
 
       <header className={cx("wrap", styles.header)} data-hero="">
         <nav className={styles.crumbs} aria-label="breadcrumb">

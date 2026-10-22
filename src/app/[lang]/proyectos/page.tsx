@@ -5,7 +5,6 @@ import { pageMeta } from "@/lib/seo";
 import { breadcrumbs, graph, itemList } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ProjectsHero } from "@/components/projects/ProjectsHero";
-import { TunnelSection } from "@/components/projects/TunnelSection";
 import { ProjectIndex } from "@/components/projects/ProjectIndex";
 
 export async function generateMetadata({ params }: LangParams): Promise<Metadata> {
@@ -20,7 +19,6 @@ export default async function ProjectsPage({ params }: LangParams) {
   return (
     <>
       <ProjectsHero />
-      <TunnelSection />
       <ProjectIndex />
       <JsonLd data={graph(breadcrumbs(lang, [{ name: t.nav.projects, path: "/proyectos" }]), itemList(lang, projectsFor(lang)))} />
     </>

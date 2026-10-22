@@ -10,11 +10,9 @@ import { cx, vars } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
 import { projectsFor } from "@/i18n";
 import { postsFor } from "@/content/blog/meta";
-import { useSceneDim } from "@/hooks/useSceneDim";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { Reveal } from "@/components/motion/Reveal";
 import { Scramble } from "@/components/motion/Scramble";
-import { Stage3D } from "@/components/three/Stage3D";
 import { TLink } from "@/components/transition/TLink";
 import { Price } from "@/components/ui/Price";
 import { SiteShot } from "@/components/ui/SiteShot";
@@ -55,7 +53,6 @@ export function LandingView({ kind, color, plan, copy, blocks, projects, posts, 
   const { t, lang } = useI18n();
   const l = t.landing;
   const body = useRef<HTMLDivElement>(null);
-  useSceneDim(body, 0.94);
 
   const projectViews = useMemo(() => {
     const all = projectsFor(lang);
@@ -72,7 +69,6 @@ export function LandingView({ kind, color, plan, copy, blocks, projects, posts, 
   return (
     <article style={vars({ "--c": COLOR_VAR[color] })}>
       <header className={styles.hero} data-hero="">
-        <Stage3D formation="projects" anchored={false} />
         <div className={cx("wrap", styles.heroInner)}>
           <nav className={styles.crumbs} aria-label="breadcrumb">
             <TLink href="/">{t.nav.home}</TLink>

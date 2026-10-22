@@ -49,7 +49,7 @@ function restoreScroll(y: number) {
  *    "Compilando <nombre de la página>".
  * 2) Navega (router.push, o el popstate original si fue el botón atrás/adelante del navegador)
  *    y mide lo que tarda en montar la nueva página.
- * 3) Descubre la página y avisa al store para que la escena 3D y la página animen su entrada.
+ * 3) Descubre la página y avisa al store para que la página anime su entrada.
  *
  * Atrás/adelante: el popstate se intercepta en fase de captura (antes que el router de Next),
  * se reproduce la animación en sentido inverso y al terminar se re-emite el mismo popstate
@@ -134,7 +134,7 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
           .fromTo(line2, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.25 }, "<")
           .to(term, { autoAlpha: 0, y: -24, duration: 0.35, ease: "power2.in" }, "+=0.18")
           .add(() => {
-            // La escena 3D y la página empiezan su entrada mientras los paneles salen.
+            // La página empieza su entrada mientras los paneles salen.
             store.enter();
           }, "<0.1")
           .to([...panels].reverse(), { ...out, duration: 0.75, ease: EASE_INOUT, stagger: 0.07 }, "<");

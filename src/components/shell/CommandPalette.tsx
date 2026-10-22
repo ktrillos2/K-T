@@ -81,8 +81,8 @@ export function CommandPalette() {
       gsap.fromTo(r, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.25 });
       gsap.fromTo(
         p,
-        { y: 30, scale: 0.96, rotationX: 12, filter: "blur(8px)" },
-        { y: 0, scale: 1, rotationX: 0, filter: "blur(0px)", duration: 0.55, ease: "expo.out" },
+        { y: 30, scale: 0.96, filter: "blur(8px)" },
+        { y: 0, scale: 1, filter: "blur(0px)", duration: 0.55, ease: "expo.out" },
       );
       window.setTimeout(() => input.current?.focus(), 30);
     } else {

@@ -10,8 +10,6 @@ import { AboutHero } from "@/components/about/AboutHero";
 import { Founder } from "@/components/about/Founder";
 import { Disciplines } from "@/components/about/Disciplines";
 import { GitLog } from "@/components/about/GitLog";
-import { TestRun } from "@/components/about/TestRun";
-import { InfoTerminal } from "@/components/about/InfoTerminal";
 import { Reviews } from "@/components/home/Reviews";
 import { getTestimonials } from "@/lib/testimonials";
 
@@ -33,8 +31,6 @@ export default async function AboutPage({ params }: LangParams) {
       <Disciplines />
       <GitLog />
       <Reviews reviews={reviews} />
-      <TestRun />
-      <InfoTerminal />
       <JsonLd
         data={graph(
           breadcrumbs(lang, [{ name: t.nav.about, path: "/nosotros" }]),

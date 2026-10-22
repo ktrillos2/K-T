@@ -5,10 +5,8 @@ import { SITE } from "@/lib/site";
 import { useI18n } from "@/i18n/I18nProvider";
 import { projectsFor } from "@/i18n";
 import { postsFor } from "@/content/blog/meta";
-import { useSceneDim } from "@/hooks/useSceneDim";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { Reveal } from "@/components/motion/Reveal";
-import { Stage3D } from "@/components/three/Stage3D";
 import { TLink } from "@/components/transition/TLink";
 import { PixelPhoto } from "@/components/about/PixelPhoto";
 import { TitleArt } from "@/components/blog/TitleArt";
@@ -21,11 +19,9 @@ export function AuthorView() {
   const posts = useMemo(() => postsFor(lang), [lang]);
   const projects = useMemo(() => projectsFor(lang).filter((p) => p.featured || p.testimonial).slice(0, 8), [lang]);
   const body = useRef<HTMLDivElement>(null);
-  useSceneDim(body, 0.92);
   return (
     <>
       <header className={styles.hero} data-hero="">
-        <Stage3D formation="about" anchored={false} />
         <div className={`wrap ${styles.grid}`}>
           <div className={styles.copy}>
             <p className={styles.eyebrow}>// {a.eyebrow}</p>

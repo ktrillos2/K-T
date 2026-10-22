@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { COLOR_VAR } from "@/lib/routes";
 import { vars } from "@/lib/utils";
 import { SectionHead } from "@/components/ui/SectionHead";
@@ -10,9 +9,8 @@ import styles from "./Disciplines.module.css";
 
 const COLORS = ["red", "yellow", "green"] as const;
 
-/** Tres disciplinas como tarjetas que giran en 3D (hover en escritorio, toque en móvil). */
+/** Tres disciplinas en tarjetas simples: suben al pasar el cursor y la barra de color se llena. */
 export function Disciplines() {
-  const [flipped, setFlipped] = useState<number | null>(null);
   const { t } = useI18n();
   const d = t.about.disciplines;
   return (
@@ -21,34 +19,15 @@ export function Disciplines() {
         <SectionHead id="h-disc" path={d.path} title={d.title} lead={d.lead} />
         <Reveal stagger={0.1} className={styles.grid}>
           {d.items.map((it, i) => (
-            <button
-              key={it.title}
-              type="button"
-              className={styles.card}
-              data-flipped={flipped === i}
-              onClick={() => setFlipped(flipped === i ? null : i)}
-              aria-pressed={flipped === i}
-              style={vars({ "--c": COLOR_VAR[COLORS[i % 3]] })}
-            >
-              <span className={styles.inner}>
-                <span className={styles.front}>
-                  <span className={styles.file}>{it.file}</span>
-                  <span className={`display ${styles.title}`}>{it.title}</span>
-                  <span className={styles.text}>{it.front}</span>
-                  <span className={styles.hint} aria-hidden="true">
-                    {d.flip}
-                  </span>
-                </span>
-                <span className={styles.back}>
-                  <span className={styles.text}>{it.back}</span>
-                  <span className={styles.tags}>
-                    {it.tags.map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
-                  </span>
-                </span>
-              </span>
-            </button>
+            <article key={it.title} className={styles.card} style={vars({ "--c": COLOR_VAR[COLORS[i % 3]] })}>
+              <h3 className={`display ${styles.title}`}>{it.title}</h3>
+              <p className={styles.text}>{it.front}</p>
+              <ul className={styles.tags}>
+                {it.tags.map((tag) => (
+                  <li key={tag}>{tag}</li>
+                ))}
+              </ul>
+            </article>
           ))}
         </Reveal>
       </div>

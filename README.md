@@ -1,6 +1,6 @@
-# K&T Code — sitio web 2.7
+# K&T Code — sitio web 3.0
 
-Sitio de K&T Code: **diseño único y código a la medida**. Next.js (App Router), escena 3D persistente (React Three Fiber), transiciones entre rutas, scroll suave (Lenis) y animaciones GSAP. Español e inglés, precios en la moneda de cada país, blog interactivo y SEO/GEO completo.
+Sitio de K&T Code: **diseño único y código a la medida**. Next.js (App Router), animaciones de movimiento 2D (sin WebGL), transiciones entre rutas, scroll suave (Lenis) y animaciones GSAP. Español e inglés, precios en la moneda de cada país, blog interactivo y SEO/GEO completo.
 
 - Fuente principal: **Ari W9500 Bold** (pixel) en `src/app/font-files/`. Secundaria: **Fira Code**.
 - Colores: blanco, negro y los tres puntos del logo (rojo `#ef685f`, amarillo `#f6bd4e`, verde `#62c453`). Modo oscuro por defecto y modo claro.
@@ -16,6 +16,18 @@ npm run screenshots    # capturas reales de los proyectos (ver abajo)
 ```
 
 Requiere Node 18.18+. En Vercel funciona sin configuración extra (la cabecera `x-vercel-ip-country` elige la moneda del visitante la primera vez).
+
+## Novedades 3.0 · Más simple, sin 3D
+
+| Qué | Dónde | Detalle |
+|---|---|---|
+| Sin WebGL | `shell/AppShell.tsx`, `lib/store.ts` | Se eliminó la escena 3D (three.js / React Three Fiber): vóxeles, túnel de proyectos y campo de píxeles. El sitio carga más rápido. |
+| Heroes 2D | `ui/HeroArt.tsx` | Logo SVG que entra deslizando, flota y sigue al mouse (solo x/y), con etiquetas cortas que aparecen en cascada. |
+| Inicio simple | `app/[lang]/page.tsx`, `home/HomeServices.tsx` | Hero → valores → 4 servicios → proyectos destacados → reseñas → preguntas rápidas. Se quitaron el comparador, el constructor y "Sigue explorando". |
+| Destacados | `home/FeaturedStack.tsx` | Slider 2D con flechas, puntos, arrastre y avance automático. |
+| Reseñas | `home/Reviews.tsx` | Fila deslizable 2D (antes anillo 3D). |
+| Proyectos | `projects/ProjectIndex.tsx` | Cuadrícula única con filtros por tipo; sin túnel 3D ni vista de lista. |
+| Menos texto | `i18n/dictionaries/*` | Textos cortos en inicio, nosotros, proyectos, precios y contacto. Blog y landings SEO/GEO sin cambios. |
 
 ## Novedades 2.8 · Todo en inglés
 
@@ -195,7 +207,7 @@ src/
   app/[lang]/          páginas (inicio, nosotros, proyectos, proyectos/[slug], precios, blog, blog/[slug], privacidad)
   app/api/rates        tasa de cambio del día
   app/llms.txt         resumen para IA (y llms-full.txt)
-  components/          shell, three, home, about, projects, pricing, blog, contact, footer, ui, motion
+  components/          shell, home, about, projects, pricing, blog, contact, footer, ui, motion
   content/blog         artículos y su contenido
   i18n/                diccionarios, proyectos en inglés y proveedor de idioma y moneda
   lib/                 datos (proyectos, precios, sitio), SEO, schema, moneda, store

@@ -71,16 +71,7 @@ export function Loader() {
       document.readyState === "complete"
         ? Promise.resolve()
         : new Promise<void>((r) => window.addEventListener("load", () => r(), { once: true }));
-    const scene = new Promise<void>((r) => {
-      if (store.get().sceneReady) return r();
-      const un = store.subscribe(() => {
-        if (store.get().sceneReady) {
-          un();
-          r();
-        }
-      });
-    });
-    Promise.race([Promise.all([fonts, load, scene]), new Promise((r) => setTimeout(r, 4500))]).then(() => {
+    Promise.race([Promise.all([fonts, load]), new Promise((r) => setTimeout(r, 4500))]).then(() => {
       ready = true;
     });
 

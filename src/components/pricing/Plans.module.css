@@ -51,7 +51,6 @@
   padding: 10px;
   border-radius: 12px;
   background: color-mix(in srgb, currentColor 4%, transparent);
-  transform: translateZ(50px);
   transition: background-color 0.4s;
 }
 .card:hover .art {
@@ -113,7 +112,6 @@
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-  transform: translateZ(30px);
 }
 .file {
   display: inline-flex;
@@ -150,12 +148,10 @@
 }
 .name {
   font-size: clamp(26px, 2.2vw, 33px);
-  transform: translateZ(40px);
 }
 .price {
   display: grid;
   gap: 2px;
-  transform: translateZ(60px);
 }
 .from,
 .cur {
@@ -281,7 +277,6 @@
   margin-top: auto;
   display: grid;
   gap: 10px;
-  transform: translateZ(40px);
 }
 .cta {
   justify-content: center;

@@ -1,8 +1,8 @@
 {
   "name": "kytcode-web",
-  "version": "2.8.0",
+  "version": "3.0.0",
   "private": true,
-  "description": "Sitio web de K&T Code: diseño único y código a la medida. Escena 3D persistente, transiciones entre rutas, blog interactivo, español/inglés y precios en moneda local.",
+  "description": "Sitio web de K&T Code: diseño único y código a la medida. Animaciones de movimiento 2D, transiciones entre rutas, blog interactivo, español/inglés y precios en moneda local.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,21 +14,18 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
-    "@react-three/fiber": "^9.1.0",
     "gsap": "^3.13.0",
     "lenis": "^1.3.0",
     "next": "^15.3.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "three": "^0.176.0"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@types/node": "^22.15.0",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
-    "@types/three": "^0.176.0",
-    "typescript": "^5.8.3",
-    "playwright": "^1.52.0"
+    "playwright": "^1.52.0",
+    "typescript": "^5.8.3"
   },
   "engines": {
     "node": ">=18.18"

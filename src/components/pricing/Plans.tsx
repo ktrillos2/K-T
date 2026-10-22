@@ -23,7 +23,7 @@ const VISIBLE = 3;
 export const choosePlan = (id: PlanId) => window.dispatchEvent(new CustomEvent("kt:plan", { detail: id }));
 
 /**
- * Planes como tarjetas 3D interactivas: luz que sigue al puntero, barra de tiempo de entrega,
+ * Planes como tarjetas interactivas: se levantan al pasar el puntero, barra de tiempo de entrega,
  * lista de lo incluido que se despliega, selección de plan y paso directo al cotizador.
  * En móvil son un carrusel con desplazamiento por pasos.
  */

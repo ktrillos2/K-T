@@ -14,7 +14,10 @@ type Props = {
   as?: "div" | "article" | "li";
 };
 
-/** Tarjeta con inclinación 3D según el puntero y reflejo de luz. */
+/**
+ * Tarjeta que se levanta y se desplaza levemente hacia el puntero (solo x/y, sin 3D),
+ * con un reflejo de luz que la sigue. `max` es el desplazamiento máximo en píxeles.
+ */
 export function Tilt({ children, className, innerClassName, max = 10, glare = true, as = "div" }: Props) {
   const root = useRef<HTMLElement>(null);
   const inner = useRef<HTMLDivElement>(null);
@@ -27,9 +30,8 @@ export function Tilt({ children, className, innerClassName, max = 10, glare = tr
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const rx = gsap.quickTo(card, "rotationX", { duration: 0.6, ease: "power3.out" });
-    const ry = gsap.quickTo(card, "rotationY", { duration: 0.6, ease: "power3.out" });
-    const z = gsap.quickTo(card, "z", { duration: 0.6, ease: "power3.out" });
+    const x = gsap.quickTo(card, "x", { duration: 0.6, ease: "power3.out" });
+    const y = gsap.quickTo(card, "y", { duration: 0.6, ease: "power3.out" });
     const gx = shine.current ? gsap.quickTo(shine.current, "xPercent", { duration: 0.6 }) : null;
     const gy = shine.current ? gsap.quickTo(shine.current, "yPercent", { duration: 0.6 }) : null;
 
@@ -37,17 +39,15 @@ export function Tilt({ children, className, innerClassName, max = 10, glare = tr
       const b = el.getBoundingClientRect();
       const nx = (e.clientX - b.left) / b.width - 0.5;
       const ny = (e.clientY - b.top) / b.height - 0.5;
-      rx(-ny * max);
-      ry(nx * max * 1.2);
-      z(30);
+      x(nx * max);
+      y(ny * max - 8);
       gx?.(nx * 100);
       gy?.(ny * 100);
       if (shine.current) shine.current.style.opacity = "1";
     };
     const leave = () => {
-      rx(0);
-      ry(0);
-      z(0);
+      x(0);
+      y(0);
       if (shine.current) shine.current.style.opacity = "0";
     };
     el.addEventListener("pointermove", move);

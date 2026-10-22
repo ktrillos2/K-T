@@ -3,8 +3,7 @@
 import { useI18n } from "@/i18n/I18nProvider";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { Reveal } from "@/components/motion/Reveal";
-import { Scramble } from "@/components/motion/Scramble";
-import { Stage3D } from "@/components/three/Stage3D";
+import { HeroArt } from "@/components/ui/HeroArt";
 import { LocaleSelector } from "@/components/shell/LocaleSelector";
 import styles from "./PricingHero.module.css";
 
@@ -15,9 +14,9 @@ export function PricingHero() {
     <section className={styles.hero} aria-labelledby="h-precios" data-hero="split">
       <div className={`wrap ${styles.grid}`}>
         <div className={styles.copy}>
-          <p className={styles.eyebrow}>
-            <span className={styles.slash}>{"//"}</span> <Scramble trigger="enter" text={`${h.eyebrow} · ${country.currency}`} />
-          </p>
+          <Reveal mode="enter" y={20}>
+            <p className={styles.eyebrow}>{`${h.eyebrow} · ${country.currency}`}</p>
+          </Reveal>
           <SplitTitle as="h1" id="h-precios" mode="enter" className="h-hero" tabIndex={-1}>
             {h.title}
           </SplitTitle>
@@ -28,7 +27,7 @@ export function PricingHero() {
             <LocaleSelector align="left" />
           </Reveal>
         </div>
-        <Stage3D formation="pricing" className={styles.stage} label={h.stageLabel} />
+        <HeroArt className={styles.stage} chips={h.chips} label={h.stageLabel} />
       </div>
     </section>
   );

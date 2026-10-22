@@ -9,7 +9,6 @@
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   visibility: hidden;
-  perspective: 1000px;
 }
 .panel {
   width: min(640px, 100%);
