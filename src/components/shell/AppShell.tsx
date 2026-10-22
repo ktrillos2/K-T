@@ -1,6 +1,7 @@
 "use client";
 
 import type { Lang } from "@/i18n/config";
+import type { ShellLinks } from "@/lib/shellLinks";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import { TransitionProvider } from "@/components/transition/TransitionProvider";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
@@ -13,7 +14,7 @@ import { Footer } from "@/components/shell/Footer";
 import { ThemeSync } from "@/components/shell/ThemeSync";
 import { WhatsAppFloat } from "@/components/shell/WhatsAppFloat";
 
-export function AppShell({ lang, children }: { lang: Lang; children: React.ReactNode }) {
+export function AppShell({ lang, links, children }: { lang: Lang; links: ShellLinks; children: React.ReactNode }) {
   return (
     <I18nProvider lang={lang}>
       <TransitionProvider>
@@ -23,11 +24,11 @@ export function AppShell({ lang, children }: { lang: Lang; children: React.React
         <main id="main" className="main">
           {children}
         </main>
-        <Footer />
+        <Footer links={links} />
         <StatusBar />
         <WhatsAppFloat />
         <div className="crt" aria-hidden="true" />
-        <CommandPalette />
+        <CommandPalette links={links} />
         <Cursor />
         <Loader />
       </TransitionProvider>

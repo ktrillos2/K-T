@@ -25,8 +25,8 @@ const LEGACY: [string, string][] = [
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  // three.js se transpila para que el tree-shaking funcione con el App Router.
-  transpilePackages: ["three"],
+  // CSS en línea dentro del HTML: sin hojas de estilo que bloqueen el primer pintado.
+  experimental: { inlineCss: true },
   async redirects() {
     return LEGACY.flatMap(([source, destination]) => [
       { source, destination, permanent: true },

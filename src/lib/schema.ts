@@ -17,6 +17,7 @@ export function organization(lang: Lang) {
     "@type": ["Organization", "ProfessionalService"],
     "@id": ORG_ID,
     name: SITE.name,
+    alternateName: SITE.alternateNames,
     legalName: SITE.legalName,
     url: SITE.url,
     logo: `${SITE.url}/brand/logo-black.png`,
@@ -72,6 +73,7 @@ export function website(lang: Lang) {
     "@id": SITE_ID,
     url: SITE.url,
     name: SITE.name,
+    alternateName: SITE.alternateNames,
     inLanguage: lang === "en" ? "en" : "es-CO",
     publisher: { "@id": ORG_ID },
   };

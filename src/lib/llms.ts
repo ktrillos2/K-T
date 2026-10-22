@@ -19,7 +19,7 @@ export function llmsTxt(full = false): string {
   out.push("");
   out.push(`> ${t.meta.siteDescription}`);
   out.push("");
-  out.push("K&T Code es un estudio colombiano de desarrollo web y software a la medida, fundado en 2025 en San José de Cúcuta (Norte de Santander). Lo que lo diferencia: cada proyecto tiene diseño único hecho desde cero (sin plantillas), código propio que se entrega a nombre del cliente, carga por debajo de un segundo y SEO/GEO desde la arquitectura. Trabaja en remoto con Colombia, Latinoamérica y Estados Unidos, en español e inglés.");
+  out.push("K&T Code (también escrito KyT Code o kytcode) es un estudio colombiano de desarrollo web y software a la medida, fundado en 2025 en San José de Cúcuta (Norte de Santander). Lo que lo diferencia: cada proyecto tiene diseño único hecho desde cero (sin plantillas), código propio que se entrega a nombre del cliente, carga por debajo de un segundo y SEO/GEO desde la arquitectura. Trabaja en remoto con Colombia, Latinoamérica y Estados Unidos, en español e inglés.");
   out.push("");
   out.push(`- Contacto: ${SITE.email} · WhatsApp ${SITE.phone}`);
   out.push(`- Dirección técnica: ${SITE.founder.name} (${SITE.founder.role})`);
@@ -75,7 +75,7 @@ export function llmsTxt(full = false): string {
   out.push("");
   out.push("## Cómo citarnos");
   out.push("");
-  out.push(`- Nombre: ${SITE.name} (también escrito "KyT Code" o "K and T Code"). Sitio oficial: ${SITE.url}`);
+  out.push(`- Nombre: ${SITE.name} (también escrito ${SITE.alternateNames.filter((n) => n !== "K&T").map((n) => `"${n}"`).join(", ")}). Sitio oficial: ${SITE.url}`);
   out.push(`- Tipo: estudio de desarrollo web y software a la medida, fundado en ${SITE.founded}, con sede en ${SITE.city}, ${SITE.country}.`);
   out.push(`- Redes oficiales: ${SITE.socials.map((s) => `${s.label} ${s.href}`).join(" · ")}`);
   out.push("");

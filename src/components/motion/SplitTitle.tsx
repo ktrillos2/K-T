@@ -20,7 +20,10 @@ type Props = {
 
 const SPLIT = { type: "lines,chars", mask: "lines", linesClass: "split-line", charsClass: "split-char" } as const;
 
-/** Título con letras que suben desde una máscara, carácter por carácter. */
+/**
+ * Título animado. Al entrar la página: barrido del bloque completo (rápido para el LCP).
+ * Al hacer scroll: letras que suben desde una máscara, carácter por carácter.
+ */
 export function SplitTitle({ as = "h2", children, className, id, mode = "scroll", delay = 0, tabIndex }: Props) {
   const ref = useRef<HTMLElement>(null);
 
@@ -33,19 +36,16 @@ export function SplitTitle({ as = "h2", children, className, id, mode = "scroll"
       gsap.set(el, { autoAlpha: 1 });
       return;
     }
-    const split = SplitText.create(el, SPLIT);
+    // Barrido de abajo hacia arriba sobre el bloque completo. No se parte en letras:
+    // el texto ya pintado se conserva y el título sigue siendo el LCP del primer pintado.
     gsap.set(el, { autoAlpha: 1 });
-    const tw = gsap.from(split.chars, {
-      yPercent: 120,
-      rotate: 8,
-      duration: 1.1,
-      ease: "power4.out",
-      delay,
-      stagger: { each: Math.min(0.03, 0.9 / Math.max(split.chars.length, 1)) },
-    });
+    const tw = gsap.fromTo(
+      el,
+      { yPercent: 18, clipPath: "inset(0% 0% 100% 0%)" },
+      { yPercent: 0, clipPath: "inset(0% 0% -20% 0%)", duration: 1.1, ease: "power4.out", delay, clearProps: "clipPath,transform" },
+    );
     return () => {
       tw.kill();
-      split.revert();
     };
   });
 

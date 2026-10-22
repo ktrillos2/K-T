@@ -8,6 +8,7 @@ import { GOOGLE_VERIFICATION, SITE } from "@/lib/site";
 import { DEFAULT_OG, ROBOTS_INDEX } from "@/lib/seo";
 import { graph, organization, person, website } from "@/lib/schema";
 import { AppShell } from "@/components/shell/AppShell";
+import { shellLinks } from "@/lib/shellLinks";
 import { JsonLd } from "@/components/seo/JsonLd";
 
 export const dynamicParams = false;
@@ -96,7 +97,9 @@ export default async function RootLayout({ children, params }: { children: React
         <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLMs-full.txt" />
       </head>
       <body>
-        <AppShell lang={lang}>{children}</AppShell>
+        <AppShell lang={lang} links={shellLinks(lang)}>
+          {children}
+        </AppShell>
         <JsonLd data={graph(organization(lang), website(lang), person(lang))} />
       </body>
     </html>

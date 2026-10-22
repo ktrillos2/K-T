@@ -13,16 +13,12 @@ import { TLink } from "@/components/transition/TLink";
 import { ContactWizard } from "@/components/contact/ContactWizard";
 import { BreakoutGame } from "@/components/footer/BreakoutGame";
 import { LocaleSelector } from "./LocaleSelector";
-import { CITY_LANDINGS, GUIDES, INDUSTRIES, SERVICES, landingCopy } from "@/content/landings";
+import type { ShellLinks } from "@/lib/shellLinks";
 import styles from "./Footer.module.css";
 
-export function Footer() {
-  const { t, lang } = useI18n();
+export function Footer({ links }: { links: ShellLinks }) {
+  const { t } = useI18n();
   const c = t.contact;
-  const label = (l: (typeof SERVICES)[number]) => {
-    const e = landingCopy(l, lang).copy.eyebrow.split("·").pop()!.trim();
-    return e.charAt(0).toUpperCase() + e.slice(1);
-  };
   const f = t.footer;
   const root = useRef<HTMLElement>(null);
 
@@ -119,9 +115,9 @@ export function Footer() {
           <h3>
             <TLink href="/servicios">{t.nav.services}</TLink>
           </h3>
-          {SERVICES.map((l) => (
-            <TLink key={l.path} href={l.path}>
-              {label(l)}
+          {links.services.map((l) => (
+            <TLink key={l.href} href={l.href}>
+              {l.label}
             </TLink>
           ))}
         </nav>
@@ -129,17 +125,17 @@ export function Footer() {
           <h3>
             <TLink href="/industrias">{t.nav.industries}</TLink>
           </h3>
-          {INDUSTRIES.map((l) => (
-            <TLink key={l.path} href={l.path}>
-              {label(l)}
+          {links.industries.map((l) => (
+            <TLink key={l.href} href={l.href}>
+              {l.label}
             </TLink>
           ))}
         </nav>
         <nav aria-label={t.landing.hubs.ciudades.title}>
           <h3>{t.landing.hubs.ciudades.title}</h3>
-          {CITY_LANDINGS.map((l) => (
-            <TLink key={l.path} href={l.path}>
-              {t.landing.crumbs.ciudad} {l.city!.name}
+          {links.cities.map((l) => (
+            <TLink key={l.href} href={l.href}>
+              {l.label}
             </TLink>
           ))}
         </nav>
@@ -147,9 +143,9 @@ export function Footer() {
           <h3>
             <TLink href="/precios">{t.nav.pricing}</TLink>
           </h3>
-          {GUIDES.map((l) => (
-            <TLink key={l.path} href={l.path}>
-              {label(l)}
+          {links.guides.map((l) => (
+            <TLink key={l.href} href={l.href}>
+              {l.label}
             </TLink>
           ))}
         </nav>

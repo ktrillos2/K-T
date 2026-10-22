@@ -7,8 +7,7 @@ import { ROUTES } from "@/lib/routes";
 import { projectsFor } from "@/i18n";
 import { localize, splitLang } from "@/i18n/config";
 import { useI18n } from "@/i18n/I18nProvider";
-import { postsFor } from "@/content/blog/meta";
-import { SERVICES, INDUSTRIES, landingCopy } from "@/content/landings";
+import type { ShellLinks } from "@/lib/shellLinks";
 import { SITE, wa } from "@/lib/site";
 import { store, useUI } from "@/lib/store";
 import { scrollToEl } from "@/lib/lenis";
@@ -21,7 +20,7 @@ type Item = { id: string; group: string; label: string; hint: string; run: () =>
 const norm = (s: string) => s.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
 
 /** Paleta de comandos (⌘K / Ctrl+K): páginas, acciones, proyectos y artículos del blog. */
-export function CommandPalette() {
+export function CommandPalette({ links }: { links: ShellLinks }) {
   const open = useUI((s) => s.paletteOpen);
   const navigate = useNavigate();
   const pathname = usePathname();
@@ -42,14 +41,11 @@ export function CommandPalette() {
       { id: "theme", group: t.palette.groups.actions, label: t.palette.theme, hint: "⌥", run: () => toggleTheme() },
       { id: "lang", group: t.palette.groups.actions, label: t.palette.language, hint: other.toUpperCase(), run: () => navigate(localize(splitLang(pathname).path, other)) },
       { id: "contact", group: t.palette.groups.actions, label: t.palette.contact, hint: "#contacto", run: () => scrollToEl("#contacto") },
-      ...[...SERVICES, ...INDUSTRIES].map((l) => {
-        const c = landingCopy(l, lang).copy;
-        return { id: `s-${l.slug}`, group: t.nav.services, label: c.h1, hint: l.path, run: () => navigate(href(l.path)) };
-      }),
+      ...links.searchLandings.map((l) => ({ id: `s-${l.href}`, group: t.nav.services, label: l.label, hint: l.href, run: () => navigate(href(l.href)) })),
       ...projectsFor(lang).map((p) => ({ id: `p-${p.slug}`, group: t.palette.groups.projects, label: p.name, hint: `${p.sector} · ${p.dateLabel}`, run: () => navigate(href(p.href)) })),
-      ...postsFor(lang).map((b) => ({ id: `b-${b.slug}`, group: t.palette.groups.blog, label: b.title, hint: t.blog.minutes(b.minutes), run: () => navigate(href(b.href)) })),
+      ...links.searchPosts.map((b) => ({ id: `b-${b.href}`, group: t.palette.groups.blog, label: b.label, hint: t.blog.minutes(b.minutes), run: () => navigate(href(b.href)) })),
     ];
-  }, [navigate, t, lang, href, pathname]);
+  }, [navigate, t, lang, href, pathname, links]);
 
   const filtered = useMemo(() => {
     const s = norm(q.trim());

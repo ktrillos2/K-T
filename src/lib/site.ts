@@ -1,6 +1,8 @@
 export const SITE = {
   name: "K&T Code",
   legalName: "K&T Code",
+  /** Otras formas en que la gente busca la marca (Google y los motores de IA las asocian a la misma entidad). */
+  alternateNames: ["KyT Code", "Kyt Code", "KYT Code", "kytcode", "K and T Code", "K&T"],
   url: "https://www.kytcode.lat",
   domain: "kytcode.lat",
   description:

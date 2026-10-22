@@ -279,9 +279,11 @@ ol {
 }
 
 /* ---------- Estados de entrada ----------
-   Con JS activo, lo marcado con data-intro espera la animación de entrada de su página.
+   En la primera visita la intro tapa la página, así que el contenido se pinta de inmediato
+   debajo (el LCP llega con el primer pintado) y luego se anima al entrar.
+   En visitas repetidas no hay intro: lo marcado con data-intro espera su animación.
    Sin JS (o si algo falla) todo queda visible. */
-html.js [data-intro] {
+html.js.booted [data-intro] {
   visibility: hidden;
 }
 html.js.intro-failsafe [data-intro] {
