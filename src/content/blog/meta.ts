@@ -13,6 +13,11 @@ type Seed = [slug: string, category: BlogCategory, date: string, minutes: number
 
 /** Artículos migrados del blog anterior (en español; la versión en inglés está en ./meta.en.ts y ./posts/en) (mismos slugs para conservar el posicionamiento). */
 const ES_ONLY: Seed[] = [
+  ["como-vender-por-whatsapp-business", "ecommerce", "2026-10-20", 7, "Cómo Vender por WhatsApp Business Paso a Paso: Estrategias, Plantillas y Frases (2026)", "Guía práctica para vender por WhatsApp en Colombia: configuración, plantillas de mensajes listas para copiar, frases que cierran ventas y cuándo dar el salto a la API con IA.", ["WhatsApp Business", "ventas", "plantillas"], true],
+  ["mejor-inteligencia-artificial-para-empresas", "ia", "2026-10-14", 7, "¿Cuál es la Mejor Inteligencia Artificial para Empresas? Herramientas y Cómo Elegir (2026)", "Qué IA usar según cada necesidad de tu empresa, beneficios reales, planes gratis vs. de pago y un test rápido para saber por dónde empezar.", ["inteligencia artificial", "herramientas de IA", "empresas"], true],
+  ["que-es-un-servidor-mcp", "ia", "2026-10-08", 6, "¿Qué es un Servidor MCP y Para Qué Sirve? Guía Clara para Empresas (2026)", "Qué es el Model Context Protocol, cómo un servidor MCP conecta la IA con Power BI, GitHub o tu base de datos, cómo se crea y cómo usarlo con seguridad.", ["MCP", "servidor MCP", "agentes de IA"], true],
+  ["que-es-vibe-coding", "desarrollo-web", "2026-10-03", 6, "¿Qué es el Vibe Coding? Lovable, Google AI Studio y lo que Significa para la Web de tu Empresa", "Qué es el vibe coding, las herramientas más usadas, sus riesgos reales y cuándo sirve (o no) para crear la página web de tu negocio.", ["vibe coding", "Lovable", "IA"], true],
+  ["que-es-n8n-para-que-sirve", "ia", "2026-09-29", 7, "¿Qué es n8n y Para Qué Sirve? ¿Es Gratis o se Paga? Guía para Empresas (2026)", "Qué es n8n, ejemplos de automatización en pymes, si es gratis o de pago, cómo crear agentes de IA y cuándo pasar a un desarrollo a medida.", ["n8n", "automatización", "agentes de IA"], true],
   ["calcular-roi-automatizacion-software-ia", "software", "2026-09-25", 6, "Cómo Calcular el ROI de un Software a Medida o Automatización con IA en Colombia", "Fórmula de ROI, periodo de recuperación y un caso real con cifras en pesos para saber cuándo se paga un software a medida o una automatización con IA.", ["ROI", "software a medida", "automatización"], true],
   ["seo-agentico-2026", "seo-geo", "2026-09-23", 6, "SEO Agéntico en 2026: Estrategia Integral para Ser la Fuente Oficial de los Modelos de IA", "Qué es el SEO agéntico y los cuatro pilares para que los agentes de IA entiendan, citen y recomienden tu empresa: entidad, respuestas directas, datos estructurados y velocidad.", ["SEO agéntico", "agentes de IA", "datos estructurados"], true],
   ["llms-txt-2026", "seo-geo", "2026-09-21", 6, "Guía Definitiva de llms.txt en 2026: Qué Es, Cómo Implementarlo y Ejemplos Reales", "Qué es el archivo llms.txt, en qué se diferencia de robots.txt y sitemap.xml, cómo estructurarlo y cómo publicarlo en tu sitio, con un ejemplo real.", ["llms.txt", "GEO", "IA"], true],
@@ -68,7 +73,8 @@ const BASE: PostMeta[] = ES_ONLY.map(([slug, category, date, minutes, title, des
     slug,
     category,
     date,
-    updated: en ? "2026-10-16" : "2026-10-14",
+    // La revisión nunca puede ser anterior a la publicación.
+    updated: [date, en ? "2026-10-16" : "2026-10-14"].sort().pop()!,
     minutes,
     interactive: !!interactive,
     color: COLOR[category],
