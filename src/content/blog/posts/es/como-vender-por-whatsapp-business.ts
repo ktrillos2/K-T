@@ -86,6 +86,19 @@ Te lo explicamos en detalle en [cómo automatizar WhatsApp Business con IA](/blo
 = Dar el precio genera confianza; esconderlo hace que el cliente busque a otro.
 :::
 
+## ¿Cómo te ayuda K&T Code a vender más por WhatsApp? {#k-t-code}
+
+Conectamos tu web, tu catálogo y tu WhatsApp para que cada visita termine en una conversación y cada conversación en un pago.
+
+Tabla: Servicios relacionados y precios de partida (COP).
+| Necesitas | Servicio | Desde |
+|---|---|---|
+| Una página que lleve clientes directo a tu WhatsApp | [Landing page](/servicios/landing-pages) | $450.000 |
+| Catálogo, carrito, pagos PSE/Nequi y pedidos por WhatsApp | [Tienda virtual](/servicios/tiendas-virtuales) | $1.300.000 |
+| Agente de IA en WhatsApp conectado a inventario y facturación | [Software a medida](/servicios/software-a-medida) | $4.500.000 |
+
+Compara en [precios](/precios) o revisa [cuánto cuesta una tienda virtual en Colombia](/precios/precio-tienda-virtual-colombia).
+
 ## Conclusión {#conclusion}
 
 Vender por WhatsApp funciona cuando lo tratas como un proceso: perfil completo, catálogo, respuestas rápidas, enlace de pago y seguimiento. Cuando el volumen crece, la IA y la API te permiten atender más sin perder el trato cercano. Si quieres que tu web y tu WhatsApp trabajen juntos, mira nuestras [tiendas virtuales](/servicios/tiendas-virtuales) o [escríbenos](/#contacto).

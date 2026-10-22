@@ -78,6 +78,20 @@ Si marcaste casi todo, adelante con el vibe coding. Si tu página debe vender, p
 = La IA acelera, pero una persona experta decide y responde por la calidad.
 :::
 
+## ¿Cómo te ayuda K&T Code? {#k-t-code}
+
+Usamos IA para trabajar más rápido, pero cada proyecto pasa por diseño, revisión de código, pruebas de velocidad y SEO técnico. Si ya tienes un prototipo hecho con vibe coding, también podemos revisarlo y llevarlo a producción.
+
+Tabla: Servicios relacionados y precios de partida (COP).
+| Necesitas | Servicio | Desde |
+|---|---|---|
+| Una página para campañas o lanzamientos | [Landing page](/servicios/landing-pages) | $450.000 |
+| La web completa de tu empresa | [Sitio corporativo](/servicios/diseno-web-corporativo) | $2.500.000 |
+| Una web a medida, rápida y lista para Google | [Desarrollo web a medida](/servicios/desarrollo-web-a-medida) | $2.500.000 |
+| Mejorar el posicionamiento de un sitio existente | [SEO técnico](/servicios/seo-tecnico) | Según alcance |
+
+Compara planes en [precios](/precios) o revisa [cuánto cuesta una página web en Colombia](/precios/precio-pagina-web-colombia).
+
 ## Conclusión {#conclusion}
 
 El vibe coding democratizó la creación de software y es perfecto para validar ideas rápido. Para lo que sostiene tu negocio (tu web, tu tienda, tu sistema), la combinación ganadora es IA + criterio profesional. Si quieres comparar opciones, mira las [mejores herramientas de IA para crear páginas web](/blog/mejores-herramientas-ia-crear-paginas-web-2026) o [cuéntanos tu proyecto](/#contacto).

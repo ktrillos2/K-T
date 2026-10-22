@@ -11,6 +11,11 @@ import md_que_es_vibe_coding from "./posts/es/que-es-vibe-coding";
 import md_que_es_un_servidor_mcp from "./posts/es/que-es-un-servidor-mcp";
 import md_mejor_inteligencia_artificial_para_empresas from "./posts/es/mejor-inteligencia-artificial-para-empresas";
 import md_como_vender_por_whatsapp_business from "./posts/es/como-vender-por-whatsapp-business";
+import en_que_es_n8n_para_que_sirve from "./posts/en/que-es-n8n-para-que-sirve";
+import en_que_es_vibe_coding from "./posts/en/que-es-vibe-coding";
+import en_que_es_un_servidor_mcp from "./posts/en/que-es-un-servidor-mcp";
+import en_mejor_inteligencia_artificial_para_empresas from "./posts/en/mejor-inteligencia-artificial-para-empresas";
+import en_como_vender_por_whatsapp_business from "./posts/en/como-vender-por-whatsapp-business";
 import md_agencia_vs_freelance_desarrollo_web from "./posts/es/agencia-vs-freelance-desarrollo-web";
 import md_agentes_ia_empresas_colombia from "./posts/es/agentes-ia-empresas-colombia";
 import md_agentic_commerce_ecommerce_ia from "./posts/es/agentic-commerce-ecommerce-ia";
@@ -111,12 +116,12 @@ const BODIES: Record<string, Partial<Record<Lang, PostBody>> & { es: PostBody }>
   "costo-oculto-pagina-web-lenta": lenta,
   "desarrollo-web-medida-vs-plantillas": medida,
   "geo-vs-seo-diferencias-motores-ia": geo,
-  // Tendencias de búsqueda de octubre de 2026 (solo español).
-  "que-es-n8n-para-que-sirve": { es: fromMarkdown(md_que_es_n8n_para_que_sirve) },
-  "que-es-vibe-coding": { es: fromMarkdown(md_que_es_vibe_coding) },
-  "que-es-un-servidor-mcp": { es: fromMarkdown(md_que_es_un_servidor_mcp) },
-  "mejor-inteligencia-artificial-para-empresas": { es: fromMarkdown(md_mejor_inteligencia_artificial_para_empresas) },
-  "como-vender-por-whatsapp-business": { es: fromMarkdown(md_como_vender_por_whatsapp_business) },
+  // Tendencias de búsqueda de octubre de 2026 (es + en).
+  "que-es-n8n-para-que-sirve": { es: fromMarkdown(md_que_es_n8n_para_que_sirve), en: fromMarkdown(en_que_es_n8n_para_que_sirve) },
+  "que-es-vibe-coding": { es: fromMarkdown(md_que_es_vibe_coding), en: fromMarkdown(en_que_es_vibe_coding) },
+  "que-es-un-servidor-mcp": { es: fromMarkdown(md_que_es_un_servidor_mcp), en: fromMarkdown(en_que_es_un_servidor_mcp) },
+  "mejor-inteligencia-artificial-para-empresas": { es: fromMarkdown(md_mejor_inteligencia_artificial_para_empresas), en: fromMarkdown(en_mejor_inteligencia_artificial_para_empresas) },
+  "como-vender-por-whatsapp-business": { es: fromMarkdown(md_como_vender_por_whatsapp_business), en: fromMarkdown(en_como_vender_por_whatsapp_business) },
   // Artículos migrados del blog anterior, escritos en markdown (es + en).
   "agencia-vs-freelance-desarrollo-web": { es: fromMarkdown(md_agencia_vs_freelance_desarrollo_web), en: fromMarkdown(en_agencia_vs_freelance_desarrollo_web) },
   "agentes-ia-empresas-colombia": { es: fromMarkdown(md_agentes_ia_empresas_colombia), en: fromMarkdown(en_agentes_ia_empresas_colombia) },

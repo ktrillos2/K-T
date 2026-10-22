@@ -95,6 +95,19 @@ Si marcaste más de las tres primeras, empieza con n8n. Si marcaste las dos últ
 = Lo crítico necesita monitoreo, pruebas y una interfaz pensada para tu operación.
 :::
 
+## ¿Cómo te ayuda K&T Code con la automatización? {#k-t-code}
+
+Diseñamos automatizaciones y agentes de IA a la medida de tu operación: con n8n cuando basta, o con software propio cuando el proceso es crítico.
+
+Tabla: Servicios relacionados y precios de partida (COP).
+| Necesitas | Servicio | Desde |
+|---|---|---|
+| Automatizar procesos, agentes de IA, integraciones | [Software a medida](/servicios/software-a-medida) | $4.500.000 |
+| Una web que capture leads y los envíe a tu CRM | [Landing page](/servicios/landing-pages) | $450.000 |
+| Vender en línea con pagos y pedidos automáticos | [Tienda virtual](/servicios/tiendas-virtuales) | $1.300.000 |
+
+Mira todos los planes en [precios](/precios) o calcula tu proyecto con la [guía de precios de software a medida](/precios/precio-software-a-medida).
+
 ## Conclusión {#conclusion}
 
 n8n es una de las mejores puertas de entrada a la automatización y a los agentes de IA: barato, flexible y rápido de probar. El paso siguiente, cuando el flujo ya vende o cobra, es darle una base sólida. Si quieres saber cuánto costaría automatizar tu proceso, revisa [cuánto cuesta automatizar con IA en Colombia](/blog/cuanto-cuesta-automatizar-procesos-ia-colombia) o [escríbenos](/#contacto).

@@ -78,6 +78,19 @@ Las versiones gratuitas sirven para probar. Para trabajar con información de la
 = Sin un proceso y una línea base, no hay forma de saber si la IA funcionó.
 :::
 
+## ¿Cómo te ayuda K&T Code a implementar IA? {#k-t-code}
+
+Te ayudamos a elegir el proceso, construir la IA conectada a tus datos y medir el retorno. Sin humo: empezamos por lo que más horas te consume.
+
+Tabla: Servicios relacionados y precios de partida (COP).
+| Necesitas | Servicio | Desde |
+|---|---|---|
+| Agentes de IA, automatizaciones y paneles con tus datos | [Software a medida](/servicios/software-a-medida) | $4.500.000 |
+| Una tienda que venda 24/7 con pagos y WhatsApp | [Tienda virtual](/servicios/tiendas-virtuales) | $1.300.000 |
+| Una web corporativa preparada para Google y la IA | [Sitio corporativo](/servicios/diseno-web-corporativo) | $2.500.000 |
+
+Mira todos los [planes y precios](/precios) o la [guía de precios de software a medida](/precios/precio-software-a-medida).
+
 ## Conclusión {#conclusion}
 
 La mejor inteligencia artificial para tu empresa es la que se conecta con tu operación y se paga sola. Empieza con un asistente general para ganar confianza, y da el salto a una IA a medida cuando tengas claro el proceso. Si quieres ver ejemplos, lee sobre [agentes de IA para empresas en Colombia](/blog/agentes-ia-empresas-colombia) o [hablemos de tu caso](/#contacto).

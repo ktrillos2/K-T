@@ -83,6 +83,19 @@ Si marcaste tres o más, un servidor MCP a medida puede ahorrarle horas a tu equ
 = Menos permisos significa menos riesgo; el registro permite auditar qué hizo la IA.
 :::
 
+## ¿Cómo te ayuda K&T Code con MCP? {#k-t-code}
+
+Creamos servidores MCP y agentes de IA conectados a tus sistemas (inventario, CRM, facturación, reportes), con permisos claros y registro de cada acción.
+
+Tabla: Servicios relacionados y precios de partida (COP).
+| Necesitas | Servicio | Desde |
+|---|---|---|
+| Servidor MCP, agentes de IA o integraciones con tu ERP | [Software a medida](/servicios/software-a-medida) | $4.500.000 |
+| Una tienda que un agente de IA pueda consultar | [Tienda virtual](/servicios/tiendas-virtuales) | $1.300.000 |
+| Soporte y actualizaciones de tus sistemas | [Mantenimiento web](/servicios/mantenimiento-web) | Según alcance |
+
+Revisa la [guía de precios de software a medida](/precios/precio-software-a-medida) o todos los [planes y precios](/precios).
+
 ## Conclusión {#conclusion}
 
 MCP está convirtiendo a los asistentes de IA en compañeros de trabajo que de verdad consultan y actúan sobre tus sistemas. Si quieres que una IA responda con tus datos reales (inventario, precios, reportes), el siguiente paso es un servidor MCP propio. Aprende más sobre [agentes de IA para empresas](/blog/agentes-ia-empresas-colombia) o [escríbenos](/#contacto).
