@@ -22,6 +22,8 @@ const snippet = (q: string) => {
 };
 
 const AUTO_MS = 6500;
+/** Tarjeta con la que arranca la fila: la segunda, para que haya reseñas a ambos lados. */
+const START = 1;
 
 /**
  * Reseñas en un slider horizontal 2D:
@@ -62,7 +64,7 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
   const r = t.home.reviews;
   const items = useMemo(() => reviewItems(reviews, projectsFor(lang)), [reviews, lang]);
   const n = items.length;
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(() => Math.min(START, Math.max(0, items.length - 1)));
   const root = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const ring = useRef<HTMLDivElement>(null);
@@ -76,7 +78,7 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
     const cards: HTMLElement[] = Array.from(rg.querySelectorAll<HTMLElement>("[data-card]"));
     const reduced = prefersReducedMotion();
     // pos = índice "continuo" de la tarjeta centrada (0 = primera)
-    const state = { pos: 0, vel: 0, dragging: false, x0: 0, pos0: 0, lastX: 0, lastT: 0, moved: 0, idle: 0, visible: false, hover: false };
+    const state = { pos: Math.min(START, n - 1), vel: 0, dragging: false, x0: 0, pos0: 0, lastX: 0, lastT: 0, moved: 0, idle: 0, visible: false, hover: false };
     let last = -1;
     let snapTween: ReturnType<typeof gsap.to> | null = null;
 

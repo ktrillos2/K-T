@@ -70,7 +70,7 @@ export function LocaleSelector({
         className={cx(styles.trigger, compact && styles.compact)}
         aria-expanded={open}
         aria-haspopup="dialog"
-        aria-label={`${t.locale.title}: ${country.name[lang]}, ${country.currency}, ${lang.toUpperCase()}`}
+        aria-label={`${country.currency} ${lang.toUpperCase()} · ${t.locale.title}: ${country.name[lang]}`}
         onClick={() => setOpen((o) => !o)}
         data-stick
       >
