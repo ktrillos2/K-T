@@ -162,11 +162,3 @@
     padding-bottom: 22vh;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .cell,
-  .dot,
-  .console p {
-    animation-duration: 0s;
-    animation-delay: 0s;
-  }
-}

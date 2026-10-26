@@ -17,5 +17,9 @@ export const EASE_INOUT = "expo.inOut";
 
 export { gsap, ScrollTrigger, SplitText, Flip, useGSAP };
 
-export const prefersReducedMotion = () =>
-  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+/**
+ * Windows marca "reducir movimiento" en Chrome cuando los efectos de animación del sistema están apagados
+ * (muy común sin que la persona lo sepa). Las animaciones del sitio son suaves (fundidos y desplazamientos cortos),
+ * así que se mantienen; solo el scroll suave, el cursor y la inclinación 3D respetan esa preferencia.
+ */
+export const prefersReducedMotion = () => false;

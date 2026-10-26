@@ -162,9 +162,3 @@
     transform: scaleX(1);
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .icon :is(path, g) {
-    animation: none !important;
-  }
-}

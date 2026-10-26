@@ -220,8 +220,3 @@
     bottom: 10px;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .dot[data-auto="true"] i {
-    animation: none;
-  }
-}

@@ -231,8 +231,3 @@
     height: 40px;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .icon rect {
-    transition: none;
-  }
-}

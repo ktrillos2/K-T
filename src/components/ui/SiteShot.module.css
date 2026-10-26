@@ -49,9 +49,3 @@
   transform: scale(1.03);
   transition: transform 1.6s var(--ease-out);
 }
-@media (prefers-reduced-motion: reduce) {
-  .hoverable:hover .img,
-  .active .img {
-    transform: none;
-  }
-}

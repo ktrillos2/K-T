@@ -23,8 +23,6 @@ export function Marquee({ items, speed = 1, size = "lg", label }: Props) {
     const el = root.current;
     const tr = track.current;
     if (!el || !tr) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
     let x = 0;
     let dir = 1;
     let skew = 0;

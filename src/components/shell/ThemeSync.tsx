@@ -23,11 +23,10 @@ export function setTheme(next: Theme, origin?: { x: number; y: number }) {
     }
     store.set({ theme: next });
   };
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const doc = document as Document & {
     startViewTransition?: (cb: () => void) => { ready: Promise<void> };
   };
-  if (!doc.startViewTransition || reduced) {
+  if (!doc.startViewTransition) {
     apply();
     return;
   }
