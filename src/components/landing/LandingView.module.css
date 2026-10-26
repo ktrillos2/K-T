@@ -7,6 +7,31 @@
   display: grid;
   gap: 22px;
 }
+/* Escena animada a la derecha del título (escritorio); en pantallas angostas no se muestra. */
+.heroArt {
+  display: none;
+}
+@media (min-width: 1100px) {
+  .heroInner {
+    grid-template-columns: minmax(0, 1fr) clamp(320px, 30vw, 460px);
+    column-gap: clamp(32px, 4vw, 64px);
+  }
+  .heroInner > * {
+    grid-column: 1;
+  }
+  .heroInner > .heroArt {
+    display: block;
+    grid-column: 2;
+    grid-row: 1 / span 6;
+    align-self: center;
+  }
+  .heroInner > .facts {
+    grid-column: 1 / -1;
+  }
+  .heroInner .h1 {
+    font-size: clamp(38px, 4.4vw, 80px);
+  }
+}
 .crumbs {
   font-size: 12px;
   color: var(--muted);

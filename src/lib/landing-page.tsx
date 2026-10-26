@@ -81,6 +81,7 @@ export function LandingPage({ landing: l, lang }: { landing: Landing; lang: Lang
     <>
       <LandingView
         kind={l.kind}
+        slug={l.slug}
         color={l.color}
         plan={l.plan}
         copy={copy}

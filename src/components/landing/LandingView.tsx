@@ -19,11 +19,13 @@ import { Inline } from "@/components/blog/Inline";
 import { SiteShot } from "@/components/ui/SiteShot";
 import { ArticleBody } from "@/components/blog/ArticleBody";
 import { TitleArt } from "@/components/blog/TitleArt";
+import type { BlogCategory } from "@/content/blog/types";
 import article from "@/components/blog/Article.module.css";
 import styles from "./LandingView.module.css";
 
 export type LandingViewProps = {
   kind: LandingKind;
+  slug: string;
   color: "red" | "yellow" | "green";
   plan?: PlanId;
   copy: {
@@ -50,7 +52,7 @@ export type LandingViewProps = {
  * Respuesta directa arriba (para buscadores y motores de IA), funciones, precio en la
  * moneda del visitante, proceso, proyectos reales, preguntas frecuentes y enlaces internos.
  */
-export function LandingView({ kind, color, plan, copy, blocks, projects, posts, related, fallback, crumbs }: LandingViewProps) {
+export function LandingView({ kind, slug, color, plan, copy, blocks, projects, posts, related, fallback, crumbs }: LandingViewProps) {
   const { t, lang } = useI18n();
   const l = t.landing;
   const body = useRef<HTMLDivElement>(null);
@@ -66,6 +68,8 @@ export function LandingView({ kind, color, plan, copy, blocks, projects, posts, 
   const planData = plan ? PLANS.find((p) => p.id === plan) : undefined;
   const planCopy = plan ? t.pricing.plans[plan] : undefined;
   const message = l.waMessage(copy.h1);
+  const artCategory: BlogCategory =
+    kind === "guia" ? "precios" : plan === "tienda" || /woocommerce/.test(slug) ? "ecommerce" : plan === "software" || /mantenimiento/.test(slug) ? "software" : /seo/.test(slug) ? "seo-geo" : /ads/.test(slug) ? "estrategia" : "desarrollo-web";
 
   return (
     <article style={vars({ "--c": COLOR_VAR[color] })}>
@@ -83,6 +87,9 @@ export function LandingView({ kind, color, plan, copy, blocks, projects, posts, 
           <p className={styles.eyebrow}>
             <i aria-hidden="true" /> <Scramble trigger="enter" text={copy.eyebrow} />
           </p>
+          <Reveal mode="enter" delay={0.4} className={styles.heroArt}>
+            <TitleArt title={copy.h1} slug={slug} category={artCategory} color={color} size="lg" autoplay />
+          </Reveal>
           <SplitTitle as="h1" mode="enter" className={styles.h1} tabIndex={-1}>
             {copy.h1}
           </SplitTitle>
