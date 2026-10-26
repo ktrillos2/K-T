@@ -12,6 +12,8 @@ type Props = {
   color: "red" | "yellow" | "green";
   size?: "sm" | "md" | "lg";
   className?: string;
+  /** Anima mientras está en pantalla sin esperar hover (portada dentro del artículo). */
+  autoplay?: boolean;
 };
 
 type Variant = "versus" | "price" | "search" | "chat" | "terminal";
@@ -41,7 +43,7 @@ function analyze(title: string, category: BlogCategory) {
  * Portada animada a partir del título del artículo (sin imágenes): cada tipo de artículo
  * tiene su propia escena tipográfica y la animación solo corre cuando está en pantalla.
  */
-export function TitleArt({ title, slug, category, color, size = "md", className }: Props) {
+export function TitleArt({ title, slug, category, color, size = "md", className, autoplay = false }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const { variant, a, b } = analyze(title, category);
   const seed = parseInt(shortHash(slug), 16) || 1;
@@ -59,7 +61,7 @@ export function TitleArt({ title, slug, category, color, size = "md", className 
   }, []);
 
   return (
-    <div ref={ref} className={`${styles.art} ${styles[size]} ${className ?? ""}`} data-c={color} data-v={variant} data-on="false" aria-hidden="true">
+    <div ref={ref} className={`${styles.art} ${styles[size]} ${className ?? ""}`} data-c={color} data-v={variant} data-on="false" data-autoplay={autoplay || undefined} aria-hidden="true">
       <span className={styles.grid} />
 
       {variant === "versus" && (

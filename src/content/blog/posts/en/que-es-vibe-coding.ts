@@ -82,12 +82,12 @@ If you ticked almost everything, go ahead with vibe coding. If your page has to 
 
 We use AI to work faster, but every project goes through design, code review, speed testing and technical SEO. If you already have a prototype built with vibe coding, we can also review it and take it to production.
 
-Table: Related services and starting prices (COP).
+Table: Related services and starting prices in your currency.
 | You need | Service | From |
 |---|---|---|
-| A page for campaigns or launches | [Landing page](/servicios/landing-pages) | $450,000 |
-| Your company's full website | [Corporate website](/servicios/diseno-web-corporativo) | $2,500,000 |
-| A fast custom website ready for Google | [Custom web development](/servicios/desarrollo-web-a-medida) | $2,500,000 |
+| A page for campaigns or launches | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| Your company's full website | [Corporate website](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
+| A fast custom website ready for Google | [Custom web development](/servicios/desarrollo-web-a-medida) | {{cop:2500000}} |
 | Better rankings for an existing site | [Technical SEO](/servicios/seo-tecnico) | Based on scope |
 
 Compare plans on [pricing](/precios) or see [how much a website costs in Colombia](/precios/precio-pagina-web-colombia).

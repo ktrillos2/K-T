@@ -6,6 +6,7 @@ import lenta from "./posts/costo-oculto-pagina-web-lenta";
 import medida from "./posts/desarrollo-web-medida-vs-plantillas";
 import geo from "./posts/geo-vs-seo-diferencias-motores-ia";
 import { fromMarkdown } from "./markdown";
+import { formatCOP } from "@/lib/money";
 import md_cuanto_cuesta_una_pagina_web_latinoamerica from "./posts/es/cuanto-cuesta-una-pagina-web-latinoamerica";
 import en_cuanto_cuesta_una_pagina_web_latinoamerica from "./posts/en/cuanto-cuesta-una-pagina-web-latinoamerica";
 import md_nearshore_desarrollo_web_latinoamerica from "./posts/es/nearshore-desarrollo-web-latinoamerica";
@@ -189,7 +190,11 @@ export function getPost(slug: string, lang: Lang) {
 
 /** Texto plano del artículo (para conteo de palabras, llms-full.txt y búsqueda). */
 export function plainText(body: PostBody): string {
-  const strip = (s: string) => s.replace(/\*\*|\*|`/g, "").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
+  const strip = (s: string) =>
+    s
+      .replace(/\{\{cop:(\d+)\}\}/g, (_, n) => `${formatCOP(Number(n))} COP`)
+      .replace(/\*\*|\*|`/g, "")
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
   const parts: string[] = [...body.tldr];
   for (const b of body.blocks) {
     switch (b.type) {

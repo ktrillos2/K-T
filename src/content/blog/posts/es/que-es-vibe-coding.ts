@@ -82,12 +82,12 @@ Si marcaste casi todo, adelante con el vibe coding. Si tu página debe vender, p
 
 Usamos IA para trabajar más rápido, pero cada proyecto pasa por diseño, revisión de código, pruebas de velocidad y SEO técnico. Si ya tienes un prototipo hecho con vibe coding, también podemos revisarlo y llevarlo a producción.
 
-Tabla: Servicios relacionados y precios de partida (COP).
+Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Necesitas | Servicio | Desde |
 |---|---|---|
-| Una página para campañas o lanzamientos | [Landing page](/servicios/landing-pages) | $450.000 |
-| La web completa de tu empresa | [Sitio corporativo](/servicios/diseno-web-corporativo) | $2.500.000 |
-| Una web a medida, rápida y lista para Google | [Desarrollo web a medida](/servicios/desarrollo-web-a-medida) | $2.500.000 |
+| Una página para campañas o lanzamientos | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| La web completa de tu empresa | [Sitio corporativo](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
+| Una web a medida, rápida y lista para Google | [Desarrollo web a medida](/servicios/desarrollo-web-a-medida) | {{cop:2500000}} |
 | Mejorar el posicionamiento de un sitio existente | [SEO técnico](/servicios/seo-tecnico) | Según alcance |
 
 Compara planes en [precios](/precios) o revisa [cuánto cuesta una página web en Colombia](/precios/precio-pagina-web-colombia).

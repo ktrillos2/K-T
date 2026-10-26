@@ -99,12 +99,12 @@ If you ticked mostly the first three, start with n8n. If you ticked the last two
 
 We design automations and AI agents around your operation: with n8n when it's enough, or with custom software when the process is critical.
 
-Table: Related services and starting prices (COP).
+Table: Related services and starting prices in your currency.
 | You need | Service | From |
 |---|---|---|
-| Process automation, AI agents, integrations | [Custom software](/servicios/software-a-medida) | $4,500,000 |
-| A website that captures leads and sends them to your CRM | [Landing page](/servicios/landing-pages) | $450,000 |
-| Selling online with automatic payments and orders | [Online store](/servicios/tiendas-virtuales) | $1,300,000 |
+| Process automation, AI agents, integrations | [Custom software](/servicios/software-a-medida) | {{cop:4500000}} |
+| A website that captures leads and sends them to your CRM | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| Selling online with automatic payments and orders | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 
 See every plan on [pricing](/precios) or estimate your project with the [custom software pricing guide](/precios/precio-software-a-medida).
 

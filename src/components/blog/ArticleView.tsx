@@ -12,6 +12,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { TLink } from "@/components/transition/TLink";
 import { ArticleBody } from "./ArticleBody";
 import { TitleArt } from "./TitleArt";
+import { Inline } from "./Inline";
 import styles from "./Article.module.css";
 
 type Props = { post: PostCard & { body: PostBody }; words: number; plain: string };
@@ -178,7 +179,7 @@ export function ArticleView({ post, words, plain }: Props) {
             {post.fallback && <p className={styles.onlyEs}>{a.onlySpanish}</p>}
           </div>
           <Reveal mode="enter" delay={0.2} className={styles.cover}>
-            <TitleArt title={post.title} slug={post.slug} category={post.category} color={post.color} size="lg" />
+            <TitleArt title={post.title} slug={post.slug} category={post.category} color={post.color} size="lg" autoplay />
           </Reveal>
         </div>
       </header>
@@ -229,7 +230,9 @@ export function ArticleView({ post, words, plain }: Props) {
             <p className={styles.tldrTitle}>{a.tldr}</p>
             <ul>
               {post.body.tldr.map((x) => (
-                <li key={x}>{x}</li>
+                <li key={x}>
+                  <Inline text={x} />
+                </li>
               ))}
             </ul>
           </section>

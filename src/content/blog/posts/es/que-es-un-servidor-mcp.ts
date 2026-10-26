@@ -87,11 +87,11 @@ Si marcaste tres o más, un servidor MCP a medida puede ahorrarle horas a tu equ
 
 Creamos servidores MCP y agentes de IA conectados a tus sistemas (inventario, CRM, facturación, reportes), con permisos claros y registro de cada acción.
 
-Tabla: Servicios relacionados y precios de partida (COP).
+Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Necesitas | Servicio | Desde |
 |---|---|---|
-| Servidor MCP, agentes de IA o integraciones con tu ERP | [Software a medida](/servicios/software-a-medida) | $4.500.000 |
-| Una tienda que un agente de IA pueda consultar | [Tienda virtual](/servicios/tiendas-virtuales) | $1.300.000 |
+| Servidor MCP, agentes de IA o integraciones con tu ERP | [Software a medida](/servicios/software-a-medida) | {{cop:4500000}} |
+| Una tienda que un agente de IA pueda consultar | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | Soporte y actualizaciones de tus sistemas | [Mantenimiento web](/servicios/mantenimiento-web) | Según alcance |
 
 Revisa la [guía de precios de software a medida](/precios/precio-software-a-medida) o todos los [planes y precios](/precios).

@@ -90,12 +90,12 @@ Te lo explicamos en detalle en [cómo automatizar WhatsApp Business con IA](/blo
 
 Conectamos tu web, tu catálogo y tu WhatsApp para que cada visita termine en una conversación y cada conversación en un pago.
 
-Tabla: Servicios relacionados y precios de partida (COP).
+Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Necesitas | Servicio | Desde |
 |---|---|---|
-| Una página que lleve clientes directo a tu WhatsApp | [Landing page](/servicios/landing-pages) | $450.000 |
-| Catálogo, carrito, pagos PSE/Nequi y pedidos por WhatsApp | [Tienda virtual](/servicios/tiendas-virtuales) | $1.300.000 |
-| Agente de IA en WhatsApp conectado a inventario y facturación | [Software a medida](/servicios/software-a-medida) | $4.500.000 |
+| Una página que lleve clientes directo a tu WhatsApp | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| Catálogo, carrito, pagos PSE/Nequi y pedidos por WhatsApp | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| Agente de IA en WhatsApp conectado a inventario y facturación | [Software a medida](/servicios/software-a-medida) | {{cop:4500000}} |
 
 Compara en [precios](/precios) o revisa [cuánto cuesta una tienda virtual en Colombia](/precios/precio-tienda-virtual-colombia).
 

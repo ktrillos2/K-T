@@ -60,13 +60,13 @@ Compara el costo del proyecto completo, no la tarifa por hora. Pide un alcance c
 
 K&T Code es un estudio de desarrollo web con sede en Colombia que trabaja con empresas de Estados Unidos y Latinoamérica. Diseñamos cada proyecto desde cero (sin plantillas), lo construimos con Next.js, lo optimizamos para Google y los buscadores con IA y te entregamos el código a tu nombre.
 
-Tabla: Servicios y precios de partida (COP; en /precios los ves en dólares).
+Tabla: Servicios y precios de partida en tu moneda.
 | Necesitas | Servicio | Desde |
 |---|---|---|
-| Una landing que convierta | [Landing page](/servicios/landing-pages) | $450.000 |
-| Una tienda virtual | [Tienda virtual](/servicios/tiendas-virtuales) | $1.300.000 |
-| Un sitio a medida y rápido | [Desarrollo web a medida](/servicios/desarrollo-web-a-medida) | $2.500.000 |
-| Una aplicación web o plataforma interna | [Software a medida](/servicios/software-a-medida) | $4.500.000 |
+| Una landing que convierta | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| Una tienda virtual | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| Un sitio a medida y rápido | [Desarrollo web a medida](/servicios/desarrollo-web-a-medida) | {{cop:2500000}} |
+| Una aplicación web o plataforma interna | [Software a medida](/servicios/software-a-medida) | {{cop:4500000}} |
 
 En [precios](/precios) elige Estados Unidos para ver todos los planes en dólares, o mira [nuestros proyectos](/proyectos) en línea.
 

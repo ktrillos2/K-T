@@ -99,12 +99,12 @@ Si marcaste más de las tres primeras, empieza con n8n. Si marcaste las dos últ
 
 Diseñamos automatizaciones y agentes de IA a la medida de tu operación: con n8n cuando basta, o con software propio cuando el proceso es crítico.
 
-Tabla: Servicios relacionados y precios de partida (COP).
+Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Necesitas | Servicio | Desde |
 |---|---|---|
-| Automatizar procesos, agentes de IA, integraciones | [Software a medida](/servicios/software-a-medida) | $4.500.000 |
-| Una web que capture leads y los envíe a tu CRM | [Landing page](/servicios/landing-pages) | $450.000 |
-| Vender en línea con pagos y pedidos automáticos | [Tienda virtual](/servicios/tiendas-virtuales) | $1.300.000 |
+| Automatizar procesos, agentes de IA, integraciones | [Software a medida](/servicios/software-a-medida) | {{cop:4500000}} |
+| Una web que capture leads y los envíe a tu CRM | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| Vender en línea con pagos y pedidos automáticos | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 
 Mira todos los planes en [precios](/precios) o calcula tu proyecto con la [guía de precios de software a medida](/precios/precio-software-a-medida).
 

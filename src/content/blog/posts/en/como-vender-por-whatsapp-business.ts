@@ -90,12 +90,12 @@ We explain it in detail in [how to automate WhatsApp Business with AI](/blog/aut
 
 We connect your website, catalog and WhatsApp so every visit ends in a conversation and every conversation in a payment.
 
-Table: Related services and starting prices (COP).
+Table: Related services and starting prices in your currency.
 | You need | Service | From |
 |---|---|---|
-| A page that sends customers straight to your WhatsApp | [Landing page](/servicios/landing-pages) | $450,000 |
-| Catalog, cart, PSE/Nequi payments and WhatsApp orders | [Online store](/servicios/tiendas-virtuales) | $1,300,000 |
-| A WhatsApp AI agent connected to inventory and invoicing | [Custom software](/servicios/software-a-medida) | $4,500,000 |
+| A page that sends customers straight to your WhatsApp | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| Catalog, cart, PSE/Nequi payments and WhatsApp orders | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| A WhatsApp AI agent connected to inventory and invoicing | [Custom software](/servicios/software-a-medida) | {{cop:4500000}} |
 
 Compare on [pricing](/precios) or see [how much an online store costs in Colombia](/precios/precio-tienda-virtual-colombia).
 

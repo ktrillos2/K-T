@@ -60,13 +60,13 @@ Compare the cost of the whole project, not the hourly rate. Ask for a fixed scop
 
 K&T Code is a web development studio based in Colombia that works with companies in the United States and Latin America. We design every project from scratch (no templates), build it with Next.js, optimize it for Google and AI search, and hand over the code in your name.
 
-Table: Services and starting prices (COP; see them in USD on /precios).
+Table: Services and starting prices in your currency.
 | You need | Service | From |
 |---|---|---|
-| A high-converting landing page | [Landing page](/servicios/landing-pages) | $450,000 |
-| An online store | [Online store](/servicios/tiendas-virtuales) | $1,300,000 |
-| A fast custom website | [Custom web development](/servicios/desarrollo-web-a-medida) | $2,500,000 |
-| A web app or internal platform | [Custom software](/servicios/software-a-medida) | $4,500,000 |
+| A high-converting landing page | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| An online store | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| A fast custom website | [Custom web development](/servicios/desarrollo-web-a-medida) | {{cop:2500000}} |
+| A web app or internal platform | [Custom software](/servicios/software-a-medida) | {{cop:4500000}} |
 
 On [pricing](/precios), choose United States to see every plan in US dollars, or browse [our projects](/proyectos) to see live work.
 

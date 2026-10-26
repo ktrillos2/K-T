@@ -87,11 +87,11 @@ If you ticked three or more, a custom MCP server can save your team hours every 
 
 We build MCP servers and AI agents connected to your systems (inventory, CRM, invoicing, reports), with clear permissions and a log of every action.
 
-Table: Related services and starting prices (COP).
+Table: Related services and starting prices in your currency.
 | You need | Service | From |
 |---|---|---|
-| MCP server, AI agents or ERP integrations | [Custom software](/servicios/software-a-medida) | $4,500,000 |
-| A store an AI agent can query | [Online store](/servicios/tiendas-virtuales) | $1,300,000 |
+| MCP server, AI agents or ERP integrations | [Custom software](/servicios/software-a-medida) | {{cop:4500000}} |
+| A store an AI agent can query | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | Support and updates for your systems | [Website maintenance](/servicios/mantenimiento-web) | Based on scope |
 
 See the [custom software pricing guide](/precios/precio-software-a-medida) or all [plans and prices](/precios).

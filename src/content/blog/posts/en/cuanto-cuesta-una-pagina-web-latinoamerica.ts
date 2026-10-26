@@ -4,7 +4,7 @@ const post: MdPost = {
   tldr: [
     "The price of a website in Mexico, Colombia, Peru, Argentina or Ecuador depends less on the country and more on four things: the type of site, the design (template or custom), the features and who builds it.",
     "There's a one-time payment (design and development) and recurring costs: a domain every year, hosting every month or year and optional maintenance.",
-    "At K&T Code a landing page starts at $450,000 COP and an online store at $1,300,000 COP; at kytcode.lat/precios you see those prices in your country's currency.",
+    "At K&T Code a landing page starts at {{cop:450000}} and an online store at {{cop:1300000}}, in the currency of the country you choose.",
     "We work remotely with all of Latin America and the United States: the country doesn't change the quality, only how you pay.",
   ],
   md: `
@@ -66,13 +66,13 @@ That the code and domain are in your name, how fast it loads on a phone, what th
 
 We're a web development studio in Colombia working remotely with companies in Mexico, Peru, Ecuador, Argentina, the rest of Latin America and the United States. We meet over video calls, hand over the code in your name and integrate your country's payment methods.
 
-Table: Services and starting prices (COP; see them in your currency on /precios).
+Table: Services and starting prices in your currency.
 | You need | Service | From |
 |---|---|---|
-| A page for campaigns and getting customers | [Landing page](/servicios/landing-pages) | $450,000 |
-| Selling online with local payments | [Online store](/servicios/tiendas-virtuales) | $1,300,000 |
-| Your company's full website | [Corporate website](/servicios/diseno-web-corporativo) | $2,500,000 |
-| Your own platform or system | [Custom software](/servicios/software-a-medida) | $4,500,000 |
+| A page for campaigns and getting customers | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| Selling online with local payments | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| Your company's full website | [Corporate website](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
+| Your own platform or system | [Custom software](/servicios/software-a-medida) | {{cop:4500000}} |
 
 On [pricing](/precios) you pick your country and see prices in your currency, and the quote builder lets you put your project together. See [our projects](/proyectos) in Mexico, Peru and Colombia too.
 

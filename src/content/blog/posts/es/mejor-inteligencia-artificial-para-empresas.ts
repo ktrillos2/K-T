@@ -82,12 +82,12 @@ Las versiones gratuitas sirven para probar. Para trabajar con información de la
 
 Te ayudamos a elegir el proceso, construir la IA conectada a tus datos y medir el retorno. Sin humo: empezamos por lo que más horas te consume.
 
-Tabla: Servicios relacionados y precios de partida (COP).
+Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Necesitas | Servicio | Desde |
 |---|---|---|
-| Agentes de IA, automatizaciones y paneles con tus datos | [Software a medida](/servicios/software-a-medida) | $4.500.000 |
-| Una tienda que venda 24/7 con pagos y WhatsApp | [Tienda virtual](/servicios/tiendas-virtuales) | $1.300.000 |
-| Una web corporativa preparada para Google y la IA | [Sitio corporativo](/servicios/diseno-web-corporativo) | $2.500.000 |
+| Agentes de IA, automatizaciones y paneles con tus datos | [Software a medida](/servicios/software-a-medida) | {{cop:4500000}} |
+| Una tienda que venda 24/7 con pagos y WhatsApp | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| Una web corporativa preparada para Google y la IA | [Sitio corporativo](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
 
 Mira todos los [planes y precios](/precios) o la [guía de precios de software a medida](/precios/precio-software-a-medida).
 

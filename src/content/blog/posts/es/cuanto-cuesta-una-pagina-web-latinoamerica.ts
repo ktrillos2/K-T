@@ -4,7 +4,7 @@ const post: MdPost = {
   tldr: [
     "El precio de una página web en México, Colombia, Perú, Argentina o Ecuador depende menos del país y más de cuatro cosas: el tipo de sitio, el diseño (plantilla o a medida), las funciones y quién la hace.",
     "Hay un pago único (diseño y desarrollo) y costos que se repiten: dominio cada año, hosting cada mes o año y mantenimiento opcional.",
-    "En K&T Code una landing page arranca en $450.000 COP y una tienda virtual en $1.300.000 COP; en kytcode.lat/precios ves esos valores en la moneda de tu país.",
+    "En K&T Code una landing page arranca en {{cop:450000}} y una tienda virtual en {{cop:1300000}}, en la moneda del país que elijas.",
     "Trabajamos en remoto con toda Latinoamérica y Estados Unidos: el país no cambia la calidad, solo la forma de pago.",
   ],
   md: `
@@ -66,13 +66,13 @@ Que el código y el dominio queden a tu nombre, cuánto tarda en cargar en el ce
 
 Somos un estudio de desarrollo web en Colombia que trabaja en remoto con empresas de México, Perú, Ecuador, Argentina, el resto de Latinoamérica y Estados Unidos. Hacemos reuniones por videollamada, entregamos el código a tu nombre e integramos los pagos de tu país.
 
-Tabla: Servicios y precios de partida (COP; en /precios los ves en tu moneda).
+Tabla: Servicios y precios de partida en tu moneda.
 | Necesitas | Servicio | Desde |
 |---|---|---|
-| Una página para campañas y captar clientes | [Landing page](/servicios/landing-pages) | $450.000 |
-| Vender en línea con pagos locales | [Tienda virtual](/servicios/tiendas-virtuales) | $1.300.000 |
-| La web completa de tu empresa | [Sitio corporativo](/servicios/diseno-web-corporativo) | $2.500.000 |
-| Una plataforma o sistema propio | [Software a medida](/servicios/software-a-medida) | $4.500.000 |
+| Una página para campañas y captar clientes | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| Vender en línea con pagos locales | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| La web completa de tu empresa | [Sitio corporativo](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
+| Una plataforma o sistema propio | [Software a medida](/servicios/software-a-medida) | {{cop:4500000}} |
 
 En [precios](/precios) eliges tu país y ves los valores en tu moneda, y con el cotizador armas tu proyecto. Mira también [nuestros proyectos](/proyectos) en México, Perú y Colombia.
 

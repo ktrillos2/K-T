@@ -488,3 +488,12 @@
     opacity: 1;
   }
 }
+
+/* Portada dentro de un artículo: anima sola mientras está en pantalla (en las cards se mantiene hover / viewport).
+   Más específica que las reglas de pausa de arriba para ganarles en cualquier pantalla. */
+@media (prefers-reduced-motion: no-preference) {
+  .art.art[data-autoplay][data-on="true"],
+  .art.art[data-autoplay][data-on="true"] * {
+    animation-play-state: running !important;
+  }
+}

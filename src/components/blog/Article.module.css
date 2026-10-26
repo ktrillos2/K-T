@@ -105,10 +105,6 @@
 .cover {
   min-width: 0;
 }
-.cover [data-on="true"],
-.cover [data-on="true"] * {
-  animation-play-state: running !important;
-}
 
 .layout {
   display: grid;

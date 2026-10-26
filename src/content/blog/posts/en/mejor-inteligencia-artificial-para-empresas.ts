@@ -82,12 +82,12 @@ Free versions are fine for testing. For working with company information, use bu
 
 We help you choose the process, build AI connected to your data and measure the return. No hype: we start with what takes up most of your hours.
 
-Table: Related services and starting prices (COP).
+Table: Related services and starting prices in your currency.
 | You need | Service | From |
 |---|---|---|
-| AI agents, automations and dashboards with your data | [Custom software](/servicios/software-a-medida) | $4,500,000 |
-| A store that sells 24/7 with payments and WhatsApp | [Online store](/servicios/tiendas-virtuales) | $1,300,000 |
-| A corporate website ready for Google and AI | [Corporate website](/servicios/diseno-web-corporativo) | $2,500,000 |
+| AI agents, automations and dashboards with your data | [Custom software](/servicios/software-a-medida) | {{cop:4500000}} |
+| A store that sells 24/7 with payments and WhatsApp | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| A corporate website ready for Google and AI | [Corporate website](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
 
 See all [plans and prices](/precios) or the [custom software pricing guide](/precios/precio-software-a-medida).
 
