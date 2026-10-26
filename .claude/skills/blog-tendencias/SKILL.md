@@ -42,7 +42,7 @@ Criterios, en este orden:
 4. **Se puede escribir con información verificable**. Nada de cifras inventadas: si no hay fuente oficial, dilo de forma general.
 5. Relación directa con algún servicio de K&T Code.
 
-**Datos propios con GSC Wizard (si está disponible):** revisa las consultas por las que kytcode.lat ya recibe impresiones pero no tiene un artículo dedicado: son los mejores temas. Evita temas que compitan con una página que ya posiciona (canibalización).
+**Datos propios con el conector GSC (si está disponible, `mcp__GSC__*`, propiedad `sc-domain:kytcode.lat`):** con `query_top_queries` (límite 200) revisa las consultas por las que kytcode.lat ya recibe impresiones pero no tiene un artículo dedicado: son los mejores temas. Evita temas que compitan con una página que ya posiciona (canibalización).
 
 **Volumen real con Ubersuggest (si está conectado):** valida los 2 temas finales con `keyword_overview` (volumen, dificultad). El plan gratis da **3 reportes al día**: usa máximo 2 (un llamado por tema), con `locId` de `location_suggest` (Colombia 2170, EE. UU. 2840) y `language` "es" o "en". Prefiere dificultad SEO menor a 40. Si no está o no hay cupo, sigue solo con Keyword Tool.
 

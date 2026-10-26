@@ -15,8 +15,10 @@ Objetivo: que los artículos viejos sigan posicionando y **lleven a contratar**.
   2. Los de fecha más antigua.
   3. Los de temas comerciales (precios, comparativas, "cómo elegir").
 - No toques los artículos que se actualizaron en los últimos 60 días.
-- **Si GSC Wizard está disponible** (herramientas `mcp__gsc-wizard__*` o la skill `seo-gsc-wizard:content-decay`), úsalo primero, propiedad `https://www.kytcode.lat/` (o `sc-domain:kytcode.lat`):
-  - Prioriza los artículos que **pierden clics** (content decay) y los que están en **posición 8–20** con muchas impresiones (quick wins).
+- **Si el conector GSC está disponible** (herramientas `mcp__GSC__*`; búscalas con ToolSearch "GSC"), úsalo primero. Propiedad: `sc-domain:kytcode.lat`.
+  - `find_decaying_content`: artículos que **pierden clics**.
+  - `score_opportunities` o `query_top_pages`: artículos en **posición 8–20** con muchas impresiones y CTR bajo (quick wins). Para esos, mejora el título y la descripción (`meta.ts`) para subir el CTR.
+  - `get_page_performance` de cada elegido: sus consultas reales.
   - Para cada uno, mira sus consultas reales: usa esas frases en títulos, subtítulos y preguntas frecuentes.
   - Si no hay datos o falla, sigue con los criterios de abajo.
 
