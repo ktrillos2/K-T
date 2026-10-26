@@ -5,7 +5,7 @@ description: Investiga tendencias de búsqueda con el conector Keyword Tool y pu
 
 # Blog por tendencias (K&T Code)
 
-Objetivo: atraer clientes de desarrollo web de forma orgánica. Cada corrida publica **2 artículos nuevos**, reales y útiles, en español e inglés, que terminen llevando al lector a los servicios y precios de K&T Code.
+Objetivo: atraer clientes de desarrollo web de forma orgánica en **Latinoamérica y Estados Unidos** para **www.kytcode.lat**. Cada corrida publica **2 artículos nuevos**, reales y útiles, en español e inglés, que terminen llevando al lector a los servicios y precios de K&T Code.
 
 ## 1. Ver qué ya existe (no repetir temas)
 
@@ -16,7 +16,10 @@ Objetivo: atraer clientes de desarrollo web de forma orgánica. Cada corrida pub
 
 Herramienta: `keywordtool-suggestions-guest` (conector "Keyword Tool: Free SEO Keyword Research"). Si no aparece, búscala con ToolSearch (`keywordtool`).
 
-- Siempre `country: "Colombia"`, `language: "Spanish"`, `limit: 30`.
+- `limit: 30`. **Rota mercados** en cada corrida (el blog ya cubre mucho Colombia):
+  - `country: "Mexico"` / `"Peru"` / `"Argentina"` / `"Chile"` / `"Ecuador"` / `"Colombia"`, con `language: "Spanish"`.
+  - `country: "United States"` con `language: "English"` (empresas que contratan en Latinoamérica: "nearshore", "hire web developer", "web design for small business") y con `language: "Spanish"` (negocios hispanos en EE. UU.).
+  - Al menos **1 de los 2 artículos** debe apuntar a un mercado fuera de Colombia (México, otro país de la región o EE. UU.).
 - Usa `type: "suggestions"` y también `type: "questions"` (las preguntas son oro para artículos).
 - Cuota gratis: 60 consultas/hora y 120/día. Usa **máximo 20** por corrida. Revisa antes con `keywordtool-quota-guest`.
 - La versión gratis no da volúmenes: mide la demanda por cuántas sugerencias devuelve una semilla (`total_count`) y por cuántas variantes de una misma intención aparecen.
@@ -39,7 +42,9 @@ Criterios, en este orden:
 4. **Se puede escribir con información verificable**. Nada de cifras inventadas: si no hay fuente oficial, dilo de forma general.
 5. Relación directa con algún servicio de K&T Code.
 
-Prefiere un tema comercial + uno de tendencia. Anota las palabras clave que respaldan cada tema: van en el resumen final.
+Prefiere un tema comercial + uno de tendencia. Anota las palabras clave que respaldan cada tema (con país e idioma): van en el resumen final.
+
+Para artículos de otros países: menciona sus medios de pago locales (México: OXXO, SPEI; Perú: Yape; Colombia: PSE, Nequi), recuerda que en `/precios` se eligen país y moneda (USD, MXN, PEN, ARS, CLP…; ver `src/lib/money.ts`) y que K&T Code trabaja en remoto con toda la región y EE. UU. No inventes precios de mercado de otros países.
 
 ## 4. Escribir cada artículo (es + en)
 

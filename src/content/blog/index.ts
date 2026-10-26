@@ -6,6 +6,10 @@ import lenta from "./posts/costo-oculto-pagina-web-lenta";
 import medida from "./posts/desarrollo-web-medida-vs-plantillas";
 import geo from "./posts/geo-vs-seo-diferencias-motores-ia";
 import { fromMarkdown } from "./markdown";
+import md_cuanto_cuesta_una_pagina_web_latinoamerica from "./posts/es/cuanto-cuesta-una-pagina-web-latinoamerica";
+import en_cuanto_cuesta_una_pagina_web_latinoamerica from "./posts/en/cuanto-cuesta-una-pagina-web-latinoamerica";
+import md_nearshore_desarrollo_web_latinoamerica from "./posts/es/nearshore-desarrollo-web-latinoamerica";
+import en_nearshore_desarrollo_web_latinoamerica from "./posts/en/nearshore-desarrollo-web-latinoamerica";
 import md_que_es_n8n_para_que_sirve from "./posts/es/que-es-n8n-para-que-sirve";
 import md_que_es_vibe_coding from "./posts/es/que-es-vibe-coding";
 import md_que_es_un_servidor_mcp from "./posts/es/que-es-un-servidor-mcp";
@@ -116,7 +120,9 @@ const BODIES: Record<string, Partial<Record<Lang, PostBody>> & { es: PostBody }>
   "costo-oculto-pagina-web-lenta": lenta,
   "desarrollo-web-medida-vs-plantillas": medida,
   "geo-vs-seo-diferencias-motores-ia": geo,
-  // Tendencias de búsqueda de octubre de 2026 (es + en).
+  // Tendencias de búsqueda (es + en), generadas con la skill blog-tendencias.
+  "cuanto-cuesta-una-pagina-web-latinoamerica": { es: fromMarkdown(md_cuanto_cuesta_una_pagina_web_latinoamerica), en: fromMarkdown(en_cuanto_cuesta_una_pagina_web_latinoamerica) },
+  "nearshore-desarrollo-web-latinoamerica": { es: fromMarkdown(md_nearshore_desarrollo_web_latinoamerica), en: fromMarkdown(en_nearshore_desarrollo_web_latinoamerica) },
   "que-es-n8n-para-que-sirve": { es: fromMarkdown(md_que_es_n8n_para_que_sirve), en: fromMarkdown(en_que_es_n8n_para_que_sirve) },
   "que-es-vibe-coding": { es: fromMarkdown(md_que_es_vibe_coding), en: fromMarkdown(en_que_es_vibe_coding) },
   "que-es-un-servidor-mcp": { es: fromMarkdown(md_que_es_un_servidor_mcp), en: fromMarkdown(en_que_es_un_servidor_mcp) },
