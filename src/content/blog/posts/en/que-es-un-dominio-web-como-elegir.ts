@@ -18,7 +18,7 @@ When someone types \`yourcompany.com\`, the domain name system (DNS) translates 
 
 - **Short and easy to pronounce:** you should be able to say it over the phone without spelling it out.
 - **No numbers or hyphens:** they cause confusion and typing errors.
-- **Brand before keywords:** "kytcode.com" is easier to remember than "cheapwebsitescolombia.com".
+- **Brand before keywords:** "yourbrand.com" is easier to remember than "cheapwebsitescolombia.com".
 - **Protect your brand:** if you buy yourcompany.com, consider yourcompany.co too.
 - **Use an ICANN-accredited registrar** with transparent renewal prices.
 

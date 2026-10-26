@@ -50,7 +50,7 @@ const es = {
   transition: { compiling: "Compilando", compiled: (name: string, ms: number) => `✓ ${name} · listo en ${ms} ms` },
   loader: {
     aria: "Cargando K&T Code",
-    title: "kytcode — zsh",
+    title: "k&t-code — zsh",
     lines: [
       "  ▲ K&T Code · desarrollo web a la medida",
       "  ✓ Diseño único",

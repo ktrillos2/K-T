@@ -50,7 +50,7 @@ const en: Dict = {
   transition: { compiling: "Compiling", compiled: (name: string, ms: number) => `✓ ${name} · ready in ${ms} ms` },
   loader: {
     aria: "Loading K&T Code",
-    title: "kytcode — zsh",
+    title: "k&t-code — zsh",
     lines: [
       "  ▲ K&T Code · custom web development",
       "  ✓ Unique design",

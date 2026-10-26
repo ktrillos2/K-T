@@ -224,7 +224,7 @@ export function BlogIndex() {
                   <i />
                   <i />
                 </span>
-                <span>~/kytcode/blog</span>
+                <span>~/k&t-code/blog</span>
               </div>
               <p className={styles.termCmd}>
                 <span>$</span> ls -la blog/{cat !== "all" ? `${cat}/` : ""}

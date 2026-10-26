@@ -21,6 +21,7 @@ const LEGACY: [string, string][] = [
   ["/privacy-policy", "/politica-de-privacidad"],
   ["/politica-privacidad", "/politica-de-privacidad"],
   ["/redes", "/#contacto"],
+  ["/blog/que-es-kyt", "/blog/que-es-k-t-code"],
   ["/services/ecommerce-development", "/servicios/tiendas-virtuales"],
   ["/services/:slug", "/servicios/:slug"],
   ["/nearshore-web-development-colombia", "/blog/nearshore-desarrollo-web-latinoamerica"],

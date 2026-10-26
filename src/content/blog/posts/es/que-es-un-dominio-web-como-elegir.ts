@@ -18,7 +18,7 @@ Cuando alguien escribe \`tuempresa.com\`, el sistema de nombres de dominio (DNS)
 
 - **Corto y fácil de pronunciar:** que puedas dictarlo por teléfono sin deletrear.
 - **Sin números ni guiones:** generan confusión y errores al escribirlo.
-- **Marca antes que palabras clave:** "kytcode.com" se recuerda mejor que "paginaswebbaratascolombia.com".
+- **Marca antes que palabras clave:** "tumarca.com" se recuerda mejor que "paginaswebbaratascolombia.com".
 - **Protege tu marca:** si compras tuempresa.com, considera también tuempresa.co.
 - **Usa un registrador acreditado por ICANN** con precios de renovación transparentes.
 

@@ -57,7 +57,7 @@ import md_nextjs_vs_wordpress from "./posts/es/nextjs-vs-wordpress";
 import md_pagina_web_vs_tienda_virtual from "./posts/es/pagina-web-vs-tienda-virtual";
 import md_por_que_mi_pagina_web_no_aparece_en_google from "./posts/es/por-que-mi-pagina-web-no-aparece-en-google";
 import md_que_es_el_seo_y_como_funciona_guia from "./posts/es/que-es-el-seo-y-como-funciona-guia";
-import md_que_es_kyt from "./posts/es/que-es-kyt";
+import md_que_es_k_t_code from "./posts/es/que-es-k-t-code";
 import md_que_es_un_dominio_web_como_elegir from "./posts/es/que-es-un-dominio-web-como-elegir";
 import md_que_es_un_ecommerce_headless_ventajas from "./posts/es/que-es-un-ecommerce-headless-ventajas";
 import md_que_es_un_hosting_web_y_como_funciona from "./posts/es/que-es-un-hosting-web-y-como-funciona";
@@ -104,7 +104,7 @@ import en_nextjs_vs_wordpress from "./posts/en/nextjs-vs-wordpress";
 import en_pagina_web_vs_tienda_virtual from "./posts/en/pagina-web-vs-tienda-virtual";
 import en_por_que_mi_pagina_web_no_aparece_en_google from "./posts/en/por-que-mi-pagina-web-no-aparece-en-google";
 import en_que_es_el_seo_y_como_funciona_guia from "./posts/en/que-es-el-seo-y-como-funciona-guia";
-import en_que_es_kyt from "./posts/en/que-es-kyt";
+import en_que_es_k_t_code from "./posts/en/que-es-k-t-code";
 import en_que_es_un_dominio_web_como_elegir from "./posts/en/que-es-un-dominio-web-como-elegir";
 import en_que_es_un_ecommerce_headless_ventajas from "./posts/en/que-es-un-ecommerce-headless-ventajas";
 import en_que_es_un_hosting_web_y_como_funciona from "./posts/en/que-es-un-hosting-web-y-como-funciona";
@@ -168,7 +168,7 @@ const BODIES: Record<string, Partial<Record<Lang, PostBody>> & { es: PostBody }>
   "pagina-web-vs-tienda-virtual": { es: fromMarkdown(md_pagina_web_vs_tienda_virtual), en: fromMarkdown(en_pagina_web_vs_tienda_virtual) },
   "por-que-mi-pagina-web-no-aparece-en-google": { es: fromMarkdown(md_por_que_mi_pagina_web_no_aparece_en_google), en: fromMarkdown(en_por_que_mi_pagina_web_no_aparece_en_google) },
   "que-es-el-seo-y-como-funciona-guia": { es: fromMarkdown(md_que_es_el_seo_y_como_funciona_guia), en: fromMarkdown(en_que_es_el_seo_y_como_funciona_guia) },
-  "que-es-kyt": { es: fromMarkdown(md_que_es_kyt), en: fromMarkdown(en_que_es_kyt) },
+  "que-es-k-t-code": { es: fromMarkdown(md_que_es_k_t_code), en: fromMarkdown(en_que_es_k_t_code) },
   "que-es-un-dominio-web-como-elegir": { es: fromMarkdown(md_que_es_un_dominio_web_como_elegir), en: fromMarkdown(en_que_es_un_dominio_web_como_elegir) },
   "que-es-un-ecommerce-headless-ventajas": { es: fromMarkdown(md_que_es_un_ecommerce_headless_ventajas), en: fromMarkdown(en_que_es_un_ecommerce_headless_ventajas) },
   "que-es-un-hosting-web-y-como-funciona": { es: fromMarkdown(md_que_es_un_hosting_web_y_como_funciona), en: fromMarkdown(en_que_es_un_hosting_web_y_como_funciona) },

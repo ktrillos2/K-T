@@ -122,7 +122,7 @@ export function QuoteBuilder() {
             </fieldset>
           </form>
 
-          <MacWindow title="~/kytcode — zsh" className={styles.term} bodyClassName={styles.termBody}>
+          <MacWindow title="~/k&t-code — zsh" className={styles.term} bodyClassName={styles.termBody}>
             <p ref={cmd} className={styles.cmd}>
               <span className={styles.ps}>$</span> {command}
             </p>
