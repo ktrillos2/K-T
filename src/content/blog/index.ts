@@ -7,6 +7,10 @@ import medida from "./posts/desarrollo-web-medida-vs-plantillas";
 import geo from "./posts/geo-vs-seo-diferencias-motores-ia";
 import { fromMarkdown } from "./markdown";
 import { formatCOP } from "@/lib/money";
+import md_cuanto_cuesta_una_tienda_online_argentina from "./posts/es/cuanto-cuesta-una-tienda-online-argentina";
+import en_cuanto_cuesta_una_tienda_online_argentina from "./posts/en/cuanto-cuesta-una-tienda-online-argentina";
+import md_pagina_web_pequeno_negocio_estados_unidos from "./posts/es/pagina-web-pequeno-negocio-estados-unidos";
+import en_pagina_web_pequeno_negocio_estados_unidos from "./posts/en/pagina-web-pequeno-negocio-estados-unidos";
 import md_cuanto_cuesta_una_pagina_web_latinoamerica from "./posts/es/cuanto-cuesta-una-pagina-web-latinoamerica";
 import en_cuanto_cuesta_una_pagina_web_latinoamerica from "./posts/en/cuanto-cuesta-una-pagina-web-latinoamerica";
 import md_nearshore_desarrollo_web_latinoamerica from "./posts/es/nearshore-desarrollo-web-latinoamerica";
@@ -122,6 +126,8 @@ const BODIES: Record<string, Partial<Record<Lang, PostBody>> & { es: PostBody }>
   "desarrollo-web-medida-vs-plantillas": medida,
   "geo-vs-seo-diferencias-motores-ia": geo,
   // Tendencias de búsqueda (es + en), generadas con la skill blog-tendencias.
+  "cuanto-cuesta-una-tienda-online-argentina": { es: fromMarkdown(md_cuanto_cuesta_una_tienda_online_argentina), en: fromMarkdown(en_cuanto_cuesta_una_tienda_online_argentina) },
+  "pagina-web-pequeno-negocio-estados-unidos": { es: fromMarkdown(md_pagina_web_pequeno_negocio_estados_unidos), en: fromMarkdown(en_pagina_web_pequeno_negocio_estados_unidos) },
   "cuanto-cuesta-una-pagina-web-latinoamerica": { es: fromMarkdown(md_cuanto_cuesta_una_pagina_web_latinoamerica), en: fromMarkdown(en_cuanto_cuesta_una_pagina_web_latinoamerica) },
   "nearshore-desarrollo-web-latinoamerica": { es: fromMarkdown(md_nearshore_desarrollo_web_latinoamerica), en: fromMarkdown(en_nearshore_desarrollo_web_latinoamerica) },
   "que-es-n8n-para-que-sirve": { es: fromMarkdown(md_que_es_n8n_para_que_sirve), en: fromMarkdown(en_que_es_n8n_para_que_sirve) },
