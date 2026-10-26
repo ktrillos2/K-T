@@ -258,8 +258,8 @@ const es = {
   ads: {
     tag: "Servicio mensual",
     name: "Administración de Ads",
-    what: "Qué es: manejamos tu publicidad en Facebook, Instagram y Google cada mes, con estrategia según tu objetivo, remarketing y reportes claros.",
-    chips: ["Meta Ads", "Google Ads", "Remarketing", "Reportes mensuales"],
+    what: "Qué es: manejamos tu publicidad en Facebook, Instagram, TikTok y Google cada mes, con estrategia según tu objetivo, remarketing y reportes claros.",
+    chips: ["Meta Ads", "TikTok Ads", "Google Ads", "Remarketing", "Reportes mensuales"],
     from: "Desde",
     per: "al mes",
     note: "No incluye la inversión en publicidad",

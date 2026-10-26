@@ -87,7 +87,7 @@ Table: Services and starting prices in your currency.
 | A multi-page business website | [Corporate web design](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
 | Selling products online | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | Ranking on Google | [Technical SEO](/servicios/seo-tecnico) | Depends on scope |
-| Bring customers with Facebook, Instagram and Google ads | [Ads management](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mo |
+| Bring customers with Facebook, Instagram, TikTok and Google ads | [Ads management](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mo |
 
 On [pricing](/precios), choose United States to see every plan in US dollars, or read [how much a website costs in Latin America](/blog/cuanto-cuesta-una-pagina-web-latinoamerica).
 

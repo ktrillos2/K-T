@@ -96,7 +96,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Una página que lleve clientes directo a tu WhatsApp | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
 | Catálogo, carrito, pagos PSE/Nequi y pedidos por WhatsApp | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | Agente de IA en WhatsApp conectado a inventario y facturación | [Software a medida](/servicios/software-a-medida) | {{cop:4500000}} |
-| Atraer clientes con publicidad en Facebook, Instagram y Google | [Administración de Ads](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mes |
+| Atraer clientes con publicidad en Facebook, Instagram, TikTok y Google | [Administración de Ads](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mes |
 
 Compara en [precios](/precios) o revisa [cuánto cuesta una tienda virtual en Colombia](/precios/precio-tienda-virtual-colombia).
 

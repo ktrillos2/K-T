@@ -258,8 +258,8 @@ const en: Dict = {
   ads: {
     tag: "Monthly service",
     name: "Ads Management",
-    what: "What it is: we run your Facebook, Instagram and Google ads every month, with a goal-based strategy, remarketing and clear reports.",
-    chips: ["Meta Ads", "Google Ads", "Remarketing", "Monthly reports"],
+    what: "What it is: we run your Facebook, Instagram, TikTok and Google ads every month, with a goal-based strategy, remarketing and clear reports.",
+    chips: ["Meta Ads", "TikTok Ads", "Google Ads", "Remarketing", "Monthly reports"],
     from: "From",
     per: "per month",
     note: "Ad spend not included",

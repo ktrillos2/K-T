@@ -569,18 +569,18 @@ export const SERVICES: Landing[] = [
     slug: "administracion-de-ads",
     path: S("administracion-de-ads"),
     color: "green",
-    serviceType: "Administración mensual de campañas publicitarias (Meta Ads y Google Ads)",
+    serviceType: "Administración mensual de campañas publicitarias (Meta Ads, TikTok Ads y Google Ads)",
     projects: [],
     posts: ["cuanto-cuesta-administrar-facebook-ads-colombia", "que-es-el-remarketing-y-como-funciona", "que-es-una-landing-page-y-para-que-sirve"],
     related: [S("landing-pages"), S("tiendas-virtuales"), S("seo-tecnico")],
     copy: {
       es: {
-        title: "Administración de Ads mensual: Meta Ads, Google Ads y remarketing",
-        description: "Administramos tus campañas de Facebook, Instagram y Google Ads cada mes según tu objetivo: estrategia, segmentación, remarketing, anuncios y reportes. Desde $450.000 COP al mes (200 USD fuera de Colombia).",
+        title: "Administración de Ads mensual: Meta, TikTok y Google Ads con remarketing",
+        description: "Administramos tus campañas de Facebook, Instagram, TikTok y Google Ads cada mes según tu objetivo: estrategia, segmentación, remarketing, anuncios y reportes. Desde $450.000 COP al mes (200 USD fuera de Colombia).",
         eyebrow: "servicios · administración de Ads",
         h1: "Administración de Ads que trae clientes, no solo likes",
-        lead: "La administración de Ads es el manejo mensual de tu publicidad pagada en Facebook, Instagram y Google: definimos la estrategia según tu objetivo (ventas, mensajes por WhatsApp o clientes potenciales), creamos y probamos los anuncios, hacemos remarketing a quienes ya te visitaron, y te enviamos reportes claros cada mes. El valor no incluye lo que inviertes en la plataforma.",
-        facts: [["Desde", "{{cop:450000,usd:200}} / mes"], ["Plataformas", "Meta y Google"], ["Reportes", "Mensuales"], ["Permanencia", "Mes a mes"]],
+        lead: "La administración de Ads es el manejo mensual de tu publicidad pagada en Facebook, Instagram, TikTok y Google: definimos la estrategia según tu objetivo (ventas, mensajes por WhatsApp o clientes potenciales), creamos y probamos los anuncios, hacemos remarketing a quienes ya te visitaron, y te enviamos reportes claros cada mes. El valor no incluye lo que inviertes en la plataforma.",
+        facts: [["Desde", "{{cop:450000,usd:200}} / mes"], ["Plataformas", "Meta, TikTok y Google"], ["Reportes", "Mensuales"], ["Permanencia", "Mes a mes"]],
         includesTitle: "Qué incluye",
         includes: [
           { t: "Estrategia según tu objetivo", d: "Ventas, mensajes por WhatsApp, clientes potenciales o visitas a tu tienda: cada objetivo usa campañas distintas." },
@@ -604,29 +604,30 @@ Tabla: Qué campaña usamos según tu objetivo.
 | Tu objetivo | Tipo de campaña | Dónde |
 |---|---|---|
 | Que te escriban por WhatsApp | Campaña de mensajes | Facebook e Instagram |
+| Darte a conocer con video | Alcance y tráfico con videos cortos | TikTok e Instagram Reels |
 | Vender en tu tienda virtual | Ventas con catálogo y remarketing | Meta y Google |
 | Conseguir clientes potenciales | Formularios o landing page | Meta y Google |
 | Que te encuentren cuando te buscan | Búsqueda | Google Ads |
 
-**El valor del servicio no incluye la inversión en publicidad**, que pagas directo a Meta o Google con tu tarjeta. Así siempre ves en qué se gasta cada peso.
+**El valor del servicio no incluye la inversión en publicidad**, que pagas directo a Meta, TikTok o Google con tu tarjeta. Así siempre ves en qué se gasta cada peso.
 
 ¿Todavía no tienes una página a donde llevar los anuncios? Una [landing page](/servicios/landing-pages) desde {{cop:450000}} convierte mucho mejor que mandar la publicidad a una red social.`,
         faqs: [
-          { q: "¿Cuánto cuesta la administración de Ads?", a: "En K&T Code la administración mensual cuesta desde $450.000 COP al mes en Colombia y 200 USD al mes en otros países, en la moneda de tu país. No incluye la inversión en publicidad, que pagas directo a Meta o Google." },
+          { q: "¿Cuánto cuesta la administración de Ads?", a: "En K&T Code la administración mensual cuesta desde $450.000 COP al mes en Colombia y 200 USD al mes en otros países, en la moneda de tu país. No incluye la inversión en publicidad, que pagas directo a Meta, TikTok o Google." },
           { q: "¿Cuánto debo invertir en publicidad?", a: "Depende de tu objetivo y tu ciudad. Te sugerimos un presupuesto en el diagnóstico y lo ajustamos con los resultados de las primeras semanas." },
           { q: "¿Qué es el remarketing?", a: "Es volver a mostrar tus anuncios a personas que ya visitaron tu web, vieron un producto o te escribieron, para que regresen y compren." },
           { q: "¿Tengo que firmar por varios meses?", a: "No. El servicio es mes a mes. Recomendamos al menos 3 meses para optimizar con datos reales." },
-          { q: "¿Manejan Facebook, Instagram y Google?", a: "Sí. Administramos Meta Ads (Facebook e Instagram) y Google Ads, según dónde esté tu cliente." },
+          { q: "¿Manejan Facebook, Instagram, TikTok y Google?", a: "Sí. Administramos Meta Ads (Facebook e Instagram), TikTok Ads y Google Ads, según dónde esté tu cliente." },
         ],
-        keywords: ["administración de ads", "administración de Facebook Ads", "gestión de Meta Ads", "manejo de pauta digital", "remarketing", "Google Ads Colombia"],
+        keywords: ["administración de ads", "administración de Facebook Ads", "gestión de Meta Ads", "manejo de pauta digital", "TikTok Ads", "remarketing", "Google Ads Colombia"],
       },
       en: {
-        title: "Monthly ads management: Meta Ads, Google Ads and remarketing",
-        description: "We manage your Facebook, Instagram and Google Ads campaigns every month around your goal: strategy, targeting, remarketing, ads and reports. From 200 USD a month (450,000 COP in Colombia).",
+        title: "Monthly ads management: Meta, TikTok and Google Ads with remarketing",
+        description: "We manage your Facebook, Instagram, TikTok and Google Ads campaigns every month around your goal: strategy, targeting, remarketing, ads and reports. From 200 USD a month (450,000 COP in Colombia).",
         eyebrow: "services · Ads management",
         h1: "Ads management that brings customers, not just likes",
-        lead: "Ads management is the monthly handling of your paid advertising on Facebook, Instagram and Google: we set the strategy around your goal (sales, WhatsApp messages or leads), create and test the ads, retarget people who already visited you and send clear reports every month. The fee doesn't include your ad spend.",
-        facts: [["From", "{{cop:450000,usd:200}} / mo"], ["Platforms", "Meta and Google"], ["Reports", "Monthly"], ["Commitment", "Month to month"]],
+        lead: "Ads management is the monthly handling of your paid advertising on Facebook, Instagram, TikTok and Google: we set the strategy around your goal (sales, WhatsApp messages or leads), create and test the ads, retarget people who already visited you and send clear reports every month. The fee doesn't include your ad spend.",
+        facts: [["From", "{{cop:450000,usd:200}} / mo"], ["Platforms", "Meta, TikTok and Google"], ["Reports", "Monthly"], ["Commitment", "Month to month"]],
         includesTitle: "What's included",
         includes: [
           { t: "Goal-based strategy", d: "Sales, WhatsApp messages, leads or store visits: each goal uses different campaigns." },
@@ -650,20 +651,21 @@ Table: Which campaign we use for each goal.
 | Your goal | Campaign type | Where |
 |---|---|---|
 | Get WhatsApp messages | Messages campaign | Facebook and Instagram |
+| Build awareness with video | Reach and traffic with short videos | TikTok and Instagram Reels |
 | Sell in your online store | Sales with catalog and remarketing | Meta and Google |
 | Get leads | Forms or landing page | Meta and Google |
 | Be found when people search | Search | Google Ads |
 
-**The service fee doesn't include ad spend**, which you pay directly to Meta or Google with your card. That way you always see where every dollar goes.
+**The service fee doesn't include ad spend**, which you pay directly to Meta, TikTok or Google with your card. That way you always see where every dollar goes.
 
 No page to send the ads to yet? A [landing page](/servicios/landing-pages) from {{cop:450000}} converts much better than sending ads to a social profile.`,
         faqs: [
-          { q: "How much does ads management cost?", a: "At K&T Code monthly ads management starts at 200 USD a month outside Colombia (450,000 COP in Colombia), shown in your currency. Ad spend is separate and paid directly to Meta or Google." },
+          { q: "How much does ads management cost?", a: "At K&T Code monthly ads management starts at 200 USD a month outside Colombia (450,000 COP in Colombia), shown in your currency. Ad spend is separate and paid directly to Meta, TikTok or Google." },
           { q: "How much should I spend on ads?", a: "It depends on your goal and market. We suggest a budget in the assessment and adjust it with the first weeks' results." },
           { q: "What is remarketing?", a: "Showing your ads again to people who already visited your site, viewed a product or messaged you, so they come back and buy." },
           { q: "Is there a long-term contract?", a: "No. It's month to month. We recommend at least 3 months to optimize with real data." },
         ],
-        keywords: ["ads management", "Facebook ads management", "Meta Ads management", "remarketing", "Google Ads management"],
+        keywords: ["ads management", "Facebook ads management", "Meta Ads management", "TikTok Ads", "remarketing", "Google Ads management"],
       },
     },
   },

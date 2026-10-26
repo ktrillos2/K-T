@@ -90,7 +90,7 @@ Table: Related services and starting prices in your currency.
 | A store with catalog, cart and payments | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | A WooCommerce-powered store with extra speed | [Headless WooCommerce](/servicios/woocommerce-headless) | Depends on scope |
 | To show up on Google | [Technical SEO](/servicios/seo-tecnico) | Depends on scope |
-| Bring customers with Facebook, Instagram and Google ads | [Ads management](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mo |
+| Bring customers with Facebook, Instagram, TikTok and Google ads | [Ads management](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mo |
 
 On [pricing](/precios) you can choose Argentina and see every plan in Argentine pesos. You may also like our [online store pricing guide](/precios/precio-tienda-virtual-colombia) and [how much a website costs in Latin America](/blog/cuanto-cuesta-una-pagina-web-latinoamerica).
 

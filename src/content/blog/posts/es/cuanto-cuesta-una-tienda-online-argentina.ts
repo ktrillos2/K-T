@@ -90,7 +90,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Una tienda con catálogo, carrito y pagos | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | Una tienda conectada a WooCommerce con velocidad extra | [WooCommerce headless](/servicios/woocommerce-headless) | Según alcance |
 | Que tu tienda aparezca en Google | [SEO técnico](/servicios/seo-tecnico) | Según alcance |
-| Atraer clientes con publicidad en Facebook, Instagram y Google | [Administración de Ads](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mes |
+| Atraer clientes con publicidad en Facebook, Instagram, TikTok y Google | [Administración de Ads](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mes |
 
 En [precios](/precios) puedes elegir Argentina y ver cada plan en pesos argentinos. También te sirve la [guía de precio de una tienda virtual](/precios/precio-tienda-virtual-colombia) y [cuánto cuesta una página web en Latinoamérica](/blog/cuanto-cuesta-una-pagina-web-latinoamerica).
 

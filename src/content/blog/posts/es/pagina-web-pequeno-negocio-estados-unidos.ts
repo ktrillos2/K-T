@@ -87,7 +87,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Un sitio de varias páginas para tu empresa | [Diseño web corporativo](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
 | Vender productos en línea | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | Aparecer en Google | [SEO técnico](/servicios/seo-tecnico) | Según alcance |
-| Atraer clientes con publicidad en Facebook, Instagram y Google | [Administración de Ads](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mes |
+| Atraer clientes con publicidad en Facebook, Instagram, TikTok y Google | [Administración de Ads](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mes |
 
 En [precios](/precios) elige Estados Unidos para ver cada plan en dólares, o lee [cuánto cuesta una página web en Latinoamérica](/blog/cuanto-cuesta-una-pagina-web-latinoamerica).
 

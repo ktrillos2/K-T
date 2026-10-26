@@ -72,12 +72,12 @@ A great ad that leads to a slow or confusing page loses customers. Send traffic 
 
 ## How K&T Code helps {#k-t-code}
 
-We manage your Facebook, Instagram and Google campaigns every month around your goal, with remarketing and simple reports. And if you don't have a page to send the ads to, we build that too.
+We manage your Facebook, Instagram, TikTok and Google campaigns every month around your goal, with remarketing and simple reports. And if you don't have a page to send the ads to, we build that too.
 
 Table: Related services and starting prices in your currency.
 | You need | Service | From |
 |---|---|---|
-| Someone to run your ads every month | [Ads management](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mo |
+| Someone to run your Meta, TikTok and Google ads every month | [Ads management](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mo |
 | A page that turns clicks into customers | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
 | Selling with a catalog and online payments | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 

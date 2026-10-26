@@ -72,12 +72,12 @@ Un anuncio bueno que lleva a una página lenta o confusa pierde clientes. Lo mej
 
 ## ¿Cómo te ayuda K&T Code? {#k-t-code}
 
-Administramos tus campañas de Facebook, Instagram y Google cada mes según tu objetivo, con remarketing y reportes simples. Y si te falta la página a donde llevar los anuncios, también la construimos.
+Administramos tus campañas de Facebook, Instagram, TikTok y Google cada mes según tu objetivo, con remarketing y reportes simples. Y si te falta la página a donde llevar los anuncios, también la construimos.
 
 Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Necesitas | Servicio | Desde |
 |---|---|---|
-| Que alguien maneje tu publicidad cada mes | [Administración de Ads](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mes |
+| Que alguien maneje tu publicidad en Meta, TikTok y Google cada mes | [Administración de Ads](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mes |
 | Una página que convierta los clics en clientes | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
 | Vender con catálogo y pagos en línea | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 

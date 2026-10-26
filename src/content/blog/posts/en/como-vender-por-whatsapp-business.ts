@@ -96,7 +96,7 @@ Table: Related services and starting prices in your currency.
 | A page that sends customers straight to your WhatsApp | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
 | Catalog, cart, PSE/Nequi payments and WhatsApp orders | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | A WhatsApp AI agent connected to inventory and invoicing | [Custom software](/servicios/software-a-medida) | {{cop:4500000}} |
-| Bring customers with Facebook, Instagram and Google ads | [Ads management](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mo |
+| Bring customers with Facebook, Instagram, TikTok and Google ads | [Ads management](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mo |
 
 Compare on [pricing](/precios) or see [how much an online store costs in Colombia](/precios/precio-tienda-virtual-colombia).
 
