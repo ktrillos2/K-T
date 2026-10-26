@@ -7,6 +7,8 @@ description: Actualiza 4 artículos antiguos del blog de www.kytcode.lat cada me
 
 Objetivo: que los artículos viejos sigan posicionando y **lleven a contratar**. Google premia el contenido al día, y cada artículo debe dirigir a los servicios y precios de K&T Code.
 
+> **Datos de Search Console guardados:** si el conector GSC no responde (la prueba de GSC Wizard vence el 2026-11-02), usa la foto más reciente en `docs/seo/gsc-*.md` (páginas, consultas, oportunidades, indexación y pendientes). Si el conector sí funciona, al terminar agrega una foto nueva `docs/seo/gsc-<año>-<mes>.md` con el mismo formato.
+
 ## 1. Elegir 4 artículos
 
 - Lista: `src/content/blog/meta.ts` (`ES_ONLY` y `BILINGUAL`) y sus cuerpos en `src/content/blog/posts/es|en/<slug>.ts` (o `posts/<slug>.ts` para los bilingües antiguos).

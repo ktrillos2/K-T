@@ -7,6 +7,8 @@ description: Crea una nueva página de aterrizaje "Desarrollo web en <país>" (e
 
 Objetivo: abrir mercados fuera de Colombia en Google. Cada corrida agrega **1 país nuevo** a www.kytcode.lat, con su página en español e inglés.
 
+> **Datos de Search Console guardados:** si el conector GSC no responde (la prueba de GSC Wizard vence el 2026-11-02), usa la foto más reciente en `docs/seo/gsc-*.md` (páginas, consultas, oportunidades, indexación y pendientes). Si el conector sí funciona, al terminar agrega una foto nueva `docs/seo/gsc-<año>-<mes>.md` con el mismo formato.
+
 ## 1. Elegir el país
 
 - Países ya publicados: `src/content/landings/countries.ts` (arreglo `COUNTRIES`).

@@ -7,6 +7,8 @@ description: Auditoría técnica mensual de SEO y rendimiento de www.kytcode.lat
 
 Objetivo: que www.kytcode.lat no pierda posiciones por fallas técnicas. Cada mes se detectan y corrigen problemas, con medición antes y después.
 
+> **Datos de Search Console guardados:** si el conector GSC no responde (la prueba de GSC Wizard vence el 2026-11-02), usa la foto más reciente en `docs/seo/gsc-*.md` (páginas, consultas, oportunidades, indexación y pendientes). Si el conector sí funciona, al terminar agrega una foto nueva `docs/seo/gsc-<año>-<mes>.md` con el mismo formato.
+
 ## 1. Preparar
 
 ```bash

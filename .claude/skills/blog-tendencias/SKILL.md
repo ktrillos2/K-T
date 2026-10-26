@@ -7,6 +7,8 @@ description: Investiga tendencias de búsqueda con el conector Keyword Tool y pu
 
 Objetivo: atraer clientes de desarrollo web de forma orgánica en **Latinoamérica y Estados Unidos** para **www.kytcode.lat**. Cada corrida publica **2 artículos nuevos**, reales y útiles, en español e inglés, que terminen llevando al lector a los servicios y precios de K&T Code.
 
+> **Datos de Search Console guardados:** si el conector GSC no responde (la prueba de GSC Wizard vence el 2026-11-02), usa la foto más reciente en `docs/seo/gsc-*.md` (páginas, consultas, oportunidades, indexación y pendientes). Si el conector sí funciona, al terminar agrega una foto nueva `docs/seo/gsc-<año>-<mes>.md` con el mismo formato.
+
 ## 1. Ver qué ya existe (no repetir temas)
 
 - Temas y slugs publicados: `src/content/blog/meta.ts` (arreglos `ES_ONLY` y `BILINGUAL`) y `src/content/blog/meta.en.ts`.
