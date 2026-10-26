@@ -2,7 +2,7 @@
 
 const es = {
   meta: {
-    siteTitle: "K&T Code (KyT Code) · Desarrollo web a la medida en Colombia",
+    siteTitle: "K&T Code · Desarrollo web a la medida en Colombia",
     siteDescription:
       "Estudio colombiano que diseña y desarrolla sitios web, tiendas virtuales y software a la medida. Cada proyecto con diseño único, sin plantillas. Desde Cúcuta para Colombia, Latinoamérica y Estados Unidos.",
     ogTitle: "K&T Code · Diseño único, código a la medida",
@@ -147,7 +147,7 @@ const es = {
       path: "preguntas rápidas",
       title: "K&T Code en 30 segundos",
       items: [
-        { q: "¿Qué hace K&T Code?", a: "K&T Code (también escrito KyT Code o kytcode) diseña y desarrolla sitios web, tiendas virtuales y software a la medida. Cada proyecto tiene un diseño único y código propio, sin plantillas." },
+        { q: "¿Qué hace K&T Code?", a: "K&T Code diseña y desarrolla sitios web, tiendas virtuales y software a la medida. Cada proyecto tiene un diseño único y código propio, sin plantillas." },
         { q: "¿Dónde está?", a: "En San José de Cúcuta, Norte de Santander, Colombia. Trabaja en remoto con empresas de Colombia, Latinoamérica y Estados Unidos." },
         { q: "¿Cuánto cuesta?", a: "Una landing page desde $450.000 COP, una tienda virtual desde $1.300.000 COP, un sitio corporativo desde $2.500.000 COP y el software a medida desde $4.500.000 COP." },
         { q: "¿Cuánto tarda?", a: "Una landing entre 7 y 12 días, un sitio corporativo entre 15 y 25 días y una tienda virtual entre 25 y 40 días." },
@@ -496,7 +496,7 @@ const es = {
       paused: "Pausa",
       aria: "Juego Rompe el logo: rompe los bloques del logo de K&T Code con la pelota.",
     },
-    tagline: "K&T Code (KyT Code): diseño único y código a la medida desde Cúcuta para el mundo.",
+    tagline: "K&T Code: diseño único y código a la medida desde Cúcuta para el mundo.",
     nav: "Navegación",
     contact: "Contacto",
     social: "Redes",

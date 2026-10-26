@@ -34,7 +34,7 @@ pnpm start -p 3123 &
    - `list_sitemaps` y `inspect_url` (máximo 10, cuida la cuota con `get_inspection_quota`) para las páginas nuevas del mes: ¿están indexadas?
    - `score_opportunities`: las 5 mejores oportunidades (posición 8–20).
    - `get_core_web_vitals` si hay datos. Corrige lo técnico (indexación, canónicas, sitemap) y deja el resto como recomendación para los agentes de blog y de actualización.
-8. **Marca:** el título del inicio y `llms.txt` siguen mencionando "K&T Code (KyT Code)" y el dominio www.kytcode.lat.
+8. **Marca:** el título del inicio dice "K&T Code" (sin "KyT" visible). Las variantes "KyT Code" y "kytcode" van solo en `alternateName` del JSON-LD y en `llms.txt`, no en textos visibles.
 
 ## 3. Corregir
 

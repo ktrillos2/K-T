@@ -2,7 +2,7 @@ import type { Dict } from "./es";
 
 const en: Dict = {
   meta: {
-    siteTitle: "K&T Code (KyT Code) · Custom web development from Colombia",
+    siteTitle: "K&T Code · Custom web development from Colombia",
     siteDescription:
       "Colombian studio that designs and builds custom websites, online stores and software. Every project has a one-of-a-kind design, no templates. From Cúcuta to Latin America and the United States.",
     ogTitle: "K&T Code · Unique design, custom code",
@@ -147,7 +147,7 @@ const en: Dict = {
       path: "quick answers",
       title: "K&T Code in 30 seconds",
       items: [
-        { q: "What does K&T Code do?", a: "K&T Code (also written KyT Code or kytcode) designs and builds custom websites, online stores and software. Every project has a unique design and its own code, with no templates." },
+        { q: "What does K&T Code do?", a: "K&T Code designs and builds custom websites, online stores and software. Every project has a unique design and its own code, with no templates." },
         { q: "Where is it based?", a: "In Cúcuta, Norte de Santander, Colombia. It works remotely with companies in Colombia, Latin America and the United States." },
         { q: "How much does it cost?", a: "A landing page starts at 450,000 COP, an online store at 1,300,000 COP, a corporate website at 2,500,000 COP and custom software at 4,500,000 COP. Prices are shown in your local currency." },
         { q: "How long does it take?", a: "A landing page takes 7 to 12 days, a corporate website 15 to 25 days and an online store 25 to 40 days." },
@@ -496,7 +496,7 @@ const en: Dict = {
       paused: "Paused",
       aria: "Break the logo game: break the blocks of the K&T Code logo with the ball.",
     },
-    tagline: "K&T Code (KyT Code): unique design and custom code from Cúcuta to the world.",
+    tagline: "K&T Code: unique design and custom code from Cúcuta to the world.",
     nav: "Navigation",
     contact: "Contact",
     social: "Social",
