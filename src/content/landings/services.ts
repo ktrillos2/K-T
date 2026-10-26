@@ -19,7 +19,7 @@ export const SERVICES: Landing[] = [
         description: "Diseñamos landing pages a la medida para campañas y captación de clientes: diseño único, carga en menos de un segundo y WhatsApp integrado. Desde $450.000 COP, entrega en 7 a 12 días.",
         eyebrow: "servicios · landing pages",
         h1: "Landing pages que convierten visitas en clientes",
-        lead: "Una landing page es una página enfocada en un solo objetivo: que el visitante te escriba, se registre o compre. En K&T Code la diseñamos desde cero para tu marca y tu campaña, carga en menos de un segundo y conecta directo con tu WhatsApp. Desde $450.000 COP, lista en 7 a 12 días.",
+        lead: "Una landing page es una página web sencilla, de una sola página, enfocada en un solo objetivo: que el visitante te escriba, se registre o compre. En K&T Code la diseñamos desde cero para tu marca y tu campaña, carga en menos de un segundo y conecta directo con tu WhatsApp. Desde $450.000 COP, lista en 7 a 12 días.",
         facts: [["Desde", "$450.000 COP"], ["Entrega", "7 a 12 días"], ["Secciones", "Hasta 5"], ["Velocidad", "Menos de 1 s"]],
         includesTitle: "Qué incluye",
         includes: [
@@ -45,7 +45,7 @@ export const SERVICES: Landing[] = [
         description: "We design custom landing pages for campaigns and lead generation: unique design, sub-second loading and WhatsApp built in. From 450,000 COP, delivered in 7 to 12 days.",
         eyebrow: "services · landing pages",
         h1: "Landing pages that turn visits into customers",
-        lead: "A landing page focuses on a single goal: getting the visitor to message you, sign up or buy. At K&T Code we design it from scratch for your brand and campaign, it loads in under a second and connects straight to your WhatsApp. From 450,000 COP, ready in 7 to 12 days.",
+        lead: "A landing page is a simple, single-page website focused on one goal: getting the visitor to message you, sign up or buy. At K&T Code we design it from scratch for your brand and campaign, it loads in under a second and connects straight to your WhatsApp. From 450,000 COP, ready in 7 to 12 days.",
         facts: [["From", "450,000 COP"], ["Delivery", "7 to 12 days"], ["Sections", "Up to 5"], ["Speed", "Under 1 s"]],
         includesTitle: "What's included",
         includes: [
@@ -83,7 +83,7 @@ export const SERVICES: Landing[] = [
         description: "Desarrollamos tiendas virtuales a la medida con Wompi, Bold o PayU, catálogo autogestionable, envíos nacionales y pedidos por WhatsApp. Sin comisión de plataforma. Desde $1.300.000 COP.",
         eyebrow: "servicios · tiendas virtuales",
         h1: "Tiendas virtuales que venden mientras duermes",
-        lead: "Una tienda virtual a la medida te permite vender en línea las 24 horas con los medios de pago que usan los colombianos: PSE, Nequi y tarjetas. En K&T Code la construimos con tu catálogo, pasarelas como Wompi, Bold o PayU y un panel para gestionar pedidos, sin comisiones de plataforma por cada venta. Desde $1.300.000 COP.",
+        lead: "Una tienda virtual es una página web donde tus clientes ven tus productos, los agregan al carrito y pagan en línea. Hecha a la medida, te permite vender en línea las 24 horas con los medios de pago que usan los colombianos: PSE, Nequi y tarjetas. En K&T Code la construimos con tu catálogo, pasarelas como Wompi, Bold o PayU y un panel para gestionar pedidos, sin comisiones de plataforma por cada venta. Desde $1.300.000 COP.",
         facts: [["Desde", "$1.300.000 COP"], ["Entrega", "25 a 40 días"], ["Pagos", "PSE, Nequi, tarjetas"], ["Comisión de plataforma", "0%"]],
         includesTitle: "Qué incluye",
         includes: [
@@ -109,7 +109,7 @@ export const SERVICES: Landing[] = [
         description: "We build custom online stores with Wompi, Bold or PayU, a self-managed catalog, national shipping and WhatsApp orders. No platform fees. From 1,300,000 COP.",
         eyebrow: "services · online stores",
         h1: "Online stores that sell while you sleep",
-        lead: "A custom online store lets you sell 24/7 with the payment methods Colombians use: PSE, Nequi and cards. At K&T Code we build it around your catalog, with gateways like Wompi, Bold or PayU and a panel to manage orders, with no platform fee on each sale. From 1,300,000 COP.",
+        lead: "An online store is a website where customers browse your products, add them to a cart and pay online. Built custom, it lets you sell 24/7 with the payment methods Colombians use: PSE, Nequi and cards. At K&T Code we build it around your catalog, with gateways like Wompi, Bold or PayU and a panel to manage orders, with no platform fee on each sale. From 1,300,000 COP.",
         facts: [["From", "1,300,000 COP"], ["Delivery", "25 to 40 days"], ["Payments", "PSE, Nequi, cards"], ["Platform fee", "0%"]],
         includesTitle: "What's included",
         includes: [

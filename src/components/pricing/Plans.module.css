@@ -164,6 +164,10 @@
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+.what {
+  font-size: 14px;
+  line-height: 1.45;
+}
 .pitch {
   font-size: 13.5px;
   opacity: 0.75;

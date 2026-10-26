@@ -29,6 +29,7 @@ export function HomeServices() {
                     <PlanArt id={p.id} />
                   </span>
                   <h3 className={cx("display", styles.name)}>{c.name}</h3>
+                  <p className={styles.what}>{c.what}</p>
                   <p className={styles.pitch}>{c.pitch}</p>
                   <span className={styles.foot}>
                     <span className={styles.from}>

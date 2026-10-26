@@ -144,6 +144,7 @@ export function Plans() {
                       {p.quote ? ` · ${t.price.quote}` : ""}
                     </span>
                   </p>
+                  <p className={styles.what}>{c.what}</p>
                   <p className={styles.pitch}>{c.pitch}</p>
 
                   <div className={styles.time}>
