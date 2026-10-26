@@ -15,6 +15,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Scramble } from "@/components/motion/Scramble";
 import { TLink } from "@/components/transition/TLink";
 import { Price } from "@/components/ui/Price";
+import { Inline } from "@/components/blog/Inline";
 import { SiteShot } from "@/components/ui/SiteShot";
 import { ArticleBody } from "@/components/blog/ArticleBody";
 import { TitleArt } from "@/components/blog/TitleArt";
@@ -101,7 +102,9 @@ export function LandingView({ kind, color, plan, copy, blocks, projects, posts, 
             {copy.facts.map(([k, v]) => (
               <div key={k}>
                 <dt>{k}</dt>
-                <dd>{v}</dd>
+                <dd>
+                  <Inline text={v} />
+                </dd>
               </div>
             ))}
           </Reveal>

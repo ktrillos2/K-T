@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { getDict, type Dict } from "./index";
 import { localize, type Lang } from "./config";
-import { COUNTRIES, DEFAULT_COUNTRY, FALLBACK_RATES, convert, countryByCode, formatMoney, type Country, type Rates } from "@/lib/money";
+import { COUNTRIES, DEFAULT_COUNTRY, FALLBACK_RATES, convert, convertUsd, countryByCode, formatMoney, type Country, type Rates } from "@/lib/money";
 
 type Ctx = {
   lang: Lang;
@@ -15,6 +15,8 @@ type Ctx = {
   rates: Rates;
   /** Precio en COP → texto formateado en la moneda del país elegido. */
   money: (cop: number) => string;
+  /** Precio fijo en dólares mostrado en la moneda del país (fuera de Colombia). */
+  moneyUsd: (usd: number) => string;
   convert: (cop: number) => number;
 };
 
@@ -93,6 +95,7 @@ export function I18nProvider({ lang, children }: { lang: Lang; children: React.R
       rates,
       convert: (cop: number) => convert(cop, country, rates),
       money: (cop: number) => formatMoney(convert(cop, country, rates), country),
+      moneyUsd: (usd: number) => formatMoney(convertUsd(usd, country, rates), country),
     }),
     [lang, t, country, setCountry, rates],
   );

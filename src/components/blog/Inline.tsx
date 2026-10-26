@@ -2,10 +2,11 @@ import { Fragment } from "react";
 import { TLink } from "@/components/transition/TLink";
 import { Price } from "@/components/ui/Price";
 
-const TOKEN = /(\{\{cop:\d+\}\}|\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
+const TOKEN = /(\{\{cop:\d+(?:,usd:\d+)?\}\}|\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
 
 /**
- * Markdown mínimo en línea: **negrita**, *cursiva*, `código`, [enlace](url) y {{cop:450000}}
+ * Markdown mínimo en línea: **negrita**, *cursiva*, `código`, [enlace](url), {{cop:450000}} y {{cop:450000,usd:200}}
+ * (este último: pesos en Colombia y 200 dólares convertidos a la moneda de los demás países)
  * (precio en pesos que se muestra en la moneda del país elegido, igual que en /precios).
  */
 export function Inline({ text }: { text: string }) {
@@ -13,8 +14,8 @@ export function Inline({ text }: { text: string }) {
   return (
     <>
       {parts.map((p, i) => {
-        const cop = p.match(/^\{\{cop:(\d+)\}\}$/);
-        if (cop) return <Price key={i} cop={Number(cop[1])} />;
+        const cop = p.match(/^\{\{cop:(\d+)(?:,usd:(\d+))?\}\}$/);
+        if (cop) return <Price key={i} cop={Number(cop[1])} usd={cop[2] ? Number(cop[2]) : undefined} />;
         if (p.startsWith("**")) return <strong key={i}>{p.slice(2, -2)}</strong>;
         if (p.startsWith("`")) return <code key={i}>{p.slice(1, -1)}</code>;
         if (p.startsWith("*")) return <em key={i}>{p.slice(1, -1)}</em>;

@@ -18,6 +18,7 @@ export const COUNTRIES: Country[] = [
   { code: "PE", name: { es: "Perú", en: "Peru" }, currency: "PEN", locale: "es-PE", lang: "es" },
   { code: "AR", name: { es: "Argentina", en: "Argentina" }, currency: "ARS", locale: "es-AR", lang: "es" },
   { code: "CL", name: { es: "Chile", en: "Chile" }, currency: "CLP", locale: "es-CL", lang: "es" },
+  { code: "PA", name: { es: "Panamá", en: "Panama" }, currency: "USD", locale: "es-PA", lang: "es" },
   { code: "EC", name: { es: "Ecuador", en: "Ecuador" }, currency: "USD", locale: "es-EC", lang: "es" },
   { code: "VE", name: { es: "Venezuela", en: "Venezuela" }, currency: "USD", locale: "es-VE", lang: "es" },
   { code: "ES", name: { es: "España", en: "Spain" }, currency: "EUR", locale: "es-ES", lang: "es" },
@@ -60,11 +61,24 @@ export function convert(cop: number, country: Country, rates: Rates): number {
   return nice(cop * r * (1 + FX_MARKUP));
 }
 
+/**
+ * Servicios con precio fijo en dólares fuera de Colombia (p. ej. administración de Ads: 200 USD/mes).
+ * En USD se muestra tal cual; en otras monedas, los dólares convertidos con la tasa del día (sin recargo).
+ */
+export function convertUsd(usd: number, country: Country, rates: Rates): number {
+  if (country.currency === "USD") return usd;
+  const r = rates.rates[country.currency] ?? FALLBACK_RATES.rates[country.currency];
+  const u = rates.rates.USD ?? FALLBACK_RATES.rates.USD;
+  if (!r || !u) return usd;
+  return nice((usd / u) * r);
+}
+
 export function formatMoney(value: number, country: Country) {
   try {
     return new Intl.NumberFormat(country.locale, {
       style: "currency",
       currency: country.currency,
+      currencyDisplay: "narrowSymbol",
       maximumFractionDigits: 0,
       minimumFractionDigits: 0,
     }).format(value);

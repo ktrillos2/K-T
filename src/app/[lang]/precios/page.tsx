@@ -9,6 +9,7 @@ import { SITE } from "@/lib/site";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PricingHero } from "@/components/pricing/PricingHero";
 import { Plans } from "@/components/pricing/Plans";
+import { AdsBanner } from "@/components/ads/AdsBanner";
 import { QuoteBuilder } from "@/components/pricing/QuoteBuilder";
 import { CompareTable } from "@/components/pricing/CompareTable";
 import { Faq } from "@/components/pricing/Faq";
@@ -27,6 +28,7 @@ export default async function PricingPage({ params }: LangParams) {
     <>
       <PricingHero />
       <Plans />
+      <AdsBanner />
       <QuoteBuilder />
       <CompareTable />
       <Faq />

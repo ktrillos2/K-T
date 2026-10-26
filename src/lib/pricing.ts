@@ -22,3 +22,6 @@ export const PLANS: Plan[] = [
 ];
 
 export const planById = (id: PlanId) => PLANS.find((p) => p.id === id)!;
+
+/** Administración de Ads (servicio mensual): pesos en Colombia y dólares fijos en los demás países. */
+export const ADS_PRICE = { cop: 450000, usd: 200 } as const;

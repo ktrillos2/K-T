@@ -9,6 +9,7 @@ import { Price } from "@/components/ui/Price";
 import { Reveal } from "@/components/motion/Reveal";
 import { TLink } from "@/components/transition/TLink";
 import { PlanArt } from "@/components/pricing/PlanArt";
+import { AdsBanner } from "@/components/ads/AdsBanner";
 import styles from "./HomeServices.module.css";
 
 /** Los cuatro servicios en tarjetas simples: qué es, para quién, desde cuánto. */
@@ -44,6 +45,7 @@ export function HomeServices() {
             );
           })}
         </Reveal>
+        <AdsBanner inset />
         <Reveal className={styles.more}>
           <TLink href="/servicios" className="btn btn--ghost" data-stick>
             {s.all} <span className="arr">→</span>

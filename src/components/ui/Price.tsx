@@ -9,10 +9,10 @@ import { formatCOP } from "@/lib/money";
  * Precio en la moneda del país elegido. El HTML del servidor trae el valor en COP
  * (lo que indexan los buscadores); al cambiar de país el número se "descifra" al nuevo valor.
  */
-export function Price({ cop, className, showCode = true }: { cop: number; className?: string; showCode?: boolean }) {
-  const { money, country, t } = useI18n();
+export function Price({ cop, usd, className, showCode = true }: { cop: number; usd?: number; className?: string; showCode?: boolean }) {
+  const { money, moneyUsd, country, t } = useI18n();
   const ref = useRef<HTMLSpanElement>(null);
-  const text = country.currency === "COP" ? `${formatCOP(cop)}${showCode ? " COP" : ""}` : `${money(cop)}${showCode ? ` ${country.currency}` : ""}`;
+  const text = country.currency === "COP" ? `${formatCOP(cop)}${showCode ? " COP" : ""}` : `${usd ? moneyUsd(usd) : money(cop)}${showCode ? ` ${country.currency}` : ""}`;
   const first = useRef(true);
 
   useEffect(() => {

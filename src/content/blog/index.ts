@@ -7,6 +7,10 @@ import medida from "./posts/desarrollo-web-medida-vs-plantillas";
 import geo from "./posts/geo-vs-seo-diferencias-motores-ia";
 import { fromMarkdown } from "./markdown";
 import { formatCOP } from "@/lib/money";
+import md_cuanto_cuesta_administrar_facebook_ads_colombia from "./posts/es/cuanto-cuesta-administrar-facebook-ads-colombia";
+import en_cuanto_cuesta_administrar_facebook_ads_colombia from "./posts/en/cuanto-cuesta-administrar-facebook-ads-colombia";
+import md_que_es_el_remarketing_y_como_funciona from "./posts/es/que-es-el-remarketing-y-como-funciona";
+import en_que_es_el_remarketing_y_como_funciona from "./posts/en/que-es-el-remarketing-y-como-funciona";
 import md_cuanto_cuesta_una_tienda_online_argentina from "./posts/es/cuanto-cuesta-una-tienda-online-argentina";
 import en_cuanto_cuesta_una_tienda_online_argentina from "./posts/en/cuanto-cuesta-una-tienda-online-argentina";
 import md_pagina_web_pequeno_negocio_estados_unidos from "./posts/es/pagina-web-pequeno-negocio-estados-unidos";
@@ -126,6 +130,8 @@ const BODIES: Record<string, Partial<Record<Lang, PostBody>> & { es: PostBody }>
   "desarrollo-web-medida-vs-plantillas": medida,
   "geo-vs-seo-diferencias-motores-ia": geo,
   // Tendencias de búsqueda (es + en), generadas con la skill blog-tendencias.
+  "cuanto-cuesta-administrar-facebook-ads-colombia": { es: fromMarkdown(md_cuanto_cuesta_administrar_facebook_ads_colombia), en: fromMarkdown(en_cuanto_cuesta_administrar_facebook_ads_colombia) },
+  "que-es-el-remarketing-y-como-funciona": { es: fromMarkdown(md_que_es_el_remarketing_y_como_funciona), en: fromMarkdown(en_que_es_el_remarketing_y_como_funciona) },
   "cuanto-cuesta-una-tienda-online-argentina": { es: fromMarkdown(md_cuanto_cuesta_una_tienda_online_argentina), en: fromMarkdown(en_cuanto_cuesta_una_tienda_online_argentina) },
   "pagina-web-pequeno-negocio-estados-unidos": { es: fromMarkdown(md_pagina_web_pequeno_negocio_estados_unidos), en: fromMarkdown(en_pagina_web_pequeno_negocio_estados_unidos) },
   "cuanto-cuesta-una-pagina-web-latinoamerica": { es: fromMarkdown(md_cuanto_cuesta_una_pagina_web_latinoamerica), en: fromMarkdown(en_cuanto_cuesta_una_pagina_web_latinoamerica) },
@@ -198,6 +204,7 @@ export function getPost(slug: string, lang: Lang) {
 export function plainText(body: PostBody): string {
   const strip = (s: string) =>
     s
+      .replace(/\{\{cop:(\d+),usd:(\d+)\}\}/g, (_, n, u) => `${formatCOP(Number(n))} COP (${u} USD)`)
       .replace(/\{\{cop:(\d+)\}\}/g, (_, n) => `${formatCOP(Number(n))} COP`)
       .replace(/\*\*|\*|`/g, "")
       .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");

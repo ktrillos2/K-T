@@ -28,7 +28,7 @@ Objetivo: que los artículos viejos sigan posicionando y **lleven a contratar**.
 
 - **Sección de servicios y precios** antes de la conclusión: `## ¿Cómo te ayuda K&T Code? {#k-t-code}` / `## How K&T Code helps {#k-t-code}`. Debe tener:
   - 1–2 frases sobre cómo K&T Code resuelve ese tema.
-  - Una tabla "Necesitas | Servicio | Desde" con 2–4 servicios enlazados y precios con el marcador `{{cop:N}}` (landing `{{cop:450000}}`, tienda `{{cop:1300000}}`, corporativo o desarrollo a medida `{{cop:2500000}}`, software `{{cop:4500000}}`; SEO técnico y mantenimiento "Según alcance"), con la leyenda "precios de partida en tu moneda".
+  - Una tabla "Necesitas | Servicio | Desde" con 2–4 servicios enlazados y precios con el marcador `{{cop:N}}` (landing `{{cop:450000}}`, tienda `{{cop:1300000}}`, corporativo o desarrollo a medida `{{cop:2500000}}`, software `{{cop:4500000}}`; SEO técnico y mantenimiento "Según alcance"), con la leyenda "precios de partida en tu moneda". Administración de Ads (mensual, enlace `/servicios/administracion-de-ads`): usa `{{cop:450000,usd:200}} / mes` (pesos en Colombia y 200 USD convertidos en los demás países); inclúyela cuando el tema sea publicidad, ventas, WhatsApp, tiendas o landing pages.
   - Una línea con enlaces a `/precios` y a la guía de precios que corresponda (`/precios/precio-pagina-web-colombia`, `/precios/precio-tienda-virtual-colombia`, `/precios/precio-software-a-medida`).
   - Si el artículo no tiene "Conclusión", ponla al final del cuerpo, antes de las FAQ.
 - **Datos al día:** corrige años, versiones, nombres de productos y precios de terceros que hayan cambiado. Solo con fuentes oficiales; si no puedes verificar algo, quítalo o hazlo general. No inventes cifras.
