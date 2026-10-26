@@ -20,6 +20,11 @@ const LEGACY: [string, string][] = [
   ["/privacy", "/politica-de-privacidad"],
   ["/privacy-policy", "/politica-de-privacidad"],
   ["/politica-privacidad", "/politica-de-privacidad"],
+  ["/redes", "/#contacto"],
+  ["/services/ecommerce-development", "/servicios/tiendas-virtuales"],
+  ["/services/:slug", "/servicios/:slug"],
+  ["/nearshore-web-development-colombia", "/blog/nearshore-desarrollo-web-latinoamerica"],
+  ["/blog/wompi-vs-mercado-pago-vs-payu-colombia-2026", "/blog/wompi-vs-mercado-pago-vs-payu-colombia"],
 ];
 
 const nextConfig: NextConfig = {

@@ -71,7 +71,7 @@ const es: PostBody = {
       ],
     },
     { type: "h2", id: "otros-paises", text: "¿Y si mi empresa no está en Colombia?" },
-    { type: "p", text: "Trabajamos en remoto con México, Perú, Estados Unidos y el resto de Latinoamérica. Puedes ver los precios de referencia en tu moneda y acordamos la propuesta final contigo antes de empezar. Puedes cambiar de país en el selector de la parte superior o ver todos los planes en [precios](/precios)." },
+    { type: "p", text: "Trabajamos en remoto con México, Perú, Estados Unidos y el resto de Latinoamérica. Puedes ver los precios de referencia en tu moneda y acordamos la propuesta final contigo antes de empezar. Puedes cambiar de país en el selector de la parte superior o ver todos los planes en [precios](/precios). Si quieres el desglose completo por tipo de sitio, revisa la [guía de precio de una página web en Colombia](/precios/precio-pagina-web-colombia)." },
     { type: "p", text: "¿Quieres ver qué se obtiene por ese precio? Revisa los [casos de estudio](/proyectos): cada uno muestra qué se construyó, cómo y con qué resultados." },
   ],
   faq: [
@@ -152,7 +152,7 @@ const en: PostBody = {
       ],
     },
     { type: "h2", id: "other-countries", text: "What if my company isn't in Colombia?" },
-    { type: "p", text: "We work remotely with Mexico, Peru, the United States and the rest of Latin America. You can see reference prices in your currency, and we agree on the final proposal with you before we start. Change the country with the selector at the top or see every plan on the [pricing](/precios) page." },
+    { type: "p", text: "We work remotely with Mexico, Peru, the United States and the rest of Latin America. You can see reference prices in your currency, and we agree on the final proposal with you before we start. Change the country with the selector at the top or see every plan on the [pricing](/precios) page. For the full breakdown by type of site, see the [web design pricing guide for Colombia](/precios/precio-pagina-web-colombia)." },
     { type: "p", text: "Want to see what you get for that price? Browse the [case studies](/proyectos): each one shows what was built, how, and the results." },
   ],
   faq: [
