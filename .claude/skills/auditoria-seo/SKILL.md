@@ -27,7 +27,8 @@ pnpm start -p 3123 &
 4. **Datos estructurados:** en inicio, un artículo, un servicio y una página de país, extrae los `<script type="application/ld+json">` y verifica que sean JSON válido y que tengan `Organization` con `alternateName`, `FAQPage` donde hay preguntas y `Service` con `areaServed`.
 5. **Metadatos:** títulos de menos de 65 caracteres y descripciones de 70 a 160 en las páginas auditadas; `canonical` y `hreflang` es/en/x-default presentes; `llms.txt` y `robots.txt` responden 200.
 6. **Visibilidad (si Ubersuggest está conectado):** 1 reporte `domain_overview` de `kytcode.lat` (palabras clave que posicionan, tráfico estimado, autoridad, dominios que enlazan). Compáralo con el mes anterior en el resumen. Plan gratis: 3 reportes al día, usa solo 1.
-7. **Marca:** el título del inicio y `llms.txt` siguen mencionando "K&T Code (KyT Code)" y el dominio www.kytcode.lat.
+7. **Search Console (si GSC Wizard está disponible):** con la skill `seo-gsc-wizard:indexing-health` revisa páginas no indexadas y cobertura del sitemap; con `seo-gsc-wizard:quick-wins` lista las 5 mejores oportunidades (posición 8–20). Corrige lo técnico (indexación, canónicas, sitemap) y deja el resto como recomendación para los agentes de blog y de actualización.
+8. **Marca:** el título del inicio y `llms.txt` siguen mencionando "K&T Code (KyT Code)" y el dominio www.kytcode.lat.
 
 ## 3. Corregir
 
