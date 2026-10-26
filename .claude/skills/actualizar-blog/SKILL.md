@@ -55,6 +55,8 @@ curl -s http://localhost:3123/blog/<slug> | grep -c 'id="k-t-code"'
 - Commit: "Blog: actualiza <n> artículos (servicios, precios y datos al día)", con la lista de slugs y las líneas de atribución que pida el sistema.
 - `git fetch origin main && git rebase origin/main && git push origin HEAD:main`. Nunca uses force push.
 
+- **Avisar a Bing (IndexNow):** después del push y del despliegue, si el conector GSC está disponible, llama `submit_indexnow_urls` (propiedad `sc-domain:kytcode.lat`) con las URLs nuevas o cambiadas en https://www.kytcode.lat (es y /en). La clave está publicada en `public/2270981fee1394870a997bfc141e97a2.txt`; no la borres.
+
 ## 5. Resumen final (breve, en español)
 
 Artículos actualizados (URL en https://www.kytcode.lat/blog/<slug>), qué cambió en cada uno y cuántos artículos quedan sin la sección de servicios.

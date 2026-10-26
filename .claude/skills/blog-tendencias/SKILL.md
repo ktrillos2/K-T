@@ -77,6 +77,8 @@ Cada artículo debe tener:
 - **Fuentes**: solo sitios oficiales o de referencia, con URL real.
 - Tono cercano, frases cortas, español de Colombia. Inglés natural, no traducción literal.
 
+- **Avisar a Bing (IndexNow):** después del push y del despliegue, si el conector GSC está disponible, llama `submit_indexnow_urls` (propiedad `sc-domain:kytcode.lat`) con las URLs nuevas o cambiadas en https://www.kytcode.lat (es y /en). La clave está publicada en `public/2270981fee1394870a997bfc141e97a2.txt`; no la borres.
+
 ## 5. Registrar
 
 - `src/content/blog/meta.ts`: agrega una fila al **inicio** de `ES_ONLY`, con `[slug, categoría, fecha, minutos, título, descripción, etiquetas, true]`.

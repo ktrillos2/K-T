@@ -48,6 +48,8 @@ curl -s http://localhost:3123/desarrollo-web-<slug> | grep -c '"@type":"Country"
 - Commit en español: "Página por país: <país>", con las palabras clave que lo respaldan y las líneas de atribución que pida el sistema.
 - `git fetch origin main && git rebase origin/main && git push origin HEAD:main`. Nunca uses force push.
 
+- **Avisar a Bing (IndexNow):** después del push y del despliegue, si el conector GSC está disponible, llama `submit_indexnow_urls` (propiedad `sc-domain:kytcode.lat`) con las URLs nuevas o cambiadas en https://www.kytcode.lat (es y /en). La clave está publicada en `public/2270981fee1394870a997bfc141e97a2.txt`; no la borres.
+
 ## 5. Resumen final (breve, en español)
 
 País agregado, URLs `https://www.kytcode.lat/desarrollo-web-<slug>` y `/en/...`, palabras clave encontradas y el país siguiente sugerido.
