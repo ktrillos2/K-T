@@ -139,6 +139,16 @@ export function Footer({ links }: { links: ShellLinks }) {
             </TLink>
           ))}
         </nav>
+        {links.countries.length > 0 && (
+          <nav aria-label={t.landing.hubs.paises.title}>
+            <h3>{t.landing.hubs.paises.title}</h3>
+            {links.countries.map((l) => (
+              <TLink key={l.href} href={l.href}>
+                {l.label}
+              </TLink>
+            ))}
+          </nav>
+        )}
         <nav aria-label={t.nav.pricing}>
           <h3>
             <TLink href="/precios">{t.nav.pricing}</TLink>

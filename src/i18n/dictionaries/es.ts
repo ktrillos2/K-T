@@ -519,7 +519,7 @@ const es = {
   },
 
   landing: {
-    crumbs: { servicio: "Servicios", industria: "Industrias", ciudad: "Desarrollo web", guia: "Precios" },
+    crumbs: { servicio: "Servicios", industria: "Industrias", ciudad: "Desarrollo web", pais: "Desarrollo web", guia: "Precios" },
     quote: "Cotizar por WhatsApp",
     seePricing: "Ver todos los precios",
     priceTitle: "Inversión de partida",
@@ -549,6 +549,9 @@ const es = {
         eyebrow: "industrias",
         h1: "Desarrollo web especializado por industria",
         lead: "Cada sector vende distinto. Conoce cómo adaptamos el diseño, las funciones y el SEO a tu industria, con proyectos reales en producción.",
+      },
+      paises: {
+        title: "Desarrollo web en Latinoamérica y EE. UU.",
       },
       ciudades: {
         title: "Desarrollo web en ciudades de Colombia",

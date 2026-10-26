@@ -69,6 +69,12 @@ const ES_ONLY: Seed[] = [
   ["seo-desde-la-raiz-crear-pagina", "seo-geo", "2026-02-15", 5, "¿Por qué el SEO debe Planificarse desde la Arquitectura Inicial de una Web?", "Por qué el SEO técnico se decide al diseñar la arquitectura: renderizado, jerarquía, datos estructurados y velocidad, y cuánto cuesta corregirlo después.", ["SEO técnico", "arquitectura", "desarrollo"], true],
 ];
 
+/**
+ * Fecha de la última actualización de contenido de los artículos de ES_ONLY (slug → yyyy-mm-dd).
+ * La usa la skill actualizar-blog: el artículo muestra "Actualizado" con esta fecha y el sitemap la toma.
+ */
+const REFRESHED: Record<string, string> = {};
+
 const BASE: PostMeta[] = ES_ONLY.map(([slug, category, date, minutes, title, description, tags, interactive]) => {
   const en = EN_META[slug];
   return {
@@ -76,7 +82,7 @@ const BASE: PostMeta[] = ES_ONLY.map(([slug, category, date, minutes, title, des
     category,
     date,
     // La revisión nunca puede ser anterior a la publicación.
-    updated: [date, en ? "2026-10-16" : "2026-10-14"].sort().pop()!,
+    updated: [date, en ? "2026-10-16" : "2026-10-14", REFRESHED[slug] ?? ""].sort().pop()!,
     minutes,
     interactive: !!interactive,
     color: COLOR[category],

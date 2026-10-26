@@ -18,7 +18,7 @@ export function landingLabel(path: string, lang: Lang): string {
   const t = getDict(lang);
   if (l) {
     const { copy } = landingCopy(l, lang);
-    if (l.kind === "ciudad") return copy.h1;
+    if (l.kind === "ciudad" || l.kind === "pais") return copy.h1;
     return cap(copy.eyebrow.split("·").pop()!.trim());
   }
   if (path === "/precios") return t.nav.pricing;
@@ -56,7 +56,9 @@ export function LandingPage({ landing: l, lang }: { landing: Landing; lang: Lang
     url,
     inLanguage: lang === "en" && !fallback ? "en" : "es-CO",
     provider: { "@id": `${SITE.url}/#organization` },
-    areaServed: l.city
+    areaServed: l.country
+      ? { "@type": "Country", name: l.country.nameEn }
+      : l.city
       ? { "@type": "City", name: l.city.name, containedInPlace: { "@type": "AdministrativeArea", name: l.city.region, containedInPlace: { "@type": "Country", name: "Colombia" } } }
       : [{ "@type": "Country", name: "Colombia" }, { "@type": "Place", name: "Latinoamérica" }, { "@type": "Country", name: "United States" }],
     keywords: copy.keywords.join(", "),

@@ -3,12 +3,13 @@ import { SERVICES } from "./services";
 import { GUIDES } from "./guides";
 import { INDUSTRIES } from "./industries";
 import { CITY_LANDINGS } from "./cities";
+import { COUNTRY_LANDINGS } from "./countries";
 import type { Landing, LandingCopy } from "./types";
 
 export type { Landing, LandingCopy };
-export { SERVICES, GUIDES, INDUSTRIES, CITY_LANDINGS };
+export { SERVICES, GUIDES, INDUSTRIES, CITY_LANDINGS, COUNTRY_LANDINGS };
 
-export const LANDINGS: Landing[] = [...SERVICES, ...GUIDES, ...INDUSTRIES, ...CITY_LANDINGS];
+export const LANDINGS: Landing[] = [...SERVICES, ...GUIDES, ...INDUSTRIES, ...CITY_LANDINGS, ...COUNTRY_LANDINGS];
 
 export const landingByPath = (path: string) => LANDINGS.find((l) => l.path === path);
 

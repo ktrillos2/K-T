@@ -38,6 +38,7 @@ export function pageLabel(href: string): string {
   const landing = landingByPath(path);
   if (landing) {
     const c = landingCopy(landing, lang).copy;
+    if (landing.kind === "pais" && landing.country) return lang === "en" ? `Web development in ${landing.country.nameEn}` : `Desarrollo web en ${landing.country.name}`;
     if (landing.kind === "ciudad" && landing.city) return lang === "en" ? `Web development in ${landing.city.name}` : `Desarrollo web en ${landing.city.name}`;
     if (landing.kind === "servicio") {
       const short = c.eyebrow.split("·").pop()?.trim();

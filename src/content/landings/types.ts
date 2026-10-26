@@ -1,7 +1,7 @@
 import type { Lang } from "@/i18n/config";
 import type { PlanId } from "@/lib/pricing";
 
-export type LandingKind = "servicio" | "industria" | "ciudad" | "guia";
+export type LandingKind = "servicio" | "industria" | "ciudad" | "pais" | "guia";
 
 export type LandingCopy = {
   /** Título para buscadores (sin la marca). */
@@ -37,5 +37,7 @@ export type Landing = {
   posts: string[];
   related: string[];
   city?: { name: string; region: string; lat: number; lng: number };
+  /** Páginas por país (kind "pais"): nombre en español e inglés y código ISO. */
+  country?: { name: string; nameEn: string; code: string; lat: number; lng: number };
   copy: Partial<Record<Lang, LandingCopy>> & { es: LandingCopy };
 };

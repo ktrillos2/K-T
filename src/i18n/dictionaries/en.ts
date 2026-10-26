@@ -519,7 +519,7 @@ const en: Dict = {
   },
 
   landing: {
-    crumbs: { servicio: "Services", industria: "Industries", ciudad: "Web development", guia: "Pricing" },
+    crumbs: { servicio: "Services", industria: "Industries", ciudad: "Web development", pais: "Web development", guia: "Pricing" },
     quote: "Get a quote on WhatsApp",
     seePricing: "See all prices",
     priceTitle: "Starting investment",
@@ -549,6 +549,9 @@ const en: Dict = {
         eyebrow: "industries",
         h1: "Industry-specific web development",
         lead: "Every sector sells differently. See how we adapt design, features and SEO to your industry, with real projects in production.",
+      },
+      paises: {
+        title: "Web development across Latin America and the US",
       },
       ciudades: {
         title: "Web development in Colombian cities",

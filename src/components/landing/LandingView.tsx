@@ -184,7 +184,7 @@ export function LandingView({ kind, color, plan, copy, blocks, projects, posts, 
           {projectViews.length > 0 && (
             <section className={styles.section} aria-labelledby="l-projects">
               <h2 id="l-projects" className={styles.h2}>
-                {kind === "ciudad" ? l.projectsCity : l.projects}
+                {kind === "ciudad" || kind === "pais" ? l.projectsCity : l.projects}
               </h2>
               <Reveal as="ul" stagger={0.07} className={styles.projects}>
                 {projectViews.map((p) => (
