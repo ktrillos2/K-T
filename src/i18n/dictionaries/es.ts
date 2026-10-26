@@ -6,7 +6,7 @@ const es = {
     siteDescription:
       "Estudio colombiano que diseña y desarrolla sitios web, tiendas virtuales y software a la medida. Cada proyecto con diseño único, sin plantillas. Desde Cúcuta para Colombia, Latinoamérica y Estados Unidos.",
     ogTitle: "K&T Code · Diseño único, código a la medida",
-    home: { title: "Desarrollo web a la medida con diseño único", description: "Sitios web, tiendas virtuales y software hechos desde cero para tu negocio. Sin plantillas, con carga en menos de un segundo. Estudio en Cúcuta, Colombia." },
+    home: { title: "Desarrollo web a la medida con diseño único", description: "Sitios web, tiendas virtuales y software hechos desde cero para tu negocio. K&T Code (KyT Code): sin plantillas y con carga en menos de un segundo. Estudio en Cúcuta, Colombia." },
     about: { title: "Nosotros", description: "K&T Code es un estudio de desarrollo web a la medida fundado en 2025 en San José de Cúcuta. Conoce a Keyner Trillos y cómo trabajamos, de la idea al lanzamiento." },
     projects: { title: "Proyectos", description: "23 sitios, tiendas y plataformas a la medida en producción para empresas de Colombia, México y Perú, con sus casos de estudio y resultados." },
     pricing: { title: "Precios", description: "Precios de desarrollo web a la medida: landing pages desde $450.000 COP, tiendas virtuales desde $1.300.000 COP, sitios corporativos y software. Precios en tu moneda." },

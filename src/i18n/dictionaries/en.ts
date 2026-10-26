@@ -6,7 +6,7 @@ const en: Dict = {
     siteDescription:
       "Colombian studio that designs and builds custom websites, online stores and software. Every project has a one-of-a-kind design, no templates. From Cúcuta to Latin America and the United States.",
     ogTitle: "K&T Code · Unique design, custom code",
-    home: { title: "Custom web development with one-of-a-kind design", description: "Websites, online stores and software built from scratch for your business. No templates, loading in under a second. Studio based in Cúcuta, Colombia." },
+    home: { title: "Custom web development with one-of-a-kind design", description: "Websites, online stores and software built from scratch for your business. K&T Code (KyT Code): no templates, loading in under a second. Studio in Cúcuta, Colombia." },
     about: { title: "About", description: "K&T Code is a custom web development studio founded in 2025 in Cúcuta, Colombia. Meet Keyner Trillos and how we work, from idea to launch." },
     projects: { title: "Projects", description: "23 custom websites, stores and platforms live for companies in Colombia, Mexico and Peru, each with its case study and results." },
     pricing: { title: "Pricing", description: "Custom web development pricing: landing pages, online stores, corporate websites and custom software. Prices shown in your local currency." },
