@@ -12,6 +12,7 @@ Objetivo: abrir mercados fuera de Colombia en Google. Cada corrida agrega **1 pa
 - Países ya publicados: `src/content/landings/countries.ts` (arreglo `COUNTRIES`).
 - Orden de prioridad (salta los que ya existan): Estados Unidos, Perú, Ecuador, Chile, Panamá, Costa Rica, Argentina, Guatemala, República Dominicana, Uruguay, Paraguay, Bolivia, El Salvador, Honduras.
 - Si el conector Keyword Tool está disponible (`keywordtool-suggestions-guest`, máximo 8 consultas), confirma la demanda con semillas como "diseño de páginas web", "desarrollo web", "cuanto cuesta una pagina web" y "tienda virtual" en ese país e idioma (para EE. UU. usa también inglés: "web design company", "web development agency", "hire web developer"). Si no está disponible, sigue el orden de prioridad.
+- Si Ubersuggest está conectado, mide 1 palabra clave del país con `keyword_overview` ("diseño de paginas web" o "web design company" para EE. UU.; `locId` de `location_suggest`). Máximo 1 reporte: el plan gratis da 3 al día.
 
 ## 2. Agregar el país
 
