@@ -60,6 +60,18 @@ export type ProjectView = Project & {
 
 const RAW: Project[] = [
   {
+    name: "KAILAB", slug: "kailab", site: "https://kailab.com.co", date: "2026-10", sector: "Tienda de péptidos para investigación", country: "Colombia", category: "ecommerce",
+    summary: "Tienda virtual bilingüe con catálogo por categorías, certificados de laboratorio verificables por lote y guías de preparación en cada producto.",
+    built: ["Catálogo por categorías con presentaciones y buscador", "Certificados de análisis publicados por lote, con enlace para verificarlos", "Guía de preparación con video y calculadora de unidades por producto", "Carrito y pagos con Wompi y USDT", "Versión en español e inglés"],
+    tags: ["E-commerce", "Bilingüe", "Pagos con Wompi"],
+  },
+  {
+    name: "XIX Olimpiadas de Robótica", slug: "olimpiadas-robotica-up", site: "https://olimpiadasroboticaup.com", date: "2026-10", sector: "Evento académico de robótica (Universidad de Pamplona)", city: "Cúcuta", country: "Colombia", category: "plataforma",
+    summary: "Plataforma del evento de robótica del Programa de Ingeniería Mecatrónica de la Universidad de Pamplona, con cuentas y preinscripción de equipos en línea.",
+    built: ["Cuentas de usuario con verificación de correo", "Preinscripción de equipos y carga del comprobante de pago", "9 categorías con su reglamento", "Tarifas por etapa y calendario del evento", "Registro histórico de ediciones anteriores y patrocinadores", "Desarrollado en colaboración con el Ing. Jeisson Martínez"],
+    tags: ["Plataforma a medida", "Inscripciones en línea", "Evento académico"],
+  },
+  {
     name: "GMX Gaming", slug: "gmx-gaming", site: "https://gmxgaming.com", date: "2026-09", sector: "Torneos de videojuegos", country: "México", category: "plataforma", featured: 1,
     summary: "Plataforma a medida para torneos de videojuegos que reemplazó un WordPress lento y automatizó las inscripciones.",
     built: ["Inscripción automática de jugadores y equipos", "Módulo de brackets para torneos", "Panel administrativo para gestionar competencias", "8 páginas con diseño inmersivo"],
