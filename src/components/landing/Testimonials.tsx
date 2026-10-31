@@ -5,6 +5,7 @@ import { COLOR_VAR } from "@/lib/routes";
 import { initialsOf } from "@/lib/projects";
 import { vars } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
+import { localizeTestimonial } from "@/i18n/testimonials.en";
 import { projectsFor } from "@/i18n";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { Reveal } from "@/components/motion/Reveal";
@@ -19,7 +20,7 @@ import styles from "./Testimonials.module.css";
 export function Testimonials({ reviews = TESTIMONIALS }: { reviews?: Testimonial[] }) {
   const { t, lang } = useI18n();
   const c = t.landing.testimonials;
-  const items = useMemo(() => reviewItems(reviews, projectsFor(lang)), [reviews, lang]);
+  const items = useMemo(() => reviewItems(reviews.map((r) => localizeTestimonial(r, lang)), projectsFor(lang)), [reviews, lang]);
   const wall = useRef<HTMLDivElement>(null);
   return (
     <>

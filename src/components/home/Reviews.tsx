@@ -6,6 +6,7 @@ import { COLOR_VAR } from "@/lib/routes";
 import { initialsOf } from "@/lib/projects";
 import { vars } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
+import { localizeTestimonial } from "@/i18n/testimonials.en";
 import { projectsFor } from "@/i18n";
 import { TESTIMONIALS, type Testimonial } from "@/content/testimonials";
 import type { ProjectView } from "@/lib/projects";
@@ -62,7 +63,7 @@ export function reviewItems(reviews: Testimonial[], projects: ProjectView[]): It
 export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: string; title?: string; lead?: string; reviews?: Testimonial[] }) {
   const { t, lang } = useI18n();
   const r = t.home.reviews;
-  const items = useMemo(() => reviewItems(reviews, projectsFor(lang)), [reviews, lang]);
+  const items = useMemo(() => reviewItems(reviews.map((r) => localizeTestimonial(r, lang)), projectsFor(lang)), [reviews, lang]);
   const n = items.length;
   const [active, setActive] = useState(() => Math.min(START, Math.max(0, items.length - 1)));
   const root = useRef<HTMLElement>(null);

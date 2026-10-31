@@ -1,6 +1,8 @@
 import es, { type Dict } from "./dictionaries/es";
 import en from "./dictionaries/en";
 import { PROJECTS_EN } from "./projects.en";
+import { TESTIMONIALS } from "@/content/testimonials";
+import { localizeTestimonial } from "./testimonials.en";
 import { PROJECTS, type ProjectView } from "@/lib/projects";
 import type { Lang } from "./config";
 
@@ -18,7 +20,10 @@ export function localizeProject(p: ProjectView, lang: Lang): ProjectView {
   if (lang !== "en") return p;
   const t = PROJECTS_EN[p.slug];
   const country = COUNTRY_EN[p.country] ?? p.country;
-  const base = { ...p, country, location: [p.city, country].filter(Boolean).join(", "), dateLabel: monthLabel(p.date, "en") };
+  const review = TESTIMONIALS.find((r) => r.project === p.slug);
+  const tr = review ? localizeTestimonial(review, "en") : undefined;
+  const testimonial = tr && p.testimonial ? { ...p.testimonial, quote: tr.message, role: tr.role ?? p.testimonial.role } : p.testimonial;
+  const base = { ...p, country, testimonial, location: [p.city, country].filter(Boolean).join(", "), dateLabel: monthLabel(p.date, "en") };
   if (!t) return base;
   return { ...base, sector: t.sector, summary: t.summary, built: t.built, tags: t.tags, results: t.results ?? p.results };
 }
