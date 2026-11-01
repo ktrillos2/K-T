@@ -52,6 +52,33 @@ const COUNTRIES: CountryData[] = [
       en: "We work with companies in Mexico City, Guadalajara, Monterrey and the whole country over video calls, with staged deliveries. We integrate the payment methods your Mexican customers use and optimize your site to rank on Google Mexico and in AI search.",
     },
   },
+  {
+    slug: "estados-unidos",
+    code: "US",
+    name: { es: "Estados Unidos", en: "the United States" },
+    lat: 38.9072,
+    lng: -77.0369,
+    color: "yellow",
+    projects: [],
+    posts: ["nearshore-desarrollo-web-latinoamerica", "pagina-web-pequeno-negocio-estados-unidos", "cuanto-cuesta-una-pagina-web-latinoamerica"],
+    payments: "Stripe, PayPal y tarjetas de crédito",
+    hours: {
+      es: "Colombia (UTC−5) coincide con la hora de Miami y Nueva York gran parte del año, y está a una o dos horas de Chicago y Houston: nearshore real, con reuniones en tu horario laboral.",
+      en: "Colombia (UTC−5) matches Miami and New York time for much of the year and is only one to two hours from Chicago and Houston: real nearshore, with meetings during your business day.",
+    },
+    sectors: {
+      es: ["Negocios locales y servicios a domicilio", "Comercio electrónico", "Inmobiliarias", "Salud y bienestar", "Servicios profesionales", "Startups y software (SaaS)"],
+      en: ["Local businesses and home services", "E-commerce", "Real estate", "Health and wellness", "Professional services", "Startups and SaaS"],
+    },
+    intro: {
+      es: "K&T Code diseña y desarrolla páginas web, tiendas virtuales y software a la medida para empresas de Estados Unidos, en remoto desde Colombia. Trabajamos en español e inglés, con diseño único, carga en menos de un segundo y el código a tu nombre.",
+      en: "K&T Code designs and builds custom websites, online stores and software for companies in the United States, remotely from Colombia. We work in English and Spanish, with a unique design, sub-second load times and the code in your name.",
+    },
+    local: {
+      es: "Atendemos negocios en Miami, Nueva York, Houston, Los Ángeles, Chicago y todo el país por videollamada, con entregas por etapas y comunicación en español o inglés. Integramos pagos con Stripe y PayPal y optimizamos tu sitio para aparecer en Google Estados Unidos y en los buscadores con IA, también para tu audiencia hispana.",
+      en: "We serve businesses in Miami, New York, Houston, Los Angeles, Chicago and across the country over video calls, with staged deliveries and communication in English or Spanish. We integrate Stripe and PayPal payments and optimize your site to rank on Google US and in AI search, including for your Hispanic audience.",
+    },
+  },
 ];
 
 const table = (c: CountryData, lang: "es" | "en") =>
