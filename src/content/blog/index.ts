@@ -7,6 +7,10 @@ import medida from "./posts/desarrollo-web-medida-vs-plantillas";
 import geo from "./posts/geo-vs-seo-diferencias-motores-ia";
 import { fromMarkdown } from "./markdown";
 import { formatCOP } from "@/lib/money";
+import md_pagina_web_para_restaurante_mexico from "./posts/es/pagina-web-para-restaurante-mexico";
+import en_pagina_web_para_restaurante_mexico from "./posts/en/pagina-web-para-restaurante-mexico";
+import md_precio_pagina_web_chile from "./posts/es/precio-pagina-web-chile";
+import en_precio_pagina_web_chile from "./posts/en/precio-pagina-web-chile";
 import md_cuanto_cuesta_administrar_facebook_ads_colombia from "./posts/es/cuanto-cuesta-administrar-facebook-ads-colombia";
 import en_cuanto_cuesta_administrar_facebook_ads_colombia from "./posts/en/cuanto-cuesta-administrar-facebook-ads-colombia";
 import md_que_es_el_remarketing_y_como_funciona from "./posts/es/que-es-el-remarketing-y-como-funciona";
@@ -130,6 +134,8 @@ const BODIES: Record<string, Partial<Record<Lang, PostBody>> & { es: PostBody }>
   "desarrollo-web-medida-vs-plantillas": medida,
   "geo-vs-seo-diferencias-motores-ia": geo,
   // Tendencias de búsqueda (es + en), generadas con la skill blog-tendencias.
+  "pagina-web-para-restaurante-mexico": { es: fromMarkdown(md_pagina_web_para_restaurante_mexico), en: fromMarkdown(en_pagina_web_para_restaurante_mexico) },
+  "precio-pagina-web-chile": { es: fromMarkdown(md_precio_pagina_web_chile), en: fromMarkdown(en_precio_pagina_web_chile) },
   "cuanto-cuesta-administrar-facebook-ads-colombia": { es: fromMarkdown(md_cuanto_cuesta_administrar_facebook_ads_colombia), en: fromMarkdown(en_cuanto_cuesta_administrar_facebook_ads_colombia) },
   "que-es-el-remarketing-y-como-funciona": { es: fromMarkdown(md_que_es_el_remarketing_y_como_funciona), en: fromMarkdown(en_que_es_el_remarketing_y_como_funciona) },
   "cuanto-cuesta-una-tienda-online-argentina": { es: fromMarkdown(md_cuanto_cuesta_una_tienda_online_argentina), en: fromMarkdown(en_cuanto_cuesta_una_tienda_online_argentina) },
