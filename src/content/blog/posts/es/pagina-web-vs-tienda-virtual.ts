@@ -36,7 +36,23 @@ Tabla: Página web corporativa frente a tienda virtual.
 
 ::widget price-calculator
 
-Lee también [landing page vs. tienda virtual](/blog/landing-page-vs-tienda-virtual) y [cuánto cuesta una página web en Colombia](/blog/cuanto-cuesta-una-pagina-web-en-colombia).
+## ¿Cómo te ayuda K&T Code? {#k-t-code}
+
+Empezamos por lo que tu negocio necesita hoy y dejamos el sitio listo para crecer: de una landing a una tienda completa, sin rehacerlo.
+
+Tabla: Servicios relacionados y precios de partida en tu moneda.
+| Necesitas | Servicio | Desde |
+|---|---|---|
+| Credibilidad y contactos | [Sitio corporativo](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
+| Una campaña o captación rápida | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| Vender productos con pagos en línea | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| Atraer clientes con publicidad | [Administración de Ads](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mes |
+
+Revisa los [precios](/precios), la [guía de precios de tienda virtual en Colombia](/precios/precio-tienda-virtual-colombia) y la de [página web](/precios/precio-pagina-web-colombia).
+
+## Conclusión {#conclusion}
+
+Si vendes servicios, empieza con una página web; si vendes productos con stock, una tienda virtual. Lee también [landing page vs. tienda virtual](/blog/landing-page-vs-tienda-virtual) y [cuánto cuesta una página web en Colombia](/blog/cuanto-cuesta-una-pagina-web-en-colombia).
 `,
   faq: [
     { q: "¿Puedo empezar con una página web y luego convertirla en tienda?", a: "Sí. Si el sitio está construido con código propio y bien estructurado, se pueden agregar carrito y pasarelas como Wompi o Bold sin rehacerlo desde cero." },

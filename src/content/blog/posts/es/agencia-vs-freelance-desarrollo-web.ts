@@ -41,6 +41,22 @@ Tabla: Freelance frente a agencia en Colombia.
 - Es un cambio pequeño en un sitio que ya existe
 :::
 
+## ¿Cómo te ayuda K&T Code? {#k-t-code}
+
+Somos una empresa constituida: contrato, factura electrónica, equipo de diseño, desarrollo y SEO, y soporte después del lanzamiento.
+
+Tabla: Servicios relacionados y precios de partida en tu moneda.
+| Necesitas | Servicio | Desde |
+|---|---|---|
+| Captar clientes con una página puntual | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| Vender con carrito y pagos | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| Un desarrollo a la medida de tu empresa | [Desarrollo web a medida](/servicios/desarrollo-web-a-medida) | {{cop:2500000}} |
+| Cuidar tu sitio después del lanzamiento | [Mantenimiento web](/servicios/mantenimiento-web) | Según alcance |
+
+Mira los [precios](/precios) o la [guía de precios de páginas web en Colombia](/precios/precio-pagina-web-colombia). Atendemos en [Bogotá](/desarrollo-web-bogota), [Medellín](/desarrollo-web-medellin) y [Cúcuta](/desarrollo-web-cucuta).
+
+## Conclusión {#conclusion}
+
 Si marcaste las primeras cuatro, te conviene un equipo formal. Lee también [cómo elegir una empresa de desarrollo web en Colombia](/blog/como-elegir-empresa-desarrollo-web-colombia) o mira nuestros [planes y precios](/precios).
 `,
   faq: [

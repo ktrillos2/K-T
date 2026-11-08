@@ -25,7 +25,7 @@ Table: WordPress vs. Next.js.
 
 ## When WordPress is the best option {#wordpress}
 
-WordPress powers more than 40% of the world's websites. It makes sense when:
+According to HTTP Archive's 2025 Web Almanac, WordPress runs on about 35% of websites. It makes sense when:
 
 - The initial budget is tight.
 - The site is purely editorial or a news blog.
@@ -40,7 +40,7 @@ WordPress powers more than 40% of the world's websites. It makes sense when:
 
 ## Performance compared {#performance}
 
-According to the CMS chapter of HTTP Archive's Web Almanac, sites on monolithic CMSs with heavy visual builders struggle to pass all three Core Web Vitals on mobile.
+According to the CMS chapter of HTTP Archive's 2025 Web Almanac (about 45% of WordPress sites pass Core Web Vitals on mobile), sites on monolithic CMSs with heavy visual builders struggle to pass all three Core Web Vitals on mobile.
 
 Table: Typical ranges in mobile tests (reference).
 | Metric | WordPress with a visual builder | Next.js in our projects |
@@ -57,7 +57,23 @@ Table: Typical ranges in mobile tests (reference).
 
 Yes. With headless WordPress, content is managed in the WordPress dashboard and the public site is custom-built, consuming that content through an API.
 
-Read [custom development vs. templates](/blog/desarrollo-web-medida-vs-plantillas) or see our [plans and pricing](/precios).
+## How K&T Code helps {#k-t-code}
+
+We build custom Next.js sites that are fast and secure, plus stores connected to Colombian payment gateways.
+
+Table: Related services and starting prices in your currency.
+| You need | Service | From |
+|---|---|---|
+| A fast site built in Next.js | [Next.js development](/servicios/desarrollo-nextjs) | Scope-based |
+| A custom corporate presence | [Corporate website](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
+| Sell with cart and payments | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| Better ranking on Google | [Technical SEO](/servicios/seo-tecnico) | Scope-based |
+
+See [pricing](/precios) or the [website pricing guide for Colombia](/precios/precio-pagina-web-colombia). If speed is your concern, read [the hidden cost of a slow website](/blog/costo-oculto-pagina-web-lenta).
+
+## Conclusion {#conclusion}
+
+WordPress fits blogs and tight budgets; Next.js fits companies that need speed, security and integrations. Read [custom development vs. templates](/blog/desarrollo-web-medida-vs-plantillas) or see our [plans and pricing](/precios).
 `,
   faq: [
     { q: "Is Next.js better than WordPress for a website?", a: "Next.js performs better on speed, has a smaller attack surface and more flexibility. WordPress is still practical for personal blogs and informational sites with a small initial budget." },
@@ -65,7 +81,7 @@ Read [custom development vs. templates](/blog/desarrollo-web-medida-vs-plantilla
     { q: "Which one costs more to maintain?", a: "WordPress usually needs more preventive maintenance: plugin updates, security patches and database optimization." },
   ],
   sources: [
-    { title: "HTTP Archive: Web Almanac 2024, CMS chapter", url: "https://almanac.httparchive.org/en/2024/cms" },
+    { title: "HTTP Archive: Web Almanac 2025, CMS chapter", url: "https://almanac.httparchive.org/en/2025/cms" },
     { title: "web.dev: Web Vitals", url: "https://web.dev/articles/vitals" },
     { title: "Chrome for Developers: Lighthouse", url: "https://developer.chrome.com/docs/lighthouse/overview" },
   ],

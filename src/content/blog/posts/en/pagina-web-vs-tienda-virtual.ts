@@ -36,7 +36,23 @@ Table: Corporate website vs. online store.
 
 ::widget price-calculator
 
-Also read [landing page vs. online store](/blog/landing-page-vs-tienda-virtual) and [how much a website costs in Colombia](/blog/cuanto-cuesta-una-pagina-web-en-colombia).
+## How K&T Code helps {#k-t-code}
+
+We start with what your business needs today and leave the site ready to grow: from a landing page to a full store, without rebuilding.
+
+Table: Related services and starting prices in your currency.
+| You need | Service | From |
+|---|---|---|
+| Credibility and leads | [Corporate website](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
+| A campaign or quick lead capture | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| Sell products with online payments | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| Bring customers with advertising | [Ads management](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mo |
+
+Check [pricing](/precios), the [online store pricing guide for Colombia](/precios/precio-tienda-virtual-colombia) and the [website one](/precios/precio-pagina-web-colombia).
+
+## Conclusion {#conclusion}
+
+If you sell services, start with a website; if you sell products with stock, an online store. Also read [landing page vs. online store](/blog/landing-page-vs-tienda-virtual) and [how much a website costs in Colombia](/blog/cuanto-cuesta-una-pagina-web-en-colombia).
 `,
   faq: [
     { q: "Can I start with a website and turn it into a store later?", a: "Yes. If the site is built with its own, well-structured code, you can add a cart and gateways such as Wompi or Bold without rebuilding it from scratch." },

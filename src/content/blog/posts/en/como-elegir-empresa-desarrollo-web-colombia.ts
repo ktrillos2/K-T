@@ -56,7 +56,23 @@ Make sure you receive the source code, the repository and access to the infrastr
 - Post-launch support is clearly defined
 :::
 
-Want a proposal? Tell us about your project in the [contact form](#contacto) or check [pricing](/precios).
+## How K&T Code helps {#k-t-code}
+
+We meet these five criteria: custom code, published prices, live projects, technical SEO from day one and code in your name.
+
+Table: Related services and starting prices in your currency.
+| You need | Service | From |
+|---|---|---|
+| A professional presence for your company | [Corporate website](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
+| Capture customers with a campaign | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| Sell online | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| Get found on Google | [Technical SEO](/servicios/seo-tecnico) | Scope-based |
+
+Compare everything on [pricing](/precios) or read the [website pricing guide for Colombia](/precios/precio-pagina-web-colombia). See also [web development in Bogotá](/desarrollo-web-bogota) or [in Cúcuta](/desarrollo-web-cucuta).
+
+## Conclusion {#conclusion}
+
+Pick the team that shows real projects, gives clear prices and leaves the code in your name. Want a proposal? Tell us about your project in the [contact form](#contacto) or check [pricing](/precios). If you hesitate between a team and an individual, read [agency vs. freelancer](/blog/agencia-vs-freelance-desarrollo-web).
 `,
   faq: [
     { q: "What should I ask a web development company before hiring?", a: "Real projects in production, a proposal with scope, price and timelines, a guarantee that the code and domain will be in your name, and the support terms after launch." },

@@ -41,6 +41,22 @@ Table: Freelancer vs. agency in Colombia.
 - It's a small change to a site that already exists
 :::
 
+## How K&T Code helps {#k-t-code}
+
+We are an incorporated company: contract, electronic invoicing, a design, development and SEO team, and support after launch.
+
+Table: Related services and starting prices in your currency.
+| You need | Service | From |
+|---|---|---|
+| Capture customers with a focused page | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| Sell with cart and payments | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| Development tailored to your company | [Custom web development](/servicios/desarrollo-web-a-medida) | {{cop:2500000}} |
+| Look after your site after launch | [Web maintenance](/servicios/mantenimiento-web) | Scope-based |
+
+See [pricing](/precios) or the [website pricing guide for Colombia](/precios/precio-pagina-web-colombia). We serve [Bogotá](/desarrollo-web-bogota), [Medellín](/desarrollo-web-medellin) and [Cúcuta](/desarrollo-web-cucuta).
+
+## Conclusion {#conclusion}
+
 If you checked the first four, a formal team suits you. Also read [how to choose a web development company in Colombia](/blog/como-elegir-empresa-desarrollo-web-colombia) or see our [plans and pricing](/precios).
 `,
   faq: [

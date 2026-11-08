@@ -56,7 +56,23 @@ Asegúrate de recibir el código fuente, el repositorio y el acceso a la infraes
 - Está claro el soporte después del lanzamiento
 :::
 
-¿Quieres una propuesta? Cuéntanos tu proyecto en el [formulario de contacto](#contacto) o revisa los [precios](/precios).
+## ¿Cómo te ayuda K&T Code? {#k-t-code}
+
+Cumplimos estos cinco criterios: código a la medida, precios publicados, proyectos en producción, SEO técnico desde el primer día y código a tu nombre.
+
+Tabla: Servicios relacionados y precios de partida en tu moneda.
+| Necesitas | Servicio | Desde |
+|---|---|---|
+| Presencia profesional para tu empresa | [Sitio corporativo](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
+| Captar clientes con una campaña | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
+| Vender en línea | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| Que te encuentren en Google | [SEO técnico](/servicios/seo-tecnico) | Según alcance |
+
+Compara todo en [precios](/precios) o lee la [guía de precios de páginas web en Colombia](/precios/precio-pagina-web-colombia). También puedes ver [desarrollo web en Bogotá](/desarrollo-web-bogota) o [en Cúcuta](/desarrollo-web-cucuta).
+
+## Conclusión {#conclusion}
+
+Elige a quien te muestre proyectos reales, precios claros y te deje el código a tu nombre. ¿Quieres una propuesta? Cuéntanos tu proyecto en el [formulario de contacto](#contacto) o revisa los [precios](/precios). Si dudas entre contratar un equipo o una persona, lee [agencia vs. freelance](/blog/agencia-vs-freelance-desarrollo-web).
 `,
   faq: [
     { q: "¿Qué debo pedirle a una empresa de desarrollo web antes de contratar?", a: "Proyectos reales en producción, una propuesta con alcance, precio y tiempos, la garantía de que el código y el dominio quedarán a tu nombre, y las condiciones de soporte después del lanzamiento." },

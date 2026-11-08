@@ -25,7 +25,7 @@ Tabla: WordPress frente a Next.js.
 
 ## Cuándo WordPress es la mejor opción {#wordpress}
 
-WordPress impulsa más del 40% de los sitios web del mundo. Conviene cuando:
+Según el Web Almanac 2025 de HTTP Archive, WordPress está en cerca del 35% de los sitios web. Conviene cuando:
 
 - El presupuesto inicial es ajustado.
 - El sitio es puramente editorial o un blog de noticias.
@@ -40,7 +40,7 @@ WordPress impulsa más del 40% de los sitios web del mundo. Conviene cuando:
 
 ## Rendimiento comparado {#rendimiento}
 
-Según el capítulo de CMS del Web Almanac de HTTP Archive, los sitios en CMS monolíticos con constructores visuales pesados tienen dificultades para aprobar las tres Core Web Vitals en móvil.
+Según el capítulo de CMS del Web Almanac 2025 de HTTP Archive (aprox. 45% de los sitios WordPress aprueban las Core Web Vitals en móvil), los sitios en CMS monolíticos con constructores visuales pesados tienen dificultades para aprobar las tres Core Web Vitals en móvil.
 
 Tabla: Rangos típicos en pruebas móviles (referencia).
 | Métrica | WordPress con constructor visual | Next.js en nuestros proyectos |
@@ -57,7 +57,23 @@ Tabla: Rangos típicos en pruebas móviles (referencia).
 
 Sí. Con WordPress headless, el contenido se administra en el panel de WordPress y el sitio público se construye a la medida, consumiendo ese contenido por API.
 
-Lee [desarrollo a la medida vs. plantillas](/blog/desarrollo-web-medida-vs-plantillas) o mira nuestros [planes y precios](/precios).
+## ¿Cómo te ayuda K&T Code? {#k-t-code}
+
+Construimos sitios en Next.js a la medida, rápidos y seguros, y también tiendas conectadas a pasarelas colombianas.
+
+Tabla: Servicios relacionados y precios de partida en tu moneda.
+| Necesitas | Servicio | Desde |
+|---|---|---|
+| Un sitio rápido hecho en Next.js | [Desarrollo Next.js](/servicios/desarrollo-nextjs) | Según alcance |
+| Presencia corporativa a la medida | [Sitio corporativo](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
+| Vender con carrito y pagos | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
+| Mejor posicionamiento en Google | [SEO técnico](/servicios/seo-tecnico) | Según alcance |
+
+Mira los [precios](/precios) o la [guía de precios de páginas web en Colombia](/precios/precio-pagina-web-colombia). Si tu duda es velocidad, lee [el costo oculto de una página web lenta](/blog/costo-oculto-pagina-web-lenta).
+
+## Conclusión {#conclusion}
+
+WordPress sirve para blogs y presupuestos ajustados; Next.js, para empresas que necesitan velocidad, seguridad e integraciones. Lee [desarrollo a la medida vs. plantillas](/blog/desarrollo-web-medida-vs-plantillas) o mira nuestros [planes y precios](/precios).
 `,
   faq: [
     { q: "¿Es mejor Next.js que WordPress para una página web?", a: "Next.js rinde mejor en velocidad, tiene menor superficie de ataque y más flexibilidad. WordPress sigue siendo práctico para blogs personales y sitios informativos con poco presupuesto inicial." },
@@ -65,7 +81,7 @@ Lee [desarrollo a la medida vs. plantillas](/blog/desarrollo-web-medida-vs-plant
     { q: "¿Cuál tiene mayor costo de mantenimiento?", a: "WordPress suele requerir más mantenimiento preventivo: actualizaciones de plugins, parches de seguridad y optimización de la base de datos." },
   ],
   sources: [
-    { title: "HTTP Archive: Web Almanac 2024, capítulo CMS", url: "https://almanac.httparchive.org/en/2024/cms" },
+    { title: "HTTP Archive: Web Almanac 2025, capítulo CMS", url: "https://almanac.httparchive.org/en/2025/cms" },
     { title: "web.dev: Web Vitals", url: "https://web.dev/articles/vitals" },
     { title: "Chrome for Developers: Lighthouse", url: "https://developer.chrome.com/docs/lighthouse/overview" },
   ],

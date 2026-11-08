@@ -81,6 +81,10 @@ const ES_ONLY: Seed[] = [
  */
 const REFRESHED: Record<string, string> = {
   "que-es-una-api-y-para-que-sirve": "2026-10-26",
+  "como-elegir-empresa-desarrollo-web-colombia": "2026-11-08",
+  "agencia-vs-freelance-desarrollo-web": "2026-11-08",
+  "nextjs-vs-wordpress": "2026-11-08",
+  "pagina-web-vs-tienda-virtual": "2026-11-08",
 };
 
 const BASE: PostMeta[] = ES_ONLY.map(([slug, category, date, minutes, title, description, tags, interactive]) => {
