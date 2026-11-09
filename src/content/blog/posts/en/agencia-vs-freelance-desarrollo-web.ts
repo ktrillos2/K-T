@@ -57,7 +57,7 @@ See [pricing](/precios) or the [website pricing guide for Colombia](/precios/pre
 
 ## Conclusion {#conclusion}
 
-If you checked the first four, a formal team suits you. Also read [how to choose a web development company in Colombia](/blog/como-elegir-empresa-desarrollo-web-colombia) or see our [plans and pricing](/precios).
+If you checked the first four, a formal team suits you. See our [plans and pricing](/precios).
 `,
   faq: [
     { q: "When is it better to hire a freelancer?", a: "For one-off tasks, tweaks to an existing site or very early projects with a low budget, where a delay or lack of support isn't critical." },

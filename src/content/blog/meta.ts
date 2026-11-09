@@ -116,7 +116,7 @@ const BILINGUAL: PostMeta[] = [
     interactive: true,
     featured: true,
     color: "green",
-    langs: ["es", "en"],
+    langs: ["es"],
     title: { es: "¿Cuánto Cuesta una Página Web en Colombia en 2026? Precios Reales y Guía", en: "How much does a website cost in Colombia in 2026? Real prices and guide" },
     description: {
       es: "Precios reales de landing pages, tiendas virtuales, sitios corporativos y software a la medida en Colombia, qué cambia el valor y una calculadora en tu moneda.",
@@ -198,7 +198,7 @@ const toCard = (p: PostMeta, lang: Lang): PostCard => {
 
 /** Artículos en el idioma pedido, del más reciente al más antiguo. */
 export const postsFor = (lang: Lang): PostCard[] =>
-  POSTS.slice()
+  POSTS.filter((p) => p.langs.includes(lang))
     .sort((a, b) => b.date.localeCompare(a.date))
     .map((p) => toCard(p, lang));
 

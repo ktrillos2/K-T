@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getDict } from "@/i18n";
 import { langOf, type LangParams } from "@/i18n/server";
 import { localize } from "@/i18n/config";
-import { CITY_LANDINGS, GUIDES, INDUSTRIES, SERVICES, landingCopy } from "@/content/landings";
+import { CITY_LANDINGS, GUIDES, INDUSTRIES, SERVICES, landingCopy, landingLangs, type Landing } from "@/content/landings";
 import { landingLabel } from "@/lib/landing-page";
 import { pageMeta } from "@/lib/seo";
 import { breadcrumbs, graph } from "@/lib/schema";
@@ -24,6 +24,7 @@ export default async function ServicesHub({ params }: LangParams) {
     const { copy } = landingCopy(s, lang);
     return { href: s.path, label: landingLabel(s.path, lang), text: copy.lead.split(". ").slice(0, 2).join(". ") + ".", color: s.color, plan: s.plan, meta: copy.facts[0]?.join(": ") };
   });
+  const published = (list: Landing[]) => list.filter((l) => landingLangs(l).includes(lang));
   return (
     <>
       <LandingHub
@@ -32,10 +33,10 @@ export default async function ServicesHub({ params }: LangParams) {
         lead={h.lead}
         items={items}
         extra={[
-          { title: t.nav.pricing, links: GUIDES.map((g) => ({ href: g.path, label: landingLabel(g.path, lang) })) },
-          { title: t.nav.industries, links: INDUSTRIES.map((g) => ({ href: g.path, label: landingLabel(g.path, lang) })) },
-          { title: t.landing.hubs.ciudades.title, links: CITY_LANDINGS.map((g) => ({ href: g.path, label: g.city!.name })) },
-        ]}
+          { title: t.nav.pricing, links: published(GUIDES).map((g) => ({ href: g.path, label: landingLabel(g.path, lang) })) },
+          { title: t.nav.industries, links: published(INDUSTRIES).map((g) => ({ href: g.path, label: landingLabel(g.path, lang) })) },
+          { title: t.landing.hubs.ciudades.title, links: published(CITY_LANDINGS).map((g) => ({ href: g.path, label: g.city!.name })) },
+        ].filter((group) => group.links.length > 0)}
       />
       <JsonLd
         data={graph(breadcrumbs(lang, [{ name: t.nav.services, path: "/servicios" }]), {

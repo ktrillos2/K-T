@@ -48,7 +48,7 @@ Table: Excel, generic ERP and custom software.
 
 ::widget roi-calculator
 
-See what it costs in [how much custom software costs](/blog/cuanto-cuesta-desarrollar-software-a-medida-colombia) or our [custom software](/servicios/software-a-medida) service.
+See our [custom software](/servicios/software-a-medida) service.
 `,
   faq: [
     { q: "When should I move off Excel?", a: "When several people edit it at once, you pass about 50 transactions a day, or an error in the file has already cost you money." },

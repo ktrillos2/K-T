@@ -19,4 +19,9 @@ export function landingCopy(l: Landing, lang: Lang): { copy: LandingCopy; fallba
   return c ? { copy: c, fallback: false } : { copy: l.copy.es, fallback: true };
 }
 
-export const landingLangs = (l: Landing): Lang[] => (l.copy.en ? ["es", "en"] : ["es"]);
+/** Landings con búsqueda solo en español: sus URLs en inglés se retiraron (ver EN_RETIRED en next.config.ts). */
+const SPANISH_ONLY_KINDS: Landing["kind"][] = ["guia", "industria", "ciudad"];
+const SPANISH_ONLY_PATHS = ["/desarrollo-web-mexico"];
+const isSpanishOnly = (l: Landing) => SPANISH_ONLY_KINDS.includes(l.kind) || SPANISH_ONLY_PATHS.includes(l.path);
+
+export const landingLangs = (l: Landing): Lang[] => (l.copy.en && !isSpanishOnly(l) ? ["es", "en"] : ["es"]);

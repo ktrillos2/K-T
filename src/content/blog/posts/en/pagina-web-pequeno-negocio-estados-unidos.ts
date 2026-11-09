@@ -20,7 +20,7 @@ Table: Website options for a small business.
 | Local agency | High | Retainer or hourly | High | Teams that want in-person meetings |
 | Custom build from a nearshore studio | Medium to high | Hosting and maintenance | Total (you own the code) | Growing businesses that value speed and SEO |
 
-Want a side-by-side of builders? Read [Wix vs. WordPress](/blog/wix-vs-wordpress-diferencias-precios) and [Agency vs. freelancer](/blog/agencia-vs-freelance-desarrollo-web).
+Deciding who should build it? Read [Agency vs. freelancer](/blog/agencia-vs-freelance-desarrollo-web).
 
 ## What drives the price {#precio}
 
@@ -89,7 +89,7 @@ Table: Services and starting prices in your currency.
 | Ranking on Google | [Technical SEO](/servicios/seo-tecnico) | Depends on scope |
 | Bring customers with Facebook, Instagram, TikTok and Google ads | [Ads management](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mo |
 
-On [pricing](/precios), choose United States to see every plan in US dollars, or read [how much a website costs in Latin America](/blog/cuanto-cuesta-una-pagina-web-latinoamerica).
+On [pricing](/precios), choose United States to see every plan in US dollars.
 
 ## Conclusion {#conclusion}
 

@@ -41,7 +41,7 @@ Table: SaaS vs. custom software.
 - I want to own my data
 :::
 
-To run the numbers with your own data, use our guide to [calculating ROI](/blog/calcular-roi-automatizacion-software-ia) and check [how much custom software costs](/blog/cuanto-cuesta-desarrollar-software-a-medida-colombia).
+
 `,
   faq: [
     { q: "When is custom software more profitable than SaaS?", a: "When licenses exceed roughly USD 500 to 1,000 a month, or when your operation needs customizations no SaaS allows." },

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { localize, LOCALES, type Lang } from "@/i18n/config";
 import { ROUTES } from "@/lib/routes";
 import { CONTENT_UPDATED, SITE } from "@/lib/site";
-import { PROJECTS } from "@/lib/projects";
+import { EN_INDEXED_PROJECT, PROJECTS } from "@/lib/projects";
 import { hasShot } from "@/lib/shots";
 import { POSTS } from "@/content/blog/meta";
 import { LANDINGS, landingLangs } from "@/content/landings";
@@ -51,12 +51,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         images: r.href === "/" ? [`${SITE.url}/og.png`] : undefined,
       }),
     ),
-    ...PROJECTS.flatMap((p) => entry(p.href, { lastModified: day(`${p.date}-15`), priority: 0.7, changeFrequency: "yearly", images: shot(p) })),
+    ...PROJECTS.flatMap((p) => entry(p.href, { lastModified: day(`${p.date}-15`), priority: 0.7, changeFrequency: "yearly", images: shot(p), langs: p.slug === EN_INDEXED_PROJECT ? LOCALES : ["es"] })),
     ...POSTS.flatMap((p) => entry(`/blog/${p.slug}`, { lastModified: day(p.updated ?? p.date), priority: 0.7, changeFrequency: "monthly", langs: p.langs })),
     ...LANDINGS.flatMap((l) =>
       entry(l.path, { lastModified: content, priority: l.kind === "servicio" || l.kind === "guia" ? 0.8 : 0.7, changeFrequency: "monthly", langs: landingLangs(l) }),
     ),
-    ...entry("/industrias", { lastModified: content, priority: 0.7, changeFrequency: "monthly" }),
+    ...entry("/industrias", { lastModified: content, priority: 0.7, changeFrequency: "monthly", langs: ["es"] }),
     ...entry("/testimonios", { lastModified: content, priority: 0.6, changeFrequency: "monthly" }),
     ...entry("/preguntas-frecuentes", { lastModified: content, priority: 0.7, changeFrequency: "monthly" }),
     ...entry("/autores/keyner-trillos", { lastModified: lastPost, priority: 0.5, changeFrequency: "monthly" }),

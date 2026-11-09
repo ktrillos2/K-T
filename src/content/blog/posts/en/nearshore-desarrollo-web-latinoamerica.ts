@@ -92,7 +92,7 @@ On [pricing](/precios), choose United States to see every plan in US dollars, or
 
 ## Conclusion {#conclusion}
 
-Nearshore development gives US companies the best of both worlds: the collaboration of a local team and the value of working with Latin America. If you're comparing options, see [how to choose a web development company](/blog/como-elegir-empresa-desarrollo-web-colombia) or [tell us about your project](/#contacto): we reply the same business day, in English.
+Nearshore development gives US companies the best of both worlds: the collaboration of a local team and the value of working with Latin America. If you're comparing options, [tell us about your project](/#contacto): we reply the same business day, in English.
 `,
   faq: [
     { q: "What is nearshore web development?", a: "It's hiring a web development team in a nearby country with overlapping time zones. For US companies, that usually means Latin America, such as Colombia or Mexico." },

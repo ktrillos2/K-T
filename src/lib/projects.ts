@@ -312,3 +312,6 @@ export const CATEGORY_LABEL: Record<ProjectCategory, string> = {
 export const AVG_SPEED = Math.round(
   PROJECTS.filter((p) => p.speed).reduce((a, p) => a + (p.speed?.after ?? 0), 0) / PROJECTS.filter((p) => p.speed).length,
 );
+
+/** Único caso indexado en inglés: los demás atienden a clientes que buscan en español. */
+export const EN_INDEXED_PROJECT = "gmx-gaming";
