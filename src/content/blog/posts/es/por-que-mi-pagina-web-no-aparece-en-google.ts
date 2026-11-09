@@ -11,7 +11,7 @@ Pagar por una página web y no encontrarla en Google es una de las frustraciones
 
 ## Primero: ¿tu web está indexada? {#diagnostico}
 
-Escribe en Google \`site:tudominio.com\`. Si aparecen páginas, están indexadas y el problema es de posicionamiento. Si no aparece nada, Google no ha podido o no ha querido guardar tu sitio. Luego revisa el informe de indexación de [Google Search Console](/blog/como-aparecer-en-google-guia-paso-a-paso).
+Escribe en Google \`site:tudominio.com\`. Si aparecen páginas, están indexadas y el problema es de posicionamiento. Si no aparece nada, Google no ha podido o no ha querido guardar tu sitio. Luego revisa el informe de indexación de Google Search Console.
 
 ## Las 12 causas más comunes {#causas}
 
@@ -76,23 +76,52 @@ Si tu sitio fue hackeado o infringió las políticas de Google, puede recibir un
 - No hay acciones manuales ni problemas de seguridad
 :::
 
+## Si tu web es nueva: 4 pasos para que Google la encuentre {#web-nueva}
+
+Aparecer en Google es gratis: no se paga por la indexación ni por los primeros lugares orgánicos. Si acabas de publicar y no tienes ninguno de los errores anteriores, esto es lo que falta.
+
+### Paso 1: verifica tu dominio en Search Console
+
+Entra a Google Search Console con la cuenta de tu empresa y agrega una propiedad de tipo **dominio**. Copia el registro TXT que te da Google, agrégalo en el DNS de tu dominio y pulsa **verificar**; puede tardar unos minutos.
+
+### Paso 2: envía el sitemap y pide indexar tus páginas clave
+
+En un sitio bien hecho, el sitemap se genera solo en \`tudominio.com/sitemap.xml\`. En Search Console, ve a **Sitemaps**, escribe la dirección y envíala. Luego, con la herramienta de inspección de URL, solicita la indexación de tu página de inicio y de tus servicios principales.
+
+### Paso 3: escribe títulos y descripciones únicos
+
+Tabla: Ejemplos de títulos para SEO local.
+| Página | Título débil | Título optimizado |
+|---|---|---|
+| Inicio | Inicio | Diseño web a la medida en Cúcuta · Mi Empresa |
+| Servicio | Servicios | Tiendas virtuales con pagos PSE y Nequi · Mi Empresa |
+| Contacto | Contacto | Cotiza tu página web en Colombia · Mi Empresa |
+
+Incluye el servicio principal y la ciudad cuando aplique, y haz que la descripción invite al clic: qué ofreces y por qué elegirte.
+
+### Paso 4: crea tu Perfil de Empresa en Google
+
+Si atiendes clientes en ciudades como Bogotá, Medellín, Cali o Cúcuta, el Perfil de Empresa en Google (antes Google My Business) te hace aparecer en Google Maps y en las búsquedas locales. Verifícalo, agrega fotos, horario y sitio web, y pide reseñas a tus clientes.
+
 ## ¿Necesitas ayuda? {#auditoria}
 
 Hacemos una auditoría técnica de tu dominio, encontramos los errores de indexación y, si hace falta, reconstruimos la web sobre una base rápida y bien estructurada. Conoce el servicio de [SEO técnico](/servicios/seo-tecnico).
 
 ## Sigue aprendiendo {#mas}
 
-- [Qué es el SEO y cómo funciona](/blog/que-es-el-seo-y-como-funciona-guia)
-- [Cómo aparecer en Google paso a paso](/blog/como-aparecer-en-google-guia-paso-a-paso)
-- [Por qué el SEO se planea desde la arquitectura](/blog/seo-desde-la-raiz-crear-pagina)
+- [Qué es el SEO y cómo funciona](/servicios/seo-tecnico)
+- [Por qué el SEO se planea desde la arquitectura](/blog/como-crear-una-pagina-web-desde-cero-2026)
 `,
   faq: [
     { q: "¿Cuánto tarda una web nueva en aparecer en Google?", a: "Normalmente entre 4 días y 3 semanas para las páginas principales, si se envió el sitemap en Search Console y no hay bloqueos como noindex." },
     { q: "¿Cómo sé si mi web está indexada?", a: "Busca site:tudominio.com en Google. Si aparecen páginas, están indexadas; si no aparece nada, hay un problema de rastreo o indexación." },
+    { q: "¿Es gratis aparecer en Google?", a: "Sí. Google no cobra por indexar tu sitio ni por los primeros lugares orgánicos; el posicionamiento depende de la calidad técnica y del contenido." },
   ],
   sources: [
     { title: "Google Search Central: bloquear la indexación con noindex", url: "https://developers.google.com/search/docs/crawling-indexing/block-indexing" },
     { title: "Google Search Console", url: "https://search.google.com/search-console/about" },
+    { title: "Google Search Central: crear y enviar un sitemap", url: "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap" },
+    { title: "Perfil de Empresa en Google", url: "https://www.google.com/business/" },
   ],
 };
 

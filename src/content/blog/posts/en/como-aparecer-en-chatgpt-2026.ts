@@ -35,7 +35,7 @@ Many sites allow the bots in robots.txt but block them with challenges or 403 er
 Structured data (schema.org in JSON-LD) tells models, unambiguously, who you are and what you offer.
 
 - **Organization or LocalBusiness:** legal name, logo, founders, address and official profiles (\`sameAs\`).
-- **Service and Product:** exact prices, currency (COP, USD), delivery times.
+- **Service and Product:** exact prices, currency (USD, EUR), delivery times.
 - **FAQPage:** direct questions and answers, easy to extract.
 - **BreadcrumbList:** your site's hierarchy.
 
@@ -45,20 +45,32 @@ Table: Content strategies that work with AI models.
 | Strategy | Why it works | Example |
 |---|---|---|
 | Definition in the first 40 words | The model extracts the answer without hunting for it | "An AI agent is an autonomous system that…" |
-| HTML tables | Interpreted better than messy lists | Prices in COP and delivery times |
-| Verifiable figures | Models prefer data to adjectives | "Landing pages from COP 450,000" |
+| HTML tables | Interpreted better than messy lists | Prices in USD and delivery times |
+| Verifiable figures | Models prefer data to adjectives | "Landing pages from USD 200" |
+
+### From promotional copy to citable copy
+
+"We are leaders in comprehensive solutions" tells a model nothing. "Custom web development studio in Cúcuta, Colombia; landing pages from USD 200; delivered in 7 to 12 days" does.
+
+Table: How to turn vague copy into something AI can cite.
+| Vague copy | Citable copy |
+|---|---|
+| Innovative web solutions | Websites, online stores and custom software |
+| Competitive prices | Landing pages from USD 200 |
+| Fast websites | The main content loads in under one second |
+| Extensive experience | More than 20 projects in production in Colombia, Mexico and Peru |
 
 ## The real hierarchy of GEO factors {#hierarchy}
 
 There are no magic files. What the OpenAI, Perplexity and Google teams describe is standard HTTP crawling of pages that are accessible, fast and indexable. In order of priority:
 
 1. **Crawling and server access:** allow OAI-SearchBot and PerplexityBot, don't block them at the firewall, and serve complete HTML from the server, fast.
-2. **Entity authority:** the same name, founders and services everywhere, linked with \`sameAs\` to verified registries and directories.
+2. **Entity authority:** to a model, your company is a name tied to a type of business, a place, some people and some services; if that data changes from one site to another, the entity becomes blurry. Use the same name, founders and services everywhere, invoices included, linked with \`sameAs\` to verified registries and directories.
 3. **Semantic structure and schema.org:** Organization, Service, Product, FAQPage and BreadcrumbList.
 4. **Direct, verifiable content:** answer first, tables and figures; no promotional filler.
-5. **External mentions and reviews:** press, directories and real reviews reinforce trust.
+5. **External mentions and reviews:** assistants cross-check what you say against what others say about you, so press, directories, documented success stories and real reviews reinforce trust.
 6. **Cross-channel consistency:** the same prices and data on your site, social media and directories.
-7. **llms.txt (optional):** a plain-text summary, useful only once everything above is solved. More in [the llms.txt guide](/blog/llms-txt-2026).
+7. **llms.txt (optional):** a plain-text summary, useful only once everything above is solved.
 
 :::checklist id="chatgpt-search" title="Checklist to show up in ChatGPT Search"
 - OAI-SearchBot is allowed in robots.txt
@@ -70,13 +82,41 @@ There are no magic files. What the OpenAI, Perplexity and Google teams describe 
 - I have reviews and mentions on third-party sites
 :::
 
+## llms.txt: what it is and how to publish it {#llms-txt}
+
+**/llms.txt** is a 2024 proposal for websites to offer language models a structured Markdown summary: who they are, what they sell, official prices and links to what matters. It comes last in the list above because it doesn't replace any of those factors.
+
+Table: Each file has a different job.
+| Standard | Purpose |
+|---|---|
+| robots.txt | What bots may crawl |
+| sitemap.xml | Which URLs exist and when they changed |
+| Structured data | Semantic relationships inside the HTML |
+| llms.txt | Plain-text summary for language models |
+
+Its advantage is economy: an agent that has to download 50 pages full of menus and scripts burns thousands of *tokens*; with llms.txt it gets the essential context in a single request of a few kilobytes.
+
+### What it should include
+
+1. **Title (H1):** the company name and what it does.
+2. **Quote (>):** the value proposition in one or two sentences, with geographic coverage.
+3. **Company information:** official name, site, founding year, headquarters and contact.
+4. **Main services:** each with its starting price and currency.
+5. **Key links:** pricing, services, case studies and blog.
+
+You can see ours at [/llms.txt](/llms.txt) and an extended version with all our cases and articles at [/llms-full.txt](/llms-full.txt).
+
+### How to publish it
+
+- Serve it at the root (yourdomain.com/llms.txt), as UTF-8 plain text with a 200 code.
+- Generate it from your site's own data (prices, services, cases) so it **never contradicts** the website.
+- Cache it for a day and regenerate it when your prices change.
+- Allow access in robots.txt to the AI crawlers you care about.
+
 ## Keep learning {#more}
 
-- [What SEO is and how it works](/blog/que-es-el-seo-y-como-funciona-guia)
+- [What SEO is and how it works](/servicios/seo-tecnico)
 - [GEO vs. SEO](/blog/geo-vs-seo-diferencias-motores-ia)
-- [How to get AI to cite your brand](/blog/seo-para-chatgpt-optimizacion-ia)
-- [Google AI Overviews and AI Mode](/blog/google-ai-overviews-ai-mode-seo)
-- [How to measure your visibility in ChatGPT and Gemini](/blog/medir-visibilidad-chatgpt-gemini-google-ai-mode)
 
 Want us to set it up for you? See our [technical SEO](/servicios/seo-tecnico) service.
 `,
@@ -85,11 +125,17 @@ Want us to set it up for you? See our [technical SEO](/servicios/seo-tecnico) se
     { q: "Do I have to allow GPTBot to appear in ChatGPT Search?", a: "No. You can allow OAI-SearchBot and block GPTBot. Allowing both helps models know your brand better." },
     { q: "What is GEO?", a: "Generative Engine Optimization: the set of technical and content practices that help AI engines recognize and cite your company." },
     { q: "Does structured data help AI cite me?", a: "Yes. Types such as Organization, Service, Product and FAQPage explicitly describe who you are, what you sell and at what price." },
+    { q: "Do I need a blog to appear in ChatGPT?", a: "It helps a lot. A blog with comparisons and clear answers gives models the material they need to cite you as a reference in your industry." },
+    { q: "Does traditional SEO still work for AI?", a: "Yes. Heading hierarchy, speed, structured data and a clean sitemap are still the foundation that lets AI crawlers read and evaluate a site." },
+    { q: "Is llms.txt required to appear in ChatGPT?", a: "No. It's a voluntary proposal. What decides it is that crawlers can access your site, that the HTML has the content and that your company's information is clear and consistent." },
+    { q: "What's the difference between llms.txt and llms-full.txt?", a: "llms.txt is a summary with links; llms-full.txt includes the complete content (cases, articles) in plain text so a model doesn't have to visit every page." },
   ],
   sources: [
     { title: "OpenAI: Overview of OpenAI crawlers", url: "https://platform.openai.com/docs/bots" },
     { title: "Google Search Central: AI features and your website", url: "https://developers.google.com/search/docs/appearance/ai-features" },
     { title: "Schema.org", url: "https://schema.org/" },
+    { title: "The llms.txt proposal", url: "https://llmstxt.org/" },
+    { title: "K&T Code: llms.txt", url: "https://www.kytcode.lat/llms.txt" },
   ],
 };
 

@@ -64,7 +64,7 @@ Si recibes decenas de mensajes al día, la app se queda corta. La **API oficial 
 - **Cobrar dentro del chat** y emitir la factura electrónica automáticamente.
 - **Mensajes masivos permitidos** con plantillas aprobadas por Meta (con costo por mensaje según la categoría).
 
-Te lo explicamos en detalle en [cómo automatizar WhatsApp Business con IA](/blog/automatizar-whatsapp-business-con-ia) y en [cómo integrarlo con inventario y facturación](/blog/integrar-whatsapp-crm-inventario-facturacion).
+Te lo explicamos en detalle en [cómo automatizar WhatsApp Business con IA](/blog/automatizar-whatsapp-business-con-ia) y en [cómo integrarlo con inventario y facturación](/blog/automatizar-whatsapp-business-con-ia).
 
 ## Pon a prueba lo que aprendiste {#quiz}
 
@@ -98,7 +98,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Agente de IA en WhatsApp conectado a inventario y facturación | [Software a medida](/servicios/software-a-medida) | {{cop:4500000}} |
 | Atraer clientes con publicidad en Facebook, Instagram, TikTok y Google | [Administración de Ads](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mes |
 
-Compara en [precios](/precios) o revisa [cuánto cuesta una tienda virtual en Colombia](/precios/precio-tienda-virtual-colombia).
+Compara en [precios](/precios) o revisa [cuánto cuesta una tienda virtual en Colombia](/blog/cuanto-cuesta-una-tienda-virtual-en-colombia-2026).
 
 ## Conclusión {#conclusion}
 

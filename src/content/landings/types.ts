@@ -1,7 +1,7 @@
 import type { Lang } from "@/i18n/config";
 import type { PlanId } from "@/lib/pricing";
 
-export type LandingKind = "servicio" | "industria" | "ciudad" | "pais" | "guia";
+export type LandingKind = "servicio" | "industria" | "ciudad" | "pais";
 
 export type LandingCopy = {
   /** Título para buscadores (sin la marca). */

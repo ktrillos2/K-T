@@ -89,7 +89,7 @@ const RAW: Landing[] = [
     plan: "corporativo",
     serviceType: "Desarrollo web para ingeniería y construcción",
     projects: ["eccocia", "nosky-group", "eccodotaciones"],
-    posts: ["como-crear-pagina-web-profesional", "como-elegir-empresa-desarrollo-web-colombia"],
+    posts: ["como-crear-una-pagina-web-desde-cero-2026", "como-elegir-empresa-desarrollo-web-colombia"],
     related: ["/servicios/diseno-web-corporativo", I("ecommerce-b2b"), I("desarrollo-web-inmobiliarias")],
     copy: {
       es: base({
@@ -124,7 +124,7 @@ const RAW: Landing[] = [
     plan: "tienda",
     serviceType: "E-commerce B2B",
     projects: ["telas-real", "occ-partes", "eccodotaciones"],
-    posts: ["cuanto-cuesta-una-tienda-virtual-en-colombia-2026", "integrar-whatsapp-crm-inventario-facturacion", "excel-vs-erp-vs-software-a-medida"],
+    posts: ["cuanto-cuesta-una-tienda-virtual-en-colombia-2026", "automatizar-whatsapp-business-con-ia", "excel-vs-erp-vs-software-a-medida"],
     related: ["/servicios/tiendas-virtuales", "/servicios/software-a-medida", I("desarrollo-web-ingenieria")],
     copy: {
       es: base({
@@ -159,7 +159,7 @@ const RAW: Landing[] = [
     plan: "corporativo",
     serviceType: "Desarrollo web para turismo",
     projects: ["aerolinea-santander", "estrella-de-david", "chevere-bogota-travel"],
-    posts: ["landing-page-vs-tienda-virtual", "seo-para-chatgpt-optimizacion-ia"],
+    posts: ["landing-page-vs-tienda-virtual", "como-aparecer-en-chatgpt-2026"],
     related: ["/servicios/landing-pages", "/servicios/diseno-web-corporativo", I("desarrollo-web-estetica")],
     copy: {
       es: base({
@@ -264,7 +264,7 @@ const RAW: Landing[] = [
     plan: "corporativo",
     serviceType: "Desarrollo web editorial",
     projects: ["causalidad-dinamica", "academia-sea"],
-    posts: ["seo-desde-la-raiz-crear-pagina", "llms-txt-2026", "geo-vs-seo-diferencias-motores-ia"],
+    posts: ["como-crear-una-pagina-web-desde-cero-2026", "como-aparecer-en-chatgpt-2026", "geo-vs-seo-diferencias-motores-ia"],
     related: ["/servicios/seo-tecnico", "/servicios/diseno-web-corporativo", "/servicios/landing-pages"],
     copy: {
       es: base({

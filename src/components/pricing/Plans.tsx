@@ -28,7 +28,7 @@ export const choosePlan = (id: PlanId) => window.dispatchEvent(new CustomEvent("
  * En móvil son un carrusel con desplazamiento por pasos.
  */
 export function Plans() {
-  const { t, country } = useI18n();
+  const { t, country, quotedAbroad } = useI18n();
   const pr = t.pricing;
   const root = useRef<HTMLElement>(null);
   const rail = useRef<HTMLDivElement>(null);
@@ -135,7 +135,7 @@ export function Plans() {
                   </div>
                   <h3 className={cx("display", styles.name)}>{c.name}</h3>
                   <p className={styles.price}>
-                    <span className={styles.from}>{t.price.from}</span>
+                    {!quotedAbroad(p) && <span className={styles.from}>{t.price.from}</span>}
                     <span className={cx("display", styles.amount)} data-amount>
                       <Price cop={p.from} showCode={false} />
                     </span>

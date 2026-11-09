@@ -12,7 +12,7 @@ export const SERVICES: Landing[] = [
     serviceType: "Diseño y desarrollo de landing pages",
     projects: ["aerolinea-santander", "causalidad-dinamica", "gmx-gaming"],
     posts: ["que-es-una-landing-page-y-para-que-sirve", "landing-page-vs-tienda-virtual", "cuanto-cuesta-una-pagina-web-en-colombia"],
-    related: [S("tiendas-virtuales"), S("diseno-web-corporativo"), "/precios/precio-pagina-web-colombia"],
+    related: [S("tiendas-virtuales"), S("diseno-web-corporativo")],
     copy: {
       es: {
         title: "Landing pages a la medida en Colombia: diseño que convierte",
@@ -42,11 +42,11 @@ export const SERVICES: Landing[] = [
       },
       en: {
         title: "Custom landing pages that convert",
-        description: "We design custom landing pages for campaigns and lead generation: unique design, sub-second loading and WhatsApp built in. From 450,000 COP, delivered in 7 to 12 days.",
+        description: "We design custom landing pages for campaigns and lead generation: unique design, sub-second loading and WhatsApp built in. From 200 USD, delivered in 7 to 12 days.",
         eyebrow: "services · landing pages",
         h1: "Landing pages that turn visits into customers",
-        lead: "A landing page is a simple, single-page website focused on one goal: getting the visitor to message you, sign up or buy. At K&T Code we design it from scratch for your brand and campaign, it loads in under a second and connects straight to your WhatsApp. From 450,000 COP, ready in 7 to 12 days.",
-        facts: [["From", "450,000 COP"], ["Delivery", "7 to 12 days"], ["Sections", "Up to 5"], ["Speed", "Under 1 s"]],
+        lead: "A landing page is a simple, single-page website focused on one goal: getting the visitor to message you, sign up or buy. At K&T Code we design it from scratch for your brand and campaign, it loads in under a second and connects straight to your WhatsApp. From 200 USD, ready in 7 to 12 days.",
+        facts: [["From", "200 USD"], ["Delivery", "7 to 12 days"], ["Sections", "Up to 5"], ["Speed", "Under 1 s"]],
         includesTitle: "What's included",
         includes: [
           { t: "Unique design", d: "Built for your ideal customer and campaign, not a recycled template." },
@@ -59,7 +59,7 @@ export const SERVICES: Landing[] = [
         forWhoTitle: "Best for",
         forWho: ["Meta Ads or Google Ads campaigns", "Product or service launches", "Professionals who need a fast presence", "Validating an idea before a full website"],
         faqs: [
-          { q: "How much does a landing page cost?", a: "At K&T Code a custom landing page starts at 450,000 COP and includes unique design, up to 5 sections, WhatsApp, form and initial SEO." },
+          { q: "How much does a landing page cost?", a: "At K&T Code a custom landing page starts at 200 USD and includes unique design, up to 5 sections, WhatsApp, form and initial SEO." },
           { q: "How long does it take?", a: "7 to 12 days once we have your copy and brand assets." },
           { q: "Can it become a full website later?", a: "Yes. Since the code is yours, pages, a blog or a store can be added without rebuilding it." },
         ],
@@ -76,7 +76,7 @@ export const SERVICES: Landing[] = [
     serviceType: "Desarrollo de tiendas virtuales",
     projects: ["telas-real", "motofox", "traum-drop", "eccodotaciones", "eklipse-home-textil", "occ-partes"],
     posts: ["cuanto-cuesta-una-tienda-virtual-en-colombia-2026", "wompi-vs-mercado-pago-vs-payu-colombia", "como-crear-una-tienda-online-desde-cero", "shopify-vs-woocommerce-colombia"],
-    related: [S("woocommerce-headless"), S("landing-pages"), "/precios/precio-tienda-virtual-colombia"],
+    related: [S("woocommerce-headless"), S("landing-pages")],
     copy: {
       es: {
         title: "Tiendas virtuales a la medida en Colombia con PSE, Nequi y tarjeta",
@@ -106,11 +106,11 @@ export const SERVICES: Landing[] = [
       },
       en: {
         title: "Custom online stores with local payments",
-        description: "We build custom online stores with Wompi, Bold or PayU, a self-managed catalog, national shipping and WhatsApp orders. No platform fees. From 1,300,000 COP.",
+        description: "We build custom online stores with the payment gateway your market uses, a self-managed catalog and WhatsApp orders. No platform fees. From 450 USD.",
         eyebrow: "services · online stores",
         h1: "Online stores that sell while you sleep",
-        lead: "An online store is a website where customers browse your products, add them to a cart and pay online. Built custom, it lets you sell 24/7 with the payment methods Colombians use: PSE, Nequi and cards. At K&T Code we build it around your catalog, with gateways like Wompi, Bold or PayU and a panel to manage orders, with no platform fee on each sale. From 1,300,000 COP.",
-        facts: [["From", "1,300,000 COP"], ["Delivery", "25 to 40 days"], ["Payments", "PSE, Nequi, cards"], ["Platform fee", "0%"]],
+        lead: "An online store is a website where customers browse your products, add them to a cart and pay online. Built custom, it lets you sell 24/7 with the payment methods your customers use. At K&T Code we build it around your catalog, with the right payment gateway and a panel to manage orders, with no platform fee on each sale. From 450 USD.",
+        facts: [["From", "450 USD"], ["Delivery", "25 to 40 days"], ["Payments", "PSE, Nequi, cards"], ["Platform fee", "0%"]],
         includesTitle: "What's included",
         includes: [
           { t: "Self-managed catalog", d: "Categories, variants, photos and prices you update yourself." },
@@ -123,7 +123,7 @@ export const SERVICES: Landing[] = [
         forWhoTitle: "Best for",
         forWho: ["Fashion, home, tech or food brands", "Distributors and wholesalers with large catalogs", "Businesses selling only on Instagram or WhatsApp today", "Stores on fee-based platforms that want independence"],
         faqs: [
-          { q: "How much does an online store cost?", a: "With K&T Code it starts at 1,300,000 COP, with local gateways included and no platform fee per sale. Domain, hosting and gateway fees are separate." },
+          { q: "How much does an online store cost?", a: "With K&T Code it starts at 450 USD, with your payment gateway included and no platform fee per sale. Domain, hosting and gateway fees are separate." },
           { q: "Which payment gateways do you integrate?", a: "Wompi, Bold, PayU and Mercado Pago, with PSE, Nequi, Daviplata and cards." },
           { q: "Can I manage products myself?", a: "Yes. You get a panel to create products, change prices, see orders and control stock." },
         ],
@@ -139,7 +139,7 @@ export const SERVICES: Landing[] = [
     plan: "corporativo",
     serviceType: "Desarrollo web a la medida",
     projects: ["cxellence-group", "qvareli", "casa-medina", "gmx-gaming"],
-    posts: ["desarrollo-web-medida-vs-plantillas", "como-crear-pagina-web-2026", "como-elegir-empresa-desarrollo-web-colombia"],
+    posts: ["desarrollo-web-medida-vs-plantillas", "como-crear-una-pagina-web-desde-cero-2026", "como-elegir-empresa-desarrollo-web-colombia"],
     related: [S("diseno-web-corporativo"), S("software-a-medida"), S("seo-tecnico")],
     copy: {
       es: {
@@ -173,7 +173,7 @@ export const SERVICES: Landing[] = [
         eyebrow: "services · custom web development",
         h1: "Custom web development: your brand, not a template",
         lead: "Custom web development means designing and coding your site from scratch for your business, with no purchased themes or visual builders. The result is a unique website that loads in under a second, shows up on Google and is 100% yours. K&T Code builds it from Cúcuta, Colombia for companies across Latin America and the United States.",
-        facts: [["Landing", "From 450,000 COP"], ["Corporate", "From 2,500,000 COP"], ["Store", "From 1,300,000 COP"], ["Code", "100% yours"]],
+        facts: [["Landing", "From 200 USD"], ["Corporate", "Quoted"], ["Store", "From 450 USD"], ["Code", "100% yours"]],
         includesTitle: "Why custom",
         includes: [
           { t: "Designed from scratch", d: "Your interface comes from your brand and customers, not a theme shared by thousands of sites." },
@@ -187,7 +187,7 @@ export const SERVICES: Landing[] = [
         forWho: ["Companies that want to stand out", "Businesses with slow or template-based sites", "Brands that need features no template offers", "Teams that want to own their technology"],
         faqs: [
           { q: "What is custom web development?", a: "Designing and coding a site from scratch for a specific business, without templates or visual builders, with code that belongs to the client." },
-          { q: "Is it more expensive than a template?", a: "Up front, yes, but it avoids licenses, plugins and redesigns and usually converts better. A custom landing page starts at 450,000 COP." },
+          { q: "Is it more expensive than a template?", a: "Up front, yes, but it avoids licenses, plugins and redesigns and usually converts better. A custom landing page starts at 200 USD." },
         ],
         keywords: ["custom web development", "custom website", "bespoke web design"],
       },
@@ -202,7 +202,7 @@ export const SERVICES: Landing[] = [
     serviceType: "Desarrollo de software a medida",
     projects: ["gmx-gaming", "brahneyker", "brambila-inmobiliaria", "autos-saldo"],
     posts: ["cuanto-cuesta-desarrollar-software-a-medida-colombia", "software-a-medida-vs-saas-comparativa", "agentes-ia-empresas-colombia", "calcular-roi-automatizacion-software-ia"],
-    related: [S("desarrollo-web-a-medida"), "/precios/precio-software-a-medida", S("mantenimiento-web")],
+    related: [S("desarrollo-web-a-medida"), S("mantenimiento-web")],
     copy: {
       es: {
         title: "Software a medida en Colombia: plataformas, paneles y automatización con IA",
@@ -232,11 +232,11 @@ export const SERVICES: Landing[] = [
       },
       en: {
         title: "Custom software: platforms, dashboards and AI automation",
-        description: "We build custom software: admin panels, SaaS platforms, integrations with invoicing, payments and WhatsApp, and AI agents. From 4,500,000 COP, with the code in your name.",
+        description: "We build custom software: admin panels, SaaS platforms, integrations with invoicing, payments and WhatsApp, and AI agents. From 1,000 USD, with the code in your name.",
         eyebrow: "services · custom software",
         h1: "Custom software to automate your operation",
-        lead: "Custom software is a system built for your company's exact processes: admin panels, client portals, SaaS platforms or AI automations. At K&T Code we build it in stages, with users and roles, integrations for invoicing, payments and WhatsApp, and the code in your name. From 4,500,000 COP.",
-        facts: [["From", "4,500,000 COP"], ["Delivery", "4 to 12 weeks"], ["Model", "In stages"], ["Code", "100% yours"]],
+        lead: "Custom software is a system built for your company's exact processes: admin panels, client portals, SaaS platforms or AI automations. At K&T Code we build it in stages, with users and roles, integrations for invoicing, payments and WhatsApp, and the code in your name. From 1,000 USD.",
+        facts: [["From", "1,000 USD"], ["Delivery", "4 to 12 weeks"], ["Model", "In stages"], ["Code", "100% yours"]],
         includesTitle: "What we build",
         includes: [
           { t: "Admin panels", d: "Inventory, orders, customers and reports in one place." },
@@ -249,7 +249,7 @@ export const SERVICES: Landing[] = [
         forWhoTitle: "Best for",
         forWho: ["Companies running on spreadsheets and WhatsApp", "Teams paying for many SaaS licenses", "Processes no generic software handles", "Startups launching their own platform"],
         faqs: [
-          { q: "How much does custom software cost?", a: "An admin panel or MVP is usually 4.5 to 9 million COP; a B2B portal 9 to 18 million COP; a full SaaS platform from 18 million COP." },
+          { q: "How much does custom software cost?", a: "Custom systems start at 1,000 USD and are quoted per project, depending on modules, integrations and users." },
           { q: "Who owns the code?", a: "Your company: the source code, database and intellectual property are yours." },
         ],
         keywords: ["custom software", "software development Colombia", "AI automation"],
@@ -264,8 +264,8 @@ export const SERVICES: Landing[] = [
     plan: "corporativo",
     serviceType: "Diseño web corporativo",
     projects: ["cxellence-group", "eccocia", "nosky-group", "academia-sea", "psicowork", "estrella-de-david"],
-    posts: ["como-crear-pagina-web-profesional", "como-elegir-empresa-desarrollo-web-colombia", "pagina-web-vs-tienda-virtual"],
-    related: [S("desarrollo-web-a-medida"), S("seo-tecnico"), "/precios/precio-pagina-web-colombia"],
+    posts: ["como-crear-una-pagina-web-desde-cero-2026", "como-elegir-empresa-desarrollo-web-colombia", "landing-page-vs-tienda-virtual"],
+    related: [S("desarrollo-web-a-medida"), S("seo-tecnico")],
     copy: {
       es: {
         title: "Diseño web corporativo en Colombia: sitios que generan confianza",
@@ -294,11 +294,11 @@ export const SERVICES: Landing[] = [
       },
       en: {
         title: "Corporate web design that builds trust",
-        description: "We design custom corporate websites: up to 8 pages, services, portfolio, testimonials, technical SEO and analytics. From 2,500,000 COP, delivered in 15 to 25 days.",
+        description: "We design custom corporate websites: up to 8 pages, services, portfolio, testimonials, technical SEO and analytics. Quoted per project, delivered in 15 to 25 days.",
         eyebrow: "services · corporate web design",
         h1: "Corporate websites that build trust and win clients",
-        lead: "A corporate website presents your company to clients, partners and investors: who you are, what you do, who you've helped and how to reach you. At K&T Code we design it custom with up to 8 pages, portfolio, testimonials, technical SEO and analytics, ready to win B2B clients. From 2,500,000 COP.",
-        facts: [["From", "2,500,000 COP"], ["Delivery", "15 to 25 days"], ["Pages", "Up to 8"], ["Includes", "Technical SEO"]],
+        lead: "A corporate website presents your company to clients, partners and investors: who you are, what you do, who you've helped and how to reach you. At K&T Code we design it custom with up to 8 pages, portfolio, testimonials, technical SEO and analytics, ready to win B2B clients. Quoted per project.",
+        facts: [["Price", "Quoted per project"], ["Delivery", "15 to 25 days"], ["Pages", "Up to 8"], ["Includes", "Technical SEO"]],
         includesTitle: "What's included",
         includes: [
           { t: "Up to 8 pages", d: "Home, about, services, portfolio, testimonials, blog and contact." },
@@ -311,7 +311,7 @@ export const SERVICES: Landing[] = [
         forWhoTitle: "Best for",
         forWho: ["B2B, industrial and service companies", "Engineering, consulting and healthcare firms", "Companies bidding on tenders", "Brands with an outdated site"],
         faqs: [
-          { q: "How much does a corporate website cost?", a: "With K&T Code it starts at 2,500,000 COP, with up to 8 pages, exclusive design, technical SEO and analytics." },
+          { q: "How much does a corporate website cost?", a: "With K&T Code it is quoted per project, with up to 8 pages, exclusive design, technical SEO and analytics." },
           { q: "Can I edit the content later?", a: "Yes. It includes a panel to edit copy, projects and articles." },
         ],
         keywords: ["corporate web design", "business website", "corporate website"],
@@ -326,7 +326,7 @@ export const SERVICES: Landing[] = [
     plan: "corporativo",
     serviceType: "Desarrollo web con Next.js",
     projects: ["gmx-gaming", "telas-real", "qvareli"],
-    posts: ["nextjs-vs-wordpress", "nextjs-vs-react", "seo-desde-la-raiz-crear-pagina"],
+    posts: ["nextjs-vs-wordpress", "como-crear-una-pagina-web-desde-cero-2026"],
     related: [S("desarrollo-web-a-medida"), S("woocommerce-headless"), S("seo-tecnico")],
     copy: {
       es: {
@@ -388,8 +388,8 @@ export const SERVICES: Landing[] = [
     plan: "tienda",
     serviceType: "E-commerce headless",
     projects: ["telas-real", "motofox", "traum-drop"],
-    posts: ["que-es-un-ecommerce-headless-ventajas", "shopify-vs-woocommerce-colombia", "cuanto-cuesta-una-tienda-virtual-en-colombia-2026"],
-    related: [S("tiendas-virtuales"), S("desarrollo-nextjs"), "/precios/precio-tienda-virtual-colombia"],
+    posts: ["shopify-vs-woocommerce-colombia", "cuanto-cuesta-una-tienda-virtual-en-colombia-2026"],
+    related: [S("tiendas-virtuales"), S("desarrollo-nextjs")],
     copy: {
       es: {
         title: "WooCommerce headless y e-commerce desacoplado en Colombia",
@@ -418,11 +418,11 @@ export const SERVICES: Landing[] = [
       },
       en: {
         title: "Headless WooCommerce and decoupled e-commerce",
-        description: "We turn your WooCommerce or Shopify store into a headless store: a custom storefront that loads in under a second and the same panel to manage products. From 2,000,000 COP.",
+        description: "We turn your WooCommerce or Shopify store into a headless store: a custom storefront that loads in under a second and the same panel to manage products. Quoted per project.",
         eyebrow: "services · headless e-commerce",
         h1: "Headless e-commerce: app-like speed, the panel you know",
-        lead: "A headless store separates the storefront customers see from the system where you manage products and orders. At K&T Code we build the storefront custom, fast and on-brand, and connect it via API to WooCommerce, Shopify or a custom panel, so you keep managing everything as usual. From 2,000,000 COP.",
-        facts: [["From", "2,000,000 COP"], ["Load", "Under 1 s"], ["Admin", "Same as today"], ["Payments", "Local"]],
+        lead: "A headless store separates the storefront customers see from the system where you manage products and orders. At K&T Code we build the storefront custom, fast and on-brand, and connect it via API to WooCommerce, Shopify or a custom panel, so you keep managing everything as usual. Quoted per project.",
+        facts: [["Price", "Quoted per project"], ["Load", "Under 1 s"], ["Admin", "Same as today"], ["Payments", "Local"]],
         includesTitle: "What's included",
         includes: [
           { t: "Custom storefront", d: "Your own design, no template limits." },
@@ -449,7 +449,7 @@ export const SERVICES: Landing[] = [
     color: "green",
     serviceType: "SEO técnico y GEO",
     projects: ["cxellence-group", "qvareli", "occ-partes"],
-    posts: ["que-es-el-seo-y-como-funciona-guia", "por-que-mi-pagina-web-no-aparece-en-google", "geo-vs-seo-diferencias-motores-ia", "como-aparecer-en-chatgpt-2026"],
+    posts: ["por-que-mi-pagina-web-no-aparece-en-google", "geo-vs-seo-diferencias-motores-ia", "como-aparecer-en-chatgpt-2026"],
     related: [S("desarrollo-web-a-medida"), S("desarrollo-nextjs"), S("mantenimiento-web")],
     copy: {
       es: {
@@ -510,7 +510,7 @@ export const SERVICES: Landing[] = [
     color: "red",
     serviceType: "Mantenimiento y soporte web",
     projects: ["casa-medina", "brahneyker", "telas-real"],
-    posts: ["cuanto-cuesta-mantenimiento-pagina-web-colombia", "que-es-un-hosting-web-y-como-funciona", "costo-oculto-pagina-web-lenta"],
+    posts: ["cuanto-cuesta-mantenimiento-pagina-web-colombia", "que-es-un-dominio-web-como-elegir", "costo-oculto-pagina-web-lenta"],
     related: [S("seo-tecnico"), S("desarrollo-web-a-medida"), S("software-a-medida")],
     copy: {
       es: {
@@ -540,11 +540,11 @@ export const SERVICES: Landing[] = [
       },
       en: {
         title: "Website maintenance: support, backups and security",
-        description: "Website maintenance plans: 24/7 monitoring, backups, SSL renewal, updates, form and payment tests, and change hours. From 180,000 COP a month.",
+        description: "Website maintenance plans: 24/7 monitoring, backups, SSL renewal, updates, form and payment tests, and change hours. Quoted per site.",
         eyebrow: "services · website maintenance",
         h1: "Website maintenance so your site never fails",
-        lead: "Website maintenance keeps your site available, secure and fast: downtime monitoring, backups, SSL renewal, updates and tests of forms and payments. At K&T Code it's optional and tailored to your site, from 180,000 COP a month.",
-        facts: [["From", "180,000 COP / mo"], ["Monitoring", "24/7"], ["Backups", "Automatic"], ["Response", "Per plan"]],
+        lead: "Website maintenance keeps your site available, secure and fast: downtime monitoring, backups, SSL renewal, updates and tests of forms and payments. At K&T Code it's optional and tailored to your site, quoted per site.",
+        facts: [["Price", "Quoted per site"], ["Monitoring", "24/7"], ["Backups", "Automatic"], ["Response", "Per plan"]],
         includesTitle: "What's included",
         includes: [
           { t: "Uptime monitoring", d: "Instant alerts if your site stops responding." },
@@ -557,7 +557,7 @@ export const SERVICES: Landing[] = [
         forWhoTitle: "Best for",
         forWho: ["Online stores that can't go down", "Companies without an in-house tech team", "Sites running campaigns", "Platforms with users and sensitive data"],
         faqs: [
-          { q: "How much does website maintenance cost?", a: "A basic preventive plan costs 180,000 to 350,000 COP a month; an online store plan, 450,000 to 850,000 COP a month." },
+          { q: "How much does website maintenance cost?", a: "It is quoted per site, depending on its size, traffic and the hours of changes you need." },
           { q: "Is it mandatory?", a: "No. Maintenance is optional and can be added any time." },
         ],
         keywords: ["website maintenance", "web support"],
@@ -623,7 +623,7 @@ Tabla: Qué campaña usamos según tu objetivo.
       },
       en: {
         title: "Monthly ads management: Meta, TikTok and Google Ads with remarketing",
-        description: "We manage your Facebook, Instagram, TikTok and Google Ads campaigns every month around your goal: strategy, targeting, remarketing, ads and reports. From 200 USD a month (450,000 COP in Colombia).",
+        description: "We manage your Facebook, Instagram, TikTok and Google Ads campaigns every month around your goal: strategy, targeting, remarketing, ads and reports. From 200 USD a month.",
         eyebrow: "services · Ads management",
         h1: "Ads management that brings customers, not just likes",
         lead: "Ads management is the monthly handling of your paid advertising on Facebook, Instagram, TikTok and Google: we set the strategy around your goal (sales, WhatsApp messages or leads), create and test the ads, retarget people who already visited you and send clear reports every month. The fee doesn't include your ad spend.",
@@ -660,7 +660,7 @@ Table: Which campaign we use for each goal.
 
 No page to send the ads to yet? A [landing page](/servicios/landing-pages) from {{cop:450000}} converts much better than sending ads to a social profile.`,
         faqs: [
-          { q: "How much does ads management cost?", a: "At K&T Code monthly ads management starts at 200 USD a month outside Colombia (450,000 COP in Colombia), shown in your currency. Ad spend is separate and paid directly to Meta, TikTok or Google." },
+          { q: "How much does ads management cost?", a: "At K&T Code monthly ads management starts at 200 USD a month, shown in your currency. Ad spend is separate and paid directly to Meta, TikTok or Google." },
           { q: "How much should I spend on ads?", a: "It depends on your goal and market. We suggest a budget in the assessment and adjust it with the first weeks' results." },
           { q: "What is remarketing?", a: "Showing your ads again to people who already visited your site, viewed a product or messaged you, so they come back and buy." },
           { q: "Is there a long-term contract?", a: "No. It's month to month. We recommend at least 3 months to optimize with real data." },

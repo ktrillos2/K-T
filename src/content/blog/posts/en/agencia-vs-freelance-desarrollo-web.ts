@@ -2,7 +2,7 @@ import type { MdPost } from "../../markdown";
 
 const post: MdPost = {
   tldr: [
-    "A freelancer charges less (approx. COP 200,000 to 800,000 for a simple site) and works for small tasks or validating an idea.",
+    "A freelancer charges less for a simple site and works for small tasks or validating an idea.",
     "An agency charges more but brings a full team (design, development, SEO), a contract, electronic invoicing and continuity of support.",
     "If your website is your calling card or your sales channel, a formal team pays off; for a one-off tweak, a freelancer may be enough.",
   ],
@@ -14,7 +14,7 @@ Hire an independent developer or a development company? The answer depends on yo
 Table: Freelancer vs. agency in Colombia.
 | Criteria | Freelancer | Agency (K&T Code) |
 |---|---|---|
-| Price range | COP 200,000 – 800,000 | COP 450,000 – 3,500,000+ |
+| Price range | Lower, varies by person | From 200 USD, quoted by scope |
 | Team | One generalist | Design, development, server and SEO |
 | Contract and warranty | Often informal | Formal contract, tax registration, electronic invoice |
 | Continuity of support | Depends on one person's availability | A team that provides continuity |
@@ -53,11 +53,11 @@ Table: Related services and starting prices in your currency.
 | Development tailored to your company | [Custom web development](/servicios/desarrollo-web-a-medida) | {{cop:2500000}} |
 | Look after your site after launch | [Web maintenance](/servicios/mantenimiento-web) | Scope-based |
 
-See [pricing](/precios) or the [website pricing guide for Colombia](/precios/precio-pagina-web-colombia). We serve [Bogotá](/desarrollo-web-bogota), [Medellín](/desarrollo-web-medellin) and [Cúcuta](/desarrollo-web-cucuta).
+See [pricing](/precios). We serve [Bogotá](/desarrollo-web-bogota), [Medellín](/desarrollo-web-medellin) and [Cúcuta](/desarrollo-web-cucuta).
 
 ## Conclusion {#conclusion}
 
-If you checked the first four, a formal team suits you. Also read [how to choose a web development company in Colombia](/blog/como-elegir-empresa-desarrollo-web-colombia) or see our [plans and pricing](/precios).
+If you checked the first four, a formal team suits you. See our [plans and pricing](/precios).
 `,
   faq: [
     { q: "When is it better to hire a freelancer?", a: "For one-off tasks, tweaks to an existing site or very early projects with a low budget, where a delay or lack of support isn't critical." },

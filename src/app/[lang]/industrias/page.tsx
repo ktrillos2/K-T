@@ -13,7 +13,7 @@ import { LandingHub } from "@/components/landing/LandingHub";
 export async function generateMetadata({ params }: LangParams): Promise<Metadata> {
   const lang = await langOf(params);
   const h = getDict(lang).landing.hubs.industrias;
-  return pageMeta({ lang, path: "/industrias", title: h.title, description: h.description });
+  return pageMeta({ lang, path: "/industrias", title: h.title, description: h.description, onlyEs: true });
 }
 
 export default async function IndustriesHub({ params }: LangParams) {

@@ -68,7 +68,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Vender en línea | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | Que te encuentren en Google | [SEO técnico](/servicios/seo-tecnico) | Según alcance |
 
-Compara todo en [precios](/precios) o lee la [guía de precios de páginas web en Colombia](/precios/precio-pagina-web-colombia). También puedes ver [desarrollo web en Bogotá](/desarrollo-web-bogota) o [en Cúcuta](/desarrollo-web-cucuta).
+Compara todo en [precios](/precios) o lee la [guía de precios de páginas web en Colombia](/blog/cuanto-cuesta-una-pagina-web-en-colombia). También puedes ver [desarrollo web en Bogotá](/desarrollo-web-bogota) o [en Cúcuta](/desarrollo-web-cucuta).
 
 ## Conclusión {#conclusion}
 

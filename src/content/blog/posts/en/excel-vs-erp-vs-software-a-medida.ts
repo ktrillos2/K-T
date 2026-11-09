@@ -14,7 +14,7 @@ Almost every company starts in Excel. The problem comes when the file becomes th
 Table: Excel, generic ERP and custom software.
 | Criteria | Excel / Sheets | Generic ERP (subscription) | Custom software |
 |---|---|---|---|
-| Initial cost | COP 0 | COP 5,000,000 – 30,000,000 in implementation | COP 8,000,000 – 35,000,000 in development |
+| Initial cost | None | High, in implementation | From 1,000 USD, quoted by scope |
 | Recurring cost | Low | High: monthly fee per user | No per-user licenses, only infrastructure |
 | Adaptability | High but fragile | Low: the company adapts to the system | Total |
 | Security | Very low: no roles, risk of deletion | High | High, with roles and audit logs |
@@ -31,7 +31,7 @@ Table: Excel, generic ERP and custom software.
 
 - **Cluttered screens** full of fields your team doesn't use, which slow down service.
 - **Per-user pricing:** every new salesperson or assistant raises the monthly bill.
-- **Expensive, slow customization:** a report or a connector can cost millions of pesos and take months.
+- **Expensive, slow customization:** a report or a connector can be expensive and take months.
 
 ## Advantages of custom software {#custom}
 
@@ -48,7 +48,7 @@ Table: Excel, generic ERP and custom software.
 
 ::widget roi-calculator
 
-See what it costs in [how much custom software costs](/blog/cuanto-cuesta-desarrollar-software-a-medida-colombia) or our [custom software](/servicios/software-a-medida) service.
+See our [custom software](/servicios/software-a-medida) service.
 `,
   faq: [
     { q: "When should I move off Excel?", a: "When several people edit it at once, you pass about 50 transactions a day, or an error in the file has already cost you money." },

@@ -37,7 +37,7 @@ En la página de [precios](/precios) eliges Chile y ves los valores en pesos chi
 ## Costos que se suman al desarrollo {#costos-extra}
 
 - **Dominio:** se renueva cada año. En Chile los dominios \`.cl\` se registran a través de NIC Chile y sus revendedores.
-- **Hosting:** depende del tamaño y del tráfico. Te lo explicamos en [qué es un hosting web](/blog/que-es-un-hosting-web-y-como-funciona).
+- **Hosting:** depende del tamaño y del tráfico. Te lo explicamos en [qué es un hosting web](/blog/que-es-un-dominio-web-como-elegir).
 - **Pasarela de pago:** para vender en línea se usan servicios como **Webpay Plus** (Transbank) o **Flow**, cada uno con sus propias comisiones y condiciones: revisa la tarifa vigente con cada proveedor.
 - **Boleta o factura electrónica:** si vendes, debes emitir documentos tributarios según las reglas del SII; conviene integrarlo con tu sistema.
 - **Mantenimiento:** actualizaciones, respaldos y soporte.
@@ -59,7 +59,7 @@ Si la cotización no dice quién es dueño del código, qué pasa con el dominio
 
 ## ¿Plantilla, freelance, agencia o a medida? {#opciones}
 
-Las plantillas y constructores reducen el costo inicial, pero limitan el diseño y el rendimiento. Un freelance puede servir para proyectos acotados. Una agencia o estudio aporta equipo y proceso. Y un desarrollo a medida permite integrar tu operación. Compara en [agencia vs. freelance](/blog/agencia-vs-freelance-desarrollo-web) y en [página web vs. tienda virtual](/blog/pagina-web-vs-tienda-virtual). Para ver precios por país, mira [cuánto cuesta una página web en Latinoamérica](/blog/cuanto-cuesta-una-pagina-web-latinoamerica).
+Las plantillas y constructores reducen el costo inicial, pero limitan el diseño y el rendimiento. Un freelance puede servir para proyectos acotados. Una agencia o estudio aporta equipo y proceso. Y un desarrollo a medida permite integrar tu operación. Compara en [agencia vs. freelance](/blog/agencia-vs-freelance-desarrollo-web) y en [página web vs. tienda virtual](/blog/landing-page-vs-tienda-virtual). Para ver precios por país, mira [cuánto cuesta una página web en Latinoamérica](/blog/cuanto-cuesta-una-pagina-web-latinoamerica).
 
 ## Pon a prueba lo que aprendiste {#quiz}
 
@@ -93,7 +93,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Sitio de empresa con varias secciones | [Diseño web corporativo](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
 | Rapidez, SEO y soporte continuo | [Mantenimiento web](/servicios/mantenimiento-web) | Según alcance |
 
-Revisa [precios](/precios) y la guía [cuánto cuesta una página web en Colombia](/precios/precio-pagina-web-colombia) como referencia de nuestra estructura de valores.
+Revisa [precios](/precios) y la guía [cuánto cuesta una página web en Colombia](/blog/cuanto-cuesta-una-pagina-web-en-colombia) como referencia de nuestra estructura de valores.
 
 ## Conclusión {#conclusion}
 

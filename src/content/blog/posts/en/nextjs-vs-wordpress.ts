@@ -36,7 +36,7 @@ According to HTTP Archive's 2025 Web Almanac, WordPress runs on about 35% of web
 - **Speed:** HTML is served prerendered in milliseconds.
 - **Security:** it doesn't depend on outdated third-party plugins.
 - **App-like experience:** near-instant transitions between pages.
-- **Integrations:** CRMs, Colombian gateways (Wompi, Bold) and your own APIs.
+- **Integrations:** CRMs, payment gateways and your own APIs.
 
 ## Performance compared {#performance}
 
@@ -69,7 +69,7 @@ Table: Related services and starting prices in your currency.
 | Sell with cart and payments | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | Better ranking on Google | [Technical SEO](/servicios/seo-tecnico) | Scope-based |
 
-See [pricing](/precios) or the [website pricing guide for Colombia](/precios/precio-pagina-web-colombia). If speed is your concern, read [the hidden cost of a slow website](/blog/costo-oculto-pagina-web-lenta).
+See [pricing](/precios). If speed is your concern, read [the hidden cost of a slow website](/blog/costo-oculto-pagina-web-lenta).
 
 ## Conclusion {#conclusion}
 

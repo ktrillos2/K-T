@@ -22,7 +22,7 @@ type Status = "idle" | "sending" | "sent" | "failed";
  * y al terminar se muestra la ficha de costos del servicio elegido, con la opción de seguir por WhatsApp.
  */
 export function ContactWizard() {
-  const { t, country, lang, money } = useI18n();
+  const { t, country, lang, planMoney } = useI18n();
   const c = t.contact;
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>(EMPTY);
@@ -80,7 +80,7 @@ export function ContactWizard() {
           planIndex: pIndex,
           country: country.name[lang],
           currency: country.currency,
-          localPrice: plan ? `${money(plan.from)} ${country.currency}` : "",
+          localPrice: plan ? planMoney(plan) : "",
           lang,
           page: window.location.href,
           website: trap,

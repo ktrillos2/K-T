@@ -56,7 +56,29 @@ Tu servidor necesita una ruta que haga dos cosas:
 3. La pasarela devuelve una URL segura y el agente la envía en el chat.
 4. Cuando la pasarela confirma el pago, el sistema envía la factura electrónica y avisa a tu equipo.
 
-Si quieres ver cómo se conecta todo con inventario y facturación DIAN, lee [cómo integrar WhatsApp con CRM, inventario y facturación](/blog/integrar-whatsapp-crm-inventario-facturacion).
+## Integración con CRM, inventario y facturación electrónica {#integracion}
+
+El cobro es solo una parte. Si después alguien tiene que revisar stock, digitar en el sistema contable y enviar la factura a mano, cada pedido sigue consumiendo tiempo y abriendo la puerta a errores. Al conectar todo, el pedido avanza solo:
+
+1. **Confirmación:** el cliente confirma producto, cantidad y datos de facturación, y WhatsApp avisa a tu servidor por webhook.
+2. **Reserva de stock:** el servidor revisa la bodega y **aparta la unidad de forma atómica**, para que nadie más pueda venderla, antes de generar el enlace de pago.
+3. **Factura:** el proveedor tecnológico genera el documento electrónico firmado y obtiene la validación de la DIAN, con su código único (CUFE) y el QR.
+4. **Cierre en el chat:** el cliente recibe el PDF, el inventario se actualiza y logística recibe la orden de despacho.
+
+Tabla: Lo que cambia al integrar.
+| Proceso manual | Proceso integrado |
+|---|---|
+| El asesor transcribe los datos del cliente al sistema contable o a Excel | Captura y validación automática de cédula o NIT |
+| Errores de digitación y stock desactualizado | Validación en la base de datos que evita sobreventas |
+| La factura llega 24 a 48 horas después | El PDF de la factura llega al instante por WhatsApp |
+| Cobro por usuario en el CRM y en el facturador | Sin costo por usuario adicional con software propio |
+
+### Requisitos para facturar electrónicamente por API
+
+1. **RUT actualizado** con la responsabilidad de facturador electrónico activa.
+2. **Certificado digital de firma** emitido por una entidad de certificación autorizada.
+3. **Resolución de numeración** de la DIAN con rango, prefijo, vigencia y clave técnica.
+4. **Proveedor tecnológico** autorizado (o el servicio gratuito de la DIAN) con el que tu software se conecta por API.
 
 ## Costos de operación en Colombia (2026) {#costos}
 
@@ -83,6 +105,9 @@ Tabla: Costos típicos de una automatización de WhatsApp con IA.
 - Tengo definidas las políticas de envío, cambios y garantías
 - Sé qué consultas repetitivas quiero automatizar primero
 - Tengo un asesor que recibe los casos escalados
+- Tengo resolución de facturación electrónica vigente
+- Elegí proveedor tecnológico de facturación
+- Tengo cuenta en una pasarela de pagos (Wompi, Bold, PayU)
 :::
 
 ¿Quieres implementarlo en tu empresa? Conoce nuestro servicio de [software a medida](/servicios/software-a-medida) o escríbenos en el [formulario de contacto](#contacto).
@@ -91,10 +116,13 @@ Tabla: Costos típicos de una automatización de WhatsApp con IA.
     { q: "¿Puedo usar mi número actual de WhatsApp con la API?", a: "Sí, pero debe dejar de usarse en la aplicación del celular. Muchas empresas prefieren un número nuevo exclusivo para la automatización." },
     { q: "¿La IA puede equivocarse con precios o stock?", a: "Si consulta tus sistemas en tiempo real y tiene reglas que limitan lo que puede ofrecer, las respuestas se basan en datos verificados. Los casos dudosos se pasan a un asesor." },
     { q: "¿Cuánto tarda la implementación?", a: "Una automatización con IA conectada a catálogo y pagos suele tomar de 2 a 4 semanas, según las integraciones." },
+    { q: "¿Se puede conectar WhatsApp con la facturación electrónica de la DIAN?", a: "Sí. El software recibe el pedido por la API de WhatsApp, emite la factura a través de un proveedor tecnológico autorizado y envía el PDF al cliente en el mismo chat." },
+    { q: "¿Necesito cambiar mi sistema contable?", a: "No necesariamente. Si tu sistema tiene API, el software a medida se conecta con él; si no, la integración se hace con un proveedor de facturación electrónica." },
   ],
   sources: [
     { title: "Meta for Developers: WhatsApp Cloud API", url: "https://developers.facebook.com/docs/whatsapp/cloud-api" },
     { title: "Superintendencia de Industria y Comercio: protección de datos personales", url: "https://www.sic.gov.co/tema/proteccion-de-datos-personales" },
+    { title: "DIAN: Factura electrónica", url: "https://www.dian.gov.co/impuestos/factura-electronica/Paginas/default.aspx" },
   ],
 };
 

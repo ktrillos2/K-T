@@ -21,7 +21,7 @@ Tabla: Costos de una página web.
 | Mantenimiento | Mensual (opcional) | Actualizaciones, copias de seguridad, soporte y cambios |
 | Extras | Según se necesiten | Pasarela de pagos, idiomas, integraciones, campañas |
 
-Si te preguntas «¿cuánto cuesta una página web al mes?», normalmente es la suma de hosting y mantenimiento. Lo explicamos en [qué es un hosting](/blog/que-es-un-hosting-web-y-como-funciona) y en [cuánto cuesta el mantenimiento](/blog/cuanto-cuesta-mantenimiento-pagina-web-colombia).
+Si te preguntas «¿cuánto cuesta una página web al mes?», normalmente es la suma de hosting y mantenimiento. Lo explicamos en [qué es un hosting](/blog/que-es-un-dominio-web-como-elegir) y en [cuánto cuesta el mantenimiento](/blog/cuanto-cuesta-mantenimiento-pagina-web-colombia).
 
 ## Los 4 factores que cambian el precio {#factores}
 

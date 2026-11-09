@@ -126,7 +126,7 @@ ${table(c, "es")}
 En [precios](/precios) eliges tu país y ves todos los planes en tu moneda. ¿Quieres saber qué cambia el valor? Lee [cuánto cuesta una página web en Latinoamérica](/blog/cuanto-cuesta-una-pagina-web-latinoamerica).
 `,
   faqs: [
-    { q: `¿Cuánto cuesta una página web en ${c.name.es}?`, a: `Con K&T Code una landing page parte de $450.000 COP, una tienda virtual de $1.300.000 COP y un sitio corporativo de $2.500.000 COP. En kytcode.lat/precios ves los valores en la moneda de ${c.name.es}.` },
+    { q: `¿Cuánto cuesta una página web en ${c.name.es}?`, a: `Con K&T Code una landing page parte de 200 USD, una tienda virtual de 450 USD y un sistema a medida de 1.000 USD. Lo demás se cotiza por proyecto. En kytcode.lat/precios ves los valores en la moneda de ${c.name.es}.` },
     { q: "¿Pueden trabajar con mi empresa si están en Colombia?", a: `Sí. Trabajamos en remoto con empresas de ${c.name.es} por videollamada, con entregas por etapas. ${c.hours.es}` },
     { q: "¿Cómo es el pago?", a: "50% al iniciar el diseño y 50% después de las pruebas y el lanzamiento, por transferencia internacional o tarjeta." },
     { q: "¿Cuánto tarda?", a: "Una landing entre 7 y 12 días, un sitio corporativo entre 15 y 25 días y una tienda virtual entre 25 y 40 días." },
@@ -162,7 +162,7 @@ ${table(c, "en")}
 On [pricing](/precios) you choose your country and see every plan in your currency. Want to know what changes the price? Read [how much a website costs in Latin America](/blog/cuanto-cuesta-una-pagina-web-latinoamerica).
 `,
   faqs: [
-    { q: `How much does a website cost in ${c.name.en}?`, a: `With K&T Code a landing page starts at $450,000 COP, an online store at $1,300,000 COP and a corporate site at $2,500,000 COP. On kytcode.lat/precios you see prices in your local currency.` },
+    { q: `How much does a website cost in ${c.name.en}?`, a: `With K&T Code a landing page starts at 200 USD, an online store at 450 USD and custom systems at 1,000 USD. Anything else is quoted per project. On kytcode.lat/precios you see prices in your local currency.` },
     { q: "Can you work with my company from Colombia?", a: `Yes. We work remotely with companies in ${c.name.en} over video calls, with staged deliveries. ${c.hours.en}` },
     { q: "How does payment work?", a: "50% when design starts and 50% after testing and launch, by international transfer or card." },
     { q: "How long does it take?", a: "A landing page takes 7 to 12 days, a corporate site 15 to 25 days and an online store 25 to 40 days." },

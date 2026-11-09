@@ -35,6 +35,33 @@ const es: PostBody = {
         "**Señales de confianza.** Autor, fecha de actualización, casos reales y reseñas.",
       ],
     },
+    { type: "h2", id: "resumenes-google", text: "Qué cambia con los resúmenes con IA de Google" },
+    { type: "p", text: "En muchas búsquedas, Google ya no solo muestra enlaces: responde con un **resumen generado por IA** (AI Overviews y AI Mode) que cita unas pocas fuentes, con los resultados tradicionales debajo. Estar en la primera página ya no basta: hay que ser la fuente que el resumen cita. El efecto depende del tipo de búsqueda." },
+    {
+      type: "table",
+      caption: "Impacto y oportunidad por tipo de búsqueda.",
+      head: ["Tipo de búsqueda", "Qué pasa con los clics", "Oportunidad"],
+      rows: [
+        ["Definiciones simples («qué es un hosting»)", "Se reducen", "El artículo superficial de diccionario ya no vale la pena"],
+        ["Comparativas («Next.js vs. WordPress»)", "El resumen cita con frecuencia", "Tablas con pros, contras y precios exactos"],
+        ["Precios y transacciones («precio página web Colombia»)", "Clics muy calificados", "Precios en COP, ofertas y datos estructurados"],
+        ["Preguntas complejas (WhatsApp + facturación DIAN)", "Respuestas largas con varias fuentes", "Guías paso a paso con ejemplos reales"],
+      ],
+    },
+    { type: "p", text: "Dos detalles marcan la diferencia: usar **tablas reales en HTML**, no imágenes de tablas, y validar los datos estructurados de artículo, preguntas frecuentes y migas de pan en la prueba de resultados enriquecidos de Google." },
+    { type: "h2", id: "seo-agentico", text: "SEO agéntico: cuando la IA también actúa" },
+    { type: "p", text: "El siguiente paso es el **SEO agéntico**: ya no te leen solo buscadores y asistentes, también agentes de IA que comparan proveedores, resumen ofertas y, en algunos casos, compran o agendan por el usuario." },
+    {
+      type: "table",
+      caption: "Las tres etapas del posicionamiento.",
+      head: ["Etapa", "Qué se optimiza", "Dónde apareces", "Para quién"],
+      rows: [
+        ["SEO clásico", "Palabras clave y enlaces", "Lista de enlaces azules", "Personas"],
+        ["SEO semántico / GEO", "Intención de búsqueda y contenido estructurado", "Resúmenes con IA y citas", "Personas y modelos"],
+        ["SEO agéntico (2026+)", "Entidades claras, datos y acciones", "Respuestas, comparaciones y transacciones", "Agentes"],
+      ],
+    },
+    { type: "p", text: "Para ellos, dos cosas cobran peso. Los modelos trabajan con un límite de contexto: si un precio aparece después de una introducción eterna, el agente probablemente lo salte, así que pon resúmenes, rangos de precio y tablas al inicio de cada sección. Y los **datos estructurados anidados** (organización → ofertas → servicios, con precio, moneda y tiempos de entrega) permiten que un agente consulte tu catálogo casi como si fuera una base de datos." },
     { type: "h2", id: "checklist", text: "Lista GEO para tu sitio" },
     { type: "p", text: "Marca lo que ya tienes. Tu avance se guarda en este navegador para que vuelvas cuando quieras." },
     {
@@ -53,6 +80,9 @@ const es: PostBody = {
         "El sitio publica un archivo llms.txt con un resumen del negocio",
         "Hay una página por servicio y por ciudad o mercado importante",
         "El perfil de Google Business está completo y con reseñas",
+        "Las tablas son reales, en HTML, no imágenes",
+        "El HTML trae el contenido completo sin esperar JavaScript",
+        "Los datos estructurados pasan la prueba de resultados enriquecidos sin errores",
       ],
     },
     { type: "h2", id: "llms-txt", text: "¿Qué es llms.txt?" },
@@ -72,11 +102,14 @@ const es: PostBody = {
   faq: [
     { q: "¿GEO reemplaza al SEO?", a: "No. Los asistentes de IA se apoyan en índices de búsqueda y en páginas rastreables, así que el SEO técnico sigue siendo la base. GEO suma claridad, datos y fuentes para que te citen." },
     { q: "¿Cómo sé si una IA menciona mi negocio?", a: "Haz las preguntas que haría tu cliente en ChatGPT, Gemini y Perplexity, revisa si apareces y qué fuente citan, y repite la prueba cada mes." },
+    { q: "¿Los resúmenes con IA de Google reducen el tráfico?", a: "En búsquedas informativas simples sí reducen clics, pero los sitios citados como fuente reciben tráfico más calificado. Las búsquedas de comparación y precio siguen siendo una gran oportunidad." },
+    { q: "¿Qué es el SEO agéntico?", a: "Es la optimización de la arquitectura, el contenido y los datos de un sitio para que agentes de IA puedan entenderlo, citarlo y ejecutar acciones en él, no solo para que lo rastree un buscador. No reemplaza al SEO tradicional: lo amplía." },
   ],
   sources: [
     { title: "Aggarwal et al. (2023). GEO: Generative Engine Optimization. arXiv:2311.09735", url: "https://arxiv.org/abs/2311.09735" },
     { title: "Propuesta llms.txt", url: "https://llmstxt.org/" },
     { title: "Google Search Central: AI features and your website", url: "https://developers.google.com/search/docs/appearance/ai-features" },
+    { title: "Anthropic: Model Context Protocol", url: "https://www.anthropic.com/news/model-context-protocol" },
   ],
 };
 
@@ -115,6 +148,33 @@ const en: PostBody = {
         "**Trust signals.** Author, last-updated date, real cases and reviews.",
       ],
     },
+    { type: "h2", id: "google-ai-summaries", text: "What changes with Google's AI summaries" },
+    { type: "p", text: "For many searches, Google no longer just shows links: it answers with an **AI-generated summary** (AI Overviews and AI Mode) that cites a handful of sources, with the traditional results below. Being on the first page isn't enough anymore: you have to be the source the summary cites. The effect depends on the type of search." },
+    {
+      type: "table",
+      caption: "Impact and opportunity by type of search.",
+      head: ["Type of search", "What happens to clicks", "Opportunity"],
+      rows: [
+        ["Simple definitions (“what is hosting”)", "They drop", "The shallow dictionary-style article is no longer worth it"],
+        ["Comparisons (“Next.js vs. WordPress”)", "The summary cites often", "Tables with pros, cons and exact prices"],
+        ["Prices and transactions (“website price Colombia”)", "Highly qualified clicks", "Prices in USD, offers and structured data"],
+        ["Complex questions (WhatsApp + DIAN invoicing)", "Long answers with several sources", "Step-by-step guides with real examples"],
+      ],
+    },
+    { type: "p", text: "Two details make the difference: using **real HTML tables**, not images of tables, and validating your article, FAQ and breadcrumb structured data in Google's Rich Results Test." },
+    { type: "h2", id: "agentic-seo", text: "Agentic SEO: when AI also takes action" },
+    { type: "p", text: "The next step is **agentic SEO**: search engines and assistants aren't the only ones reading your site anymore, AI agents do too, comparing providers, summarizing offers and, in some cases, buying or booking on the user's behalf." },
+    {
+      type: "table",
+      caption: "The three stages of search optimization.",
+      head: ["Stage", "What's optimized", "Where you appear", "For whom"],
+      rows: [
+        ["Classic SEO", "Keywords and links", "List of blue links", "People"],
+        ["Semantic SEO / GEO", "Search intent and structured content", "AI summaries and citations", "People and models"],
+        ["Agentic SEO (2026+)", "Clear entities, data and actions", "Answers, comparisons and transactions", "Agents"],
+      ],
+    },
+    { type: "p", text: "For them, two things gain weight. Models work within a context limit: if a price appears after an endless introduction, the agent will probably skip it, so put summaries, price ranges and tables at the start of each section. And **nested structured data** (organization → offers → services, with price, currency and delivery times) lets an agent query your catalog almost as if it were a database." },
     { type: "h2", id: "checklist", text: "GEO checklist for your site" },
     { type: "p", text: "Tick what you already have. Your progress is saved in this browser so you can come back anytime." },
     {
@@ -133,6 +193,9 @@ const en: PostBody = {
         "The site publishes an llms.txt file summarizing the business",
         "There's a page for each service and for each key city or market",
         "The Google Business profile is complete and has reviews",
+        "Tables are real HTML, not images",
+        "The HTML carries the full content without waiting for JavaScript",
+        "Structured data passes the Rich Results Test without errors",
       ],
     },
     { type: "h2", id: "llms-txt", text: "What is llms.txt?" },
@@ -152,6 +215,8 @@ const en: PostBody = {
   faq: [
     { q: "Does GEO replace SEO?", a: "No. AI assistants rely on search indexes and crawlable pages, so technical SEO is still the foundation. GEO adds clarity, data and sources so they cite you." },
     { q: "How do I know if an AI mentions my business?", a: "Ask the questions your customer would ask in ChatGPT, Gemini and Perplexity, check whether you appear and which source is cited, and repeat every month." },
+    { q: "Do Google's AI summaries reduce traffic?", a: "On simple informational searches they do reduce clicks, but sites cited as sources get more qualified traffic. Comparison and pricing searches are still a big opportunity." },
+    { q: "What is agentic SEO?", a: "It's optimizing a site's architecture, content and data so AI agents can understand it, cite it and take actions on it, not just so a search engine can crawl it. It doesn't replace traditional SEO: it extends it." },
   ],
   sources: es.sources,
 };

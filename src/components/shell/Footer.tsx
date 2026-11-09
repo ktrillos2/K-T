@@ -121,16 +121,18 @@ export function Footer({ links }: { links: ShellLinks }) {
             </TLink>
           ))}
         </nav>
-        <nav aria-label={t.nav.industries}>
-          <h3>
-            <TLink href="/industrias">{t.nav.industries}</TLink>
-          </h3>
-          {links.industries.map((l) => (
-            <TLink key={l.href} href={l.href}>
-              {l.label}
-            </TLink>
-          ))}
-        </nav>
+        {links.industries.length > 0 && (
+          <nav aria-label={t.nav.industries}>
+            <h3>
+              <TLink href="/industrias">{t.nav.industries}</TLink>
+            </h3>
+            {links.industries.map((l) => (
+              <TLink key={l.href} href={l.href}>
+                {l.label}
+              </TLink>
+            ))}
+          </nav>
+        )}
         <nav aria-label={t.landing.hubs.ciudades.title}>
           <h3>{t.landing.hubs.ciudades.title}</h3>
           {links.cities.map((l) => (

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getDict, localizeProject } from "@/i18n";
 import { isLang, type Lang } from "@/i18n/config";
-import { getProject, PROJECTS } from "@/lib/projects";
+import { EN_INDEXED_PROJECT, getProject, PROJECTS } from "@/lib/projects";
 import { pageMeta } from "@/lib/seo";
 import { breadcrumbs, graph, projectWork } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -30,6 +30,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return pageMeta({
     lang,
     path: p.href,
+    // En inglés solo se indexa el proyecto para clientes de EE. UU.; los demás siguen visibles como portafolio.
+    onlyEs: p.slug !== EN_INDEXED_PROJECT,
+    noindex: lang === "en" && p.slug !== EN_INDEXED_PROJECT,
     title: lang === "en" ? `${p.name}: ${category} case study` : `${p.name}: caso de estudio de ${category.toLowerCase()}`,
     description: `${p.summary} ${p.location ? `${p.location}. ` : ""}${t.projects.detail.built}: ${p.built.slice(0, 2).join(", ").toLowerCase()}.`,
     // Imagen social: captura propia o portada del portafolio (con w=1200 para Open Graph)

@@ -20,7 +20,7 @@ Table: Website options for a small business.
 | Local agency | High | Retainer or hourly | High | Teams that want in-person meetings |
 | Custom build from a nearshore studio | Medium to high | Hosting and maintenance | Total (you own the code) | Growing businesses that value speed and SEO |
 
-Want a side-by-side of builders? Read [Wix vs. WordPress](/blog/wix-vs-wordpress-diferencias-precios) and [Agency vs. freelancer](/blog/agencia-vs-freelance-desarrollo-web).
+Deciding who should build it? Read [Agency vs. freelancer](/blog/agencia-vs-freelance-desarrollo-web).
 
 ## What drives the price {#precio}
 
@@ -89,14 +89,14 @@ Table: Services and starting prices in your currency.
 | Ranking on Google | [Technical SEO](/servicios/seo-tecnico) | Depends on scope |
 | Bring customers with Facebook, Instagram, TikTok and Google ads | [Ads management](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mo |
 
-On [pricing](/precios), choose United States to see every plan in US dollars, or read [how much a website costs in Latin America](/blog/cuanto-cuesta-una-pagina-web-latinoamerica).
+On [pricing](/precios), choose United States to see every plan in US dollars.
 
 ## Conclusion {#conclusion}
 
 The right small business website is the one that matches your goal, loads fast, can be found on Google and belongs to you. Compare written quotes, ask about ownership and plan for maintenance. When you're ready, [write to us](/#contacto) and we'll quote your project.
 `,
   faq: [
-    { q: "How much does a small business website cost in the US?", a: "It varies widely by approach: a DIY builder, a freelancer, an agency or a custom build. Compare written quotes that list design, hosting, maintenance, SEO and code ownership. K&T Code landing pages start at $450,000 COP and corporate sites at $2,500,000 COP, shown in US dollars on the pricing page." },
+    { q: "How much does a small business website cost in the US?", a: "It varies widely by approach: a DIY builder, a freelancer, an agency or a custom build. Compare written quotes that list design, hosting, maintenance, SEO and code ownership. K&T Code landing pages start at 200 USD, online stores at 450 USD and custom systems at 1,000 USD. Anything else is quoted per project." },
     { q: "Is a website builder enough for a small business?", a: "For a very simple site, yes. If you need speed, custom design, strong SEO or integrations, a custom build gives you more control and avoids rebuilding later." },
     { q: "Can a Latin American studio build my US business website?", a: "Yes. A nearshore studio works in your time zone, in English and Spanish, and can deliver the code in your name. K&T Code does this from Colombia." },
     { q: "Does my small business website need to be accessible?", a: "Accessibility is a best practice and in the US it can have legal implications. Build to WCAG and consult an attorney about what applies to your business." },

@@ -3,6 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { getDict, type Dict } from "./index";
 import { localize, type Lang } from "./config";
+import type { Plan } from "@/lib/pricing";
 import { COUNTRIES, DEFAULT_COUNTRY, FALLBACK_RATES, convert, convertUsd, countryByCode, formatMoney, type Country, type Rates } from "@/lib/money";
 
 type Ctx = {
@@ -17,6 +18,10 @@ type Ctx = {
   money: (cop: number) => string;
   /** Precio fijo en dólares mostrado en la moneda del país (fuera de Colombia). */
   moneyUsd: (usd: number) => string;
+  /** El plan no tiene tarifa fija en este país: se cotiza. */
+  quotedAbroad: (plan: Plan) => boolean;
+  /** Precio del plan con su moneda, para mensajes y formularios. */
+  planMoney: (plan: Plan) => string;
   convert: (cop: number) => number;
 };
 
@@ -30,7 +35,7 @@ function readCookie(name: string) {
 
 export function I18nProvider({ lang, children }: { lang: Lang; children: React.ReactNode }) {
   const t = getDict(lang);
-  const [country, setCountryState] = useState<Country>(DEFAULT_COUNTRY);
+  const [country, setCountryState] = useState<Country>(lang === "en" ? countryByCode("US") : DEFAULT_COUNTRY);
   const [rates, setRates] = useState<Rates>(FALLBACK_RATES);
 
   // País guardado por el visitante o detectado por el servidor (cookie del middleware).
@@ -96,6 +101,11 @@ export function I18nProvider({ lang, children }: { lang: Lang; children: React.R
       convert: (cop: number) => convert(cop, country, rates),
       money: (cop: number) => formatMoney(convert(cop, country, rates), country),
       moneyUsd: (usd: number) => formatMoney(convertUsd(usd, country, rates), country),
+      quotedAbroad: (plan: Plan) => country.currency !== "COP" && !plan.usd,
+      planMoney: (plan: Plan) => {
+        if (country.currency === "COP") return `${formatMoney(plan.from, country)} COP`;
+        return plan.usd ? `${formatMoney(convertUsd(plan.usd, country, rates), country)} ${country.currency}` : t.price.quote;
+      },
     }),
     [lang, t, country, setCountry, rates],
   );

@@ -35,7 +35,7 @@ Los planes y comisiones se actualizan con frecuencia. Mira siempre las páginas 
 - **Shopify:** más apps y herramientas para vender fuera del país; suma costos por apps y puede cobrar comisión extra si usas una pasarela que no sea la suya.
 - **A medida (por ejemplo con Next.js):** carga muy rápida, diseño sin límites y sin atarte a comisiones de plataforma. Requiere una inversión inicial mayor.
 
-Si quieres profundizar, lee [Shopify vs. WooCommerce](/blog/shopify-vs-woocommerce-colombia), [WordPress vs. Shopify](/blog/wordpress-vs-shopify-comparativa) y [qué es un e-commerce headless](/blog/que-es-un-ecommerce-headless-ventajas).
+Si quieres profundizar, lee [Shopify vs. WooCommerce](/blog/shopify-vs-woocommerce-colombia), [WordPress vs. Shopify](/blog/shopify-vs-woocommerce-colombia) y [qué es un e-commerce headless](/servicios/woocommerce-headless).
 
 ## Cobrar en Argentina: Mercado Pago, transferencias y cuotas {#cobros}
 
@@ -92,7 +92,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Que tu tienda aparezca en Google | [SEO técnico](/servicios/seo-tecnico) | Según alcance |
 | Atraer clientes con publicidad en Facebook, Instagram, TikTok y Google | [Administración de Ads](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mes |
 
-En [precios](/precios) puedes elegir Argentina y ver cada plan en pesos argentinos. También te sirve la [guía de precio de una tienda virtual](/precios/precio-tienda-virtual-colombia) y [cuánto cuesta una página web en Latinoamérica](/blog/cuanto-cuesta-una-pagina-web-latinoamerica).
+En [precios](/precios) puedes elegir Argentina y ver cada plan en pesos argentinos. También te sirve la [guía de precio de una tienda virtual](/blog/cuanto-cuesta-una-tienda-virtual-en-colombia-2026) y [cuánto cuesta una página web en Latinoamérica](/blog/cuanto-cuesta-una-pagina-web-latinoamerica).
 
 ## Conclusión {#conclusion}
 

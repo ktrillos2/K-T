@@ -25,6 +25,16 @@ Tabla: Costos de una tienda virtual en Colombia (2026).
 Revisa siempre las tarifas vigentes de cada pasarela antes de decidir. Te comparamos las principales en [Wompi vs. Mercado Pago vs. PayU](/blog/wompi-vs-mercado-pago-vs-payu-colombia).
 :::
 
+## Comisiones de pasarelas (referencia) {#pasarelas}
+
+Tabla: Tarifas de referencia; verifica las vigentes en cada pasarela.
+| Pasarela | Comisión de referencia | Abono |
+|---|---|---|
+| Wompi | 2,65% + $700 COP | Automático a Bancolombia |
+| Bold | 2,99% + $900 COP + IVA | A cualquier banco |
+| PayU | 3,29% – 3,49% + $900 COP | Programable |
+| Mercado Pago | 2,99% + $900 COP | Inmediato en la cuenta |
+
 ## Calcula tu tienda {#calculadora}
 
 ::widget price-calculator
@@ -41,9 +51,9 @@ Revisa siempre las tarifas vigentes de cada pasarela antes de decidir. Te compar
 - **Velocidad:** una tienda que carga en menos de un segundo reduce el abandono del carrito en móvil.
 - **WhatsApp integrado:** puedes cerrar ventas con pago automático o con un asesor por chat.
 
-Profundiza en [Shopify vs. WooCommerce en Colombia](/blog/shopify-vs-woocommerce-colombia) y [qué es un e-commerce headless](/blog/que-es-un-ecommerce-headless-ventajas).
+Profundiza en [Shopify vs. WooCommerce en Colombia](/blog/shopify-vs-woocommerce-colombia) y [qué es un e-commerce headless](/servicios/woocommerce-headless).
 
-Mira los [precios de una tienda virtual](/precios/precio-tienda-virtual-colombia) o nuestro servicio de [tiendas virtuales](/servicios/tiendas-virtuales).
+Mira los [precios de una tienda virtual](/precios) o nuestro servicio de [tiendas virtuales](/servicios/tiendas-virtuales).
 `,
   faq: [
     { q: "¿Cuánto cuesta crear una tienda virtual profesional en Colombia?", a: "Con K&T Code, una tienda a la medida con integración a Wompi, Bold o PayU parte de $1.300.000 COP, sin comisión de plataforma por cada venta." },

@@ -97,11 +97,11 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Una tienda con pagos y envíos conectados | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | Un sitio rápido con formularios y WhatsApp integrados | [Desarrollo web a medida](/servicios/desarrollo-web-a-medida) | {{cop:2500000}} |
 
-Mira todos los [planes y precios](/precios) o la [guía de precios de software a medida](/precios/precio-software-a-medida).
+Mira todos los [planes y precios](/precios) o la [guía de precios de software a medida](/blog/cuanto-cuesta-desarrollar-software-a-medida-colombia).
 
 ## Conclusión {#conclusion}
 
-Una API es el puente que hace que tus sistemas trabajen juntos. Si hoy copias datos a mano entre tu web, WhatsApp y tu facturación, una integración puede ahorrarte horas cada semana. Lee [cómo integrar WhatsApp con CRM, inventario y facturación](/blog/integrar-whatsapp-crm-inventario-facturacion) o [escríbenos](/#contacto).
+Una API es el puente que hace que tus sistemas trabajen juntos. Si hoy copias datos a mano entre tu web, WhatsApp y tu facturación, una integración puede ahorrarte horas cada semana. Lee [cómo integrar WhatsApp con CRM, inventario y facturación](/blog/automatizar-whatsapp-business-con-ia) o [escríbenos](/#contacto).
 `,
   faq: [
     { q: "¿Qué es una API en palabras simples?", a: "Es el intermediario que permite que dos programas intercambien información de forma segura, como un mesero que lleva tu pedido a la cocina y te trae el plato." },

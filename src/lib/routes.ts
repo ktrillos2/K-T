@@ -1,6 +1,6 @@
 import { splitLang } from "@/i18n/config";
 
-export type RouteKey = "inicio" | "nosotros" | "servicios" | "servicio" | "proyectos" | "proyecto" | "precios" | "guia" | "blog" | "articulo" | "pagina" | "legal" | "404";
+export type RouteKey = "inicio" | "nosotros" | "servicios" | "servicio" | "proyectos" | "proyecto" | "precios" | "blog" | "articulo" | "pagina" | "legal" | "404";
 export type BrandColor = "red" | "yellow" | "green" | "fg";
 export type Variant = "iris" | "up" | "side";
 export type NavKey = "home" | "about" | "services" | "projects" | "pricing" | "blog";
@@ -46,7 +46,6 @@ export function routeFromPath(pathname: string): RouteKey {
   if (hit) return hit.key;
   if (path.startsWith("/proyectos/")) return "proyecto";
   if (path.startsWith("/servicios/") || path.startsWith("/industrias") || path.startsWith("/desarrollo-web-")) return "servicio";
-  if (path.startsWith("/precios/")) return "guia";
   if (["/testimonios", "/preguntas-frecuentes"].includes(path) || path.startsWith("/autores/")) return "pagina";
   if (path.startsWith("/blog/")) return "articulo";
   if (path === "/politica-de-privacidad") return "legal";
@@ -62,7 +61,6 @@ export function metaFor(pathname: string): RouteMeta | null {
   const by = (k: RouteKey) => ROUTES.find((r) => r.key === k)!;
   if (key === "articulo") return { ...by("blog"), key };
   if (key === "servicio") return { ...by("servicios"), key };
-  if (key === "guia") return { ...by("precios"), key };
   if (key === "pagina") return { ...by("nosotros"), key };
   return null;
 }
@@ -78,7 +76,6 @@ export function navKeyFor(key: RouteKey): NavKey | null {
     case "proyecto":
       return "projects";
     case "precios":
-    case "guia":
       return "pricing";
     case "servicios":
     case "servicio":
