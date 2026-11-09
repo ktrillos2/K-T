@@ -576,6 +576,12 @@
 }
 
 .prose .inlineCta a {
+  max-width: 100%;
+  height: auto;
+  min-height: 48px;
+  padding-block: 0.75rem;
   color: var(--bg);
+  text-align: center;
+  white-space: normal;
   text-decoration: none;
 }
