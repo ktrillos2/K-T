@@ -14,7 +14,7 @@ import styles from "./HomeServices.module.css";
 
 /** Los cuatro servicios en tarjetas simples: qué es, para quién, desde cuánto. */
 export function HomeServices() {
-  const { t } = useI18n();
+  const { t, quotedAbroad } = useI18n();
   const s = t.home.services;
   return (
     <section className={cx("band", styles.section)} aria-labelledby="h-servicios">
@@ -34,7 +34,7 @@ export function HomeServices() {
                   <p className={styles.pitch}>{c.pitch}</p>
                   <span className={styles.foot}>
                     <span className={styles.from}>
-                      {p.quote ? s.fromQuote : s.from} <Price cop={p.from} className={styles.price} />
+                      {quotedAbroad(p) ? "" : p.quote ? s.fromQuote : s.from} <Price cop={p.from} className={styles.price} />
                     </span>
                     <span className={styles.arrow} aria-hidden="true">
                       →

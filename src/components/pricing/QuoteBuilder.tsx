@@ -24,7 +24,7 @@ const slug = (s: string) =>
  * el comando se actualiza en vivo y el mensaje sale listo para WhatsApp.
  */
 export function QuoteBuilder() {
-  const { t, lang, country, money } = useI18n();
+  const { t, lang, country, quotedAbroad, planMoney } = useI18n();
   const q = t.pricing.quote;
   const EXTRAS = t.pricing.extras;
   const [plan, setPlan] = useState<PlanId>("tienda");
@@ -44,11 +44,11 @@ export function QuoteBuilder() {
       q.message({
         name: name.trim(),
         plan: planName,
-        price: `${money(current.from)} ${country.currency}`,
+        price: planMoney(current),
         extras,
         country: country.name[lang],
       }),
-    [q, name, planName, money, current.from, country, extras, lang],
+    [q, name, planName, planMoney, current, country, extras, lang],
   );
 
   // El comando se "reescribe" cada vez que cambia la selección.
@@ -91,7 +91,7 @@ export function QuoteBuilder() {
                     />
                     <span className={styles.planName}>{t.pricing.plans[p.id].name}</span>
                     <span className={styles.planPrice}>
-                      {t.price.from} <Price cop={p.from} />
+                      {!quotedAbroad(p) && t.price.from} <Price cop={p.from} />
                     </span>
                   </label>
                 ))}

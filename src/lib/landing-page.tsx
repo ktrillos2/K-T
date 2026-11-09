@@ -3,7 +3,7 @@ import { getDict } from "@/i18n";
 import { localize, type Lang } from "@/i18n/config";
 import { landingByPath, landingCopy, landingLangs, type Landing } from "@/content/landings";
 import { parseMarkdown } from "@/content/blog/markdown";
-import { PLANS } from "./pricing";
+import { PLANS, offerPrice } from "./pricing";
 import { SITE } from "./site";
 import { pageMeta } from "./seo";
 import { breadcrumbs, faqPage, graph } from "./schema";
@@ -45,6 +45,7 @@ export function LandingPage({ landing: l, lang }: { landing: Landing; lang: Lang
   const t = getDict(lang);
   const url = `${SITE.url}${localize(l.path, lang)}`;
   const plan = l.plan ? PLANS.find((p) => p.id === l.plan) : undefined;
+  const offer = plan && !plan.quote ? offerPrice(plan, lang) : null;
   const crumbs = crumbsFor(l, lang);
 
   const service = {
@@ -62,8 +63,8 @@ export function LandingPage({ landing: l, lang }: { landing: Landing; lang: Lang
       ? { "@type": "City", name: l.city.name, containedInPlace: { "@type": "AdministrativeArea", name: l.city.region, containedInPlace: { "@type": "Country", name: "Colombia" } } }
       : [{ "@type": "Country", name: "Colombia" }, { "@type": "Place", name: "Latinoamérica" }, { "@type": "Country", name: "United States" }],
     keywords: copy.keywords.join(", "),
-    ...(plan && !plan.quote
-      ? { offers: { "@type": "Offer", priceCurrency: "COP", price: plan.from, priceSpecification: { "@type": "PriceSpecification", minPrice: plan.from, priceCurrency: "COP" }, availability: "https://schema.org/InStock", seller: { "@id": `${SITE.url}/#organization` } } }
+    ...(offer
+      ? { offers: { "@type": "Offer", priceCurrency: offer.currency, price: offer.amount, priceSpecification: { "@type": "PriceSpecification", minPrice: offer.amount, priceCurrency: offer.currency }, availability: "https://schema.org/InStock", seller: { "@id": `${SITE.url}/#organization` } } }
       : {}),
   };
   const webPage = {

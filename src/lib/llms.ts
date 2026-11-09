@@ -30,7 +30,7 @@ export function llmsTxt(full = false): string {
   out.push("");
   for (const p of PLANS) {
     const c = t.pricing.plans[p.id];
-    out.push(`- ${c.name}: desde ${formatCOP(p.from)} COP · entrega: ${c.delivery.toLowerCase()}. ${c.pitch}`);
+    out.push(`- ${c.name}: desde ${formatCOP(p.from)} COP${p.usd ? ` (${p.usd} USD fuera de Colombia)` : ""} · entrega: ${c.delivery.toLowerCase()}. ${c.pitch}`);
   }
   out.push("- Los precios se pueden consultar en moneda local (México, Perú, Argentina, Chile, Ecuador, España, Estados Unidos y más) desde el selector de país.");
   out.push("");

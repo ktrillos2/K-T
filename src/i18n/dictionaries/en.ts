@@ -149,7 +149,7 @@ const en: Dict = {
       items: [
         { q: "What does K&T Code do?", a: "K&T Code designs and builds custom websites, online stores and software. Every project has a unique design and its own code, with no templates." },
         { q: "Where is it based?", a: "In Cúcuta, Norte de Santander, Colombia. It works remotely with companies in Colombia, Latin America and the United States." },
-        { q: "How much does it cost?", a: "A landing page starts at 450,000 COP, an online store at 1,300,000 COP, a corporate website at 2,500,000 COP and custom software at 4,500,000 COP. Prices are shown in your local currency." },
+        { q: "How much does it cost?", a: "A landing page starts at 200 USD, an online store at 450 USD and custom systems at 1,000 USD. Anything else is quoted per project." },
         { q: "How long does it take?", a: "A landing page takes 7 to 12 days, a corporate website 15 to 25 days and an online store 25 to 40 days." },
         { q: "What makes it different?", a: "A from-scratch design for each client, load times under one second, SEO built into the architecture and code delivered in the client's name." },
         { q: "What results has it achieved?", a: "Its projects go from an average PageSpeed of 46 to 98 out of 100. Telas Real grew its quote requests by 64% and GMX Gaming automated 85% more registrations." },

@@ -53,7 +53,7 @@ export type LandingViewProps = {
  * moneda del visitante, proceso, proyectos reales, preguntas frecuentes y enlaces internos.
  */
 export function LandingView({ kind, slug, color, plan, copy, blocks, projects, posts, related, fallback, crumbs }: LandingViewProps) {
-  const { t, lang } = useI18n();
+  const { t, lang, quotedAbroad } = useI18n();
   const l = t.landing;
   const body = useRef<HTMLDivElement>(null);
 
@@ -153,7 +153,7 @@ export function LandingView({ kind, slug, color, plan, copy, blocks, projects, p
                 <p className={styles.priceLabel}>{l.priceTitle}</p>
                 <p className={styles.planName}>{planCopy.name}</p>
                 <p className={styles.price}>
-                  <span>{t.price.from}</span>
+                  {!quotedAbroad(planData) && <span>{t.price.from}</span>}
                   <strong className="display">
                     <Price cop={planData.from} />
                   </strong>

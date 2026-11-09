@@ -24,7 +24,7 @@ type Props = {
 
 /** Índice de servicios o industrias: tarjetas con su precio de partida en la moneda del visitante. */
 export function LandingHub({ eyebrow, h1, lead, items, extra = [] }: Props) {
-  const { t } = useI18n();
+  const { t, quotedAbroad } = useI18n();
   const body = useRef<HTMLDivElement>(null);
   return (
     <>
@@ -55,7 +55,7 @@ export function LandingHub({ eyebrow, h1, lead, items, extra = [] }: Props) {
                     <span className={styles.foot}>
                       {plan && !plan.quote ? (
                         <span>
-                          {t.price.from} <strong>{<Price cop={plan.from} />}</strong>
+                          {!quotedAbroad(plan) && t.price.from} <strong>{<Price cop={plan.from} />}</strong>
                         </span>
                       ) : (
                         <span>{it.meta}</span>

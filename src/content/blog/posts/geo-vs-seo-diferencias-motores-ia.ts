@@ -157,7 +157,7 @@ const en: PostBody = {
       rows: [
         ["Simple definitions (“what is hosting”)", "They drop", "The shallow dictionary-style article is no longer worth it"],
         ["Comparisons (“Next.js vs. WordPress”)", "The summary cites often", "Tables with pros, cons and exact prices"],
-        ["Prices and transactions (“website price Colombia”)", "Highly qualified clicks", "Prices in COP, offers and structured data"],
+        ["Prices and transactions (“website price Colombia”)", "Highly qualified clicks", "Prices in USD, offers and structured data"],
         ["Complex questions (WhatsApp + DIAN invoicing)", "Long answers with several sources", "Step-by-step guides with real examples"],
       ],
     },

@@ -35,7 +35,7 @@ Many sites allow the bots in robots.txt but block them with challenges or 403 er
 Structured data (schema.org in JSON-LD) tells models, unambiguously, who you are and what you offer.
 
 - **Organization or LocalBusiness:** legal name, logo, founders, address and official profiles (\`sameAs\`).
-- **Service and Product:** exact prices, currency (COP, USD), delivery times.
+- **Service and Product:** exact prices, currency (USD, EUR), delivery times.
 - **FAQPage:** direct questions and answers, easy to extract.
 - **BreadcrumbList:** your site's hierarchy.
 
@@ -45,18 +45,18 @@ Table: Content strategies that work with AI models.
 | Strategy | Why it works | Example |
 |---|---|---|
 | Definition in the first 40 words | The model extracts the answer without hunting for it | "An AI agent is an autonomous system that…" |
-| HTML tables | Interpreted better than messy lists | Prices in COP and delivery times |
-| Verifiable figures | Models prefer data to adjectives | "Landing pages from COP 450,000" |
+| HTML tables | Interpreted better than messy lists | Prices in USD and delivery times |
+| Verifiable figures | Models prefer data to adjectives | "Landing pages from USD 200" |
 
 ### From promotional copy to citable copy
 
-"We are leaders in comprehensive solutions" tells a model nothing. "Custom web development studio in Cúcuta, Colombia; landing pages from COP 450,000; delivered in 7 to 12 days" does.
+"We are leaders in comprehensive solutions" tells a model nothing. "Custom web development studio in Cúcuta, Colombia; landing pages from USD 200; delivered in 7 to 12 days" does.
 
 Table: How to turn vague copy into something AI can cite.
 | Vague copy | Citable copy |
 |---|---|
 | Innovative web solutions | Websites, online stores and custom software |
-| Competitive prices | Landing pages from COP 450,000 |
+| Competitive prices | Landing pages from USD 200 |
 | Fast websites | The main content loads in under one second |
 | Extensive experience | More than 20 projects in production in Colombia, Mexico and Peru |
 

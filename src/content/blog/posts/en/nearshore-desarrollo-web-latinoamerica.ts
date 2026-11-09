@@ -98,7 +98,7 @@ Nearshore development gives US companies the best of both worlds: the collaborat
     { q: "What is nearshore web development?", a: "It's hiring a web development team in a nearby country with overlapping time zones. For US companies, that usually means Latin America, such as Colombia or Mexico." },
     { q: "What's the difference between nearshore and offshore?", a: "Nearshore teams are in nearby countries with similar hours, which allows real-time collaboration. Offshore teams are far away, with large time differences." },
     { q: "Is Colombia in the same time zone as the US?", a: "Colombia uses UTC−5 all year: it matches US Eastern time in winter and Central time during daylight saving time." },
-    { q: "How much does it cost to hire a web developer in Latin America?", a: "It depends on the scope. At K&T Code a landing page starts at $450,000 COP and a custom website at $2,500,000 COP; on kytcode.lat/precios you can see every plan in US dollars." },
+    { q: "How much does it cost to hire a web developer in Latin America?", a: "It depends on the scope. At K&T Code a landing page starts at 200 USD and a custom website at $2,500,000 COP; on kytcode.lat/precios you can see every plan in US dollars." },
   ],
   sources: [
     { title: "timeanddate.com: time zone in Colombia", url: "https://www.timeanddate.com/time/zone/colombia" },
