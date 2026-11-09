@@ -26,6 +26,27 @@ const LEGACY: [string, string][] = [
   ["/services/:slug", "/servicios/:slug"],
   ["/nearshore-web-development-colombia", "/blog/nearshore-desarrollo-web-latinoamerica"],
   ["/blog/wompi-vs-mercado-pago-vs-payu-colombia-2026", "/blog/wompi-vs-mercado-pago-vs-payu-colombia"],
+  // Artículos que competían por la misma búsqueda: su contenido útil pasó a la ganadora.
+  ["/blog/como-crear-pagina-web-2026", "/blog/como-crear-una-pagina-web-desde-cero-2026"],
+  ["/blog/como-crear-pagina-web-profesional", "/blog/como-crear-una-pagina-web-desde-cero-2026"],
+  ["/blog/seo-desde-la-raiz-crear-pagina", "/blog/como-crear-una-pagina-web-desde-cero-2026"],
+  ["/blog/seo-para-chatgpt-optimizacion-ia", "/blog/como-aparecer-en-chatgpt-2026"],
+  ["/blog/llms-txt-2026", "/blog/como-aparecer-en-chatgpt-2026"],
+  ["/blog/seo-agentico-2026", "/blog/geo-vs-seo-diferencias-motores-ia"],
+  ["/blog/google-ai-overviews-ai-mode-seo", "/blog/geo-vs-seo-diferencias-motores-ia"],
+  ["/blog/como-usar-chatgpt-para-crear-pagina-web", "/blog/que-es-vibe-coding"],
+  ["/blog/mejores-herramientas-ia-crear-paginas-web-2026", "/blog/que-es-vibe-coding"],
+  ["/blog/chatbot-vs-agente-ia", "/blog/agentes-ia-empresas-colombia"],
+  ["/blog/integrar-whatsapp-crm-inventario-facturacion", "/blog/automatizar-whatsapp-business-con-ia"],
+  ["/blog/como-aparecer-en-google-guia-paso-a-paso", "/blog/por-que-mi-pagina-web-no-aparece-en-google"],
+  ["/blog/pagina-web-vs-tienda-virtual", "/blog/landing-page-vs-tienda-virtual"],
+  ["/blog/que-es-un-hosting-web-y-como-funciona", "/blog/que-es-un-dominio-web-como-elegir"],
+  ["/blog/wix-vs-wordpress-diferencias-precios", "/blog/shopify-vs-wix-comparativa-ecommerce"],
+  ["/blog/wordpress-vs-shopify-comparativa", "/blog/shopify-vs-woocommerce-colombia"],
+  ["/blog/agentic-commerce-ecommerce-ia", "/servicios/tiendas-virtuales"],
+  ["/blog/nextjs-vs-react", "/servicios/desarrollo-nextjs"],
+  ["/blog/que-es-el-seo-y-como-funciona-guia", "/servicios/seo-tecnico"],
+  ["/blog/que-es-un-ecommerce-headless-ventajas", "/servicios/woocommerce-headless"],
 ];
 
 /** Páginas en inglés retiradas: atendían búsquedas locales que no existen en inglés. Van antes de LEGACY para no encadenar saltos. */

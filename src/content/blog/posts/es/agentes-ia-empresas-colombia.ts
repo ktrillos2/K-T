@@ -33,7 +33,16 @@ Tabla: Diferencias entre las tres opciones.
 | Mantenimiento | Reconfigurar árboles a mano | Actualizar documentos y endpoints | Arquitectura modular con monitoreo |
 | Impacto | Filtro superficial de soporte | Ventas y servicio de punta a punta | Automatiza procesos repetitivos completos |
 
-Profundiza en [chatbot vs. agente de IA](/blog/chatbot-vs-agente-ia).
+### Entre los dos: el chatbot con NLP
+
+Hay una generación intermedia. Clasifica intenciones en lugar de seguir un árbol, usa webhooks fijos y conserva el contexto uno o dos turnos. Es aceptable para preguntas frecuentes, pero no planifica ni elige herramientas por su cuenta.
+
+### Un ejemplo: la pregunta que no cabe en un botón
+
+El chatbot responde; el agente actúa. Un cliente escribe: *«Necesito 15 licencias, ¿hay descuento por pago anual? Necesito factura electrónica con mi RUT, estoy en Cúcuta.»*
+
+- **Chatbot de reglas:** muestra un menú fijo («1. Ver planes · 2. Soporte · 3. Horarios»). La pregunta compuesta no cabe en ningún botón y el cliente se va.
+- **Agente de IA:** consulta la política de descuentos corporativos, verifica la regla de facturación electrónica, calcula el descuento por pago anual y ofrece una cotización formal en PDF en el mismo chat.
 
 ## Casos de uso reales en Colombia {#casos}
 
@@ -67,12 +76,18 @@ Poner un agente encima de una operación desordenada. La IA amplifica los proces
 - Tu equipo pasa más de 3 horas al día respondiendo las mismas preguntas o copiando datos entre WhatsApp y Excel.
 - Pierdes clientes por fuera del horario laboral.
 - Tu ERP, CRM o base de datos permite integraciones.
+- Vendes productos con variantes o muchas referencias.
+- Haces cotizaciones B2B personalizadas.
+- Agendas citas médicas o visitas técnicas.
+- Necesitas cobrar 24/7 con enlaces de pago.
+- Tus clientes hacen preguntas compuestas.
 
 ### Todavía no conviene si…
 
 - Tus políticas de precios, cambios o cobertura no están claras.
 - Recibes menos de unas 15 consultas al día: en esa etapa vale más el contacto directo.
 - Quieres que la IA tome decisiones financieras críticas sin supervisión.
+- Solo necesitas mostrar horarios y ubicación: para eso, un chatbot sencillo es suficiente.
 
 :::checklist id="agente-ia-listo" title="¿Tu empresa está lista para un agente de IA?"
 - Tengo procesos con reglas claras y documentadas
@@ -98,6 +113,7 @@ Si quieres estimar si se paga solo, usa nuestra guía para [calcular el ROI de u
 - Registro completo: qué respondió el agente, qué herramientas usó y por qué.
 `,
   faq: [
+    { q: "¿Cuál es la diferencia entre un chatbot y un agente de IA?", a: "El chatbot sigue respuestas predefinidas; el agente entiende el contexto, consulta tus sistemas y ejecuta acciones como cotizar, cobrar o agendar." },
     { q: "¿Un agente de IA puede inventar respuestas?", a: "Puede ocurrir si se conecta sin controles. Por eso limitamos el modelo a fuentes verificadas (bases de datos y catálogos) y validamos cada acción crítica antes de ejecutarla." },
     { q: "¿Reemplaza a los asesores de venta?", a: "No. El agente filtra, recoge datos y resuelve lo repetitivo; luego entrega al asesor los clientes calificados con un resumen." },
     { q: "¿Cuánto tarda la implementación?", a: "Un agente conectado a WhatsApp y a un CRM básico toma de 2 a 4 semanas. Con integración profunda a un ERP, de 6 a 10 semanas." },
@@ -105,6 +121,7 @@ Si quieres estimar si se paga solo, usa nuestra guía para [calcular el ROI de u
   sources: [
     { title: "Superintendencia de Industria y Comercio: protección de datos personales", url: "https://www.sic.gov.co/tema/proteccion-de-datos-personales" },
     { title: "Meta for Developers: WhatsApp Cloud API", url: "https://developers.facebook.com/docs/whatsapp/cloud-api" },
+    { title: "OpenAI: Function calling", url: "https://platform.openai.com/docs/guides/function-calling" },
   ],
 };
 

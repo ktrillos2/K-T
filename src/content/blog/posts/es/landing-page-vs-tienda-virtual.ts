@@ -46,6 +46,16 @@ Cada paso adicional es una oportunidad de abandono. Por eso, para campañas paga
 4. **Control de inventario y envíos** con transportadoras como Envía, Coordinadora o Interrapidísimo.
 5. **Recompra y venta cruzada:** recomendaciones y cupones.
 
+## ¿Y si lo que necesitas es una página web corporativa? {#web-corporativa}
+
+Landing y tienda no son las únicas opciones. Una página web corporativa no busca cerrar una venta en una sola pantalla ni mover un catálogo: genera credibilidad, contactos y citas, con formulario y WhatsApp en lugar de pagos en línea. Con K&T Code parte de $2.500.000 COP. Elígela si:
+
+- Vendes servicios o consultorías y el precio depende del alcance.
+- Eres una empresa B2B o industrial que busca reuniones y cotizaciones.
+- No necesitas inventario en tiempo real, transportadoras ni comisiones por venta.
+
+Si el sitio está bien construido, también puedes empezar así y agregarle la tienda después, sin rehacerlo.
+
 ## El modelo híbrido {#hibrido}
 
 Mantén la **tienda como catálogo maestro** y motor de SEO, y para cada campaña paga envía el tráfico a una **landing satélite** con una sola oferta. Después de la compra, invitas al cliente a conocer el resto del catálogo. Así combinas la conversión de la landing con el alcance de la tienda.
@@ -65,16 +75,20 @@ Mantén la **tienda como catálogo maestro** y motor de SEO, y para cada campañ
 = Con variantes y volumen necesitas categorías, filtros, carrito e inventario.
 :::
 
-Compara también [página web vs. tienda virtual](/blog/pagina-web-vs-tienda-virtual) o revisa los planes en [precios](/precios).
+Revisa los planes en [precios](/precios).
 `,
   faq: [
     { q: "¿Puedo empezar con una landing y luego pasar a una tienda?", a: "Sí, y es lo recomendable para negocios nuevos: la landing valida la demanda. Cuando superes 20–30 pedidos por semana y WhatsApp se vuelva inmanejable, conviene la tienda." },
     { q: "¿Una landing page puede recibir pagos?", a: "Sí. Puede tener un botón de pago directo (Wompi, Bold o Stripe) por un valor fijo sin carrito tradicional." },
     { q: "¿Cuál posiciona mejor en Google?", a: "La tienda tiene más potencial orgánico a largo plazo porque genera muchas URLs indexables (categorías y productos). La landing brilla con tráfico pago." },
+    { q: "¿Puedo empezar con una página web y luego convertirla en tienda?", a: "Sí. Si el sitio está construido con código propio y bien estructurado, se pueden agregar carrito y pasarelas como Wompi o Bold sin rehacerlo desde cero." },
+    { q: "¿Qué pasarelas necesito para una tienda virtual en Colombia?", a: "Las más usadas son Wompi, Bold, PayU y Mercado Pago, que procesan PSE, tarjetas, Nequi y Daviplata." },
   ],
   sources: [
     { title: "Baymard Institute: Checkout usability", url: "https://baymard.com/research/checkout-usability" },
     { title: "Shopify: Commerce trends", url: "https://www.shopify.com/enterprise/commerce-trends" },
+    { title: "Wompi: tarifas", url: "https://wompi.com/es/co/tarifas" },
+    { title: "Cámara Colombiana de Comercio Electrónico", url: "https://www.ccce.org.co/" },
   ],
 };
 

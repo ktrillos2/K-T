@@ -20,7 +20,7 @@ Tabla: Opciones para una web de pequeño negocio.
 | Agencia local | Alto | Retainer o por horas | Alto | Quien quiere reuniones presenciales |
 | Desarrollo a medida con estudio nearshore | Medio a alto | Hosting y mantenimiento | Total (el código es tuyo) | Negocios que crecen y valoran velocidad y SEO |
 
-¿Quieres comparar constructores? Lee [Wix vs. WordPress](/blog/wix-vs-wordpress-diferencias-precios) y [agencia vs. freelance](/blog/agencia-vs-freelance-desarrollo-web).
+¿Quieres comparar constructores? Lee [Wix vs. WordPress](/blog/shopify-vs-wix-comparativa-ecommerce) y [agencia vs. freelance](/blog/agencia-vs-freelance-desarrollo-web).
 
 ## Qué define el precio {#precio}
 

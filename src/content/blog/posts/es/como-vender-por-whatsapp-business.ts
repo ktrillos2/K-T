@@ -64,7 +64,7 @@ Si recibes decenas de mensajes al día, la app se queda corta. La **API oficial 
 - **Cobrar dentro del chat** y emitir la factura electrónica automáticamente.
 - **Mensajes masivos permitidos** con plantillas aprobadas por Meta (con costo por mensaje según la categoría).
 
-Te lo explicamos en detalle en [cómo automatizar WhatsApp Business con IA](/blog/automatizar-whatsapp-business-con-ia) y en [cómo integrarlo con inventario y facturación](/blog/integrar-whatsapp-crm-inventario-facturacion).
+Te lo explicamos en detalle en [cómo automatizar WhatsApp Business con IA](/blog/automatizar-whatsapp-business-con-ia) y en [cómo integrarlo con inventario y facturación](/blog/automatizar-whatsapp-business-con-ia).
 
 ## Pon a prueba lo que aprendiste {#quiz}
 

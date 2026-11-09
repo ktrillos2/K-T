@@ -60,7 +60,7 @@ Haz las pruebas en ventana privada, sin historial y con ubicación en Colombia. 
 
 1. Responde en las primeras 40–45 palabras de cada sección.
 2. Usa tablas comparativas en HTML.
-3. Publica un [llms.txt](/blog/llms-txt-2026) con tus servicios y precios.
+3. Publica un [llms.txt](/blog/como-aparecer-en-chatgpt-2026) con tus servicios y precios.
 4. Implementa datos estructurados de organización, servicios y migas de pan sin errores.
 
 ¿Quieres que lo auditemos por ti? Mira el servicio de [SEO técnico](/servicios/seo-tecnico).

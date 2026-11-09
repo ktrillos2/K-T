@@ -47,7 +47,7 @@ Para pedidos en línea conviene ofrecer lo que tus clientes ya usan: tarjeta, tr
 4. Pide reseñas a clientes reales y responde todas.
 5. Mantén el menú y los horarios al día.
 
-Tienes el paso a paso general en [cómo aparecer en Google](/blog/como-aparecer-en-google-guia-paso-a-paso).
+Tienes el paso a paso general en [cómo aparecer en Google](/blog/por-que-mi-pagina-web-no-aparece-en-google).
 
 :::checklist id="web-restaurante" title="Revisa la página de tu restaurante"
 - El menú está en texto, con precios actualizados

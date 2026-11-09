@@ -21,10 +21,24 @@ Tabla: Shopify frente a Wix para vender en línea.
 | Pasarelas en Colombia | Wompi, PayU, Mercado Pago | Mercado Pago, PayU; opciones locales más limitadas |
 | Costo | Suscripción mensual + comisiones | Plan mensual que sube al renovar |
 
+## ¿Y WordPress? Lo que cambia si algún día quieres irte {#portabilidad}
+
+Wix es muy fácil para empezar, pero es un sistema cerrado: no puedes exportar el código ni la base de datos, así que migrar significa reconstruir el sitio desde cero. WordPress tiene curva de aprendizaje, pero su código es libre y puedes moverlo a otro hosting; a cambio, a medida que sumas plugins el sitio se vuelve más lento y más vulnerable.
+
+Tabla: Wix frente a WordPress.
+| Criterio | Wix | WordPress |
+|---|---|---|
+| Facilidad para empezar | Muy alta: arrastrar y soltar | Media: requiere aprender |
+| Propiedad y portabilidad | No puedes exportar el sitio | Código libre, lo mueves a otro hosting |
+| Velocidad | Moderada: muchos scripts | Buena si se optimiza bien |
+| Flexibilidad | Limitada a lo que ofrece Wix | Alta con plugins, pero cada plugin pesa |
+| Costo | Plan mensual que sube al renovar | Hosting y dominio, más plugins premium |
+
 ## ¿Cuál elegir? {#elegir}
 
 - **Wix:** si tienes menos de unos 50 productos sencillos y no esperas crecer rápido.
 - **Shopify:** si manejas variantes, inventario dinámico y volumen alto.
+- **WordPress:** si quieres poder llevarte el sitio a otro hosting y aceptas más mantenimiento técnico.
 - **A la medida:** si quieres una tienda rápida, sin comisión de plataforma, conectada a WhatsApp y con un diseño propio.
 
 Compara costos reales en [cuánto cuesta una tienda virtual en Colombia](/blog/cuanto-cuesta-una-tienda-virtual-en-colombia-2026) y en [Shopify vs. WooCommerce](/blog/shopify-vs-woocommerce-colombia).
@@ -32,6 +46,8 @@ Compara costos reales en [cuánto cuesta una tienda virtual en Colombia](/blog/c
   faq: [
     { q: "¿Wix es suficiente para una tienda mediana?", a: "Funciona bien para catálogos pequeños, de unas decenas de productos sencillos. Para variantes complejas, inventario dinámico y alto volumen, Shopify o una tienda a la medida son más robustos." },
     { q: "¿Qué pasarelas colombianas aceptan Shopify y Wix?", a: "Shopify se integra con Wompi, PayU y Mercado Pago. Wix soporta Mercado Pago y PayU, con opciones locales más limitadas." },
+    { q: "¿Puedo migrar de Wix a otra plataforma?", a: "Wix es un sistema cerrado que no permite exportar el código ni la base de datos, así que migrar implica reconstruir el sitio desde cero." },
+    { q: "¿Es más económico WordPress que Wix para un negocio en Colombia?", a: "WordPress con hosting propio suele costar menos que los planes premium de Wix y evita los aumentos al renovar, aunque requiere más mantenimiento técnico." },
   ],
 };
 

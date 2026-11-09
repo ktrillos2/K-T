@@ -41,7 +41,7 @@ Revisa siempre las tarifas vigentes de cada pasarela antes de decidir. Te compar
 - **Velocidad:** una tienda que carga en menos de un segundo reduce el abandono del carrito en móvil.
 - **WhatsApp integrado:** puedes cerrar ventas con pago automático o con un asesor por chat.
 
-Profundiza en [Shopify vs. WooCommerce en Colombia](/blog/shopify-vs-woocommerce-colombia) y [qué es un e-commerce headless](/blog/que-es-un-ecommerce-headless-ventajas).
+Profundiza en [Shopify vs. WooCommerce en Colombia](/blog/shopify-vs-woocommerce-colombia) y [qué es un e-commerce headless](/servicios/woocommerce-headless).
 
 Mira los [precios de una tienda virtual](/precios/precio-tienda-virtual-colombia) o nuestro servicio de [tiendas virtuales](/servicios/tiendas-virtuales).
 `,

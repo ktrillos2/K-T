@@ -35,7 +35,7 @@ Los planes y comisiones se actualizan con frecuencia. Mira siempre las páginas 
 - **Shopify:** más apps y herramientas para vender fuera del país; suma costos por apps y puede cobrar comisión extra si usas una pasarela que no sea la suya.
 - **A medida (por ejemplo con Next.js):** carga muy rápida, diseño sin límites y sin atarte a comisiones de plataforma. Requiere una inversión inicial mayor.
 
-Si quieres profundizar, lee [Shopify vs. WooCommerce](/blog/shopify-vs-woocommerce-colombia), [WordPress vs. Shopify](/blog/wordpress-vs-shopify-comparativa) y [qué es un e-commerce headless](/blog/que-es-un-ecommerce-headless-ventajas).
+Si quieres profundizar, lee [Shopify vs. WooCommerce](/blog/shopify-vs-woocommerce-colombia), [WordPress vs. Shopify](/blog/shopify-vs-woocommerce-colombia) y [qué es un e-commerce headless](/servicios/woocommerce-headless).
 
 ## Cobrar en Argentina: Mercado Pago, transferencias y cuotas {#cobros}
 

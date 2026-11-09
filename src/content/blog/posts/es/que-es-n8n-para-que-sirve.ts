@@ -42,7 +42,7 @@ n8n usa una licencia «fair-code»: puedes usarlo gratis para automatizar tu pro
 
 La gran novedad son los **nodos de IA**. Conectas un modelo (OpenAI, Anthropic, Gemini) y le das «herramientas»: leer una hoja de cálculo, consultar una API, enviar un mensaje. El agente decide cuál usar según lo que pide el cliente.
 
-Es la forma más rápida de pasar de un [chatbot de reglas a un agente de IA](/blog/chatbot-vs-agente-ia). Para un prototipo, en una tarde tienes algo funcionando.
+Es la forma más rápida de pasar de un [chatbot de reglas a un agente de IA](/blog/agentes-ia-empresas-colombia). Para un prototipo, en una tarde tienes algo funcionando.
 
 ## n8n vs. Zapier vs. Make vs. software a medida {#comparativa}
 

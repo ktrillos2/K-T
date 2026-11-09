@@ -139,7 +139,7 @@ export const SERVICES: Landing[] = [
     plan: "corporativo",
     serviceType: "Desarrollo web a la medida",
     projects: ["cxellence-group", "qvareli", "casa-medina", "gmx-gaming"],
-    posts: ["desarrollo-web-medida-vs-plantillas", "como-crear-pagina-web-2026", "como-elegir-empresa-desarrollo-web-colombia"],
+    posts: ["desarrollo-web-medida-vs-plantillas", "como-crear-una-pagina-web-desde-cero-2026", "como-elegir-empresa-desarrollo-web-colombia"],
     related: [S("diseno-web-corporativo"), S("software-a-medida"), S("seo-tecnico")],
     copy: {
       es: {
@@ -264,7 +264,7 @@ export const SERVICES: Landing[] = [
     plan: "corporativo",
     serviceType: "Diseño web corporativo",
     projects: ["cxellence-group", "eccocia", "nosky-group", "academia-sea", "psicowork", "estrella-de-david"],
-    posts: ["como-crear-pagina-web-profesional", "como-elegir-empresa-desarrollo-web-colombia", "pagina-web-vs-tienda-virtual"],
+    posts: ["como-crear-una-pagina-web-desde-cero-2026", "como-elegir-empresa-desarrollo-web-colombia", "landing-page-vs-tienda-virtual"],
     related: [S("desarrollo-web-a-medida"), S("seo-tecnico"), "/precios/precio-pagina-web-colombia"],
     copy: {
       es: {
@@ -326,7 +326,7 @@ export const SERVICES: Landing[] = [
     plan: "corporativo",
     serviceType: "Desarrollo web con Next.js",
     projects: ["gmx-gaming", "telas-real", "qvareli"],
-    posts: ["nextjs-vs-wordpress", "nextjs-vs-react", "seo-desde-la-raiz-crear-pagina"],
+    posts: ["nextjs-vs-wordpress", "como-crear-una-pagina-web-desde-cero-2026"],
     related: [S("desarrollo-web-a-medida"), S("woocommerce-headless"), S("seo-tecnico")],
     copy: {
       es: {
@@ -388,7 +388,7 @@ export const SERVICES: Landing[] = [
     plan: "tienda",
     serviceType: "E-commerce headless",
     projects: ["telas-real", "motofox", "traum-drop"],
-    posts: ["que-es-un-ecommerce-headless-ventajas", "shopify-vs-woocommerce-colombia", "cuanto-cuesta-una-tienda-virtual-en-colombia-2026"],
+    posts: ["shopify-vs-woocommerce-colombia", "cuanto-cuesta-una-tienda-virtual-en-colombia-2026"],
     related: [S("tiendas-virtuales"), S("desarrollo-nextjs"), "/precios/precio-tienda-virtual-colombia"],
     copy: {
       es: {
@@ -449,7 +449,7 @@ export const SERVICES: Landing[] = [
     color: "green",
     serviceType: "SEO técnico y GEO",
     projects: ["cxellence-group", "qvareli", "occ-partes"],
-    posts: ["que-es-el-seo-y-como-funciona-guia", "por-que-mi-pagina-web-no-aparece-en-google", "geo-vs-seo-diferencias-motores-ia", "como-aparecer-en-chatgpt-2026"],
+    posts: ["por-que-mi-pagina-web-no-aparece-en-google", "geo-vs-seo-diferencias-motores-ia", "como-aparecer-en-chatgpt-2026"],
     related: [S("desarrollo-web-a-medida"), S("desarrollo-nextjs"), S("mantenimiento-web")],
     copy: {
       es: {
@@ -510,7 +510,7 @@ export const SERVICES: Landing[] = [
     color: "red",
     serviceType: "Mantenimiento y soporte web",
     projects: ["casa-medina", "brahneyker", "telas-real"],
-    posts: ["cuanto-cuesta-mantenimiento-pagina-web-colombia", "que-es-un-hosting-web-y-como-funciona", "costo-oculto-pagina-web-lenta"],
+    posts: ["cuanto-cuesta-mantenimiento-pagina-web-colombia", "que-es-un-dominio-web-como-elegir", "costo-oculto-pagina-web-lenta"],
     related: [S("seo-tecnico"), S("desarrollo-web-a-medida"), S("software-a-medida")],
     copy: {
       es: {

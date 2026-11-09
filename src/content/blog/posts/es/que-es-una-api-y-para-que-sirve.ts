@@ -101,7 +101,7 @@ Mira todos los [planes y precios](/precios) o la [guía de precios de software a
 
 ## Conclusión {#conclusion}
 
-Una API es el puente que hace que tus sistemas trabajen juntos. Si hoy copias datos a mano entre tu web, WhatsApp y tu facturación, una integración puede ahorrarte horas cada semana. Lee [cómo integrar WhatsApp con CRM, inventario y facturación](/blog/integrar-whatsapp-crm-inventario-facturacion) o [escríbenos](/#contacto).
+Una API es el puente que hace que tus sistemas trabajen juntos. Si hoy copias datos a mano entre tu web, WhatsApp y tu facturación, una integración puede ahorrarte horas cada semana. Lee [cómo integrar WhatsApp con CRM, inventario y facturación](/blog/automatizar-whatsapp-business-con-ia) o [escríbenos](/#contacto).
 `,
   faq: [
     { q: "¿Qué es una API en palabras simples?", a: "Es el intermediario que permite que dos programas intercambien información de forma segura, como un mesero que lleva tu pedido a la cocina y te trae el plato." },
