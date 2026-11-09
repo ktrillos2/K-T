@@ -9,10 +9,6 @@ const EN: Record<string, { message: string; role: string }> = {
   "occ-partes-diego-gonzalez": { role: "Sales Director", message: "The implementation process was very dynamic, K&T's design proposal was spot on and they're very responsive to changes. We recommend them." },
   "estrella-de-david-ruby-mendoza": { role: "Communications Lead", message: "Very satisfied with the attention and service. They pay close attention to detail, are always available for any question or request, and are very efficient. Highly recommended." },
   "brahneyker-stella": { role: "Salon owner", message: "I'm happy with the product because I can now manage my inventory and have a website where people can find my business." },
-  "gmx-gaming-equipo-directivo": { role: "Operations — GMX Gaming", message: "We came from a limited WordPress site that slowed everything down and forced us to run tournaments by hand. With K&T we built a custom platform: ultra-fast, with an immersive design and 100% automated registration." },
-  "cxellence-group-andres-restrepo": { role: "CEO & Co-Founder — CXellence Group", message: "K&T Code built our corporate website with semantic SEO from the ground up. Within a few weeks we started getting qualified B2B leads in Bogotá and Medellín." },
-  "nosky-group-santiago-silva": { role: "CTO — Noskygroup", message: "Code delivery was on time, with rigorous architecture standards and a private repository that's 100% ours. Easily the best technical agency we've worked with in Colombia." },
-  "psicowork-laura-martinez": { role: "Talent & Wellbeing Director — Psicowork", message: "We wanted an intuitive platform for companies and employees. K&T designed a modern interface with a user experience our corporate clients praise every day." },
 };
 
 export const TRANSLATED_NOTE = "translated from Spanish";

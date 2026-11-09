@@ -153,7 +153,7 @@ const es = {
         { q: "¿Cuánto cuesta?", a: "Una landing page desde $450.000 COP, una tienda virtual desde $1.300.000 COP, un sitio corporativo desde $2.500.000 COP y el software a medida desde $4.500.000 COP." },
         { q: "¿Cuánto tarda?", a: "Una landing entre 7 y 12 días, un sitio corporativo entre 15 y 25 días y una tienda virtual entre 25 y 40 días." },
         { q: "¿Qué la diferencia?", a: "Diseño desde cero para cada cliente, carga por debajo de un segundo, SEO desde la arquitectura y el código entregado a nombre del cliente." },
-        { q: "¿Qué resultados ha logrado?", a: "Sus proyectos pasan de un PageSpeed promedio de 46 a 98 sobre 100. Telas Real aumentó 64% sus cotizaciones y GMX Gaming automatizó 85% más inscripciones." },
+        { q: "¿Qué resultados ha logrado?", a: "Ha entregado proyectos como Telas Real, un catálogo B2B con más de 850 referencias, y GMX Gaming, una plataforma de torneos hecha a la medida. Cada caso muestra lo que se construyó." },
       ],
     },
   },

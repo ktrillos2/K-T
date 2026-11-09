@@ -38,7 +38,7 @@ const CITIES: CityData[] = [
     color: "red",
     projects: ["telas-real", "psicowork"],
     sectors: ["Textil y moda", "Salud mental y bienestar", "Comercio B2B", "Tecnología", "Servicios profesionales"],
-    intro: "Desde Medellín nos han confiado proyectos como Telas Real, el catálogo B2B con más de 850 referencias que aumentó 64% sus cotizaciones, y Psicowork, un portal de psicología clínica y organizacional. Desarrollamos páginas web, tiendas y software a la medida para empresas antioqueñas, en remoto.",
+    intro: "Desde Medellín nos han confiado proyectos como Telas Real, el catálogo B2B con más de 850 referencias, y Psicowork, un portal de psicología clínica y organizacional. Desarrollamos páginas web, tiendas y software a la medida para empresas antioqueñas, en remoto.",
     local: "La industria textil, de moda y de servicios de Medellín necesita catálogos rápidos y procesos de cotización simples: es lo que construimos.",
     meet: "Por videollamada, con avances que puedes revisar en línea en cada etapa.",
   },
@@ -86,7 +86,7 @@ const CITY_EN: Record<string, { sectors: string[]; intro: string; local: string;
   },
   medellin: {
     sectors: ["Textiles and fashion", "Mental health and wellbeing", "B2B commerce", "Technology", "Professional services"],
-    intro: "From Medellín, clients have trusted us with projects such as Telas Real, the B2B catalog with more than 850 SKUs that increased its quote requests by 64%, and Psicowork, a clinical and organizational psychology portal. We build websites, stores and custom software for companies in Antioquia, remotely.",
+    intro: "From Medellín, clients have trusted us with projects such as Telas Real, the B2B catalog with more than 850 SKUs, and Psicowork, a clinical and organizational psychology portal. We build websites, stores and custom software for companies in Antioquia, remotely.",
     local: "Medellín's textile, fashion and services industries need fast catalogs and simple quoting processes: that's what we build.",
     meet: "By video call, with progress you can review online at every stage.",
   },
