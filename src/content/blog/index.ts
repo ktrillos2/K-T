@@ -9,6 +9,10 @@ import { fromMarkdown } from "./markdown";
 import { formatCOP } from "@/lib/money";
 import md_pagina_web_para_restaurante_mexico from "./posts/es/pagina-web-para-restaurante-mexico";
 import md_precio_pagina_web_chile from "./posts/es/precio-pagina-web-chile";
+import md_precio_pagina_web_peru from "./posts/es/precio-pagina-web-peru";
+import en_precio_pagina_web_peru from "./posts/en/precio-pagina-web-peru";
+import md_precio_pagina_web_ecuador from "./posts/es/precio-pagina-web-ecuador";
+import en_precio_pagina_web_ecuador from "./posts/en/precio-pagina-web-ecuador";
 import md_cuanto_cuesta_administrar_facebook_ads_colombia from "./posts/es/cuanto-cuesta-administrar-facebook-ads-colombia";
 import md_que_es_el_remarketing_y_como_funciona from "./posts/es/que-es-el-remarketing-y-como-funciona";
 import md_cuanto_cuesta_una_tienda_online_argentina from "./posts/es/cuanto-cuesta-una-tienda-online-argentina";
@@ -63,6 +67,8 @@ const BODIES: Record<string, Partial<Record<Lang, PostBody>> & { es: PostBody }>
   "geo-vs-seo-diferencias-motores-ia": geo,
   // Tendencias de búsqueda (es + en), generadas con la skill blog-tendencias.
   "pagina-web-para-restaurante-mexico": { es: fromMarkdown(md_pagina_web_para_restaurante_mexico) },
+  "precio-pagina-web-peru": { es: fromMarkdown(md_precio_pagina_web_peru), en: fromMarkdown(en_precio_pagina_web_peru) },
+  "precio-pagina-web-ecuador": { es: fromMarkdown(md_precio_pagina_web_ecuador), en: fromMarkdown(en_precio_pagina_web_ecuador) },
   "precio-pagina-web-chile": { es: fromMarkdown(md_precio_pagina_web_chile) },
   "cuanto-cuesta-administrar-facebook-ads-colombia": { es: fromMarkdown(md_cuanto_cuesta_administrar_facebook_ads_colombia) },
   "que-es-el-remarketing-y-como-funciona": { es: fromMarkdown(md_que_es_el_remarketing_y_como_funciona) },
