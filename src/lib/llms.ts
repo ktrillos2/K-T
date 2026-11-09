@@ -2,7 +2,7 @@ import { getDict, projectsFor } from "@/i18n";
 import { localize } from "@/i18n/config";
 import { POSTS } from "@/content/blog/meta";
 import { getPost, plainText } from "@/content/blog";
-import { CITY_LANDINGS, GUIDES, INDUSTRIES, SERVICES, type Landing } from "@/content/landings";
+import { CITY_LANDINGS, INDUSTRIES, SERVICES, type Landing } from "@/content/landings";
 import { PLANS } from "./pricing";
 import { TESTIMONIALS } from "@/content/testimonials";
 import { SITE } from "./site";
@@ -51,7 +51,6 @@ export function llmsTxt(full = false): string {
     out.push("");
   };
   section("Servicios", SERVICES);
-  section("Guías de precios", GUIDES);
   section("Industrias", INDUSTRIES);
   section("Ciudades", CITY_LANDINGS);
   out.push("## Casos de estudio");
@@ -103,7 +102,7 @@ export function llmsTxt(full = false): string {
       }
       if (p.testimonial) out.push(`Testimonio: “${p.testimonial.quote}” — ${p.testimonial.author}, ${p.testimonial.role}`);
     }
-    for (const l of [...SERVICES, ...GUIDES]) {
+    for (const l of SERVICES) {
       out.push("");
       out.push(`## ${l.copy.es.h1}`);
       out.push(`URL: ${abs(l.path)}`);

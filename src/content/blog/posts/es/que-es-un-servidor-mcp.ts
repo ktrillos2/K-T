@@ -94,7 +94,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Una tienda que un agente de IA pueda consultar | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | Soporte y actualizaciones de tus sistemas | [Mantenimiento web](/servicios/mantenimiento-web) | Según alcance |
 
-Revisa la [guía de precios de software a medida](/precios/precio-software-a-medida) o todos los [planes y precios](/precios).
+Revisa la [guía de precios de software a medida](/blog/cuanto-cuesta-desarrollar-software-a-medida-colombia) o todos los [planes y precios](/precios).
 
 ## Conclusión {#conclusion}
 

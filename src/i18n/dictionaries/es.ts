@@ -528,7 +528,7 @@ const es = {
   },
 
   landing: {
-    crumbs: { servicio: "Servicios", industria: "Industrias", ciudad: "Desarrollo web", pais: "Desarrollo web", guia: "Precios" },
+    crumbs: { servicio: "Servicios", industria: "Industrias", ciudad: "Desarrollo web", pais: "Desarrollo web" },
     quote: "Cotizar por WhatsApp",
     seePricing: "Ver todos los precios",
     priceTitle: "Inversión de partida",

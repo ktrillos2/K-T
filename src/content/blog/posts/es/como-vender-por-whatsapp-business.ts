@@ -98,7 +98,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Agente de IA en WhatsApp conectado a inventario y facturación | [Software a medida](/servicios/software-a-medida) | {{cop:4500000}} |
 | Atraer clientes con publicidad en Facebook, Instagram, TikTok y Google | [Administración de Ads](/servicios/administracion-de-ads) | {{cop:450000,usd:200}} / mes |
 
-Compara en [precios](/precios) o revisa [cuánto cuesta una tienda virtual en Colombia](/precios/precio-tienda-virtual-colombia).
+Compara en [precios](/precios) o revisa [cuánto cuesta una tienda virtual en Colombia](/blog/cuanto-cuesta-una-tienda-virtual-en-colombia-2026).
 
 ## Conclusión {#conclusion}
 

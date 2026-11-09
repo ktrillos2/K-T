@@ -18,7 +18,7 @@ Tabla: Rangos de referencia en Colombia (2026).
 | Portal B2B o sistema para clientes | $9.000.000 – $18.000.000 | $2.300 – $4.500 | 6 a 10 semanas |
 | Plataforma SaaS completa (varias empresas) | $18.000.000 – $45.000.000+ | $4.500 – $11.000+ | 12 a 20 semanas |
 
-Estos valores son de referencia. Puedes ver nuestros [planes de software a medida](/precios/precio-software-a-medida).
+Estos valores son de referencia. Puedes ver nuestros [planes de software a medida](/servicios/software-a-medida).
 
 ## Las fases que componen el presupuesto {#fases}
 

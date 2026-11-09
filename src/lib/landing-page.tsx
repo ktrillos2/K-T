@@ -31,7 +31,7 @@ export function landingLabel(path: string, lang: Lang): string {
 function crumbsFor(l: Landing, lang: Lang) {
   const t = getDict(lang);
   const parent =
-    l.kind === "servicio" ? { href: "/servicios", label: t.nav.services } : l.kind === "industria" ? { href: "/industrias", label: t.nav.industries } : l.kind === "guia" ? { href: "/precios", label: t.nav.pricing } : null;
+    l.kind === "servicio" ? { href: "/servicios", label: t.nav.services } : l.kind === "industria" ? { href: "/industrias", label: t.nav.industries } : null;
   return [...(parent ? [parent] : []), { href: l.path, label: landingLabel(l.path, lang) }];
 }
 

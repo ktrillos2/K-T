@@ -47,6 +47,10 @@ const LEGACY: [string, string][] = [
   ["/blog/nextjs-vs-react", "/servicios/desarrollo-nextjs"],
   ["/blog/que-es-el-seo-y-como-funciona-guia", "/servicios/seo-tecnico"],
   ["/blog/que-es-un-ecommerce-headless-ventajas", "/servicios/woocommerce-headless"],
+  // Guías cortas que competían con el artículo de cada precio, que tiene más impresiones y la calculadora.
+  ["/precios/precio-pagina-web-colombia", "/blog/cuanto-cuesta-una-pagina-web-en-colombia"],
+  ["/precios/precio-tienda-virtual-colombia", "/blog/cuanto-cuesta-una-tienda-virtual-en-colombia-2026"],
+  ["/precios/precio-software-a-medida", "/blog/cuanto-cuesta-desarrollar-software-a-medida-colombia"],
 ];
 
 /** Páginas en inglés retiradas: atendían búsquedas locales que no existen en inglés. Van antes de LEGACY para no encadenar saltos. */

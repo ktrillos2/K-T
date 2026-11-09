@@ -528,7 +528,7 @@ const en: Dict = {
   },
 
   landing: {
-    crumbs: { servicio: "Services", industria: "Industries", ciudad: "Web development", pais: "Web development", guia: "Pricing" },
+    crumbs: { servicio: "Services", industria: "Industries", ciudad: "Web development", pais: "Web development" },
     quote: "Get a quote on WhatsApp",
     seePricing: "See all prices",
     priceTitle: "Starting investment",

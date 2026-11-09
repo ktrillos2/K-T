@@ -127,7 +127,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Una web a medida, rápida y lista para Google | [Desarrollo web a medida](/servicios/desarrollo-web-a-medida) | {{cop:2500000}} |
 | Mejorar el posicionamiento de un sitio existente | [SEO técnico](/servicios/seo-tecnico) | Según alcance |
 
-Compara planes en [precios](/precios) o revisa [cuánto cuesta una página web en Colombia](/precios/precio-pagina-web-colombia).
+Compara planes en [precios](/precios) o revisa [cuánto cuesta una página web en Colombia](/blog/cuanto-cuesta-una-pagina-web-en-colombia).
 
 ## Conclusión {#conclusion}
 

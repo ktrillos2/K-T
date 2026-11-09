@@ -103,7 +103,7 @@ Una página corporativa es la carta de presentación de tu empresa ante clientes
 
 ## ¿Prefieres que lo hagamos por ti? {#k-t}
 
-En K&T Code diseñamos y desarrollamos tu web desde cero, lista para Google y para captar clientes, desde $450.000 COP. Mira los [precios de una página web](/precios/precio-pagina-web-colombia) o nuestro servicio de [desarrollo web a la medida](/servicios/desarrollo-web-a-medida).
+En K&T Code diseñamos y desarrollamos tu web desde cero, lista para Google y para captar clientes, desde $450.000 COP. Mira los [precios de una página web](/blog/cuanto-cuesta-una-pagina-web-en-colombia) o nuestro servicio de [desarrollo web a la medida](/servicios/desarrollo-web-a-medida).
 `,
   faq: [
     { q: "¿Cuánto tiempo toma crear una página web profesional desde cero?", a: "Un sitio corporativo a la medida toma de 2 a 4 semanas, incluyendo diseño, desarrollo, optimización de velocidad y SEO técnico. Una landing page, de 7 a 12 días." },

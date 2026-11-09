@@ -12,7 +12,7 @@ export const SERVICES: Landing[] = [
     serviceType: "Diseño y desarrollo de landing pages",
     projects: ["aerolinea-santander", "causalidad-dinamica", "gmx-gaming"],
     posts: ["que-es-una-landing-page-y-para-que-sirve", "landing-page-vs-tienda-virtual", "cuanto-cuesta-una-pagina-web-en-colombia"],
-    related: [S("tiendas-virtuales"), S("diseno-web-corporativo"), "/precios/precio-pagina-web-colombia"],
+    related: [S("tiendas-virtuales"), S("diseno-web-corporativo")],
     copy: {
       es: {
         title: "Landing pages a la medida en Colombia: diseño que convierte",
@@ -76,7 +76,7 @@ export const SERVICES: Landing[] = [
     serviceType: "Desarrollo de tiendas virtuales",
     projects: ["telas-real", "motofox", "traum-drop", "eccodotaciones", "eklipse-home-textil", "occ-partes"],
     posts: ["cuanto-cuesta-una-tienda-virtual-en-colombia-2026", "wompi-vs-mercado-pago-vs-payu-colombia", "como-crear-una-tienda-online-desde-cero", "shopify-vs-woocommerce-colombia"],
-    related: [S("woocommerce-headless"), S("landing-pages"), "/precios/precio-tienda-virtual-colombia"],
+    related: [S("woocommerce-headless"), S("landing-pages")],
     copy: {
       es: {
         title: "Tiendas virtuales a la medida en Colombia con PSE, Nequi y tarjeta",
@@ -202,7 +202,7 @@ export const SERVICES: Landing[] = [
     serviceType: "Desarrollo de software a medida",
     projects: ["gmx-gaming", "brahneyker", "brambila-inmobiliaria", "autos-saldo"],
     posts: ["cuanto-cuesta-desarrollar-software-a-medida-colombia", "software-a-medida-vs-saas-comparativa", "agentes-ia-empresas-colombia", "calcular-roi-automatizacion-software-ia"],
-    related: [S("desarrollo-web-a-medida"), "/precios/precio-software-a-medida", S("mantenimiento-web")],
+    related: [S("desarrollo-web-a-medida"), S("mantenimiento-web")],
     copy: {
       es: {
         title: "Software a medida en Colombia: plataformas, paneles y automatización con IA",
@@ -265,7 +265,7 @@ export const SERVICES: Landing[] = [
     serviceType: "Diseño web corporativo",
     projects: ["cxellence-group", "eccocia", "nosky-group", "academia-sea", "psicowork", "estrella-de-david"],
     posts: ["como-crear-una-pagina-web-desde-cero-2026", "como-elegir-empresa-desarrollo-web-colombia", "landing-page-vs-tienda-virtual"],
-    related: [S("desarrollo-web-a-medida"), S("seo-tecnico"), "/precios/precio-pagina-web-colombia"],
+    related: [S("desarrollo-web-a-medida"), S("seo-tecnico")],
     copy: {
       es: {
         title: "Diseño web corporativo en Colombia: sitios que generan confianza",
@@ -389,7 +389,7 @@ export const SERVICES: Landing[] = [
     serviceType: "E-commerce headless",
     projects: ["telas-real", "motofox", "traum-drop"],
     posts: ["shopify-vs-woocommerce-colombia", "cuanto-cuesta-una-tienda-virtual-en-colombia-2026"],
-    related: [S("tiendas-virtuales"), S("desarrollo-nextjs"), "/precios/precio-tienda-virtual-colombia"],
+    related: [S("tiendas-virtuales"), S("desarrollo-nextjs")],
     copy: {
       es: {
         title: "WooCommerce headless y e-commerce desacoplado en Colombia",

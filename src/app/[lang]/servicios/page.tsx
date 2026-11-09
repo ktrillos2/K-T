@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { getDict } from "@/i18n";
+import { shellLinks } from "@/lib/shellLinks";
 import { langOf, type LangParams } from "@/i18n/server";
 import { localize } from "@/i18n/config";
-import { CITY_LANDINGS, GUIDES, INDUSTRIES, SERVICES, landingCopy, landingLangs, type Landing } from "@/content/landings";
+import { CITY_LANDINGS, INDUSTRIES, SERVICES, landingCopy, landingLangs, type Landing } from "@/content/landings";
 import { landingLabel } from "@/lib/landing-page";
 import { pageMeta } from "@/lib/seo";
 import { breadcrumbs, graph } from "@/lib/schema";
@@ -33,7 +34,7 @@ export default async function ServicesHub({ params }: LangParams) {
         lead={h.lead}
         items={items}
         extra={[
-          { title: t.nav.pricing, links: published(GUIDES).map((g) => ({ href: g.path, label: landingLabel(g.path, lang) })) },
+          { title: t.nav.pricing, links: shellLinks(lang).guides },
           { title: t.nav.industries, links: published(INDUSTRIES).map((g) => ({ href: g.path, label: landingLabel(g.path, lang) })) },
           { title: t.landing.hubs.ciudades.title, links: published(CITY_LANDINGS).map((g) => ({ href: g.path, label: g.city!.name })) },
         ].filter((group) => group.links.length > 0)}

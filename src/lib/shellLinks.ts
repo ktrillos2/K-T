@@ -1,7 +1,14 @@
 import type { Lang } from "@/i18n/config";
 import { getDict } from "@/i18n";
 import { postsFor } from "@/content/blog/meta";
-import { CITY_LANDINGS, COUNTRY_LANDINGS, GUIDES, INDUSTRIES, SERVICES, landingCopy, landingLangs, type Landing } from "@/content/landings";
+import { CITY_LANDINGS, COUNTRY_LANDINGS, INDUSTRIES, SERVICES, landingCopy, landingLangs, type Landing } from "@/content/landings";
+
+/** Artículos de precios que responden las búsquedas de costo en Colombia (solo en español). */
+const PRICE_ARTICLES: ShellLink[] = [
+  { href: "/blog/cuanto-cuesta-una-pagina-web-en-colombia", label: "Precio de una página web" },
+  { href: "/blog/cuanto-cuesta-una-tienda-virtual-en-colombia-2026", label: "Precio de una tienda virtual" },
+  { href: "/blog/cuanto-cuesta-desarrollar-software-a-medida-colombia", label: "Precio de software a medida" },
+];
 
 export type ShellLink = { href: string; label: string };
 export type ShellLinks = {
@@ -32,7 +39,7 @@ export function shellLinks(lang: Lang): ShellLinks {
     industries: published(INDUSTRIES).map((l) => ({ href: l.path, label: label(l) })),
     cities: published(CITY_LANDINGS).map((l) => ({ href: l.path, label: `${t.landing.crumbs.ciudad} ${l.city!.name}` })),
     countries: published(COUNTRY_LANDINGS).map((l) => ({ href: l.path, label: `${t.landing.crumbs.pais} ${lang === "en" ? l.country!.nameEn : l.country!.name}` })),
-    guides: published(GUIDES).map((l) => ({ href: l.path, label: label(l) })),
+    guides: lang === "es" ? PRICE_ARTICLES : [],
     searchLandings: [...SERVICES, ...published(INDUSTRIES)].map((l) => ({ href: l.path, label: landingCopy(l, lang).copy.h1 })),
     searchPosts: postsFor(lang).map((b) => ({ href: b.href, label: b.title, minutes: b.minutes })),
   };

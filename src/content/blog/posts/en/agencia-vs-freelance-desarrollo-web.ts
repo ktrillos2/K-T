@@ -53,7 +53,7 @@ Table: Related services and starting prices in your currency.
 | Development tailored to your company | [Custom web development](/servicios/desarrollo-web-a-medida) | {{cop:2500000}} |
 | Look after your site after launch | [Web maintenance](/servicios/mantenimiento-web) | Scope-based |
 
-See [pricing](/precios) or the [website pricing guide for Colombia](/precios/precio-pagina-web-colombia). We serve [Bogotá](/desarrollo-web-bogota), [Medellín](/desarrollo-web-medellin) and [Cúcuta](/desarrollo-web-cucuta).
+See [pricing](/precios). We serve [Bogotá](/desarrollo-web-bogota), [Medellín](/desarrollo-web-medellin) and [Cúcuta](/desarrollo-web-cucuta).
 
 ## Conclusion {#conclusion}
 

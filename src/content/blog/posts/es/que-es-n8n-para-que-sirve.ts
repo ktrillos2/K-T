@@ -106,7 +106,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Una web que capture leads y los envíe a tu CRM | [Landing page](/servicios/landing-pages) | {{cop:450000}} |
 | Vender en línea con pagos y pedidos automáticos | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 
-Mira todos los planes en [precios](/precios) o calcula tu proyecto con la [guía de precios de software a medida](/precios/precio-software-a-medida).
+Mira todos los planes en [precios](/precios) o calcula tu proyecto con la [guía de precios de software a medida](/blog/cuanto-cuesta-desarrollar-software-a-medida-colombia).
 
 ## Conclusión {#conclusion}
 

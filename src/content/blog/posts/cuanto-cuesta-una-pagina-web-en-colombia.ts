@@ -23,6 +23,18 @@ const es: PostBody = {
       ],
     },
     { type: "callout", tone: "info", title: "¿Por qué la tienda cuesta menos que el sitio corporativo?", text: "Porque el plan de tienda parte de un catálogo y un flujo de compra muy definidos, mientras que un sitio corporativo suele tener más páginas, más contenido propio y más secciones a diseñar desde cero. En la práctica, una tienda grande puede superar a un corporativo pequeño." },
+    { type: "h2", id: "planes", text: "Qué incluye y qué no incluye cada proyecto" },
+    {
+      type: "table",
+      caption: "Precios de K&T Code en pesos colombianos (2026).",
+      head: ["Proyecto", "Desde", "Plazo", "Incluye", "No incluye"],
+      rows: [
+        ["Landing page", "$450.000", "7 a 12 días", "Diseño a la medida, hasta 5 secciones, WhatsApp, SEO inicial", "Varias páginas internas, carrito"],
+        ["Sitio corporativo", "$2.500.000", "15 a 25 días", "Hasta 8 páginas, contenido editable, SEO técnico, analítica", "Pasarela de pagos y carrito"],
+        ["Tienda virtual", "$1.300.000", "25 a 40 días", "Catálogo, carrito, pasarelas colombianas, envíos, panel de pedidos", "Reglas B2B complejas o ERP avanzado"],
+        ["Software a medida", "$4.500.000", "4 a 12 semanas", "Usuarios y roles, base de datos, APIs, facturación DIAN", "Módulos fuera del alcance acordado"],
+      ],
+    },
     { type: "h2", id: "que-cambia", text: "Qué hace subir o bajar el precio" },
     {
       type: "ul",
@@ -71,7 +83,7 @@ const es: PostBody = {
       ],
     },
     { type: "h2", id: "otros-paises", text: "¿Y si mi empresa no está en Colombia?" },
-    { type: "p", text: "Trabajamos en remoto con México, Perú, Estados Unidos y el resto de Latinoamérica. Puedes ver los precios de referencia en tu moneda y acordamos la propuesta final contigo antes de empezar. Puedes cambiar de país en el selector de la parte superior o ver todos los planes en [precios](/precios). Si quieres el desglose completo por tipo de sitio, revisa la [guía de precio de una página web en Colombia](/precios/precio-pagina-web-colombia)." },
+    { type: "p", text: "Trabajamos en remoto con México, Perú, Estados Unidos y el resto de Latinoamérica. Puedes ver los precios de referencia en tu moneda y acordamos la propuesta final contigo antes de empezar. Puedes cambiar de país en el selector de la parte superior o ver todos los planes en [precios](/precios). Si quieres el desglose completo por tipo de sitio, revisa la [guía de precio de una página web en Colombia](/precios)." },
     { type: "p", text: "¿Quieres ver qué se obtiene por ese precio? Revisa los [casos de estudio](/proyectos): cada uno muestra qué se construyó, cómo y con qué resultados." },
   ],
   faq: [
@@ -152,7 +164,7 @@ const en: PostBody = {
       ],
     },
     { type: "h2", id: "other-countries", text: "What if my company isn't in Colombia?" },
-    { type: "p", text: "We work remotely with Mexico, Peru, the United States and the rest of Latin America. You can see reference prices in your currency, and we agree on the final proposal with you before we start. Change the country with the selector at the top or see every plan on the [pricing](/precios) page. For the full breakdown by type of site, see the [web design pricing guide for Colombia](/precios/precio-pagina-web-colombia)." },
+    { type: "p", text: "We work remotely with Mexico, Peru, the United States and the rest of Latin America. You can see reference prices in your currency, and we agree on the final proposal with you before we start. Change the country with the selector at the top or see every plan on the [pricing](/precios) page. For the full breakdown by type of site, see the [web design pricing guide for Colombia](/precios)." },
     { type: "p", text: "Want to see what you get for that price? Browse the [case studies](/proyectos): each one shows what was built, how, and the results." },
   ],
   faq: [

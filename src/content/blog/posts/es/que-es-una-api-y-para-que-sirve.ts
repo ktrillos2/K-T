@@ -97,7 +97,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Una tienda con pagos y envíos conectados | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | Un sitio rápido con formularios y WhatsApp integrados | [Desarrollo web a medida](/servicios/desarrollo-web-a-medida) | {{cop:2500000}} |
 
-Mira todos los [planes y precios](/precios) o la [guía de precios de software a medida](/precios/precio-software-a-medida).
+Mira todos los [planes y precios](/precios) o la [guía de precios de software a medida](/blog/cuanto-cuesta-desarrollar-software-a-medida-colombia).
 
 ## Conclusión {#conclusion}
 

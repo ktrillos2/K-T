@@ -53,7 +53,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Un desarrollo a la medida de tu empresa | [Desarrollo web a medida](/servicios/desarrollo-web-a-medida) | {{cop:2500000}} |
 | Cuidar tu sitio después del lanzamiento | [Mantenimiento web](/servicios/mantenimiento-web) | Según alcance |
 
-Mira los [precios](/precios) o la [guía de precios de páginas web en Colombia](/precios/precio-pagina-web-colombia). Atendemos en [Bogotá](/desarrollo-web-bogota), [Medellín](/desarrollo-web-medellin) y [Cúcuta](/desarrollo-web-cucuta).
+Mira los [precios](/precios) o la [guía de precios de páginas web en Colombia](/blog/cuanto-cuesta-una-pagina-web-en-colombia). Atendemos en [Bogotá](/desarrollo-web-bogota), [Medellín](/desarrollo-web-medellin) y [Cúcuta](/desarrollo-web-cucuta).
 
 ## Conclusión {#conclusion}
 

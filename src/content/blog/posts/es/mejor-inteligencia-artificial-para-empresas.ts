@@ -89,7 +89,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Una tienda que venda 24/7 con pagos y WhatsApp | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | Una web corporativa preparada para Google y la IA | [Sitio corporativo](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
 
-Mira todos los [planes y precios](/precios) o la [guía de precios de software a medida](/precios/precio-software-a-medida).
+Mira todos los [planes y precios](/precios) o la [guía de precios de software a medida](/blog/cuanto-cuesta-desarrollar-software-a-medida-colombia).
 
 ## Conclusión {#conclusion}
 

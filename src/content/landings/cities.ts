@@ -197,7 +197,7 @@ export const CITY_LANDINGS: Landing[] = CITIES.map((c) => ({
   serviceType: `Desarrollo web en ${c.name}`,
   projects: c.projects,
   posts: ["cuanto-cuesta-una-pagina-web-en-colombia", "como-elegir-empresa-desarrollo-web-colombia", "mejores-agencias-software-a-medida-cucuta-2026"],
-  related: ["/servicios/desarrollo-web-a-medida", "/servicios/tiendas-virtuales", "/precios/precio-pagina-web-colombia"],
+  related: ["/servicios/desarrollo-web-a-medida", "/servicios/tiendas-virtuales"],
   city: { name: c.name, region: c.region, lat: c.lat, lng: c.lng },
   copy: (() => {
     const en = copyEn(c);

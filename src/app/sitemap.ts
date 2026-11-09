@@ -54,7 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...PROJECTS.flatMap((p) => entry(p.href, { lastModified: day(`${p.date}-15`), priority: 0.7, changeFrequency: "yearly", images: shot(p), langs: p.slug === EN_INDEXED_PROJECT ? LOCALES : ["es"] })),
     ...POSTS.flatMap((p) => entry(`/blog/${p.slug}`, { lastModified: day(p.updated ?? p.date), priority: 0.7, changeFrequency: "monthly", langs: p.langs })),
     ...LANDINGS.flatMap((l) =>
-      entry(l.path, { lastModified: content, priority: l.kind === "servicio" || l.kind === "guia" ? 0.8 : 0.7, changeFrequency: "monthly", langs: landingLangs(l) }),
+      entry(l.path, { lastModified: content, priority: l.kind === "servicio" ? 0.8 : 0.7, changeFrequency: "monthly", langs: landingLangs(l) }),
     ),
     ...entry("/industrias", { lastModified: content, priority: 0.7, changeFrequency: "monthly", langs: ["es"] }),
     ...entry("/testimonios", { lastModified: content, priority: 0.6, changeFrequency: "monthly" }),

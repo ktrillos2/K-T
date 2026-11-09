@@ -93,7 +93,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Sitio de empresa con varias secciones | [Diseño web corporativo](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
 | Rapidez, SEO y soporte continuo | [Mantenimiento web](/servicios/mantenimiento-web) | Según alcance |
 
-Revisa [precios](/precios) y la guía [cuánto cuesta una página web en Colombia](/precios/precio-pagina-web-colombia) como referencia de nuestra estructura de valores.
+Revisa [precios](/precios) y la guía [cuánto cuesta una página web en Colombia](/blog/cuanto-cuesta-una-pagina-web-en-colombia) como referencia de nuestra estructura de valores.
 
 ## Conclusión {#conclusion}
 

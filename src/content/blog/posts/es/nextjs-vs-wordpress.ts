@@ -69,7 +69,7 @@ Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Vender con carrito y pagos | [Tienda virtual](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | Mejor posicionamiento en Google | [SEO técnico](/servicios/seo-tecnico) | Según alcance |
 
-Mira los [precios](/precios) o la [guía de precios de páginas web en Colombia](/precios/precio-pagina-web-colombia). Si tu duda es velocidad, lee [el costo oculto de una página web lenta](/blog/costo-oculto-pagina-web-lenta).
+Mira los [precios](/precios) o la [guía de precios de páginas web en Colombia](/blog/cuanto-cuesta-una-pagina-web-en-colombia). Si tu duda es velocidad, lee [el costo oculto de una página web lenta](/blog/costo-oculto-pagina-web-lenta).
 
 ## Conclusión {#conclusion}
 

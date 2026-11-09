@@ -69,7 +69,7 @@ Table: Related services and starting prices in your currency.
 | Sell with cart and payments | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} |
 | Better ranking on Google | [Technical SEO](/servicios/seo-tecnico) | Scope-based |
 
-See [pricing](/precios) or the [website pricing guide for Colombia](/precios/precio-pagina-web-colombia). If speed is your concern, read [the hidden cost of a slow website](/blog/costo-oculto-pagina-web-lenta).
+See [pricing](/precios). If speed is your concern, read [the hidden cost of a slow website](/blog/costo-oculto-pagina-web-lenta).
 
 ## Conclusion {#conclusion}
 
