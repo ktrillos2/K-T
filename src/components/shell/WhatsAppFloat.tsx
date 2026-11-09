@@ -118,7 +118,7 @@ export function WhatsAppFloat() {
   const href = wa(f.message(pageLabel(pathname || "/")));
 
   return (
-    <div ref={root} className={styles.root} data-visible={visible} data-bubble={bubble}>
+    <div ref={root} className={styles.root} data-visible={visible} data-bubble={bubble} data-track="flotante">
       {bubble !== "off" && (
         <div className={styles.bubble} role="status">
           <button type="button" className={styles.close} onClick={dismiss} aria-label={f.close}>

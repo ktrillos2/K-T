@@ -96,15 +96,6 @@ export const TESTIMONIALS: Testimonial[] = [
     source: "web",
   },
   {
-    id: "san-roque-marcela-gomez",
-    project: "san-roqueros",
-    projectName: "San Roque",
-    name: "Dra. Marcela Gómez",
-    role: "Gerente Administrativa — San Roque Salud",
-    message: "Desarrollaron el portal médico y sistema de citas con un diseño impecable en Figma y una arquitectura rápida y segura. Nuestros pacientes agendan citas en segundos desde su celular.",
-    source: "web",
-  },
-  {
     id: "cxellence-group-andres-restrepo",
     project: "cxellence-group",
     projectName: "CXellence Group",

@@ -32,7 +32,7 @@ const es: PostBody = {
         ["Landing page", "$450.000", "7 a 12 días", "Diseño a la medida, hasta 5 secciones, WhatsApp, SEO inicial", "Varias páginas internas, carrito"],
         ["Sitio corporativo", "$2.500.000", "15 a 25 días", "Hasta 8 páginas, contenido editable, SEO técnico, analítica", "Pasarela de pagos y carrito"],
         ["Tienda virtual", "$1.300.000", "25 a 40 días", "Catálogo, carrito, pasarelas colombianas, envíos, panel de pedidos", "Reglas B2B complejas o ERP avanzado"],
-        ["Software a medida", "$4.500.000", "4 a 12 semanas", "Usuarios y roles, base de datos, APIs, facturación DIAN", "Módulos fuera del alcance acordado"],
+        ["Software a medida", "$4.500.000", "Según alcance", "Usuarios y roles, base de datos, APIs, facturación DIAN", "Módulos fuera del alcance acordado"],
       ],
     },
     { type: "h2", id: "que-cambia", text: "Qué hace subir o bajar el precio" },
@@ -51,6 +51,8 @@ const es: PostBody = {
     { type: "h2", id: "calculadora", text: "Calcula tu proyecto" },
     { type: "p", text: "Elige el tipo de proyecto, mueve el número de páginas y marca las funciones que necesitas. El valor se muestra en la moneda del país que tengas seleccionado arriba." },
     { type: "widget", name: "price-calculator" },
+    { type: "p", text: "Un ejemplo de cómo el alcance define el proyecto: [KAILAB](/proyectos/kailab) necesitaba catálogo por categorías, dos idiomas y pagos con Wompi, así que se cotizó como tienda virtual y no como landing page. Si ya tienes claro qué necesitas, cuéntanos y te enviamos una propuesta exacta." },
+    { type: "cta", label: "Pedir una propuesta para mi página", message: "Hola K&T Code, usé la calculadora de la guía de precios y quiero una propuesta para mi página web.", service: "paginas-web" },
     { type: "h2", id: "costos-ocultos", text: "Costos que no siempre aparecen en la cotización" },
     {
       type: "ul",

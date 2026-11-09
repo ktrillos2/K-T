@@ -77,12 +77,13 @@ async function approvedFromSanity(): Promise<Testimonial[]> {
 /** Todas las reseñas publicadas (sin duplicados). Si Sanity no responde, quedan las fijas. */
 export async function getTestimonials(): Promise<Testimonial[]> {
   const extra = await approvedFromSanity();
-  const key = (t: Testimonial) => `${norm(t.name)}|${t.project || norm(t.projectName)}`;
-  const seen = new Set(TESTIMONIALS.map(key));
+  // También por persona y texto: la misma reseña puede llegar de Sanity con otro proyecto asociado.
+  const keys = (t: Testimonial) => [`${norm(t.name)}|${t.project || norm(t.projectName)}`, `${norm(t.name)}|${norm(t.message)}`];
+  const seen = new Set(TESTIMONIALS.flatMap(keys));
   const fresh = extra.filter((t) => {
-    const k = key(t);
-    if (seen.has(k)) return false;
-    seen.add(k);
+    const ks = keys(t);
+    if (ks.some((k) => seen.has(k))) return false;
+    ks.forEach((k) => seen.add(k));
     return true;
   });
   // Las nuevas primero: así la última reseña aprobada es la que se ve al entrar.

@@ -116,6 +116,7 @@ const es = {
       from: "Desde",
       fromQuote: "Desde",
       all: "Ver todos los servicios",
+      pricesLink: "Comparar todos los precios",
     },
     featured: {
       path: "proyectos destacados",
@@ -140,7 +141,7 @@ const es = {
       lead: "Empresas reales que confiaron en nosotros.",
       prev: "Reseña anterior",
       next: "Reseña siguiente",
-      count: (n: number) => `${n} reseñas verificadas`,
+      count: (n: number) => `${n} reseñas de clientes`,
       seeProject: "Ver el proyecto",
     },
     facts: {

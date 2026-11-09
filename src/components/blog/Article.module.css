@@ -570,3 +570,12 @@
     grid-template-columns: 1fr;
   }
 }
+
+.inlineCta {
+  margin: 1.75rem 0;
+}
+
+.prose .inlineCta a {
+  color: var(--bg);
+  text-decoration: none;
+}

@@ -1,3 +1,4 @@
+import { Analytics } from "@/components/analytics/Analytics";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import "../globals.css";
@@ -101,6 +102,7 @@ export default async function RootLayout({ children, params }: { children: React
           {children}
         </AppShell>
         <JsonLd data={graph(organization(lang), website(lang), person(lang))} />
+        <Analytics />
       </body>
     </html>
   );

@@ -5,6 +5,7 @@ import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { useI18n } from "@/i18n/I18nProvider";
 import { PLANS } from "@/lib/pricing";
 import { wa } from "@/lib/site";
+import { trackEvent } from "@/lib/analytics";
 import { cx } from "@/lib/utils";
 import { DIAL_COUNTRIES, dialCountryByCode, type DialCountry } from "@/lib/countries-dial";
 import { CostSheet } from "./CostSheet";
@@ -86,6 +87,7 @@ export function ContactWizard() {
           website: trap,
         }),
       });
+      if (res.ok) trackEvent("generate_lead", { service: plan?.id ?? "sin_definir", method: "formulario" });
       setStatus(res.ok ? "sent" : "failed");
     } catch {
       setStatus("failed");
@@ -97,7 +99,7 @@ export function ContactWizard() {
     const key = KEYS[step];
     if (key === "phone") {
       const rawDigits = v.replace(/\D/g, "");
-      v = rawDigits ? `${selectedDialCountry.flag} ${selectedDialCountry.dial} ${rawDigits}` : "";
+      v = rawDigits ? `${selectedDialCountry.dial} ${rawDigits}` : "";
     }
     if (key === "email" && !EMAIL.test(v)) {
       setError(c.invalidEmail);
@@ -107,6 +109,7 @@ export function ContactWizard() {
     setError("");
     const next = { ...answers, [key]: v };
     setAnswers(next);
+    if (step === 0) trackEvent("quote_form_start", { service: optIndex !== undefined ? PLANS[optIndex]?.id ?? "sin_definir" : "sin_definir", location: "formulario" });
     if (step === 0 && optIndex !== undefined) setPlanIndex(optIndex);
     setDraft("");
     setStep((s) => s + 1);
@@ -270,7 +273,7 @@ export function ContactWizard() {
                 >
                   {DIAL_COUNTRIES.map((dc) => (
                     <option key={dc.code} value={dc.code}>
-                      {dc.flag} {dc.dial} ({dc.name})
+                      {dc.code} {dc.dial} ({dc.name})
                     </option>
                   ))}
                 </select>

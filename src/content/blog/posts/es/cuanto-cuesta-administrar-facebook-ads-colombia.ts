@@ -74,6 +74,10 @@ Un anuncio bueno que lleva a una página lenta o confusa pierde clientes. Lo mej
 
 Administramos tus campañas de Facebook, Instagram, TikTok y Google cada mes según tu objetivo, con remarketing y reportes simples. Y si te falta la página a donde llevar los anuncios, también la construimos.
 
+**Qué cubre nuestra administración:** estrategia, anuncios, públicos, remarketing y reporte mensual. **Qué no cubre:** la inversión que pagas directo a Meta y, si aún no la tienes, la página de destino, que se cotiza aparte.
+
+::cta Hablar de mi objetivo y presupuesto en Ads | Hola K&T Code, leí la guía de administración de Facebook Ads y quiero hablar de mi objetivo y mi presupuesto. | administracion-de-ads
+
 Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Necesitas | Servicio | Desde |
 |---|---|---|

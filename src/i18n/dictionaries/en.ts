@@ -115,6 +115,7 @@ const en: Dict = {
       lead: "Four solutions, all built around your business.",
       from: "From",
       fromQuote: "From",
+      pricesLink: "Compare all pricing",
       all: "See all services",
     },
     featured: {
@@ -140,7 +141,7 @@ const en: Dict = {
       lead: "Real companies that trusted us.",
       prev: "Previous review",
       next: "Next review",
-      count: (n: number) => `${n} verified reviews`,
+      count: (n: number) => `${n} client reviews`,
       seeProject: "See the project",
     },
     facts: {
