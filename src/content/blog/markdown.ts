@@ -10,6 +10,7 @@ import type { Block, PostBody } from "./types";
  *   Tabla: leyenda             → leyenda de la tabla que sigue
  *   | a | b |  + |---|---|     → tabla
  *   ::stat 58% | texto | fuente
+ *   ::cta Texto del botón | Mensaje inicial de WhatsApp | servicio
  *   ::widget price-calculator  (speed-simulator, template-vs-custom)
  *   :::tip Título … :::        (info, tip, warn)
  *   :::checklist id="x" title="Título"  - ítems  :::
@@ -89,6 +90,12 @@ export function parseMarkdown(md: string): Block[] {
     if (line.startsWith("::widget ")) {
       const name = line.slice(9).trim() as "price-calculator" | "speed-simulator" | "template-vs-custom";
       out.push({ type: "widget", name });
+      i++;
+      continue;
+    }
+    if (line.startsWith("::cta ")) {
+      const [label, message, service] = line.slice(6).split("|").map((part) => part.trim());
+      out.push({ type: "cta", label, message, service });
       i++;
       continue;
     }

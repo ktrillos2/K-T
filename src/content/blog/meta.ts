@@ -13,6 +13,9 @@ type Seed = [slug: string, category: BlogCategory, date: string, minutes: number
 
 /** Artículos migrados del blog anterior (en español; la versión en inglés está en ./meta.en.ts y ./posts/en) (mismos slugs para conservar el posicionamiento). */
 const ES_ONLY: Seed[] = [
+  ["nextjs-vs-react", "comparativas", "2026-03-04", 6, "Next.js vs. React: Diferencias y Cuál Elegir en 2026", "React es una librería y Next.js un framework sobre React. Diferencias en renderizado, SEO y enrutamiento, y cuándo conviene cada uno para tu proyecto.", ["Next.js", "React", "renderizado"]],
+  ["mejores-herramientas-ia-crear-paginas-web-2026", "ia", "2026-06-28", 5, "Las Mejores Herramientas de IA para Crear Páginas Web en 2026", "Las herramientas de IA más útiles para diseñar, programar y optimizar páginas web, para qué sirve cada una y sus límites.", ["herramientas IA", "desarrollo web", "2026"]],
+  ["wix-vs-wordpress-diferencias-precios", "comparativas", "2026-07-18", 5, "Wix vs. WordPress: Diferencias, Precios Reales y Cuál Elegir en 2026", "Wix frente a WordPress en facilidad, propiedad del sitio, velocidad, costos de renovación y qué pasa cuando tu negocio crece.", ["Wix", "WordPress", "comparativa"], true],
   ["precio-pagina-web-peru", "precios", "2026-11-09", 6, "Precio de una Página Web en Perú: Qué lo Define y Cuánto Presupuestar (2026)", "Qué define el precio de una página web en Perú, costos extra como dominio, hosting, Yape y comprobantes SUNAT, y valores de partida para cotizar.", ["precio página web perú", "cotización", "Perú", "tienda virtual"], true],
   ["precio-pagina-web-ecuador", "precios", "2026-11-08", 6, "Precio de una Página Web en Ecuador: Cuánto Cuesta y Qué Incluir en la Cotización (2026)", "Cuánto cuesta una página web en Ecuador: qué define el precio, costos extra como dominio, hosting y factura electrónica SRI, y valores de partida en dólares.", ["precio página web ecuador", "cotización", "Ecuador", "tienda virtual"], true],
   ["pagina-web-para-restaurante-mexico", "desarrollo-web", "2026-11-02", 6, "Página Web para Restaurante en México: Qué Incluir, Menú Digital y Cuánto Cuesta (2026)", "Qué debe tener la página web de un restaurante en México: menú digital, WhatsApp, Google y opciones de landing o tienda con precios de partida.", ["página web para restaurante", "menú digital", "México", "landing page"], true],
@@ -62,6 +65,11 @@ const ES_ONLY: Seed[] = [
  * La usa la skill actualizar-blog: el artículo muestra "Actualizado" con esta fecha y el sitemap la toma.
  */
 const REFRESHED: Record<string, string> = {
+  "wompi-vs-mercado-pago-vs-payu-colombia": "2026-11-09",
+  "cuanto-cuesta-administrar-facebook-ads-colombia": "2026-11-09",
+  "nextjs-vs-react": "2026-11-09",
+  "mejores-herramientas-ia-crear-paginas-web-2026": "2026-11-09",
+  "wix-vs-wordpress-diferencias-precios": "2026-11-09",
   "que-es-una-api-y-para-que-sirve": "2026-10-26",
   "como-elegir-empresa-desarrollo-web-colombia": "2026-11-08",
   "agencia-vs-freelance-desarrollo-web": "2026-11-08",
@@ -92,7 +100,7 @@ const BILINGUAL: PostMeta[] = [
     slug: "cuanto-cuesta-una-pagina-web-en-colombia",
     category: "precios",
     date: "2026-02-21",
-    updated: "2026-10-14",
+    updated: "2026-11-09",
     minutes: 8,
     interactive: true,
     featured: true,

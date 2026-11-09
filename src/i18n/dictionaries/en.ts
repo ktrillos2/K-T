@@ -115,6 +115,7 @@ const en: Dict = {
       lead: "Four solutions, all built around your business.",
       from: "From",
       fromQuote: "From",
+      pricesLink: "Compare all pricing",
       all: "See all services",
     },
     featured: {
@@ -140,7 +141,7 @@ const en: Dict = {
       lead: "Real companies that trusted us.",
       prev: "Previous review",
       next: "Next review",
-      count: (n: number) => `${n} verified reviews`,
+      count: (n: number) => `${n} client reviews`,
       seeProject: "See the project",
     },
     facts: {
@@ -152,7 +153,7 @@ const en: Dict = {
         { q: "How much does it cost?", a: "A landing page starts at 200 USD, an online store at 450 USD and custom systems at 1,000 USD. Anything else is quoted per project." },
         { q: "How long does it take?", a: "A landing page takes 7 to 12 days, a corporate website 15 to 25 days and an online store 25 to 40 days." },
         { q: "What makes it different?", a: "A from-scratch design for each client, load times under one second, SEO built into the architecture and code delivered in the client's name." },
-        { q: "What results has it achieved?", a: "Its projects go from an average PageSpeed of 46 to 98 out of 100. Telas Real grew its quote requests by 64% and GMX Gaming automated 85% more registrations." },
+        { q: "What results has it achieved?", a: "It has delivered projects such as Telas Real, a B2B catalog with more than 850 SKUs, and GMX Gaming, a custom tournament platform. Each case shows what was built." },
       ],
     },
   },

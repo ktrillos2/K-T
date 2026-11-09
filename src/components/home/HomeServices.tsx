@@ -1,6 +1,6 @@
 "use client";
 
-import { PLANS } from "@/lib/pricing";
+import { PLANS, type PlanId } from "@/lib/pricing";
 import { COLOR_VAR } from "@/lib/routes";
 import { cx, vars } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
@@ -11,6 +11,13 @@ import { TLink } from "@/components/transition/TLink";
 import { PlanArt } from "@/components/pricing/PlanArt";
 import { AdsBanner } from "@/components/ads/AdsBanner";
 import styles from "./HomeServices.module.css";
+
+const SERVICE_PATH: Record<PlanId, string> = {
+  landing: "/servicios/landing-pages",
+  tienda: "/servicios/tiendas-virtuales",
+  corporativo: "/servicios/diseno-web-corporativo",
+  software: "/servicios/software-a-medida",
+};
 
 /** Los cuatro servicios en tarjetas simples: qué es, para quién, desde cuánto. */
 export function HomeServices() {
@@ -25,7 +32,7 @@ export function HomeServices() {
             const c = t.pricing.plans[p.id];
             return (
               <li key={p.id}>
-                <TLink href="/precios" className={styles.card} data-plan-card style={vars({ "--c": COLOR_VAR[p.color] })}>
+                <TLink href={SERVICE_PATH[p.id]} className={styles.card} data-plan-card style={vars({ "--c": COLOR_VAR[p.color] })}>
                   <span className={styles.art}>
                     <PlanArt id={p.id} />
                   </span>
@@ -45,6 +52,11 @@ export function HomeServices() {
             );
           })}
         </Reveal>
+        <p className={styles.pricesLink}>
+          <TLink href="/precios">
+            {s.pricesLink} <span aria-hidden="true">→</span>
+          </TLink>
+        </p>
         <AdsBanner inset />
         <Reveal className={styles.more}>
           <TLink href="/servicios" className="btn btn--ghost" data-stick>

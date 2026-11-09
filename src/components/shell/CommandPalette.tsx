@@ -9,6 +9,7 @@ import { localize, splitLang } from "@/i18n/config";
 import { useI18n } from "@/i18n/I18nProvider";
 import type { ShellLinks } from "@/lib/shellLinks";
 import { SITE, wa } from "@/lib/site";
+import { trackEvent } from "@/lib/analytics";
 import { store, useUI } from "@/lib/store";
 import { scrollToEl } from "@/lib/lenis";
 import { useNavigate } from "@/components/transition/TransitionProvider";
@@ -36,7 +37,7 @@ export function CommandPalette({ links }: { links: ShellLinks }) {
     const other = lang === "es" ? "en" : "es";
     return [
       ...ROUTES.map((r) => ({ id: `go-${r.key}`, group: t.palette.groups.nav, label: t.palette.goTo(t.nav[r.nav]), hint: href(r.href), run: () => navigate(href(r.href)) })),
-      { id: "wa", group: t.palette.groups.actions, label: t.palette.quote, hint: SITE.phone, run: () => window.open(wa(t.wa.default), "_blank", "noopener") },
+      { id: "wa", group: t.palette.groups.actions, label: t.palette.quote, hint: SITE.phone, run: () => { trackEvent("whatsapp_click", { location: "paleta" }); window.open(wa(t.wa.default), "_blank", "noopener"); } },
       { id: "mail", group: t.palette.groups.actions, label: t.palette.copyEmail, hint: SITE.email, run: () => void navigator.clipboard?.writeText(SITE.email).catch(() => {}) },
       { id: "theme", group: t.palette.groups.actions, label: t.palette.theme, hint: "⌥", run: () => toggleTheme() },
       { id: "lang", group: t.palette.groups.actions, label: t.palette.language, hint: other.toUpperCase(), run: () => navigate(localize(splitLang(pathname).path, other)) },

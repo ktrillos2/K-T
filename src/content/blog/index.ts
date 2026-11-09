@@ -23,6 +23,12 @@ import md_nearshore_desarrollo_web_latinoamerica from "./posts/es/nearshore-desa
 import en_nearshore_desarrollo_web_latinoamerica from "./posts/en/nearshore-desarrollo-web-latinoamerica";
 import md_que_es_n8n_para_que_sirve from "./posts/es/que-es-n8n-para-que-sirve";
 import md_que_es_vibe_coding from "./posts/es/que-es-vibe-coding";
+import md_nextjs_vs_react from "./posts/es/nextjs-vs-react";
+import en_nextjs_vs_react from "./posts/en/nextjs-vs-react";
+import md_mejores_herramientas_ia_crear_paginas_web_2026 from "./posts/es/mejores-herramientas-ia-crear-paginas-web-2026";
+import en_mejores_herramientas_ia_crear_paginas_web_2026 from "./posts/en/mejores-herramientas-ia-crear-paginas-web-2026";
+import md_wix_vs_wordpress_diferencias_precios from "./posts/es/wix-vs-wordpress-diferencias-precios";
+import en_wix_vs_wordpress_diferencias_precios from "./posts/en/wix-vs-wordpress-diferencias-precios";
 import md_que_es_un_servidor_mcp from "./posts/es/que-es-un-servidor-mcp";
 import md_mejor_inteligencia_artificial_para_empresas from "./posts/es/mejor-inteligencia-artificial-para-empresas";
 import md_como_vender_por_whatsapp_business from "./posts/es/como-vender-por-whatsapp-business";
@@ -78,6 +84,9 @@ const BODIES: Record<string, Partial<Record<Lang, PostBody>> & { es: PostBody }>
   "nearshore-desarrollo-web-latinoamerica": { es: fromMarkdown(md_nearshore_desarrollo_web_latinoamerica), en: fromMarkdown(en_nearshore_desarrollo_web_latinoamerica) },
   "que-es-n8n-para-que-sirve": { es: fromMarkdown(md_que_es_n8n_para_que_sirve) },
   "que-es-vibe-coding": { es: fromMarkdown(md_que_es_vibe_coding) },
+  "nextjs-vs-react": { es: fromMarkdown(md_nextjs_vs_react), en: fromMarkdown(en_nextjs_vs_react) },
+  "mejores-herramientas-ia-crear-paginas-web-2026": { es: fromMarkdown(md_mejores_herramientas_ia_crear_paginas_web_2026), en: fromMarkdown(en_mejores_herramientas_ia_crear_paginas_web_2026) },
+  "wix-vs-wordpress-diferencias-precios": { es: fromMarkdown(md_wix_vs_wordpress_diferencias_precios), en: fromMarkdown(en_wix_vs_wordpress_diferencias_precios) },
   "que-es-un-servidor-mcp": { es: fromMarkdown(md_que_es_un_servidor_mcp) },
   "mejor-inteligencia-artificial-para-empresas": { es: fromMarkdown(md_mejor_inteligencia_artificial_para_empresas) },
   "como-vender-por-whatsapp-business": { es: fromMarkdown(md_como_vender_por_whatsapp_business) },

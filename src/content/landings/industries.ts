@@ -132,8 +132,8 @@ const RAW: Landing[] = [
         description: "Catálogos y tiendas B2B a la medida: listas de precios por cliente, pedidos por volumen, cotización automática por WhatsApp, facturación electrónica y catálogos de cientos de referencias.",
         eyebrow: "industrias · e-commerce B2B",
         h1: "E-commerce B2B para vender por volumen",
-        lead: "Vender a empresas no es igual que vender al consumidor: hay listas de precios por cliente, cantidades mínimas, cotizaciones y facturación. En K&T Code construimos catálogos y tiendas B2B a la medida, como el de Telas Real, con más de 850 referencias, filtros instantáneos y cotizaciones automáticas que aumentaron 64% sus transacciones con distribuidores.",
-        facts: [["Caso", "Telas Real +64%"], ["Catálogo", "Cientos de referencias"], ["Cotización", "Automática"], ["Facturación", "Electrónica"]],
+        lead: "Vender a empresas no es igual que vender al consumidor: hay listas de precios por cliente, cantidades mínimas, cotizaciones y facturación. En K&T Code construimos catálogos y tiendas B2B a la medida, como el de Telas Real, con más de 850 referencias, filtros instantáneos y cotizaciones automáticas.",
+        facts: [["Caso", "Telas Real"], ["Catálogo", "Cientos de referencias"], ["Cotización", "Automática"], ["Facturación", "Electrónica"]],
         includes: [
           { t: "Listas de precios por cliente", d: "Cada distribuidor ve sus condiciones al iniciar sesión." },
           { t: "Pedidos por volumen", d: "Cantidades mínimas, escalas de precio y pedidos recurrentes." },

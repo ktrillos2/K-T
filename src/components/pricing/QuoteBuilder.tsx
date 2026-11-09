@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { PLANS, type PlanId } from "@/lib/pricing";
 import { wa } from "@/lib/site";
+import { trackEvent } from "@/lib/analytics";
 import { cx } from "@/lib/utils";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { MacWindow } from "@/components/ui/MacWindow";
@@ -28,6 +29,13 @@ export function QuoteBuilder() {
   const q = t.pricing.quote;
   const EXTRAS = t.pricing.extras;
   const [plan, setPlan] = useState<PlanId>("tienda");
+  const started = useRef(false);
+  // Este cotizador solo abre WhatsApp: mide el inicio y el clic, nunca un contacto recibido.
+  const markStarted = () => {
+    if (started.current) return;
+    started.current = true;
+    trackEvent("quote_form_start", { service: plan, location: "cotizador" });
+  };
   const [extras, setExtras] = useState<string[]>([]);
   const [name, setName] = useState("");
   const cmd = useRef<HTMLParagraphElement>(null);
@@ -75,7 +83,7 @@ export function QuoteBuilder() {
       <div className="wrap">
         <SectionHead id="h-cotizar" path={q.path} title={q.title} lead={q.lead} />
         <div className={styles.grid}>
-          <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+          <form className={styles.form} onSubmit={(e) => e.preventDefault()} onChangeCapture={markStarted}>
             <fieldset className={styles.fieldset}>
               <legend className={styles.legend}>{q.step1}</legend>
               <div className={styles.plans}>
@@ -128,7 +136,7 @@ export function QuoteBuilder() {
             </p>
             <p className={styles.ok}>{q.generated}</p>
             <pre className={styles.msg}>{message}</pre>
-            <a className={cx("btn btn--solid", styles.send)} href={wa(message)} target="_blank" rel="noopener noreferrer" data-stick>
+            <a data-track="cotizador" data-service={plan} className={cx("btn btn--solid", styles.send)} href={wa(message)} target="_blank" rel="noopener noreferrer" data-stick>
               {q.send} <span className="arr">→</span>
             </a>
             <p className={styles.small}>{q.small}</p>

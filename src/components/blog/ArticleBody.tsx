@@ -1,6 +1,7 @@
 "use client";
 
 import type { Block } from "@/content/blog/types";
+import { wa } from "@/lib/site";
 import { Inline } from "./Inline";
 import { PriceCalculator } from "./widgets/PriceCalculator";
 import { SpeedSimulator } from "./widgets/SpeedSimulator";
@@ -103,6 +104,14 @@ export function ArticleBody({ blocks }: { blocks: Block[] }) {
                   </tbody>
                 </table>
               </div>
+            );
+          case "cta":
+            return (
+              <p key={i} className={styles.inlineCta} data-track="guia" data-service={b.service}>
+                <a className="btn btn--solid" href={wa(b.message)} target="_blank" rel="noopener noreferrer" data-stick>
+                  {b.label} <span className="arr">→</span>
+                </a>
+              </p>
             );
           case "stat":
             return (

@@ -50,7 +50,7 @@ const es: PostBody = {
       ],
     },
     { type: "h2", id: "como-lo-hacemos", text: "Cómo logramos cargar en menos de un segundo" },
-    { type: "p", text: "En nuestros proyectos el PageSpeed móvil pasa en promedio de 46 a 98 sobre 100. No hay truco: es una suma de decisiones a la medida." },
+    { type: "p", text: "No hay truco: una página rápida es una suma de decisiones a la medida." },
     {
       type: "ul",
       items: [
@@ -133,7 +133,7 @@ const en: PostBody = {
       ],
     },
     { type: "h2", id: "how-we-do-it", text: "How we load in under a second" },
-    { type: "p", text: "On our projects, mobile PageSpeed goes from an average of 46 to 98 out of 100. There's no trick: it's a sum of custom decisions." },
+    { type: "p", text: "There's no trick: a fast website is a sum of custom decisions." },
     {
       type: "ul",
       items: [

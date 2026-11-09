@@ -80,8 +80,8 @@ export const INDUSTRIES_EN: Record<string, LandingCopy> = {
     description: "Custom B2B catalogs and stores: price lists per customer, volume orders, automatic quotes over WhatsApp, electronic invoicing and catalogs with hundreds of SKUs.",
     eyebrow: "industries · B2B e-commerce",
     h1: "B2B e-commerce built to sell in volume",
-    lead: "Selling to businesses isn't like selling to consumers: there are price lists per customer, minimum quantities, quotes and invoicing. At K&T Code we build custom B2B catalogs and stores, like Telas Real's, with more than 850 SKUs, instant filters and automatic quotes that increased its transactions with distributors by 64%.",
-    facts: [["Case", "Telas Real +64%"], ["Catalog", "Hundreds of SKUs"], ["Quotes", "Automatic"], ["Invoicing", "Electronic"]],
+    lead: "Selling to businesses isn't like selling to consumers: there are price lists per customer, minimum quantities, quotes and invoicing. At K&T Code we build custom B2B catalogs and stores, like Telas Real's, with more than 850 SKUs, instant filters and automatic quotes.",
+    facts: [["Case", "Telas Real"], ["Catalog", "Hundreds of SKUs"], ["Quotes", "Automatic"], ["Invoicing", "Electronic"]],
     includes: [
       { t: "Price lists per customer", d: "Each distributor sees their own terms when they sign in." },
       { t: "Volume orders", d: "Minimum quantities, price tiers and recurring orders." },

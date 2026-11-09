@@ -19,6 +19,14 @@ type Props = { post: PostCard & { body: PostBody }; words: number; plain: string
 
 const SIZES = [15, 16.5, 18, 20];
 
+function ThumbIcon({ down = false }: { down?: boolean }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={down ? { transform: "rotate(180deg)" } : undefined}>
+      <path d="M7 10v11H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1h3Zm0 0 4-8a3 3 0 0 1 3 3v4h5.5a2 2 0 0 1 2 2.3l-1.2 8a2 2 0 0 1-2 1.7H7" />
+    </svg>
+  );
+}
+
 export function ArticleView({ post, words, plain }: Props) {
   const { t, lang, href } = useI18n();
   const a = t.blog.article;
@@ -275,10 +283,10 @@ export function ArticleView({ post, words, plain }: Props) {
               <>
                 <p>{a.helpful}</p>
                 <button type="button" onClick={() => castVote("yes")}>
-                  👍 {a.yes}
+                  <ThumbIcon /> {a.yes}
                 </button>
                 <button type="button" onClick={() => castVote("no")}>
-                  👎 {a.no}
+                  <ThumbIcon down /> {a.no}
                 </button>
               </>
             )}

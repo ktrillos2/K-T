@@ -18,6 +18,7 @@ export type Block =
   | { type: "callout"; tone: "info" | "tip" | "warn"; title?: string; text: string }
   | { type: "table"; head: string[]; rows: string[][]; caption?: string }
   | { type: "stat"; value: string; label: string; source?: string }
+  | { type: "cta"; label: string; message: string; service?: string }
   | { type: "widget"; name: "price-calculator" | "speed-simulator" | "template-vs-custom" }
   | { type: "widget"; name: "quiz"; questions: { q: string; options: string[]; answer: number; why: string }[] }
   | { type: "widget"; name: "checklist"; id: string; title: string; items: string[] };

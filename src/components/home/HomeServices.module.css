@@ -83,3 +83,32 @@
     grid-template-columns: 1fr;
   }
 }
+
+.pricesLink {
+  margin: 1.5rem 0 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.pricesLink a {
+  display: inline-block;
+  padding: 0.75rem 0.5rem;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.pricesLink a:hover,
+.pricesLink a:focus-visible {
+  transform: translateX(4px);
+  opacity: 0.8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pricesLink a {
+    transition: none;
+  }
+
+  .pricesLink a:hover,
+  .pricesLink a:focus-visible {
+    transform: none;
+  }
+}
