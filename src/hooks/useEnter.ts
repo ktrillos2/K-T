@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { store } from "@/lib/store";
 
 /**
- * Ejecuta `fn` cuando la página debe reproducir su entrada: al terminar el loader
+ * Ejecuta `fn` cuando la página debe reproducir su entrada: al hidratar
  * y cada vez que una transición revela una ruta nueva.
  */
 export function useEnter(fn: () => void | (() => void)) {

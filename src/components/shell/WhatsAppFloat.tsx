@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { gsap } from "@/lib/gsap";
-import { live, store, useUI } from "@/lib/store";
+import { live, useUI } from "@/lib/store";
+import { useMedia } from "@/hooks/useMedia";
 import { wa } from "@/lib/site";
 import { pageLabel } from "@/lib/page-label";
 import { useI18n } from "@/i18n/I18nProvider";
@@ -40,7 +41,7 @@ const BUBBLE_KEY = "kt-wa-bubble";
 
 /**
  * Botón flotante de WhatsApp en pixel art.
- * - Aparece al bajar un poco en cualquier página (se arma píxel por píxel) y se esconde
+ * - Está visible desde el inicio en móvil; en escritorio aparece al bajar un poco. Se esconde
  *   cuando la sección de contacto está en pantalla, durante las transiciones y con el menú abierto.
  * - Al pasar el puntero se despliega "¿Hablamos?" con el estado "en línea".
  * - Una vez por sesión muestra un globo de saludo con puntos de "escribiendo…".
@@ -54,13 +55,15 @@ export function WhatsAppFloat() {
   const menuOpen = useUI((s) => s.menuOpen);
   const paletteOpen = useUI((s) => s.paletteOpen);
   const loaded = useUI((s) => s.loaded);
+  const mobile = useMedia("(max-width: 980px)");
   const [scrolled, setScrolled] = useState(false);
   const [contactInView, setContactInView] = useState(false);
   const [bubble, setBubble] = useState<"off" | "typing" | "on">("off");
   const [seen, setSeen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
 
-  const visible = loaded && scrolled && !contactInView && !transitioning && !menuOpen && !paletteOpen;
+  const available = !contactInView && !transitioning && !menuOpen && !paletteOpen;
+  const visible = available && (mobile || (loaded && scrolled));
 
   // Umbral de scroll (lee el valor de Lenis en el ticker; solo hace setState al cruzarlo).
   useEffect(() => {
@@ -78,16 +81,17 @@ export function WhatsAppFloat() {
 
   // La sección de contacto ya tiene su propio botón de WhatsApp: ahí el flotante se aparta.
   useEffect(() => {
+    setContactInView(false);
     const el = document.getElementById("contacto");
     if (!el) return;
     const io = new IntersectionObserver(([e]) => setContactInView(e.isIntersecting), { threshold: 0.15 });
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [pathname]);
 
   // Saludo una vez por sesión, un rato después de aparecer.
   useEffect(() => {
-    if (!visible || seen) return;
+    if (!visible || seen || mobile) return;
     let shown = false;
     try {
       shown = sessionStorage.getItem(BUBBLE_KEY) === "1";
@@ -103,7 +107,7 @@ export function WhatsAppFloat() {
     const c = window.setTimeout(() => dismiss(), 14000);
     return () => [a, b, c].forEach((id) => window.clearTimeout(id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible, seen]);
+  }, [visible, seen, mobile]);
 
   const dismiss = () => {
     setBubble("off");
@@ -118,8 +122,8 @@ export function WhatsAppFloat() {
   const href = wa(f.message(pageLabel(pathname || "/")));
 
   return (
-    <div ref={root} className={styles.root} data-visible={visible} data-bubble={bubble} data-track="flotante">
-      {bubble !== "off" && (
+    <div ref={root} className={styles.root} data-visible={visible} data-available={available} data-bubble={bubble} data-track="flotante">
+      {!mobile && bubble !== "off" && (
         <div className={styles.bubble} role="status">
           <button type="button" className={styles.close} onClick={dismiss} aria-label={f.close}>
             ×
@@ -147,7 +151,7 @@ export function WhatsAppFloat() {
         onClick={dismiss}
         data-stick
         data-native
-        tabIndex={visible ? 0 : -1}
+        tabIndex={available ? 0 : -1}
       >
         <span className={styles.icon} aria-hidden="true">
           <svg viewBox="-1 -1 18 18" shapeRendering="crispEdges">

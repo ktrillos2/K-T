@@ -11,6 +11,7 @@ import { projectsFor } from "@/i18n";
 import { TESTIMONIALS, type Testimonial } from "@/content/testimonials";
 import type { ProjectView } from "@/lib/projects";
 import { SectionHead } from "@/components/ui/SectionHead";
+import { ReviewRating } from "@/components/ui/ReviewRating";
 import { Reveal } from "@/components/motion/Reveal";
 import { TLink } from "@/components/transition/TLink";
 import styles from "./Reviews.module.css";
@@ -237,15 +238,7 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
         <SectionHead path={path ?? r.path} title={title ?? r.title} lead={lead ?? r.lead} id="h-reviews" />
 
         <Reveal className={styles.shell}>
-          <div className={styles.score}>
-            <span className={`display ${styles.scoreNum}`}>5.0</span>
-            <span className={styles.stars} aria-hidden="true">
-              {[0, 1, 2, 3, 4].map((s) => (
-                <i key={s} style={vars({ "--d": `${s * 0.08}s` })} />
-              ))}
-            </span>
-            <span className={styles.scoreMeta}>{r.count(n)}</span>
-          </div>
+          <p className={styles.scoreMeta}>{r.count(n)}</p>
 
           {/* Fila deslizable */}
           <div ref={stage} className={styles.stage} data-cursor={t.cursor.drag} data-drag="false">
@@ -260,9 +253,7 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
                         <svg className={styles.mark} viewBox="0 0 7 5" shapeRendering="crispEdges" aria-hidden="true">
                           <path d="M0 0h3v3h-1v2h-2zM4 0h3v3h-1v2h-2z" />
                         </svg>
-                        <span className={styles.cardStars} aria-hidden="true">
-                          {"★".repeat(tm.rating || 5)}
-                        </span>
+                        <ReviewRating rating={tm.rating} />
                       </span>
                       <blockquote className={styles.quote}>
                         <p>{tm.quote}</p>

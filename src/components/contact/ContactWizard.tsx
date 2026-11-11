@@ -11,16 +11,17 @@ import { DIAL_COUNTRIES, dialCountryByCode, type DialCountry } from "@/lib/count
 import { CostSheet } from "./CostSheet";
 import styles from "./ContactWizard.module.css";
 
-type Answers = { what: string; biz: string; when: string; name: string; email: string; phone: string };
-const EMPTY: Answers = { what: "", biz: "", when: "", name: "", email: "", phone: "" };
-const KEYS: (keyof Answers)[] = ["what", "biz", "when", "name", "email", "phone"];
+type Answers = { what: string; name: string; phone: string; email: string };
+const EMPTY: Answers = { what: "", name: "", phone: "", email: "" };
+const KEYS: (keyof Answers)[] = ["what", "name", "phone", "email"];
 const STEPS = KEYS.length;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const PHONE = /^\+[1-9]\d{7,14}$/;
 type Status = "idle" | "sending" | "sent" | "failed";
 
 /**
- * Contacto conversacional: seis preguntas, la información se envía por correo (Resend)
- * y al terminar se muestra la ficha de costos del servicio elegido, con la opción de seguir por WhatsApp.
+ * Tres datos para contactar y un correo opcional. Al terminar se muestra la ficha
+ * de costos del servicio elegido, con la opción de seguir por WhatsApp.
  */
 export function ContactWizard() {
   const { t, country, lang, planMoney } = useI18n();
@@ -28,7 +29,6 @@ export function ContactWizard() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>(EMPTY);
   const [planIndex, setPlanIndex] = useState(-1);
-  const [typing, setTyping] = useState(false);
   const [draft, setDraft] = useState("");
   const [selectedDialCountry, setSelectedDialCountry] = useState<DialCountry>(() => dialCountryByCode(country?.code));
   const [error, setError] = useState("");
@@ -43,19 +43,12 @@ export function ContactWizard() {
     }
   }, [country?.code]);
 
-  const questions = [c.q1, c.q2, c.q3, c.q4, c.q5, c.q6];
-  const options: (string[] | null)[] = [c.q1opts, null, c.q3opts, null, null, null];
-  const placeholders = ["", c.q2ph, "", c.q4ph, c.q5ph, c.q6ph];
-  const types = ["text", "text", "text", "text", "email", "tel"];
-  const autos = ["off", "organization", "off", "name", "email", "tel"];
+  const questions = [c.q1, c.q4, c.q6, c.q5];
+  const options: (string[] | null)[] = [c.q1opts, null, null, null];
+  const placeholders = ["", c.q4ph, c.q6ph, c.q5ph];
+  const types = ["text", "text", "tel", "email"];
+  const autos = ["off", "name", "tel-national", "email"];
   const done = step >= STEPS;
-
-  useEffect(() => {
-    if (done) return;
-    setTyping(true);
-    const id = window.setTimeout(() => setTyping(false), prefersReducedMotion() ? 0 : 600);
-    return () => window.clearTimeout(id);
-  }, [step, done]);
 
   useEffect(() => {
     const el = log.current;
@@ -63,9 +56,9 @@ export function ContactWizard() {
     el.scrollTo({ top: el.scrollHeight, behavior: prefersReducedMotion() ? "auto" : "smooth" });
     const tail = Array.from(el.querySelectorAll("[data-bubble]")).slice(-2);
     if (!prefersReducedMotion() && tail.length) gsap.fromTo(tail, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.45, stagger: 0.08, ease: "power3.out" });
-    if (!typing && !done && options[step] === null) inputRef.current?.focus({ preventScroll: true });
+    if (!done && options[step] === null) inputRef.current?.focus({ preventScroll: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [step, typing, status]);
+  }, [step, status]);
 
   const message = c.message({ ...answers, name: answers.name || "—", phone: answers.phone || undefined }) + `\n${lang === "en" ? "Country" : "País"}: ${country.name[lang]}`;
 
@@ -100,12 +93,16 @@ export function ContactWizard() {
     if (key === "phone") {
       const rawDigits = v.replace(/\D/g, "");
       v = rawDigits ? `${selectedDialCountry.dial} ${rawDigits}` : "";
+      if (rawDigits.length < 7 || !PHONE.test(v.replace(/\s/g, ""))) {
+        setError(c.invalidPhone);
+        return;
+      }
     }
-    if (key === "email" && !EMAIL.test(v)) {
+    if (key === "email" && v && !EMAIL.test(v)) {
       setError(c.invalidEmail);
       return;
     }
-    if (!v && key !== "phone") return;
+    if (!v && key !== "email") return;
     setError("");
     const next = { ...answers, [key]: v };
     setAnswers(next);
@@ -167,7 +164,7 @@ export function ContactWizard() {
               <span className={styles.who}>{c.bot}</span>
               {q}
             </p>
-            {answers[KEYS[i]] && (
+            {(answers[KEYS[i]] || KEYS[i] === "email") && (
               <p data-bubble className={cx(styles.bubble, styles.you)}>
                 <span className={styles.who}>
                   {c.you}
@@ -177,7 +174,7 @@ export function ContactWizard() {
                     </button>
                   )}
                 </span>
-                {answers[KEYS[i]]}
+                {answers[KEYS[i]] || c.skipped}
               </p>
             )}
           </div>
@@ -185,17 +182,9 @@ export function ContactWizard() {
 
         {!done && (
           <div className={styles.pair}>
-            <p data-bubble className={cx(styles.bubble, styles.bot, typing && styles.typing)}>
+            <p data-bubble className={cx(styles.bubble, styles.bot)}>
               <span className={styles.who}>{c.bot}</span>
-              {typing ? (
-                <span className={styles.dotsAnim} aria-label={c.typing}>
-                  <i />
-                  <i />
-                  <i />
-                </span>
-              ) : (
-                questions[step]
-              )}
+              {questions[step]}
             </p>
           </div>
         )}
@@ -220,8 +209,7 @@ export function ContactWizard() {
                 ✓
               </span>{" "}
               {c.sent}
-              <br />
-              <small>{c.copyTo(answers.email)}</small>
+              {answers.email && <small>{c.copyTo(answers.email)}</small>}
             </p>
             <div data-bubble>
               <CostSheet planIndex={planIndex} />
@@ -238,7 +226,7 @@ export function ContactWizard() {
       </div>
 
       <div className={styles.input}>
-        {!done && !typing && options[step] && (
+        {!done && options[step] && (
           <div className={styles.options} role="group" aria-label={questions[step]}>
             {options[step]!.map((o, k) => (
               <button key={o} type="button" className={styles.option} onClick={() => answer(o, k)} data-stick>
@@ -247,7 +235,7 @@ export function ContactWizard() {
             ))}
           </div>
         )}
-        {!done && !typing && !options[step] && (
+        {!done && !options[step] && (
           <form
             className={styles.form}
             onSubmit={(e) => {
@@ -269,7 +257,7 @@ export function ContactWizard() {
                   className={styles.countrySelect}
                   value={selectedDialCountry.code}
                   onChange={(e) => setSelectedDialCountry(dialCountryByCode(e.target.value))}
-                  aria-label="Código de país para WhatsApp"
+                  aria-label={c.dialCode}
                 >
                   {DIAL_COUNTRIES.map((dc) => (
                     <option key={dc.code} value={dc.code}>
@@ -327,13 +315,14 @@ export function ContactWizard() {
               }}
               placeholder={KEYS[step] === "phone" ? selectedDialCountry.placeholder : placeholders[step]}
               autoComplete={autos[step]}
+              required={KEYS[step] !== "email"}
               maxLength={KEYS[step] === "phone" ? 15 : 120}
               aria-invalid={!!error}
               aria-describedby={error ? "wizard-error" : undefined}
             />
             {/* Campo trampa para bots */}
             <input className={styles.trap} tabIndex={-1} autoComplete="off" value={trap} onChange={(e) => setTrap(e.target.value)} aria-hidden="true" name="website" />
-            {KEYS[step] === "phone" && (
+            {KEYS[step] === "email" && (
               <button type="button" className={styles.skip} onClick={() => answer("")}>
                 {c.skip}
               </button>

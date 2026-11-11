@@ -12,6 +12,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Scramble } from "@/components/motion/Scramble";
 import { TLink } from "@/components/transition/TLink";
 import { Reviews, reviewItems } from "@/components/home/Reviews";
+import { ReviewRating } from "@/components/ui/ReviewRating";
 import { ReviewForm } from "./ReviewForm";
 import { TESTIMONIALS, type Testimonial } from "@/content/testimonials";
 import styles from "./Testimonials.module.css";
@@ -44,9 +45,7 @@ export function Testimonials({ reviews = TESTIMONIALS }: { reviews?: Testimonial
             {items.map((p) => (
               <li key={p.slug} className={styles.item} style={vars({ "--c": COLOR_VAR[p.color] })}>
                 <figure>
-                  <div className={styles.stars} aria-label={`${p.testimonial!.rating || 5}/5`}>
-                    {"★".repeat(p.testimonial!.rating || 5)}
-                  </div>
+                  <ReviewRating rating={p.testimonial!.rating} />
                   <blockquote>
                     <p>“{p.testimonial!.quote}”</p>
                   </blockquote>

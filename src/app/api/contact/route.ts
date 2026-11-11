@@ -16,10 +16,11 @@ const limited = (ip: string) => {
 
 const clean = (v: unknown, max = 200) => (typeof v === "string" ? v.replace(/[\u0000-\u001f]/g, " ").trim().slice(0, max) : "");
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const PHONE = /^\+[1-9]\d{7,14}$/;
 
 /**
- * Recibe el formulario tipo chat y envía dos correos con Resend:
- * uno al equipo (con el correo del cliente como respuesta) y una confirmación con la ficha de costos al cliente.
+ * Envía la solicitud al equipo con Resend. Si el cliente deja un correo,
+ * también envía una confirmación con la ficha de costos.
  */
 export async function POST(req: Request) {
   const key = process.env.RESEND_API_KEY;
@@ -32,12 +33,19 @@ export async function POST(req: Request) {
 
   let data: Record<string, unknown>;
   try {
-    data = (await req.json()) as Record<string, unknown>;
+    const body: unknown = await req.json();
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return NextResponse.json({ ok: false, error: "bad_request" }, { status: 400 });
+    }
+    data = body as Record<string, unknown>;
   } catch {
     return NextResponse.json({ ok: false, error: "bad_request" }, { status: 400 });
   }
   // Campo trampa: los humanos no lo ven, los bots lo llenan.
   if (clean(data.website)) return NextResponse.json({ ok: true });
+  if (data.email != null && typeof data.email !== "string") {
+    return NextResponse.json({ ok: false, error: "invalid" }, { status: 422 });
+  }
 
   const lang = clean(data.lang, 2);
   const lead: Lead = {
@@ -46,18 +54,19 @@ export async function POST(req: Request) {
     biz: clean(data.biz, 160),
     when: clean(data.when, 60),
     name: clean(data.name, 80),
-    email: clean(data.email, 120).toLowerCase(),
-    phone: clean(data.phone, 40) || undefined,
+    email: clean(data.email, 120).toLowerCase() || undefined,
+    phone: clean(data.phone, 40).replace(/[\s().-]/g, ""),
     country: clean(data.country, 40),
     currency: clean(data.currency, 3),
     localPrice: clean(data.localPrice, 40) || undefined,
     lang: isLang(lang) ? lang : "es",
     page: clean(data.page, 200) || undefined,
   };
-  if (!lead.what || !lead.name || !EMAIL.test(lead.email)) return NextResponse.json({ ok: false, error: "invalid" }, { status: 422 });
+  if (!lead.what || !lead.name || !PHONE.test(lead.phone) || (lead.email && !EMAIL.test(lead.email))) {
+    return NextResponse.json({ ok: false, error: "invalid" }, { status: 422 });
+  }
 
   const team = teamEmail(lead);
-  const client = clientEmail(lead);
 
   // 1. Notificación prioritaria al equipo (contacto@kytcode.lat)
   const teamRes = await fetch("https://api.resend.com/emails", {
@@ -66,7 +75,7 @@ export async function POST(req: Request) {
     body: JSON.stringify({
       from,
       to: to.split(",").map((s) => s.trim()),
-      reply_to: lead.email,
+      ...(lead.email ? { reply_to: lead.email } : {}),
       subject: team.subject,
       html: team.html,
     }),
@@ -78,23 +87,26 @@ export async function POST(req: Request) {
     console.error("[contact] Error enviando correo al equipo:", teamRes?.status, errText);
   }
 
-  // 2. Confirmación con ficha de costos al cliente
-  fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-    body: JSON.stringify({
-      from,
-      to: [lead.email],
-      reply_to: to.split(",")[0].trim(),
-      subject: client.subject,
-      html: client.html,
-    }),
-  }).catch((err) => {
-    console.warn("[contact] Aviso al cliente no enviado:", err);
-  });
-
   if (!teamOk) {
     return NextResponse.json({ ok: false, error: "send_failed" }, { status: 502 });
+  }
+
+  // 2. Confirmación opcional con ficha de costos al cliente.
+  if (lead.email) {
+    const client = clientEmail(lead);
+    fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from,
+        to: [lead.email],
+        reply_to: to.split(",")[0].trim(),
+        subject: client.subject,
+        html: client.html,
+      }),
+    }).catch((err) => {
+      console.warn("[contact] Aviso al cliente no enviado:", err);
+    });
   }
 
   return NextResponse.json({ ok: true });

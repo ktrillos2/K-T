@@ -21,3 +21,14 @@
   align-items: flex-end;
   gap: 20px;
 }
+.local {
+  max-width: 760px;
+  color: var(--muted);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+.local a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

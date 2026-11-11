@@ -79,6 +79,20 @@
 .gameTitle {
   font-size: clamp(40px, 6vw, 96px);
 }
+.gameSlot {
+  min-width: 0;
+}
+.gamePlaceholder {
+  aspect-ratio: 880 / 520;
+  display: grid;
+  place-items: center;
+  margin-block: 24px 44px;
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 12px;
+}
 
 .cols {
   display: grid;

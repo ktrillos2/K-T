@@ -1,6 +1,11 @@
 import type { Landing } from "./types";
+import { planById } from "@/lib/pricing";
 
 const S = (slug: string) => `/servicios/${slug}`;
+// Headless pertenece al plan Tienda; el texto y el Offer comparten el catálogo.
+const headlessPlan = planById("tienda");
+const headlessCop = `$${headlessPlan.from.toLocaleString("es-CO")} COP`;
+const headlessUsd = `${headlessPlan.usd} USD`;
 
 export const SERVICES: Landing[] = [
   {
@@ -393,11 +398,11 @@ export const SERVICES: Landing[] = [
     copy: {
       es: {
         title: "WooCommerce headless y e-commerce desacoplado en Colombia",
-        description: "Convertimos tu tienda WooCommerce o Shopify en una tienda headless: vitrina a la medida que carga en menos de un segundo y el mismo panel para administrar productos. Desde $2.000.000 COP.",
+        description: `Convertimos tu tienda WooCommerce o Shopify en una tienda headless: vitrina a la medida que carga en menos de un segundo y el mismo panel para administrar productos. Desde ${headlessCop}.`,
         eyebrow: "servicios · e-commerce headless",
         h1: "E-commerce headless: la velocidad de una app, el panel de siempre",
-        lead: "Una tienda headless separa la vitrina que ve el cliente del sistema donde administras productos y pedidos. En K&T Code construimos la vitrina a la medida, rápida y con tu diseño, y la conectamos por API con WooCommerce, Shopify o un panel propio, para que sigas gestionando todo como siempre. Desde $2.000.000 COP.",
-        facts: [["Desde", "$2.000.000 COP"], ["Carga", "Menos de 1 s"], ["Administración", "La de siempre"], ["Pagos", "Colombianos"]],
+        lead: `Una tienda headless separa la vitrina que ve el cliente del sistema donde administras productos y pedidos. En K&T Code construimos la vitrina a la medida, rápida y con tu diseño, y la conectamos por API con WooCommerce, Shopify o un panel propio, para que sigas gestionando todo como siempre. Desde ${headlessCop}.`,
+        facts: [["Desde", headlessCop], ["Carga", "Menos de 1 s"], ["Administración", "La de siempre"], ["Pagos", "Colombianos"]],
         includesTitle: "Qué incluye",
         includes: [
           { t: "Vitrina a la medida", d: "Diseño propio para tu marca, sin límites de plantilla." },
@@ -412,17 +417,17 @@ export const SERVICES: Landing[] = [
         faqs: [
           { q: "¿Qué es WooCommerce headless?", a: "Una tienda donde los productos y pedidos se siguen administrando en WooCommerce, pero la vitrina que ve el cliente es un sitio a la medida, mucho más rápido." },
           { q: "¿Tengo que cambiar mi forma de administrar?", a: "No. Sigues usando el mismo panel; el cambio es invisible para quien administra." },
-          { q: "¿Cuánto cuesta?", a: "Una tienda headless con K&T Code parte de $2.000.000 COP según el tamaño del catálogo y las integraciones." },
+          { q: "¿Cuánto cuesta?", a: `Una tienda headless con K&T Code parte de ${headlessCop}, el precio base del plan Tienda. El valor final depende del tamaño del catálogo y las integraciones.` },
         ],
         keywords: ["WooCommerce headless", "e-commerce headless", "tienda headless Colombia"],
       },
       en: {
         title: "Headless WooCommerce and decoupled e-commerce",
-        description: "We turn your WooCommerce or Shopify store into a headless store: a custom storefront that loads in under a second and the same panel to manage products. Quoted per project.",
+        description: `We turn your WooCommerce or Shopify store into a headless store: a custom storefront that loads in under a second and the same panel to manage products. From ${headlessUsd}.`,
         eyebrow: "services · headless e-commerce",
         h1: "Headless e-commerce: app-like speed, the panel you know",
-        lead: "A headless store separates the storefront customers see from the system where you manage products and orders. At K&T Code we build the storefront custom, fast and on-brand, and connect it via API to WooCommerce, Shopify or a custom panel, so you keep managing everything as usual. Quoted per project.",
-        facts: [["Price", "Quoted per project"], ["Load", "Under 1 s"], ["Admin", "Same as today"], ["Payments", "Local"]],
+        lead: `A headless store separates the storefront customers see from the system where you manage products and orders. At K&T Code we build the storefront custom, fast and on-brand, and connect it via API to WooCommerce, Shopify or a custom panel, so you keep managing everything as usual. From ${headlessUsd}.`,
+        facts: [["From", headlessUsd], ["Load", "Under 1 s"], ["Admin", "Same as today"], ["Payments", "Local"]],
         includesTitle: "What's included",
         includes: [
           { t: "Custom storefront", d: "Your own design, no template limits." },
@@ -437,6 +442,7 @@ export const SERVICES: Landing[] = [
         faqs: [
           { q: "What is headless WooCommerce?", a: "A store where products and orders are still managed in WooCommerce, but the storefront is a custom, much faster site." },
           { q: "Do I need to change how I manage the store?", a: "No. You keep the same panel; the change is invisible to whoever manages it." },
+          { q: "How much does it cost?", a: `A headless store with K&T Code starts at ${headlessUsd}, the base price of the Store plan. The final price depends on catalog size and integrations.` },
         ],
         keywords: ["headless WooCommerce", "headless e-commerce"],
       },

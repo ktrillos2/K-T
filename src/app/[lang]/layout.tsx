@@ -82,10 +82,10 @@ export const viewport: Viewport = {
 };
 
 /**
- * Se ejecuta antes del primer pintado: tema guardado, visita repetida y detección de bots.
- * Los buscadores y crawlers de IA ven el contenido completo sin loader ni animaciones de entrada.
+ * Se ejecuta antes del primer pintado para aplicar el tema guardado y detectar bots.
+ * El contenido permanece visible sin depender de este script ni de una intro.
  */
-const bootScript = `(function(){var d=document.documentElement;var bot=/bot|crawl|spider|slurp|lighthouse|headless|bingpreview|facebookexternalhit|embedly|whatsapp|telegram|gptbot|claude|perplexity|google-extended/i.test(navigator.userAgent);try{var t=localStorage.getItem('kt-theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t)}catch(e){}if(bot){d.classList.add('bot');return}d.classList.add('js');try{if(sessionStorage.getItem('kt-booted'))d.classList.add('booted')}catch(e){}setTimeout(function(){if(!d.classList.contains('ready'))d.classList.add('intro-failsafe')},9000)})();`;
+const bootScript = `(function(){var d=document.documentElement;var bot=/bot|crawl|spider|slurp|lighthouse|headless|bingpreview|facebookexternalhit|embedly|whatsapp|telegram|gptbot|claude|perplexity|google-extended/i.test(navigator.userAgent);try{var t=localStorage.getItem('kt-theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t)}catch(e){}d.classList.add(bot?'bot':'js')})();`;
 
 export default async function RootLayout({ children, params }: { children: React.ReactNode; params: Promise<{ lang: string }> }) {
   const { lang } = await params;

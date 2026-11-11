@@ -14,7 +14,7 @@ const abs = (path: string) => `${SITE.url}${path === "/" ? "" : path}`;
 export function organization(lang: Lang) {
   const t = getDict(lang);
   return {
-    "@type": ["Organization", "ProfessionalService"],
+    "@type": "LocalBusiness",
     "@id": ORG_ID,
     name: SITE.name,
     alternateName: SITE.alternateNames,
@@ -36,7 +36,6 @@ export function organization(lang: Lang) {
       addressRegion: SITE.region,
       addressCountry: "CO",
     },
-    geo: { "@type": "GeoCoordinates", latitude: 7.8939, longitude: -72.5078 },
     areaServed: [
       { "@type": "Country", name: "Colombia" },
       { "@type": "Country", name: "México" },

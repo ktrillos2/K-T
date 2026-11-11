@@ -27,7 +27,7 @@ export function Cursor() {
     const r = ring.current;
     const d = dot.current;
     const lb = label.current;
-    if (!fine || !r || !d || !lb) return;
+    if (!fine || reduced || !r || !d || !lb) return;
     document.documentElement.classList.add("has-cursor");
 
     const BASE = 36;

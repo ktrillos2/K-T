@@ -3,6 +3,8 @@
 import { useEffect, useState, useMemo, useRef } from "react";
 import { PROJECTS } from "@/lib/projects";
 import type { SanityReview } from "@/lib/sanity";
+import { testimonialRating } from "@/content/testimonials";
+import { ReviewRating } from "@/components/ui/ReviewRating";
 import styles from "./admin.module.css";
 
 type ModalState = {
@@ -28,7 +30,7 @@ export default function AdminReviewsPage() {
     role: "",
     project: "",
     content: "",
-    rating: 5,
+    rating: "" as number | "",
     status: "approved" as "approved" | "pending" | "rejected",
     avatarAssetId: "",
     avatarUrl: "",
@@ -176,7 +178,7 @@ export default function AdminReviewsPage() {
       role: "",
       project: PROJECTS[0]?.name || "",
       content: "",
-      rating: 5,
+      rating: "",
       status: "approved",
       avatarAssetId: "",
       avatarUrl: "",
@@ -191,7 +193,7 @@ export default function AdminReviewsPage() {
       role: r.role || "",
       project: r.project || "",
       content: r.content,
-      rating: r.rating || 5,
+      rating: testimonialRating(r.rating) ?? "",
       status: r.status,
       avatarAssetId: r.avatarAssetId || "",
       avatarUrl: r.avatarUrl || "",
@@ -209,6 +211,7 @@ export default function AdminReviewsPage() {
 
     setLoading(true);
     try {
+      const payload = { ...formData, rating: formData.rating === "" ? null : formData.rating };
       if (modal.mode === "create") {
         const res = await fetch("/api/admin/reviews", {
           method: "POST",
@@ -216,7 +219,7 @@ export default function AdminReviewsPage() {
             "Content-Type": "application/json",
             "x-admin-pin": pin,
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(payload),
         });
         const data = await res.json();
         if (!res.ok || !data.ok) throw new Error(data.error || "Error al crear");
@@ -230,7 +233,7 @@ export default function AdminReviewsPage() {
           },
           body: JSON.stringify({
             id: modal.review._id,
-            ...formData,
+            ...payload,
           }),
         });
         const data = await res.json();
@@ -254,9 +257,9 @@ export default function AdminReviewsPage() {
   const rejectedCount = reviews.filter((r) => r.status === "rejected").length;
 
   const avgRating = useMemo(() => {
-    if (!reviews.length) return "5.0";
-    const sum = reviews.reduce((acc, r) => acc + (r.rating || 5), 0);
-    return (sum / reviews.length).toFixed(1);
+    const ratings = reviews.map((review) => testimonialRating(review.rating)).filter((rating): rating is number => rating !== undefined);
+    if (!ratings.length) return undefined;
+    return (ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length).toFixed(1);
   }, [reviews]);
 
   const filteredReviews = useMemo(() => {
@@ -281,7 +284,7 @@ export default function AdminReviewsPage() {
     return (
       <main className={styles.loginWrap}>
         <div className={styles.loginCard}>
-          <div className={styles.loginIcon}>🔒</div>
+          <div className={styles.loginIcon} aria-hidden="true">K&T</div>
           <h1 className={styles.title} style={{ fontSize: "22px", marginBottom: "8px" }}>
             Administración de Reseñas
           </h1>
@@ -391,7 +394,7 @@ export default function AdminReviewsPage() {
           <div className={styles.kpiCard}>
             <div className={styles.kpiLabel}>Calificación Promedio</div>
             <div className={styles.kpiValue}>
-              {avgRating} <span style={{ color: "#f5a623", fontSize: "20px" }}>★</span>
+              {avgRating === undefined ? "Sin calificaciones" : `${avgRating} / 5`}
             </div>
           </div>
         </section>
@@ -499,13 +502,13 @@ export default function AdminReviewsPage() {
                       ? "● Aprobada en Web"
                       : r.status === "rejected"
                       ? "✕ Rechazada"
-                      : "⏳ Pendiente"}
+                      : "Pendiente"}
                   </span>
                 </div>
 
                 <div className={styles.cardBody}>
-                  <div className={styles.ratingStars} aria-label={`${r.rating || 5} estrellas`}>
-                    {"★".repeat(r.rating || 5)}
+                  <div className={styles.ratingStars}>
+                    {testimonialRating(r.rating) === undefined ? "Sin calificación" : <ReviewRating rating={r.rating} />}
                   </div>
                   <blockquote className={styles.reviewText}>
                     “{r.content}”
@@ -634,12 +637,17 @@ export default function AdminReviewsPage() {
               </div>
 
               <div className={styles.formGroup}>
-                <label>Calificación (Estrellas)</label>
+                <label htmlFor="review-rating">Calificación (opcional)</label>
                 <select
+                  id="review-rating"
                   value={formData.rating}
-                  onChange={(e) => setFormData({ ...formData, rating: Number(e.target.value) })}
+                  onChange={(e) => setFormData({ ...formData, rating: e.target.value === "" ? "" : Number(e.target.value) })}
                   className={styles.formSelect}
                 >
+                  <option value="">Sin calificación</option>
+                  {typeof formData.rating === "number" && !Number.isInteger(formData.rating) && (
+                    <option value={formData.rating}>{formData.rating} / 5</option>
+                  )}
                   <option value={5}>★★★★★ (5 estrellas - Excelente)</option>
                   <option value={4}>★★★★☆ (4 estrellas - Muy bueno)</option>
                   <option value={3}>★★★☆☆ (3 estrellas - Bueno)</option>
@@ -750,7 +758,10 @@ export default function AdminReviewsPage() {
           rel="noopener noreferrer"
           className={styles.brandLink}
         >
-          Desarrollado por K&T <span className={styles.heart}>🤍</span>
+          Desarrollado por K&T{" "}
+          <svg className={styles.heart} width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 21s-7.5-4.6-10-9.4C.4 8.4 2.3 4.5 6 4.5c2.2 0 3.6 1.2 4.5 2.6.9-1.4 2.3-2.6 4.5-2.6 3.7 0 5.6 3.9 4 7.1C19.5 16.4 12 21 12 21z" />
+          </svg>
         </a>
         <div style={{ marginTop: "6px", fontSize: "12px", color: "rgba(242, 242, 238, 0.4)" }}>
           © {new Date().getFullYear()} K&T CODE. Todos los derechos reservados.

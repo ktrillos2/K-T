@@ -7,6 +7,10 @@
   justify-items: end;
   gap: 12px;
   pointer-events: none;
+  visibility: hidden;
+}
+.root[data-visible="true"] {
+  visibility: visible;
 }
 .root[data-visible="true"] > * {
   pointer-events: auto;
@@ -217,10 +221,22 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 980px) {
   .root {
     right: 14px;
-    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  }
+  .root[data-available="true"] {
+    visibility: visible;
+  }
+  .root[data-available="true"] > * {
+    pointer-events: auto;
+  }
+  .root[data-available="true"] .btn {
+    transform: none;
+    opacity: 1;
+  }
+  .root[data-available="true"] .icon rect {
+    transform: scale(1);
   }
   .btn {
     height: 56px;
@@ -229,5 +245,35 @@
   .icon {
     width: 40px;
     height: 40px;
+  }
+  .text {
+    display: none;
+  }
+  .btn,
+  .icon rect {
+    transition: none;
+  }
+  .icon svg,
+  .badge {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .root {
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root *,
+  .root *::before,
+  .root *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .bubble {
+    opacity: 1;
+    transform: none;
   }
 }

@@ -21,6 +21,7 @@ const GUIDE_SERVICE: Record<string, string> = {
 export function serviceFromPath(pathname: string): string {
   const [section, slug] = pathname.replace(/^\/en(?=\/|$)/, "").split("/").filter(Boolean);
   if (section === "servicios" && slug) return slug;
+  if (section?.startsWith("desarrollo-web-")) return "desarrollo-web-a-medida";
   if (section === "blog" && slug) return GUIDE_SERVICE[slug] ?? "general";
   return "general";
 }

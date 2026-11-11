@@ -278,17 +278,7 @@ ol {
   background: var(--green);
 }
 
-/* ---------- Estados de entrada ----------
-   En la primera visita la intro tapa la página, así que el contenido se pinta de inmediato
-   debajo (el LCP llega con el primer pintado) y luego se anima al entrar.
-   En visitas repetidas no hay intro: lo marcado con data-intro espera su animación.
-   Sin JS (o si algo falla) todo queda visible. */
-html.js.booted [data-intro] {
-  visibility: hidden;
-}
-html.js.intro-failsafe [data-intro] {
-  visibility: visible;
-}
+/* Las entradas se animan al hidratar; el contenido ya es visible desde el HTML. */
 
 /* ---------- Heroes ---------- */
 [data-hero] {
@@ -347,10 +337,18 @@ html.has-cursor button {
   mix-blend-mode: normal;
 }
 
-/* Con "reducir movimiento" (p. ej. Windows con los efectos de animación apagados) se mantienen
-   las animaciones suaves; solo se quita el desplazamiento suave. */
+/* Respeta la preferencia de reducir movimiento sin ocultar contenido ni foco. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-delay: 0ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

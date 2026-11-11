@@ -25,6 +25,10 @@ export type Testimonial = {
   source: "web" | "sanity";
 };
 
+/** Solo conserva notas explícitas dentro de la escala real de las reseñas. */
+export const testimonialRating = (value: unknown): number | undefined =>
+  typeof value === "number" && Number.isFinite(value) && value >= 1 && value <= 5 ? value : undefined;
+
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: "telas-real-stefanny-robayo",
