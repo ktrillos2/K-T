@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { getAdminReviews, mutateSanity } from "@/lib/sanity";
+import { testimonialRating } from "@/content/testimonials";
 
 export const runtime = "nodejs";
 
@@ -42,10 +43,15 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json();
-    const { name, role, project, projectUrl, content, rating = 5, status = "approved", avatarAssetId } = body;
+    const { name, role, project, projectUrl, content, rating, status = "approved", avatarAssetId } = body;
 
     if (!name || !content) {
       return NextResponse.json({ ok: false, error: "Nombre y contenido son obligatorios" }, { status: 400 });
+    }
+
+    const normalizedRating = testimonialRating(rating);
+    if (rating != null && rating !== "" && normalizedRating === undefined) {
+      return NextResponse.json({ ok: false, error: "La calificación debe ser un número entre 1 y 5" }, { status: 400 });
     }
 
     const doc: Record<string, unknown> = {
@@ -55,7 +61,7 @@ export async function POST(req: Request) {
       project: project ? String(project).trim() : undefined,
       projectUrl: projectUrl ? String(projectUrl).trim() : undefined,
       content: String(content).trim(),
-      rating: Number(rating) || 5,
+      rating: normalizedRating,
       status: status || "approved",
     };
 
@@ -111,7 +117,18 @@ export async function PATCH(req: Request) {
     if (role !== undefined) setFields.role = String(role).trim();
     if (project !== undefined) setFields.project = String(project).trim();
     if (content !== undefined) setFields.content = String(content).trim();
-    if (rating !== undefined) setFields.rating = Number(rating);
+    const unsetFields: string[] = [];
+    if (rating !== undefined) {
+      if (rating === null || rating === "") {
+        unsetFields.push("rating");
+      } else {
+        const normalizedRating = testimonialRating(rating);
+        if (normalizedRating === undefined) {
+          return NextResponse.json({ ok: false, error: "La calificación debe ser un número entre 1 y 5" }, { status: 400 });
+        }
+        setFields.rating = normalizedRating;
+      }
+    }
 
     if (avatarAssetId) {
       setFields.avatar = {
@@ -128,6 +145,7 @@ export async function PATCH(req: Request) {
         patch: {
           id,
           set: setFields,
+          ...(unsetFields.length ? { unset: unsetFields } : {}),
         },
       },
     ];

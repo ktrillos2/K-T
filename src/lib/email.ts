@@ -10,8 +10,8 @@ export type Lead = {
   biz: string;
   when: string;
   name: string;
-  email: string;
-  phone?: string;
+  email?: string;
+  phone: string;
   country: string;
   currency: string;
   localPrice?: string;
@@ -70,7 +70,7 @@ const shell = (title: string, body: string) => `<!doctype html>
             <td style="padding:20px 28px;background-color:#111113;border-top:1px solid #2a2a2f;color:#8b8b92;font-size:12px;text-align:center">
               <p style="margin:0 0 6px">
                 <a href="${SITE.url}" target="_blank" rel="noopener noreferrer" style="color:#f2f2ee;text-decoration:none;font-weight:700">
-                  Desarrollado por K&amp;T <span style="color:#ffffff">🤍</span>
+                  Desarrollado por K&amp;T <span style="color:#ffffff">&#9829;&#xFE0E;</span>
                 </a>
               </p>
               <p style="margin:0;color:#6b6b72">
@@ -102,7 +102,7 @@ function sheetHtml(lead: Lead) {
 <div style="color:#8b8b92;font-size:13px;margin:4px 0 12px">${esc(d.pitch)}</div>
 <div style="font-size:11px;color:#8b8b92;text-transform:uppercase;letter-spacing:0.05em">${esc(c.sheetFrom)}</div>
 <div style="font-size:22px;font-weight:800;color:#62c453;margin:2px 0 8px">${p.quote ? esc(t.price.quote) + " · " : ""}${formatCOP(p.from)} COP</div>${local}
-<div style="font-size:12px;color:#8b8b92;margin-top:8px">⏱️ ${esc(c.sheetDelivery)}: <strong style="color:#f2f2ee">${esc(d.delivery)}</strong></div>
+<div style="font-size:12px;color:#8b8b92;margin-top:8px">${esc(c.sheetDelivery)}: <strong style="color:#f2f2ee">${esc(d.delivery)}</strong></div>
 <div style="font-size:12px;color:#8b8b92;margin-top:12px">${esc(c.sheetIncludes)}:</div>
 <ul style="margin:6px 0 0;padding-left:20px;color:#d4d4d8">${d.features.map((f) => `<li style="margin-bottom:4px">${esc(f)}</li>`).join("")}</ul></div>`;
     })
@@ -112,11 +112,11 @@ function sheetHtml(lead: Lead) {
 
 /** Correo interno para notificar a contacto@kytcode.lat sobre un nuevo lead desde la web */
 export function teamEmail(lead: Lead) {
-  const row = (icon: string, label: string, value?: string, isHighlight = false) =>
+  const row = (label: string, value?: string, isHighlight = false) =>
     value
       ? `<tr>
           <td style="color:#8b8b92;padding:9px 12px 9px 0;border-bottom:1px solid #222226;vertical-align:top;font-size:13px;width:150px">
-            ${icon} ${esc(label)}
+            ${esc(label)}
           </td>
           <td style="padding:9px 0;border-bottom:1px solid #222226;font-size:14px;color:${isHighlight ? "#62c453;font-weight:700" : "#f2f2ee"}">
             ${esc(value)}
@@ -131,7 +131,7 @@ export function teamEmail(lead: Lead) {
     <!-- Badge de estado -->
     <div style="margin-bottom:18px">
       <span style="background-color:rgba(98,196,83,0.15);color:#73d964;border:1px solid rgba(98,196,83,0.3);font-size:11px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border-radius:6px;display:inline-block">
-        ⚡ NUEVO LEAD DESDE LA WEB
+        NUEVO LEAD DESDE LA WEB
       </span>
     </div>
 
@@ -144,16 +144,16 @@ export function teamEmail(lead: Lead) {
 
     <!-- Ficha de datos del cliente -->
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#18181b;border:1px solid #2a2a2f;border-radius:12px;padding:16px 20px;margin-bottom:24px">
-      ${row("👤", "Nombre", lead.name, true)}
-      ${row("📱", "WhatsApp", lead.phone)}
-      ${row("✉️", "Correo", lead.email)}
-      ${row("🚀", "Quiere construir", lead.what, true)}
-      ${row("🏢", "Negocio", lead.biz)}
-      ${row("⏱️", "Plazo deseado", lead.when)}
-      ${row("🌎", "País / Moneda", `${lead.country} (${lead.currency})`)}
-      ${row("💵", "Precio que vio", lead.localPrice)}
-      ${row("🌐", "Idioma web", lead.lang === "en" ? "Inglés (EN)" : "Español (ES)")}
-      ${row("🔗", "Página origen", lead.page)}
+      ${row("Nombre", lead.name, true)}
+      ${row("WhatsApp", lead.phone)}
+      ${row("Correo", lead.email)}
+      ${row("Quiere construir", lead.what, true)}
+      ${row("Negocio", lead.biz)}
+      ${row("Plazo deseado", lead.when)}
+      ${row("País / Moneda", `${lead.country} (${lead.currency})`)}
+      ${row("Precio que vio", lead.localPrice)}
+      ${row("Idioma web", lead.lang === "en" ? "Inglés (EN)" : "Español (ES)")}
+      ${row("Página origen", lead.page)}
     </table>
 
     <!-- Acciones rápidas para el equipo -->
@@ -161,18 +161,18 @@ export function teamEmail(lead: Lead) {
       ${
         waLink
           ? `<a href="${waLink}" target="_blank" rel="noopener noreferrer" style="background-color:#25d366;color:#0b0b0c;padding:12px 20px;border-radius:8px;font-weight:800;text-decoration:none;display:inline-block;margin-right:12px;font-size:14px;box-shadow:0 4px 14px rgba(37,211,102,0.3)">
-              💬 Abrir WhatsApp con ${esc(lead.name.split(" ")[0])}
+              Abrir WhatsApp con ${esc(lead.name.split(" ")[0])}
             </a>`
           : ""
       }
-      <a href="mailto:${esc(lead.email)}?subject=${encodeURIComponent(`Respuesta K&T Code: ${lead.what}`)}" style="background-color:#f2f2ee;color:#0b0b0c;padding:12px 20px;border-radius:8px;font-weight:800;text-decoration:none;display:inline-block;font-size:14px">
-        ✉️ Responder por Correo
-      </a>
+      ${lead.email ? `<a href="mailto:${esc(lead.email)}?subject=${encodeURIComponent(`Respuesta K&T Code: ${lead.what}`)}" style="background-color:#f2f2ee;color:#0b0b0c;padding:12px 20px;border-radius:8px;font-weight:800;text-decoration:none;display:inline-block;font-size:14px">
+        Responder por Correo
+      </a>` : ""}
     </div>
   `;
 
   return {
-    subject: `⚡ Nuevo Lead desde la web: ${lead.name} · ${lead.what}`,
+    subject: `Nuevo Lead desde la web: ${lead.name} · ${lead.what}`,
     html: shell("kt lead-inbox", body),
   };
 }
@@ -190,7 +190,7 @@ export function clientEmail(lead: Lead) {
     </div>
 
     <h1 style="margin:0 0 10px;font-size:22px;font-weight:800;color:#f2f2ee;letter-spacing:-0.02em">
-      ${en ? "Hi" : "Hola"} ${esc(lead.name)} 👋
+      ${en ? "Hi" : "Hola"} ${esc(lead.name)}
     </h1>
     <p style="margin:0 0 16px;color:#d4d4d8;font-size:15px;line-height:1.6">
       ${
@@ -210,13 +210,13 @@ export function clientEmail(lead: Lead) {
 
     <div style="margin:28px 0 10px">
       <a href="https://wa.me/${SITE.phoneRaw}" target="_blank" rel="noopener noreferrer" style="background-color:#25d366;color:#0b0b0c;padding:12px 22px;border-radius:8px;font-weight:800;text-decoration:none;display:inline-block;font-size:14px;box-shadow:0 4px 14px rgba(37,211,102,0.3)">
-        💬 ${en ? "Chat with us on WhatsApp" : "Escríbenos directamente por WhatsApp"}
+        ${en ? "Chat with us on WhatsApp" : "Escríbenos directamente por WhatsApp"}
       </a>
     </div>
   `;
 
   return {
-    subject: en ? `Your K&T Code project: ${lead.what} 🚀` : `Tu proyecto con K&T Code: ${lead.what} 🚀`,
+    subject: en ? `Your K&T Code project: ${lead.what}` : `Tu proyecto con K&T Code: ${lead.what}`,
     html: shell(en ? "kt new-project" : "kt nuevo-proyecto", body),
   };
 }

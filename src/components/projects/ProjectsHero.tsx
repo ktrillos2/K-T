@@ -5,10 +5,11 @@ import { useI18n } from "@/i18n/I18nProvider";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { Reveal } from "@/components/motion/Reveal";
 import { Scramble } from "@/components/motion/Scramble";
+import { TLink } from "@/components/transition/TLink";
 import styles from "./ProjectsHero.module.css";
 
 export function ProjectsHero() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const h = t.projects.hero;
   return (
     <section className={styles.hero} aria-labelledby="h-proyectos" data-hero="">
@@ -25,6 +26,12 @@ export function ProjectsHero() {
             {h.toIndex} <span className="arr">↓</span>
           </a>
         </Reveal>
+        <p className={styles.local}>
+          {lang === "es" ? "Para empresas de la región, presentamos el caso de las Olimpiadas de Robótica y nuestros " : "For businesses in the region, see the Robotics Olympiad case and our "}
+          <TLink href="/desarrollo-web-cucuta" raw>
+            {lang === "es" ? "servicios de diseño y desarrollo web en Cúcuta" : "web design and development services in Cúcuta"}
+          </TLink>.
+        </p>
       </div>
     </section>
   );

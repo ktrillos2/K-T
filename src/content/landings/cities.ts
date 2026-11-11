@@ -10,10 +10,10 @@ const CITIES: CityData[] = [
     lat: 7.8939,
     lng: -72.5078,
     color: "green",
-    projects: ["gmx-gaming", "telas-real", "cxellence-group"],
+    projects: ["olimpiadas-robotica-up"],
     sectors: ["Textil y confección", "Calzado y marroquinería", "Clínicas y odontología", "Comercio fronterizo y logística", "Inmobiliarias y constructoras", "Software y automatización"],
-    intro: "K&T Code tiene su sede principal en San José de Cúcuta. Diseñamos y desarrollamos páginas web, tiendas virtuales y software a la medida para empresas de Cúcuta, Los Patios, Villa del Rosario y todo Norte de Santander, con atención presencial y virtual.",
-    local: "Conocemos la economía de la región: comercio fronterizo, textiles, calzado, salud y construcción. Por eso diseñamos catálogos, portales de citas y sitios corporativos pensados para los clientes de Cúcuta y para vender a todo el país.",
+    intro: "Diseñamos y desarrollamos páginas web en Cúcuta para captar consultas por WhatsApp, presentar tu empresa o vender en línea. K&T Code tiene su sede principal en San José de Cúcuta y atiende empresas de Los Patios, Villa del Rosario y Norte de Santander, de forma presencial y virtual. Landing pages desde $450.000 COP, sitios corporativos desde $2.500.000 COP y tiendas desde $1.300.000 COP.",
+    local: "Conocemos la economía de la región: comercio fronterizo, textiles, calzado, salud y construcción. Una landing puede ayudarte a recibir consultas por WhatsApp; un sitio corporativo, a explicar tus servicios; y una tienda virtual, a vender con pagos en línea. Definimos contigo las páginas, el catálogo y las integraciones antes de cotizar.",
     meet: "Sí. Podemos reunirnos en persona en Cúcuta (por ejemplo en Caobos o el Centro) o por videollamada.",
   },
   {
@@ -74,8 +74,8 @@ const CITIES: CityData[] = [
 const CITY_EN: Record<string, { sectors: string[]; intro: string; local: string; meet: string }> = {
   cucuta: {
     sectors: ["Textiles and apparel", "Footwear and leather goods", "Clinics and dentistry", "Cross-border trade and logistics", "Real estate and construction", "Software and automation"],
-    intro: "K&T Code has its headquarters in San José de Cúcuta. We design and build websites, online stores and custom software for companies in Cúcuta, Los Patios, Villa del Rosario and all of Norte de Santander, with in-person and remote service.",
-    local: "We know the region's economy: cross-border trade, textiles, footwear, healthcare and construction. That's why we design catalogs, booking portals and corporate sites built for Cúcuta's customers and for selling to the whole country.",
+    intro: "We design and build websites in Cúcuta to generate WhatsApp inquiries, present your company or sell online. K&T Code is based in San José de Cúcuta and serves companies in Los Patios, Villa del Rosario and Norte de Santander, in person and remotely. Landing pages from 450,000 COP, corporate sites from 2,500,000 COP and stores from 1,300,000 COP.",
+    local: "We know the region's economy: cross-border trade, textiles, footwear, healthcare and construction. A landing page can generate WhatsApp inquiries, a corporate site can explain your services, and an online store can sell with online payments. We agree on pages, catalog size and integrations before quoting.",
     meet: "Yes. We can meet in person in Cúcuta (for example in Caobos or downtown) or by video call.",
   },
   bogota: {
@@ -137,12 +137,26 @@ Table: Web development plans for companies in ${c.name} (2026).
 | Corporate site | 2,500,000 COP | 15 to 25 days | The company's complete presence |
 | Online store | 1,300,000 COP | 25 to 40 days | Selling online with Colombian payments |
 | Custom software | 4,500,000 COP | 4 to 12 weeks | Dashboards, platforms and automation |
+${c.slug === "cucuta" ? `
+These are starting prices. We confirm scope, integrations and delivery in the quote. Website timelines start once we have your copy and brand assets; custom software is planned by milestones. See [plans and inclusions](/precios) or tell us what your business needs through the contact form.
+
+## A project in Cúcuta: XIX Robotics Olympiad {#local-project}
+
+We built the [XIX Robotics Olympiad platform](/proyectos/olimpiadas-robotica-up), an event of the Mechatronics Engineering Program at Universidad de Pamplona, in collaboration with engineer Jeisson Martínez. It includes user accounts with email verification, online team pre-registration and payment receipt upload, nine categories with their rules, stage-based fees and the event calendar, plus a history of previous editions and sponsors.
+
+This case describes our development collaboration on the event platform; it does not imply institutional endorsement of K&T Code.
+` : ""}
 `,
     faqs: [
       { q: `How much does a website cost in ${c.name}?`, a: "With K&T Code a landing page starts at 450,000 COP, a corporate site at 2,500,000 COP and an online store at 1,300,000 COP." },
       { q: "How does payment work?", a: "50% when design starts and 50% after testing and launch. We accept bank transfer, Nequi, Daviplata and card." },
       { q: "Can we meet?", a: e.meet },
       { q: "How long does it take?", a: "A landing page takes 7 to 12 days, a corporate site 15 to 25 days and an online store 25 to 40 days." },
+      ...(c.slug === "cucuta" ? [
+        { q: "What does the starting price include?", a: "A landing page includes custom design, up to five sections, WhatsApp, a contact form and initial SEO. For other plans, we agree on pages, catalog size and integrations in the quote. Domain, hosting and payment gateway fees are separate." },
+        { q: "What do you need to quote my website?", a: "Tell us what your business does, whether you need inquiries or online sales, and which pages or features you need. We review the scope and confirm price and delivery. Website timelines start once we have your copy and brand assets." },
+        { q: "Do you serve Los Patios and Villa del Rosario?", a: "Yes. We serve companies in Cúcuta, Los Patios, Villa del Rosario and Norte de Santander. We can arrange an in-person meeting in Cúcuta or a video call." },
+      ] : []),
     ],
     keywords: [`web design ${c.name}`, `web development ${c.name}`, `website ${c.name} Colombia`, `online store ${c.name}`],
   };
@@ -178,12 +192,26 @@ Tabla: Planes de desarrollo web para empresas de ${c.name} (2026).
 | Sitio corporativo | $2.500.000 COP | 15 a 25 días | Presencia completa de la empresa |
 | Tienda virtual | $1.300.000 COP | 25 a 40 días | Vender en línea con pagos colombianos |
 | Software a medida | $4.500.000 COP | 4 a 12 semanas | Paneles, plataformas y automatización |
+${c.slug === "cucuta" ? `
+Son precios de partida. Confirmamos el alcance, las integraciones y la entrega en la cotización. Los plazos de las páginas web empiezan cuando tenemos los textos y el material de tu marca; el software se planea por etapas. Revisa los [planes y lo que incluyen](/precios) o cuéntanos qué necesita tu negocio en el formulario de contacto.
+
+## Un proyecto en Cúcuta: XIX Olimpiadas de Robótica {#caso-local}
+
+Desarrollamos la [plataforma de las XIX Olimpiadas de Robótica](/proyectos/olimpiadas-robotica-up), evento del Programa de Ingeniería Mecatrónica de la Universidad de Pamplona, en colaboración con el Ing. Jeisson Martínez. Incluye cuentas de usuario con verificación de correo, preinscripción de equipos en línea y carga del comprobante de pago, nueve categorías con su reglamento, tarifas por etapa y calendario del evento, además del registro histórico de ediciones anteriores y patrocinadores.
+
+Este caso describe nuestra colaboración en el desarrollo de la plataforma del evento; no implica un aval institucional a K&T Code.
+` : ""}
 `,
   faqs: [
     { q: `¿Cuánto cuesta una página web en ${c.name}?`, a: "Con K&T Code una landing page parte de $450.000 COP, un sitio corporativo de $2.500.000 COP y una tienda virtual de $1.300.000 COP." },
     { q: "¿Cómo es el pago?", a: "50% al iniciar el diseño y 50% después de las pruebas y el lanzamiento. Aceptamos transferencia, Nequi, Daviplata y tarjeta." },
     { q: "¿Podemos reunirnos?", a: c.meet },
     { q: "¿Cuánto tarda?", a: "Una landing entre 7 y 12 días, un sitio corporativo entre 15 y 25 días y una tienda virtual entre 25 y 40 días." },
+    ...(c.slug === "cucuta" ? [
+      { q: "¿Qué incluye el precio de partida?", a: "Una landing incluye diseño a la medida, hasta cinco secciones, WhatsApp, formulario y SEO inicial. Para los demás planes, acordamos las páginas, el catálogo y las integraciones en la cotización. Dominio, hosting y comisiones de las pasarelas se pagan aparte." },
+      { q: "¿Qué necesitan para cotizar mi página web?", a: "Cuéntanos a qué se dedica tu negocio, si necesitas recibir consultas o vender en línea, y qué páginas o funciones buscas. Revisamos el alcance y confirmamos precio y entrega. Los plazos de las páginas web empiezan cuando tenemos los textos y el material de tu marca." },
+      { q: "¿Atienden empresas de Los Patios y Villa del Rosario?", a: "Sí. Atendemos empresas de Cúcuta, Los Patios, Villa del Rosario y Norte de Santander. Podemos coordinar una reunión presencial en Cúcuta o una videollamada." },
+    ] : []),
   ],
   keywords: [`páginas web ${c.name}`, `desarrollo web ${c.name}`, `diseño web ${c.name}`, `tienda virtual ${c.name}`],
 });

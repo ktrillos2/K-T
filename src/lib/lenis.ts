@@ -13,9 +13,10 @@ export function scrollToTop(immediate = true) {
 
 export function scrollToEl(target: HTMLElement | string, offset = -90) {
   const l = lenisRef.current;
-  if (l) l.scrollTo(target, { offset, duration: 1.4 });
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (l) l.scrollTo(target, { offset, ...(reduced ? { immediate: true } : { duration: 1.4 }) });
   else {
     const el = typeof target === "string" ? document.querySelector(target) : target;
-    el?.scrollIntoView({ behavior: "smooth" });
+    el?.scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
   }
 }

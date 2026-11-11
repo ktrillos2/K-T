@@ -3,6 +3,8 @@
  * Manejo centralizado de reseñas (testimonios) y subida de activos a Sanity CDN.
  */
 
+import { testimonialRating } from "@/content/testimonials";
+
 export const SANITY_PROJECT_ID = process.env.SANITY_PROJECT_ID || process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "bc3zxc91";
 export const SANITY_DATASET = process.env.SANITY_DATASET || process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 export const SANITY_CDN_BASE = `https://cdn.sanity.io/images/${SANITY_PROJECT_ID}/${SANITY_DATASET}/`;
@@ -107,7 +109,7 @@ export async function getAdminReviews(): Promise<SanityReview[]> {
     project: doc.project ? String(doc.project).trim() : undefined,
     projectUrl: doc.projectUrl ? String(doc.projectUrl).trim() : undefined,
     content: String(doc.content || "").trim(),
-    rating: typeof doc.rating === "number" ? doc.rating : 5,
+    rating: testimonialRating(doc.rating),
     status: (doc.status as "pending" | "approved" | "rejected") || "pending",
     avatarUrl: doc.avatarUrl ? sanityImageUrl(String(doc.avatarUrl), { width: 160, height: 160, fit: "crop" }) : undefined,
     avatarAssetId: doc.avatarAssetId ? String(doc.avatarAssetId) : undefined,

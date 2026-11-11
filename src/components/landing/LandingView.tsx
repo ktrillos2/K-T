@@ -258,6 +258,14 @@ export function LandingView({ kind, slug, color, plan, copy, blocks, projects, p
           <Reveal className={styles.cta}>
             <h2 className="display">{l.ctaTitle}</h2>
             <p>{l.ctaText}</p>
+            {kind === "servicio" && (
+              <p>
+                {lang === "es" ? "Si tu empresa está en Cúcuta o su área metropolitana, consulta nuestra propuesta de " : "If your company is in Cúcuta or its metropolitan area, explore our "}
+                <TLink href="/desarrollo-web-cucuta" raw className={styles.localLink}>
+                  {lang === "es" ? "diseño y desarrollo web en Cúcuta" : "web design and development in Cúcuta"}
+                </TLink>.
+              </p>
+            )}
             <div className={styles.ctas}>
               <a href={wa(message)} className="btn btn--solid" target="_blank" rel="noopener noreferrer" data-stick>
                 {l.quote} <span className="arr">→</span>

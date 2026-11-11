@@ -333,6 +333,13 @@
 .cta h2 {
   font-size: clamp(30px, 4.4vw, 66px);
 }
+.localLink {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.localLink:focus-visible {
+  outline-color: currentColor;
+}
 .cta :global(.btn--solid) {
   background: #0b0b0c;
   color: #f2f2ee;

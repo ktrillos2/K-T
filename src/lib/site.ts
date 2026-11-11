@@ -33,7 +33,7 @@ export const GOOGLE_VERIFICATION = "dqsrEf4u6-TWpy3i2r3S-BJbGb7LV6J7cWob35JSKD4"
  * Va en el <lastmod> del sitemap: cámbiala solo cuando edites ese contenido. Si cambiara en cada
  * despliegue, Google dejaría de confiar en las fechas del sitemap.
  */
-export const CONTENT_UPDATED = "2026-11-09";
+export const CONTENT_UPDATED = "2026-11-11";
 
 /** Enlace de WhatsApp con mensaje prellenado. */
 export const wa = (text = "Hola K&T Code, quiero cotizar un proyecto.") =>

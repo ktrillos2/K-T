@@ -200,6 +200,11 @@
 .countrySelect:focus {
   border-color: var(--green);
 }
+.field:focus-visible,
+.countrySelect:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
+}
 .countrySelect option {
   background: #141416;
   color: #f2f2ee;
@@ -273,6 +278,19 @@
 }
 .wa:hover {
   background: #1fbe5b;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dotsAnim i {
+    animation: none;
+  }
+  .option,
+  .steps i,
+  .countrySelect {
+    transition: none;
+  }
+  .option:hover {
+    transform: none;
+  }
 }
 @media (max-width: 560px) {
   .win {

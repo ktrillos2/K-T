@@ -4,8 +4,7 @@ import type { Lang } from "@/i18n/config";
 import type { ShellLinks } from "@/lib/shellLinks";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import { TransitionProvider } from "@/components/transition/TransitionProvider";
-import { SmoothScroll } from "@/components/motion/SmoothScroll";
-import { Cursor } from "@/components/motion/Cursor";
+import { DeferredEffects } from "@/components/shell/DeferredEffects";
 import { Loader } from "@/components/shell/Loader";
 import { Nav } from "@/components/shell/Nav";
 import { StatusBar } from "@/components/shell/StatusBar";
@@ -19,7 +18,7 @@ export function AppShell({ lang, links, children }: { lang: Lang; links: ShellLi
     <I18nProvider lang={lang}>
       <TransitionProvider>
         <ThemeSync />
-        <SmoothScroll />
+        <DeferredEffects />
         <Nav />
         <main id="main" className="main">
           {children}
@@ -29,7 +28,6 @@ export function AppShell({ lang, links, children }: { lang: Lang; links: ShellLi
         <WhatsAppFloat />
         <div className="crt" aria-hidden="true" />
         <CommandPalette links={links} />
-        <Cursor />
         <Loader />
       </TransitionProvider>
     </I18nProvider>

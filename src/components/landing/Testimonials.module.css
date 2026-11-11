@@ -46,10 +46,6 @@
   font-size: 15px;
   line-height: 1.65;
 }
-.stars {
-  color: var(--yellow);
-  letter-spacing: 0.1em;
-}
 .item figcaption {
   display: flex;
   gap: 12px;

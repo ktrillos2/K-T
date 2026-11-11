@@ -1,0 +1,13 @@
+.rating {
+  position: relative;
+  display: inline-block;
+  color: var(--yellow-ink);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  overflow: hidden;
+}

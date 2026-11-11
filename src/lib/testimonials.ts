@@ -1,4 +1,4 @@
-import { TESTIMONIALS, type Testimonial } from "@/content/testimonials";
+import { TESTIMONIALS, testimonialRating, type Testimonial } from "@/content/testimonials";
 import { PROJECTS } from "./projects";
 
 /**
@@ -65,7 +65,7 @@ async function approvedFromSanity(): Promise<Testimonial[]> {
         role: d.role?.trim() || undefined,
         message: d.content!.trim(),
         date: d._createdAt?.slice(0, 10),
-        rating: typeof d.rating === "number" ? d.rating : 5,
+        rating: testimonialRating(d.rating),
         avatar: d.avatar ? `${d.avatar.split("?")[0]}?auto=format&fit=crop&w=160&h=160&q=82` : undefined,
         source: "sanity" as const,
       }));

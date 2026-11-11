@@ -21,7 +21,7 @@ const SERVICE_PATH: Record<PlanId, string> = {
 
 /** Los cuatro servicios en tarjetas simples: qué es, para quién, desde cuánto. */
 export function HomeServices() {
-  const { t, quotedAbroad } = useI18n();
+  const { t, lang, quotedAbroad } = useI18n();
   const s = t.home.services;
   return (
     <section className={cx("band", styles.section)} aria-labelledby="h-servicios">
@@ -55,6 +55,11 @@ export function HomeServices() {
         <p className={styles.pricesLink}>
           <TLink href="/precios">
             {s.pricesLink} <span aria-hidden="true">→</span>
+          </TLink>
+        </p>
+        <p className={styles.pricesLink}>
+          <TLink href="/desarrollo-web-cucuta" raw>
+            {lang === "es" ? "Diseño y desarrollo web en Cúcuta: atención local, planes y un caso de la región" : "Web design and development in Cúcuta: local service, plans and a regional project"}
           </TLink>
         </p>
         <AdsBanner inset />

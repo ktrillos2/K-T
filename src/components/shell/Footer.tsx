@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
 import { ROUTES } from "@/lib/routes";
 import { SITE, wa } from "@/lib/site";
 import { useI18n } from "@/i18n/I18nProvider";
@@ -11,10 +12,54 @@ import { CopyField } from "@/components/ui/CopyField";
 import { Logo } from "@/components/ui/Logo";
 import { TLink } from "@/components/transition/TLink";
 import { ContactWizard } from "@/components/contact/ContactWizard";
-import { BreakoutGame } from "@/components/footer/BreakoutGame";
 import { LocaleSelector } from "./LocaleSelector";
 import type { ShellLinks } from "@/lib/shellLinks";
 import styles from "./Footer.module.css";
+
+function GamePlaceholder() {
+  const { t } = useI18n();
+  return (
+    <div className={styles.gamePlaceholder} role="status">
+      {t.common.loading}
+    </div>
+  );
+}
+
+const BreakoutGame = dynamic(() => import("@/components/footer/BreakoutGame").then((m) => m.BreakoutGame), {
+  ssr: false,
+  loading: GamePlaceholder,
+});
+
+function DeferredGame() {
+  const slot = useRef<HTMLDivElement>(null);
+  const [near, setNear] = useState(false);
+
+  useEffect(() => {
+    const el = slot.current;
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) {
+      setNear(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setNear(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "320px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={slot} className={styles.gameSlot}>
+      {near ? <BreakoutGame /> : <div className={styles.gamePlaceholder} aria-hidden="true" />}
+    </div>
+  );
+}
 
 export function Footer({ links }: { links: ShellLinks }) {
   const { t } = useI18n();
@@ -65,7 +110,7 @@ export function Footer({ links }: { links: ShellLinks }) {
           </h2>
           <p className="lead">{f.game.lead}</p>
         </div>
-        <BreakoutGame />
+        <DeferredGame />
       </section>
 
       {/* Columnas */}
