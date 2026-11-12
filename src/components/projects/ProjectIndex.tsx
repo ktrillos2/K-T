@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
-import { gsap, Flip, useGSAP, prefersReducedMotion } from "@/lib/gsap";
+import { gsap, Flip, ScrollTrigger, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import type { ProjectCategory } from "@/lib/projects";
 import { COLOR_VAR } from "@/lib/routes";
 import { cx, vars } from "@/lib/utils";
@@ -26,7 +26,6 @@ export function ProjectIndex() {
   const [filter, setFilter] = useState<Filter>("todos");
   const root = useRef<HTMLElement>(null);
   const flipState = useRef<ReturnType<typeof Flip.getState> | null>(null);
-  const [hover, setHover] = useState<number | null>(null);
 
   const capture = () => {
     const els = root.current?.querySelectorAll("[data-item]");
@@ -47,12 +46,16 @@ export function ProjectIndex() {
     });
   }, [filter]);
 
-  // Entrada en cascada al hacer scroll
+  // Entrada en cascada al hacer scroll: un solo observador por lotes (no uno por tarjeta)
   useGSAP(
     () => {
       if (prefersReducedMotion()) return;
-      gsap.utils.toArray<HTMLElement>("[data-item]", root.current).forEach((el, i) => {
-        gsap.from(el, { autoAlpha: 0, y: 50, duration: 0.8, delay: (i % 3) * 0.08, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 92%", once: true } });
+      const els = gsap.utils.toArray<HTMLElement>("[data-item]", root.current);
+      gsap.set(els, { autoAlpha: 0, y: 40 });
+      ScrollTrigger.batch(els, {
+        start: "top 94%",
+        once: true,
+        onEnter: (batch) => gsap.to(batch, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.07, ease: "power3.out", overwrite: true }),
       });
     },
     { scope: root },
@@ -95,11 +98,9 @@ export function ProjectIndex() {
                   className={styles.item}
                   style={vars({ "--c": COLOR_VAR[p.color] })}
                   data-cursor={t.cursor.view}
-                  onPointerEnter={() => setHover(i)}
-                  onPointerLeave={() => setHover((h) => (h === i ? null : h))}
                 >
                   <span className={styles.thumb}>
-                    <SiteShot project={p} active={hover === i} scrollOnHover={false} />
+                    <SiteShot project={p} thumb scrollOnHover={false} sizes="(max-width: 760px) 92vw, (max-width: 1100px) 46vw, 30vw" priority={i < 3} />
                     <span className={styles.badge}>{t.projects.category[p.category]}</span>
                   </span>
                   <span className={styles.date}>{p.dateLabel}</span>

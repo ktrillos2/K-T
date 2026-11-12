@@ -86,9 +86,9 @@
   width: 60%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: var(--c);
-  opacity: 0.18;
-  filter: blur(20px);
+  /* Degradado en vez de filter: blur (con decenas de tarjetas, el blur trababa el scroll en PC). */
+  background: radial-gradient(circle, var(--c) 0%, transparent 70%);
+  opacity: 0.22;
   z-index: -1;
   transition: transform 1s var(--ease-out);
 }

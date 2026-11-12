@@ -93,9 +93,8 @@
   padding: 3px 9px;
   border-radius: 999px;
   font-size: 11px;
-  background: rgba(11, 11, 12, 0.75);
+  background: rgba(11, 11, 12, 0.85);
   color: #f2f2ee;
-  backdrop-filter: blur(6px);
 }
 .arrow {
   font-size: 16px;

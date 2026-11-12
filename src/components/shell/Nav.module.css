@@ -10,9 +10,8 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: color-mix(in srgb, var(--bg) 74%, transparent);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  /* Sin backdrop-filter: desenfocar lo de atrás en cada cuadro del scroll trababa el desplazamiento en PC. */
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
   border-bottom: 1px solid var(--line);
   opacity: 0;
   transition: opacity 0.4s;

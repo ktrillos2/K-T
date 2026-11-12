@@ -257,7 +257,7 @@ export function CaseStudy({ slug }: { slug: string }) {
                 </span>
                 <span className={`display ${styles.pagerName}`}>{x.name}</span>
                 <span className={styles.pagerThumb}>
-                  <SiteShot project={x} scrollOnHover={false} />
+                  <SiteShot project={x} thumb scrollOnHover={false} sizes="(max-width: 760px) 45vw, 22vw" />
                 </span>
               </TLink>
             ))}

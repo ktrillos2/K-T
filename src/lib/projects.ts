@@ -53,6 +53,12 @@ export type ProjectView = Project & {
   image?: string;
   /** Mejor imagen para la vista móvil: captura móvil > portada. */
   imageMobile?: string;
+  /** Imagen liviana para tarjetas y cuadrículas (recorte de la captura o portada reducida). */
+  thumb?: string;
+  /** srcset de la miniatura (solo portadas de Sanity, que se piden al tamaño justo). */
+  thumbSet?: string;
+  /** Proporción de la miniatura (ancho/alto). */
+  thumbRatio?: number;
   domain?: string;
   dateLabel: string;
   location: string;
@@ -283,6 +289,9 @@ export const PROJECTS: ProjectView[] = RAW.map((p, i) => ({
   coverRatio: coverRatio(p.slug),
   image: SHOTS.has(p.slug) ? `/shots/${p.slug}.jpg` : coverUrl(p.slug),
   imageMobile: SHOTS.has(p.slug) ? `/shots/${p.slug}-m.jpg` : coverUrl(p.slug, 900),
+  thumb: SHOTS.has(p.slug) ? `/shots/${p.slug}-card.jpg` : coverUrl(p.slug, 800),
+  thumbSet: SHOTS.has(p.slug) || !coverUrl(p.slug) ? undefined : [480, 800, 1200].map((w) => `${coverUrl(p.slug, w)} ${w}w`).join(", "),
+  thumbRatio: SHOTS.has(p.slug) ? 1.6 : coverRatio(p.slug),
   domain: domainOf(p.site),
   dateLabel: formatMonth(p.date),
   location: [p.city, p.country].filter(Boolean).join(", "),

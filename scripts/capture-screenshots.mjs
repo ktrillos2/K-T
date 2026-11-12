@@ -8,6 +8,7 @@
  * Genera en public/shots:
  *   <slug>.jpg    escritorio 1440 px de ancho, página completa (máx. 4.200 px de alto)
  *   <slug>-m.jpg  móvil 390 px de ancho a 2x, página completa (máx. 3.200 px de alto)
+ *   <slug>-card.jpg  primera pantalla en escritorio, liviana, para las tarjetas de /proyectos
  *
  * Requiere Playwright: npm i -D playwright && npx playwright install chromium
  */
@@ -73,6 +74,8 @@ async function capture({ slug, site }, vp) {
   const height = await page.evaluate(() => document.documentElement.scrollHeight);
   const file = join(out, `${slug}${vp.suffix}.jpg`);
   await page.screenshot({ path: file, type: "jpeg", quality: 72, fullPage: true, clip: { x: 0, y: 0, width: vp.width, height: Math.min(height, vp.max) } });
+  // Miniatura para tarjetas: solo la primera pantalla (decodificar la página completa en cada tarjeta trababa el scroll).
+  if (!vp.mobile) await page.screenshot({ path: join(out, `${slug}-card.jpg`), type: "jpeg", quality: 60, clip: { x: 0, y: 0, width: vp.width, height: vp.height } });
   await ctx.close();
   return file;
 }

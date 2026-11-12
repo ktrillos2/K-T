@@ -22,8 +22,8 @@ export function SmoothScroll() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const lenis = new Lenis({
       autoRaf: false,
-      // Más directo que antes (0.1): responde rápido a la rueda y frena sin "flotar".
-      lerp: reduced ? 1 : 0.16,
+      // Más directo (antes 0.16): en PC la rueda responde casi al instante y no se siente "demorado".
+      lerp: reduced ? 1 : 0.24,
       smoothWheel: !reduced,
       wheelMultiplier: 1,
       touchMultiplier: 1,

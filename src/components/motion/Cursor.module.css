@@ -16,28 +16,27 @@
   display: grid;
   place-items: center;
   transform-origin: center;
-  will-change: transform, width, height;
-  mix-blend-mode: difference;
-  border-color: #fff;
+  will-change: transform;
+  /* Sin mix-blend-mode: mezclar el cursor con toda la página obligaba a recomponerla en cada cuadro. */
+  border-color: var(--fg);
 }
 .ring[data-visible="true"],
 .dot[data-visible="true"] {
   opacity: 1;
 }
 .ring[data-mode="link"] {
-  background: rgba(255, 255, 255, 0.08);
+  background: color-mix(in srgb, var(--fg) 10%, transparent);
 }
 .ring[data-mode="label"] {
   background: #f2f2ee;
   border-color: #0b0b0c;
-  mix-blend-mode: normal;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 .ring[data-hidden="true"] {
   opacity: 0 !important;
 }
 .ring[data-mode="text"] {
-  background: #fff;
+  background: var(--fg);
 }
 .ring.down {
   border-width: 3px;
@@ -63,8 +62,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #fff;
-  mix-blend-mode: difference;
+  background: var(--fg);
 }
 .dot[data-hide="true"] {
   opacity: 0 !important;

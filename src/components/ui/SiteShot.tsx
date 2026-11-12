@@ -22,6 +22,8 @@ type Props = {
    * y centrada dentro de él.
    */
   fit?: "natural" | "frame";
+  /** Versión liviana para tarjetas de cuadrícula: miniatura recortada, sin captura de página completa. */
+  thumb?: boolean;
 };
 
 /**
@@ -31,11 +33,11 @@ type Props = {
  *    la tarjeta toma la proporción de la imagen (o se centra si el marco es fijo);
  * 3. si tampoco hay, la portada generativa con las iniciales.
  */
-export function SiteShot({ project, device = "desktop", className, scrollOnHover = true, active, priority, sizes, fit: frame = "natural" }: Props) {
-  const src = device === "mobile" ? project.imageMobile : project.image;
-  const fit = project.hasShot ? "scroll" : frame === "frame" ? "contain" : "natural";
+export function SiteShot({ project, device = "desktop", className, scrollOnHover = true, active, priority, sizes, fit: frame = "natural", thumb = false }: Props) {
+  const src = thumb ? project.thumb : device === "mobile" ? project.imageMobile : project.image;
+  const fit = project.hasShot && !thumb ? "scroll" : frame === "frame" ? "contain" : "natural";
   // Proporción conocida de antemano (sin saltos de diseño) o medida al cargar la imagen.
-  const [ratio, setRatio] = useState<number | undefined>(project.coverRatio);
+  const [ratio, setRatio] = useState<number | undefined>(thumb ? project.thumbRatio : project.coverRatio);
   const [failed, setFailed] = useState(!src);
   const [travel, setTravel] = useState(0);
   const box = useRef<HTMLDivElement>(null);
@@ -56,8 +58,8 @@ export function SiteShot({ project, device = "desktop", className, scrollOnHover
 
   useEffect(() => {
     setFailed(!src);
-    setRatio(project.coverRatio);
-  }, [src, project.coverRatio]);
+    setRatio(thumb ? project.thumbRatio : project.coverRatio);
+  }, [src, thumb, project.coverRatio, project.thumbRatio]);
 
   useEffect(() => {
     const b = box.current;
@@ -92,6 +94,7 @@ export function SiteShot({ project, device = "desktop", className, scrollOnHover
         alt={`${project.name}: ${project.summary}`}
         loading={priority ? "eager" : "lazy"}
         decoding="async"
+        srcSet={thumb ? project.thumbSet : undefined}
         sizes={sizes}
         onLoad={measure}
         onError={() => setFailed(true)}
