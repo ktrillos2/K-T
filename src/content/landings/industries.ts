@@ -158,7 +158,7 @@ const RAW: Landing[] = [
     color: "green",
     plan: "corporativo",
     serviceType: "Desarrollo web para turismo",
-    projects: ["aerolinea-santander", "estrella-de-david", "chevere-bogota-travel"],
+    projects: ["aerolinea-santander", "estrella-de-david"],
     posts: ["landing-page-vs-tienda-virtual", "como-aparecer-en-chatgpt-2026"],
     related: ["/servicios/landing-pages", "/servicios/diseno-web-corporativo", I("desarrollo-web-estetica")],
     copy: {
@@ -167,7 +167,7 @@ const RAW: Landing[] = [
         description: "Sitios para hoteles, glampings, agencias de viaje y transporte turístico: reservas directas sin comisiones de intermediarios, galerías inmersivas, varios idiomas y pagos locales.",
         eyebrow: "industrias · turismo",
         h1: "Páginas web para turismo con reservas directas",
-        lead: "Las plataformas de reservas cobran comisiones altas por cada huésped. Una web propia te permite vender directo, en varios idiomas y con pagos locales. En K&T Code construimos sitios para hoteles, agencias y transporte turístico, como los de Aerolínea Santander, Estrella de David y Chévere Bogotá Travel.",
+        lead: "Las plataformas de reservas cobran comisiones altas por cada huésped. Una web propia te permite vender directo, en varios idiomas y con pagos locales. En K&T Code construimos sitios para hoteles, agencias y transporte turístico, como los de Aerolínea Santander y Estrella de David.",
         facts: [["Reservas", "Directas"], ["Idiomas", "Español e inglés"], ["Pagos", "Locales e internacionales"], ["Galerías", "Inmersivas"]],
         includes: [
           { t: "Reservas directas", d: "Motor de reservas o cotización sin comisión de intermediarios." },

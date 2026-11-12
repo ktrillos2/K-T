@@ -102,7 +102,7 @@ export const INDUSTRIES_EN: Record<string, LandingCopy> = {
     description: "Sites for hotels, glampings, travel agencies and tourist transport: direct bookings without intermediary fees, immersive galleries, several languages and local payments.",
     eyebrow: "industries · tourism",
     h1: "Tourism websites with direct bookings",
-    lead: "Booking platforms charge high fees for every guest. Your own website lets you sell direct, in several languages and with local payments. At K&T Code we build sites for hotels, agencies and tourist transport, like those of Aerolínea Santander, Estrella de David and Chévere Bogotá Travel.",
+    lead: "Booking platforms charge high fees for every guest. Your own website lets you sell direct, in several languages and with local payments. At K&T Code we build sites for hotels, agencies and tourist transport, like those of Aerolínea Santander and Estrella de David.",
     facts: [["Bookings", "Direct"], ["Languages", "Spanish and English"], ["Payments", "Local and international"], ["Galleries", "Immersive"]],
     includes: [
       { t: "Direct bookings", d: "A booking engine or quote request with no intermediary fee." },

@@ -241,12 +241,6 @@ const RAW: Project[] = [
     pages: 6, weeks: 3, speed: { before: 45, after: 98 }, lcp: 640,
     results: ["Primeros resultados en búsquedas de spa canino en Bogotá"],
   },
-  {
-    name: "Chévere Bogotá Travel", slug: "chevere-bogota-travel", date: "2025-08", sector: "Turismo", city: "Bogotá", country: "Colombia", category: "corporativo",
-    summary: "Experiencias turísticas en Colombia, en varios idiomas.",
-    built: ["Sitio multi-idioma para turistas", "Catálogo de experiencias"],
-    tags: ["Turismo", "Multi-idioma"],
-  },
 ];
 
 const COLORS = ["red", "yellow", "green"] as const;

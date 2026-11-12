@@ -6,6 +6,8 @@ const LEGACY: [string, string][] = [
   // Proyecto retirado del portafolio.
   ["/projects/repuestos-germana", "/proyectos"],
   ["/proyectos/repuestos-germana", "/proyectos"],
+  ["/projects/chevere-bogota-travel", "/proyectos"],
+  ["/proyectos/chevere-bogota-travel", "/proyectos"],
   ["/projects", "/proyectos"],
   ["/projects/:slug", "/proyectos/:slug"],
   ["/portafolio", "/proyectos"],
