@@ -130,6 +130,14 @@
   font-size: 12px;
   color: var(--muted);
 }
+.extra .note {
+  /* Ocupa su propia línea; el texto se corta a ~70 caracteres para leerse bien. */
+  padding-right: max(0px, calc(100% - 70ch));
+  margin-bottom: 6px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--fg);
+}
 .chip {
   padding: 9px 14px;
   border-radius: 999px;

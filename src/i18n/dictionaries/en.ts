@@ -565,6 +565,7 @@ const en: Dict = {
       },
       paises: {
         title: "Web development across Latin America and the US",
+        lead: "We also work internationally: remotely with companies across Latin America, the United States and Spain, with video calls, prices in your currency and the code in your name.",
       },
       ciudades: {
         title: "Web development in Colombian cities",

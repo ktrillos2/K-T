@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getDict } from "@/i18n";
 import { langOf, type LangParams } from "@/i18n/server";
 import { localize } from "@/i18n/config";
-import { INDUSTRIES, SERVICES, landingCopy } from "@/content/landings";
+import { COUNTRY_LANDINGS, INDUSTRIES, SERVICES, landingCopy } from "@/content/landings";
 import { landingLabel } from "@/lib/landing-page";
 import { pageMeta } from "@/lib/seo";
 import { breadcrumbs, graph } from "@/lib/schema";
@@ -26,7 +26,14 @@ export default async function IndustriesHub({ params }: LangParams) {
   });
   return (
     <>
-      <LandingHub eyebrow={h.eyebrow} h1={h.h1} lead={h.lead} items={items} extra={[{ title: t.nav.services, links: SERVICES.map((g) => ({ href: g.path, label: landingLabel(g.path, lang) })) }]} />
+      <LandingHub eyebrow={h.eyebrow} h1={h.h1} lead={h.lead} items={items} extra={[
+          { title: t.nav.services, links: SERVICES.map((g) => ({ href: g.path, label: landingLabel(g.path, lang) })) },
+          {
+            title: t.landing.hubs.paises.title,
+            note: t.landing.hubs.paises.lead,
+            links: COUNTRY_LANDINGS.map((g) => ({ href: g.path, label: lang === "en" ? g.country!.nameEn : g.country!.name })),
+          },
+        ]} />
       <JsonLd
         data={graph(breadcrumbs(lang, [{ name: t.nav.industries, path: "/industrias" }]), {
           "@type": "ItemList",

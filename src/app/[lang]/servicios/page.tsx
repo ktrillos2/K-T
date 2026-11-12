@@ -3,7 +3,7 @@ import { getDict } from "@/i18n";
 import { shellLinks } from "@/lib/shellLinks";
 import { langOf, type LangParams } from "@/i18n/server";
 import { localize } from "@/i18n/config";
-import { CITY_LANDINGS, INDUSTRIES, SERVICES, landingCopy, landingLangs, type Landing } from "@/content/landings";
+import { CITY_LANDINGS, COUNTRY_LANDINGS, INDUSTRIES, SERVICES, landingCopy, landingLangs, type Landing } from "@/content/landings";
 import { landingLabel } from "@/lib/landing-page";
 import { pageMeta } from "@/lib/seo";
 import { breadcrumbs, graph } from "@/lib/schema";
@@ -36,6 +36,14 @@ export default async function ServicesHub({ params }: LangParams) {
         extra={[
           { title: t.nav.pricing, links: shellLinks(lang).guides },
           { title: t.nav.industries, links: published(INDUSTRIES).map((g) => ({ href: g.path, label: landingLabel(g.path, lang) })) },
+          {
+            title: t.landing.hubs.paises.title,
+            note: t.landing.hubs.paises.lead,
+            links: [
+              ...published(COUNTRY_LANDINGS).map((g) => ({ href: g.path, label: lang === "en" ? g.country!.nameEn : g.country!.name })),
+              { href: "/blog/cuanto-cuesta-una-pagina-web-latinoamerica", label: lang === "en" ? "Prices across Latin America" : "Precios en Latinoamérica" },
+            ],
+          },
           { title: t.landing.hubs.ciudades.title, links: published(CITY_LANDINGS).map((g) => ({ href: g.path, label: g.city!.name })) },
         ].filter((group) => group.links.length > 0)}
       />

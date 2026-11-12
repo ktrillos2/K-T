@@ -565,6 +565,7 @@ const es = {
       },
       paises: {
         title: "Desarrollo web en Latinoamérica y EE. UU.",
+        lead: "Trabajamos también de forma internacional: en remoto con empresas de toda Latinoamérica, Estados Unidos y España, con reuniones por videollamada, precios en tu moneda y el código a tu nombre.",
       },
       ciudades: {
         title: "Desarrollo web en ciudades de Colombia",

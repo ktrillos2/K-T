@@ -10,6 +10,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Scramble } from "@/components/motion/Scramble";
 import { TLink } from "@/components/transition/TLink";
 import { Price } from "@/components/ui/Price";
+import { Inline } from "@/components/blog/Inline";
 import styles from "./LandingHub.module.css";
 
 export type HubItem = { href: string; label: string; text: string; color: "red" | "yellow" | "green"; plan?: PlanId; meta?: string };
@@ -19,7 +20,7 @@ type Props = {
   h1: string;
   lead: string;
   items: HubItem[];
-  extra?: { title: string; links: { href: string; label: string }[] }[];
+  extra?: { title: string; note?: string; links: { href: string; label: string }[] }[];
 };
 
 /** Índice de servicios o industrias: tarjetas con su precio de partida en la moneda del visitante. */
@@ -58,7 +59,7 @@ export function LandingHub({ eyebrow, h1, lead, items, extra = [] }: Props) {
                           {!quotedAbroad(plan) && t.price.from} <strong>{<Price cop={plan.from} />}</strong>
                         </span>
                       ) : (
-                        <span>{it.meta}</span>
+                        <span>{it.meta && <Inline text={it.meta} />}</span>
                       )}
                       <span className={styles.arrow} aria-hidden="true">
                         →
@@ -72,6 +73,7 @@ export function LandingHub({ eyebrow, h1, lead, items, extra = [] }: Props) {
           {extra.map((g) => (
             <nav key={g.title} className={styles.extra} aria-label={g.title}>
               <p>{g.title}</p>
+              {g.note && <p className={styles.note}>{g.note}</p>}
               {g.links.map((l) => (
                 <TLink key={l.href} href={l.href} className={styles.chip}>
                   {l.label} →
