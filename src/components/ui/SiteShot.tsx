@@ -34,10 +34,13 @@ type Props = {
  * 3. si tampoco hay, la portada generativa con las iniciales.
  */
 export function SiteShot({ project, device = "desktop", className, scrollOnHover = true, active, priority, sizes, fit: frame = "natural", thumb = false }: Props) {
-  const src = thumb ? project.thumb : device === "mobile" ? project.imageMobile : project.image;
-  const fit = project.hasShot && !thumb ? "scroll" : frame === "frame" ? "contain" : "natural";
+  // En miniatura, la captura completa se pide solo al pasar el cursor (para el recorrido de la página).
+  const [full, setFull] = useState(false);
+  const light = thumb && !(full && project.hasShot);
+  const src = light ? project.thumb : device === "mobile" ? project.imageMobile : project.image;
+  const fit = project.hasShot && !light ? "scroll" : frame === "frame" ? "contain" : "natural";
   // Proporción conocida de antemano (sin saltos de diseño) o medida al cargar la imagen.
-  const [ratio, setRatio] = useState<number | undefined>(thumb ? project.thumbRatio : project.coverRatio);
+  const [ratio, setRatio] = useState<number | undefined>(light ? project.thumbRatio : project.coverRatio);
   const [failed, setFailed] = useState(!src);
   const [travel, setTravel] = useState(0);
   const box = useRef<HTMLDivElement>(null);
@@ -58,8 +61,8 @@ export function SiteShot({ project, device = "desktop", className, scrollOnHover
 
   useEffect(() => {
     setFailed(!src);
-    setRatio(thumb ? project.thumbRatio : project.coverRatio);
-  }, [src, thumb, project.coverRatio, project.thumbRatio]);
+    setRatio(light ? project.thumbRatio : project.coverRatio);
+  }, [src, light, project.coverRatio, project.thumbRatio]);
 
   useEffect(() => {
     const b = box.current;
@@ -82,6 +85,7 @@ export function SiteShot({ project, device = "desktop", className, scrollOnHover
       ref={box}
       className={cx(styles.box, scrollOnHover && styles.hoverable, active && styles.active, className)}
       data-fit={fit}
+      onPointerEnter={thumb && project.hasShot && scrollOnHover ? () => setFull(true) : undefined}
       style={vars({ "--travel": `${-travel}px`, "--dur": `${Math.max(2.5, travel / 260)}s`, ...(fit === "natural" && ratio ? { "--ratio": ratio.toFixed(4) } : {}) })}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -94,7 +98,7 @@ export function SiteShot({ project, device = "desktop", className, scrollOnHover
         alt={`${project.name}: ${project.summary}`}
         loading={priority ? "eager" : "lazy"}
         decoding="async"
-        srcSet={thumb ? project.thumbSet : undefined}
+        srcSet={light ? project.thumbSet : undefined}
         sizes={sizes}
         onLoad={measure}
         onError={() => setFailed(true)}

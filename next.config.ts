@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 /** URLs del sitio anterior → nuevas rutas (301/308 permanentes para conservar el posicionamiento). */
 const LEGACY: [string, string][] = [
   ["/projects/aerolinea-Santander", "/proyectos/aerolinea-santander"],
+  // Proyecto retirado del portafolio.
+  ["/projects/repuestos-germana", "/proyectos"],
+  ["/proyectos/repuestos-germana", "/proyectos"],
   ["/projects", "/proyectos"],
   ["/projects/:slug", "/proyectos/:slug"],
   ["/portafolio", "/proyectos"],

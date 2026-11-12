@@ -5,8 +5,6 @@
  * - Por defecto se cargan desde cdn.sanity.io con el tamaño y formato que pide cada vista.
  * - `npm run covers` las descarga a public/projects/<slug>.webp. Si luego defines
  *   NEXT_PUBLIC_LOCAL_COVERS=1, el sitio usa esas copias locales y no depende de Sanity.
- * - Repuestos Germana estaba alojada en el dominio viejo (/images/projects/repuestos.webp):
- *   solo existe en local, así que ejecuta `npm run covers` ANTES de publicar el sitio nuevo.
  */
 const SANITY = "https://cdn.sanity.io/images/bc3zxc91/production/";
 
@@ -32,7 +30,6 @@ export const COVERS: Record<string, string> = {
   brahneyker: `${SANITY}3c1573cfaf6b6d3995254efca1190428db0cf50d-1024x556.png`,
   "estrella-de-david": `${SANITY}97d2c128d8adb1d22c3ece9ed0d95981315d02e7-1024x553.png`,
   "san-roqueros": `${SANITY}ffdaf821106ef8e89ea0f4451c51963669e4ef73-1024x558.png`,
-  "repuestos-germana": `${SANITY}437bd1f2654a9252252e9a4a98d618c46f9ca2f4-1024x1024.jpg`,
 };
 
 /** Portadas legacy con fallback si fuera necesario. */

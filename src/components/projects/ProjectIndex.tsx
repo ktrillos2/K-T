@@ -100,7 +100,7 @@ export function ProjectIndex() {
                   data-cursor={t.cursor.view}
                 >
                   <span className={styles.thumb}>
-                    <SiteShot project={p} thumb scrollOnHover={false} sizes="(max-width: 760px) 92vw, (max-width: 1100px) 46vw, 30vw" priority={i < 3} />
+                    <SiteShot project={p} thumb sizes="(max-width: 760px) 92vw, (max-width: 1100px) 46vw, 30vw" priority={i < 3} />
                     <span className={styles.badge}>{t.projects.category[p.category]}</span>
                   </span>
                   <span className={styles.date}>{p.dateLabel}</span>

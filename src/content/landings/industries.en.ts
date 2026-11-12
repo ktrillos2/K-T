@@ -124,7 +124,7 @@ export const INDUSTRIES_EN: Record<string, LandingCopy> = {
     description: "Catalogs and stores for the automotive sector: search by make, model and year, spec sheets, spare-part quotes, vehicle marketplaces and contact with sales reps on WhatsApp.",
     eyebrow: "industries · automotive",
     h1: "Automotive websites that find the right part",
-    lead: "In the automotive sector the customer looks for something very specific: a part by reference, a vehicle by model or a repair service. At K&T Code we build catalogs with search by make, model, year and part number, spec sheets and direct contact with reps, like those of Repuestos Germana, OCC Partes, Motofox and Auto Saldo.",
+    lead: "In the automotive sector the customer looks for something very specific: a part by reference, a vehicle by model or a repair service. At K&T Code we build catalogs with search by make, model, year and part number, spec sheets and direct contact with reps, like those of OCC Partes, Motofox and Auto Saldo.",
     facts: [["Search", "Make, model, part no."], ["Sheets", "Technical"], ["Quotes", "WhatsApp"], ["Cases", "4 projects"]],
     includes: [
       { t: "Search by reference", d: "Part number, make, model and year." },

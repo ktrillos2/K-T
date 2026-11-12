@@ -5,7 +5,6 @@
  *   npm run covers
  *
  * - Las de Sanity (cdn.sanity.io) se piden ya en WebP a 1600 px.
- * - Repuestos Germana solo existía en el dominio viejo: descárgala ANTES de publicar el sitio nuevo.
  * Después puedes poner NEXT_PUBLIC_LOCAL_COVERS=1 (en .env.local / Vercel) para servir todas
  * desde tu propio dominio y no depender de Sanity.
  */

@@ -86,14 +86,6 @@ const RAW: Project[] = [
     results: ["Carga de 4.9 s a 0.59 s"],
   },
   {
-    name: "Repuestos Germana", slug: "repuestos-germana", site: "https://repuestosgermana.com", date: "2026-09", sector: "Repuestos y taller automotriz premium", city: "Bogotá", country: "Colombia", category: "ecommerce",
-    summary: "Portal de repuestos y servicio automotriz especializado que reemplazó un sitio lento y desactualizado.",
-    built: ["Catálogo estructurado de repuestos y servicios de taller", "Interfaz moderna y adaptada a cualquier pantalla", "Canal directo con asesores por WhatsApp Business", "Optimización de velocidad en móvil y escritorio", "Acompañamiento en marketing digital"],
-    tags: ["Repuestos", "Catálogo", "WhatsApp"],
-    pages: 6, weeks: 4, speed: { before: 34, after: 97 }, lcp: 630,
-    results: ["Carga de 5,1 s a 0,63 s", "Solicitudes dirigidas a taller en Bogotá y repuestos a nivel nacional"],
-  },
-  {
     name: "CXellence Group", slug: "cxellence-group", site: "https://www.cxellence.co", date: "2026-05", sector: "Consultoría en experiencia del cliente", city: "Bogotá", country: "Colombia", category: "corporativo", featured: 3,
     summary: "Portal corporativo B2B que une las cuatro divisiones del grupo en una sola experiencia.",
     built: ["Portal que unifica Inspire, Insights, Improve e Institute", "Diseño oscuro con los colores institucionales", "Microinteracciones y transiciones suaves", "SEO semántico para palabras clave B2B", "Datos estructurados de programas y certificaciones"],

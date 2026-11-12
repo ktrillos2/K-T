@@ -193,7 +193,7 @@ const RAW: Landing[] = [
     color: "red",
     plan: "tienda",
     serviceType: "Desarrollo web automotriz",
-    projects: ["repuestos-germana", "motofox", "occ-partes", "autos-saldo"],
+    projects: ["motofox", "occ-partes", "autos-saldo"],
     posts: ["cuanto-cuesta-una-tienda-virtual-en-colombia-2026", "como-crear-una-tienda-online-desde-cero"],
     related: ["/servicios/tiendas-virtuales", I("ecommerce-b2b"), "/servicios/software-a-medida"],
     copy: {
@@ -202,7 +202,7 @@ const RAW: Landing[] = [
         description: "Catálogos y tiendas para el sector automotriz: búsqueda por marca, modelo y año, fichas técnicas, cotización de repuestos, marketplaces de vehículos y contacto con asesores por WhatsApp.",
         eyebrow: "industrias · automotriz",
         h1: "Páginas web automotrices que encuentran la pieza correcta",
-        lead: "En el sector automotriz el cliente busca algo muy específico: un repuesto por referencia, un vehículo por modelo o un servicio de taller. En K&T Code construimos catálogos con búsqueda por marca, modelo, año y número de parte, fichas técnicas y contacto directo con asesores, como los de Repuestos Germana, OCC Partes, Motofox y Auto Saldo.",
+        lead: "En el sector automotriz el cliente busca algo muy específico: un repuesto por referencia, un vehículo por modelo o un servicio de taller. En K&T Code construimos catálogos con búsqueda por marca, modelo, año y número de parte, fichas técnicas y contacto directo con asesores, como los de OCC Partes, Motofox y Auto Saldo.",
         facts: [["Búsqueda", "Marca, modelo, referencia"], ["Fichas", "Técnicas"], ["Cotización", "WhatsApp"], ["Casos", "4 proyectos"]],
         includes: [
           { t: "Búsqueda por referencia", d: "Número de parte, marca, modelo y año." },
