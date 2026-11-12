@@ -10,7 +10,7 @@ export type { Dict };
 export const getDict = (lang: Lang): Dict => (lang === "en" ? en : es);
 
 /** Proyecto con sus textos en el idioma pedido (el inglés cae al español si falta). */
-const COUNTRY_EN: Record<string, string> = { Colombia: "Colombia", México: "Mexico", Perú: "Peru" };
+const COUNTRY_EN: Record<string, string> = { Colombia: "Colombia", México: "Mexico", Perú: "Peru", "Estados Unidos": "United States" };
 
 /** Fecha "YYYY-MM" como "mes año" en el idioma pedido. */
 export const monthLabel = (yyyyMm: string, lang: Lang, long = false) =>

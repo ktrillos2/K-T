@@ -66,6 +66,18 @@ export type ProjectView = Project & {
 
 const RAW: Project[] = [
   {
+    name: "Los Elegidos Colombia", slug: "los-elegidos-colombia", site: "https://www.loselegidoscolombia.com", date: "2026-11", sector: "Consultoría estratégica, BI y automatización para pymes", country: "Colombia", category: "corporativo",
+    summary: "Sitio corporativo de una consultora para pymes que explica su método, sus servicios y lleva a solicitar un diagnóstico.",
+    built: ["Presentación del método y de las 5 líneas de servicio", "Sección de diagnóstico con los problemas más comunes de las pymes", "Panel gerencial animado como muestra de su servicio de BI", "Página de DataWorld", "Contacto directo por WhatsApp"],
+    tags: ["Sitio corporativo", "Consultoría", "Diagnóstico"],
+  },
+  {
+    name: "ECG Construction", slug: "ecg-construction", site: "https://www.ecgcowa.com/es", date: "2026-10", sector: "Construcción, concreto y pisos epóxicos", city: "Snohomish, WA", country: "Estados Unidos", category: "corporativo",
+    summary: "Sitio bilingüe para un contratista de Washington, con páginas por servicio y por ciudad para conseguir estimados en el norte del estado.",
+    built: ["Versión en inglés y en español", "Páginas por servicio: concreto, pulido, epoxy, asfalto, excavación y mantenimiento", "Páginas por ciudad para SEO local (13 zonas de servicio)", "Galería de proyectos", "Solicitud de estimado gratis y llamada directa"],
+    tags: ["Sitio corporativo", "Bilingüe", "SEO local"],
+  },
+  {
     name: "KAILAB", slug: "kailab", site: "https://kailab.com.co", date: "2026-10", sector: "Tienda de péptidos para investigación", country: "Colombia", category: "ecommerce",
     summary: "Tienda virtual bilingüe con catálogo por categorías, certificados de laboratorio verificables por lote y guías de preparación en cada producto.",
     built: ["Catálogo por categorías con presentaciones y buscador", "Certificados de análisis publicados por lote, con enlace para verificarlos", "Guía de preparación con video y calculadora de unidades por producto", "Carrito y pagos con Wompi y USDT", "Versión en español e inglés"],
