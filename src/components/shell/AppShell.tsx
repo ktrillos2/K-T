@@ -26,7 +26,6 @@ export function AppShell({ lang, links, children }: { lang: Lang; links: ShellLi
         <Footer links={links} />
         <StatusBar />
         <WhatsAppFloat />
-        <div className="crt" aria-hidden="true" />
         <CommandPalette links={links} />
         <Loader />
       </TransitionProvider>

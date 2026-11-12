@@ -316,20 +316,6 @@ html.has-cursor button {
   cursor: none;
 }
 
-/* Scanlines CRT muy sutiles sobre todo el sitio */
-.crt {
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.16) 0 1px, transparent 1px 3px);
-  opacity: 0.16;
-  contain: strict;
-}
-:root[data-theme="light"] .crt {
-  opacity: 0.08;
-}
-
 /* Transición de tema con View Transitions */
 ::view-transition-old(root),
 ::view-transition-new(root) {

@@ -19,12 +19,12 @@ import { live, store } from "@/lib/store";
  */
 export function SmoothScroll() {
   useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const lenis = new Lenis({
       autoRaf: false,
-      // Más directo (antes 0.16): en PC la rueda responde casi al instante y no se siente "demorado".
-      lerp: reduced ? 1 : 0.24,
-      smoothWheel: !reduced,
+      // Scroll nativo del navegador: corre en su propio hilo y no se traba aunque la página esté ocupada.
+      // (El suavizado por JavaScript se sentía lento en PC.) Lenis queda solo para anclas y ScrollTrigger.
+      lerp: 1,
+      smoothWheel: false,
       wheelMultiplier: 1,
       touchMultiplier: 1,
       syncTouch: false,
