@@ -84,7 +84,7 @@ export function BlogIndex() {
     <section ref={root} className={styles.page} aria-labelledby="h-blog">
       <header className={cx("wrap", styles.head)} data-hero="">
         <p className={styles.eyebrow}>
-          <span>{"//"}</span> <Scramble trigger="enter" text={b.path} />
+          <span>●</span> <Scramble trigger="enter" text={b.path} />
         </p>
         <SplitTitle as="h1" id="h-blog" mode="enter" className="h-hero" tabIndex={-1}>
           {b.title}

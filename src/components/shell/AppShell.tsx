@@ -7,7 +7,7 @@ import { TransitionProvider } from "@/components/transition/TransitionProvider";
 import { DeferredEffects } from "@/components/shell/DeferredEffects";
 import { Loader } from "@/components/shell/Loader";
 import { Nav } from "@/components/shell/Nav";
-import { StatusBar } from "@/components/shell/StatusBar";
+import { MobileCta } from "@/components/shell/MobileCta";
 import { CommandPalette } from "@/components/shell/CommandPalette";
 import { Footer } from "@/components/shell/Footer";
 import { ThemeSync } from "@/components/shell/ThemeSync";
@@ -24,7 +24,7 @@ export function AppShell({ lang, links, children }: { lang: Lang; links: ShellLi
           {children}
         </main>
         <Footer links={links} />
-        <StatusBar />
+        <MobileCta />
         <WhatsAppFloat />
         <CommandPalette links={links} />
         <Loader />

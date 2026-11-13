@@ -15,7 +15,7 @@ export function ProjectsHero() {
     <section className={styles.hero} aria-labelledby="h-proyectos" data-hero="">
       <div className="wrap">
         <p className={styles.eyebrow}>
-          <span className={styles.slash}>{"//"}</span> <Scramble trigger="enter" text={h.eyebrow} />
+          <span className={styles.slash}>●</span> <Scramble trigger="enter" text={h.eyebrow} />
         </p>
         <SplitTitle as="h1" id="h-proyectos" mode="enter" className="h-hero" tabIndex={-1}>
           {h.title(PROJECTS.length)}

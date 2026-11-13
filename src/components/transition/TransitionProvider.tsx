@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { gsap, ScrollTrigger, EASE_INOUT, SCRAMBLE_CHARS, prefersReducedMotion } from "@/lib/gsap";
+import { gsap, ScrollTrigger, EASE_INOUT, prefersReducedMotion } from "@/lib/gsap";
 import { COLOR_VAR, metaFor, normalizePath, routeFromPath, type Variant } from "@/lib/routes";
 import { pageLabel } from "@/lib/page-label";
 import { live, store } from "@/lib/store";
@@ -132,12 +132,12 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
         });
         tl.to(bar, { scaleX: 1, duration: 0.25, ease: "power2.out" })
           .fromTo(line2, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.25 }, "<")
-          .to(term, { autoAlpha: 0, y: -24, duration: 0.35, ease: "power2.in" }, "+=0.18")
+          .to(term, { autoAlpha: 0, y: -16, duration: 0.2, ease: "power2.in" }, "+=0.02")
           .add(() => {
             // La página empieza su entrada mientras los paneles salen.
             store.enter();
           }, "<0.1")
-          .to([...panels].reverse(), { ...out, duration: 0.75, ease: EASE_INOUT, stagger: 0.07 }, "<");
+          .to([...panels].reverse(), { ...out, duration: 0.45, ease: EASE_INOUT, stagger: 0.04 }, "<");
       }),
     );
   }, [finish, place]);
@@ -188,16 +188,15 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
       tl.fromTo(
         panels,
         { clipPath: `circle(0px at ${x}px ${y}px)` },
-        { clipPath: `circle(${radius}px at ${x}px ${y}px)`, duration: 0.8, ease: EASE_INOUT, stagger: 0.08 },
+        { clipPath: `circle(${radius}px at ${x}px ${y}px)`, duration: 0.45, ease: EASE_INOUT, stagger: 0.04 },
       );
     } else if (variant === "side") {
-      tl.fromTo(panels, { xPercent: -100 * dir, yPercent: 0 }, { xPercent: 0, duration: 0.7, ease: EASE_INOUT, stagger: 0.07 });
+      tl.fromTo(panels, { xPercent: -100 * dir, yPercent: 0 }, { xPercent: 0, duration: 0.4, ease: EASE_INOUT, stagger: 0.04 });
     } else {
-      tl.fromTo(panels, { yPercent: 100 * dir }, { yPercent: 0, duration: 0.7, ease: EASE_INOUT, stagger: 0.07 });
+      tl.fromTo(panels, { yPercent: 100 * dir }, { yPercent: 0, duration: 0.4, ease: EASE_INOUT, stagger: 0.04 });
     }
-    tl.fromTo(term, { autoAlpha: 0, y: 24 * dir }, { autoAlpha: 1, y: 0, duration: 0.4 }, "-=0.35")
-      .fromTo(bar, { scaleX: 0 }, { scaleX: 0.7, duration: 0.5, ease: "power1.inOut" }, "<")
-      .to(name, { duration: 0.55, scrambleText: { text: label, chars: SCRAMBLE_CHARS, speed: 0.9, revealDelay: 0.1 } }, "<");
+    // Transición corta: el nombre de la página aparece tal cual, sin efecto de "compilación".
+    tl.fromTo(term, { autoAlpha: 0, y: 16 * dir }, { autoAlpha: 1, y: 0, duration: 0.25 }, "-=0.25").fromTo(bar, { scaleX: 0 }, { scaleX: 0.7, duration: 0.3, ease: "power1.inOut" }, "<");
   }, [finish, reveal]);
 
   const navigate = useCallback(

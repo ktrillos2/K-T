@@ -1,0 +1,33 @@
+.bar {
+  display: none;
+}
+@media (max-width: 760px) {
+  .bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 80;
+    display: block;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: color-mix(in srgb, var(--bg) 96%, transparent);
+    border-top: 1px solid var(--line);
+    transform: translateY(110%);
+    transition: transform 0.4s var(--ease-out);
+  }
+  .bar[data-show="true"] {
+    transform: none;
+  }
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 48px;
+    border-radius: 12px;
+    background: #25d366;
+    color: #06260f;
+    font-weight: 600;
+    font-size: 15.5px;
+  }
+}

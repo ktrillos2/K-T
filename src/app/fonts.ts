@@ -1,5 +1,5 @@
 import localFont from "next/font/local";
-import { Fira_Code } from "next/font/google";
+import { Inter } from "next/font/google";
 
 /** Fuente principal (pixel). Subconjunto WOFF con latín, español, flechas y bloques. */
 export const ari = localFont({
@@ -11,10 +11,9 @@ export const ari = localFont({
   adjustFontFallback: false,
 });
 
-/** Fuente secundaria: textos, código y UI pequeña. */
-export const fira = Fira_Code({
+/** Fuente de lectura: textos, botones y UI. Limpia y cercana; la pixel queda solo para títulos. */
+export const sans = Inter({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600"],
-  variable: "--font-fira",
+  variable: "--font-sans",
   display: "swap",
 });

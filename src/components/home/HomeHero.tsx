@@ -5,7 +5,7 @@ import { useI18n } from "@/i18n/I18nProvider";
 import { SplitTitle } from "@/components/motion/SplitTitle";
 import { Reveal } from "@/components/motion/Reveal";
 import { Counter } from "@/components/motion/Counter";
-import { HeroArt } from "@/components/ui/HeroArt";
+import { HeroDemo } from "./HeroDemo";
 import { TLink } from "@/components/transition/TLink";
 import styles from "./HomeHero.module.css";
 
@@ -37,7 +37,7 @@ export function HomeHero() {
             </TLink>
           </div>
         </div>
-        <HeroArt className={styles.stage} chips={h.chips} label={h.stageLabel} />
+        <HeroDemo className={styles.stage} />
       </div>
 
       <div className="wrap">

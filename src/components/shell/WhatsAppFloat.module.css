@@ -277,3 +277,10 @@
     transform: none;
   }
 }
+
+/* En celular el contacto va en la barra fija inferior (MobileCta). */
+@media (max-width: 760px) {
+  .root {
+    display: none;
+  }
+}

@@ -55,7 +55,7 @@ export function ReviewForm() {
     <section id="dejar-resena" className={`wrap ${styles.wrap}`} aria-labelledby="h-review-form">
       <div className={styles.copy}>
         <p className={styles.path}>
-          <span>{"//"}</span> {f.path}
+          <span>●</span> {f.path}
         </p>
         <h2 id="h-review-form" className={`display ${styles.title}`}>
           {f.title}

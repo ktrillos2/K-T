@@ -32,7 +32,7 @@ export function LandingHub({ eyebrow, h1, lead, items, extra = [] }: Props) {
       <header className={styles.hero} data-hero="">
         <div className="wrap">
           <p className={styles.eyebrow}>
-            <span>{"//"}</span> <Scramble trigger="enter" text={eyebrow} />
+            <span>●</span> <Scramble trigger="enter" text={eyebrow} />
           </p>
           <SplitTitle as="h1" mode="enter" className="h-hero" tabIndex={-1}>
             {h1}

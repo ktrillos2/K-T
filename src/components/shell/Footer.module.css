@@ -83,10 +83,9 @@
   min-width: 0;
 }
 .gamePlaceholder {
-  aspect-ratio: 880 / 520;
+  height: clamp(300px, 46vh, 420px);
   display: grid;
   place-items: center;
-  margin-block: 24px 44px;
   border: 1px solid var(--line-2);
   border-radius: 14px;
   background: var(--surface);

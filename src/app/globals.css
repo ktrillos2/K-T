@@ -23,7 +23,9 @@
   --green-ink: #62c453;
 
   --display: var(--font-ari), "Courier New", ui-monospace, monospace;
-  --mono: var(--font-fira), ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  /* --mono es la fuente de lectura de todo el sitio (el nombre viene de cuando era monoespaciada). */
+  --mono: var(--font-sans), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --code: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
   --ease: cubic-bezier(0.76, 0, 0.24, 1);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -31,7 +33,8 @@
   --gut-l: max(20px, env(safe-area-inset-left, 0px));
   --gut-r: max(20px, env(safe-area-inset-right, 0px));
   --nav-h: 68px;
-  --status-h: 28px;
+  /* Alto de la barra fija inferior: solo existe en celular (botón de WhatsApp). */
+  --status-h: 0px;
   --radius: 14px;
 
   color-scheme: dark;
@@ -88,7 +91,6 @@ body {
   font-family: var(--mono);
   font-size: 15px;
   line-height: 1.65;
-  font-feature-settings: "calt" 1, "liga" 1;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
   transition: background-color 0.6s var(--ease-out), color 0.6s var(--ease-out);
@@ -336,5 +338,12 @@ html.has-cursor button {
     animation-iteration-count: 1 !important;
     transition-delay: 0ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* En celular hay una barra fija inferior con el botón de WhatsApp (MobileCta). */
+@media (max-width: 760px) {
+  :root {
+    --status-h: 68px;
   }
 }

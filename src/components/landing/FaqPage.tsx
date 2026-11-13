@@ -28,7 +28,7 @@ export function FaqPage({ groups }: { groups: FaqGroup[] }) {
       <header className={styles.hero} data-hero="">
         <div className="wrap">
           <p className={styles.eyebrow}>
-            <span>{"//"}</span> <Scramble trigger="enter" text={c.eyebrow} />
+            <span>●</span> <Scramble trigger="enter" text={c.eyebrow} />
           </p>
           <SplitTitle as="h1" mode="enter" className="h-hero" tabIndex={-1}>
             {c.h1}

@@ -25,7 +25,7 @@ function GamePlaceholder() {
   );
 }
 
-const BreakoutGame = dynamic(() => import("@/components/footer/BreakoutGame").then((m) => m.BreakoutGame), {
+const BuildGame = dynamic(() => import("@/components/footer/BuildGame").then((m) => m.BuildGame), {
   ssr: false,
   loading: GamePlaceholder,
 });
@@ -56,7 +56,7 @@ function DeferredGame() {
 
   return (
     <div ref={slot} className={styles.gameSlot}>
-      {near ? <BreakoutGame /> : <div className={styles.gamePlaceholder} aria-hidden="true" />}
+      {near ? <BuildGame /> : <div className={styles.gamePlaceholder} aria-hidden="true" />}
     </div>
   );
 }
@@ -72,7 +72,7 @@ export function Footer({ links }: { links: ShellLinks }) {
       {/* Contacto conversacional (reemplaza al antiguo "¿Hacemos git init?") */}
       <section id="contacto" className="wrap" aria-labelledby="contact-title">
         <p className={styles.path}>
-          <span>{"//"}</span> {c.path}
+          <span>●</span> {c.path}
         </p>
         <SplitTitle as="h2" id="contact-title" className={styles.title}>
           {c.title}
@@ -103,7 +103,7 @@ export function Footer({ links }: { links: ShellLinks }) {
       <section className={`wrap ${styles.gameRow}`} aria-labelledby="game-title">
         <div className={styles.gameCopy}>
           <p className={styles.path}>
-            <span>{"//"}</span> game.exe
+            <span>●</span> {f.game.path}
           </p>
           <h2 id="game-title" className={`display ${styles.gameTitle}`}>
             {f.game.title}

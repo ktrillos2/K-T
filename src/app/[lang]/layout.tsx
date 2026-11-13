@@ -2,7 +2,7 @@ import { Analytics } from "@/components/analytics/Analytics";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import "../globals.css";
-import { ari, fira } from "../fonts";
+import { ari, sans } from "../fonts";
 import { LOCALES, isLang, type Lang } from "@/i18n/config";
 import { getDict } from "@/i18n";
 import { GOOGLE_VERIFICATION, SITE } from "@/lib/site";
@@ -91,7 +91,7 @@ export default async function RootLayout({ children, params }: { children: React
   const { lang } = await params;
   if (!isLang(lang)) notFound();
   return (
-    <html lang={lang === "en" ? "en" : "es-CO"} data-theme="dark" className={`${ari.variable} ${fira.variable}`} suppressHydrationWarning>
+    <html lang={lang === "en" ? "en" : "es-CO"} data-theme="dark" className={`${ari.variable} ${sans.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="LLMs.txt" />

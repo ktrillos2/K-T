@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { ari, fira } from "../fonts";
+import { ari, sans } from "../fonts";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export const viewport: Viewport = {
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${ari.variable} ${fira.variable}`} style={{ colorScheme: "dark" }}>
+    <html lang="es" className={`${ari.variable} ${sans.variable}`} style={{ colorScheme: "dark" }}>
       <body
         style={{
           margin: 0,

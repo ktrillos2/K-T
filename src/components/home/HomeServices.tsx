@@ -52,6 +52,7 @@ export function HomeServices() {
             );
           })}
         </Reveal>
+        <AdsBanner inset />
         <p className={styles.pricesLink}>
           <TLink href="/precios">
             {s.pricesLink} <span aria-hidden="true">→</span>
@@ -62,7 +63,6 @@ export function HomeServices() {
             {lang === "es" ? "Diseño y desarrollo web en Cúcuta: atención local, planes y un caso de la región" : "Web design and development in Cúcuta: local service, plans and a regional project"}
           </TLink>
         </p>
-        <AdsBanner inset />
         <Reveal className={styles.more}>
           <TLink href="/servicios" className="btn btn--ghost" data-stick>
             {s.all} <span className="arr">→</span>

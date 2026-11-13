@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Marquee } from "@/components/motion/Marquee";
 import { HomeHero } from "@/components/home/HomeHero";
 import { HomeServices } from "@/components/home/HomeServices";
+import { WhyUs } from "@/components/home/WhyUs";
 import { FeaturedStack } from "@/components/home/FeaturedStack";
 import { Reviews } from "@/components/home/Reviews";
 import { QuickFacts } from "@/components/home/QuickFacts";
@@ -28,6 +29,7 @@ export default async function HomePage({ params }: LangParams) {
       <HomeHero />
       <Marquee items={t.home.values} label={t.home.valuesLabel} speed={1} />
       <HomeServices />
+      <WhyUs />
       <FeaturedStack />
       <Reviews reviews={reviews} />
       <QuickFacts />
