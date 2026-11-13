@@ -25,7 +25,7 @@ function GamePlaceholder() {
   );
 }
 
-const BuildGame = dynamic(() => import("@/components/footer/BuildGame").then((m) => m.BuildGame), {
+const BreakoutGame = dynamic(() => import("@/components/footer/BreakoutGame").then((m) => m.BreakoutGame), {
   ssr: false,
   loading: GamePlaceholder,
 });
@@ -56,7 +56,7 @@ function DeferredGame() {
 
   return (
     <div ref={slot} className={styles.gameSlot}>
-      {near ? <BuildGame /> : <div className={styles.gamePlaceholder} aria-hidden="true" />}
+      {near ? <BreakoutGame /> : <div className={styles.gamePlaceholder} aria-hidden="true" />}
     </div>
   );
 }
