@@ -88,6 +88,8 @@ const shell = (title: string, body: string) => `<!doctype html>
 function sheetHtml(lead: Lead) {
   const t = getDict(lead.lang);
   const c = t.contact;
+  // «Administración de Ads» va justo después de los planes en el formulario: no tiene ficha de plan.
+  if (lead.planIndex === PLAN_ORDER.length) return "";
   const id = planForIndex(lead.planIndex);
   const plans = id ? PLANS.filter((p) => p.id === id) : PLANS;
   const rows = plans

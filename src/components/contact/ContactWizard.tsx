@@ -19,6 +19,9 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PHONE = /^\+[1-9]\d{7,14}$/;
 type Status = "idle" | "sending" | "sent" | "failed";
 
+/** Opción «Administración de Ads» del primer paso: va después de los planes y no tiene ficha de plan. */
+const ADS_INDEX = PLANS.length;
+
 /**
  * Tres datos para contactar y un correo opcional. Al terminar se muestra la ficha
  * de costos del servicio elegido, con la opción de seguir por WhatsApp.
@@ -80,7 +83,7 @@ export function ContactWizard() {
           website: trap,
         }),
       });
-      if (res.ok) trackEvent("generate_lead", { service: plan?.id ?? "sin_definir", method: "formulario" });
+      if (res.ok) trackEvent("generate_lead", { service: plan?.id ?? (pIndex === ADS_INDEX ? "administracion-de-ads" : "sin_definir"), method: "formulario" });
       setStatus(res.ok ? "sent" : "failed");
     } catch {
       setStatus("failed");
@@ -106,7 +109,7 @@ export function ContactWizard() {
     setError("");
     const next = { ...answers, [key]: v };
     setAnswers(next);
-    if (step === 0) trackEvent("quote_form_start", { service: optIndex !== undefined ? PLANS[optIndex]?.id ?? "sin_definir" : "sin_definir", location: "formulario" });
+    if (step === 0) trackEvent("quote_form_start", { service: optIndex !== undefined ? PLANS[optIndex]?.id ?? (optIndex === ADS_INDEX ? "administracion-de-ads" : "sin_definir") : "sin_definir", location: "formulario" });
     if (step === 0 && optIndex !== undefined) setPlanIndex(optIndex);
     setDraft("");
     setStep((s) => s + 1);
@@ -211,9 +214,11 @@ export function ContactWizard() {
               {c.sent}
               {answers.email && <small>{c.copyTo(answers.email)}</small>}
             </p>
-            <div data-bubble>
-              <CostSheet planIndex={planIndex} />
-            </div>
+            {planIndex !== ADS_INDEX && (
+              <div data-bubble>
+                <CostSheet planIndex={planIndex} />
+              </div>
+            )}
           </div>
         )}
 

@@ -451,7 +451,7 @@ const es = {
     bot: "K&T",
     you: "Tú",
     q1: "¡Hola! ¿Qué quieres construir?",
-    q1opts: ["Landing page", "Tienda virtual", "Sitio corporativo", "Software a medida", "Aún no lo sé"],
+    q1opts: ["Landing page", "Tienda virtual", "Sitio corporativo", "Software a medida", "Administración de Ads", "Aún no lo sé"],
     q2: "Genial. ¿Cómo se llama tu negocio y a qué se dedica?",
     q2ph: "Ej.: Panadería Doña Rosa, repostería artesanal",
     q3: "¿Para cuándo lo necesitas?",

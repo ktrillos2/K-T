@@ -1,7 +1,8 @@
 .win {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
-  height: min(640px, 82svh);
+  /* Alto justo para ver la pregunta y las opciones sin hacer scroll (antes 640px: se veía vacío). */
+  height: min(460px, 72svh);
   border: 1px solid var(--line-2);
   border-radius: 18px;
   background: var(--surface);

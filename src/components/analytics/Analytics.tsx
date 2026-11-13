@@ -5,6 +5,8 @@ import Script from "next/script";
 import { trackEvent, WHATSAPP_LINK_SELECTOR } from "@/lib/analytics";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+/** Píxel de Meta: se activa al definir NEXT_PUBLIC_META_PIXEL_ID en Vercel (solo dígitos). */
+const PIXEL_ID = /^\d{5,20}$/.test(process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "") ? process.env.NEXT_PUBLIC_META_PIXEL_ID : undefined;
 
 function linkLocation(link: Element): string {
   const tagged = link.closest<HTMLElement>("[data-track]")?.dataset.track;
@@ -18,7 +20,7 @@ function linkLocation(link: Element): string {
 /** Google Analytics y el registro de clics reales en WhatsApp, con un solo oyente para todos los enlaces del sitio. */
 export function Analytics() {
   useEffect(() => {
-    if (!GA_ID) return;
+    if (!GA_ID && !PIXEL_ID) return;
     const onClick = (event: MouseEvent) => {
       const link = (event.target as Element | null)?.closest?.(WHATSAPP_LINK_SELECTOR);
       if (!link) return;
@@ -29,13 +31,22 @@ export function Analytics() {
     return () => document.removeEventListener("click", onClick, true);
   }, []);
 
-  if (!GA_ID) return null;
+  if (!GA_ID && !PIXEL_ID) return null;
   return (
     <>
-      <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
-      <Script id="ga-init" strategy="afterInteractive">
-        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag("js",new Date());gtag("config","${GA_ID}");`}
-      </Script>
+      {GA_ID && (
+        <>
+          <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+          <Script id="ga-init" strategy="afterInteractive">
+            {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag("js",new Date());gtag("config","${GA_ID}");`}
+          </Script>
+        </>
+      )}
+      {PIXEL_ID && (
+        <Script id="meta-pixel" strategy="lazyOnload">
+          {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","${PIXEL_ID}");fbq("track","PageView");`}
+        </Script>
+      )}
     </>
   );
 }

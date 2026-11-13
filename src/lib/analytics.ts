@@ -6,8 +6,12 @@ type EventParams = { service?: string; location?: string; method?: string };
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
+    fbq?: (...args: unknown[]) => void;
   }
 }
+
+/** Evento estándar de Meta equivalente a cada evento del sitio. */
+const META_EVENT: Partial<Record<AnalyticsEvent, string>> = { whatsapp_click: "Contact", generate_lead: "Lead" };
 
 export const WHATSAPP_LINK_SELECTOR = `a[href^="https://wa.me/${SITE.phoneRaw}"]`;
 
@@ -28,5 +32,9 @@ export function serviceFromPath(pathname: string): string {
 
 /** Envía un evento a Analytics. Nunca incluye nombres, correos, teléfonos ni texto escrito por la persona. */
 export function trackEvent(name: AnalyticsEvent, params: EventParams = {}) {
+  const service = params.service ?? serviceFromPath(window.location.pathname);
   window.gtag?.("event", name, { page_path: window.location.pathname, service: serviceFromPath(window.location.pathname), ...params });
+  // Píxel de Meta (si está configurado): mismos eventos, para remarketing y medición de campañas.
+  const meta = META_EVENT[name];
+  if (meta) window.fbq?.("track", meta, { content_name: service });
 }

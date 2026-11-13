@@ -451,7 +451,7 @@ const en: Dict = {
     bot: "K&T",
     you: "You",
     q1: "Hi! What would you like to build?",
-    q1opts: ["Landing page", "Online store", "Corporate website", "Custom software", "Not sure yet"],
+    q1opts: ["Landing page", "Online store", "Corporate website", "Custom software", "Ads management", "Not sure yet"],
     q2: "Great. What's your business called and what does it do?",
     q2ph: "E.g.: Rosa's Bakery, handmade pastries",
     q3: "When do you need it?",
