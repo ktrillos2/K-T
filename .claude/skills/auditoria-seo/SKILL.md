@@ -9,6 +9,8 @@ Objetivo: que www.kytcode.lat no pierda posiciones por fallas técnicas. Cada me
 
 > **Datos de Search Console guardados:** si el conector GSC no responde (la prueba de GSC Wizard vence el 2026-11-02), usa la foto más reciente en `docs/seo/gsc-*.md` (páginas, consultas, oportunidades, indexación y pendientes). Si el conector sí funciona, al terminar agrega una foto nueva `docs/seo/gsc-<año>-<mes>.md` con el mismo formato.
 
+> **Skills de Claude SEO:** si están instaladas (se instalan solas al iniciar la sesión; revisa que exista la skill `seo`), úsalas como apoyo en esta tarea: `seo-audit` (auditoría completa), `seo-technical`, `seo-schema`, `seo-sitemap`, `seo-agentic` y `seo-geo`. Sus hallazgos son recomendaciones: aplica solo lo que sea claro y verifica antes de publicar. Si no están disponibles, sigue con los pasos de abajo.
+
 ## 1. Preparar
 
 ```bash

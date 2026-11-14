@@ -9,6 +9,8 @@ Objetivo: abrir mercados fuera de Colombia en Google. Cada corrida agrega **1 pa
 
 > **Datos de Search Console guardados:** si el conector GSC no responde (la prueba de GSC Wizard vence el 2026-11-02), usa la foto más reciente en `docs/seo/gsc-*.md` (páginas, consultas, oportunidades, indexación y pendientes). Si el conector sí funciona, al terminar agrega una foto nueva `docs/seo/gsc-<año>-<mes>.md` con el mismo formato.
 
+> **Skills de Claude SEO:** si están instaladas (se instalan solas al iniciar la sesión; revisa que exista la skill `seo`), úsalas como apoyo en esta tarea: `seo-hreflang` (etiquetas de idioma y país), `seo-local` y `seo-schema`. Sus hallazgos son recomendaciones: aplica solo lo que sea claro y verifica antes de publicar. Si no están disponibles, sigue con los pasos de abajo.
+
 ## 1. Elegir el país
 
 - Países ya publicados: `src/content/landings/countries.ts` (arreglo `COUNTRIES`).
