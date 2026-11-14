@@ -1,0 +1,253 @@
+{
+ "summary": {
+  "health_score": 74,
+  "business_type": "Agencia de desarrollo web y marketing digital (servicio profesional, Cúcuta, Colombia; clientes en Colombia, Latinoamérica y EE. UU.)",
+  "top_findings": [
+   "Casos de estudio con texto plantilla y sin resultados de negocio",
+   "Errores de hecho en horarios de México y EE. UU.",
+   "Guía de precios sin rangos de mercado",
+   "Páginas en inglés con poco valor propio (36 URL rastreadas sin indexar)",
+   "Marca casi inexistente fuera del sitio y nombre 'K&T Solutions Web' en el footer"
+  ],
+  "quick_wins": [
+   "Corregir horarios en countries.ts",
+   "Renombrar Facebook a K&T Code",
+   "Alinear precio del schema de /desarrollo-web-cucuta",
+   "Arreglar enlace roto en inglés de la guía de Perú",
+   "Acortar 92 títulos de más de 60 caracteres"
+  ]
+ },
+ "categories": [
+  {
+   "name": "Technical SEO",
+   "score": 88,
+   "what_works": [
+    "robots.txt y sitemap válidos",
+    "148 URL con 200 sin redirección",
+    "Redirecciones 308 de un salto",
+    "Canonical y hreflang correctos",
+    "Contenido en HTML sin JS"
+   ],
+   "findings": [
+    {
+     "title": "HTML pesado en el inicio (~540 KB)",
+     "severity": "Medium",
+     "description": "222 KB de scripts inline y 176 KB de CSS inline; /blog ~600 KB",
+     "recommendation": "Reducir props al cliente y CSS inline; paginar /blog"
+    },
+    {
+     "title": "Enlace interno en inglés que redirige",
+     "severity": "Medium",
+     "description": "/en/blog/precio-pagina-web-peru enlaza a un artículo que solo existe en español",
+     "recommendation": "Enlazar a la versión en español o a una página en inglés"
+    },
+    {
+     "title": "Sin Content-Security-Policy",
+     "severity": "Medium",
+     "description": "Cabecera ausente",
+     "recommendation": "Añadir CSP en modo report-only primero"
+    },
+    {
+     "title": "lastmod del sitemap poco fiable",
+     "severity": "Low",
+     "description": "5 URL con fecha futura y 49 con la misma fecha",
+     "recommendation": "Usar la fecha real de cada página"
+    }
+   ]
+  },
+  {
+   "name": "Content Quality",
+   "score": 60,
+   "what_works": [
+    "Blogs con resumen, tablas, FAQ y fuentes",
+    "Precios visibles en la moneda del visitante"
+   ],
+   "findings": [
+    {
+     "title": "Casos de estudio con texto plantilla",
+     "severity": "High",
+     "description": "'El reto' idéntico entre proyectos; sin cifras de negocio",
+     "recommendation": "Reto real por cliente y 1-2 resultados con periodo"
+    },
+    {
+     "title": "Errores de horario",
+     "severity": "High",
+     "description": "México siempre 1 h detrás; Nueva York coincide solo nov-mar",
+     "recommendation": "Corregir src/content/landings/countries.ts"
+    },
+    {
+     "title": "Guía de precios sin mercado",
+     "severity": "High",
+     "description": "Solo tarifas propias",
+     "recommendation": "Tabla por tipo de proveedor y costos de dominio/hosting/mantenimiento"
+    },
+    {
+     "title": "Páginas /en con poco valor propio",
+     "severity": "High",
+     "description": "Traducciones de temas locales de 475 palabras",
+     "recommendation": "Ampliar las de demanda en EE. UU.; noindex o redirigir el resto"
+    },
+    {
+     "title": "Autor sin credenciales ni sameAs",
+     "severity": "Medium",
+     "description": "Página de autor básica",
+     "recommendation": "Credenciales y perfiles externos"
+    }
+   ]
+  },
+  {
+   "name": "On-Page SEO",
+   "score": 78,
+   "what_works": [
+    "Un H1 por página",
+    "Sin descripciones duplicadas"
+   ],
+   "findings": [
+    {
+     "title": "Títulos largos",
+     "severity": "Medium",
+     "description": "92 de 148 superan 60 caracteres",
+     "recommendation": "Acortar, priorizando páginas con más impresiones"
+    },
+    {
+     "title": "Título duplicado en /blog y /en/blog",
+     "severity": "Low",
+     "description": "'Blog · K&T Code' en ambos",
+     "recommendation": "Título en inglés para /en/blog"
+    }
+   ]
+  },
+  {
+   "name": "Schema / Structured Data",
+   "score": 76,
+   "what_works": [
+    "JSON-LD válido",
+    "@id coherentes",
+    "BlogPosting completo"
+   ],
+   "findings": [
+    {
+     "title": "LocalBusiness incompleto",
+     "severity": "High",
+     "description": "Sin dirección completa, geo ni horario",
+     "recommendation": "ProfessionalService + Organization, o dirección real"
+    },
+    {
+     "title": "Precio del schema distinto al texto en Cúcuta",
+     "severity": "High",
+     "description": "offers.price 2500000 vs 'desde 450.000'",
+     "recommendation": "AggregateOffer con lowPrice/highPrice"
+    },
+    {
+     "title": "Person sin sameAs",
+     "severity": "Low",
+     "description": "Autor sin perfiles externos",
+     "recommendation": "Agregar LinkedIn y otros perfiles"
+    }
+   ]
+  },
+  {
+   "name": "Performance (CWV)",
+   "score": 62,
+   "what_works": [
+    "CLS 0 en todas las páginas medidas",
+    "Accesibilidad 100"
+   ],
+   "findings": [
+    {
+     "title": "Inicio lento en móvil (laboratorio)",
+     "severity": "High",
+     "description": "Lighthouse 41, LCP 5,5 s, TBT 1.630 ms",
+     "recommendation": "Diferir demo, juego y carrusel; reducir JS/CSS inline"
+    }
+   ]
+  },
+  {
+   "name": "AI Search Readiness",
+   "score": 72,
+   "what_works": [
+    "Rastreadores de IA permitidos",
+    "llms.txt y llms-full.txt válidos",
+    "Contenido citable"
+   ],
+   "findings": [
+    {
+     "title": "Nombre de marca inconsistente",
+     "severity": "High",
+     "description": "'K&T Solutions Web' en footer y sameAs",
+     "recommendation": "Renombrar Facebook a K&T Code"
+    },
+    {
+     "title": "Sin presencia externa",
+     "severity": "High",
+     "description": "Sin LinkedIn, YouTube ni Wikidata en sameAs",
+     "recommendation": "Crear perfiles y enlazarlos"
+    }
+   ]
+  },
+  {
+   "name": "Images",
+   "score": 85,
+   "what_works": [
+    "Imágenes de contenido con alt",
+    "Banderas decorativas con alt vacío (correcto)"
+   ],
+   "findings": [
+    {
+     "title": "Sin imagen OG por artículo",
+     "severity": "Low",
+     "description": "Todos los artículos comparten la imagen genérica",
+     "recommendation": "Imagen OG propia por artículo"
+    }
+   ]
+  }
+ ],
+ "action_plan": {
+  "phases": [
+   {
+    "name": "Phase 1: Critical Fixes",
+    "timeframe": "Week 1",
+    "items": [
+     "Corregir horarios",
+     "Renombrar Facebook",
+     "Precio del schema de Cúcuta",
+     "Enlace roto en inglés",
+     "Acortar títulos"
+    ]
+   },
+   {
+    "name": "Phase 2: High-Impact Improvements",
+    "timeframe": "Weeks 2-3",
+    "items": [
+     "Casos de estudio con resultados",
+     "Guía de precios con rangos de mercado",
+     "Páginas /en para nearshore",
+     "Comparativa de pasarelas ampliada",
+     "Rendimiento del inicio en móvil"
+    ]
+   },
+   {
+    "name": "Phase 3: Content & Authority",
+    "timeframe": "Month 2",
+    "items": [
+     "Clutch, GoodFirms y TechBehemoths con reseñas",
+     "LinkedIn, Google Business Profile y Wikidata",
+     "Enlaces desde sitios de clientes",
+     "YouTube con casos"
+    ]
+   },
+   {
+    "name": "Phase 4: Monitoring & Iteration",
+    "timeframe": "Ongoing",
+    "items": [
+     "Conectar Search Console, CrUX y GA4",
+     "Repetir auditoría en 4-6 semanas"
+    ]
+   }
+  ]
+ },
+ "artifacts": {
+  "findings_dir": "findings/",
+  "screenshots_dir": "screenshots/"
+ }
+}
