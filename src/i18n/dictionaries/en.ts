@@ -8,9 +8,9 @@ const en: Dict = {
     ogTitle: "K&T Code · Unique design, custom code",
     home: { title: "Custom web development with one-of-a-kind design", description: "Websites, online stores and software built from scratch for your business. No templates, loading in under a second. Studio based in Cúcuta, Colombia." },
     about: { title: "About", description: "K&T Code is a custom web development studio founded in 2025 in Cúcuta, Colombia. Meet Keyner Trillos and how we work, from idea to launch." },
-    projects: { title: "Projects", description: "23 custom websites, stores and platforms live for companies in Colombia, Mexico and Peru, each with its case study and results." },
+    projects: { title: "Projects", description: "Custom websites, stores and platforms live for companies in Colombia, Mexico, Peru and the United States, each with its case study." },
     pricing: { title: "Pricing", description: "Custom web development pricing: landing pages, online stores, corporate websites and custom software. Prices shown in your local currency." },
-    blog: { title: "Blog", description: "Pricing guides, comparisons and SEO and GEO strategies to help your website sell more, with interactive calculators and simulators." },
+    blog: { title: "Web design, pricing and SEO blog", description: "Pricing guides, comparisons and SEO and GEO strategies to help your website sell more, with interactive calculators and simulators." },
     privacy: { title: "Privacy policy", description: "How K&T Code handles the personal data it receives through its website and contact channels." },
     notFound: { title: "Page not found" },
   },
@@ -98,9 +98,9 @@ const en: Dict = {
 
   home: {
     hero: {
-      eyebrow: "Web agency · Cúcuta, Colombia",
+      eyebrow: "Nearshore web agency · Colombia (UTC−5)",
       title: "Your business online, ready to sell.",
-      lead: "We're K&T Code. We build websites, online stores and custom systems, and we run your ads so more customers reach you.",
+      lead: "We're K&T Code, a nearshore team in Colombia working in US business hours, in English and Spanish. We build websites, online stores and custom systems, and run your ads so more customers reach you.",
       cta1: "See projects",
       cta2: "Get a quote on WhatsApp",
       stats: ["projects delivered", "client companies", "countries served", "yours: everything is in your name"],
@@ -274,8 +274,15 @@ const en: Dict = {
       ctaText: "Tell us your idea and we'll send you a custom proposal.",
       cta: "Get a quote",
       noSite: "No live preview is available for this project.",
-      challengeText: (p: { name: string; sector: string; category: string }) =>
-        `${p.name} needed its own digital presence for its ${p.sector.toLowerCase()} business: fast, easy to manage and built to turn visits into customers. A template wouldn't reflect the brand or its processes, so we designed and built a custom ${p.category.toLowerCase()}.`,
+      challengeText: (p: { name: string; summary: string; kind: "corporativo" | "ecommerce" | "plataforma" | "landing" }) =>
+        `${p.summary} ${
+          {
+            ecommerce: `${p.name} needed to sell online with a catalog that's easy to browse on a phone and a short path to checkout or a sales rep.`,
+            corporativo: `${p.name} needed to earn the trust of clients and partners and turn visits into quote requests.`,
+            plataforma: `${p.name} needed features a template can't offer, with a panel to manage them without depending on anyone.`,
+            landing: `${p.name} needed a single clear, fast page built around one specific action.`,
+          }[p.kind]
+        }`,
       phases: (weeks: number) => [
         { w: "Week 1", t: "Discovery and design", d: "Interviews, competitor analysis, information architecture and an interface designed around the brand." },
         { w: weeks > 3 ? "Weeks 2 and 3" : "Week 2", t: "Development", d: "Building every section and feature, integrations and content, with client reviews on a live version." },

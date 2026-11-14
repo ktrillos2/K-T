@@ -26,6 +26,23 @@ Table: OpenAI crawlers and what they do.
 - **Maximum visibility (the one we recommend):** allow OAI-SearchBot, GPTBot and ChatGPT-User across the whole site, and block only private paths such as \`/admin/\` and \`/api/\`. You show up in searches and your brand becomes part of the models' general knowledge.
 - **Search only, no training:** allow OAI-SearchBot and ChatGPT-User, and block GPTBot. You stay citable without contributing data to training.
 
+### Other AI crawlers worth allowing
+
+Table: Crawlers from other assistants and AI search engines.
+| Crawler | Owner | Purpose |
+|---|---|---|
+| Claude-SearchBot | Anthropic | Find pages Claude cites in its searches |
+| Claude-User | Anthropic | Read a page when a user asks Claude to |
+| ClaudeBot | Anthropic | Collect training data |
+| PerplexityBot | Perplexity | Index pages Perplexity shows as sources |
+| Perplexity-User | Perplexity | Read a page when a user asks for it |
+| Googlebot | Google | Google Search, including AI Overviews and AI Mode |
+| Google-Extended | Google | Controls whether your content trains and grounds Gemini (doesn't affect Search) |
+| Bingbot | Microsoft | Bing search and Copilot answers |
+| Applebot / Applebot-Extended | Apple | Siri and Spotlight / use of content to train Apple models |
+
+Blocking Google-Extended or Applebot-Extended doesn't remove you from Google or Siri: it only decides whether your content trains their models.
+
 :::tip Check your firewall too
 Many sites allow the bots in robots.txt but block them with challenges or 403 errors at the firewall or CDN. For the crawler the result is the same: it can't read your page.
 :::
@@ -133,6 +150,10 @@ Want us to set it up for you? See our [technical SEO](/servicios/seo-tecnico) se
   sources: [
     { title: "OpenAI: Overview of OpenAI crawlers", url: "https://platform.openai.com/docs/bots" },
     { title: "Google Search Central: AI features and your website", url: "https://developers.google.com/search/docs/appearance/ai-features" },
+    { title: "Anthropic: Does Anthropic crawl data from the web?", url: "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler" },
+    { title: "Google: Common crawlers (Google-Extended)", url: "https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers" },
+    { title: "Perplexity: Perplexity crawlers", url: "https://docs.perplexity.ai/guides/bots" },
+    { title: "Apple: About Applebot", url: "https://support.apple.com/en-us/119829" },
     { title: "Schema.org", url: "https://schema.org/" },
     { title: "The llms.txt proposal", url: "https://llmstxt.org/" },
     { title: "K&T Code: llms.txt", url: "https://www.kytcode.lat/llms.txt" },

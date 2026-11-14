@@ -18,7 +18,7 @@ export const SITE = {
   socials: [
     { label: "Instagram", handle: "@kytcode", href: "https://www.instagram.com/kytcode/" },
     { label: "TikTok", handle: "@kytcode", href: "https://www.tiktok.com/@kytcode" },
-    { label: "Facebook", handle: "K&T Solutions Web", href: "https://www.facebook.com/KTSolutionsWeb" },
+    { label: "Facebook", handle: "K&T Code", href: "https://www.facebook.com/KTSolutionsWeb" },
   ],
 } as const;
 

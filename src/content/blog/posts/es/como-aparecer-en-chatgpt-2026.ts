@@ -26,6 +26,23 @@ Tabla: Rastreadores de OpenAI y su función.
 - **Máxima visibilidad (la que recomendamos):** permite OAI-SearchBot, GPTBot y ChatGPT-User en todo el sitio, y bloquea solo rutas privadas como \`/admin/\` y \`/api/\`. Apareces en búsquedas y tu marca queda en el conocimiento general de los modelos.
 - **Solo búsqueda, sin entrenamiento:** permite OAI-SearchBot y ChatGPT-User, y bloquea GPTBot. Sigues siendo citable sin aportar datos al entrenamiento.
 
+### Los demás rastreadores de IA que conviene permitir
+
+Table: Rastreadores de otros asistentes y buscadores con IA.
+| Rastreador | De quién | Para qué |
+|---|---|---|
+| Claude-SearchBot | Anthropic | Encontrar páginas que Claude cita en sus búsquedas |
+| Claude-User | Anthropic | Leer una página cuando un usuario se lo pide a Claude |
+| ClaudeBot | Anthropic | Recolectar datos para entrenamiento |
+| PerplexityBot | Perplexity | Indexar páginas que Perplexity muestra como fuentes |
+| Perplexity-User | Perplexity | Leer una página cuando un usuario la pide |
+| Googlebot | Google | Búsqueda de Google, incluidos AI Overviews y AI Mode |
+| Google-Extended | Google | Controla si tu contenido se usa para entrenar y fundamentar Gemini (no afecta la búsqueda) |
+| Bingbot | Microsoft | Búsqueda de Bing y respuestas de Copilot |
+| Applebot / Applebot-Extended | Apple | Siri y Spotlight / uso del contenido para entrenar modelos de Apple |
+
+Bloquear Google-Extended o Applebot-Extended no te saca de Google ni de Siri: solo decide si tu contenido se usa para entrenar sus modelos.
+
 :::tip Revisa también tu firewall
 Muchos sitios permiten los bots en robots.txt pero los bloquean con desafíos o errores 403 en el firewall o el CDN. Para el rastreador, el resultado es el mismo: no puede leer tu página.
 :::
@@ -134,6 +151,10 @@ Puedes ver el nuestro en [/llms.txt](/llms.txt) y una versión extendida con tod
   sources: [
     { title: "OpenAI: Overview of OpenAI crawlers", url: "https://platform.openai.com/docs/bots" },
     { title: "Google Search Central: AI features and your website", url: "https://developers.google.com/search/docs/appearance/ai-features" },
+    { title: "Anthropic: Does Anthropic crawl data from the web?", url: "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler" },
+    { title: "Google: Common crawlers (Google-Extended)", url: "https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers" },
+    { title: "Perplexity: Perplexity crawlers", url: "https://docs.perplexity.ai/guides/bots" },
+    { title: "Apple: About Applebot", url: "https://support.apple.com/en-us/119829" },
     { title: "Schema.org", url: "https://schema.org/" },
     { title: "Propuesta del estándar llms.txt", url: "https://llmstxt.org/" },
     { title: "K&T Code: llms.txt", url: "https://www.kytcode.lat/llms.txt" },

@@ -93,7 +93,7 @@ Table: Related services and starting prices in your currency.
 | A company site with several sections | [Corporate web design](/servicios/diseno-web-corporativo) | {{cop:2500000}} |
 | Speed, SEO and ongoing support | [Website maintenance](/servicios/mantenimiento-web) | Depends on scope |
 
-See [pricing](/precios) (starting prices in your currency) and our guide to [the cost of a website in Latin America](/blog/cuanto-cuesta-una-pagina-web-latinoamerica).
+See [pricing](/precios) (starting prices in your currency) and our guide to [hiring a nearshore web team in Latin America](/blog/nearshore-desarrollo-web-latinoamerica).
 
 ## Conclusion {#conclusion}
 

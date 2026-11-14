@@ -23,6 +23,9 @@ const norm = (s: string) => s.toLowerCase().normalize("NFD").replace(/\p{Diacrit
 /** Paleta de comandos (⌘K / Ctrl+K): páginas, acciones, proyectos y artículos del blog. */
 export function CommandPalette({ links }: { links: ShellLinks }) {
   const open = useUI((s) => s.paletteOpen);
+  // La lista (todas las páginas y artículos) solo se pinta después de abrir la paleta por primera vez:
+  // así no carga cientos de nodos en el HTML de cada página.
+  const [ever, setEver] = useState(false);
   const navigate = useNavigate();
   const pathname = usePathname();
   const { t, lang, href } = useI18n();
@@ -72,6 +75,7 @@ export function CommandPalette({ links }: { links: ShellLinks }) {
     const p = panel.current;
     if (!r || !p) return;
     if (open) {
+      setEver(true);
       setQ("");
       setActive(0);
       gsap.set(r, { display: "grid" });
@@ -146,8 +150,8 @@ export function CommandPalette({ links }: { links: ShellLinks }) {
           <kbd className={styles.esc}>esc</kbd>
         </div>
         <ul ref={list} id="command-list" className={styles.list} role="listbox" data-lenis-prevent>
-          {filtered.length === 0 && <li className={styles.empty}>{t.palette.empty(q)}</li>}
-          {filtered.map((it, idx) => {
+          {ever && filtered.length === 0 && <li className={styles.empty}>{t.palette.empty(q)}</li>}
+          {ever && filtered.map((it, idx) => {
             const header = it.group !== lastGroup ? it.group : null;
             lastGroup = it.group;
             return (

@@ -35,6 +35,19 @@ const es: PostBody = {
         ["Software a medida", "$4.500.000", "Según alcance", "Usuarios y roles, base de datos, APIs, facturación DIAN", "Módulos fuera del alcance acordado"],
       ],
     },
+    { type: "h2", id: "tipo-de-proveedor", text: "¿Hazlo tú, freelance o agencia? Qué pagas en cada opción" },
+    { type: "p", text: "El precio también cambia según **quién** hace la página. Antes de comparar cifras, compara qué recibes en cada caso:" },
+    {
+      type: "table",
+      caption: "Opciones para tener una página web en Colombia y qué pagas en cada una.",
+      head: ["Opción", "Qué pagas", "Ventaja", "Riesgo"],
+      rows: [
+        ["Hazlo tú (Wix, Shopify, WordPress con plantilla)", "Plan mensual o anual de la plataforma y tu tiempo", "Arrancas rápido y con poca inversión", "Diseño parecido a miles de sitios, límites de la plataforma y pagos que no paran"],
+        ["Freelance", "Un pago por el proyecto; el mantenimiento suele ir aparte", "Precio más bajo que una agencia", "Todo depende de una sola persona: tiempos, soporte y si sigue disponible"],
+        ["Agencia o estudio", "Un pago por el proyecto con diseño, desarrollo, pruebas y soporte", "Equipo, proceso y garantía", "Algunas agencias cobran mensualidades obligatorias o se quedan con el dominio o el código"],
+      ],
+    },
+    { type: "p", text: "Sea cual sea la opción, pide la cotización por escrito y confirma que el dominio, el hosting y el código queden **a nombre de tu empresa**. Lo comparamos en detalle en [agencia vs. freelance](/blog/agencia-vs-freelance-desarrollo-web) y en [Wix vs. WordPress](/blog/wix-vs-wordpress-diferencias-precios)." },
     { type: "h2", id: "que-cambia", text: "Qué hace subir o bajar el precio" },
     {
       type: "ul",
@@ -118,6 +131,19 @@ const en: PostBody = {
       ],
     },
     { type: "callout", tone: "info", title: "Why does the store cost less than the corporate site?", text: "Because the store plan starts from a well-defined catalog and checkout flow, while a corporate site usually has more pages, more original content and more sections designed from scratch. In practice a large store can cost more than a small corporate site." },
+    { type: "h2", id: "provider-type", text: "DIY, freelancer or agency? What you pay for with each" },
+    { type: "p", text: "Price also depends on **who** builds the site. Before comparing numbers, compare what you get:" },
+    {
+      type: "table",
+      caption: "Ways to get a website in Colombia and what you pay for with each.",
+      head: ["Option", "What you pay", "Upside", "Risk"],
+      rows: [
+        ["DIY (Wix, Shopify, WordPress with a template)", "The platform's monthly or yearly plan plus your time", "Fast start with a small investment", "Looks like thousands of sites, platform limits and payments that never stop"],
+        ["Freelancer", "One project fee; maintenance is usually extra", "Lower price than an agency", "Everything depends on one person: timelines, support and availability"],
+        ["Agency or studio", "One project fee covering design, development, testing and support", "A team, a process and a warranty", "Some agencies charge mandatory monthly fees or keep the domain or code"],
+      ],
+    },
+    { type: "p", text: "Whichever you choose, get the quote in writing and make sure the domain, hosting and code are **in your company's name**. We compare them in detail in [agency vs. freelancer](/blog/agencia-vs-freelance-desarrollo-web) and [Wix vs. WordPress](/blog/wix-vs-wordpress-diferencias-precios)." },
     { type: "h2", id: "what-changes", text: "What makes the price go up or down" },
     {
       type: "ul",

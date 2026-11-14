@@ -36,8 +36,8 @@ const COUNTRIES: CountryData[] = [
     posts: ["cuanto-cuesta-una-pagina-web-latinoamerica", "como-vender-por-whatsapp-business", "nearshore-desarrollo-web-latinoamerica"],
     payments: "Mercado Pago, Stripe, OXXO y SPEI",
     hours: {
-      es: "Ciudad de México y Colombia comparten la hora (UTC−6 y UTC−5) la mayor parte del año: trabajamos en tu mismo horario laboral.",
-      en: "Mexico City and Colombia share working hours (UTC−6 and UTC−5) most of the year: we work during your business day.",
+      es: "Colombia (UTC−5) va solo una hora adelante de Ciudad de México (UTC−6) todo el año: trabajamos dentro de tu horario laboral.",
+      en: "Colombia (UTC−5) is just one hour ahead of Mexico City (UTC−6) all year: we work within your business day.",
     },
     sectors: {
       es: ["Videojuegos y eSports", "Comercio electrónico", "Servicios profesionales", "Salud y bienestar", "Inmobiliarias", "Educación"],
@@ -63,8 +63,8 @@ const COUNTRIES: CountryData[] = [
     posts: ["nearshore-desarrollo-web-latinoamerica", "pagina-web-pequeno-negocio-estados-unidos", "cuanto-cuesta-una-pagina-web-latinoamerica"],
     payments: "Stripe, PayPal y tarjetas de crédito",
     hours: {
-      es: "Colombia (UTC−5) coincide con la hora de Miami y Nueva York gran parte del año, y está a una o dos horas de Chicago y Houston: nearshore real, con reuniones en tu horario laboral.",
-      en: "Colombia (UTC−5) matches Miami and New York time for much of the year and is only one to two hours from Chicago and Houston: real nearshore, with meetings during your business day.",
+      es: "Colombia (UTC−5) tiene la misma hora que Miami y Nueva York de noviembre a marzo y una hora menos el resto del año; con Chicago y Houston coincide en verano y va una hora adelante en invierno: nearshore real, con reuniones en tu horario laboral.",
+      en: "Colombia (UTC−5) matches Miami and New York time from November to March and is one hour behind the rest of the year; it matches Chicago and Houston in summer and is one hour ahead in winter: real nearshore, with meetings during your business day.",
     },
     sectors: {
       es: ["Negocios locales y servicios a domicilio", "Comercio electrónico", "Inmobiliarias", "Salud y bienestar", "Servicios profesionales", "Startups y software (SaaS)"],

@@ -16,11 +16,16 @@ export const ROBOTS_INDEX: NonNullable<Metadata["robots"]> = {
   googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
 };
 
-/** Recorta en la última palabra completa (Google muestra ~155–160 caracteres de la descripción). */
-export function clip(text: string, max = 158): string {
+/**
+ * Deja la descripción en ~160 caracteres (lo que muestra Google). Prefiere cortar al final de una
+ * frase para que no quede a medias; si no hay frase completa, corta en la última palabra con "…".
+ */
+export function clip(text: string, max = 160): string {
   const t = text.replace(/\s+/g, " ").trim();
   if (t.length <= max) return t;
-  const cut = t.slice(0, max - 1);
+  const cut = t.slice(0, max);
+  const end = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf(": "));
+  if (end >= 90) return cut.slice(0, end + 1).replace(/:$/, ".");
   return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,.;:·–-]+$/, "")}…`;
 }
 

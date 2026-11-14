@@ -8,9 +8,9 @@ const es = {
     ogTitle: "K&T Code · Diseño único, código a la medida",
     home: { title: "Desarrollo web a la medida con diseño único", description: "Sitios web, tiendas virtuales y software hechos desde cero para tu negocio. Sin plantillas, con carga en menos de un segundo. Estudio en Cúcuta, Colombia." },
     about: { title: "Nosotros", description: "K&T Code es un estudio de desarrollo web a la medida fundado en 2025 en San José de Cúcuta. Conoce a Keyner Trillos y cómo trabajamos, de la idea al lanzamiento." },
-    projects: { title: "Proyectos", description: "23 sitios, tiendas y plataformas a la medida en producción para empresas de Colombia, México y Perú, con sus casos de estudio y resultados." },
+    projects: { title: "Proyectos", description: "Sitios, tiendas y plataformas a la medida en producción para empresas de Colombia, México, Perú y Estados Unidos, con su caso de estudio." },
     pricing: { title: "Precios", description: "Precios de desarrollo web a la medida: landing pages desde $450.000 COP, tiendas virtuales desde $1.300.000 COP, sitios corporativos y software. Precios en tu moneda." },
-    blog: { title: "Blog", description: "Guías de precios, comparativas y estrategias de SEO y GEO para que tu página web venda más, con calculadoras y simuladores interactivos." },
+    blog: { title: "Blog de páginas web, precios y SEO", description: "Guías de precios, comparativas y estrategias de SEO y GEO para que tu página web venda más, con calculadoras y simuladores interactivos." },
     privacy: { title: "Política de privacidad", description: "Cómo K&T Code trata los datos personales que recibe a través de su sitio web y sus canales de contacto." },
     notFound: { title: "Página no encontrada" },
   },
@@ -274,8 +274,16 @@ const es = {
       ctaText: "Cuéntanos tu idea y te enviamos una propuesta a la medida.",
       cta: "Cotizar mi proyecto",
       noSite: "Este proyecto no tiene vista en vivo disponible.",
-      challengeText: (p: { name: string; sector: string; category: string }) =>
-        `${p.name} necesitaba una presencia digital propia para su negocio de ${p.sector.toLowerCase()}: rápida, fácil de administrar y pensada para convertir visitas en clientes. Una plantilla no iba a reflejar su marca ni sus procesos, así que diseñamos y desarrollamos ${p.category.toLowerCase() === "landing page" ? "una landing" : "una solución"} a la medida.`,
+      // El texto parte del resumen propio de cada proyecto; la segunda frase depende del tipo de proyecto.
+      challengeText: (p: { name: string; summary: string; kind: "corporativo" | "ecommerce" | "plataforma" | "landing" }) =>
+        `${p.summary} ${
+          {
+            ecommerce: `${p.name} necesitaba vender en línea con un catálogo fácil de recorrer en el celular y un camino corto hasta la compra o el asesor.`,
+            corporativo: `${p.name} necesitaba transmitir confianza a clientes y aliados, y convertir las visitas en solicitudes de cotización.`,
+            plataforma: `${p.name} necesitaba funciones propias que una plantilla no ofrece, con un panel para gestionarlas sin depender de nadie.`,
+            landing: `${p.name} necesitaba una sola página clara y rápida, pensada para una acción concreta.`,
+          }[p.kind]
+        }`,
       phases: (weeks: number) => [
         { w: "Semana 1", t: "Descubrimiento y diseño", d: "Entrevistas, análisis de la competencia, arquitectura de la información y diseño de la interfaz a la medida de la marca." },
         { w: weeks > 3 ? "Semanas 2 y 3" : "Semana 2", t: "Desarrollo", d: "Programación de cada sección y funcionalidad, integraciones y contenido, con revisiones del cliente sobre una versión en línea." },

@@ -8,7 +8,8 @@ import { POSTS } from "@/content/blog/meta";
 import { LANDINGS, landingLangs } from "@/content/landings";
 
 const abs = (path: string) => `${SITE.url}${path === "/" ? "" : path}`;
-const day = (iso: string) => new Date(`${iso.slice(0, 10)}T12:00:00Z`);
+// Nunca una fecha futura (artículos programados o fechas de prueba): como máximo, hoy.
+const day = (iso: string) => new Date(Math.min(Date.parse(`${iso.slice(0, 10)}T12:00:00Z`), Date.now()));
 
 type Freq = "weekly" | "monthly" | "yearly";
 

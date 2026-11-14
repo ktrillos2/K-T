@@ -6,7 +6,7 @@ import { ari, sans } from "../fonts";
 import { LOCALES, isLang, type Lang } from "@/i18n/config";
 import { getDict } from "@/i18n";
 import { GOOGLE_VERIFICATION, SITE } from "@/lib/site";
-import { DEFAULT_OG, ROBOTS_INDEX } from "@/lib/seo";
+import { DEFAULT_OG } from "@/lib/seo";
 import { graph, organization, person, website } from "@/lib/schema";
 import { AppShell } from "@/components/shell/AppShell";
 import { shellLinks } from "@/lib/shellLinks";
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     publisher: SITE.name,
     category: "technology",
     formatDetection: { telephone: false, email: false, address: false },
-    robots: ROBOTS_INDEX,
+    // robots va en cada página (pageMeta): así el 404 solo lleva noindex, sin una segunda etiqueta index.
     // Íconos con las mismas URLs del sitio anterior (/favicon.ico, /icon.png, /apple-icon.png)
     // para que Google y los navegadores conserven el favicon que ya tenían en caché.
     icons: {

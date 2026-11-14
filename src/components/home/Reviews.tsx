@@ -230,7 +230,8 @@ export function Reviews({ path, title, lead, reviews = TESTIMONIALS }: { path?: 
   const go = (i: number) => api.current?.goTo(i);
   const cur = items[active];
   if (!cur) return null;
-  const rows = [items, [...items].reverse()];
+  // Una sola cinta de frases (antes dos): la mitad de nodos y de animación continua.
+  const rows = [items];
 
   return (
     <section ref={root} className={`band ${styles.section}`} aria-labelledby="h-reviews" style={vars({ "--c": COLOR_VAR[cur.color] })}>

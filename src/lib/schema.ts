@@ -14,7 +14,8 @@ const abs = (path: string) => `${SITE.url}${path === "/" ? "" : path}`;
 export function organization(lang: Lang) {
   const t = getDict(lang);
   return {
-    "@type": "LocalBusiness",
+    // Agencia que atiende en remoto (sin local abierto al público): Organization + ProfessionalService.
+    "@type": ["Organization", "ProfessionalService"],
     "@id": ORG_ID,
     name: SITE.name,
     alternateName: SITE.alternateNames,

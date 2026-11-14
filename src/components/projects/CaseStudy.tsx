@@ -127,7 +127,7 @@ export function CaseStudy({ slug }: { slug: string }) {
               <span>01</span> {d.challenge}
             </h2>
             <Reveal>
-              <p className={styles.big}>{d.challengeText({ name: p.name, sector: p.sector, category })}</p>
+              <p className={styles.big}>{d.challengeText({ name: p.name, summary: p.summary, kind: p.category })}</p>
             </Reveal>
           </section>
 

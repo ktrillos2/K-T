@@ -46,6 +46,13 @@ export function LandingPage({ landing: l, lang }: { landing: Landing; lang: Lang
   const url = `${SITE.url}${localize(l.path, lang)}`;
   const plan = l.plan ? PLANS.find((p) => p.id === l.plan) : undefined;
   const offer = plan && !plan.quote ? offerPrice(plan, lang) : null;
+  // Ciudades y países muestran varios planes ("landing desde…"): rango de precios, no un precio único.
+  const local = l.kind === "ciudad" || l.kind === "pais";
+  const range = local
+    ? PLANS.filter((p) => !p.quote)
+        .map((p) => offerPrice(p, lang))
+        .filter((x): x is { amount: number; currency: string } => !!x)
+    : [];
   const crumbs = crumbsFor(l, lang);
 
   const service = {
@@ -63,9 +70,21 @@ export function LandingPage({ landing: l, lang }: { landing: Landing; lang: Lang
       ? { "@type": "City", name: l.city.name, containedInPlace: { "@type": "AdministrativeArea", name: l.city.region, containedInPlace: { "@type": "Country", name: "Colombia" } } }
       : [{ "@type": "Country", name: "Colombia" }, { "@type": "Place", name: "Latinoamérica" }, { "@type": "Country", name: "United States" }],
     keywords: copy.keywords.join(", "),
-    ...(offer
-      ? { offers: { "@type": "Offer", priceCurrency: offer.currency, price: offer.amount, priceSpecification: { "@type": "PriceSpecification", minPrice: offer.amount, priceCurrency: offer.currency }, availability: "https://schema.org/InStock", seller: { "@id": `${SITE.url}/#organization` } } }
-      : {}),
+    ...(local && range.length
+      ? {
+          offers: {
+            "@type": "AggregateOffer",
+            priceCurrency: range[0].currency,
+            lowPrice: Math.min(...range.map((r) => r.amount)),
+            highPrice: Math.max(...range.map((r) => r.amount)),
+            offerCount: range.length,
+            availability: "https://schema.org/InStock",
+            seller: { "@id": `${SITE.url}/#organization` },
+          },
+        }
+      : offer
+        ? { offers: { "@type": "Offer", priceCurrency: offer.currency, price: offer.amount, priceSpecification: { "@type": "PriceSpecification", minPrice: offer.amount, priceCurrency: offer.currency }, availability: "https://schema.org/InStock", seller: { "@id": `${SITE.url}/#organization` } } }
+        : {}),
   };
   const webPage = {
     "@type": "WebPage",
