@@ -4,6 +4,8 @@
  * pasa a tener langs ["es", "en"] (sitemap, hreflang y feed EN se ajustan solos).
  */
 export const EN_META: Record<string, [title: string, description: string, tags: string[]]> = {
+  "pagina-web-para-abogados": ["Law Firm Website: What It Needs and What It Costs (2026)", "What a law firm website needs in the US and Mexico: practice area pages, privacy, Google, lawyer advertising rules and starting prices to budget.", ["law firm website", "lawyer website", "website design for law firms", "united states"]],
+  "chatbot-para-agendar-citas-whatsapp": ["WhatsApp Appointment Booking Chatbot: How It Works and Costs (2026)", "How a WhatsApp appointment booking chatbot works: options, the official API, reminders, health data privacy and starting prices for your business.", ["appointment booking chatbot", "WhatsApp", "scheduling", "automation"]],
   "nextjs-vs-react": ["Next.js vs. React: Differences in Architecture, Rendering and When to Use Each", "React is a library and Next.js a framework: differences in rendering, SEO and routing, and when each one makes sense.", ["Next.js", "React", "rendering"]],
   "mejores-herramientas-ia-crear-paginas-web-2026": ["The Best AI Tools for Building Websites in 2026", "The most useful AI tools for designing, coding and optimizing websites, what each one is for and their limits.", ["AI tools", "web development", "2026"]],
   "wix-vs-wordpress-diferencias-precios": ["Wix vs. WordPress: Differences, Real Prices and Which to Choose in 2026", "Wix vs. WordPress on ease of use, site ownership, speed, renewal costs and what happens when your business grows.", ["Wix", "WordPress", "comparison"]],
