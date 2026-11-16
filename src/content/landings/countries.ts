@@ -79,6 +79,33 @@ const COUNTRIES: CountryData[] = [
       en: "We serve businesses in Miami, New York, Houston, Los Angeles, Chicago and across the country over video calls, with staged deliveries and communication in English or Spanish. We integrate Stripe and PayPal payments and optimize your site to rank on Google US and in AI search, including for your Hispanic audience.",
     },
   },
+  {
+    slug: "peru",
+    code: "PE",
+    name: { es: "Perú", en: "Peru" },
+    lat: -12.0464,
+    lng: -77.0428,
+    color: "red",
+    projects: ["autos-saldo", "estrella-de-david"],
+    posts: ["precio-pagina-web-peru", "cuanto-cuesta-una-pagina-web-latinoamerica", "como-vender-por-whatsapp-business"],
+    payments: "Yape, Plin, Niubiz y Culqi",
+    hours: {
+      es: "Perú y Colombia tienen la misma hora todo el año (UTC−5, sin horario de verano): trabajamos exactamente en tu horario laboral.",
+      en: "Peru and Colombia share the same time all year (UTC−5, no daylight saving time): we work exactly within your business day.",
+    },
+    sectors: {
+      es: ["Turismo y transporte", "Compraventa de vehículos", "Comercio electrónico", "Servicios profesionales", "Inmobiliarias", "Educación"],
+      en: ["Tourism and transportation", "Vehicle marketplaces", "E-commerce", "Professional services", "Real estate", "Education"],
+    },
+    intro: {
+      es: "K&T Code diseña y desarrolla páginas web, tiendas virtuales y software a la medida para empresas del Perú, en remoto desde Colombia. Entregamos proyectos en Lima como el marketplace de vehículos de Auto Saldo y el sitio de cotización de buses turísticos de Estrella de David, con diseño único, carga en menos de un segundo y el código a tu nombre.",
+      en: "K&T Code designs and builds custom websites, online stores and software for companies in Peru, remotely from Colombia. We've delivered projects in Lima like Auto Saldo's vehicle marketplace and Estrella de David's tour bus quoting site, with a unique design, sub-second load times and the code in your name.",
+    },
+    local: {
+      es: "Trabajamos con empresas de Lima, Arequipa, Trujillo, Cusco y todo el país por videollamada, con entregas por etapas. Integramos los pagos que usan tus clientes peruanos, como Yape, Plin y tarjetas con Niubiz o Culqi, y optimizamos tu sitio para aparecer en Google Perú y en los buscadores con IA.",
+      en: "We work with companies in Lima, Arequipa, Trujillo, Cusco and the whole country over video calls, with staged deliveries. We integrate the payment methods your Peruvian customers use, such as Yape, Plin and cards through Niubiz or Culqi, and optimize your site to rank on Google Peru and in AI search.",
+    },
+  },
 ];
 
 const table = (c: CountryData, lang: "es" | "en") =>

@@ -7,6 +7,10 @@ import medida from "./posts/desarrollo-web-medida-vs-plantillas";
 import geo from "./posts/geo-vs-seo-diferencias-motores-ia";
 import { fromMarkdown } from "./markdown";
 import { formatCOP } from "@/lib/money";
+import md_pagina_web_para_abogados from "./posts/es/pagina-web-para-abogados";
+import en_pagina_web_para_abogados from "./posts/en/pagina-web-para-abogados";
+import md_chatbot_para_agendar_citas_whatsapp from "./posts/es/chatbot-para-agendar-citas-whatsapp";
+import en_chatbot_para_agendar_citas_whatsapp from "./posts/en/chatbot-para-agendar-citas-whatsapp";
 import md_pagina_web_para_restaurante_mexico from "./posts/es/pagina-web-para-restaurante-mexico";
 import md_precio_pagina_web_chile from "./posts/es/precio-pagina-web-chile";
 import md_precio_pagina_web_peru from "./posts/es/precio-pagina-web-peru";
@@ -72,6 +76,8 @@ const BODIES: Record<string, Partial<Record<Lang, PostBody>> & { es: PostBody }>
   "desarrollo-web-medida-vs-plantillas": medida,
   "geo-vs-seo-diferencias-motores-ia": geo,
   // Tendencias de búsqueda (es + en), generadas con la skill blog-tendencias.
+  "pagina-web-para-abogados": { es: fromMarkdown(md_pagina_web_para_abogados), en: fromMarkdown(en_pagina_web_para_abogados) },
+  "chatbot-para-agendar-citas-whatsapp": { es: fromMarkdown(md_chatbot_para_agendar_citas_whatsapp), en: fromMarkdown(en_chatbot_para_agendar_citas_whatsapp) },
   "pagina-web-para-restaurante-mexico": { es: fromMarkdown(md_pagina_web_para_restaurante_mexico) },
   "precio-pagina-web-peru": { es: fromMarkdown(md_precio_pagina_web_peru), en: fromMarkdown(en_precio_pagina_web_peru) },
   "precio-pagina-web-ecuador": { es: fromMarkdown(md_precio_pagina_web_ecuador), en: fromMarkdown(en_precio_pagina_web_ecuador) },
