@@ -1,17 +1,20 @@
 .root {
   display: flex;
   align-items: flex-end;
-  gap: clamp(8px, 1.2vw, 14px);
+  gap: clamp(6px, 1vw, 12px);
 }
 
-.chat {
+/* Celular con el chat de WhatsApp */
+.phone {
+  order: 2;
   flex: 1;
   min-width: 0;
   border: 1px solid var(--line-2);
-  border-radius: 16px;
-  background: var(--surface);
+  border-radius: 22px;
+  background: #0b141a;
+  color: #e9edef;
   overflow: hidden;
-  box-shadow: 0 20px 60px -30px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 24px 70px -30px rgba(0, 0, 0, 0.7);
 }
 
 .head {
@@ -19,70 +22,135 @@
   align-items: center;
   gap: 10px;
   padding: 12px 14px;
-  border-bottom: 1px solid var(--line);
-  background: var(--surface-2);
+  background: #1f2c33;
   font-size: 14px;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 .head b {
   display: block;
   font-weight: 600;
 }
 .head small {
-  color: var(--green);
-  font-size: 12px;
+  color: #8696a0;
+  font-size: 11.5px;
 }
 .avatar {
+  display: grid;
+  place-items: center;
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: var(--c, var(--green));
-  box-shadow: inset 0 0 0 7px var(--surface-2);
+  background: #6a7175;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
   flex: none;
 }
 
 .thread {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  min-height: 236px;
-  padding: 14px;
-  background-image: radial-gradient(var(--line) 1px, transparent 1px);
+  gap: 7px;
+  height: 300px;
+  padding: 12px;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  background-color: #0b141a;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 14px 14px;
 }
 
 .bubble {
-  max-width: 82%;
-  margin: 0;
-  padding: 8px 12px;
-  border-radius: 12px;
-  font-size: 14px;
-  line-height: 1.4;
+  flex: none;
+  max-width: 84%;
+  padding: 6px 9px 4px;
+  border-radius: 9px;
+  font-size: 13px;
+  line-height: 1.35;
   animation: pop 0.35s var(--ease-out, ease-out) both;
 }
+.bubble p {
+  margin: 0;
+}
+.bubble time {
+  display: block;
+  margin-top: 2px;
+  text-align: right;
+  font-size: 10px;
+  color: rgba(233, 237, 239, 0.55);
+}
 .user {
-  align-self: flex-end;
-  background: var(--c, var(--green));
-  color: #06140c;
-  border-bottom-right-radius: 4px;
+  align-self: flex-start;
+  background: #202c33;
+  border-top-left-radius: 2px;
 }
 .bot {
-  align-self: flex-start;
-  background: var(--bg);
-  border: 1px solid var(--line-2);
-  border-bottom-left-radius: 4px;
+  align-self: flex-end;
+  background: #005c4b;
+  border-top-right-radius: 2px;
+}
+.label {
+  display: block;
+  margin-bottom: 2px;
+  font-family: var(--mono, monospace);
+  font-size: 10px;
+  font-weight: 600;
+  color: #8dffb0;
+}
+
+.menu {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  margin: 6px 0 2px;
+  padding: 10px 8px 8px;
+  border-radius: 6px;
+  background: #0b2e26;
+  text-align: center;
+}
+.menu b {
+  font-size: 12px;
+}
+.menu small {
+  font-size: 10.5px;
+  color: rgba(233, 237, 239, 0.65);
+}
+.pizza {
+  width: 34px;
+  height: 34px;
+  margin-bottom: 4px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 40%, #c0392b 0 3px, transparent 3.5px),
+    radial-gradient(circle at 62% 58%, #c0392b 0 3px, transparent 3.5px),
+    radial-gradient(circle at 60% 30%, #c0392b 0 2.5px, transparent 3px),
+    radial-gradient(circle, #f6c453 0 13px, #d98b2b 13.5px);
+}
+
+.confirm {
+  flex: none;
+  align-self: center;
+  margin: 4px 0 0;
+  padding: 5px 10px;
+  border: 1px solid #25d366;
+  border-radius: 8px;
+  color: #c9f7d8;
+  font-family: var(--mono, monospace);
+  font-size: 11px;
+  white-space: nowrap;
+  animation: pop 0.35s var(--ease-out, ease-out) both;
 }
 
 .dots {
   display: inline-flex;
   gap: 4px;
-  padding: 12px 14px;
+  padding: 10px 12px;
 }
 .dots i {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--muted);
+  background: #8dffb0;
   animation: blink 1s infinite;
 }
 .dots i:nth-child(2) {
@@ -92,44 +160,72 @@
   animation-delay: 0.3s;
 }
 
-/* Robot en pixel art */
+/* Robot de K&T en pixel art */
 .robot {
-  order: -1;
+  order: 1;
   flex: none;
-  width: clamp(76px, 8vw, 118px);
-  margin-bottom: -4px;
+  width: clamp(112px, 13vw, 190px);
   height: auto;
-  image-rendering: pixelated;
-  animation: bob 2.4s ease-in-out infinite;
-  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35));
+  animation: bob 2.6s ease-in-out infinite;
+  filter: drop-shadow(0 0 14px rgba(110, 255, 150, 0.18)) drop-shadow(0 12px 18px rgba(0, 0, 0, 0.45));
 }
-.k {
-  fill: var(--fg);
+.case {
+  fill: #2b2724;
 }
-.g {
-  fill: var(--c, var(--green));
+.edge {
+  fill: #3d3833;
 }
-.s {
-  fill: #0f2318;
+.screen {
+  fill: #110f0d;
 }
-.e {
-  fill: #8dffbf;
+.stem {
+  fill: #5d5650;
+}
+.bulb {
+  fill: #8dffb0;
+  animation: glow 1.8s ease-in-out infinite;
+}
+.dr {
+  fill: #ff6b6b;
+}
+.dy {
+  fill: #f5c26b;
+}
+.dg {
+  fill: #6fd36f;
+}
+.led {
+  fill: #8dffb0;
+}
+.eye {
   transform-box: fill-box;
   transform-origin: center;
-  animation: eyes 4s infinite;
+  animation: eyes 4.5s infinite;
 }
-.m {
-  fill: #8dffbf;
+.cursor {
+  animation: cursor 1.1s steps(1) infinite;
 }
-.a {
-  fill: var(--yellow);
-  animation: blink 1.6s steps(1) infinite;
-}
-.open {
+.mouthOpen {
   opacity: 0;
 }
-.talking .open {
-  animation: talk 0.28s steps(1) infinite;
+.talking .mouthClosed {
+  animation: talk 0.36s steps(1) infinite reverse;
+}
+.talking .mouthOpen {
+  animation: talk 0.36s steps(1) infinite;
+}
+.cream {
+  fill: #f1e6cf;
+}
+.hand {
+  fill: #e9d9bd;
+}
+.wave {
+  transform-box: fill-box;
+  transform-origin: bottom left;
+}
+.talking .wave {
+  animation: wave 0.7s ease-in-out infinite;
 }
 
 @keyframes pop {
@@ -143,6 +239,11 @@
     opacity: 0.3;
   }
 }
+@keyframes glow {
+  50% {
+    opacity: 0.6;
+  }
+}
 @keyframes bob {
   50% {
     transform: translateY(-4px);
@@ -150,27 +251,44 @@
 }
 @keyframes eyes {
   0%,
-  92%,
+  93%,
   100% {
     transform: scaleY(1);
   }
-  95% {
-    transform: scaleY(0.1);
+  96% {
+    transform: scaleY(0.15);
+  }
+}
+@keyframes cursor {
+  50% {
+    opacity: 0;
   }
 }
 @keyframes talk {
-  50% {
+  0% {
     opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes wave {
+  50% {
+    transform: translateY(-2px) rotate(-12deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .robot,
-  .e,
-  .a,
+  .bulb,
+  .eye,
+  .cursor,
   .bubble,
+  .confirm,
   .dots i,
-  .talking .open {
+  .talking .mouthClosed,
+  .talking .mouthOpen,
+  .talking .wave {
     animation: none;
   }
 }
