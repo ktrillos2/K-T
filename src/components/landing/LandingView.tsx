@@ -22,6 +22,7 @@ import { TitleArt } from "@/components/blog/TitleArt";
 import type { BlogCategory } from "@/content/blog/types";
 import article from "@/components/blog/Article.module.css";
 import styles from "./LandingView.module.css";
+import { ChatbotHero } from "./ChatbotHero";
 
 export type LandingViewProps = {
   kind: LandingKind;
@@ -88,7 +89,7 @@ export function LandingView({ kind, slug, color, plan, copy, blocks, projects, p
             <i aria-hidden="true" /> <Scramble trigger="enter" text={copy.eyebrow} />
           </p>
           <Reveal mode="enter" delay={0.4} className={styles.heroArt}>
-            <TitleArt title={copy.h1} slug={slug} category={artCategory} color={color} size="lg" autoplay />
+            {slug === "chatbot-whatsapp" ? <ChatbotHero /> : <TitleArt title={copy.h1} slug={slug} category={artCategory} color={color} size="lg" autoplay />}
           </Reveal>
           <SplitTitle as="h1" mode="enter" className={styles.h1} tabIndex={-1}>
             {copy.h1}
@@ -105,6 +106,7 @@ export function LandingView({ kind, slug, color, plan, copy, blocks, projects, p
               {l.seePricing}
             </TLink>
           </Reveal>
+          {slug === "chatbot-whatsapp" && <ChatbotHero className={styles.mobileArt} />}
           <Reveal mode="enter" delay={0.55} as="dl" stagger={0.06} className={styles.facts}>
             {copy.facts.map(([k, v]) => (
               <div key={k}>

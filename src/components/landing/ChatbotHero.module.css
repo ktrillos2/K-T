@@ -1,0 +1,176 @@
+.root {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(8px, 1.2vw, 14px);
+}
+
+.chat {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--line-2);
+  border-radius: 16px;
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: 0 20px 60px -30px rgba(0, 0, 0, 0.6);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+  font-size: 14px;
+  line-height: 1.2;
+}
+.head b {
+  display: block;
+  font-weight: 600;
+}
+.head small {
+  color: var(--green);
+  font-size: 12px;
+}
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--c, var(--green));
+  box-shadow: inset 0 0 0 7px var(--surface-2);
+  flex: none;
+}
+
+.thread {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 236px;
+  padding: 14px;
+  background-image: radial-gradient(var(--line) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+.bubble {
+  max-width: 82%;
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  animation: pop 0.35s var(--ease-out, ease-out) both;
+}
+.user {
+  align-self: flex-end;
+  background: var(--c, var(--green));
+  color: #06140c;
+  border-bottom-right-radius: 4px;
+}
+.bot {
+  align-self: flex-start;
+  background: var(--bg);
+  border: 1px solid var(--line-2);
+  border-bottom-left-radius: 4px;
+}
+
+.dots {
+  display: inline-flex;
+  gap: 4px;
+  padding: 12px 14px;
+}
+.dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--muted);
+  animation: blink 1s infinite;
+}
+.dots i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.dots i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Robot en pixel art */
+.robot {
+  order: -1;
+  flex: none;
+  width: clamp(76px, 8vw, 118px);
+  margin-bottom: -4px;
+  height: auto;
+  image-rendering: pixelated;
+  animation: bob 2.4s ease-in-out infinite;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35));
+}
+.k {
+  fill: var(--fg);
+}
+.g {
+  fill: var(--c, var(--green));
+}
+.s {
+  fill: #0f2318;
+}
+.e {
+  fill: #8dffbf;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: eyes 4s infinite;
+}
+.m {
+  fill: #8dffbf;
+}
+.a {
+  fill: var(--yellow);
+  animation: blink 1.6s steps(1) infinite;
+}
+.open {
+  opacity: 0;
+}
+.talking .open {
+  animation: talk 0.28s steps(1) infinite;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.97);
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0.3;
+  }
+}
+@keyframes bob {
+  50% {
+    transform: translateY(-4px);
+  }
+}
+@keyframes eyes {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+@keyframes talk {
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .robot,
+  .e,
+  .a,
+  .bubble,
+  .dots i,
+  .talking .open {
+    animation: none;
+  }
+}
