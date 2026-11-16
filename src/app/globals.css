@@ -341,9 +341,3 @@ html.has-cursor button {
   }
 }
 
-/* En celular hay una barra fija inferior con el botón de WhatsApp (MobileCta). */
-@media (max-width: 760px) {
-  :root {
-    --status-h: 68px;
-  }
-}

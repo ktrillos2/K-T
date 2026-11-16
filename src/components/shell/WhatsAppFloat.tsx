@@ -32,10 +32,10 @@ const ICON = [
   "GGGGDDGGGGGD....",
   "GGD.............",
 ];
-export const WA_CELLS = ICON.flatMap((row, y) =>
+const CELLS = ICON.flatMap((row, y) =>
   [...row].flatMap((ch, x) => (ch === "." ? [] : [{ x, y, ch, d: Math.hypot(x - 7.5, y - 7.5) }])),
 );
-export const WA_FILL: Record<string, string> = { G: "#62c453", W: "#f2f2ee", D: "#3f8f35" };
+const FILL: Record<string, string> = { G: "#62c453", W: "#f2f2ee", D: "#3f8f35" };
 
 const BUBBLE_KEY = "kt-wa-bubble";
 
@@ -60,6 +60,8 @@ export function WhatsAppFloat() {
   const [contactInView, setContactInView] = useState(false);
   const [bubble, setBubble] = useState<"off" | "typing" | "on">("off");
   const [seen, setSeen] = useState(false);
+  // El botón se abre solo cada tanto para mostrar el texto y luego se vuelve a cerrar.
+  const [peek, setPeek] = useState(false);
   const root = useRef<HTMLDivElement>(null);
 
   const available = !contactInView && !transitioning && !menuOpen && !paletteOpen;
@@ -109,6 +111,27 @@ export function WhatsAppFloat() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, seen, mobile]);
 
+  useEffect(() => {
+    if (!visible || bubble !== "off") {
+      setPeek(false);
+      return;
+    }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let close = 0;
+    const open = () => {
+      if (document.hidden) return;
+      setPeek(true);
+      close = window.setTimeout(() => setPeek(false), 3800);
+    };
+    const first = window.setTimeout(open, 1800);
+    const loop = window.setInterval(open, 11000);
+    return () => {
+      window.clearTimeout(first);
+      window.clearTimeout(close);
+      window.clearInterval(loop);
+    };
+  }, [visible, bubble]);
+
   const dismiss = () => {
     setBubble("off");
     setSeen(true);
@@ -122,7 +145,7 @@ export function WhatsAppFloat() {
   const href = wa(f.message(pageLabel(pathname || "/")));
 
   return (
-    <div ref={root} className={styles.root} data-visible={visible} data-available={available} data-bubble={bubble} data-track="flotante">
+    <div ref={root} className={styles.root} data-visible={visible} data-available={available} data-bubble={bubble} data-peek={peek} data-track="flotante">
       {!mobile && bubble !== "off" && (
         <div className={styles.bubble} role="status">
           <button type="button" className={styles.close} onClick={dismiss} aria-label={f.close}>
@@ -155,8 +178,8 @@ export function WhatsAppFloat() {
       >
         <span className={styles.icon} aria-hidden="true">
           <svg viewBox="-1 -1 18 18" shapeRendering="crispEdges">
-            {WA_CELLS.map((c, i) => (
-              <rect key={i} x={c.x} y={c.y} width="1" height="1" fill={WA_FILL[c.ch]} style={{ transitionDelay: `${(c.d * 0.035).toFixed(3)}s` }} />
+            {CELLS.map((c, i) => (
+              <rect key={i} x={c.x} y={c.y} width="1" height="1" fill={FILL[c.ch]} style={{ transitionDelay: `${(c.d * 0.035).toFixed(3)}s` }} />
             ))}
           </svg>
           {!seen && <span className={styles.badge}>1</span>}
