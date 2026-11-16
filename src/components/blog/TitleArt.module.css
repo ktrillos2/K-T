@@ -819,6 +819,106 @@
 
 /* Portada dentro de un artículo: anima sola mientras está en pantalla (en las cards se mantiene hover / viewport).
    Más específica que las reglas de pausa de arriba para ganarles en cualquier pantalla. */
+/* ---------- Robot de K&T (chatbots, WhatsApp y agentes de IA) ---------- */
+.botScene {
+  position: absolute;
+  inset: 8% 6% 6%;
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  align-items: end;
+  gap: 3cqw;
+}
+.botRobot {
+  width: 100%;
+  margin-bottom: -1cqw;
+}
+.botChat {
+  display: grid;
+  gap: 2cqw;
+  align-content: end;
+  padding: 2.6cqw;
+  border-radius: 3cqw;
+  background: #0b141a;
+  border: 1px solid var(--line-2);
+  box-shadow: 0 2cqw 6cqw -3cqw rgba(0, 0, 0, 0.6);
+  font-size: 3cqw;
+  line-height: 1.3;
+  color: #e9edef;
+}
+.botHead {
+  display: flex;
+  align-items: center;
+  gap: 1.4cqw;
+  font-size: 2.4cqw;
+  color: #8696a0;
+}
+.botHead i {
+  width: 1.6cqw;
+  height: 1.6cqw;
+  background: #25d366;
+  animation: blink 1.2s steps(1) infinite;
+}
+.botAsk {
+  justify-self: start;
+  max-width: 92%;
+  padding: 1.6cqw 2.2cqw;
+  border-radius: 0.6cqw 2cqw 2cqw 2cqw;
+  background: #202c33;
+  animation: botIn 6s var(--ease) infinite;
+}
+.botReply {
+  justify-self: end;
+  display: grid;
+  gap: 1.2cqw;
+  width: 70%;
+  padding: 1.6cqw 2.2cqw 1.2cqw;
+  border-radius: 2cqw 0.6cqw 2cqw 2cqw;
+  background: #005c4b;
+  animation: botIn 6s var(--ease) infinite;
+  animation-delay: 0.9s;
+}
+.botReply b {
+  font-family: var(--mono, monospace);
+  font-size: 2.2cqw;
+  color: #8dffb0;
+}
+.botReply i {
+  height: 1.5cqw;
+  border-radius: 99px;
+  background: rgba(233, 237, 239, 0.35);
+}
+.botReply i:nth-of-type(2) {
+  width: 62%;
+  background: #8dffb0;
+}
+.botReply small {
+  justify-self: end;
+  font-size: 2cqw;
+  color: rgba(233, 237, 239, 0.6);
+}
+/* El estado de reposo (0%) es la conversación completa: así la portada se ve bien aunque la animación esté pausada. */
+@keyframes botIn {
+  0%,
+  80%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+  86% {
+    opacity: 0;
+    transform: translateY(25%);
+  }
+  94% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0.3;
+  }
+}
+
 .art.art[data-autoplay][data-on="true"],
 .art.art[data-autoplay][data-on="true"] * {
   animation-play-state: running !important;

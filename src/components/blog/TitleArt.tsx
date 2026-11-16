@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import type { BlogCategory } from "@/content/blog/types";
 import { shortHash, vars } from "@/lib/utils";
 import { useI18n } from "@/i18n/I18nProvider";
+import { KtRobot } from "@/components/ui/KtRobot";
 import styles from "./TitleArt.module.css";
 
 type Props = {
@@ -17,7 +18,7 @@ type Props = {
   autoplay?: boolean;
 };
 
-type Variant = "versus" | "price" | "search" | "chat" | "terminal" | "receipt" | "bars" | "browser" | "phone";
+type Variant = "versus" | "price" | "search" | "chat" | "terminal" | "receipt" | "bars" | "browser" | "phone" | "bot";
 
 const clean = (s: string) =>
   s
@@ -30,7 +31,7 @@ const clean = (s: string) =>
 const POOL: Record<BlogCategory, Variant[]> = {
   precios: ["price", "receipt", "bars"],
   "seo-geo": ["search", "bars", "search"],
-  ia: ["chat", "phone", "terminal"],
+  ia: ["bot", "chat", "terminal"],
   ecommerce: ["browser", "receipt", "phone"],
   "desarrollo-web": ["browser", "terminal"],
   software: ["terminal", "browser"],
@@ -48,7 +49,9 @@ function analyze(title: string, category: BlogCategory, seed: number) {
     .replace(/^qu[eé] es (el|la|un|una)?\s*/i, "")
     .replace(/\s+en\s+colombia.*$/i, "")
     .replace(/^(el|la|una?|los|las)\s+/i, "");
-  if (/ads|remarketing|publicidad|whatsapp|instagram|tiktok/i.test(head)) return { variant: "phone" as Variant, a: subject, b: "" };
+  // Chatbots, WhatsApp y agentes de IA: el robot de K&T atendiendo la pregunta.
+  if (/chatbot|\bbots?\b|agentes?\b|asistente|whatsapp/i.test(head)) return { variant: "bot" as Variant, a: head, b: "" };
+  if (/ads|remarketing|publicidad|instagram|tiktok/i.test(head)) return { variant: "phone" as Variant, a: subject, b: "" };
   const pool = POOL[category] ?? ["terminal"];
   const variant = pool[seed % pool.length];
   return { variant, a: variant === "search" ? head.toLowerCase() : variant === "chat" || variant === "terminal" ? head : subject, b: "" };
@@ -224,6 +227,23 @@ export function TitleArt({ title, slug, category, color, size = "md", className,
           </span>
           <span className={styles.notif} style={vars({ "--i": 1 })}>
             {en ? "WhatsApp · 3 messages" : "WhatsApp · 3 mensajes"}
+          </span>
+        </div>
+      )}
+      {variant === "bot" && (
+        <div className={styles.botScene}>
+          <KtRobot talking className={styles.botRobot} />
+          <span className={styles.botChat}>
+            <span className={styles.botHead}>
+              <i /> WhatsApp · {en ? "online" : "en línea"}
+            </span>
+            <span className={styles.botAsk}>{a.length > 52 ? `${a.slice(0, 50)}…` : a}?</span>
+            <span className={styles.botReply}>
+              <b>{en ? ">_ K&T Assistant" : ">_ Asistente K&T"}</b>
+              <i />
+              <i />
+              <small>3:07 {en ? "a.m." : "a.\u00a0m."} ✓✓</small>
+            </span>
           </span>
         </div>
       )}
