@@ -11,6 +11,8 @@ Objetivo: abrir mercados fuera de Colombia en Google. Cada corrida agrega **1 pa
 
 > **Skills de Claude SEO:** si están instaladas (se instalan solas al iniciar la sesión; revisa que exista la skill `seo`), úsalas como apoyo en esta tarea: `seo-hreflang` (etiquetas de idioma y país), `seo-local` y `seo-schema`. Sus hallazgos son recomendaciones: aplica solo lo que sea claro y verifica antes de publicar. Si no están disponibles, sigue con los pasos de abajo.
 
+> **Que no suene a IA:** los textos de la página siguen `docs/blog/escritura-natural.md` (sin frases típicas de IA, con detalles reales de cómo trabaja K&T Code con ese país). Publica directo en `main` sin pedir aprobación si la validación pasa.
+
 ## 1. Elegir el país
 
 - Países ya publicados: `src/content/landings/countries.ts` (arreglo `COUNTRIES`).

@@ -7,6 +7,10 @@ description: Actualiza 4 artículos antiguos del blog de www.kytcode.lat cada me
 
 Objetivo: que los artículos viejos sigan posicionando y **lleven a contratar**. Google premia el contenido al día, y cada artículo debe dirigir a los servicios y precios de K&T Code.
 
+> **Publicación automática:** esta skill corre sola (tarea programada). No pidas aprobación: si la validación pasa, publica directo en `main`. Si algo falla y no lo puedes corregir, no publiques y explica qué pasó.
+
+> **Que no suene a IA (obligatorio):** todo texto nuevo o reescrito sigue `docs/blog/escritura-natural.md` y pasa por la pasada de edición del paso 2b.
+
 > **Datos de Search Console guardados:** si el conector GSC no responde (la prueba de GSC Wizard vence el 2026-11-02), usa la foto más reciente en `docs/seo/gsc-*.md` (páginas, consultas, oportunidades, indexación y pendientes). Si el conector sí funciona, al terminar agrega una foto nueva `docs/seo/gsc-<año>-<mes>.md` con el mismo formato.
 
 > **Skills de Claude SEO:** si están instaladas (se instalan solas al iniciar la sesión; revisa que exista la skill `seo`), úsalas como apoyo en esta tarea: `seo-content` (calidad y E-E-A-T del artículo), `seo-content-brief` (qué le falta frente a la competencia) y `seo-geo` (que la IA lo cite). Sus hallazgos son recomendaciones: aplica solo lo que sea claro y verifica antes de publicar. Si no están disponibles, sigue con los pasos de abajo.
@@ -19,6 +23,8 @@ Objetivo: que los artículos viejos sigan posicionando y **lleven a contratar**.
   2. Los de fecha más antigua.
   3. Los de temas comerciales (precios, comparativas, "cómo elegir").
 - No toques los artículos que se actualizaron en los últimos 60 días.
+- **Rastreados sin indexar o débiles:** los artículos que `docs/seo/gsc-*.md` (o el conector GSC) marcan como «rastreada sin indexar», o con muchas impresiones y CTR bajo, van primero. Para ellos no basta la sección de servicios: amplía con experiencia propia, una respuesta directa al inicio y preguntas reales.
+- **Unir en vez de mantener dos:** si dos artículos responden la misma búsqueda, deja el más fuerte, pásale lo útil del otro y redirige el débil con un 301 en `next.config.ts` (`redirects`) y quítalo de `meta.ts`, `meta.en.ts` e `index.ts`. Hazlo solo si es claro; si dudas, déjalo como recomendación en el resumen.
 - **Si el conector GSC está disponible** (herramientas `mcp__GSC__*`; búscalas con ToolSearch "GSC"), úsalo primero. Propiedad: `sc-domain:kytcode.lat`.
   - `find_decaying_content`: artículos que **pierden clics**.
   - `score_opportunities` o `query_top_pages`: artículos en **posición 8–20** con muchas impresiones y CTR bajo (quick wins). Para esos, mejora el título y la descripción (`meta.ts`) para subir el CTR.
@@ -41,6 +47,18 @@ Objetivo: que los artículos viejos sigan posicionando y **lleven a contratar**.
   - En `BILINGUAL`, cambia `updated` a la fecha de hoy.
   - Nunca cambies la fecha de publicación (`date`).
 
+- **Experiencia propia:** agrega al menos un detalle real del trabajo de K&T Code o un proyecto de `src/content/projects` que encaje. Sin inventar resultados.
+
+## 2b. Pasada de edición: que suene humano (obligatorio)
+
+Relee cada artículo tocado como editor, siguiendo `docs/blog/escritura-natural.md`: parafrasea los párrafos genéricos, quita frases típicas de IA, varía el ritmo, usa menos negritas y viñetas. Luego corre el revisor hasta que diga «OK»:
+
+```bash
+node scripts/revisar-texto-blog.mjs src/content/blog/posts/es/<slug>.ts src/content/blog/posts/en/<slug>.ts
+```
+
+Si la skill `seo-content` de Claude SEO está disponible, úsala para la limpieza final.
+
 ## 3. Validar (obligatorio)
 
 ```bash
@@ -51,11 +69,12 @@ curl -s http://localhost:3123/blog/<slug> | grep -c 'id="k-t-code"'
 ```
 
 - Cada enlace interno nuevo debe responder 200 en el servidor local. Detén el servidor al terminar.
+- El revisor de texto del paso 2b debe terminar en «OK».
 
 ## 4. Publicar
 
 - Commit: "Blog: actualiza <n> artículos (servicios, precios y datos al día)", con la lista de slugs y las líneas de atribución que pida el sistema.
-- `git fetch origin main && git rebase origin/main && git push origin HEAD:main`. Nunca uses force push.
+- Publica directo, **sin pedir aprobación**: `git fetch origin main && git rebase origin/main && git push origin HEAD:main`. Nunca uses force push.
 
 - **Avisar a Bing (IndexNow):** después del push y del despliegue, si el conector GSC está disponible, llama `submit_indexnow_urls` (propiedad `sc-domain:kytcode.lat`) con las URLs nuevas o cambiadas en https://www.kytcode.lat (es y /en). La clave está publicada en `public/2270981fee1394870a997bfc141e97a2.txt`; no la borres.
 

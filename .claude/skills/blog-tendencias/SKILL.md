@@ -5,7 +5,13 @@ description: Investiga tendencias de búsqueda con el conector Keyword Tool y pu
 
 # Blog por tendencias (K&T Code)
 
-Objetivo: atraer clientes de desarrollo web de forma orgánica en **Latinoamérica y Estados Unidos** para **www.kytcode.lat**. Cada corrida publica **2 artículos nuevos**, reales y útiles, en español e inglés, que terminen llevando al lector a los servicios y precios de K&T Code.
+Objetivo: atraer clientes de desarrollo web de forma orgánica en **Latinoamérica y Estados Unidos** para **www.kytcode.lat**. Cada corrida publica **hasta 2 artículos nuevos**, reales y útiles, en español e inglés, que terminen llevando al lector a los servicios y precios de K&T Code.
+
+> **Publicación automática:** esta skill corre sola (tarea programada). No pidas aprobación ni dejes borradores: si la validación del paso 6 pasa, publica directo en `main`. Si algo falla y no lo puedes corregir, no publiques y explica qué pasó en el resumen.
+
+> **Calidad antes que cantidad:** máximo 2 artículos por semana. Publicar más no ayuda a posicionar si el contenido es parecido o genérico; Google y los buscadores con IA premian artículos con experiencia propia y datos verificables.
+
+> **Que no suene a IA (obligatorio):** sigue `docs/blog/escritura-natural.md` al escribir y haz la pasada de edición del paso 4b antes de registrar.
 
 > **Datos de Search Console guardados:** si el conector GSC no responde (la prueba de GSC Wizard vence el 2026-11-02), usa la foto más reciente en `docs/seo/gsc-*.md` (páginas, consultas, oportunidades, indexación y pendientes). Si el conector sí funciona, al terminar agrega una foto nueva `docs/seo/gsc-<año>-<mes>.md` con el mismo formato.
 
@@ -15,6 +21,14 @@ Objetivo: atraer clientes de desarrollo web de forma orgánica en **Latinoaméri
 
 - Temas y slugs publicados: `src/content/blog/meta.ts` (arreglos `ES_ONLY` y `BILINGUAL`) y `src/content/blog/meta.en.ts`.
 - Un tema está repetido si otro artículo responde la misma intención de búsqueda, aunque el título sea distinto.
+
+### ¿Actualizar en vez de escribir uno nuevo?
+
+Antes de crear un artículo, revisa si ya hay uno cercano al tema elegido. **Si existe, es mejor mejorarlo** (más secciones, datos al día, preguntas nuevas, título más claro) que publicar otro que compita con él (canibalización). En ese caso:
+
+- Amplía el artículo existente siguiendo la skill `actualizar-blog` (sección {#k-t-code}, datos, enlaces, fecha en `REFRESHED` o `updated`) y la pasada de edición del paso 4b. No cambies su slug ni su fecha de publicación.
+- Cuenta como uno de los 2 artículos de la semana. En el resumen di que fue una actualización y por qué.
+- Prioriza para esto los artículos que en `docs/seo/gsc-*.md` (o el conector GSC) aparecen con muchas impresiones y CTR bajo, o como «rastreada sin indexar».
 
 ## 2. Investigar con Keyword Tool
 
@@ -78,8 +92,24 @@ Cada artículo debe tener:
 - **FAQ** de 4 preguntas que respondan las búsquedas encontradas (salen como datos estructurados).
 - **Fuentes**: solo sitios oficiales o de referencia, con URL real.
 - Tono cercano, frases cortas, español de Colombia. Inglés natural, no traducción literal.
+- **Experiencia propia:** al menos 2 detalles del trabajo real de K&T Code (qué preguntan los clientes, qué retrasa un proyecto, cuánto tarda de verdad) y, si encaja, un proyecto real de `src/content/projects`. Sin inventar resultados ni testimonios. Ver `docs/blog/escritura-natural.md`.
 
 - **Avisar a Bing (IndexNow):** después del push y del despliegue, si el conector GSC está disponible, llama `submit_indexnow_urls` (propiedad `sc-domain:kytcode.lat`) con las URLs nuevas o cambiadas en https://www.kytcode.lat (es y /en). La clave está publicada en `public/2270981fee1394870a997bfc141e97a2.txt`; no la borres.
+
+## 4b. Pasada de edición: que suene humano (obligatorio)
+
+Con el borrador listo, reléelo **como editor, no como redactor**, siguiendo `docs/blog/escritura-natural.md`:
+
+1. Parafrasea con tus palabras los párrafos genéricos o que suenen a folleto; quita frases de relleno y frases típicas de IA («en el mundo actual», «es importante destacar», «sin lugar a dudas», «delve», «seamless»…).
+2. Varía el largo de las frases y los párrafos; menos negritas y menos viñetas; explica en prosa cuando haya un porqué.
+3. Revisa que cada H2 responda en su primera frase y que haya opinión clara («te recomendamos X si…»).
+4. Corre el revisor y corrige hasta que diga «OK» (sin errores):
+
+   ```bash
+   node scripts/revisar-texto-blog.mjs src/content/blog/posts/es/<slug>.ts src/content/blog/posts/en/<slug>.ts
+   ```
+
+5. Si la skill `seo-content` de Claude SEO está disponible, úsala para la limpieza final (frases de IA y caracteres invisibles) y una revisión rápida de E-E-A-T.
 
 ## 5. Registrar
 
@@ -102,17 +132,18 @@ curl -s http://localhost:3123/blog/<slug> | grep -c 'Quiz_\|Checklist_\|id="k-t-
 ```
 
 - Cada enlace interno nuevo debe responder 200 en el servidor local.
+- `node scripts/revisar-texto-blog.mjs <archivos es y en>` debe terminar en «OK».
 - Si algo falla, corrígelo. No publiques con errores.
 - Detén el servidor al terminar.
 
 ## 7. Publicar
 
 - Commit en español, con los títulos y las palabras clave que respaldan cada tema, más las líneas de atribución que pida el sistema.
-- Publica directo en `main`: `git fetch origin main`, `git rebase origin/main` (son commits propios), `git push origin HEAD:main`. Nunca uses force push. Si el push falla por red, reintenta con espera creciente.
+- Publica directo en `main`, **sin pedir aprobación**: `git fetch origin main`, `git rebase origin/main` (son commits propios), `git push origin HEAD:main`. Nunca uses force push. Si el push falla por red, reintenta con espera creciente.
 
 ## 8. Resumen final
 
 Responde breve en español:
 
-- Los 2 artículos: título, URL (`https://www.kytcode.lat/blog/<slug>`) y las palabras clave que los respaldan.
+- Los 2 artículos (nuevos o actualizados): título, URL (`https://www.kytcode.lat/blog/<slug>`) y las palabras clave que los respaldan.
 - 3–5 ideas de temas para la próxima corrida.
