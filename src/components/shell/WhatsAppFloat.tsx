@@ -32,10 +32,10 @@ const ICON = [
   "GGGGDDGGGGGD....",
   "GGD.............",
 ];
-const CELLS = ICON.flatMap((row, y) =>
+export const WA_CELLS = ICON.flatMap((row, y) =>
   [...row].flatMap((ch, x) => (ch === "." ? [] : [{ x, y, ch, d: Math.hypot(x - 7.5, y - 7.5) }])),
 );
-const FILL: Record<string, string> = { G: "#62c453", W: "#f2f2ee", D: "#3f8f35" };
+export const WA_FILL: Record<string, string> = { G: "#62c453", W: "#f2f2ee", D: "#3f8f35" };
 
 const BUBBLE_KEY = "kt-wa-bubble";
 
@@ -155,8 +155,8 @@ export function WhatsAppFloat() {
       >
         <span className={styles.icon} aria-hidden="true">
           <svg viewBox="-1 -1 18 18" shapeRendering="crispEdges">
-            {CELLS.map((c, i) => (
-              <rect key={i} x={c.x} y={c.y} width="1" height="1" fill={FILL[c.ch]} style={{ transitionDelay: `${(c.d * 0.035).toFixed(3)}s` }} />
+            {WA_CELLS.map((c, i) => (
+              <rect key={i} x={c.x} y={c.y} width="1" height="1" fill={WA_FILL[c.ch]} style={{ transitionDelay: `${(c.d * 0.035).toFixed(3)}s` }} />
             ))}
           </svg>
           {!seen && <span className={styles.badge}>1</span>}
