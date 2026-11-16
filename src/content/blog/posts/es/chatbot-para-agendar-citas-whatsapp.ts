@@ -90,7 +90,7 @@ Si agendas citas médicas, odontológicas o psicológicas, los datos de salud so
 
 ## ¿Cómo te ayuda K&T Code con tu bot de citas? {#k-t-code}
 
-Trabajamos en remoto con negocios de México, Argentina y toda la región. Conectamos WhatsApp con tu agenda y tu web para que las citas lleguen solas.
+Trabajamos en remoto con negocios de México, Argentina y toda la región. Conectamos WhatsApp con tu agenda y tu web para que las citas lleguen solas. Mira cómo funciona nuestro [chatbot de WhatsApp con IA](/servicios/chatbot-whatsapp) y pide una demo gratis.
 
 Tabla: Servicios relacionados y precios de partida en tu moneda.
 | Necesitas | Servicio | Desde |

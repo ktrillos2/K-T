@@ -90,7 +90,7 @@ If you book medical, dental or therapy appointments, health information is **sen
 
 ## How K&T Code helps with your booking bot {#k-t-code}
 
-We work remotely with businesses in Mexico, Argentina, the US and across the region. We connect WhatsApp to your calendar and your website so appointments come in on their own.
+We work remotely with businesses in Mexico, Argentina, the US and across the region. We connect WhatsApp to your calendar and your website so appointments come in on their own. See how our [AI WhatsApp chatbot](/servicios/chatbot-whatsapp) works and book a free demo.
 
 Table: Related services and starting prices in your currency.
 | You need | Service | From |

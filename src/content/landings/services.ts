@@ -675,4 +675,125 @@ No page to send the ads to yet? A [landing page](/servicios/landing-pages) from 
       },
     },
   },
+  {
+    kind: "servicio",
+    slug: "chatbot-whatsapp",
+    path: S("chatbot-whatsapp"),
+    color: "green",
+    serviceType: "Chatbot de WhatsApp con inteligencia artificial para negocios (API oficial de WhatsApp Business)",
+    projects: [],
+    posts: ["chatbot-para-agendar-citas-whatsapp", "automatizar-whatsapp-business-con-ia", "agentes-ia-empresas-colombia"],
+    related: [S("administracion-de-ads"), S("software-a-medida"), S("landing-pages")],
+    copy: {
+      es: {
+        title: "Chatbot de WhatsApp con IA para negocios: ventas, citas y pedidos",
+        description: "Chatbot de WhatsApp con IA que responde en segundos, agenda citas, toma pedidos y pasa a una persona cuando hace falta. API oficial. Agenda una demo gratis.",
+        eyebrow: "servicios · chatbot de WhatsApp",
+        h1: "Chatbot de WhatsApp con IA que responde mientras tú trabajas",
+        lead: "Un chatbot de WhatsApp con IA contesta a tus clientes a cualquier hora, entiende mensajes escritos como los escribe la gente, agenda citas, toma pedidos y te pasa la conversación cuando hace falta una persona. Lo conectamos con la API oficial de WhatsApp Business, tu catálogo y tu calendario. Estamos abriendo los primeros cupos: escríbenos y te mostramos una demo con tu negocio.",
+        facts: [["Precio", "Según tu negocio"], ["Canal", "API oficial de WhatsApp"], ["Atiende", "24/7"], ["Demo", "Gratis"]],
+        includesTitle: "Qué hace tu chatbot",
+        includes: [
+          { t: "Responde al instante", d: "Precios, horarios, ubicación, envíos y las preguntas que te hacen todos los días, con tus palabras y tu tono." },
+          { t: "Entiende mensajes libres", d: "Con IA entiende «¿tienen algo para el jueves en la tarde?» y no obliga al cliente a escoger solo botones." },
+          { t: "Agenda citas", d: "Muestra horarios libres, reserva en tu calendario y envía recordatorios para que la gente no falte." },
+          { t: "Toma pedidos y cobra", d: "Muestra productos de tu catálogo, arma el pedido y envía el enlace de pago." },
+          { t: "Pasa a una persona", d: "Cuando la pregunta se sale del guion o el cliente lo pide, la conversación llega a tu equipo con todo el contexto." },
+          { t: "Medición", d: "Cuántas conversaciones llegaron, cuántas terminaron en cita o venta y qué preguntan más tus clientes." },
+        ],
+        forWhoTitle: "Ideal para",
+        forWho: ["Clínicas, consultorios y centros de estética que agendan citas", "Restaurantes y negocios que reciben pedidos por WhatsApp", "Tiendas que responden las mismas preguntas todo el día", "Negocios que pautan en Meta y no alcanzan a contestar los mensajes"],
+        body: `## ¿Cómo funciona un chatbot de WhatsApp con IA? {#como-funciona}
+
+El cliente te escribe a tu número de WhatsApp de siempre. El chatbot lee el mensaje, busca la respuesta en la información de tu negocio (precios, horarios, catálogo, calendario) y contesta en segundos. Si puede resolverlo solo, lo hace: agenda, toma el pedido o manda el enlace de pago. Si no, te pasa la conversación.
+
+Lo que más nos piden los negocios no es «un bot que hable bonito». Es dejar de perder clientes por contestar tarde, sobre todo de noche y los fines de semana, que es cuando más escriben quienes vienen de un anuncio.
+
+## ¿WhatsApp Business gratis o la API oficial? {#app-o-api}
+
+Tabla: Diferencias entre la app gratis y la API oficial de WhatsApp.
+| | App WhatsApp Business (gratis) | API oficial de WhatsApp Business |
+|---|---|---|
+| Respuestas automáticas | Saludo, ausencia y respuestas rápidas | Conversaciones completas con IA |
+| Agendar en tu calendario | No | Sí |
+| Varias personas atendiendo | Limitado | Sí, con historial compartido |
+| Conectar con tu web, tienda o CRM | No | Sí |
+| Costo de Meta | Gratis | Meta cobra por algunos mensajes que inicia la empresa, según el país |
+
+Si recibes pocos mensajes al día, la app gratis con buenas respuestas rápidas puede bastar; te lo decimos en la demo. El chatbot vale la pena cuando ya no alcanzas a responder a tiempo o cuando cada cliente que se va sin respuesta es una venta perdida.
+
+## ¿Cómo lo implementamos? {#proceso}
+
+1. **Demo y diagnóstico:** vemos qué te preguntan, cuántos mensajes recibes y qué debe resolver el bot.
+2. **Guion y conocimiento:** escribimos con tu equipo las respuestas, los precios y los casos en que debe pasar a una persona.
+3. **Conexión:** número en la API oficial, catálogo, calendario o sistema de pedidos.
+4. **Pruebas:** lo probamos con conversaciones reales antes de abrirlo a todos tus clientes.
+5. **Ajustes:** las primeras semanas revisamos las conversaciones y mejoramos las respuestas.
+
+¿Ya pautas en Facebook o Instagram con campañas de mensajes? El chatbot y la [administración de Ads](/servicios/administracion-de-ads) se complementan: los anuncios traen las conversaciones y el bot las atiende al instante.`,
+        faqs: [
+          { q: "¿Cuánto cuesta un chatbot de WhatsApp con IA?", a: "Depende de lo que deba hacer (responder, agendar, tomar pedidos o conectarse con tu sistema) y de cuántos mensajes recibes. Te damos el valor después de una demo gratis. Aparte, Meta cobra por algunos mensajes que inicia la empresa, según el país." },
+          { q: "¿Necesito cambiar mi número de WhatsApp?", a: "Puedes usar tu mismo número de negocio. Lo conectamos a la API oficial de WhatsApp Business; te explicamos en la demo qué cambia en tu celular." },
+          { q: "¿El chatbot reemplaza a mi equipo?", a: "No. Resuelve lo repetitivo y pasa a una persona las conversaciones que lo necesitan, con todo el contexto." },
+          { q: "¿Es seguro para datos de pacientes o clientes?", a: "Usamos la API oficial de Meta, pedimos solo los datos necesarios y definimos contigo qué información puede ver el bot." },
+          { q: "¿Funciona fuera de Colombia?", a: "Sí. Trabajamos con negocios de Colombia, Latinoamérica y Estados Unidos, en español e inglés." },
+        ],
+        keywords: ["chatbot whatsapp", "chatbot de WhatsApp con IA", "chatbot WhatsApp Business", "bot de WhatsApp para negocios", "chatbot para agendar citas", "chatbot para restaurantes", "automatizar WhatsApp"],
+      },
+      en: {
+        title: "AI WhatsApp chatbot for businesses: sales, bookings and orders",
+        description: "AI WhatsApp chatbot that replies in seconds, books appointments, takes orders and hands off to a person when needed. Official API. Book a free demo.",
+        eyebrow: "services · WhatsApp chatbot",
+        h1: "An AI WhatsApp chatbot that replies while you work",
+        lead: "An AI WhatsApp chatbot answers your customers at any hour, understands messages the way people actually write them, books appointments, takes orders and hands the chat to you when a person is needed. We connect it to the official WhatsApp Business API, your catalog and your calendar. We're opening the first spots now: message us and we'll show you a demo built around your business.",
+        facts: [["Price", "Based on your business"], ["Channel", "Official WhatsApp API"], ["Available", "24/7"], ["Demo", "Free"]],
+        includesTitle: "What your chatbot does",
+        includes: [
+          { t: "Instant answers", d: "Prices, hours, location, shipping and the questions you get every day, in your words and tone." },
+          { t: "Understands free text", d: "With AI it understands \"anything Thursday afternoon?\" instead of forcing customers to tap buttons." },
+          { t: "Books appointments", d: "Shows open slots, books them in your calendar and sends reminders to cut no-shows." },
+          { t: "Takes orders and payments", d: "Shows products from your catalog, builds the order and sends the payment link." },
+          { t: "Hands off to a person", d: "When a question goes off script or the customer asks, the chat reaches your team with full context." },
+          { t: "Reporting", d: "How many chats came in, how many became a booking or sale, and what customers ask most." },
+        ],
+        forWhoTitle: "Best for",
+        forWho: ["Clinics, practices and beauty centers that book appointments", "Restaurants and shops taking orders on WhatsApp", "Stores answering the same questions all day", "Businesses running Meta ads that can't keep up with messages"],
+        body: `## How does an AI WhatsApp chatbot work? {#como-funciona}
+
+Customers message your usual WhatsApp number. The chatbot reads the message, looks up the answer in your business info (prices, hours, catalog, calendar) and replies in seconds. If it can solve it, it does: books, takes the order or sends the payment link. If not, it hands the chat to you.
+
+What businesses ask us for isn't "a bot that sounds nice". It's to stop losing customers to slow replies, especially at night and on weekends, when people coming from an ad tend to write.
+
+## Free WhatsApp Business app or the official API? {#app-o-api}
+
+Table: Free app vs. official WhatsApp API.
+| | WhatsApp Business app (free) | Official WhatsApp Business API |
+|---|---|---|
+| Automated replies | Greeting, away message and quick replies | Full AI conversations |
+| Booking in your calendar | No | Yes |
+| Several people answering | Limited | Yes, with shared history |
+| Connect to your site, store or CRM | No | Yes |
+| Meta fees | Free | Meta charges for some business-initiated messages, by country |
+
+If you get a few messages a day, the free app with good quick replies may be enough, and we'll tell you so in the demo. A chatbot pays off when you can't reply in time anymore, or when every unanswered customer is a lost sale.
+
+## How we set it up {#proceso}
+
+1. **Demo and assessment:** what customers ask, how many messages you get and what the bot should handle.
+2. **Script and knowledge:** we write the answers, prices and hand-off rules with your team.
+3. **Connection:** your number on the official API, plus catalog, calendar or order system.
+4. **Testing:** we try it with real conversations before opening it to all customers.
+5. **Tuning:** in the first weeks we review chats and improve the answers.
+
+Already running message campaigns on Facebook or Instagram? The chatbot and [ads management](/servicios/administracion-de-ads) work together: ads bring the conversations, the bot answers them right away.`,
+        faqs: [
+          { q: "How much does an AI WhatsApp chatbot cost?", a: "It depends on what it needs to do (answer, book, take orders or connect to your systems) and how many messages you get. We quote after a free demo. Meta also charges for some business-initiated messages, by country." },
+          { q: "Do I need a new WhatsApp number?", a: "You can keep your business number. We connect it to the official WhatsApp Business API and explain in the demo what changes on your phone." },
+          { q: "Does the chatbot replace my team?", a: "No. It handles the repetitive part and hands off the conversations that need a person, with full context." },
+          { q: "Does it work in English for US customers?", a: "Yes. We work with businesses in Colombia, Latin America and the United States, in Spanish and English." },
+        ],
+        keywords: ["WhatsApp chatbot", "AI WhatsApp chatbot", "WhatsApp Business API chatbot", "WhatsApp bot for business", "appointment booking chatbot"],
+      },
+    },
+  },
 ];

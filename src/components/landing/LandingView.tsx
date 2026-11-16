@@ -69,7 +69,7 @@ export function LandingView({ kind, slug, color, plan, copy, blocks, projects, p
   const planCopy = plan ? t.pricing.plans[plan] : undefined;
   const message = l.waMessage(copy.h1);
   const artCategory: BlogCategory =
-    plan === "tienda" || /woocommerce/.test(slug) ? "ecommerce" : plan === "software" || /mantenimiento/.test(slug) ? "software" : /seo/.test(slug) ? "seo-geo" : /ads/.test(slug) ? "estrategia" : "desarrollo-web";
+    plan === "tienda" || /woocommerce/.test(slug) ? "ecommerce" : plan === "software" || /mantenimiento/.test(slug) ? "software" : /seo/.test(slug) ? "seo-geo" : /ads/.test(slug) ? "estrategia" : /chatbot/.test(slug) ? "ia" : "desarrollo-web";
 
   return (
     <article style={vars({ "--c": COLOR_VAR[color] })}>

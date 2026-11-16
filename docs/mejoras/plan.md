@@ -51,7 +51,7 @@ Base: auditoría del 14 nov 2026 (`docs/seo/kytcode.lat-audit/`, 74/100) y Searc
 - Enlace de calendario (Cal.com o Calendly) para el botón «Agendar llamada» en /en.
 - Razón social y NIT; credenciales del autor para su página.
 - ID del píxel de Meta en Vercel (`NEXT_PUBLIC_META_PIXEL_ID`).
-- **Página de servicio «Chatbot de WhatsApp con IA»** (oportunidad: «chatbot whatsapp» 720 búsquedas/mes en Colombia, dificultad 11, 8,35 USD por clic): esperar la aprobación de Meta como socio (proveedor de tecnología) y definir precio de partida. Cuando el dueño lo confirme, pasa a prioridad alta.
+- **Chatbot de WhatsApp** (`/servicios/chatbot-whatsapp`, publicada el 2026-11-16 sin precio y con «demo gratis»): cuando Meta apruebe a K&T Code como socio y el dueño defina el precio de partida, agregarlo a `src/lib/pricing.ts`, a la página y a los artículos de chatbots.
 
 ## Hechas
 

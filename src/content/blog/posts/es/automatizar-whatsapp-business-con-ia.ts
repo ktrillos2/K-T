@@ -110,7 +110,7 @@ Tabla: Costos típicos de una automatización de WhatsApp con IA.
 - Tengo cuenta en una pasarela de pagos (Wompi, Bold, PayU)
 :::
 
-¿Quieres implementarlo en tu empresa? Conoce nuestro servicio de [software a medida](/servicios/software-a-medida) o escríbenos en el [formulario de contacto](#contacto).
+¿Quieres implementarlo en tu empresa? Mira nuestro [chatbot de WhatsApp con IA](/servicios/chatbot-whatsapp) (con demo gratis), el servicio de [software a medida](/servicios/software-a-medida) para integraciones grandes o escríbenos en el [formulario de contacto](#contacto).
 `,
   faq: [
     { q: "¿Puedo usar mi número actual de WhatsApp con la API?", a: "Sí, pero debe dejar de usarse en la aplicación del celular. Muchas empresas prefieren un número nuevo exclusivo para la automatización." },
