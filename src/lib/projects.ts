@@ -30,7 +30,7 @@ export type Project = {
   lcp?: number;
   results?: string[];
   testimonial?: { quote: string; author: string; role: string };
-  featured?: 1 | 2 | 3;
+  featured?: 1 | 2 | 3 | 4;
 };
 
 export type ProjectView = Project & {
@@ -66,7 +66,7 @@ export type ProjectView = Project & {
 
 const RAW: Project[] = [
   {
-    name: "Diana Gamboa", slug: "diana-gamboa", site: "https://www.dianagamboa.com", date: "2026-11", sector: "Academia de análisis del mercado de valores", country: "Colombia", category: "plataforma",
+    name: "Diana Gamboa", slug: "diana-gamboa", site: "https://www.dianagamboa.com", date: "2026-11", sector: "Academia de análisis del mercado de valores", country: "Colombia", category: "plataforma", featured: 4,
     summary: "Academia web de una analista del mercado de valores cuyo público venía de YouTube: ahora tiene una casa propia donde sus alumnos se registran, siguen una ruta de clases y la conocen de primera mano, lo que generó más confianza y comunicación con ellos.",
     built: ["Registro gratuito e inicio de sesión de alumnos", "Ruta de aprendizaje con las clases organizadas desde cero", "El Reto de la Gráfica: preguntas interactivas sobre velas, tendencias, niveles y medias móviles", "Página «Sobre Diana» con su historia", "Sección de prevención de estafas con sus únicos canales oficiales", "Conexión con sus lives de YouTube y biblioteca de recursos"],
     tags: ["Academia en línea", "Registro de alumnos", "De YouTube a la web"],
