@@ -37,7 +37,6 @@
   font-size: 12.5px;
   color: var(--muted);
 }
-.field select,
 .field input,
 .field textarea {
   width: 100%;
@@ -50,20 +49,12 @@
   font-size: 15px;
   transition: border-color 0.25s, box-shadow 0.25s;
 }
-.field select {
-  appearance: none;
-  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
-  background-position: calc(100% - 20px) 50%, calc(100% - 15px) 50%;
-  background-size: 5px 5px;
-  background-repeat: no-repeat;
-  padding-right: 40px;
-}
 .field textarea {
   resize: vertical;
   min-height: 130px;
   line-height: 1.55;
 }
-.field :is(select, input, textarea):focus {
+.field :is(input, textarea):focus {
   outline: none;
   border-color: var(--green);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 25%, transparent);

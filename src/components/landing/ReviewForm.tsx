@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useI18n } from "@/i18n/I18nProvider";
 import { projectsFor } from "@/i18n";
 import { wa } from "@/lib/site";
+import { ProjectPicker } from "./ProjectPicker";
 import styles from "./ReviewForm.module.css";
 
 type Status = "idle" | "sending" | "sent" | "failed";
@@ -75,19 +76,16 @@ export function ReviewForm() {
         </div>
       ) : (
         <form className={styles.form} onSubmit={submit} noValidate>
-          <label className={styles.field}>
-            <span>{f.project}</span>
-            <select value={project} onChange={(e) => setProject(e.target.value)} required>
-              <option value="" disabled>
-                {f.projectPh}
-              </option>
-              {projects.map((p) => (
-                <option key={p.slug} value={p.slug}>
-                  {p.name}
-                </option>
-              ))}
-            </select>
-          </label>
+          <ProjectPicker
+            projects={projects}
+            value={project}
+            onChange={setProject}
+            label={f.project}
+            placeholder={f.projectPh}
+            searchPlaceholder={f.projectSearch}
+            empty={f.projectEmpty}
+            count={f.projectCount}
+          />
           <label className={styles.field}>
             <span>{f.name}</span>
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={f.namePh} maxLength={80} autoComplete="name" required />
