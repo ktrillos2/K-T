@@ -130,6 +130,13 @@ const nextConfig: NextConfig = {
         { source, destination, permanent: true },
         { source: `/en${source}`, destination: `/en${destination === "/#contacto" ? "#contacto" : destination}`, permanent: true },
       ]),
+      // Enlaces cortos para pedir reseñas a los clientes (temporales, por si cambia el destino).
+      { source: "/resena", destination: "/testimonios#dejar-resena", permanent: false },
+      { source: "/resena/:slug", destination: "/testimonios?proyecto=:slug#dejar-resena", permanent: false },
+      { source: "/review", destination: "/en/testimonios#dejar-resena", permanent: false },
+      { source: "/review/:slug", destination: "/en/testimonios?proyecto=:slug#dejar-resena", permanent: false },
+      { source: "/en/review", destination: "/en/testimonios#dejar-resena", permanent: false },
+      { source: "/en/review/:slug", destination: "/en/testimonios?proyecto=:slug#dejar-resena", permanent: false },
     ];
   },
   async headers() {

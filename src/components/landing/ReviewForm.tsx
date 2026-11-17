@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useI18n } from "@/i18n/I18nProvider";
 import { projectsFor } from "@/i18n";
 import { wa } from "@/lib/site";
@@ -24,6 +24,12 @@ export function ReviewForm() {
   const [trap, setTrap] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+
+  // Enlace directo (kytcode.lat/resena/<proyecto>): llega con ?proyecto=<slug> y lo deja elegido.
+  useEffect(() => {
+    const slug = new URLSearchParams(window.location.search).get("proyecto");
+    if (slug && projects.some((p) => p.slug === slug)) setProject(slug);
+  }, [projects]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
