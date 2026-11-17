@@ -66,6 +66,12 @@ export type ProjectView = Project & {
 
 const RAW: Project[] = [
   {
+    name: "Diana Gamboa", slug: "diana-gamboa", site: "https://www.dianagamboa.com", date: "2026-11", sector: "Academia de análisis del mercado de valores", country: "Colombia", category: "plataforma",
+    summary: "Academia web de una analista del mercado de valores cuyo público venía de YouTube: ahora tiene una casa propia donde sus alumnos se registran, siguen una ruta de clases y la conocen de primera mano, lo que generó más confianza y comunicación con ellos.",
+    built: ["Registro gratuito e inicio de sesión de alumnos", "Ruta de aprendizaje con las clases organizadas desde cero", "El Reto de la Gráfica: preguntas interactivas sobre velas, tendencias, niveles y medias móviles", "Página «Sobre Diana» con su historia", "Sección de prevención de estafas con sus únicos canales oficiales", "Conexión con sus lives de YouTube y biblioteca de recursos"],
+    tags: ["Academia en línea", "Registro de alumnos", "De YouTube a la web"],
+  },
+  {
     name: "Los Elegidos Colombia", slug: "los-elegidos-colombia", site: "https://www.loselegidoscolombia.com", date: "2026-11", sector: "Consultoría estratégica, BI y automatización para pymes", country: "Colombia", category: "corporativo",
     summary: "Sitio corporativo de una consultora para pymes que explica su método, sus servicios y lleva a solicitar un diagnóstico.",
     built: ["Presentación del método y de las 5 líneas de servicio", "Sección de diagnóstico con los problemas más comunes de las pymes", "Panel gerencial animado como muestra de su servicio de BI", "Página de DataWorld", "Contacto directo por WhatsApp"],
