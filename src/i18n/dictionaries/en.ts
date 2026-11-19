@@ -634,6 +634,7 @@ const en: Dict = {
         send: "Send review",
         sending: "Sending…",
         ok: "Thank you! We received your review and will publish it once it's reviewed.",
+        google: "Can you help us on Google too? Leave your review on Google Maps",
         error: "We couldn't send it. Try again or message us on WhatsApp.",
         invalid: "Pick the project and write your name and a review of at least 10 characters.",
         another: "Send another",

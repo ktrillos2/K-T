@@ -19,7 +19,11 @@ export const SITE = {
     { label: "Instagram", handle: "@kytcode", href: "https://www.instagram.com/kytcode/" },
     { label: "TikTok", handle: "@kytcode", href: "https://www.tiktok.com/@kytcode" },
     { label: "Facebook", handle: "K&T Code", href: "https://www.facebook.com/KTSolutionsWeb" },
+    // Ficha de Google Business: va en sameAs del schema (Google une la web con la ficha de Maps).
+    { label: "Google", handle: "K&T Code", href: "https://g.page/r/CSVaZsxAkR9WEAI" },
   ],
+  /** Enlace directo para dejar una reseña en Google (las reseñas ayudan a salir en Google Maps). */
+  googleReview: "https://g.page/r/CSVaZsxAkR9WEAI/review",
 } as const;
 
 /**

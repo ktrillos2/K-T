@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useI18n } from "@/i18n/I18nProvider";
 import { projectsFor } from "@/i18n";
-import { wa } from "@/lib/site";
+import { SITE, wa } from "@/lib/site";
 import { ProjectPicker } from "./ProjectPicker";
 import styles from "./ReviewForm.module.css";
 
@@ -68,6 +68,12 @@ export function ReviewForm() {
           {f.title}
         </h2>
         <p className="lead">{f.lead}</p>
+        {/* Las reseñas en Google son las que ayudan a salir en Google Maps. */}
+        <p className={styles.google}>
+          <a href={SITE.googleReview} target="_blank" rel="noopener noreferrer">
+            {f.google} ↗
+          </a>
+        </p>
       </div>
 
       {status === "sent" ? (
@@ -76,6 +82,9 @@ export function ReviewForm() {
             ✓
           </span>
           <p>{f.ok}</p>
+          <a className={styles.google} href={SITE.googleReview} target="_blank" rel="noopener noreferrer">
+            {f.google} ↗
+          </a>
           <button type="button" className={styles.again} onClick={reset}>
             {f.another}
           </button>

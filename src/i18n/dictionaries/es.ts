@@ -636,6 +636,7 @@ const es = {
         send: "Enviar reseña",
         sending: "Enviando…",
         ok: "¡Gracias! Recibimos tu reseña y la publicaremos cuando la revisemos.",
+        google: "¿Nos ayudas también en Google? Deja tu reseña en Google Maps",
         error: "No pudimos enviarla. Inténtalo de nuevo o escríbenos por WhatsApp.",
         invalid: "Elige el proyecto y escribe tu nombre y una reseña de al menos 10 caracteres.",
         another: "Enviar otra",

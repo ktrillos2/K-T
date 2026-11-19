@@ -131,3 +131,17 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Enlace a la reseña en Google Maps. */
+.google {
+  margin-top: 14px;
+  font-size: 14px;
+}
+.google a,
+a.google {
+  display: inline-block;
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  text-underline-offset: 4px;
+}
