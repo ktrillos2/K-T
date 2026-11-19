@@ -78,6 +78,8 @@
 .name {
   font-size: clamp(22px, 2.2vw, 33px);
   line-height: 1;
+  /* Es un h3 (nombre del proyecto): sin la negrita por defecto. */
+  font-weight: inherit;
 }
 .sector {
   font-size: 13px;

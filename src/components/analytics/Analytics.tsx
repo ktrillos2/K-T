@@ -11,6 +11,8 @@ const PIXEL_ID = /^\d{5,20}$/.test(process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "") 
 function linkLocation(link: Element): string {
   const tagged = link.closest<HTMLElement>("[data-track]")?.dataset.track;
   if (tagged) return tagged;
+  // El inicio de cada página (data-hero) también es un <header>: va antes que el menú para no mezclarlos.
+  if (link.closest("[data-hero]")) return "hero";
   if (link.closest("header, nav")) return "menu";
   if (link.closest("footer")) return "pie";
   if (link.closest("article")) return "articulo";

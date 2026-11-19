@@ -29,13 +29,10 @@ export function Faq() {
                     className={styles.q}
                     onClick={() => setOpen(isOpen ? null : i)}
                   >
-                    <span className={styles.fold} aria-hidden="true">
-                      {isOpen ? "▾" : "▸"}
-                    </span>
+                    {/* Los símbolos los pinta el CSS: así el H3 solo contiene la pregunta. */}
+                    <span className={styles.fold} aria-hidden="true" data-glyph={isOpen ? "▾" : "▸"} />
                     <span className={styles.qText}>{f.q}</span>
-                    <span className={styles.lines} aria-hidden="true">
-                      {isOpen ? "" : "{ … }"}
-                    </span>
+                    <span className={styles.lines} aria-hidden="true" data-glyph={isOpen ? "" : "{ … }"} />
                   </button>
                 </h3>
                 <div id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`} className={styles.a}>

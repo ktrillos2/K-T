@@ -106,7 +106,7 @@ export function ProjectIndex() {
                   <span className={styles.date}>{p.dateLabel}</span>
                   <span className={styles.nameRow}>
                     <i aria-hidden="true" />
-                    <span className={cx("display", styles.name)}>{p.name}</span>
+                    <h3 className={cx("display", styles.name)}>{p.name}</h3>
                   </span>
                   <span className={styles.sector}>
                     {p.sector}

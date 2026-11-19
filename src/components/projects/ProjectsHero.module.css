@@ -10,6 +10,9 @@
 .eyebrow {
   font-size: 12.5px;
   color: var(--muted);
+  /* Es el h1: sin la negrita ni el contorno de foco por defecto. */
+  font-weight: 400;
+  outline: none;
 }
 .slash {
   color: var(--yellow-ink);
@@ -31,4 +34,9 @@
   color: var(--fg);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+/* El punto decorativo lo pinta el CSS para que no entre en el texto del h1. */
+.dot::before {
+  content: "●";
 }

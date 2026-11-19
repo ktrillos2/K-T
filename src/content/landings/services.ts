@@ -26,7 +26,7 @@ export const SERVICES: Landing[] = [
         h1: "Landing pages que convierten visitas en clientes",
         lead: "Una landing page es una página web sencilla, de una sola página, enfocada en un solo objetivo: que el visitante te escriba, se registre o compre. En K&T Code la diseñamos desde cero para tu marca y tu campaña, carga en menos de un segundo y conecta directo con tu WhatsApp. Desde $450.000 COP, lista en 7 a 12 días.",
         facts: [["Desde", "$450.000 COP"], ["Entrega", "7 a 12 días"], ["Secciones", "Hasta 5"], ["Velocidad", "Menos de 1 s"]],
-        includesTitle: "Qué incluye",
+        includesTitle: "¿Qué incluye una landing page?",
         includes: [
           { t: "Diseño único", d: "Pensado para tu cliente ideal y tu campaña, no una plantilla reciclada." },
           { t: "Hasta 5 secciones", d: "Portada, beneficios, prueba social, preguntas frecuentes y llamado a la acción." },
@@ -35,7 +35,7 @@ export const SERVICES: Landing[] = [
           { t: "Dominio y SSL", d: "Te asesoramos con el dominio a nombre de tu empresa y lo dejamos seguro." },
           { t: "Medición", d: "Listo para conectar tus píxeles de Meta y Google y medir la campaña." },
         ],
-        forWhoTitle: "Ideal para",
+        forWhoTitle: "¿Para quién es una landing page?",
         forWho: ["Campañas en Meta Ads o Google Ads", "Lanzamientos de productos o servicios", "Profesionales que necesitan presencia rápida", "Validar una idea antes de invertir en un sitio completo"],
         faqs: [
           { q: "¿Cuánto cuesta una landing page en Colombia?", a: "En K&T Code una landing page a la medida parte de $450.000 COP e incluye diseño único, hasta 5 secciones, WhatsApp, formulario y SEO inicial." },
@@ -52,7 +52,7 @@ export const SERVICES: Landing[] = [
         h1: "Landing pages that turn visits into customers",
         lead: "A landing page is a simple, single-page website focused on one goal: getting the visitor to message you, sign up or buy. At K&T Code we design it from scratch for your brand and campaign, it loads in under a second and connects straight to your WhatsApp. From 200 USD, ready in 7 to 12 days.",
         facts: [["From", "200 USD"], ["Delivery", "7 to 12 days"], ["Sections", "Up to 5"], ["Speed", "Under 1 s"]],
-        includesTitle: "What's included",
+        includesTitle: "¿Qué incluye una landing page?",
         includes: [
           { t: "Unique design", d: "Built for your ideal customer and campaign, not a recycled template." },
           { t: "Up to 5 sections", d: "Hero, benefits, social proof, FAQ and call to action." },
@@ -61,7 +61,7 @@ export const SERVICES: Landing[] = [
           { t: "Domain and SSL", d: "We help you get a domain in your company's name and secure it." },
           { t: "Tracking", d: "Ready to connect your Meta and Google pixels and measure the campaign." },
         ],
-        forWhoTitle: "Best for",
+        forWhoTitle: "¿Para quién es una landing page?",
         forWho: ["Meta Ads or Google Ads campaigns", "Product or service launches", "Professionals who need a fast presence", "Validating an idea before a full website"],
         faqs: [
           { q: "How much does a landing page cost?", a: "At K&T Code a custom landing page starts at 200 USD and includes unique design, up to 5 sections, WhatsApp, form and initial SEO." },
@@ -90,7 +90,7 @@ export const SERVICES: Landing[] = [
         h1: "Tiendas virtuales que venden mientras duermes",
         lead: "Una tienda virtual es una página web donde tus clientes ven tus productos, los agregan al carrito y pagan en línea. Hecha a la medida, te permite vender en línea las 24 horas con los medios de pago que usan los colombianos: PSE, Nequi y tarjetas. En K&T Code la construimos con tu catálogo, pasarelas como Wompi, Bold o PayU y un panel para gestionar pedidos, sin comisiones de plataforma por cada venta. Desde $1.300.000 COP.",
         facts: [["Desde", "$1.300.000 COP"], ["Entrega", "25 a 40 días"], ["Pagos", "PSE, Nequi, tarjetas"], ["Comisión de plataforma", "0%"]],
-        includesTitle: "Qué incluye",
+        includesTitle: "¿Qué incluye tu tienda virtual?",
         includes: [
           { t: "Catálogo autogestionable", d: "Categorías, variantes, fotos y precios que actualizas tú mismo." },
           { t: "Pasarelas colombianas", d: "Wompi, Bold o PayU con PSE, Nequi y tarjetas, con confirmación automática." },
@@ -99,7 +99,7 @@ export const SERVICES: Landing[] = [
           { t: "Pedidos por WhatsApp", d: "Para clientes que prefieren confirmar con un asesor." },
           { t: "SEO de producto", d: "Fichas indexables con datos de precio y disponibilidad para Google." },
         ],
-        forWhoTitle: "Ideal para",
+        forWhoTitle: "¿Para quién es una tienda virtual?",
         forWho: ["Marcas de moda, hogar, tecnología o alimentos", "Distribuidores y mayoristas con catálogos grandes", "Negocios que hoy venden solo por Instagram o WhatsApp", "Tiendas en plataformas con comisiones que quieren independizarse"],
         faqs: [
           { q: "¿Cuánto cuesta una tienda virtual en Colombia?", a: "Con K&T Code parte de $1.300.000 COP, con pasarelas colombianas integradas y sin comisión de plataforma por cada venta. A eso se suman el dominio, el hosting y la comisión de la pasarela." },
@@ -116,7 +116,7 @@ export const SERVICES: Landing[] = [
         h1: "Online stores that sell while you sleep",
         lead: "An online store is a website where customers browse your products, add them to a cart and pay online. Built custom, it lets you sell 24/7 with the payment methods your customers use. At K&T Code we build it around your catalog, with the right payment gateway and a panel to manage orders, with no platform fee on each sale. From 450 USD.",
         facts: [["From", "450 USD"], ["Delivery", "25 to 40 days"], ["Payments", "PSE, Nequi, cards"], ["Platform fee", "0%"]],
-        includesTitle: "What's included",
+        includesTitle: "What's included in your online store?",
         includes: [
           { t: "Self-managed catalog", d: "Categories, variants, photos and prices you update yourself." },
           { t: "Local payment gateways", d: "Wompi, Bold or PayU with PSE, Nequi and cards, confirmed automatically." },
@@ -125,7 +125,7 @@ export const SERVICES: Landing[] = [
           { t: "WhatsApp orders", d: "For customers who prefer to confirm with an advisor." },
           { t: "Product SEO", d: "Indexable product pages with price and availability data." },
         ],
-        forWhoTitle: "Best for",
+        forWhoTitle: "Who is an online store for?",
         forWho: ["Fashion, home, tech or food brands", "Distributors and wholesalers with large catalogs", "Businesses selling only on Instagram or WhatsApp today", "Stores on fee-based platforms that want independence"],
         faqs: [
           { q: "How much does an online store cost?", a: "With K&T Code it starts at 450 USD, with your payment gateway included and no platform fee per sale. Domain, hosting and gateway fees are separate." },
@@ -154,7 +154,7 @@ export const SERVICES: Landing[] = [
         h1: "Desarrollo web a la medida: tu marca, no una plantilla",
         lead: "El desarrollo web a la medida consiste en diseñar y programar tu sitio desde cero para tu negocio, sin temas comprados ni constructores visuales. El resultado es una web única, que carga en menos de un segundo, aparece en Google y es 100% tuya. K&T Code lo hace desde Cúcuta para empresas de Colombia, Latinoamérica y Estados Unidos.",
         facts: [["Landing", "Desde $450.000"], ["Corporativo", "Desde $2.500.000"], ["Tienda", "Desde $1.300.000"], ["Código", "100% tuyo"]],
-        includesTitle: "Por qué a la medida",
+        includesTitle: "¿Por qué una web a la medida y no una plantilla?",
         includes: [
           { t: "Diseño desde cero", d: "Tu interfaz nace de tu marca y tus clientes, no de un tema compartido por miles de sitios." },
           { t: "Velocidad", d: "Sin plugins ni constructores: el contenido principal carga en menos de un segundo." },
@@ -163,7 +163,7 @@ export const SERVICES: Landing[] = [
           { t: "Seguridad", d: "Menos dependencias de terceros, menos puntos vulnerables." },
           { t: "Propiedad total", d: "Código, dominio y cuentas a nombre de tu empresa. Sin licencias ni ataduras." },
         ],
-        forWhoTitle: "Ideal para",
+        forWhoTitle: "¿Para quién es el desarrollo web a la medida?",
         forWho: ["Empresas que quieren diferenciarse de su competencia", "Negocios con webs lentas o hechas con plantilla", "Marcas que necesitan funciones que ninguna plantilla resuelve", "Equipos que quieren ser dueños de su tecnología"],
         faqs: [
           { q: "¿Qué es el desarrollo web a la medida?", a: "Diseñar y programar un sitio desde cero para un negocio específico, sin plantillas ni constructores visuales, con código propio que queda a nombre del cliente." },
@@ -179,7 +179,7 @@ export const SERVICES: Landing[] = [
         h1: "Custom web development: your brand, not a template",
         lead: "Custom web development means designing and coding your site from scratch for your business, with no purchased themes or visual builders. The result is a unique website that loads in under a second, shows up on Google and is 100% yours. K&T Code builds it from Cúcuta, Colombia for companies across Latin America and the United States.",
         facts: [["Landing", "From 200 USD"], ["Corporate", "Quoted"], ["Store", "From 450 USD"], ["Code", "100% yours"]],
-        includesTitle: "Why custom",
+        includesTitle: "Why a custom website instead of a template?",
         includes: [
           { t: "Designed from scratch", d: "Your interface comes from your brand and customers, not a theme shared by thousands of sites." },
           { t: "Speed", d: "No plugins or builders: the main content loads in under a second." },
@@ -188,7 +188,7 @@ export const SERVICES: Landing[] = [
           { t: "Security", d: "Fewer third-party dependencies, fewer weak points." },
           { t: "Full ownership", d: "Code, domain and accounts in your company's name." },
         ],
-        forWhoTitle: "Best for",
+        forWhoTitle: "Who is custom web development for?",
         forWho: ["Companies that want to stand out", "Businesses with slow or template-based sites", "Brands that need features no template offers", "Teams that want to own their technology"],
         faqs: [
           { q: "What is custom web development?", a: "Designing and coding a site from scratch for a specific business, without templates or visual builders, with code that belongs to the client." },
@@ -216,7 +216,7 @@ export const SERVICES: Landing[] = [
         h1: "Software a medida para automatizar tu operación",
         lead: "El software a medida es un sistema construido para los procesos exactos de tu empresa: paneles administrativos, portales para clientes, plataformas SaaS o automatizaciones con inteligencia artificial. En K&T Code lo desarrollamos por etapas, con usuarios y roles, integraciones con DIAN, pagos y WhatsApp, y el código a tu nombre. Desde $4.500.000 COP.",
         facts: [["Desde", "$4.500.000 COP"], ["Entrega", "4 a 12 semanas"], ["Modelo", "Por etapas"], ["Código", "100% tuyo"]],
-        includesTitle: "Qué construimos",
+        includesTitle: "¿Qué software a medida construimos?",
         includes: [
           { t: "Paneles administrativos", d: "Inventario, pedidos, clientes y reportes en un solo lugar." },
           { t: "Plataformas y SaaS", d: "Portales para clientes, sistemas de reservas, marketplaces y productos digitales." },
@@ -225,7 +225,7 @@ export const SERVICES: Landing[] = [
           { t: "Automatización con IA", d: "Agentes que responden, cotizan y registran pedidos conectados a tus datos." },
           { t: "Base de datos propia", d: "Tus datos en tu infraestructura, con copias de seguridad." },
         ],
-        forWhoTitle: "Ideal para",
+        forWhoTitle: "¿Para quién es el software a medida?",
         forWho: ["Empresas que viven en Excel y WhatsApp", "Equipos que pagan muchas licencias de SaaS", "Procesos que ningún software genérico resuelve", "Emprendimientos que quieren lanzar su propia plataforma"],
         faqs: [
           { q: "¿Cuánto cuesta un software a medida en Colombia?", a: "Un panel administrativo o MVP suele estar entre $4.500.000 y $9.000.000 COP; un portal B2B entre $9.000.000 y $18.000.000 COP; una plataforma SaaS completa desde $18.000.000 COP." },
@@ -242,7 +242,7 @@ export const SERVICES: Landing[] = [
         h1: "Custom software to automate your operation",
         lead: "Custom software is a system built for your company's exact processes: admin panels, client portals, SaaS platforms or AI automations. At K&T Code we build it in stages, with users and roles, integrations for invoicing, payments and WhatsApp, and the code in your name. From 1,000 USD.",
         facts: [["From", "1,000 USD"], ["Delivery", "4 to 12 weeks"], ["Model", "In stages"], ["Code", "100% yours"]],
-        includesTitle: "What we build",
+        includesTitle: "What custom software do we build?",
         includes: [
           { t: "Admin panels", d: "Inventory, orders, customers and reports in one place." },
           { t: "Platforms and SaaS", d: "Client portals, booking systems, marketplaces and digital products." },
@@ -251,7 +251,7 @@ export const SERVICES: Landing[] = [
           { t: "AI automation", d: "Agents that answer, quote and log orders, connected to your data." },
           { t: "Your own database", d: "Your data on your infrastructure, with backups." },
         ],
-        forWhoTitle: "Best for",
+        forWhoTitle: "Who is custom software for?",
         forWho: ["Companies running on spreadsheets and WhatsApp", "Teams paying for many SaaS licenses", "Processes no generic software handles", "Startups launching their own platform"],
         faqs: [
           { q: "How much does custom software cost?", a: "Custom systems start at 1,000 USD and are quoted per project, depending on modules, integrations and users." },
@@ -279,7 +279,7 @@ export const SERVICES: Landing[] = [
         h1: "Sitios corporativos que generan confianza y clientes",
         lead: "Un sitio web corporativo presenta tu empresa ante clientes, aliados e inversionistas: quién eres, qué haces, a quién has ayudado y cómo contactarte. En K&T Code lo diseñamos a la medida con hasta 8 páginas, portafolio, testimonios, SEO técnico y analítica, listo para captar clientes B2B. Desde $2.500.000 COP.",
         facts: [["Desde", "$2.500.000 COP"], ["Entrega", "15 a 25 días"], ["Páginas", "Hasta 8"], ["Incluye", "SEO técnico"]],
-        includesTitle: "Qué incluye",
+        includesTitle: "¿Qué incluye un sitio web corporativo?",
         includes: [
           { t: "Hasta 8 páginas", d: "Inicio, nosotros, servicios, portafolio, testimonios, blog y contacto." },
           { t: "Diseño exclusivo", d: "Tu identidad corporativa llevada a una interfaz propia." },
@@ -288,7 +288,7 @@ export const SERVICES: Landing[] = [
           { t: "Analítica", d: "Google Analytics y Search Console configurados." },
           { t: "Contenido editable", d: "Actualiza textos, proyectos y artículos sin depender de nadie." },
         ],
-        forWhoTitle: "Ideal para",
+        forWhoTitle: "¿Para qué empresas es un sitio corporativo?",
         forWho: ["Empresas B2B, industriales y de servicios", "Firmas de ingeniería, consultoría y salud", "Empresas que participan en licitaciones", "Marcas con un sitio desactualizado"],
         faqs: [
           { q: "¿Cuánto cuesta un sitio web corporativo?", a: "Con K&T Code parte de $2.500.000 COP, con hasta 8 páginas, diseño exclusivo, SEO técnico y analítica." },
@@ -304,7 +304,7 @@ export const SERVICES: Landing[] = [
         h1: "Corporate websites that build trust and win clients",
         lead: "A corporate website presents your company to clients, partners and investors: who you are, what you do, who you've helped and how to reach you. At K&T Code we design it custom with up to 8 pages, portfolio, testimonials, technical SEO and analytics, ready to win B2B clients. Quoted per project.",
         facts: [["Price", "Quoted per project"], ["Delivery", "15 to 25 days"], ["Pages", "Up to 8"], ["Includes", "Technical SEO"]],
-        includesTitle: "What's included",
+        includesTitle: "What's included in a corporate website?",
         includes: [
           { t: "Up to 8 pages", d: "Home, about, services, portfolio, testimonials, blog and contact." },
           { t: "Exclusive design", d: "Your corporate identity turned into its own interface." },
@@ -313,7 +313,7 @@ export const SERVICES: Landing[] = [
           { t: "Analytics", d: "Google Analytics and Search Console set up." },
           { t: "Editable content", d: "Update copy, projects and posts without depending on anyone." },
         ],
-        forWhoTitle: "Best for",
+        forWhoTitle: "Which companies need a corporate website?",
         forWho: ["B2B, industrial and service companies", "Engineering, consulting and healthcare firms", "Companies bidding on tenders", "Brands with an outdated site"],
         faqs: [
           { q: "How much does a corporate website cost?", a: "With K&T Code it is quoted per project, with up to 8 pages, exclusive design, technical SEO and analytics." },
@@ -341,7 +341,7 @@ export const SERVICES: Landing[] = [
         h1: "Desarrollo con Next.js: velocidad y SEO de serie",
         lead: "Next.js es el marco de desarrollo que usamos para construir sitios a la medida que cargan en menos de un segundo y llegan completos a Google y a los asistentes de IA, porque se renderizan en el servidor. En K&T Code lo usamos para sitios corporativos, tiendas y plataformas, y para migrar sitios lentos hechos con plantillas.",
         facts: [["Carga", "Menos de 1 s"], ["PageSpeed típico", "95 – 100"], ["SEO", "HTML completo"], ["Migraciones", "Desde WordPress"]],
-        includesTitle: "Qué ganas",
+        includesTitle: "¿Qué ganas con una web en Next.js?",
         includes: [
           { t: "Renderizado en el servidor", d: "El contenido llega completo en el HTML: mejor para Google y para la IA." },
           { t: "Velocidad", d: "Páginas prerenderizadas servidas desde una red global." },
@@ -350,7 +350,7 @@ export const SERVICES: Landing[] = [
           { t: "Seguridad", d: "Sin plugins de terceros que se desactualicen." },
           { t: "Migración sin perder SEO", d: "Redirecciones y estructura para conservar tus posiciones." },
         ],
-        forWhoTitle: "Ideal para",
+        forWhoTitle: "¿Para quién es una web en Next.js?",
         forWho: ["Empresas con WordPress lento que quieren migrar", "Tiendas que pierden ventas por velocidad", "Plataformas con mucho tráfico", "Equipos que quieren una base técnica moderna"],
         faqs: [
           { q: "¿Por qué Next.js y no WordPress?", a: "Next.js entrega páginas prerenderizadas, más rápidas y seguras, sin depender de plugins. WordPress sigue siendo útil para blogs sencillos." },
@@ -366,7 +366,7 @@ export const SERVICES: Landing[] = [
         h1: "Next.js development: speed and SEO built in",
         lead: "Next.js is the framework we use to build custom sites that load in under a second and reach Google and AI assistants complete, because they render on the server. At K&T Code we use it for corporate sites, stores and platforms, and to migrate slow template-based sites.",
         facts: [["Load", "Under 1 s"], ["Typical PageSpeed", "95 – 100"], ["SEO", "Full HTML"], ["Migrations", "From WordPress"]],
-        includesTitle: "What you get",
+        includesTitle: "What you get with a Next.js website",
         includes: [
           { t: "Server rendering", d: "Content arrives complete in the HTML: better for Google and AI." },
           { t: "Speed", d: "Pre-rendered pages served from a global network." },
@@ -375,7 +375,7 @@ export const SERVICES: Landing[] = [
           { t: "Security", d: "No outdated third-party plugins." },
           { t: "SEO-safe migration", d: "Redirects and structure to keep your rankings." },
         ],
-        forWhoTitle: "Best for",
+        forWhoTitle: "Who is a Next.js website for?",
         forWho: ["Companies with slow WordPress sites", "Stores losing sales to speed", "High-traffic platforms", "Teams wanting a modern technical base"],
         faqs: [
           { q: "Why Next.js instead of WordPress?", a: "Next.js serves pre-rendered pages that are faster and safer, without plugins. WordPress is still fine for simple blogs." },
@@ -403,7 +403,7 @@ export const SERVICES: Landing[] = [
         h1: "E-commerce headless: la velocidad de una app, el panel de siempre",
         lead: `Una tienda headless separa la vitrina que ve el cliente del sistema donde administras productos y pedidos. En K&T Code construimos la vitrina a la medida, rápida y con tu diseño, y la conectamos por API con WooCommerce, Shopify o un panel propio, para que sigas gestionando todo como siempre. Desde ${headlessCop}.`,
         facts: [["Desde", headlessCop], ["Carga", "Menos de 1 s"], ["Administración", "La de siempre"], ["Pagos", "Colombianos"]],
-        includesTitle: "Qué incluye",
+        includesTitle: "¿Qué incluye una tienda headless?",
         includes: [
           { t: "Vitrina a la medida", d: "Diseño propio para tu marca, sin límites de plantilla." },
           { t: "Conexión por API", d: "Productos, inventario y pedidos sincronizados con tu panel actual." },
@@ -412,7 +412,7 @@ export const SERVICES: Landing[] = [
           { t: "SEO de catálogo", d: "Cada producto con su página indexable y datos estructurados." },
           { t: "Omnicanal", d: "El mismo catálogo para web, app y punto de venta." },
         ],
-        forWhoTitle: "Ideal para",
+        forWhoTitle: "¿Para quién es el e-commerce headless?",
         forWho: ["Tiendas WooCommerce lentas", "Marcas en Shopify que necesitan más diseño", "Catálogos grandes con muchas variantes", "Negocios que venden por varios canales"],
         faqs: [
           { q: "¿Qué es WooCommerce headless?", a: "Una tienda donde los productos y pedidos se siguen administrando en WooCommerce, pero la vitrina que ve el cliente es un sitio a la medida, mucho más rápido." },
@@ -428,7 +428,7 @@ export const SERVICES: Landing[] = [
         h1: "Headless e-commerce: app-like speed, the panel you know",
         lead: `A headless store separates the storefront customers see from the system where you manage products and orders. At K&T Code we build the storefront custom, fast and on-brand, and connect it via API to WooCommerce, Shopify or a custom panel, so you keep managing everything as usual. From ${headlessUsd}.`,
         facts: [["From", headlessUsd], ["Load", "Under 1 s"], ["Admin", "Same as today"], ["Payments", "Local"]],
-        includesTitle: "What's included",
+        includesTitle: "What's included in a headless store?",
         includes: [
           { t: "Custom storefront", d: "Your own design, no template limits." },
           { t: "API connection", d: "Products, stock and orders synced with your current panel." },
@@ -437,7 +437,7 @@ export const SERVICES: Landing[] = [
           { t: "Catalog SEO", d: "Each product with an indexable page and structured data." },
           { t: "Omnichannel", d: "One catalog for web, app and point of sale." },
         ],
-        forWhoTitle: "Best for",
+        forWhoTitle: "Who is headless e-commerce for?",
         forWho: ["Slow WooCommerce stores", "Shopify brands needing more design freedom", "Large catalogs with many variants", "Multichannel businesses"],
         faqs: [
           { q: "What is headless WooCommerce?", a: "A store where products and orders are still managed in WooCommerce, but the storefront is a custom, much faster site." },
@@ -465,7 +465,7 @@ export const SERVICES: Landing[] = [
         h1: "SEO técnico y GEO: que te encuentren en Google y en la IA",
         lead: "El SEO técnico asegura que Google pueda rastrear, entender y mostrar tu sitio; el GEO (optimización para motores generativos) hace que asistentes como ChatGPT, Gemini y Perplexity te citen. En K&T Code auditamos tu dominio, corregimos los errores de indexación, la velocidad y los datos estructurados, y preparamos tu contenido para ser citado.",
         facts: [["Auditoría", "Indexación y velocidad"], ["Datos estructurados", "schema.org"], ["Rastreadores IA", "Configurados"], ["Entrega", "Informe y correcciones"]],
-        includesTitle: "Qué hacemos",
+        includesTitle: "¿Qué hacemos en SEO técnico y GEO?",
         includes: [
           { t: "Auditoría de indexación", d: "noindex, robots.txt, canonical, sitemaps y errores en Search Console." },
           { t: "Velocidad", d: "Core Web Vitals medidas y corregidas en móvil." },
@@ -474,7 +474,7 @@ export const SERVICES: Landing[] = [
           { t: "Arquitectura de contenido", d: "Páginas por servicio, ciudad e intención de búsqueda." },
           { t: "SEO local", d: "Perfil de Empresa en Google y consistencia de tus datos." },
         ],
-        forWhoTitle: "Ideal para",
+        forWhoTitle: "¿Para quién es el SEO técnico y GEO?",
         forWho: ["Webs que no aparecen en Google", "Empresas que perdieron tráfico", "Marcas que quieren que la IA las recomiende", "Sitios que se van a migrar o rediseñar"],
         faqs: [
           { q: "¿Qué diferencia hay entre SEO y GEO?", a: "El SEO busca posicionar tus páginas en los resultados de Google; el GEO busca que los asistentes de IA citen tu negocio dentro de sus respuestas. El SEO técnico es la base de ambos." },
@@ -490,7 +490,7 @@ export const SERVICES: Landing[] = [
         h1: "Technical SEO and GEO: be found on Google and by AI",
         lead: "Technical SEO makes sure Google can crawl, understand and show your site; GEO (generative engine optimization) makes assistants like ChatGPT, Gemini and Perplexity cite you. At K&T Code we audit your domain, fix indexing, speed and structured data, and prepare your content to be cited.",
         facts: [["Audit", "Indexing and speed"], ["Structured data", "schema.org"], ["AI crawlers", "Configured"], ["Delivery", "Report and fixes"]],
-        includesTitle: "What we do",
+        includesTitle: "What we do in technical SEO and GEO",
         includes: [
           { t: "Indexing audit", d: "noindex, robots.txt, canonicals, sitemaps and Search Console errors." },
           { t: "Speed", d: "Core Web Vitals measured and fixed on mobile." },
@@ -499,7 +499,7 @@ export const SERVICES: Landing[] = [
           { t: "Content architecture", d: "Pages per service, city and search intent." },
           { t: "Local SEO", d: "Google Business Profile and consistent business data." },
         ],
-        forWhoTitle: "Best for",
+        forWhoTitle: "Who is technical SEO and GEO for?",
         forWho: ["Sites that don't show up on Google", "Companies that lost traffic", "Brands that want AI to recommend them", "Sites about to be migrated or redesigned"],
         faqs: [
           { q: "What's the difference between SEO and GEO?", a: "SEO ranks your pages in Google's results; GEO gets AI assistants to cite your business in their answers. Technical SEO is the base of both." },
@@ -526,7 +526,7 @@ export const SERVICES: Landing[] = [
         h1: "Mantenimiento web para que tu sitio nunca falle",
         lead: "El mantenimiento web mantiene tu sitio disponible, seguro y rápido: monitoreo de caídas, copias de seguridad, renovación del certificado SSL, actualizaciones y pruebas de formularios y pagos. En K&T Code es opcional y se ajusta a tu sitio, desde $180.000 COP al mes.",
         facts: [["Desde", "$180.000 COP / mes"], ["Monitoreo", "24/7"], ["Copias", "Automáticas"], ["Respuesta", "Según el plan"]],
-        includesTitle: "Qué incluye",
+        includesTitle: "¿Qué incluye el mantenimiento web?",
         includes: [
           { t: "Monitoreo de disponibilidad", d: "Alertas inmediatas si tu sitio deja de responder." },
           { t: "Copias de seguridad", d: "Base de datos y archivos, guardados fuera del servidor principal." },
@@ -535,7 +535,7 @@ export const SERVICES: Landing[] = [
           { t: "Velocidad", d: "Auditoría periódica de Core Web Vitals." },
           { t: "Horas de cambios", d: "Bloques de horas para nuevas secciones o ajustes." },
         ],
-        forWhoTitle: "Ideal para",
+        forWhoTitle: "¿Para quién es el mantenimiento web?",
         forWho: ["Tiendas virtuales que no pueden caerse", "Empresas sin equipo técnico interno", "Sitios con campañas activas", "Plataformas con usuarios y datos sensibles"],
         faqs: [
           { q: "¿Cuánto cuesta el mantenimiento web?", a: "Un plan preventivo básico cuesta entre $180.000 y $350.000 COP al mes; uno para tiendas virtuales, entre $450.000 y $850.000 COP al mes." },
@@ -551,7 +551,7 @@ export const SERVICES: Landing[] = [
         h1: "Website maintenance so your site never fails",
         lead: "Website maintenance keeps your site available, secure and fast: downtime monitoring, backups, SSL renewal, updates and tests of forms and payments. At K&T Code it's optional and tailored to your site, quoted per site.",
         facts: [["Price", "Quoted per site"], ["Monitoring", "24/7"], ["Backups", "Automatic"], ["Response", "Per plan"]],
-        includesTitle: "What's included",
+        includesTitle: "What's included in website maintenance?",
         includes: [
           { t: "Uptime monitoring", d: "Instant alerts if your site stops responding." },
           { t: "Backups", d: "Database and files stored off the main server." },
@@ -560,7 +560,7 @@ export const SERVICES: Landing[] = [
           { t: "Speed", d: "Periodic Core Web Vitals audit." },
           { t: "Change hours", d: "Hour blocks for new sections or tweaks." },
         ],
-        forWhoTitle: "Best for",
+        forWhoTitle: "Who is website maintenance for?",
         forWho: ["Online stores that can't go down", "Companies without an in-house tech team", "Sites running campaigns", "Platforms with users and sensitive data"],
         faqs: [
           { q: "How much does website maintenance cost?", a: "It is quoted per site, depending on its size, traffic and the hours of changes you need." },
@@ -581,13 +581,13 @@ export const SERVICES: Landing[] = [
     related: [S("landing-pages"), S("tiendas-virtuales"), S("seo-tecnico")],
     copy: {
       es: {
-        title: "Administración de Ads: Meta, TikTok y Google Ads con remarketing",
+        title: "Administración de pauta en Facebook, Instagram y Google Ads",
         description: "Administramos tus campañas de Facebook, Instagram, TikTok y Google Ads cada mes según tu objetivo: estrategia, segmentación, remarketing, anuncios y reportes. Desde $450.000 COP al mes (200 USD fuera de Colombia).",
         eyebrow: "servicios · administración de Ads",
-        h1: "Administración de Ads que trae clientes, no solo likes",
+        h1: "Publicidad en Facebook, Instagram y Google que trae clientes",
         lead: "La administración de Ads es el manejo mensual de tu publicidad pagada en Facebook, Instagram, TikTok y Google: definimos la estrategia según tu objetivo (ventas, mensajes por WhatsApp o clientes potenciales), creamos y probamos los anuncios, hacemos remarketing a quienes ya te visitaron, y te enviamos reportes claros cada mes. El valor no incluye lo que inviertes en la plataforma.",
         facts: [["Desde", "{{cop:450000,usd:200}} / mes"], ["Plataformas", "Meta, TikTok y Google"], ["Reportes", "Mensuales"], ["Permanencia", "Mes a mes"]],
-        includesTitle: "Qué incluye",
+        includesTitle: "¿Qué incluye la administración de publicidad?",
         includes: [
           { t: "Estrategia según tu objetivo", d: "Ventas, mensajes por WhatsApp, clientes potenciales o visitas a tu tienda: cada objetivo usa campañas distintas." },
           { t: "Públicos y segmentación", d: "Definimos a quién mostrar tus anuncios por zona, intereses y comportamiento, y públicos similares a tus clientes." },
@@ -596,9 +596,9 @@ export const SERVICES: Landing[] = [
           { t: "Píxel y medición", d: "Configuramos el píxel de Meta, las conversiones y Google Analytics para saber qué anuncio trae cada venta." },
           { t: "Optimización y reportes", d: "Ajustes cada semana y un reporte mensual simple: cuánto invertiste, cuántos clientes llegaron y cuánto costó cada uno." },
         ],
-        forWhoTitle: "Ideal para",
+        forWhoTitle: "¿Para qué negocios es la pauta en redes?",
         forWho: ["Negocios que ya tienen web o tienda y quieren más ventas", "Marcas que pautan por su cuenta y no ven resultados", "Lanzamientos de productos o servicios", "Empresas que venden por WhatsApp"],
-        body: `## ¿Cómo trabajamos tu publicidad cada mes? {#como-trabajamos}
+        body: `## ¿Qué hacemos cada mes con tu publicidad? {#como-trabajamos}
 
 1. **Diagnóstico:** revisamos tu negocio, tu web, tus cuentas publicitarias y lo que ya invertiste.
 2. **Estrategia:** elegimos el objetivo, las plataformas, el presupuesto sugerido y los públicos.
@@ -634,7 +634,7 @@ Tabla: Qué campaña usamos según tu objetivo.
         h1: "Ads management that brings customers, not just likes",
         lead: "Ads management is the monthly handling of your paid advertising on Facebook, Instagram, TikTok and Google: we set the strategy around your goal (sales, WhatsApp messages or leads), create and test the ads, retarget people who already visited you and send clear reports every month. The fee doesn't include your ad spend.",
         facts: [["From", "{{cop:450000,usd:200}} / mo"], ["Platforms", "Meta, TikTok and Google"], ["Reports", "Monthly"], ["Commitment", "Month to month"]],
-        includesTitle: "What's included",
+        includesTitle: "What's included in ads management?",
         includes: [
           { t: "Goal-based strategy", d: "Sales, WhatsApp messages, leads or store visits: each goal uses different campaigns." },
           { t: "Audiences and targeting", d: "We decide who sees your ads by location, interests and behavior, plus lookalikes of your customers." },
@@ -643,7 +643,7 @@ Tabla: Qué campaña usamos según tu objetivo.
           { t: "Pixel and tracking", d: "We set up the Meta pixel, conversions and Google Analytics so you know which ad brings each sale." },
           { t: "Optimization and reports", d: "Weekly adjustments and a simple monthly report: what you spent, how many customers came and what each one cost." },
         ],
-        forWhoTitle: "Best for",
+        forWhoTitle: "Which businesses is ads management for?",
         forWho: ["Businesses with a website or store that want more sales", "Brands running ads themselves without results", "Product or service launches", "Companies that sell over WhatsApp"],
         body: `## How we run your ads every month {#como-trabajamos}
 
@@ -692,7 +692,7 @@ No page to send the ads to yet? A [landing page](/servicios/landing-pages) from 
         h1: "Chatbot de WhatsApp con IA que responde mientras tú trabajas",
         lead: "Un chatbot de WhatsApp con IA contesta a tus clientes a cualquier hora, entiende mensajes escritos como los escribe la gente, agenda citas, toma pedidos y te pasa la conversación cuando hace falta una persona. Lo conectamos con la API oficial de WhatsApp Business, tu catálogo y tu calendario. Estamos abriendo los primeros cupos: escríbenos y te mostramos una demo con tu negocio.",
         facts: [["Precio", "Según tu negocio"], ["Canal", "API oficial de WhatsApp"], ["Atiende", "24/7"], ["Demo", "Gratis"]],
-        includesTitle: "Qué hace tu chatbot",
+        includesTitle: "¿Qué hace un chatbot de WhatsApp con IA?",
         includes: [
           { t: "Responde al instante", d: "Precios, horarios, ubicación, envíos y las preguntas que te hacen todos los días, con tus palabras y tu tono." },
           { t: "Entiende mensajes libres", d: "Con IA entiende «¿tienen algo para el jueves en la tarde?» y no obliga al cliente a escoger solo botones." },
@@ -701,7 +701,7 @@ No page to send the ads to yet? A [landing page](/servicios/landing-pages) from 
           { t: "Pasa a una persona", d: "Cuando la pregunta se sale del guion o el cliente lo pide, la conversación llega a tu equipo con todo el contexto." },
           { t: "Medición", d: "Cuántas conversaciones llegaron, cuántas terminaron en cita o venta y qué preguntan más tus clientes." },
         ],
-        forWhoTitle: "Ideal para",
+        forWhoTitle: "¿Para qué negocios es un chatbot de WhatsApp?",
         forWho: ["Clínicas, consultorios y centros de estética que agendan citas", "Restaurantes y negocios que reciben pedidos por WhatsApp", "Tiendas que responden las mismas preguntas todo el día", "Negocios que pautan en Meta y no alcanzan a contestar los mensajes"],
         body: `## ¿Cómo funciona un chatbot de WhatsApp con IA? {#como-funciona}
 

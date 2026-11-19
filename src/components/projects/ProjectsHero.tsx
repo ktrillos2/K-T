@@ -14,10 +14,11 @@ export function ProjectsHero() {
   return (
     <section className={styles.hero} aria-labelledby="h-proyectos" data-hero="">
       <div className="wrap">
-        <p className={styles.eyebrow}>
-          <span className={styles.slash}>●</span> <Scramble trigger="enter" text={h.eyebrow} />
-        </p>
-        <SplitTitle as="h1" id="h-proyectos" mode="enter" className="h-hero" tabIndex={-1}>
+        {/* H1 con lo que se busca; el titular grande se ve igual como párrafo. */}
+        <h1 id="h-proyectos" className={styles.eyebrow} tabIndex={-1}>
+          <span className={`${styles.slash} ${styles.dot}`} aria-hidden="true" /> <Scramble trigger="enter" text={h.eyebrow} />
+        </h1>
+        <SplitTitle as="p" mode="enter" className="h-hero">
           {h.title(PROJECTS.length)}
         </SplitTitle>
         <Reveal mode="enter" delay={0.4} className={styles.row}>

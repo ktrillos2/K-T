@@ -7,9 +7,9 @@ const es = {
       "Estudio colombiano que diseña y desarrolla sitios web, tiendas virtuales y software a la medida. Cada proyecto con diseño único, sin plantillas. Desde Cúcuta para Colombia, Latinoamérica y Estados Unidos.",
     ogTitle: "K&T Code · Diseño único, código a la medida",
     home: { title: "Desarrollo web a la medida con diseño único", description: "Páginas web, tiendas virtuales y software a la medida, más pauta en Meta, Google y TikTok para que te lleguen clientes. Agencia en Cúcuta, Colombia." },
-    about: { title: "Nosotros", description: "K&T Code es un estudio de desarrollo web a la medida fundado en 2025 en San José de Cúcuta. Conoce a Keyner Trillos y cómo trabajamos, de la idea al lanzamiento." },
-    projects: { title: "Proyectos", description: "Sitios, tiendas y plataformas a la medida en producción para empresas de Colombia, México, Perú y Estados Unidos, con su caso de estudio." },
-    pricing: { title: "Precios", description: "Precios de desarrollo web a la medida: landing pages desde $450.000 COP, tiendas virtuales desde $1.300.000 COP, sitios corporativos y software. Precios en tu moneda." },
+    about: { title: "Nosotros: estudio de desarrollo web en Cúcuta", description: "K&T Code es un estudio de desarrollo web a la medida fundado en 2025 en San José de Cúcuta. Conoce a Keyner Trillos y cómo trabajamos, de la idea al lanzamiento." },
+    projects: { title: "Proyectos de páginas web y software a la medida", description: "Sitios, tiendas y plataformas a la medida en producción para empresas de Colombia, México, Perú y Estados Unidos, con su caso de estudio." },
+    pricing: { title: "Precios de páginas web en Colombia", description: "Precios de desarrollo web a la medida: landing pages desde $450.000 COP, tiendas virtuales desde $1.300.000 COP, sitios corporativos y software. Precios en tu moneda." },
     blog: { title: "Blog de páginas web, precios y SEO", description: "Guías de precios, comparativas y estrategias de SEO y GEO para que tu página web venda más, con calculadoras y simuladores interactivos." },
     privacy: { title: "Política de privacidad", description: "Cómo K&T Code trata los datos personales que recibe a través de su sitio web y sus canales de contacto." },
     notFound: { title: "Página no encontrada" },
@@ -126,7 +126,7 @@ const es = {
     },
     why: {
       path: "por qué nosotros",
-      title: "¿Por qué elegirnos?",
+      title: "¿Por qué elegir K&T Code para tu página web?",
       lead: "Lo que cambia cuando tu página se hace pensando solo en tu negocio.",
       items: [
         { t: "Tu página es tuya", d: "Te entregamos todo a tu nombre. Sin mensualidades obligatorias ni ataduras." },
@@ -150,7 +150,7 @@ const es = {
     },
     featured: {
       path: "proyectos destacados",
-      title: "Nuestro trabajo",
+      title: "Páginas web y tiendas que hemos creado",
       lead: "Sitios reales, funcionando hoy.",
       devices: { desktop: "Escritorio", tablet: "Tablet", mobile: "Móvil" },
       liveToggle: "Ver en vivo",
@@ -167,7 +167,7 @@ const es = {
     },
     reviews: {
       path: "reseñas",
-      title: "Lo que dicen nuestros clientes",
+      title: "Reseñas de clientes de K&T Code",
       lead: "Empresas reales que confiaron en nosotros.",
       prev: "Reseña anterior",
       next: "Reseña siguiente",
@@ -190,7 +190,7 @@ const es = {
 
   about: {
     hero: {
-      eyebrow: "Nosotros · desde 2025",
+      eyebrow: "Nosotros · estudio de desarrollo web en Cúcuta desde 2025",
       title: "Un estudio pequeño con estándares grandes",
       lead: "Somos un estudio colombiano de desarrollo web en Cúcuta. Trabajamos con empresas de Colombia, Latinoamérica y EE. UU.",
       chips: ["Diseño", "Desarrollo", "SEO", "Soporte"],
@@ -198,7 +198,7 @@ const es = {
     },
     founder: {
       path: "fundador",
-      title: "Quién está detrás",
+      title: "Quién está detrás de K&T Code",
       photoAlt: "Keyner Trillos, cofundador y líder de desarrollo de K&T Code",
       caption: "Keyner Trillos",
       role: "Cofundador y líder de desarrollo",
@@ -225,7 +225,7 @@ const es = {
     },
     method: {
       path: "proceso",
-      title: "Cómo trabajamos",
+      title: "Cómo creamos tu página web, paso a paso",
       lead: "Cuatro pasos, de la idea al lanzamiento.",
       stage: (n: number) => `Etapa ${n}`,
       head: "(HEAD → main, tag: v1.0)",
@@ -240,14 +240,14 @@ const es = {
 
   projects: {
     hero: {
-      eyebrow: "Proyectos · 2025 – 2026",
+      eyebrow: "Proyectos de páginas web y software · 2025 – 2026",
       title: (n: number) => `${n} proyectos en producción`,
       lead: "Sitios, tiendas y plataformas reales. Elige uno para ver cómo se hizo.",
       toIndex: "Ver proyectos",
     },
     index: {
       path: "todos",
-      title: "Todos los proyectos",
+      title: "Páginas web, tiendas y plataformas entregadas",
       lead: "Filtra por tipo.",
       filterAria: "Filtrar por tipo",
     },
@@ -305,7 +305,7 @@ const es = {
   },
   pricing: {
     hero: {
-      eyebrow: "Precios en tu moneda",
+      eyebrow: "Precios de páginas web y software en tu moneda",
       title: "Precios claros",
       lead: "Precios de partida. Tras una reunión te enviamos una propuesta exacta.",
       chips: ["Landing", "Tienda", "Corporativo", "Software"],
@@ -330,7 +330,7 @@ const es = {
     note: "Los precios pueden variar según secciones, funcionalidades, integraciones, idiomas y personalización.",
     quote: {
       path: "cotizador",
-      title: "Arma tu cotización",
+      title: "Cotiza tu página web en línea",
       lead: "Elige plan y extras. Te dejamos el mensaje listo para WhatsApp.",
       step1: "1. Plan",
       step2: "2. Servicios adicionales",
@@ -352,7 +352,7 @@ const es = {
     extras: ["Mantenimiento mensual", "Hosting y dominio", "Posicionamiento SEO", "Integración con pasarelas de pago", "Automatización de procesos", "Paneles administrativos", "Integraciones con APIs", "Rediseño de páginas existentes", "Configuración de analítica", "Pauta en Meta y Google Ads", "Soporte técnico"],
     compare: {
       path: "comparar",
-      title: "Compara los planes",
+      title: "Compara precios y qué incluye cada plan",
       lead: "",
       feature: "Característica",
       included: "Incluido",
@@ -486,7 +486,7 @@ const es = {
 
   contact: {
     path: "contacto",
-    title: "Cuéntanos tu idea",
+    title: "Cotiza tu página web o tu publicidad",
     lead: "Dinos qué necesitas, tu nombre y tu WhatsApp. Te respondemos el mismo día hábil.",
     bot: "K&T",
     you: "Tú",
@@ -578,7 +578,7 @@ const es = {
     seePricing: "Ver todos los precios",
     priceTitle: "Inversión de partida",
     priceNote: "Precio de partida. El valor exacto se define en la propuesta según alcance e integraciones.",
-    process: "Cómo trabajamos",
+    process: "Cómo trabajamos tu proyecto, paso a paso",
     projects: "Proyectos relacionados",
     projectsCity: "Proyectos que hemos entregado",
     posts: "Guías relacionadas",
@@ -594,7 +594,7 @@ const es = {
         title: "Servicios de desarrollo web y software a la medida",
         description: "Landing pages, tiendas virtuales, sitios corporativos, software a medida, SEO técnico y mantenimiento. Todo diseñado desde cero, sin plantillas, para empresas de Colombia y Latinoamérica.",
         eyebrow: "servicios",
-        h1: "Servicios a la medida de tu negocio",
+        h1: "Diseño web, software y publicidad a la medida",
         lead: "Diseñamos y desarrollamos sitios web, tiendas virtuales y software desde cero. Elige el servicio que necesitas: cada uno incluye diseño único, velocidad medida y el código a nombre de tu empresa.",
       },
       industrias: {
@@ -617,7 +617,7 @@ const es = {
       title: "Testimonios de clientes",
       description: "Lo que dicen las empresas que trabajaron con K&T Code: reseñas reales con nombre, cargo y el proyecto entregado.",
       eyebrow: "testimonios",
-      h1: "Lo que dicen nuestros clientes",
+      h1: "Reseñas y opiniones de clientes de K&T Code",
       lead: "Reseñas reales de empresas de Colombia, México y Perú, cada una enlazada al caso de estudio del proyecto que entregamos.",
       cta: "¿Fuiste nuestro cliente? Escríbenos para contar tu experiencia.",
       form: {

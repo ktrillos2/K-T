@@ -14,9 +14,12 @@ export function AboutHero() {
       <div className={`wrap ${styles.grid}`}>
         <div className={styles.copy}>
           <Reveal mode="enter" y={20}>
-            <p className={styles.eyebrow}>{h.eyebrow}</p>
+            {/* H1 con lo que se busca; el lema grande se ve igual como párrafo. */}
+            <h1 id="h-nosotros" className={styles.eyebrow} tabIndex={-1}>
+              {h.eyebrow}
+            </h1>
           </Reveal>
-          <SplitTitle as="h1" id="h-nosotros" mode="enter" className="h-hero" tabIndex={-1}>
+          <SplitTitle as="p" mode="enter" className="h-hero">
             {h.title}
           </SplitTitle>
           <Reveal mode="enter" delay={0.4}>

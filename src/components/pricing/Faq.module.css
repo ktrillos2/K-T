@@ -60,3 +60,8 @@
 .item[data-open="true"] .a {
   grid-template-rows: 1fr;
 }
+
+.fold::before,
+.lines::before {
+  content: attr(data-glyph);
+}

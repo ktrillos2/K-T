@@ -94,6 +94,8 @@
 }
 .name {
   font-size: clamp(26px, 2.6vw, 38px);
+  /* Es un h2 (nombre del servicio): sin la negrita por defecto. */
+  font-weight: inherit;
 }
 .text {
   font-size: 13.5px;

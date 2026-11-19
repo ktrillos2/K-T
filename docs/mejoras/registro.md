@@ -2,6 +2,12 @@
 
 Lo más nuevo arriba. Formato: fecha · mejora · archivos · cómo se verificó · resultado (antes → después si hay medición).
 
+## 2026-11-19 · Encabezados y títulos para búsquedas de clientes (revisión con Sitechecker)
+
+- Qué: H1 con palabras clave en /precios, /nosotros, /proyectos y /blog (el titular grande se ve igual como párrafo); títulos de /precios, /nosotros y /proyectos (antes 18–20 caracteres); subtítulos genéricos reescritos («¿Por qué elegir K&T Code para tu página web?», «Reseñas de clientes de K&T Code», «Cotiza tu página web o tu publicidad», preguntas propias por servicio como «¿Qué incluye una landing page?»); página de pauta con «publicidad en Facebook, Instagram y Google» en H1 y título; nombres de servicios, proyectos y artículos como encabezados en sus listados; títulos del pie como párrafos; «▸ { … }» fuera de los H3 de preguntas frecuentes; espacio en «Etapa 1 Entendemos…».
+- Medición: los botones «Pedir este plan» envían el plan en `service`; los botones del inicio de cada página se registran como `location=hero` (antes `menu`).
+- Verificación: typecheck y build limpios; un solo H1 por página; JSON-LD válido; capturas en 1440 y 390 px sin errores.
+
 ## 2026-11-19 · H1 del inicio con los servicios (páginas web y publicidad)
 
 - Qué: el H1 del inicio pasa a ser «Agencia de páginas web y publicidad digital · Cúcuta, Colombia» (antes el lema «Tu negocio en internet, listo para vender.», que se sigue viendo igual como párrafo). Título «K&T Code · Páginas web y publicidad digital en Colombia», descripción con la pauta en Meta, Google y TikTok, y H2 de servicios «Páginas web, software y publicidad». Igual en /en.

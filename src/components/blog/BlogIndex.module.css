@@ -9,6 +9,9 @@
 .eyebrow {
   font-size: 12.5px;
   color: var(--muted);
+  /* Es el h1: sin la negrita ni el contorno de foco por defecto. */
+  font-weight: 400;
+  outline: none;
 }
 .eyebrow span {
   color: var(--green-ink);
@@ -62,6 +65,7 @@
 }
 .fTitle {
   font-size: clamp(30px, 3.8vw, 58px);
+  font-weight: inherit;
 }
 .fDesc {
   color: var(--muted);
@@ -190,6 +194,7 @@
   color: var(--muted);
 }
 .cTitle {
+  font-weight: inherit;
   font-family: var(--display);
   font-size: clamp(22px, 2vw, 28px);
   line-height: 1.02;
@@ -299,4 +304,12 @@
   .random {
     margin-left: 0;
   }
+}
+
+/* El punto decorativo lo pinta el CSS para que no entre en el texto del h1. */
+.dot::before {
+  content: "●";
+}
+.dot {
+  color: var(--green-ink);
 }

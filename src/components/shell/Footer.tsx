@@ -121,7 +121,7 @@ export function Footer({ links }: { links: ShellLinks }) {
           <LocaleSelector up />
         </div>
         <nav aria-label={f.nav} className={styles.col}>
-          <h3>{f.nav}</h3>
+          <p className={styles.colTitle}>{f.nav}</p>
           {ROUTES.map((r) => (
             <TLink key={r.key} href={r.href}>
               {t.nav[r.nav]}
@@ -129,7 +129,7 @@ export function Footer({ links }: { links: ShellLinks }) {
           ))}
         </nav>
         <div className={styles.col}>
-          <h3>{f.contact}</h3>
+          <p className={styles.colTitle}>{f.contact}</p>
           <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
           <a href={wa(t.wa.default)} target="_blank" rel="noopener noreferrer">
             {SITE.phone}
@@ -139,7 +139,7 @@ export function Footer({ links }: { links: ShellLinks }) {
           </span>
         </div>
         <div className={styles.col}>
-          <h3>{f.social}</h3>
+          <p className={styles.colTitle}>{f.social}</p>
           {SITE.socials.map((s) => (
             <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer me">
               {s.label} <span className="muted">{s.handle}</span>
@@ -147,7 +147,7 @@ export function Footer({ links }: { links: ShellLinks }) {
           ))}
         </div>
         <div className={styles.col}>
-          <h3>{f.legal}</h3>
+          <p className={styles.colTitle}>{f.legal}</p>
           <TLink href="/politica-de-privacidad">{f.privacy}</TLink>
           <TLink href="/preguntas-frecuentes">{t.landing.faq}</TLink>
           <TLink href="/testimonios">{t.landing.testimonials.title}</TLink>
@@ -157,9 +157,9 @@ export function Footer({ links }: { links: ShellLinks }) {
       {/* Mapa de servicios: enlaces internos para buscadores y visitantes */}
       <div className={`wrap ${styles.map}`}>
         <nav aria-label={t.nav.services}>
-          <h3>
+          <p className={styles.colTitle}>
             <TLink href="/servicios">{t.nav.services}</TLink>
-          </h3>
+          </p>
           {links.services.map((l) => (
             <TLink key={l.href} href={l.href}>
               {l.label}
@@ -168,9 +168,9 @@ export function Footer({ links }: { links: ShellLinks }) {
         </nav>
         {links.industries.length > 0 && (
           <nav aria-label={t.nav.industries}>
-            <h3>
+            <p className={styles.colTitle}>
               <TLink href="/industrias">{t.nav.industries}</TLink>
-            </h3>
+            </p>
             {links.industries.map((l) => (
               <TLink key={l.href} href={l.href}>
                 {l.label}
@@ -179,7 +179,7 @@ export function Footer({ links }: { links: ShellLinks }) {
           </nav>
         )}
         <nav aria-label={t.landing.hubs.ciudades.title}>
-          <h3>{t.landing.hubs.ciudades.title}</h3>
+          <p className={styles.colTitle}>{t.landing.hubs.ciudades.title}</p>
           {links.cities.map((l) => (
             <TLink key={l.href} href={l.href}>
               {l.label}
@@ -188,7 +188,7 @@ export function Footer({ links }: { links: ShellLinks }) {
         </nav>
         {links.countries.length > 0 && (
           <nav aria-label={t.landing.hubs.paises.title}>
-            <h3>{t.landing.hubs.paises.title}</h3>
+            <p className={styles.colTitle}>{t.landing.hubs.paises.title}</p>
             {links.countries.map((l) => (
               <TLink key={l.href} href={l.href}>
                 {l.label}
@@ -197,9 +197,9 @@ export function Footer({ links }: { links: ShellLinks }) {
           </nav>
         )}
         <nav aria-label={t.nav.pricing}>
-          <h3>
+          <p className={styles.colTitle}>
             <TLink href="/precios">{t.nav.pricing}</TLink>
-          </h3>
+          </p>
           {links.guides.map((l) => (
             <TLink key={l.href} href={l.href}>
               {l.label}

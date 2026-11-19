@@ -15,9 +15,10 @@ export function PricingHero() {
       <div className={`wrap ${styles.grid}`}>
         <div className={styles.copy}>
           <Reveal mode="enter" y={20}>
-            <p className={styles.eyebrow}>{`${h.eyebrow} · ${country.currency}`}</p>
+            {/* H1 con lo que se busca ("precios de páginas web"); el lema grande se ve igual como párrafo. */}
+            <h1 id="h-precios" className={styles.eyebrow} tabIndex={-1}>{`${h.eyebrow} · ${country.currency}`}</h1>
           </Reveal>
-          <SplitTitle as="h1" id="h-precios" mode="enter" className="h-hero" tabIndex={-1}>
+          <SplitTitle as="p" mode="enter" className="h-hero">
             {h.title}
           </SplitTitle>
           <Reveal mode="enter" delay={0.4}>

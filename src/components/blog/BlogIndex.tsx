@@ -83,10 +83,11 @@ export function BlogIndex() {
   return (
     <section ref={root} className={styles.page} aria-labelledby="h-blog">
       <header className={cx("wrap", styles.head)} data-hero="">
-        <p className={styles.eyebrow}>
-          <span>●</span> <Scramble trigger="enter" text={b.path} />
-        </p>
-        <SplitTitle as="h1" id="h-blog" mode="enter" className="h-hero" tabIndex={-1}>
+        {/* H1 con lo que trata el blog; el "Blog" grande se ve igual como párrafo. */}
+        <h1 id="h-blog" className={styles.eyebrow} tabIndex={-1}>
+          <span className={styles.dot} aria-hidden="true" /> <Scramble trigger="enter" text={t.meta.blog.title} />
+        </h1>
+        <SplitTitle as="p" mode="enter" className="h-hero">
           {b.title}
         </SplitTitle>
         <Reveal mode="enter" delay={0.35} className={styles.leadRow}>
@@ -105,7 +106,7 @@ export function BlogIndex() {
                   {b.featured} · {CATEGORY_LABELS[lang][featured.category]}
                   {featured.interactive && <em>{b.interactive}</em>}
                 </span>
-                <span className={`display ${styles.fTitle}`}>{featured.title}</span>
+                <h2 className={`display ${styles.fTitle}`}>{featured.title}</h2>
                 <span className={styles.fDesc}>{featured.description}</span>
                 <span className={styles.fMeta}>
                   {formatDate(featured.date, lang)} · {b.minutes(featured.minutes)}
@@ -205,7 +206,7 @@ export function BlogIndex() {
                       {CATEGORY_LABELS[lang][p.category]} · {b.minutes(p.minutes)}
                       {p.fallback && <em>{b.onlyEs}</em>}
                     </span>
-                    <span className={styles.cTitle}>{p.title}</span>
+                    <h2 className={styles.cTitle}>{p.title}</h2>
                     <span className={styles.cDesc}>{p.description}</span>
                     <span className={styles.cTags}>
                       {p.tags.slice(0, 3).map((tag) => (

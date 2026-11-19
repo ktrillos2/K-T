@@ -71,7 +71,7 @@ export function GitLog() {
                     </span>
                   </p>
                   <h3 className={`display ${styles.title}`}>
-                    <span className={styles.step}>{m.stage(i + 1)}</span>
+                    <span className={styles.step}>{m.stage(i + 1)}</span>{" "}
                     {s.title}
                   </h3>
                   <p className={styles.body}>{s.body}</p>

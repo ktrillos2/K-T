@@ -51,7 +51,7 @@ export function LandingHub({ eyebrow, h1, lead, items, extra = [] }: Props) {
                 <li key={it.href}>
                   <TLink href={it.href} className={styles.card} style={vars({ "--c": COLOR_VAR[it.color] })} data-cursor={t.cursor.open}>
                     <span className={styles.idx}>{String(i + 1).padStart(2, "0")}</span>
-                    <span className={`display ${styles.name}`}>{it.label}</span>
+                    <h2 className={`display ${styles.name}`}>{it.label}</h2>
                     <span className={styles.text}>{it.text}</span>
                     <span className={styles.foot}>
                       {plan && !plan.quote ? (

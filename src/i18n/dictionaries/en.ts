@@ -7,9 +7,9 @@ const en: Dict = {
       "Colombian studio that designs and builds custom websites, online stores and software. Every project has a one-of-a-kind design, no templates. From Cúcuta to Latin America and the United States.",
     ogTitle: "K&T Code · Unique design, custom code",
     home: { title: "Custom web development with one-of-a-kind design", description: "Custom websites, online stores and software, plus Meta, Google and TikTok ads management to bring you clients. Nearshore agency in Colombia." },
-    about: { title: "About", description: "K&T Code is a custom web development studio founded in 2025 in Cúcuta, Colombia. Meet Keyner Trillos and how we work, from idea to launch." },
-    projects: { title: "Projects", description: "Custom websites, stores and platforms live for companies in Colombia, Mexico, Peru and the United States, each with its case study." },
-    pricing: { title: "Pricing", description: "Custom web development pricing: landing pages, online stores, corporate websites and custom software. Prices shown in your local currency." },
+    about: { title: "About our web development studio", description: "K&T Code is a custom web development studio founded in 2025 in Cúcuta, Colombia. Meet Keyner Trillos and how we work, from idea to launch." },
+    projects: { title: "Website and custom software projects", description: "Custom websites, stores and platforms live for companies in Colombia, Mexico, Peru and the United States, each with its case study." },
+    pricing: { title: "Website and software pricing", description: "Custom web development pricing: landing pages, online stores, corporate websites and custom software. Prices shown in your local currency." },
     blog: { title: "Web design, pricing and SEO blog", description: "Pricing guides, comparisons and SEO and GEO strategies to help your website sell more, with interactive calculators and simulators." },
     privacy: { title: "Privacy policy", description: "How K&T Code handles the personal data it receives through its website and contact channels." },
     notFound: { title: "Page not found" },
@@ -126,7 +126,7 @@ const en: Dict = {
     },
     why: {
       path: "why us",
-      title: "Why choose us?",
+      title: "Why choose K&T Code for your website?",
       lead: "What changes when your website is built just for your business.",
       items: [
         { t: "Your website is yours", d: "Everything is delivered in your name. No forced monthly fees, no lock-in." },
@@ -150,7 +150,7 @@ const en: Dict = {
     },
     featured: {
       path: "featured projects",
-      title: "Our work",
+      title: "Websites and stores we have built",
       lead: "Real sites, live today.",
       devices: { desktop: "Desktop", tablet: "Tablet", mobile: "Mobile" },
       liveToggle: "View live",
@@ -167,7 +167,7 @@ const en: Dict = {
     },
     reviews: {
       path: "reviews",
-      title: "What our clients say",
+      title: "K&T Code client reviews",
       lead: "Real companies that trusted us.",
       prev: "Previous review",
       next: "Next review",
@@ -190,7 +190,7 @@ const en: Dict = {
 
   about: {
     hero: {
-      eyebrow: "About · since 2025",
+      eyebrow: "About · web development studio in Colombia since 2025",
       title: "A small studio with big standards",
       lead: "We're a Colombian web development studio in Cúcuta. We work with companies across Colombia, Latin America and the US.",
       chips: ["Design", "Development", "SEO", "Support"],
@@ -198,7 +198,7 @@ const en: Dict = {
     },
     founder: {
       path: "founder",
-      title: "Who's behind it",
+      title: "Who's behind K&T Code",
       photoAlt: "Keyner Trillos, co-founder and lead developer at K&T Code",
       caption: "Keyner Trillos",
       role: "Co-founder and lead developer",
@@ -225,7 +225,7 @@ const en: Dict = {
     },
     method: {
       path: "process",
-      title: "How we work",
+      title: "How we build your website, step by step",
       lead: "Four steps, from idea to launch.",
       stage: (n: number) => `Stage ${n}`,
       head: "(HEAD → main, tag: v1.0)",
@@ -240,14 +240,14 @@ const en: Dict = {
 
   projects: {
     hero: {
-      eyebrow: "Projects · 2025 – 2026",
+      eyebrow: "Website and software projects · 2025 – 2026",
       title: (n: number) => `${n} projects live`,
       lead: "Real websites, stores and platforms. Pick one to see how it was made.",
       toIndex: "See projects",
     },
     index: {
       path: "all",
-      title: "All projects",
+      title: "Websites, stores and platforms delivered",
       lead: "Filter by type.",
       filterAria: "Filter by type",
     },
@@ -304,7 +304,7 @@ const en: Dict = {
   },
   pricing: {
     hero: {
-      eyebrow: "Prices in your currency",
+      eyebrow: "Website and software prices in your currency",
       title: "Clear prices",
       lead: "Starting prices. After a short meeting we send you an exact proposal.",
       chips: ["Landing", "Store", "Corporate", "Software"],
@@ -328,7 +328,7 @@ const en: Dict = {
     note: "Prices may vary with sections, features, integrations, languages and customization.",
     quote: {
       path: "quote",
-      title: "Build your quote",
+      title: "Get a website quote online",
       lead: "Pick a plan and extras. We'll leave the message ready for WhatsApp.",
       step1: "1. Plan",
       step2: "2. Extra services",
@@ -350,7 +350,7 @@ const en: Dict = {
     extras: ["Monthly maintenance", "Hosting and domain", "SEO positioning", "Payment gateway integration", "Process automation", "Admin dashboards", "API integrations", "Redesign of existing sites", "Analytics setup", "Meta and Google Ads", "Technical support"],
     compare: {
       path: "compare",
-      title: "Compare plans",
+      title: "Compare prices and what each plan includes",
       lead: "",
       feature: "Feature",
       included: "Included",
@@ -484,7 +484,7 @@ const en: Dict = {
 
   contact: {
     path: "contact",
-    title: "Tell us your idea",
+    title: "Get a quote for your website or ads",
     lead: "Tell us what you need, your name and your WhatsApp number. We reply the same business day.",
     bot: "K&T",
     you: "You",
@@ -576,7 +576,7 @@ const en: Dict = {
     seePricing: "See all prices",
     priceTitle: "Starting investment",
     priceNote: "Starting price. The exact amount is set in the proposal based on scope and integrations.",
-    process: "How we work",
+    process: "How we run your project, step by step",
     projects: "Related projects",
     projectsCity: "Projects we've delivered",
     posts: "Related guides",
@@ -592,7 +592,7 @@ const en: Dict = {
         title: "Custom web development and software services",
         description: "Landing pages, online stores, corporate sites, custom software, technical SEO and maintenance. All designed from scratch, no templates.",
         eyebrow: "services",
-        h1: "Services tailored to your business",
+        h1: "Web design, software and ads, built for you",
         lead: "We design and build websites, online stores and software from scratch. Choose the service you need: each includes unique design, measured speed and the code in your company's name.",
       },
       industrias: {
@@ -615,7 +615,7 @@ const en: Dict = {
       title: "Client testimonials",
       description: "What companies that worked with K&T Code say: real reviews with name, role and the project delivered.",
       eyebrow: "testimonials",
-      h1: "What our clients say",
+      h1: "K&T Code client reviews and testimonials",
       lead: "Real reviews from companies in Colombia, Mexico and Peru, each linked to the case study of the project we delivered.",
       cta: "Were you a client? Write to us to share your experience.",
       form: {

@@ -182,7 +182,7 @@ export function Plans() {
                     <button type="button" className={cx("btn", p.hot ? styles.ctaHot : "btn--solid", styles.cta)} onClick={(e) => toQuote(p.id, e.currentTarget)} data-stick>
                       {pr.build} <span className="arr">→</span>
                     </button>
-                    <a className={styles.waLink} href={wa(t.wa.plan(c.name))} target="_blank" rel="noopener noreferrer">
+                    <a className={styles.waLink} href={wa(t.wa.plan(c.name))} target="_blank" rel="noopener noreferrer" data-service={p.id}>
                       {p.quote ? pr.talk : pr.ask} ↗
                     </a>
                   </div>
