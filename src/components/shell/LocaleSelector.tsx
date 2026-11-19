@@ -76,7 +76,8 @@ export function LocaleSelector({
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={flag(country.code)} alt="" width={20} height={14} className={styles.flag} />
-        <span className={styles.code}>{country.currency}</span>
+        {/* El espacio no se ve (flex) pero hace que el texto visible sea "COP ES", igual al inicio del aria-label. */}
+        <span className={styles.code}>{country.currency}</span>{" "}
         <span className={styles.lang}>{lang.toUpperCase()}</span>
       </button>
 

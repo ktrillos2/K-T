@@ -25,9 +25,8 @@ export function ArticleBody({ blocks }: { blocks: Block[] }) {
           case "h2":
             return (
               <h2 key={i} id={b.id} data-toc>
-                <a href={`#${b.id}`} className={styles.anchor} aria-hidden="true" tabIndex={-1}>
-                  #
-                </a>
+                {/* El "#" lo dibuja el CSS: así no entra en el texto del subtítulo (Google y los buscadores con IA leían "#Título"). */}
+                <a href={`#${b.id}`} className={styles.anchor} aria-hidden="true" tabIndex={-1} />
                 {b.text}
               </h2>
             );

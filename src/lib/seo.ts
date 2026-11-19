@@ -18,7 +18,8 @@ export const ROBOTS_INDEX: NonNullable<Metadata["robots"]> = {
 
 /**
  * Deja la descripción en ~160 caracteres (lo que muestra Google). Prefiere cortar al final de una
- * frase para que no quede a medias; si no hay frase completa, corta en la última palabra con "…".
+ * frase para que no quede a medias; si no hay, cierra en la última coma (la frase queda completa);
+ * solo como último recurso corta en la última palabra con "…".
  */
 export function clip(text: string, max = 160): string {
   const t = text.replace(/\s+/g, " ").trim();
@@ -26,6 +27,8 @@ export function clip(text: string, max = 160): string {
   const cut = t.slice(0, max);
   const end = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf(": "));
   if (end >= 90) return cut.slice(0, end + 1).replace(/:$/, ".");
+  const comma = cut.lastIndexOf(", ");
+  if (comma >= 110) return `${cut.slice(0, comma)}.`;
   return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,.;:·–-]+$/, "")}…`;
 }
 

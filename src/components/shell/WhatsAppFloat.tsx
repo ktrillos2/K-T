@@ -165,12 +165,13 @@ export function WhatsAppFloat() {
         </div>
       )}
 
+      {/* El nombre accesible empieza con el texto visible ("¿Hablamos? En línea…") para que el control por voz y los agentes lo encuentren. */}
       <a
         className={styles.btn}
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={f.aria}
+        aria-label={`${f.label} ${f.online}. ${f.aria}`}
         onClick={dismiss}
         data-stick
         data-native
@@ -182,7 +183,8 @@ export function WhatsAppFloat() {
               <rect key={i} x={c.x} y={c.y} width="1" height="1" fill={FILL[c.ch]} style={{ transitionDelay: `${(c.d * 0.035).toFixed(3)}s` }} />
             ))}
           </svg>
-          {!seen && <span className={styles.badge}>1</span>}
+          {/* El "1" del aviso lo pone el CSS: es decorativo y no debe contar como texto del botón. */}
+          {!seen && <span className={styles.badge} />}
         </span>
         <span className={styles.text}>
           <span className={styles.textInner}>

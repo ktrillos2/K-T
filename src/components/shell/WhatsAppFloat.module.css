@@ -86,6 +86,9 @@
     transform: rotate(-6deg);
   }
 }
+.badge::before {
+  content: "1";
+}
 .badge {
   position: absolute;
   top: -6px;

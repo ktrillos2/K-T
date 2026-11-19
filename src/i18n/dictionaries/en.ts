@@ -316,6 +316,7 @@ const en: Dict = {
       corporativo: { name: "Corporate Website", what: "What it is: your company's full website, with several sections: home, about, services and contact.", pitch: "For companies that need a complete presence ready to grow.", delivery: "15 to 25 days", features: ["Up to 8 internal pages", "Services, portfolio and testimonials", "Form and WhatsApp", "Initial technical SEO", "Analytics setup"] },
       software: { name: "Custom Software", what: "What it is: a program built for your business (inventory, bookings, clients) that runs in the browser.", pitch: "To organize your business: inventory, bookings, customers and tasks you do by hand today.", delivery: "Depends on scope", features: ["Requirements analysis", "Full development and database", "Users, roles and admin panel", "Integrations and e-invoicing", "Automations and support"] },
     },
+    plansTitle: "Plans and starting prices",
     hot: "Most requested",
     file: (id: string) => `plan.${id}`,
     deliveryLabel: "Delivery",

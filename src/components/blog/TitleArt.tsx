@@ -80,7 +80,8 @@ export function TitleArt({ title, slug, category, color, size = "md", className,
   }, []);
 
   return (
-    <div ref={ref} className={`${styles.art} ${styles[size]} ${className ?? ""}`} data-c={color} data-v={variant} data-on="false" data-autoplay={autoplay || undefined} aria-hidden="true">
+    // data-nosnippet: el texto de la portada es decorativo (dominios de ejemplo, títulos recortados); Google no lo usa en fragmentos ni en sus respuestas con IA.
+    <div ref={ref} className={`${styles.art} ${styles[size]} ${className ?? ""}`} data-c={color} data-v={variant} data-on="false" data-autoplay={autoplay || undefined} aria-hidden="true" data-nosnippet>
       <span className={styles.grid} />
 
       {variant === "versus" && (
@@ -168,8 +169,9 @@ export function TitleArt({ title, slug, category, color, size = "md", className,
                 <b />
               </span>
             ))}
+            {/* El monto es decorativo y aleatorio: lo pinta el CSS para que Google y los buscadores con IA no lo lean como un precio real. */}
             <span className={styles.total}>
-              TOTAL <b>${digits.slice(0, 1)}.{digits.slice(1)}.000</b>
+              TOTAL <b data-amount={`$${digits.slice(0, 1)}.${digits.slice(1)}.000`} />
             </span>
           </span>
         </div>

@@ -15,8 +15,10 @@ type CountryData = {
   color: Landing["color"];
   projects: string[];
   posts: string[];
-  /** Medios de pago locales que integramos. */
-  payments: string;
+  /** Medios de pago locales que integramos (lista natural en cada idioma). */
+  payments: { es: string; en: string };
+  /** Guía de precios en inglés que se enlaza en la versión /en (si falta, la guía nearshore). */
+  guideEn?: { label: string; href: string };
   /** Diferencia horaria o franja con Colombia (UTC−5). */
   hours: { es: string; en: string };
   sectors: { es: string[]; en: string[] };
@@ -34,7 +36,7 @@ const COUNTRIES: CountryData[] = [
     color: "red",
     projects: ["gmx-gaming"],
     posts: ["cuanto-cuesta-una-pagina-web-latinoamerica", "como-vender-por-whatsapp-business", "nearshore-desarrollo-web-latinoamerica"],
-    payments: "Mercado Pago, Stripe, OXXO y SPEI",
+    payments: { es: "Mercado Pago, Stripe, OXXO y SPEI", en: "Mercado Pago, Stripe, OXXO and SPEI" },
     hours: {
       es: "Colombia (UTC−5) va solo una hora adelante de Ciudad de México (UTC−6) todo el año: trabajamos dentro de tu horario laboral.",
       en: "Colombia (UTC−5) is just one hour ahead of Mexico City (UTC−6) all year: we work within your business day.",
@@ -61,7 +63,8 @@ const COUNTRIES: CountryData[] = [
     color: "yellow",
     projects: [],
     posts: ["nearshore-desarrollo-web-latinoamerica", "pagina-web-pequeno-negocio-estados-unidos", "cuanto-cuesta-una-pagina-web-latinoamerica"],
-    payments: "Stripe, PayPal y tarjetas de crédito",
+    payments: { es: "Stripe, PayPal y tarjetas de crédito", en: "Stripe, PayPal and credit cards" },
+    guideEn: { label: "what a small business website costs in the US", href: "/blog/pagina-web-pequeno-negocio-estados-unidos" },
     hours: {
       es: "Colombia (UTC−5) tiene la misma hora que Miami y Nueva York de noviembre a marzo y una hora menos el resto del año; con Chicago y Houston coincide en verano y va una hora adelante en invierno: nearshore real, con reuniones en tu horario laboral.",
       en: "Colombia (UTC−5) matches Miami and New York time from November to March and is one hour behind the rest of the year; it matches Chicago and Houston in summer and is one hour ahead in winter: real nearshore, with meetings during your business day.",
@@ -88,7 +91,8 @@ const COUNTRIES: CountryData[] = [
     color: "red",
     projects: ["autos-saldo", "estrella-de-david"],
     posts: ["precio-pagina-web-peru", "cuanto-cuesta-una-pagina-web-latinoamerica", "como-vender-por-whatsapp-business"],
-    payments: "Yape, Plin, Niubiz y Culqi",
+    payments: { es: "Yape, Plin, Niubiz y Culqi", en: "Yape, Plin, Niubiz and Culqi" },
+    guideEn: { label: "what a website costs in Peru", href: "/blog/precio-pagina-web-peru" },
     hours: {
       es: "Perú y Colombia tienen la misma hora todo el año (UTC−5, sin horario de verano): trabajamos exactamente en tu horario laboral.",
       en: "Peru and Colombia share the same time all year (UTC−5, no daylight saving time): we work exactly within your business day.",
@@ -125,9 +129,18 @@ const table = (c: CountryData, lang: "es" | "en") =>
 | [Online store](/servicios/tiendas-virtuales) | {{cop:1300000}} | 25 to 40 days | Selling online with local payments |
 | [Custom software](/servicios/software-a-medida) | {{cop:4500000}} | 4 to 12 weeks | Dashboards, platforms and automation |`;
 
+/** Meta descripción: la versión completa si cabe en 160 caracteres (lo que muestra Google); si no, la corta. */
+const fit = (full: string, short: string) => (full.length <= 160 ? full : short);
+
+/** La guía de precios de Latinoamérica solo existe en español: en /en se enlaza esta si el país no tiene guía propia. */
+const NEARSHORE_GUIDE = { label: "nearshore web development costs in Latin America", href: "/blog/nearshore-desarrollo-web-latinoamerica" };
+
 const copyEs = (c: CountryData): LandingCopy => ({
-  title: `Desarrollo de páginas web en ${c.name.es}: diseño y software a la medida`,
-  description: `Páginas web, tiendas virtuales y software a la medida para empresas de ${c.name.es}, en remoto. Diseño único, carga en menos de un segundo, SEO y pagos locales (${c.payments}).`,
+  title: `Diseño y desarrollo de páginas web en ${c.name.es}`,
+  description: fit(
+    `Páginas web, tiendas y software a la medida para empresas de ${c.name.es}: diseño único, carga en menos de un segundo y pagos con ${c.payments.es}.`,
+    `Páginas web, tiendas y software a la medida para empresas de ${c.name.es}: diseño único, carga en menos de un segundo y pagos locales.`,
+  ),
   eyebrow: `desarrollo web · ${c.name.es.toLowerCase()}`,
   h1: `Desarrollo de páginas web en ${c.name.es}`,
   lead: c.intro.es,
@@ -138,7 +151,7 @@ const copyEs = (c: CountryData): LandingCopy => ({
     { t: "Tu mismo horario", d: c.hours.es },
     { t: "Velocidad", d: "Tu web carga en menos de un segundo, también en datos móviles." },
     { t: "SEO local", d: `Estructura y datos para aparecer cuando buscan tu servicio en ${c.name.es}.` },
-    { t: "Pagos locales", d: `${c.payments} integrados en tu tienda o plataforma.` },
+    { t: "Pagos locales", d: `${c.payments.es} integrados en tu tienda o plataforma.` },
     { t: "Propiedad del código", d: "El código, el dominio y las cuentas quedan a tu nombre." },
   ],
   forWhoTitle: `Sectores que atendemos en ${c.name.es}`,
@@ -163,7 +176,10 @@ En [precios](/precios) eliges tu país y ves todos los planes en tu moneda. ¿Qu
 
 const copyEn = (c: CountryData): LandingCopy => ({
   title: `Web development in ${c.name.en}: custom design and software`,
-  description: `Custom websites, online stores and software for companies in ${c.name.en}, built remotely. Unique design, sub-second load times, SEO and local payments (${c.payments}).`,
+  description: fit(
+    `Websites, online stores and custom software for companies in ${c.name.en}: unique design, sub-second load times and payments with ${c.payments.en}.`,
+    `Websites, online stores and custom software for companies in ${c.name.en}: unique design, sub-second load times and local payments.`,
+  ),
   eyebrow: `web development · ${c.name.en.toLowerCase()}`,
   h1: `Web development in ${c.name.en}`,
   lead: c.intro.en,
@@ -174,7 +190,7 @@ const copyEn = (c: CountryData): LandingCopy => ({
     { t: "Your working hours", d: c.hours.en },
     { t: "Speed", d: "Your website loads in under a second, even on mobile data." },
     { t: "Local SEO", d: `Structure and data to show up when people search for your service in ${c.name.en}.` },
-    { t: "Local payments", d: `${c.payments} integrated into your store or platform.` },
+    { t: "Local payments", d: `${c.payments.en} integrated into your store or platform.` },
     { t: "Code ownership", d: "The code, domain and accounts are in your name." },
   ],
   forWhoTitle: `Industries we serve in ${c.name.en}`,
@@ -186,7 +202,7 @@ ${c.local.en}
 
 ${table(c, "en")}
 
-On [pricing](/precios) you choose your country and see every plan in your currency. Want to know what changes the price? Read [how much a website costs in Latin America](/blog/cuanto-cuesta-una-pagina-web-latinoamerica).
+On [pricing](/precios) you choose your country and see every plan in your currency. Want to know what changes the price? Read [${(c.guideEn ?? NEARSHORE_GUIDE).label}](${(c.guideEn ?? NEARSHORE_GUIDE).href}).
 `,
   faqs: [
     { q: `How much does a website cost in ${c.name.en}?`, a: `With K&T Code a landing page starts at 200 USD, an online store at 450 USD and custom systems at 1,000 USD. Anything else is quoted per project. On kytcode.lat/precios you see prices in your local currency.` },

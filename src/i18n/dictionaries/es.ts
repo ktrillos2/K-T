@@ -317,6 +317,8 @@ const es = {
       corporativo: { name: "Sitio Corporativo", what: "Qué es: la página web completa de tu empresa, con varias secciones: inicio, nosotros, servicios y contacto.", pitch: "Para empresas que necesitan una presencia completa y lista para crecer.", delivery: "15 a 25 días", features: ["Hasta 8 páginas internas", "Servicios, portafolio y testimonios", "Formulario y WhatsApp", "SEO técnico inicial", "Analítica configurada"] },
       software: { name: "Software a medida", what: "Qué es: un programa hecho para tu negocio (inventario, reservas, clientes) que se usa desde el navegador.", pitch: "Para ordenar tu negocio: inventario, citas, clientes y tareas que hoy haces a mano.", delivery: "Según alcance", features: ["Análisis de requerimientos", "Desarrollo completo y base de datos", "Usuarios, roles y panel administrativo", "Integraciones y facturación DIAN", "Automatizaciones y soporte"] },
     },
+    /** Subtítulo (solo para lectores de pantalla y buscadores) de la sección de planes en /precios. */
+    plansTitle: "Planes y precios de partida",
     hot: "Más solicitado",
     file: (id: string) => `plan.${id}`,
     deliveryLabel: "Entrega",
@@ -597,7 +599,7 @@ const es = {
       },
       industrias: {
         title: "Desarrollo web especializado por industria",
-        description: "Páginas web y software a la medida para inmobiliarias, salud, ingeniería, e-commerce B2B, turismo, automotriz, estética y medios, con casos reales en cada sector.",
+        description: "Páginas web y software a la medida para inmobiliarias, salud, ingeniería, e-commerce B2B, turismo, automotriz, estética y medios, con casos reales.",
         eyebrow: "industrias",
         h1: "Desarrollo web especializado por industria",
         lead: "Cada sector vende distinto. Conoce cómo adaptamos el diseño, las funciones y el SEO a tu industria, con proyectos reales en producción.",

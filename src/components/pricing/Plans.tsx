@@ -104,7 +104,11 @@ export function Plans() {
   };
 
   return (
-    <section ref={root} className={styles.section} aria-label={t.nav.pricing}>
+    <section ref={root} className={styles.section} aria-labelledby="h-planes">
+      {/* Subtítulo invisible: los planes (h3) quedaban colgando del h1 sin un h2 (orden de encabezados). */}
+      <h2 id="h-planes" className="sr-only">
+        {pr.plansTitle}
+      </h2>
       <div className="wrap">
         <div ref={rail} className={styles.grid} onScroll={onRail} data-lenis-prevent-touch>
           {PLANS.map((p) => {

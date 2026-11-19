@@ -26,7 +26,8 @@ Objetivo: abrir mercados fuera de Colombia en Google. Cada corrida agrega **1 pa
    - `slug` sin tildes (ej. `peru`, `estados-unidos`), `code` ISO, `name` es/en, `lat`/`lng` de la capital, `color` (`red` | `yellow` | `green`).
    - `projects`: slugs de `src/lib/projects.ts` cuyo `country` sea ese país (puede quedar vacío).
    - `posts`: 2–3 artículos del blog que existan y apliquen (ej. `cuanto-cuesta-una-pagina-web-latinoamerica`, `nearshore-desarrollo-web-latinoamerica` para EE. UU.).
-   - `payments`: medios de pago reales y comunes en ese país (ej. Perú: Yape, Plin, Niubiz, Mercado Pago; Chile: Webpay, Mercado Pago; EE. UU.: Stripe, PayPal y tarjetas). No inventes.
+   - `payments`: medios de pago reales y comunes en ese país, en español e inglés (ej. `{ es: "Webpay y Mercado Pago", en: "Webpay and Mercado Pago" }`; Perú: Yape, Plin, Niubiz; EE. UU.: Stripe, PayPal y tarjetas). No inventes.
+   - `guideEn` (opcional): guía de precios **que exista en inglés** para enlazar desde la versión /en (si falta, se enlaza la guía nearshore). Nunca enlaces desde /en un artículo que solo existe en español: `/en/...` redirige y queda como enlace roto.
    - `hours`: diferencia horaria real con Colombia (UTC−5). Verifica si el país usa horario de verano.
    - `sectors`, `intro` y `local` en español e inglés: concretos, sin exagerar, mencionando ciudades principales del país. Si hay proyectos ahí, nómbralos.
 2. Crea la ruta `src/app/[lang]/desarrollo-web-<slug>/page.tsx` copiando `src/app/[lang]/desarrollo-web-mexico/page.tsx` y cambiando la ruta.

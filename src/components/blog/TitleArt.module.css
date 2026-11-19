@@ -534,6 +534,9 @@
   color: var(--c);
   filter: brightness(0.7);
 }
+.total b::before {
+  content: attr(data-amount);
+}
 @keyframes print {
   0% {
     transform: scaleY(0.2);

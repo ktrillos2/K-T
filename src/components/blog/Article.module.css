@@ -257,6 +257,9 @@
   opacity: 0;
   transition: opacity 0.2s;
 }
+.anchor::before {
+  content: "#";
+}
 .prose h2:hover .anchor {
   opacity: 1;
 }

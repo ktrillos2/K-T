@@ -41,7 +41,10 @@ export default async function ServicesHub({ params }: LangParams) {
             note: t.landing.hubs.paises.lead,
             links: [
               ...published(COUNTRY_LANDINGS).map((g) => ({ href: g.path, label: lang === "en" ? g.country!.nameEn : g.country!.name })),
-              { href: "/blog/cuanto-cuesta-una-pagina-web-latinoamerica", label: lang === "en" ? "Prices across Latin America" : "Precios en Latinoamérica" },
+              // La guía de precios de Latinoamérica solo existe en español (/en/... redirige al blog): en inglés va la guía nearshore.
+              lang === "en"
+                ? { href: "/blog/nearshore-desarrollo-web-latinoamerica", label: "Nearshore costs in Latin America" }
+                : { href: "/blog/cuanto-cuesta-una-pagina-web-latinoamerica", label: "Precios en Latinoamérica" },
             ],
           },
           { title: t.landing.hubs.ciudades.title, links: published(CITY_LANDINGS).map((g) => ({ href: g.path, label: g.city!.name })) },

@@ -23,7 +23,7 @@ const RAW: Landing[] = [
     copy: {
       es: base({
         title: "Páginas web para inmobiliarias en Colombia con buscador de propiedades",
-        description: "Portales inmobiliarios a la medida: buscador con filtros por ciudad, estrato, precio y tipo, fichas de propiedad indexables, galerías rápidas y contacto por WhatsApp. Casos reales en Villavicencio y Bucaramanga.",
+        description: "Portales inmobiliarios: buscador por ciudad, estrato y precio, fichas que Google indexa y contacto por WhatsApp. Casos en Villavicencio y Bucaramanga.",
         eyebrow: "industrias · inmobiliario",
         h1: "Páginas web para inmobiliarias que muestran y venden",
         lead: "Una web inmobiliaria debe ayudar a encontrar la propiedad correcta en segundos y convertir esa visita en una llamada o un mensaje. En K&T Code construimos portales con buscador y filtros instantáneos, fichas indexables por propiedad y contacto directo por WhatsApp, como los de Casa Medina y Brambila's Inmobiliaria.",
@@ -59,7 +59,7 @@ const RAW: Landing[] = [
     copy: {
       es: base({
         title: "Páginas web para clínicas, médicos y psicólogos en Colombia",
-        description: "Sitios web para clínicas, consultorios, psicólogos y centros de salud: agendamiento en línea o por WhatsApp, páginas por especialidad, cumplimiento de la Ley 1581 y SEO local.",
+        description: "Sitios web para clínicas, consultorios y psicólogos: citas en línea o por WhatsApp, páginas por especialidad, Ley 1581 de datos y SEO local.",
         eyebrow: "industrias · salud",
         h1: "Páginas web para salud que generan confianza",
         lead: "En salud, la confianza se gana antes de la primera cita. Una web médica debe explicar con claridad cada especialidad, mostrar a los profesionales y facilitar el agendamiento. En K&T Code creamos sitios para clínicas, consultorios y psicólogos con citas en línea o por WhatsApp y tratamiento de datos conforme a la Ley 1581, como el de Psicowork.",
@@ -94,7 +94,7 @@ const RAW: Landing[] = [
     copy: {
       es: base({
         title: "Páginas web para empresas de ingeniería y construcción en Colombia",
-        description: "Sitios corporativos para firmas de ingeniería, constructoras y topografía: portafolio de proyectos, fichas técnicas descargables, maquinaria y credenciales para licitaciones y clientes B2B.",
+        description: "Sitios corporativos para firmas de ingeniería, constructoras y topografía: portafolio de obras, fichas técnicas, maquinaria y credenciales para licitaciones.",
         eyebrow: "industrias · ingeniería y construcción",
         h1: "Páginas web para ingeniería que ganan licitaciones",
         lead: "Una firma de ingeniería necesita demostrar capacidad: proyectos ejecutados, maquinaria, certificaciones y equipo. En K&T Code construimos sitios corporativos con portafolio de obras, fichas técnicas y un gestor para mantenerlos al día, como los de Eccocia y Noskygroup.",
@@ -129,7 +129,7 @@ const RAW: Landing[] = [
     copy: {
       es: base({
         title: "E-commerce B2B para mayoristas, fabricantes y distribuidores",
-        description: "Catálogos y tiendas B2B a la medida: listas de precios por cliente, pedidos por volumen, cotización automática por WhatsApp, facturación electrónica y catálogos de cientos de referencias.",
+        description: "Catálogos y tiendas B2B a la medida: precios por cliente, pedidos por volumen, cotización por WhatsApp y facturación electrónica para cientos de referencias.",
         eyebrow: "industrias · e-commerce B2B",
         h1: "E-commerce B2B para vender por volumen",
         lead: "Vender a empresas no es igual que vender al consumidor: hay listas de precios por cliente, cantidades mínimas, cotizaciones y facturación. En K&T Code construimos catálogos y tiendas B2B a la medida, como el de Telas Real, con más de 850 referencias, filtros instantáneos y cotizaciones automáticas.",
@@ -164,7 +164,7 @@ const RAW: Landing[] = [
     copy: {
       es: base({
         title: "Páginas web para turismo, hoteles y agencias de viaje en Colombia",
-        description: "Sitios para hoteles, glampings, agencias de viaje y transporte turístico: reservas directas sin comisiones de intermediarios, galerías inmersivas, varios idiomas y pagos locales.",
+        description: "Sitios para hoteles, glampings, agencias de viaje y transporte turístico: reservas directas sin comisiones, galerías, varios idiomas y pagos locales.",
         eyebrow: "industrias · turismo",
         h1: "Páginas web para turismo con reservas directas",
         lead: "Las plataformas de reservas cobran comisiones altas por cada huésped. Una web propia te permite vender directo, en varios idiomas y con pagos locales. En K&T Code construimos sitios para hoteles, agencias y transporte turístico, como los de Aerolínea Santander y Estrella de David.",
@@ -199,7 +199,7 @@ const RAW: Landing[] = [
     copy: {
       es: base({
         title: "Páginas web para concesionarios, repuestos y talleres en Colombia",
-        description: "Catálogos y tiendas para el sector automotriz: búsqueda por marca, modelo y año, fichas técnicas, cotización de repuestos, marketplaces de vehículos y contacto con asesores por WhatsApp.",
+        description: "Catálogos y tiendas para el sector automotriz: búsqueda por marca, modelo y año, cotización de repuestos, venta de vehículos y asesores por WhatsApp.",
         eyebrow: "industrias · automotriz",
         h1: "Páginas web automotrices que encuentran la pieza correcta",
         lead: "En el sector automotriz el cliente busca algo muy específico: un repuesto por referencia, un vehículo por modelo o un servicio de taller. En K&T Code construimos catálogos con búsqueda por marca, modelo, año y número de parte, fichas técnicas y contacto directo con asesores, como los de OCC Partes, Motofox y Auto Saldo.",
@@ -234,7 +234,7 @@ const RAW: Landing[] = [
     copy: {
       es: base({
         title: "Páginas web para centros de estética, spas y salones de belleza",
-        description: "Sitios para centros de estética, dermatología, spas y salones: catálogo de tratamientos, agenda en línea 24/7 sin cruces de horario, inventario y facturación electrónica.",
+        description: "Sitios para centros de estética, dermatología, spas y salones: catálogo de tratamientos, agenda en línea 24/7 sin cruces, inventario y facturación electrónica.",
         eyebrow: "industrias · estética y bienestar",
         h1: "Páginas web para estética con agenda 24/7",
         lead: "En estética y bienestar, el cliente quiere ver resultados y reservar sin llamar. En K&T Code construimos sitios con catálogo de tratamientos, agenda en línea disponible las 24 horas sin citas duplicadas, y si lo necesitas, inventario y facturación, como el sistema del Salón Brahneyker y el sitio de San Roque.",
@@ -269,7 +269,7 @@ const RAW: Landing[] = [
     copy: {
       es: base({
         title: "Páginas web para medios, editoriales, autores y educación",
-        description: "Portales para medios digitales, editoriales, autores y academias: carga rápida con tráfico alto, SEO para noticias y artículos, monetización por suscripción o publicidad.",
+        description: "Portales para medios digitales, editoriales, autores y academias: carga rápida con mucho tráfico, SEO para artículos y monetización por suscripción o anuncios.",
         eyebrow: "industrias · editorial y educación",
         h1: "Páginas web editoriales que se leen y se encuentran",
         lead: "En un medio o una editorial, el contenido es el producto: tiene que cargar rápido, leerse bien y aparecer en Google y en los asistentes de IA. En K&T Code construimos portales editoriales, sitios de autor y plataformas educativas, como la landing narrativa de Causalidad Dinámica y la plataforma de Academia SEA.",

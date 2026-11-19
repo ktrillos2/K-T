@@ -210,7 +210,7 @@ export const SERVICES: Landing[] = [
     related: [S("desarrollo-web-a-medida"), S("mantenimiento-web")],
     copy: {
       es: {
-        title: "Software a medida en Colombia: plataformas, paneles y automatización con IA",
+        title: "Software a medida en Colombia: sistemas y automatización con IA",
         description: "Desarrollamos software a medida: paneles administrativos, plataformas SaaS, integraciones con DIAN, pagos y WhatsApp, y agentes de IA. Desde $4.500.000 COP, con el código a nombre de tu empresa.",
         eyebrow: "servicios · software a medida",
         h1: "Software a medida para automatizar tu operación",
@@ -398,7 +398,7 @@ export const SERVICES: Landing[] = [
     copy: {
       es: {
         title: "WooCommerce headless y e-commerce desacoplado en Colombia",
-        description: `Convertimos tu tienda WooCommerce o Shopify en una tienda headless: vitrina a la medida que carga en menos de un segundo y el mismo panel para administrar productos. Desde ${headlessCop}.`,
+        description: `Tu WooCommerce o Shopify como tienda headless: vitrina a la medida que carga en menos de un segundo y el mismo panel para tus productos. Desde ${headlessCop}.`,
         eyebrow: "servicios · e-commerce headless",
         h1: "E-commerce headless: la velocidad de una app, el panel de siempre",
         lead: `Una tienda headless separa la vitrina que ve el cliente del sistema donde administras productos y pedidos. En K&T Code construimos la vitrina a la medida, rápida y con tu diseño, y la conectamos por API con WooCommerce, Shopify o un panel propio, para que sigas gestionando todo como siempre. Desde ${headlessCop}.`,
@@ -460,7 +460,7 @@ export const SERVICES: Landing[] = [
     copy: {
       es: {
         title: "SEO técnico y GEO en Colombia: aparece en Google y en ChatGPT",
-        description: "Auditoría y optimización de SEO técnico y GEO: indexación, velocidad, datos estructurados, robots.txt para rastreadores de IA y contenido citable para Google, ChatGPT, Gemini y Perplexity.",
+        description: "Auditoría y optimización de SEO técnico y GEO: indexación, velocidad, datos estructurados y contenido que citan Google, ChatGPT, Gemini y Perplexity.",
         eyebrow: "servicios · SEO técnico y GEO",
         h1: "SEO técnico y GEO: que te encuentren en Google y en la IA",
         lead: "El SEO técnico asegura que Google pueda rastrear, entender y mostrar tu sitio; el GEO (optimización para motores generativos) hace que asistentes como ChatGPT, Gemini y Perplexity te citen. En K&T Code auditamos tu dominio, corregimos los errores de indexación, la velocidad y los datos estructurados, y preparamos tu contenido para ser citado.",
@@ -485,7 +485,7 @@ export const SERVICES: Landing[] = [
       },
       en: {
         title: "Technical SEO and GEO: get found on Google and in AI",
-        description: "Technical SEO and GEO audits and fixes: indexing, speed, structured data, robots.txt for AI crawlers and citable content for Google, ChatGPT, Gemini and Perplexity.",
+        description: "Technical SEO and GEO audits and fixes: indexing, speed, structured data and content that Google, ChatGPT, Gemini and Perplexity can cite.",
         eyebrow: "services · technical SEO and GEO",
         h1: "Technical SEO and GEO: be found on Google and by AI",
         lead: "Technical SEO makes sure Google can crawl, understand and show your site; GEO (generative engine optimization) makes assistants like ChatGPT, Gemini and Perplexity cite you. At K&T Code we audit your domain, fix indexing, speed and structured data, and prepare your content to be cited.",
@@ -581,7 +581,7 @@ export const SERVICES: Landing[] = [
     related: [S("landing-pages"), S("tiendas-virtuales"), S("seo-tecnico")],
     copy: {
       es: {
-        title: "Administración de Ads mensual: Meta, TikTok y Google Ads con remarketing",
+        title: "Administración de Ads: Meta, TikTok y Google Ads con remarketing",
         description: "Administramos tus campañas de Facebook, Instagram, TikTok y Google Ads cada mes según tu objetivo: estrategia, segmentación, remarketing, anuncios y reportes. Desde $450.000 COP al mes (200 USD fuera de Colombia).",
         eyebrow: "servicios · administración de Ads",
         h1: "Administración de Ads que trae clientes, no solo likes",

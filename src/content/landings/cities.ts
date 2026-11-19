@@ -163,7 +163,7 @@ This case describes our development collaboration on the event platform; it does
 };
 
 const copy = (c: CityData): LandingCopy => ({
-  title: `Desarrollo de páginas web en ${c.name}: diseño y software a la medida`,
+  title: `Diseño y desarrollo de páginas web en ${c.name}`,
   description: `Páginas web, tiendas virtuales y software a la medida para empresas de ${c.name}, ${c.region}. Diseño único, carga en menos de un segundo y SEO local. Landing desde $450.000 COP.`,
   eyebrow: `desarrollo web · ${c.name.toLowerCase()}, ${c.region.toLowerCase()}`,
   h1: `Desarrollo de páginas web en ${c.name}`,
