@@ -28,6 +28,10 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  /* Es el h1: sin el tamaño ni la negrita por defecto del navegador. */
+  font-weight: 400;
+  line-height: 1.5;
+  outline: none;
 }
 .dot {
   width: 8px;

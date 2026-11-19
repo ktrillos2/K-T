@@ -2,6 +2,12 @@
 
 Lo más nuevo arriba. Formato: fecha · mejora · archivos · cómo se verificó · resultado (antes → después si hay medición).
 
+## 2026-11-19 · H1 del inicio con los servicios (páginas web y publicidad)
+
+- Qué: el H1 del inicio pasa a ser «Agencia de páginas web y publicidad digital · Cúcuta, Colombia» (antes el lema «Tu negocio en internet, listo para vender.», que se sigue viendo igual como párrafo). Título «K&T Code · Páginas web y publicidad digital en Colombia», descripción con la pauta en Meta, Google y TikTok, y H2 de servicios «Páginas web, software y publicidad». Igual en /en.
+- Verificación: un solo H1; capturas en 1440 y 390 px sin errores; Lighthouse inicio accesibilidad/SEO 100 y agentes 3/3. En vivo, el clic en «Cotizar por WhatsApp» llega a GA4 como `whatsapp_click`.
+- Pendiente del dueño: píxel de Meta (`NEXT_PUBLIC_META_PIXEL_ID` en Vercel) y marcar `generate_lead` y `whatsapp_click` como eventos clave en GA4.
+
 ## 2026-11-19 · Auditoría SEO, GEO y AEO
 
 - Qué: 4 enlaces internos en inglés que redirigían, texto en español en /en de EE. UU. y Perú (medios de pago), 34 títulos recortados, 21 descripciones completas (ninguna con «…»), «#» fuera del texto de los H2 del blog, monto aleatorio de las portadas fuera del HTML legible (`data-nosnippet`), h2 de planes en /precios y nombres accesibles con el texto visible (selector de país, WhatsApp, A−/A+).

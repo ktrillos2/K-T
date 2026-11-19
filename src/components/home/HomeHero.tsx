@@ -18,11 +18,13 @@ export function HomeHero() {
       <div className={`wrap ${styles.grid}`}>
         <div className={styles.copy}>
           <Reveal mode="enter" y={20}>
-            <p className={styles.eyebrow}>
-              <span className={styles.dot} /> {h.eyebrow}
-            </p>
+            {/* El H1 dice qué vendemos (páginas web y publicidad) para Google y los buscadores con IA;
+                el lema grande de abajo se ve igual, pero es un párrafo. */}
+            <h1 id="h-inicio" className={styles.eyebrow} tabIndex={-1}>
+              <span className={styles.dot} aria-hidden="true" /> {h.eyebrow}
+            </h1>
           </Reveal>
-          <SplitTitle as="h1" id="h-inicio" mode="enter" className={`h-hero ${styles.title}`} tabIndex={-1}>
+          <SplitTitle as="p" mode="enter" className={`h-hero ${styles.title}`}>
             {h.title}
           </SplitTitle>
           <Reveal mode="enter" delay={0.4} className={styles.leadWrap}>

@@ -2,11 +2,11 @@
 
 const es = {
   meta: {
-    siteTitle: "K&T Code · Desarrollo web a la medida en Colombia",
+    siteTitle: "K&T Code · Páginas web y publicidad digital en Colombia",
     siteDescription:
       "Estudio colombiano que diseña y desarrolla sitios web, tiendas virtuales y software a la medida. Cada proyecto con diseño único, sin plantillas. Desde Cúcuta para Colombia, Latinoamérica y Estados Unidos.",
     ogTitle: "K&T Code · Diseño único, código a la medida",
-    home: { title: "Desarrollo web a la medida con diseño único", description: "Sitios web, tiendas virtuales y software hechos desde cero para tu negocio. Sin plantillas, con carga en menos de un segundo. Estudio en Cúcuta, Colombia." },
+    home: { title: "Desarrollo web a la medida con diseño único", description: "Páginas web, tiendas virtuales y software a la medida, más pauta en Meta, Google y TikTok para que te lleguen clientes. Agencia en Cúcuta, Colombia." },
     about: { title: "Nosotros", description: "K&T Code es un estudio de desarrollo web a la medida fundado en 2025 en San José de Cúcuta. Conoce a Keyner Trillos y cómo trabajamos, de la idea al lanzamiento." },
     projects: { title: "Proyectos", description: "Sitios, tiendas y plataformas a la medida en producción para empresas de Colombia, México, Perú y Estados Unidos, con su caso de estudio." },
     pricing: { title: "Precios", description: "Precios de desarrollo web a la medida: landing pages desde $450.000 COP, tiendas virtuales desde $1.300.000 COP, sitios corporativos y software. Precios en tu moneda." },
@@ -98,7 +98,7 @@ const es = {
 
   home: {
     hero: {
-      eyebrow: "Agencia de páginas web · Cúcuta, Colombia",
+      eyebrow: "Agencia de páginas web y publicidad digital · Cúcuta, Colombia",
       title: "Tu negocio en internet, listo para vender.",
       lead: "Somos K&T Code. Creamos páginas web, tiendas en línea y sistemas hechos a tu medida, y manejamos tu publicidad para que te lleguen más clientes.",
       cta1: "Ver proyectos",
@@ -117,7 +117,7 @@ const es = {
     valuesLabel: "Lo que nos define",
     services: {
       path: "servicios",
-      title: "¿Qué hacemos?",
+      title: "Páginas web, software y publicidad",
       lead: "Cinco formas de ayudarte a vender más, explicadas sin enredos.",
       from: "Desde",
       fromQuote: "Desde",

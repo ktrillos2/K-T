@@ -2,11 +2,11 @@ import type { Dict } from "./es";
 
 const en: Dict = {
   meta: {
-    siteTitle: "K&T Code · Custom web development from Colombia",
+    siteTitle: "K&T Code · Web development and digital ads from Colombia",
     siteDescription:
       "Colombian studio that designs and builds custom websites, online stores and software. Every project has a one-of-a-kind design, no templates. From Cúcuta to Latin America and the United States.",
     ogTitle: "K&T Code · Unique design, custom code",
-    home: { title: "Custom web development with one-of-a-kind design", description: "Websites, online stores and software built from scratch for your business. No templates, loading in under a second. Studio based in Cúcuta, Colombia." },
+    home: { title: "Custom web development with one-of-a-kind design", description: "Custom websites, online stores and software, plus Meta, Google and TikTok ads management to bring you clients. Nearshore agency in Colombia." },
     about: { title: "About", description: "K&T Code is a custom web development studio founded in 2025 in Cúcuta, Colombia. Meet Keyner Trillos and how we work, from idea to launch." },
     projects: { title: "Projects", description: "Custom websites, stores and platforms live for companies in Colombia, Mexico, Peru and the United States, each with its case study." },
     pricing: { title: "Pricing", description: "Custom web development pricing: landing pages, online stores, corporate websites and custom software. Prices shown in your local currency." },
@@ -98,7 +98,7 @@ const en: Dict = {
 
   home: {
     hero: {
-      eyebrow: "Nearshore web agency · Colombia (UTC−5)",
+      eyebrow: "Nearshore web and digital ads agency · Colombia (UTC−5)",
       title: "Your business online, ready to sell.",
       lead: "We're K&T Code, a nearshore team in Colombia working in US business hours, in English and Spanish. We build websites, online stores and custom systems, and run your ads so more customers reach you.",
       cta1: "See projects",
@@ -117,7 +117,7 @@ const en: Dict = {
     valuesLabel: "What defines us",
     services: {
       path: "services",
-      title: "What we do",
+      title: "Websites, software and ads",
       lead: "Five ways to help you sell more, explained simply.",
       from: "From",
       fromQuote: "From",
