@@ -26,7 +26,7 @@ export default async function IndustriesHub({ params }: LangParams) {
   });
   return (
     <>
-      <LandingHub eyebrow={h.eyebrow} h1={h.h1} lead={h.lead} items={items} extra={[
+      <LandingHub eyebrow={h.eyebrow} h1={h.h1} lead={h.lead} items={items} art={{ chips: ["Inmobiliarias", "Salud", "Turismo", "B2B"], label: t.pricing.hero.stageLabel }} extra={[
           { title: t.nav.services, links: SERVICES.map((g) => ({ href: g.path, label: landingLabel(g.path, lang) })) },
           {
             title: t.landing.hubs.paises.title,

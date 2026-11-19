@@ -11,6 +11,7 @@ import { Scramble } from "@/components/motion/Scramble";
 import { TLink } from "@/components/transition/TLink";
 import { Price } from "@/components/ui/Price";
 import { Inline } from "@/components/blog/Inline";
+import { HeroArt } from "@/components/ui/HeroArt";
 import styles from "./LandingHub.module.css";
 
 export type HubItem = { href: string; label: string; text: string; color: "red" | "yellow" | "green"; plan?: PlanId; meta?: string };
@@ -21,16 +22,19 @@ type Props = {
   lead: string;
   items: HubItem[];
   extra?: { title: string; note?: string; links: { href: string; label: string }[] }[];
+  /** Visual animado a la derecha del título (logo con etiquetas), como en /precios. */
+  art?: { chips: string[]; label: string };
 };
 
 /** Índice de servicios o industrias: tarjetas con su precio de partida en la moneda del visitante. */
-export function LandingHub({ eyebrow, h1, lead, items, extra = [] }: Props) {
+export function LandingHub({ eyebrow, h1, lead, items, extra = [], art }: Props) {
   const { t, quotedAbroad } = useI18n();
   const body = useRef<HTMLDivElement>(null);
   return (
     <>
       <header className={styles.hero} data-hero="">
-        <div className="wrap">
+        <div className={`wrap ${art ? styles.split : ""}`}>
+          <div className={styles.copy}>
           <p className={styles.eyebrow}>
             <span>●</span> <Scramble trigger="enter" text={eyebrow} />
           </p>
@@ -40,6 +44,8 @@ export function LandingHub({ eyebrow, h1, lead, items, extra = [] }: Props) {
           <Reveal mode="enter" delay={0.3}>
             <p className={`lead ${styles.lead}`}>{lead}</p>
           </Reveal>
+          </div>
+          {art && <HeroArt className={styles.stage} chips={art.chips} label={art.label} />}
         </div>
       </header>
       <div ref={body} className={styles.body}>

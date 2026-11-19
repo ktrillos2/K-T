@@ -17,6 +17,32 @@
 .lead {
   max-width: 68ch;
 }
+/* Con visual a la derecha (servicios, industrias): dos columnas como en /precios. */
+.split {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px) !important;
+}
+.copy {
+  position: relative;
+  z-index: 28;
+  display: grid;
+  gap: 22px;
+  min-width: 0;
+}
+.stage {
+  width: 100%;
+  aspect-ratio: 0.8;
+}
+@media (max-width: 960px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+  .stage {
+    order: -1;
+    aspect-ratio: 2;
+  }
+}
 .body {
   position: relative;
   z-index: 2;

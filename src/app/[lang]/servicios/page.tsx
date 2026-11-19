@@ -31,6 +31,7 @@ export default async function ServicesHub({ params }: LangParams) {
       <LandingHub
         eyebrow={h.eyebrow}
         h1={h.h1}
+        art={{ chips: lang === "en" ? ["Websites", "Stores", "Software", "Ads"] : ["Páginas web", "Tiendas", "Software", "Publicidad"], label: t.pricing.hero.stageLabel }}
         lead={h.lead}
         items={items}
         extra={[
