@@ -101,6 +101,10 @@
   line-height: 0.95;
   -webkit-font-smoothing: none;
 }
+/* El número lo pinta el CSS: el h2 solo contiene el texto ("El reto de Telas Real"). */
+.h2 span::before {
+  content: attr(data-n);
+}
 .h2 span {
   display: block;
   font-family: var(--mono);

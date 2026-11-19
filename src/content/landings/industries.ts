@@ -3,9 +3,13 @@ import { INDUSTRIES_EN } from "./industries.en";
 
 const I = (slug: string) => `/industrias/${slug}`;
 
+/** Sector a partir del eyebrow ("industrias · salud" → "salud"). */
+const sector = (eyebrow: string) => eyebrow.split("·").pop()!.trim();
+
 const base = (o: Omit<LandingCopy, "includesTitle" | "forWhoTitle"> & { includesTitle?: string; forWhoTitle?: string }): LandingCopy => ({
-  includesTitle: "Funciones clave para tu sector",
-  forWhoTitle: "Para quién",
+  // Subtítulos con el sector ("¿Qué debe tener una página web para el sector salud?"), no genéricos.
+  includesTitle: `¿Qué debe tener una página web para el sector ${sector(o.eyebrow)}?`,
+  forWhoTitle: `¿Qué negocios del sector ${sector(o.eyebrow)} atendemos?`,
   ...o,
 });
 

@@ -66,6 +66,19 @@ export function LandingView({ kind, slug, color, plan, copy, blocks, projects, p
     const all = postsFor(lang);
     return posts.map((s) => all.find((p) => p.slug === s)).filter(Boolean).slice(0, 3) as ReturnType<typeof postsFor>;
   }, [lang, posts]);
+  // Tema de la página para los subtítulos ("Preguntas frecuentes sobre landing pages", "… sobre páginas web en Bogotá").
+  const tail = copy.eyebrow.split("·").pop()!.trim();
+  const topic =
+    kind === "ciudad" || kind === "pais"
+      ? (() => {
+          const s = copy.h1.replace(/^Desarrollo de /, "");
+          return s.charAt(0).toLowerCase() + s.slice(1);
+        })()
+      : kind === "industria"
+        ? lang === "en"
+          ? `websites for ${tail}`
+          : `páginas web para el sector ${tail}`
+        : tail;
   const planData = plan ? PLANS.find((p) => p.id === plan) : undefined;
   const planCopy = plan ? t.pricing.plans[plan] : undefined;
   const message = l.waMessage(copy.h1);
@@ -216,7 +229,7 @@ export function LandingView({ kind, slug, color, plan, copy, blocks, projects, p
 
           <section className={styles.section} aria-labelledby="l-faq">
             <h2 id="l-faq" className={styles.h2}>
-              {l.faq}
+              {l.faqAbout(topic)}
             </h2>
             <div className={styles.faq}>
               {copy.faqs.map((f, i) => (
@@ -231,7 +244,7 @@ export function LandingView({ kind, slug, color, plan, copy, blocks, projects, p
           {postCards.length > 0 && (
             <section className={styles.section} aria-labelledby="l-posts">
               <h2 id="l-posts" className={styles.h2}>
-                {l.posts}
+                {l.postsAbout(topic)}
               </h2>
               <ul className={styles.posts}>
                 {postCards.map((p) => (

@@ -124,7 +124,7 @@ export function CaseStudy({ slug }: { slug: string }) {
 
           <section className={styles.block} aria-labelledby="cs-challenge">
             <h2 id="cs-challenge" className={styles.h2}>
-              <span>01</span> {d.challenge}
+              <span aria-hidden="true" data-n="01" /> {d.challengeFor(p.name)}
             </h2>
             <Reveal>
               <p className={styles.big}>{d.challengeText({ name: p.name, summary: p.summary, kind: p.category })}</p>
@@ -133,7 +133,7 @@ export function CaseStudy({ slug }: { slug: string }) {
 
           <section className={styles.block} aria-labelledby="cs-built">
             <h2 id="cs-built" className={styles.h2}>
-              <span>02</span> {d.built}
+              <span aria-hidden="true" data-n="02" /> {d.builtFor(p.name)}
             </h2>
             <Reveal as="ul" stagger={0.08} className={styles.built}>
               {p.built.map((b, i) => (
@@ -156,7 +156,7 @@ export function CaseStudy({ slug }: { slug: string }) {
 
           <section className={styles.block} aria-labelledby="cs-how">
             <h2 id="cs-how" className={styles.h2}>
-              <span>03</span> {d.how}
+              <span aria-hidden="true" data-n="03" /> {d.how}
             </h2>
             <div className={styles.phases}>
               <span className={styles.phaseLine} data-phase-line aria-hidden="true" />
@@ -177,7 +177,7 @@ export function CaseStudy({ slug }: { slug: string }) {
 
           <section className={styles.block} aria-labelledby="cs-results">
             <h2 id="cs-results" className={styles.h2}>
-              <span>04</span> {d.results}
+              <span aria-hidden="true" data-n="04" /> {d.resultsFor(p.name)}
             </h2>
             <div className={styles.results}>
               {p.speed ? (
@@ -219,7 +219,7 @@ export function CaseStudy({ slug }: { slug: string }) {
           {p.testimonial && (
             <section className={styles.block} aria-labelledby="cs-quote">
               <h2 id="cs-quote" className={styles.h2}>
-                <span>05</span> {d.testimonial}
+                <span aria-hidden="true" data-n="05" /> {d.testimonial}
               </h2>
               <Reveal>
                 <figure className={styles.quote}>
