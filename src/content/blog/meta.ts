@@ -1,6 +1,10 @@
 import type { Lang } from "@/i18n/config";
 import type { BlogCategory, PostCard, PostMeta } from "./types";
 import { EN_META } from "./meta.en";
+import { planById } from "@/lib/pricing";
+
+/** Precio de partida en pesos ("$450.000"), tomado de pricing.ts para que el título no quede desactualizado. */
+const cop = (id: Parameters<typeof planById>[0]) => `$${planById(id).from.toLocaleString("es-CO")}`;
 
 export const CATEGORY_LABELS: Record<Lang, Record<BlogCategory, string>> = {
   es: { precios: "Precios y guías", "desarrollo-web": "Desarrollo web", "seo-geo": "SEO y GEO", ia: "IA y automatización", ecommerce: "E-commerce", software: "Software a medida", comparativas: "Comparativas", estrategia: "Estrategia" },
@@ -109,9 +113,10 @@ const BILINGUAL: PostMeta[] = [
     featured: true,
     color: "green",
     langs: ["es"],
-    title: { es: "¿Cuánto Cuesta una Página Web en Colombia en 2026? Precios Reales y Guía", en: "How much does a website cost in Colombia in 2026? Real prices and guide" },
+    // Search Console (nov 2026): 2.270 impresiones y 0,26 % de CTR; el precio en el título responde la búsqueda de una vez.
+    title: { es: `¿Cuánto Cuesta una Página Web en Colombia? Desde ${cop("landing")} (2026)`, en: "How much does a website cost in Colombia in 2026? Real prices and guide" },
     description: {
-      es: "Precios reales de landing pages, tiendas virtuales, sitios corporativos y software a la medida en Colombia, qué cambia el valor y una calculadora en tu moneda.",
+      es: `En 2026 una landing page parte de ${cop("landing")} COP, una tienda virtual de ${cop("tienda")} y un sitio corporativo de ${cop("corporativo")}. Qué cambia el precio y calculadora.`,
       en: "Real prices for landing pages, online stores, corporate sites and custom software in Colombia, what changes the cost, and a calculator in your currency.",
     },
     tags: { es: ["precios", "presupuesto", "landing page", "tienda virtual"], en: ["pricing", "budget", "landing page", "online store"] },

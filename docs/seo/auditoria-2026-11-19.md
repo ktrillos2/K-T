@@ -55,9 +55,13 @@ Primera medición guardada: 19 palabras clave orgánicas, unas 7 visitas al mes 
 5. **Subtítulos del blog:** el «#» del enlace ancla salía dentro del texto del H2 («#Rangos de precio…»). Ahora lo dibuja el CSS; se ve igual al pasar el cursor.
 6. **Accesibilidad:** h2 (solo para lectores de pantalla) en la sección de planes de /precios; el selector de país, el botón flotante de WhatsApp y los botones A−/A+ del blog tienen nombres accesibles que empiezan con el texto visible.
 
+## Search Console (exportación del dueño)
+
+Ver `gsc-2026-11-19.md`. Últimos 28 días: 66 clics y 12.797 impresiones (antes 31 y 6.967), CTR 0,52 %, posición 10,8. Con esos datos se cambió también el título de la guía de precios de Colombia (2.270 impresiones, 0,26 % de CTR) a «¿Cuánto Cuesta una Página Web en Colombia? Desde $450.000 (2026)», con los precios de partida al inicio de la descripción.
+
 ## Recomendaciones (no se cambiaron)
 
-1. **Search Console:** sin datos desde el 2 de noviembre. Conectarlo de nuevo para medir en 3–4 semanas el CTR de las 34 páginas con título nuevo.
+1. **Search Console:** exportar de nuevo a mediados de diciembre para medir el CTR de las 35 páginas con título nuevo.
 2. **/en/proyectos/ecg-construction** tiene `noindex` (en inglés solo se indexa GMX Gaming). Es el cliente de EE. UU.: conviene indexarlo junto con el bloque para empresas de EE. UU. (plan, punto 3).
 3. **23 títulos de 66 a 70 caracteres:** en celular Google los muestra casi completos. Los agentes del blog pueden acortarlos al actualizar cada artículo.
 4. **Marca fuera del sitio:** `sameAs` sigue apuntando a facebook.com/KTSolutionsWeb; faltan LinkedIn, Clutch, Google Business Profile y YouTube (los da el dueño).
