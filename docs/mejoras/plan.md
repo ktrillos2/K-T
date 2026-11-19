@@ -40,8 +40,10 @@ Base: auditoría del 14 nov 2026 (`docs/seo/kytcode.lat-audit/`, 74/100) y Searc
 ### Baja
 
 13. `llms.txt` en inglés y versión Markdown de las páginas principales.
-14. Revisar enlaces internos rotos o con redirección en todo el sitio.
+14. ✅ 2026-11-19 · Revisar enlaces internos rotos o con redirección en todo el sitio (4 en inglés corregidos; la auditoría mensual lo vuelve a revisar).
 15. Accesibilidad: contraste y foco visible en botones del menú, paleta y formulario.
+16. **Títulos de 66 a 70 caracteres** (23 páginas, sobre todo del blog): acortarlos a 64 o menos al actualizar cada artículo, sin tocar los que están en observación (Wompi, guía de precios de Colombia, «How to Appear in ChatGPT Search»).
+17. **/en/proyectos/ecg-construction** está en `noindex` (en inglés solo se indexa GMX Gaming). Indexarlo junto con el punto 3: es el cliente de EE. UU.
 
 ## Necesita al dueño (no lo hacen los agentes)
 

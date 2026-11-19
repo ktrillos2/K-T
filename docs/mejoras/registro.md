@@ -2,6 +2,13 @@
 
 Lo más nuevo arriba. Formato: fecha · mejora · archivos · cómo se verificó · resultado (antes → después si hay medición).
 
+## 2026-11-19 · Auditoría SEO, GEO y AEO
+
+- Qué: 4 enlaces internos en inglés que redirigían, texto en español en /en de EE. UU. y Perú (medios de pago), 34 títulos recortados, 21 descripciones completas (ninguna con «…»), «#» fuera del texto de los H2 del blog, monto aleatorio de las portadas fuera del HTML legible (`data-nosnippet`), h2 de planes en /precios y nombres accesibles con el texto visible (selector de país, WhatsApp, A−/A+).
+- Archivos: `src/content/landings/{countries,cities,services,industries}.ts`, `src/content/blog/meta*.ts`, `src/lib/seo.ts`, componentes del blog, precios y shell. Detalle en `docs/seo/auditoria-2026-11-19.md`.
+- Verificación: typecheck y build limpios; rastreo de las 157 URL del sitemap (200, 0 redirecciones internas, JSON-LD válido); Lighthouse móvil en 9 páginas; capturas en 1440 y 390 px.
+- Resultado: accesibilidad de /precios 98 → 100; `label-content-name-mismatch` 9 páginas → 0; títulos de más de 65 caracteres 58 → 26; descripciones cortadas 19 → 0; inicio 88 → 88 (sin regresión); agentes 3/3 en todas.
+
 ## 2026-11-16 · Página de servicio «Chatbot de WhatsApp con IA»
 
 - Qué: nueva página `/servicios/chatbot-whatsapp` (es/en) para posicionar «chatbot whatsapp» (720 búsquedas/mes en Colombia, dificultad SEO 11, CPC 8,35 USD según Ubersuggest). Sin precio: «según tu negocio» y demo gratis, mientras llega la aprobación de Meta. Enlazada desde los artículos de chatbot para citas (es/en) y automatizar WhatsApp con IA.

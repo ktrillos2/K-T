@@ -207,11 +207,12 @@ export function ArticleView({ post, words, plain }: Props) {
             </ol>
             <p className={styles.left}>{a.minutesLeft(left)}</p>
             <div className={styles.tools}>
+              {/* Cada botón empieza su nombre accesible con lo que se ve ("A−", "A+"): así lo encuentran el control por voz y los agentes. */}
               <div className={styles.sizer} role="group" aria-label={a.fontSize}>
-                <button type="button" onClick={() => changeSize(-1)} disabled={size === 0} aria-label={`${a.fontSize} −`}>
+                <button type="button" onClick={() => changeSize(-1)} disabled={size === 0} aria-label={`A− · ${a.fontSize}`}>
                   A−
                 </button>
-                <button type="button" onClick={() => changeSize(1)} disabled={size === SIZES.length - 1} aria-label={`${a.fontSize} +`}>
+                <button type="button" onClick={() => changeSize(1)} disabled={size === SIZES.length - 1} aria-label={`A+ · ${a.fontSize}`}>
                   A+
                 </button>
               </div>

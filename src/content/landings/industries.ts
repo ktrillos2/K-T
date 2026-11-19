@@ -59,7 +59,7 @@ const RAW: Landing[] = [
     copy: {
       es: base({
         title: "Páginas web para clínicas, médicos y psicólogos en Colombia",
-        description: "Sitios web para clínicas, consultorios y psicólogos: citas en línea o por WhatsApp, páginas por especialidad, Ley 1581 de datos y SEO local.",
+        description: "Sitios web para clínicas, consultorios y psicólogos: citas en línea o por WhatsApp, páginas por especialidad, cumplimiento de la Ley 1581 y SEO local.",
         eyebrow: "industrias · salud",
         h1: "Páginas web para salud que generan confianza",
         lead: "En salud, la confianza se gana antes de la primera cita. Una web médica debe explicar con claridad cada especialidad, mostrar a los profesionales y facilitar el agendamiento. En K&T Code creamos sitios para clínicas, consultorios y psicólogos con citas en línea o por WhatsApp y tratamiento de datos conforme a la Ley 1581, como el de Psicowork.",

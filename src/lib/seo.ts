@@ -28,7 +28,10 @@ export function clip(text: string, max = 160): string {
   const end = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf(": "));
   if (end >= 90) return cut.slice(0, end + 1).replace(/:$/, ".");
   const comma = cut.lastIndexOf(", ");
-  if (comma >= 110) return `${cut.slice(0, comma)}.`;
+  const head = cut.slice(0, comma);
+  const count = (re: RegExp) => head.match(re)?.length ?? 0;
+  // Solo si no deja un paréntesis o una pregunta abiertos ("pagos (Yape." no sirve).
+  if (comma >= 110 && count(/\(/g) === count(/\)/g) && count(/¿/g) === count(/\?/g)) return `${head}.`;
   return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,.;:·–-]+$/, "")}…`;
 }
 
